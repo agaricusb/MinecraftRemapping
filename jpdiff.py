@@ -97,7 +97,8 @@ def main():
     classes_obf2cb = getClassMap()
     classes_cb2obf = {v:k for k,v in classes_obf2cb.iteritems()}
 
-    for obf,cb in classes_obf2cb.iteritems():
+    for obf in sorted(classes_obf2cb.keys()):
+        cb = classes_obf2cb[obf]
         print "***",obf,cb
         #file("vanilla/"+obf+".class"); file("mc-dev/"+cb+".class"); continue  # quick existence check
         diffMembers("vanilla/"+obf, "mc-dev/"+cb)
