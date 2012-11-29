@@ -11,7 +11,7 @@ import subprocess
 def getClassMap():
     obf2cb = {}
     i = 0
-    for line in file("knownclasses.txt"):
+    for line in file("classes.srg"):
         i += 1
         line = line.strip()
         assert line.startswith("CL: ")
@@ -66,19 +66,19 @@ def parseDeclName(decl):
 
     return name
 
-def diffMembers(fn1, fn2):
-    class1, m1 = dumpMembers(fn1)
-    class2, m2 = dumpMembers(fn2)
+def diffMembers(c1, c2):
+    class1, m1 = dumpMembers("vanilla/"+c1)
+    class2, m2 = dumpMembers("mc-dev/"+c2)
 
-    print class1
-    print class2
+    print "DEBUG",class1
+    print "DEBUG",class2
 
     assert len(m1) == len(m2), "Mismatched number of members: %d != %d, %s != %s" % (len(m1), len(m2), m1, m2)
 
     for a,b in zip(m1,m2):
         na, sa = a
         nb, sb = b
-        print na,nb,sa,sb
+        print "\t".join((c1, na,sa, nb,sb))
 
 def difflines():
     a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
@@ -99,9 +99,8 @@ def main():
 
     for obf in sorted(classes_obf2cb.keys()):
         cb = classes_obf2cb[obf]
-        print "***",obf,cb
-        #file("vanilla/"+obf+".class"); file("mc-dev/"+cb+".class"); continue  # quick existence check
-        diffMembers("vanilla/"+obf, "mc-dev/"+cb)
+        print "DEBUG","***",obf,cb
+        diffMembers(obf,cb)
 
 if __name__ == "__main__":
     main()
