@@ -953,8 +953,8 @@ CL: xq net/minecraft/server/Explosion
 CL: xs net/minecraft/server/GameRules
 CL: xt net/minecraft/server/GameRuleValue
 CL: xv net/minecraft/server/World
-CL: xw net/minecraft/server/CrashReportEntities
-CL: xx net/minecraft/server/CrashReportPlayerCount
+CL: xw net/minecraft/server/CrashReportSourceBlockType
+CL: xx net/minecraft/server/CrashReportPlayers
 CL: xy net/minecraft/server/CrashReportChunkStats
 CL: y net/minecraft/server/ICommand
 CL: ya net/minecraft/server/ExceptionWorldConflict
