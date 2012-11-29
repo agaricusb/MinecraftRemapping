@@ -2,7 +2,7 @@
 
 # Make srg MD and FD from output of jpdiff.py
 
-for line in file("fields-with-signatures.csv").readlines():  # grep "("
+for line in file("fields-with-signatures.csv").readlines():  # grep -v DEBUG|grep -v "("
     line = line.strip()
     if line == "": continue
     tokens = line.split("\t")
@@ -12,7 +12,7 @@ for line in file("fields-with-signatures.csv").readlines():  # grep "("
 
     print "FD: %s/%s %s" % (obf_class, obf_field, cb_field) 
 
-for line in file("methods-with-signatures.csv").readlines(): # grep -v "("
+for line in file("methods-with-signatures.csv").readlines(): # grep -v DEBUG|grep "("
     line = line.strip()
     if line == "": continue
     tokens = line.split("\t")
