@@ -99,6 +99,7 @@ def main():
 
     for obf,cb in classes_obf2cb.iteritems():
         print "***",obf,cb
+        #file("vanilla/"+obf+".class"); file("mc-dev/"+cb+".class"); continue  # quick existence check
         diffMembers("vanilla/"+obf, "mc-dev/"+cb)
 
 if __name__ == "__main__":
