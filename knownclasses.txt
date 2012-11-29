@@ -369,7 +369,7 @@ CL: apb org/bouncycastle/jcajce/provider/config/ProviderConfiguration
 CL: apc org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission
 CL: apd org/bouncycastle/jcajce/provider/util/AlgorithmProvider
 CL: ape org/bouncycastle/jce/provider/BouncyCastleProvider
-CL: apf org/bouncycastle/jce/provider/BouncyCastleProviderAction
+CL: apf org/bouncycastle/jce/provider/BouncyCastleProvider$1
 CL: apg org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration
 CL: aph org/bouncycastle/util/Strings
 CL: aq net/minecraft/server/CommandException

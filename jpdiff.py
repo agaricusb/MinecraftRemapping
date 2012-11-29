@@ -2,29 +2,34 @@
 
 # diff internally-renamed Java class files
 
-JAVAP = "javap -s -private "
+JAVAP = ["javap", "-s", "-private"]
 
 import os
+import subprocess
 
 # Get provided map of obfuscated class names to CB names
 def getClassMap():
     obf2cb = {}
+    i = 0
     for line in file("knownclasses.txt"):
+        i += 1
         line = line.strip()
         assert line.startswith("CL: ")
         line = line.replace("CL: ","")
         obf, cb = line.split(" ")
+
         obf2cb[obf] = cb
 
     return obf2cb
 
 def dumpMembers(fn):
     d = {}
-    f = os.popen(JAVAP + fn)
+    f = subprocess.Popen(JAVAP + [fn], stdout=subprocess.PIPE).stdout
     compiledFrom = f.readline().strip()
-    assert compiledFrom == "Compiled from SourceFile"
-
-    classDecl = f.readline().strip()
+    if compiledFrom == "Compiled from SourceFile":
+        classDecl = f.readline().strip()
+    else:
+        classDecl = compiledFrom  # bouncycastle
 
     members = []
    
@@ -68,7 +73,7 @@ def diffMembers(fn1, fn2):
     print class1
     print class2
 
-    assert len(m1) == len(m2), "Mismatched number of members"
+    assert len(m1) == len(m2), "Mismatched number of members: %d != %d, %s != %s" % (len(m1), len(m2), m1, m2)
 
     for a,b in zip(m1,m2):
         na, sa = a
@@ -92,9 +97,9 @@ def main():
     classes_obf2cb = getClassMap()
     classes_cb2obf = {v:k for k,v in classes_obf2cb.iteritems()}
 
-    print classes_cb2obf
-
-    diffMembers("vanilla/zt", "mc-dev/net/minecraft/server/ChunkSection")
+    for obf,cb in classes_obf2cb.iteritems():
+        print "***",obf,cb
+        diffMembers("vanilla/"+obf, "mc-dev/"+cb)
 
 if __name__ == "__main__":
     main()
