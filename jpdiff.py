@@ -6,30 +6,56 @@ JAVAP = "javap -s -private "
 
 import os
 
-def disasm(fn):
+def dumpMembers(fn):
+    d = {}
     f = os.popen(JAVAP + fn)
     compiledFrom = f.readline().strip()
     assert compiledFrom == "Compiled from SourceFile"
 
     classDecl = f.readline().strip()
     print classDecl
+
+    d["class"] = classDecl
+    d["members"] = []
    
     while True:
-        name = f.readline()
-        if name == "": break
-        name = name.strip()
-        if name == "}" or name == "": continue
-        assert name[-1] == ";"
-        name = name.replace(";","")
-
+        decl = f.readline()
+        if decl == "": break
+        decl = decl.strip()
+        if decl == "}" or decl == "": continue
+        assert decl[-1] == ";"
+        decl = decl.replace(";","")
 
         sig = f.readline().strip()
         assert sig.startswith("Signature: ")
         sig = sig.replace("Signature: ", "")
 
+        name = parseDeclName(decl)
+
+        d["members"].append((name, sig))
         print name,sig
 
-disasm("mc-dev/net/minecraft/server/ChunkSection")
+    return d["members"]
+
+# Parse symbol name from declaration
+def parseDeclName(decl):
+    # strip arguments if a method
+    if "(" in decl:
+        before, args = decl.split("(")
+    else:
+        before = decl
+
+    # last token
+    tokens = before.split()
+    name = tokens[-1]
+
+    return name
+    
+a = dumpMembers("mc-dev/net/minecraft/server/ChunkSection")
+b = dumpMembers("vanilla/zt")
+
+for x,y in zip(a,b):
+    print x,y
 
 def difflines():
     a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
