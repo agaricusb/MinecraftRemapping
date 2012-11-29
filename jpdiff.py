@@ -6,6 +6,18 @@ JAVAP = "javap -s -private "
 
 import os
 
+# Get provided map of obfuscated class names to CB names
+def getClassMap():
+    obf2cb = {}
+    for line in file("knownclasses.txt"):
+        line = line.strip()
+        assert line.startswith("CL: ")
+        line = line.replace("CL: ","")
+        obf, cb = line.split(" ")
+        obf2cb[obf] = cb
+
+    return obf2cb
+
 def dumpMembers(fn):
     d = {}
     f = os.popen(JAVAP + fn)
@@ -13,10 +25,8 @@ def dumpMembers(fn):
     assert compiledFrom == "Compiled from SourceFile"
 
     classDecl = f.readline().strip()
-    print classDecl
 
-    d["class"] = classDecl
-    d["members"] = []
+    members = []
    
     while True:
         decl = f.readline()
@@ -32,10 +42,10 @@ def dumpMembers(fn):
 
         name = parseDeclName(decl)
 
-        d["members"].append((name, sig))
-        print name,sig
+        members.append((name, sig))
+        #print name,sig
 
-    return d["members"]
+    return classDecl, members
 
 # Parse symbol name from declaration
 def parseDeclName(decl):
@@ -50,12 +60,20 @@ def parseDeclName(decl):
     name = tokens[-1]
 
     return name
-    
-a = dumpMembers("mc-dev/net/minecraft/server/ChunkSection")
-b = dumpMembers("vanilla/zt")
 
-for x,y in zip(a,b):
-    print x,y
+def diffMembers(fn1, fn2):
+    class1, m1 = dumpMembers(fn1)
+    class2, m2 = dumpMembers(fn2)
+
+    print class1
+    print class2
+
+    assert len(m1) == len(m2), "Mismatched number of members"
+
+    for a,b in zip(m1,m2):
+        na, sa = a
+        nb, sb = b
+        print na,nb,sa,sb
 
 def difflines():
     a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
@@ -69,3 +87,15 @@ def difflines():
             print "+",b[i].strip()
         else:
             print " ",a[i].strip()
+
+def main():
+    classes_obf2cb = getClassMap()
+    classes_cb2obf = {v:k for k,v in classes_obf2cb.iteritems()}
+
+    print classes_cb2obf
+
+    diffMembers("vanilla/zt", "mc-dev/net/minecraft/server/ChunkSection")
+
+if __name__ == "__main__":
+    main()
+
