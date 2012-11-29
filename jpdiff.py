@@ -2,7 +2,7 @@
 
 # diff internally-renamed Java class files
 
-JAVAP = "javap -s -private -c "
+JAVAP = "javap -s -private "
 
 import os
 
@@ -15,29 +15,19 @@ def disasm(fn):
     print classDecl
    
     while True:
-        memberDecl = f.readline()
-        if memberDecl == "": break
-        memberDecl = memberDecl.strip()
-        assert memberDecl[-1] == ";"
-        memberDecl = memberDecl.replace(";","")
+        name = f.readline()
+        if name == "": break
+        name = name.strip()
+        if name == "}" or name == "": continue
+        assert name[-1] == ";"
+        name = name.replace(";","")
 
-        print memberDecl
 
         sig = f.readline().strip()
         assert sig.startswith("Signature: ")
         sig = sig.replace("Signature: ", "")
-        print sig
 
-        line = f.readline().strip()
-        if line == "": continue
-        print line
-        assert line == "Code:"
-
-        while True:
-            codeLine = f.readline().strip()
-            if codeLine == "": break
-            print codeLine
-        print "---"
+        print name,sig
 
 disasm("mc-dev/net/minecraft/server/ChunkSection")
 
