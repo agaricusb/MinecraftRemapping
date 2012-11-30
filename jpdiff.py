@@ -101,9 +101,9 @@ def diffMembers(obfClass, cbClass):
         if "(" in obfSig:  # method
             #if cbName == cbClass: continue # skip constructors
             #if obfName == obfClass: continue # skip constructors
-            print "MD: %s/%s %s %s %s" % (obfClass, obfName, obfSig, cbName, cbSig)
+            print "MD: %s/%s %s %s/%s %s" % (obfClass, obfName, obfSig, cbClass, cbName, cbSig)
         else:  # field
-            print "FD: %s/%s %s" % (obfClass, obfName, cbName)
+            print "FD: %s/%s %s/%s" % (obfClass, obfName, cbClass, cbName)
 
 def difflines():
     a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
