@@ -1,0 +1,35 @@
+--- mcp-stripped-craftbukkit-1.4.5-R0.2/net/minecraft/src/World.java	2012-11-29 21:40:53.000000000 -0800
++++ mcp-patched-craftbukkit-1.4.5-R0.2/net/minecraft/src/World.java	2012-11-30 09:01:11.000000000 -0800
+@@ -235,6 +235,32 @@
+       return this.getBlockId(var1, var3, var2);
+    }
+ 
++   // Bukkit API start - required for implementing BlockChangeDelegate interface
++   public int getTypeId(int var1, int var2, int var3) {
++      return this.getBlockId(var1, var2, var3);
++   }
++
++   public boolean isEmpty(int var1, int var2, int var3) {
++      return this.isAirBlock(var1, var2, var3);
++   }
++
++   public boolean setRawTypeId(int var1, int var2, int var3, int var4) {
++      return this.setBlock(var1, var2, var3, var4);
++   }
++
++   public boolean setRawTypeIdAndData(int var1, int var2, int var3, int var4, int var5) {
++      return this.setBlockAndMetadata(var1, var2, var3, var4, var5);
++   }
++
++   public boolean setTypeId(int var1, int var2, int var3, int var4) {
++      return this.setTypeId(var1, var2, var3, var4);
++   }
++
++   public boolean setTypeIdAndData(int var1, int var2, int var3, int var4, int var5) {
++      return this.setBlockAndMetadataWithNotify(var1, var2, var3, var4, var5);
++   }
++   // Bukkit API end
++
+    public int getBlockId(int var1, int var2, int var3) {
+       if(var1 >= -30000000 && var3 >= -30000000 && var1 < 30000000 && var3 < 30000000) {
+          if(var2 < 0) {

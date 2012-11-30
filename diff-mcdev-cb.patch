@@ -2,7 +2,6 @@ Only in mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft: org
 Only in mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft/server: MinecraftServer$1.class
 Binary files mcp-mcdev/net/minecraft/server/MinecraftServer.class and mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft/server/MinecraftServer.class differ
 Only in mcp-mcdev/net/minecraft/server: MinecraftServer.java
-Only in mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft/src: .WorldGenTrees.java.swp
 Binary files mcp-mcdev/net/minecraft/src/AABBPool.class and mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft/src/AABBPool.class differ
 diff -ur mcp-mcdev/net/minecraft/src/AABBPool.java mcp-stripped-craftbukkit-1.4.2-R0.2/net/minecraft/src/AABBPool.java
 --- mcp-mcdev/net/minecraft/src/AABBPool.java	2012-11-29 21:15:28.000000000 -0800

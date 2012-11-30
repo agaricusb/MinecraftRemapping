@@ -8,7 +8,8 @@
 # http://assets.minecraft.net/1_4_5/minecraft.jar 
 # 2. Extract Bukkit's "mc-dev" minecraft-server into "mc-dev"
 # http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/1.4.5/minecraft-server-1.4.5.jar
-# 3. Run this script and save output to "server.srg"
+# 3. Run this script and save output to "obf2cb.srg"
+# (To make cb2obf.srg, run ReverseSrg from SrgTools)
 
 JAVAP = ["javap", "-s", "-private"]
 

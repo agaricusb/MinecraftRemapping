@@ -1,0 +1,3 @@
+FD: net/minecraft/server/NetServerHandler/y net/minecraft/src/NetServerHandler/lastPosXForEvent_CB
+FD: net/minecraft/server/NetServerHandler/z net/minecraft/src/NetServerHandler/lastPosYForEvent_CB
+FD: net/minecraft/server/NetServerHandler/q net/minecraft/src/NetServerHandler/lastPosZForEvent_CB
