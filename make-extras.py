@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-# Generate "extras" file, showing MCP<->CB mappings, without obfuscated mappings
+# Given obf<->MCP and obf<->CB mappings, generate MCP<->CB mappings
+
+import sys
 
 def process(filename):
     f = file(filename)
@@ -41,12 +43,23 @@ def compare(filenameA, filenameB):
         mapA = allA[kind]
         mapB = allB[kind]
 
-        assert len(mapA) == len(mapB), "incomplete maps"
+        missing = set(mapA.keys()) - set(mapB.keys())
+        if len(missing) != 0:
+            print "Second mappings missing fields from first mappings: %s" % (missing,)
+
+        surplus = set(mapB.keys()) - set(mapA.keys())
+        if len(surplus) != 0:
+            #print "Second mappings has extra mappings not in first: %s" % (surplus,) # no problem, probably just constructors (no rename)
+            pass
+
+        #assert len(mapA) == len(mapB), "non-one-to-one map: %s != %s, +%s, -%s" % (len(mapA), len(mapB), set(mapA.keys()) - set(mapB.keys()), set(mapB.keys()) - set(mapA.keys()))
 
         for obf in sorted(mapA.keys()):
-
-            mapA[obf] = mapA[obf].replace("net/minecraft/src", "net/minecraft/server")  # CraftBukkit mappings, package
-
             print "\t".join((kind,mapA[obf],mapB[obf]))
 
-compare("../mcp719-bukkitmappings/conf/server.srg", "../mcp719-clean/conf/server.srg")
+if len(sys.argv) != 3:
+    print "Usage: %s vanilla/conf/server.srg bukkit/conf/server.srg" % (sys.argv[0],)
+    raise SystemExit
+
+compare(sys.argv[1], sys.argv[2])
+

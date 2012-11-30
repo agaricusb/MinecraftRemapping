@@ -99,7 +99,8 @@ def diffMembers(obfClass, cbClass):
         if obfName == "{}": continue  # skip static initializer bodies
 
         if "(" in obfSig:  # method
-            if obfName == obfClass: continue # skip constructors
+            #if cbName == cbClass: continue # skip constructors
+            #if obfName == obfClass: continue # skip constructors
             print "MD: %s/%s %s %s %s" % (obfClass, obfName, obfSig, cbName, cbSig)
         else:  # field
             print "FD: %s/%s %s" % (obfClass, obfName, cbName)
