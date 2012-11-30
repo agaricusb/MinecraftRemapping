@@ -55,21 +55,27 @@ def chain(mcpdir, cbsrg):
     # TODO: option to surpress
     descriptiveFieldNames = loadDescriptiveNamesCSV(mcpdir + "fields.csv",)
     descriptiveMethodNames = loadDescriptiveNamesCSV(mcpdir + "methods.csv")
-    def descriptiveName(mcpIndexedName):
+    def descriptiveName(mcpIndexedNameSig):
+        # methods are name, space, signature
+        if " " in mcpIndexedNameSig:
+            mcpIndexedName, sig = mcpIndexedNameSig.split(" ")
+            sig = " " + sig
+        else:
+            mcpIndexedName = mcpIndexedNameSig
+            sig = ""
+
+        # translate name, preserving package
         tokens = mcpIndexedName.split("/")
         firstName = tokens[:-1]
         lastName = tokens[-1]
-        if lastName == "func_75971_g":
-            print "XXX"
-            raise SystemExit
         if lastName.startswith("field_"):
             newName = descriptiveFieldNames.get(lastName, lastName)
-        elif lastName.startswith("field_"):
+        elif lastName.startswith("func_"):
             newName = descriptiveMethodNames.get(lastName, lastName)
         else:
             newName = lastName
 
-        return "/".join(firstName + [newName])
+        return "/".join(firstName + [newName]) + sig
 
     for kind in ("CL", "FD", "MD"):
         mapMCP = mcp[kind]
