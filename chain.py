@@ -35,32 +35,52 @@ def process(filename):
 
     return {"CL": classes_o2d, "FD": fields_o2d, "MD": methods_o2d}
 
-def compare(filenameA, filenameB):
-    allA = process(filenameA)
-    allB = process(filenameB)
+# Load fields/methods.csv mapping "searge" name (func_XXX/field_XXX) to descriptive MCP name
+def loadDescriptiveNamesCSV(fn):
+    f = file(fn)
+    d = {}
+    for line in f.readlines():
+        tokens = line.split(",")
+        if tokens[0] == "searge": continue
+        searge,name,side,desc = tokens
+        d[searge] = name
+    return d
+
+def loadDescriptiveNames(ffn, mfn):
+    d = loadDescriptiveNamesCSV(ffn)
+    d.extend(loadDescriptiveNamesCSV(mfn))
+    return d
+    
+def chain(mcpdir, cbsrg):
+
+    mcpsrg = mcpdir + "server.srg"
+    mcp = process(mcpsrg)
+    cb = process(cbsrg)
 
     for kind in ("CL", "FD", "MD"):
-        mapA = allA[kind]
-        mapB = allB[kind]
+        mapMCP = mcp[kind]
+        mapCB = cb[kind]
 
-        missing = set(mapA.keys()) - set(mapB.keys())
+        missing = set(mapMCP.keys()) - set(mapCB.keys())
         if len(missing) != 0:
-            print "Second mappings missing fields from first mappings: %s" % (missing,)
+            print "CB mappings missing fields from MCP mappings: %s" % (missing,)
 
-        surplus = set(mapB.keys()) - set(mapA.keys())
+        surplus = set(mapCB.keys()) - set(mapMCP.keys())
         if len(surplus) != 0:
-            #print "Second mappings has extra mappings not in first: %s" % (surplus,) # no problem, probably just constructors (no rename)
+            #print "CB mappings has extra mappings not in MCP: %s" % (surplus,) # no problem, probably just constructors (no rename)
             pass
 
-        #assert len(mapA) == len(mapB), "non-one-to-one map: %s != %s, +%s, -%s" % (len(mapA), len(mapB), set(mapA.keys()) - set(mapB.keys()), set(mapB.keys()) - set(mapA.keys()))
-
-        for obf in sorted(mapA.keys()):
-            print "%s: %s %s" % (kind, mapB[obf], mapA[obf])
+        for obf in sorted(mapMCP.keys()):
+            print "%s: %s %s" % (kind, mapCB[obf], mapMCP[obf])
 
 if len(sys.argv) != 3:
     print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
-    print "Usage: %s ../mcp723-clean/conf/server.srg bukkit/conf/server.srg" % (sys.argv[0],)
+    print "Usage: %s clean-mcpdir cb-server.srg" % (sys.argv[0],)
+    print "Example: %s ../mcp723-clean/conf/ server.srg" % (sys.argv[0],)
     raise SystemExit
 
-compare(sys.argv[1], sys.argv[2])
+mcpdir = sys.argv[1]
+cbsrg = sys.argv[2]
+
+chain(mcpdir, cbsrg)
 
