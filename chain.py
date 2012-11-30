@@ -46,32 +46,30 @@ def loadDescriptiveNamesCSV(fn):
         d[searge] = name
     return d
 
-def loadDescriptiveNames(ffn, mfn):
-    d = loadDescriptiveNamesCSV(ffn)
-    for k,v in loadDescriptiveNamesCSV(mfn).iteritems(): d[k] = v
-    return d
-    
 def chain(mcpdir, cbsrg):
-
     mcpsrg = mcpdir + "server.srg"
     mcp = process(mcpsrg)
     cb = process(cbsrg)
 
     # Map MCP indexed names to descriptive names
     # TODO: option to surpress
-    descriptiveNameMap = loadDescriptiveNames(mcpdir + "fields.csv", mcpdir + "methods.csv")
+    descriptiveFieldNames = loadDescriptiveNamesCSV(mcpdir + "fields.csv",)
+    descriptiveMethodNames = loadDescriptiveNamesCSV(mcpdir + "methods.csv")
     def descriptiveName(mcpIndexedName):
         tokens = mcpIndexedName.split("/")
         firstName = tokens[:-1]
         lastName = tokens[-1]
-        if lastName.startswith("func_") or lastName.startswith("field_"):
-            if descriptiveNameMap.has_key(lastName):
-                lastName = descriptiveNameMap[lastName]
-            else:
-                # no defined name, leave indexed
-                pass
+        if lastName == "func_75971_g":
+            print "XXX"
+            raise SystemExit
+        if lastName.startswith("field_"):
+            newName = descriptiveFieldNames.get(lastName, lastName)
+        elif lastName.startswith("field_"):
+            newName = descriptiveMethodNames.get(lastName, lastName)
+        else:
+            newName = lastName
 
-        return "/".join(firstName + [lastName])
+        return "/".join(firstName + [newName])
 
     for kind in ("CL", "FD", "MD"):
         mapMCP = mcp[kind]
