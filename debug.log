@@ -4314,7 +4314,6 @@ any	a	()V	a	()V
 any	c	()I	c	()I
 any	d	()I	d	()I
 DEBUG *** anz net/minecraft/server/MovingObjectPosition
-
 DEBUG public class anz extends java.lang.Object{
 DEBUG public class net.minecraft.server.MovingObjectPosition extends java.lang.Object{
 anz	a	Laoa;	type	Lnet/minecraft/server/EnumMovingObjectType;

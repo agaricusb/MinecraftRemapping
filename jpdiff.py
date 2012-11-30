@@ -1,11 +1,22 @@
 #!/usr/bin/python
 
-# diff internally-renamed Java class files
+# diff internally-renamed Java class files into a .srg
+
+# Example Usage:
+# 0. Update classes.srg with comprehensive obfuscated->CB class map
+# 1. Extract minecraft_server.jar from Mojang into "vanilla"
+# http://assets.minecraft.net/1_4_5/minecraft.jar 
+# 2. Extract Bukkit's "mc-dev" minecraft-server into "mc-dev"
+# http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/1.4.5/minecraft-server-1.4.5.jar
+# 3. Run this script and save output to "server.srg"
 
 JAVAP = ["javap", "-s", "-private"]
 
 import os
 import subprocess
+
+def debug(s):
+    pass
 
 # Get provided map of obfuscated class names to CB names
 def getClassMap():
@@ -21,6 +32,10 @@ def getClassMap():
         obf2cb[obf] = cb
 
     return obf2cb
+
+def printClasses(obf2cb):
+    for obf in sorted(obf2cb.keys()):
+        print "CL: %s %s" % (obf, obf2cb[obf])
 
 def dumpMembers(fn):
     d = {}
@@ -66,19 +81,28 @@ def parseDeclName(decl):
 
     return name
 
-def diffMembers(c1, c2):
-    class1, m1 = dumpMembers("vanilla/"+c1)
-    class2, m2 = dumpMembers("mc-dev/"+c2)
+def diffMembers(obfClass, cbClass):
+    obfClassDecl, obfMembers = dumpMembers("vanilla/"+obfClass)
+    cbClassDecl, cbMembers = dumpMembers("mc-dev/"+cbClass)
 
-    print "DEBUG",class1
-    print "DEBUG",class2
+    debug(obfClassDecl)
+    debug(cbClassDecl)
 
-    assert len(m1) == len(m2), "Mismatched number of members: %d != %d, %s != %s" % (len(m1), len(m2), m1, m2)
+    # This means either the wrong class, or missing class
+    assert len(obfMembers) == len(cbMembers), "Mismatched number of members: %d != %d, %s != %s" % (len(obfMembers), len(cbMembers), obfMembers, cbMembers)
 
-    for a,b in zip(m1,m2):
-        na, sa = a
-        nb, sb = b
-        print "\t".join((c1, na,sa, nb,sb))
+    for a,b in zip(obfMembers,cbMembers):
+        obfName, obfSig = a
+        cbName, cbSig = b
+        debug("\t".join((obfClass, obfName,obfSig, cbName,cbSig)))
+
+        if obfName == "{}": continue  # skip static initializer bodies
+
+        if "(" in obfSig:  # method
+            if obfName == obfClass: continue # skip constructors
+            print "MD: %s/%s %s %s %s" % (obfClass, obfName, obfSig, cbName, cbSig)
+        else:  # field
+            print "FD: %s/%s %s" % (obfClass, obfName, cbName)
 
 def difflines():
     a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
@@ -93,13 +117,23 @@ def difflines():
         else:
             print " ",a[i].strip()
 
+def printPackage():
+    print """PK: . net/minecraft/server
+PK: net net
+PK: net/minecraft net/minecraft
+PK: net/minecraft/server net/minecraft/server"""
+
 def main():
+    printPackage()
+
     classes_obf2cb = getClassMap()
+    printClasses(classes_obf2cb)
+
     classes_cb2obf = {v:k for k,v in classes_obf2cb.iteritems()}
 
     for obf in sorted(classes_obf2cb.keys()):
         cb = classes_obf2cb[obf]
-        print "DEBUG","***",obf,cb
+        debug(" ".join(("***",obf,cb)))
         diffMembers(obf,cb)
 
 if __name__ == "__main__":
