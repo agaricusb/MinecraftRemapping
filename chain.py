@@ -40,7 +40,7 @@ def loadDescriptiveNamesCSV(fn):
     f = file(fn)
     d = {}
     for line in f.readlines():
-        tokens = line.split(",")
+        tokens = line.split(",",3)
         if tokens[0] == "searge": continue
         searge,name,side,desc = tokens
         d[searge] = name
@@ -48,7 +48,7 @@ def loadDescriptiveNamesCSV(fn):
 
 def loadDescriptiveNames(ffn, mfn):
     d = loadDescriptiveNamesCSV(ffn)
-    d.extend(loadDescriptiveNamesCSV(mfn))
+    for k,v in loadDescriptiveNamesCSV(mfn).iteritems(): d[k] = v
     return d
     
 def chain(mcpdir, cbsrg):
@@ -56,6 +56,22 @@ def chain(mcpdir, cbsrg):
     mcpsrg = mcpdir + "server.srg"
     mcp = process(mcpsrg)
     cb = process(cbsrg)
+
+    # Map MCP indexed names to descriptive names
+    # TODO: option to surpress
+    descriptiveNameMap = loadDescriptiveNames(mcpdir + "fields.csv", mcpdir + "methods.csv")
+    def descriptiveName(mcpIndexedName):
+        tokens = mcpIndexedName.split("/")
+        firstName = tokens[:-1]
+        lastName = tokens[-1]
+        if lastName.startswith("func_") or lastName.startswith("field_"):
+            if descriptiveNameMap.has_key(lastName):
+                lastName = descriptiveNameMap[lastName]
+            else:
+                # no defined name, leave indexed
+                pass
+
+        return "/".join(firstName + [lastName])
 
     for kind in ("CL", "FD", "MD"):
         mapMCP = mcp[kind]
@@ -71,7 +87,7 @@ def chain(mcpdir, cbsrg):
             pass
 
         for obf in sorted(mapMCP.keys()):
-            print "%s: %s %s" % (kind, mapCB[obf], mapMCP[obf])
+            print "%s: %s %s" % (kind, mapCB[obf], descriptiveName(mapMCP[obf]))
 
 if len(sys.argv) != 3:
     print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
@@ -80,6 +96,7 @@ if len(sys.argv) != 3:
     raise SystemExit
 
 mcpdir = sys.argv[1]
+if mcpdir[-1] != "/": mcpdir += "/"
 cbsrg = sys.argv[2]
 
 chain(mcpdir, cbsrg)
