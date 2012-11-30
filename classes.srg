@@ -511,10 +511,10 @@ CL: fv net/minecraft/server/DispenseBehaviorEmptyBucket
 CL: fw net/minecraft/server/ConvertProgressUpdater
 CL: fx net/minecraft/server/ThreadShutdown
 CL: fy net/minecraft/server/ThreadServerApplication
-CL: fz net/minecraft/server/CrashReportModded
+CL: fz net/minecraft/server/CrashReportProfilerPosition
 CL: g net/minecraft/server/CrashReportJVMFlags
-CL: ga net/minecraft/server/CrashReportProfilerPosition
-CL: gb net/minecraft/server/CrashReportVec3DPoolSize
+CL: ga net/minecraft/server/CrashReportVec3DPoolSize
+CL: gb net/minecraft/server/CrashReportPlayerCount
 CL: gc net/minecraft/server/DispenseBehaviorEgg
 CL: gd net/minecraft/server/DispenseBehaviorSnowBall
 CL: ge net/minecraft/server/DispenseBehaviorExpBottle
