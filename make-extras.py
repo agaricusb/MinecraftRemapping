@@ -33,13 +33,13 @@ def process(filename):
         else:
             assert "Unknown type " + kind
 
-    return {"CLASS": classes_o2d, "FIELD": fields_o2d, "METHOD": methods_o2d}
+    return {"CL": classes_o2d, "FD": fields_o2d, "MD": methods_o2d}
 
 def compare(filenameA, filenameB):
     allA = process(filenameA)
     allB = process(filenameB)
 
-    for kind in ("CLASS", "FIELD", "METHOD"):
+    for kind in ("CL", "FD", "MD"):
         mapA = allA[kind]
         mapB = allB[kind]
 
@@ -55,10 +55,11 @@ def compare(filenameA, filenameB):
         #assert len(mapA) == len(mapB), "non-one-to-one map: %s != %s, +%s, -%s" % (len(mapA), len(mapB), set(mapA.keys()) - set(mapB.keys()), set(mapB.keys()) - set(mapA.keys()))
 
         for obf in sorted(mapA.keys()):
-            print "\t".join((kind,mapA[obf],mapB[obf]))
+            print "%s: %s %s" % (kind, mapB[obf], mapA[obf])
 
 if len(sys.argv) != 3:
-    print "Usage: %s vanilla/conf/server.srg bukkit/conf/server.srg" % (sys.argv[0],)
+    print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
+    print "Usage: %s ../mcp723-clean/conf/server.srg bukkit/conf/server.srg" % (sys.argv[0],)
     raise SystemExit
 
 compare(sys.argv[1], sys.argv[2])
