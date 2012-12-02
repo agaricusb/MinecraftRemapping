@@ -1,0 +1,39 @@
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index f0e6cf7..1ba5b34 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -839,7 +839,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IMo
+     }
+ 
+     public String getServerModName() {
+-        return "craftbukkit"; // CraftBukkit - cb > vanilla!
++        return "craftbukkit-mcp"; // CraftBukkit - cb > vanilla! // CBMCP: add -mcp
+     }
+ 
+     public CrashReport b(CrashReport crashreport) {
+diff --git a/src/main/java/net/minecraft/server/NetServerHandler.java b/src/main/java/net/minecraft/server/NetServerHandler.java
+index 079c5c5..c29afb5 100644
+--- a/src/main/java/net/minecraft/server/NetServerHandler.java
++++ b/src/main/java/net/minecraft/server/NetServerHandler.java
+@@ -61,7 +61,7 @@ public class NetServerHandler extends NetHandler {
+     private long j;
+     private static Random k = new Random();
+     private long l;
+-    private volatile int m = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(NetServerHandler.class, "m"); // CraftBukkit - multithreaded field
++    private volatile int m = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(NetServerHandler.class, "chatSpamThresholdCount"); // CraftBukkit - multithreaded field // CBMCP - update field "m" to MCP name
+     private int x = 0;
+     private double y;
+     private double z;
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 429320b..8048ab8 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -133,7 +133,7 @@ import com.google.common.collect.MapMaker;
+ import jline.console.ConsoleReader;
+ 
+ public final class CraftServer implements Server {
+-    private final String serverName = "CraftBukkit";
++    private final String serverName = "CraftBukkit-MCP";
+     private final String serverVersion;
+     private final String bukkitVersion = Versioning.getBukkitVersion();
+     private final ServicesManager servicesManager = new SimpleServicesManager();

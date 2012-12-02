@@ -11115,6 +11115,3 @@ MD: net/minecraft/server/IChunkLoader/a (Lnet/minecraft/server/World;II)Lnet/min
 MD: net/minecraft/server/IChunkLoader/a (Lnet/minecraft/server/World;Lnet/minecraft/server/Chunk;)V net/minecraft/src/IChunkLoader/saveChunk (Lnet/minecraft/src/World;Lnet/minecraft/src/Chunk;)V
 MD: net/minecraft/server/IChunkLoader/b ()V net/minecraft/src/IChunkLoader/saveExtraData ()V
 MD: net/minecraft/server/IChunkLoader/b (Lnet/minecraft/server/World;Lnet/minecraft/server/Chunk;)V net/minecraft/src/IChunkLoader/saveExtraChunkData (Lnet/minecraft/src/World;Lnet/minecraft/src/Chunk;)V
-FD: net/minecraft/server/NetServerHandler/lastPosX net/minecraft/src/NetServerHandler/lastPosXForEvent_CB
-FD: net/minecraft/server/NetServerHandler/lastPosY net/minecraft/src/NetServerHandler/lastPosYForEvent_CB
-FD: net/minecraft/server/NetServerHandler/lastPosZ net/minecraft/src/NetServerHandler/lastPosZForEvent_CB
