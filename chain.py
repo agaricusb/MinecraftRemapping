@@ -47,14 +47,29 @@ def loadDescriptiveNamesCSV(fn):
     return d
 
 def chain(mcpdir, cbsrg):
-    mcpsrg = mcpdir + "server.srg"
+    if mcpdir.endswith(".srg"):
+        # only chain srgs
+        mcpsrg = mcpdir
+        fields_fn = methods_fn = None
+    elif mcpdir.endswith("/"):
+        # also translate descriptive names through MCP's fields/methods.csv
+        mcpsrg = mcpdir + "server.srg"
+        fields_fn = mcpdir + "fields.csv"
+        methods_fn = mcpdir + "methods.csv"
+    else:
+        print "argument must be srg or mcp dir with server.srg, fields.csv, and methods.csv"
+        raise SystemExit
+
     mcp = process(mcpsrg)
     cb = process(cbsrg)
 
     # Map MCP indexed names to descriptive names
-    # TODO: option to surpress
-    descriptiveFieldNames = loadDescriptiveNamesCSV(mcpdir + "fields.csv",)
-    descriptiveMethodNames = loadDescriptiveNamesCSV(mcpdir + "methods.csv")
+    if fields_fn and methods_fn:
+        descriptiveFieldNames = loadDescriptiveNamesCSV(fields_fn)
+        descriptiveMethodNames = loadDescriptiveNamesCSV(methods_fn)
+    else:
+        descriptiveFieldNames = descriptiveMethodNames = {}
+
     def descriptiveName(mcpIndexedNameSig):
         # methods are name, space, signature
         if " " in mcpIndexedNameSig:
@@ -83,12 +98,19 @@ def chain(mcpdir, cbsrg):
 
         missing = set(mapMCP.keys()) - set(mapCB.keys())
         if len(missing) != 0:
-            print "CB mappings missing fields from MCP mappings: %s" % (missing,)
+            print "CB mappings missing from MCP mappings: %s" % (missing,)
+            import pprint
+            print "=== mapMCP ==="
+            pprint.pprint(mapMCP)
+            print "=== mapCB ==="
+            pprint.pprint(mapCB)
+            print "== missing ==="
+            pprint.pprint(missing)
 
         surplus = set(mapCB.keys()) - set(mapMCP.keys())
         if len(surplus) != 0:
-            #print "CB mappings has extra mappings not in MCP: %s" % (surplus,) # no problem, probably just constructors (no rename)
-            pass
+           #print "CB mappings has extra mappings not in MCP: %s" % (surplus,) # no problem, probably just constructors (no rename)
+           pass
 
         for obf in sorted(mapMCP.keys()):
             print "%s: %s %s" % (kind, mapCB[obf], descriptiveName(mapMCP[obf]))
@@ -96,11 +118,14 @@ def chain(mcpdir, cbsrg):
 if len(sys.argv) != 3:
     print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
     print "Usage: %s clean-mcpdir cb-server.srg" % (sys.argv[0],)
-    print "Example: %s ../mcp723-clean/conf/ server.srg" % (sys.argv[0],)
+    print "Examples:"
+    print "Translate through server.srg and descriptive fields.csv/methods.csv:"
+    print "\t%s ../mcp723-clean/conf/ server.srg" % (sys.argv[0],)
+    print "Translate only through server.srg, leaving indexed func_XXX/field_XXX names:"
+    print "\t%s ../mcp723-clean/conf/server.srg server.srg" % (sys.argv[0],)
     raise SystemExit
 
 mcpdir = sys.argv[1]
-if mcpdir[-1] != "/": mcpdir += "/"
 cbsrg = sys.argv[2]
 
 chain(mcpdir, cbsrg)
