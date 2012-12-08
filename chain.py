@@ -117,12 +117,12 @@ def chain(mcpdir, cbsrg):
 
 if len(sys.argv) != 3:
     print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
-    print "Usage: %s clean-mcpdir cb-server.srg" % (sys.argv[0],)
+    print "Usage: %s clean-mcpdir/conf cb-server.srg" % (sys.argv[0],)
     print "Examples:"
     print "Translate through server.srg and descriptive fields.csv/methods.csv:"
-    print "\t%s ../mcp723-clean/conf/ server.srg" % (sys.argv[0],)
+    print "\t%s ../mcp723-clean/conf/ obf2cb.srg" % (sys.argv[0],)
     print "Translate only through server.srg, leaving indexed func_XXX/field_XXX names:"
-    print "\t%s ../mcp723-clean/conf/server.srg server.srg" % (sys.argv[0],)
+    print "\t%s ../mcp723-clean/conf/server.srg ob2cb.srg" % (sys.argv[0],)
     raise SystemExit
 
 mcpdir = sys.argv[1]
