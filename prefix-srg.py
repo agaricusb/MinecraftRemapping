@@ -33,7 +33,7 @@ for line in f.readlines():
         print kind, inName, applyPrefix(outName, prefix)
     elif kind == "MD:": # method
         inName, inSig, outName, outSig = args
-        print kind, inSig, applyPrefix(outName, prefix), outSig
+        print kind, inName, inSig, applyPrefix(outName, prefix), outSig
     else:
         print line
 
