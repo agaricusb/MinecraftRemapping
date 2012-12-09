@@ -10,7 +10,7 @@ if len(sys.argv) < 3:
     print "Prepends a prefix to renamed symbols, to avoid collisions"
     print "Usage: %s file.srg prefix" % (sys.argv[0],)
     print "Example:"
-    print "\t%0 cb2mcp.srg cbtmp_" % (sys.argv[0],)
+    print "\t%s cb2mcp.srg cbtmp_" % (sys.argv[0],)
     raise SystemExit
 
 
