@@ -43,6 +43,7 @@ def loadDescriptiveNamesCSV(fn):
         tokens = line.split(",",3)
         if tokens[0] == "searge": continue
         searge,name,side,desc = tokens
+        if side != "1": continue # 1=server-side, mappings don't always match 0=client-side
         d[searge] = name
     return d
 
@@ -120,9 +121,9 @@ if len(sys.argv) != 3:
     print "Usage: %s clean-mcpdir/conf cb-server.srg" % (sys.argv[0],)
     print "Examples:"
     print "Translate through server.srg and descriptive fields.csv/methods.csv:"
-    print "\t%s ../mcp723-clean/conf/ obf2cb.srg" % (sys.argv[0],)
+    print "\t%s ../mcp723-clean/conf/ obf2cb.srg > cb2mcp.srg" % (sys.argv[0],)
     print "Translate only through server.srg, leaving indexed func_XXX/field_XXX names:"
-    print "\t%s ../mcp723-clean/conf/server.srg ob2cb.srg" % (sys.argv[0],)
+    print "\t%s ../mcp723-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
     raise SystemExit
 
 mcpdir = sys.argv[1]
