@@ -35,13 +35,14 @@ def process(filename):
 
         print "s/(\W)%s(\W)/$1%s$2/g;" % (inName, outName)
 
-        ren.append("git mv '%s.java' '%s.java'" % (inName, outName.replace("cbtmp_", "")))
+        ren.append("mv '%s.java' '%s.java'" % (inName, outName))
 
-    print
-    print "Then run: find . -type perl -pe's/cbtmp_//g' -i {} \;"
-    print "And then run renames commands:"
+    print "Then run renames commands:"
     print "\n".join(ren)
-
+    print 
+    print "And then run:"
+    print "find . -type perl -pe's/cbtmp_//g' -i {} \;"
+    print "and rename cbtmp_"
 
 
 def lastComponent(fullName):
