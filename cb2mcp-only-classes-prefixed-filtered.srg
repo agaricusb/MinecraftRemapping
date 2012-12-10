@@ -1,4 +1,3 @@
-#!/usr/bin/perl -pi
 CL: net/minecraft/server/ICommandListener minecraft/src/ICommandSender/cbtmp_ICommandSender
 CL: net/minecraft/server/OldChunkLoader minecraft/src/ChunkLoader/cbtmp_ChunkLoader
 CL: net/minecraft/server/OldChunk minecraft/src/AnvilConverterData/cbtmp_AnvilConverterData

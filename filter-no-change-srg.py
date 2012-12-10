@@ -5,7 +5,6 @@ import sys
 def process(filename):
     f = file(filename)
     patterns = []
-    print "#!/usr/bin/perl -pi"
     for line in f.readlines():
         line = line.strip()
         tokens = line.strip().split()
