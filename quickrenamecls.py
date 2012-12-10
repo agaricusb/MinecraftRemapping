@@ -2,10 +2,22 @@
 
 # Quick-and-dirty textual rename of class names
 
-import sys, os
+import sys, os, re
+
+def walk(mapping, dirname, fnames):
+    for filename in fnames:
+        if not filename.endswith(".java"): continue
+        path = os.path.join(dirname, filename)
+        print path
+
+        data = file(path, "r").read()
+        print len(data)
+
 
 def process(filename, target):
     f = file(filename)
+    patterns = []
+    mapping = {}
     for line in f.readlines():
         line = line.strip()
         tokens = line.strip().split()
@@ -17,11 +29,13 @@ def process(filename, target):
         inName = lastComponent(inFullName)
         outName = lastComponent(outFullName)
 
-        print "Rename: %s -> %s" % (inName, outName)
+    print "Loaded %d class mappings" % (len(mapping),)
 
-        cmd = "find '%s' -type f -name '*.java' -exec perl -pe's/(\W)%s(\W)/$1%s$2/g' -i {} \;" % (target, inName, outName)
-        print cmd
-        #os.system(cmd)
+    os.path.walk(target, walk, mapping)
+
+    cmd = "find '%s' -type f -name '*.java' -exec perl -pe's/(\W)%s(\W)/$1%s$2/g' -i {} \;" % (target, inName, outName)
+    print cmd
+    #os.system(cmd)
 
 def lastComponent(fullName):
     return fullName.split("/")[-1]
