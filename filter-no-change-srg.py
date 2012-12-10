@@ -1,18 +1,6 @@
 #!/usr/bin/python
 
-# Generate Perl script for quick-and-dirty textual rename of class names
-
-import sys, os, re
-
-def walk(_, dirname, fnames):
-    for filename in fnames:
-        if not filename.endswith(".java"): continue
-        path = os.path.join(dirname, filename)
-        print path
-
-        data = file(path, "r").read()
-        print len(data)
-
+import sys
 
 def process(filename):
     f = file(filename)
@@ -29,7 +17,8 @@ def process(filename):
         inName = lastComponent(inFullName)
         outName = lastComponent(outFullName)
 
-        print "s/(\W)%s(\W)/$1%s$2/g;" % (inName, outName)
+        if inName != outName.replace("cbtmp_", ""):
+            print line
 
 def lastComponent(fullName):
     return fullName.split("/")[-1]
