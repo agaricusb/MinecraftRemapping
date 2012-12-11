@@ -208,6 +208,7 @@ net/minecraft/server/ServerConfigurationManagerAbstract
 net/minecraft/server/ShapedRecipes
 net/minecraft/server/ShapelessRecipes
 net/minecraft/server/Slot
+net/minecraft/server/SlotFurnaceResult
 net/minecraft/server/SpawnerCreature
 net/minecraft/server/ThreadCommandReader
 net/minecraft/server/ThreadLoginVerifier

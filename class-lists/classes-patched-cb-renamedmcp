@@ -58,6 +58,7 @@ net/minecraft/src/ContainerChest
 net/minecraft/src/ContainerDispenser
 net/minecraft/src/ContainerEnchantment
 net/minecraft/src/SlotEnchantmentTable
+net/minecraft/src/SlotFurnace
 net/minecraft/src/ContainerFurnace
 net/minecraft/src/ContainerMerchant
 net/minecraft/src/ContainerPlayer
