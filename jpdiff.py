@@ -131,8 +131,6 @@ def main():
     classes_obf2cb = getClassMap()
     printClasses(classes_obf2cb)
 
-    classes_cb2obf = {v:k for k,v in classes_obf2cb.iteritems()}
-
     for obf in sorted(classes_obf2cb.keys()):
         cb = classes_obf2cb[obf]
         debug(" ".join(("***",obf,cb)))
