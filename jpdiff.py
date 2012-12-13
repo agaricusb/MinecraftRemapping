@@ -43,7 +43,7 @@ def dumpMembers(fn):
     d = {}
     cmd = JAVAP + [fn]
     debug("$ %s" % (" ".join(cmd),))
-    f = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
+    f = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
     while True:
         line = f.readline()
         assert len(line) != 0, "couldn't find class declaration in javap output for %s: %s" % (cmd, line)
@@ -110,19 +110,6 @@ def diffMembers(obfClass, cbClass):
             print "MD: %s/%s %s %s/%s %s" % (obfClass, obfName, obfSig, cbClass, cbName, cbSig)
         else:  # field
             print "FD: %s/%s %s/%s" % (obfClass, obfName, cbClass, cbName)
-
-def difflines():
-    a = os.popen(JAVAP + " mc-dev/net/minecraft/server/ChunkSection").readlines()
-    b = os.popen(JAVAP + " vanilla/zt").readlines()
-
-    assert len(a) == len(b), "Not equal length"
-
-    for i in range(len(a)):
-        if a[i] != b[i]:
-            print "-",a[i].strip()
-            print "+",b[i].strip()
-        else:
-            print " ",a[i].strip()
 
 def printPackage():
     print """PK: . net/minecraft/server
