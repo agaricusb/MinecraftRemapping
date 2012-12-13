@@ -4,7 +4,7 @@ import sys
 
 def applyPrefix(symbol, prefix):
     parts = symbol.split("/")
-    return "/".join(parts[1:]) + "/" + prefix + parts[-1]
+    return "/".join(parts[:-1]) + "/" + prefix + parts[-1]
 
 if len(sys.argv) < 3:
     print "Prepends a prefix to renamed symbols, to avoid collisions"
