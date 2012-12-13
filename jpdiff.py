@@ -2,8 +2,13 @@
 
 # javap-based diff of internally-renamed Java class files into a .srg
 
+# Requires:
+#  classes.srg - from zip-class-diff.py
+#  vanilla/ - extracted minecraft_server.jar
+#  mc-dev/ - extracted minecraft-server-*.jar
+
 # Example Usage:
-# 0. Update classes.srg with comprehensive obfuscated->CB class map
+# 0. Update classes.srg with comprehensive obfuscated->CB class map - see zip-class-diff.py
 # 1. Extract minecraft_server.jar from Mojang into "vanilla"
 # http://assets.minecraft.net/1_4_5/minecraft.jar 
 # 2. Extract Bukkit's "mc-dev" minecraft-server into "mc-dev"
@@ -11,6 +16,7 @@
 # 3. Run this script and save output to "obf2cb.srg"
 # (To make cb2obf.srg, run ReverseSrg from SrgTools)
 
+# TODO: use ASM instead of javap parsing
 JAVAP = ["javap", "-s", "-private"]
 
 import os

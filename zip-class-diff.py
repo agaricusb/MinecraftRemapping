@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Generate class mapping between two identical but internally-renamed jars
+# Generate class mapping difference between two identical but internally-renamed jars
 
 import zipfile
 import sys
