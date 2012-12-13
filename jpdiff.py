@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# diff internally-renamed Java class files into a .srg
+# javap-based diff of internally-renamed Java class files into a .srg
 
 # Example Usage:
 # 0. Update classes.srg with comprehensive obfuscated->CB class map
@@ -17,6 +17,7 @@ import os
 import subprocess
 
 def debug(s):
+    #print s
     pass
 
 # Get provided map of obfuscated class names to CB names
@@ -40,19 +41,23 @@ def printClasses(obf2cb):
 
 def dumpMembers(fn):
     d = {}
-    f = subprocess.Popen(JAVAP + [fn], stdout=subprocess.PIPE).stdout
-    compiledFrom = f.readline().strip()
-    if compiledFrom == "Compiled from SourceFile":
-        classDecl = f.readline().strip()
-    else:
-        classDecl = compiledFrom  # bouncycastle
-
+    cmd = JAVAP + [fn]
+    debug("$ %s" % (" ".join(cmd),))
+    f = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
+    while True:
+        line = f.readline()
+        assert len(line) != 0, "couldn't find class declaration in javap output for %s: %s" % (cmd, line)
+        if "class" in line or "interface" in line:
+            classDecl = line.strip()
+            break
+            
     members = []
    
     while True:
         decl = f.readline()
         if decl == "": break
         decl = decl.strip()
+        debug(">"+decl)
         if decl == "}" or decl == "": continue
         assert decl[-1] == ";"
         decl = decl.replace(";","")
