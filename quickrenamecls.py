@@ -6,15 +6,14 @@ import sys, os, re, subprocess
 
 def filenameRenames(renames, srcdir):
     pushd = os.getcwd()
-    os.chdir(srcdir)  # have to be in root for git 
-    os.mkdir("main/java/net/minecraft/src/")
-    for before, after in renames.iteritems():
-        # Change package too
-        # TODO: fix org bouncycastle renames, have to do manually
-        beforePath = os.path.join("main/java/net/minecraft/server/", before) + ".java"
-        afterPath = os.path.join("main/java/net/minecraft/src/", after) + ".java"
+    os.chdir(srcdir + "main/java/")  # have to be in root for git 
+    if not os.path.exists("net/minecraft/src"): os.mkdir("net/minecraft/src/")
+    for before in sorted(renames.keys()):
+        after = renames[before]
 
-        cmd = ("git", "mv", beforePath, afterPath)
+        if before == after: continue
+
+        cmd = ("git", "mv", before + ".java", after + ".java")
         print " ".join(cmd)
         subprocess.call(cmd)
     os.chdir(pushd)
@@ -27,7 +26,8 @@ def textualRename(renames, filenames):
         data = file(filename, "r").read()
 
         for before, after in renames.iteritems():
-            data = re.sub(r"\b" + re.escape(before) + r"\b", after, data)
+            data = re.sub(r"\b" + re.escape(lastComponent(before)) + r"\b", lastComponent(after), data)
+            data = re.sub(r"\b" + "net.minecraft.server" + r"\b", "net.minecraft.src", data)
 
         file(filename, "w").write(data)
 
@@ -53,14 +53,9 @@ def getRenames(filename):
         if tokens[0] != "CL:": continue
         args = tokens[1:]
 
-        inFullName, outFullName = args
-
-        inName = lastComponent(inFullName)
-        outName = lastComponent(outFullName)
+        inName, outName= args
 
         renames[inName] = outName
-
-    renames["net.minecraft.server"] = "net.minecraft.src"  #  package name
 
     return renames
 
@@ -76,10 +71,10 @@ def main():
     renames = getRenames(sys.argv[1])
     filenames = getJavaSource(sys.argv[2])
 
-    print "Renaming class references..."
-    textualRename(renames, filenames)
-    print "Commit to git now, then press enter once committed to continue"
-    raw_input()
+    #print "Renaming class references..."
+    #textualRename(renames, filenames)
+    #print "Commit to git now, then press enter once committed to continue"
+    #raw_input()
     print "Renaming files"
     filenameRenames(renames, sys.argv[2])
     print "Rename complete! Commit to git, then fix any errors (org.bukkit.Potion vs net.minecraft.src.Potion, etc.)"
