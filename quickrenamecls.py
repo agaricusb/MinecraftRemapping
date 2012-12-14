@@ -1,24 +1,51 @@
 #!/usr/bin/python
 
-# Generate Perl script for quick-and-dirty textual rename of class names
+# Textually rename 
 
-import sys, os, re
+import sys, os, re, subprocess
 
-def walk(_, dirname, fnames):
-    for filename in fnames:
-        if not filename.endswith(".java"): continue
-        path = os.path.join(dirname, filename)
-        print path
+def filenameRenames(renames, srcdir):
+    pushd = os.getcwd()
+    os.chdir(srcdir)  # have to be in root for git 
+    os.mkdir("main/java/net/minecraft/src/")
+    for before, after in renames.iteritems():
+        # Change package too
+        # TODO: fix org bouncycastle renames, have to do manually
+        beforePath = os.path.join("main/java/net/minecraft/server/", before) + ".java"
+        afterPath = os.path.join("main/java/net/minecraft/src/", after) + ".java"
 
-        data = file(path, "r").read()
-        print len(data)
+        cmd = ("git", "mv", beforePath, afterPath)
+        print " ".join(cmd)
+        subprocess.call(cmd)
+    os.chdir(pushd)
 
 
-def process(filename):
+# Rename classes in files, by text
+def textualRename(renames, filenames):
+    for filename in filenames:
+        print filename
+        data = file(filename, "r").read()
+
+        for before, after in renames.iteritems():
+            data = re.sub(r"\b" + re.escape(before) + r"\b", after, data)
+
+        file(filename, "w").write(data)
+
+def getJavaSource(srcdir):
+    paths = []
+    for root, dirs, files in os.walk(srcdir):
+        for fn in files:
+            if not fn.endswith(".java"): continue
+
+            path = os.path.join(root, fn)
+            paths.append(path)
+    return paths
+
+
+# Get class renames map
+def getRenames(filename):
+    renames = {}
     f = file(filename)
-    patterns = []
-    print "Save to Perl script /tmp/a, and run: find src -name '*.java' -exec perl -i /tmp/a {} \;"
-    print "#!/usr/bin/perl -pi"
     ren = []
     for line in f.readlines():
         line = line.strip()
@@ -31,28 +58,33 @@ def process(filename):
         inName = lastComponent(inFullName)
         outName = lastComponent(outFullName)
 
-        inName = inName.replace("$", "\$1"); outName = outName.replace("$", "\$1") # TODO: real escaping
+        renames[inName] = outName
 
-        print "s/(\W)%s(\W)/$1%s$2/g;" % (inName, outName)
+    renames["net.minecraft.server"] = "net.minecraft.src"  #  package name
 
-        ren.append("mv '%s.java' '%s.java'" % (inName, outName))
-
-    print "Then run renames commands:"
-    print "\n".join(ren)
-    print 
-    print "And then run:"
-    print "find . -type perl -pe's/cbtmp_//g' -i {} \;"
-    print "and rename cbtmp_"
+    return renames
 
 
 def lastComponent(fullName):
     return fullName.split("/")[-1]
 
-if len(sys.argv) != 2:
-    print "Usage: %s cb2mcp-only-classes-prefixed.srg" % (sys.argv[0],)
-    raise SystemExit
+def main():
+    if len(sys.argv) != 3:
+        print "Usage: %s cb2mcp-only-classes.srg ../CraftBukkit/src/" % (sys.argv[0],)
+        raise SystemExit
 
-filename = sys.argv[1]
+    renames = getRenames(sys.argv[1])
+    filenames = getJavaSource(sys.argv[2])
 
-process(filename)
+    print "Renaming class references..."
+    textualRename(renames, filenames)
+    print "Commit to git now, then press enter once committed to continue"
+    raw_input()
+    print "Renaming files"
+    filenameRenames(renames, sys.argv[2])
+    print "Rename complete! Commit to git, then fix any errors (org.bukkit.Potion vs net.minecraft.src.Potion, etc.)"
+    print "Note, you must now use git-log --follow to view history of any of the renames files"
+
+if __name__ == "__main__":
+    main()
 
