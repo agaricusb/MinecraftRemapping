@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
-# Textually rename 
+# Textually rename classes
+
+# This is an alternative to ApplySrg2Source using a classes srg,
+# for when your computer can't handle it
+
+# Requires some manual fixing afterwards, but its MUCH faster
 
 import sys, os, re, subprocess
 
@@ -25,9 +30,15 @@ def textualRename(renames, filenames):
         print filename
         data = file(filename, "r").read()
 
+        tempPrefix = "cbtmp_"
+
         for before, after in renames.iteritems():
-            data = re.sub(r"\b" + re.escape(lastComponent(before)) + r"\b", lastComponent(after), data)
+            data = re.sub(r"\b" + re.escape(lastComponent(before)) + r"\b", tempPrefix + lastComponent(after), data)
             data = re.sub(r"\b" + "net.minecraft.server" + r"\b", "net.minecraft.src", data)
+
+        # To avoid renaming unintentionally transitive renames, we substitute a temporary prefix, do all
+        # of the renames, then remove the prefix. This makes the rename operation "atomic".
+        data = data.replace(tempPrefix, "")
 
         file(filename, "w").write(data)
 
@@ -71,10 +82,10 @@ def main():
     renames = getRenames(sys.argv[1])
     filenames = getJavaSource(sys.argv[2])
 
-    #print "Renaming class references..."
-    #textualRename(renames, filenames)
-    #print "Commit to git now, then press enter once committed to continue"
-    #raw_input()
+    print "Renaming class references..."
+    textualRename(renames, filenames)
+    print "Commit to git now, then press enter once committed to continue"
+    raw_input()
     print "Renaming files"
     filenameRenames(renames, sys.argv[2])
     print "Rename complete! Commit to git, then fix any errors (org.bukkit.Potion vs net.minecraft.src.Potion, etc.)"
