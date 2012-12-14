@@ -200,6 +200,7 @@ net/minecraft/src/Profiler
 net/minecraft/src/PropertyManager
 net/minecraft/src/RecipesArmorDyes
 net/minecraft/src/RecipesMapCloning
+net/minecraft/src/RegionFile
 net/minecraft/src/SaveHandler
 net/minecraft/src/ServerBlockEventList
 net/minecraft/src/ServerConfigurationManager

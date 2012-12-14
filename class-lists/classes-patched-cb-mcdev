@@ -203,6 +203,7 @@ net/minecraft/server/PropertyManager
 net/minecraft/server/RecipesArmorDye
 net/minecraft/server/RecipesFurnace
 net/minecraft/server/RecipesMapClone
+net/minecraft/server/RegionFile
 net/minecraft/server/SecondaryWorldServer
 net/minecraft/server/ServerConfigurationManagerAbstract
 net/minecraft/server/ShapedRecipes
