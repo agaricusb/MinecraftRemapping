@@ -129,7 +129,6 @@ net/minecraft/src/CallableMemoryInfo
 net/minecraft/src/CallableMinecraftVersion
 net/minecraft/src/CallableOSInfo
 net/minecraft/src/CallableServerMemoryStats
-net/minecraft/src/CallableServerProfiler
 net/minecraft/src/CallableServerType
 net/minecraft/src/CallableStructureType
 net/minecraft/src/CallableSuspiciousClasses
@@ -173,18 +172,12 @@ net/minecraft/src/CommandServerOp
 net/minecraft/src/CommandServerPardon
 net/minecraft/src/CommandServerPardonIp
 net/minecraft/src/CommandServerPublishLocal
-net/minecraft/src/CommandServerSaveAll
-net/minecraft/src/CommandServerSaveOff
-net/minecraft/src/CommandServerSaveOn
 net/minecraft/src/CommandServerSay
 net/minecraft/src/CommandServerStop
 net/minecraft/src/CommandServerTp
 net/minecraft/src/CommandServerWhitelist
 net/minecraft/src/CommandSetSpawnpoint
 net/minecraft/src/CommandShowSeed
-net/minecraft/src/CommandTime
-net/minecraft/src/CommandToggleDownfall
-net/minecraft/src/CommandWeather
 net/minecraft/src/CommandXP
 net/minecraft/src/ComparatorClassSorter
 net/minecraft/src/ComponentMineshaftCorridor
@@ -242,7 +235,6 @@ net/minecraft/src/ComponentVillageTorch
 net/minecraft/src/ComponentVillageWell
 net/minecraft/src/ComponentVillageWoodHut
 net/minecraft/src/CompressedStreamTools
-net/minecraft/src/ContainerSheep
 net/minecraft/src/ConvertingProgressUpdate
 net/minecraft/src/CrashReportCategory
 net/minecraft/src/CrashReportCategoryEntry
@@ -266,7 +258,6 @@ net/minecraft/src/DedicatedPlayerList
 net/minecraft/src/DedicatedServerListenThread
 net/minecraft/src/DedicatedServerSleepThread
 net/minecraft/src/DemoWorldManager
-net/minecraft/src/DemoWorldServer
 net/minecraft/src/DerivedWorldInfo
 net/minecraft/src/Direction
 net/minecraft/src/Empty3
@@ -393,7 +384,6 @@ net/minecraft/src/GenLayerVoronoiZoom
 net/minecraft/src/GenLayerZoom
 net/minecraft/src/GuiLogFormatter
 net/minecraft/src/GuiLogOutputHandler
-net/minecraft/src/GuiStatsComponent
 net/minecraft/src/GuiStatsListener
 net/minecraft/src/HttpUtil
 net/minecraft/src/IAdminCommand
@@ -630,7 +620,6 @@ net/minecraft/src/ReportedException
 net/minecraft/src/SaveFormatOld
 net/minecraft/src/ServerBlockEvent
 net/minecraft/src/ServerCommand
-net/minecraft/src/ServerCommandManager
 net/minecraft/src/ServerGUI
 net/minecraft/src/ServerGuiCommandListener
 net/minecraft/src/ServerGuiFocusAdapter
@@ -682,7 +671,6 @@ net/minecraft/src/SyntaxErrorException
 net/minecraft/src/TcpMasterThread
 net/minecraft/src/TcpMonitorThread
 net/minecraft/src/TcpReaderThread
-net/minecraft/src/ThreadDedicatedServer
 net/minecraft/src/ThreadMinecraftServer
 net/minecraft/src/ThreadedFileIOBase
 net/minecraft/src/TileEntityEnchantmentTable
