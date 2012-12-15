@@ -539,7 +539,6 @@ net/minecraft/server/RecipesMapExtend
 net/minecraft/server/RecipesTools
 net/minecraft/server/RecipesWeapons
 net/minecraft/server/RedstoneUpdateInfo
-net/minecraft/server/RegionFile
 net/minecraft/server/RegionFileCache
 net/minecraft/server/RegistryDefault
 net/minecraft/server/RegistrySimple

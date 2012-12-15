@@ -611,7 +611,6 @@ net/minecraft/src/RecipesMapExtending
 net/minecraft/src/RecipesTools
 net/minecraft/src/RecipesWeapons
 net/minecraft/src/RedstoneUpdateInfo
-net/minecraft/src/RegionFile
 net/minecraft/src/RegionFileCache
 net/minecraft/src/RegionFileChunkBuffer
 net/minecraft/src/RegistryDefaulted
