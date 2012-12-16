@@ -53,8 +53,15 @@ net/minecraft/src/BlockTrapDoor
 net/minecraft/src/BlockTripWire
 net/minecraft/src/BlockTripWireSource
 net/minecraft/src/BlockVine
+net/minecraft/src/CallableServerProfiler
 net/minecraft/src/Chunk
 net/minecraft/src/ChunkProviderServer
+net/minecraft/src/CommandServerSaveAll
+net/minecraft/src/CommandServerSaveOff
+net/minecraft/src/CommandServerSaveOn
+net/minecraft/src/CommandTime
+net/minecraft/src/CommandToggleDownfall
+net/minecraft/src/CommandWeather
 net/minecraft/src/ConsoleLogFormatter
 net/minecraft/src/ConsoleLogManager
 net/minecraft/src/Container
@@ -67,11 +74,13 @@ net/minecraft/src/ContainerFurnace
 net/minecraft/src/ContainerMerchant
 net/minecraft/src/ContainerPlayer
 net/minecraft/src/ContainerRepair
+net/minecraft/src/ContainerSheep
 net/minecraft/src/ContainerWorkbench
 net/minecraft/src/CraftingManager
 net/minecraft/src/CrashReport
 net/minecraft/src/DedicatedServer
 net/minecraft/src/DedicatedServerCommandThread
+net/minecraft/src/DemoWorldServer
 net/minecraft/src/Enchantment
 net/minecraft/src/Entity
 net/minecraft/src/EntityAIArrowAttack
@@ -141,6 +150,7 @@ net/minecraft/src/Explosion
 net/minecraft/src/ExtendedBlockStorage
 net/minecraft/src/FoodStats
 net/minecraft/src/FurnaceRecipes
+net/minecraft/src/GuiStatsComponent
 net/minecraft/src/IInventory
 net/minecraft/src/IRecipe
 net/minecraft/src/ISaveHandler
@@ -203,6 +213,7 @@ net/minecraft/src/RecipesMapCloning
 net/minecraft/src/RegionFile
 net/minecraft/src/SaveHandler
 net/minecraft/src/ServerBlockEventList
+net/minecraft/src/ServerCommandManager
 net/minecraft/src/ServerConfigurationManager
 net/minecraft/src/ServerListenThread
 net/minecraft/src/ShapedRecipes
@@ -214,6 +225,7 @@ net/minecraft/src/SpawnerAnimals
 net/minecraft/src/TcpConnection
 net/minecraft/src/TcpWriterThread
 net/minecraft/src/Teleporter
+net/minecraft/src/ThreadDedicatedServer
 net/minecraft/src/ThreadLoginVerifier
 net/minecraft/src/TileEntity
 net/minecraft/src/TileEntityBeacon
