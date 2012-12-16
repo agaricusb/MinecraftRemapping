@@ -2,3 +2,4 @@ mc-dev
 vanilla
 *.jar
 *.swp
+*.pyc
