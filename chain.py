@@ -2,7 +2,9 @@
 
 # Given obf<->MCP and obf<->CB mappings, generate MCP<->CB mappings
 
-import sys
+import sys, os
+
+global verbose
 
 def process(filename):
     f = file(filename)
@@ -54,11 +56,17 @@ def chain(mcpdir, cbsrg):
         fields_fn = methods_fn = None
     elif mcpdir.endswith("/"):
         # also translate descriptive names through MCP's fields/methods.csv
-        mcpsrg = mcpdir + "server.srg"
+        mcpsrg = mcpdir + "server.srg"  # old MCP
+        if not os.path.exists(mcpsrg):
+            mcpsrg = mcpdir + "packaged.srg"    # Forge uses multi-level packages (not joined.srg)
+        if not os.path.exists(mcpsrg):
+            print "no .srg found in %s" % (mcpdir,)
+            raise SystemExit
+
         fields_fn = mcpdir + "fields.csv"
         methods_fn = mcpdir + "methods.csv"
     else:
-        print "argument must be srg or mcp dir with server.srg, fields.csv, and methods.csv"
+        print "argument must be srg or mcp dir with .srg, fields.csv, and methods.csv"
         raise SystemExit
 
     mcp = process(mcpsrg)
@@ -98,7 +106,7 @@ def chain(mcpdir, cbsrg):
         mapCB = cb[kind]
 
         missing = set(mapMCP.keys()) - set(mapCB.keys())
-        if len(missing) != 0:
+        if len(missing) != 0 and verbose:
             print "CB mappings missing from MCP mappings: %s" % (missing,)
             import pprint
             print "=== mapMCP ==="
@@ -114,20 +122,31 @@ def chain(mcpdir, cbsrg):
            pass
 
         for obf in sorted(mapMCP.keys()):
+            if not mapCB.has_key(obf) or not mapMCP.has_key(obf): continue
+
             print "%s: %s %s" % (kind, mapCB[obf], descriptiveName(mapMCP[obf]))
 
-if len(sys.argv) != 3:
-    print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
-    print "Usage: %s clean-mcpdir/conf cb-server.srg" % (sys.argv[0],)
-    print "Examples:"
-    print "Translate through server.srg and descriptive fields.csv/methods.csv:"
-    print "\t%s ../mcp723-clean/conf/ obf2cb.srg > cb2mcp.srg" % (sys.argv[0],)
-    print "Translate only through server.srg, leaving indexed func_XXX/field_XXX names:"
-    print "\t%s ../mcp723-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
-    raise SystemExit
+def main():
+    global verbose
 
-mcpdir = sys.argv[1]
-cbsrg = sys.argv[2]
+    verbose = False
 
-chain(mcpdir, cbsrg)
+    if len(sys.argv) < 3:
+        print "chain srg given obf<->MCP and obf<->CB to CB<->MCP"
+        print "Usage: %s clean-mcpdir/conf cb-server.srg [-v]" % (sys.argv[0],)
+        print "Examples:"
+        print "Translate through .srg and descriptive fields.csv/methods.csv:"
+        print "\t%s ../mcp723-clean/conf/ obf2cb.srg > cb2mcp.srg" % (sys.argv[0],)
+        print "Translate only through .srg, leaving indexed func_XXX/field_XXX names:"
+        print "\t%s ../mcp723-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
+        raise SystemExit
 
+    mcpdir = sys.argv[1]
+    cbsrg = sys.argv[2]
+
+    verbose = "-v" in sys.argv
+
+    chain(mcpdir, cbsrg)
+
+if __name__ == "__main__":
+    main()
