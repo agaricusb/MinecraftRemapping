@@ -45,7 +45,7 @@ def loadDescriptiveNamesCSV(fn):
         tokens = line.split(",",3)
         if tokens[0] == "searge": continue
         searge,name,side,desc = tokens
-        if side != "1": continue # 1=server-side, mappings don't always match 0=client-side
+        if side == "0": continue # 2=joined, 1=server-side, 0=client-side. Skip client, include server and joined
         d[searge] = name
     return d
 
@@ -59,6 +59,7 @@ def chain(mcpdir, cbsrg):
         mcpsrg = mcpdir + "server.srg"  # old MCP
         if not os.path.exists(mcpsrg):
             mcpsrg = mcpdir + "packaged.srg"    # Forge uses multi-level packages (not joined.srg)
+            #mcpsrg = mcpdir + "joined.srg"    # flat namespace
         if not os.path.exists(mcpsrg):
             print "no .srg found in %s" % (mcpdir,)
             raise SystemExit
