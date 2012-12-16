@@ -11,6 +11,7 @@ def getPackages():
     fn = mcpdir + "conf/packages.csv"
     for line in file(fn).readlines():
         cls, pkg = line.strip().split(",")
+        if cls == "class" or pkg == "package": continue
         cls2pkg[cls] = pkg
 
     return cls2pkg
