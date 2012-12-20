@@ -18,11 +18,19 @@ cb_jar = "../CraftBukkit/target/craftbukkit-1.4.5-R1.1-SNAPSHOT.jar"
 classpath = "/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/jre/lib/jce.jar"
 classpath += ":".join(os.getenv("CLASSPATH", ""))
 
-# TODO: all classes
+nms_classes = filter(lambda x: x.startswith("net"), [x.strip().replace("/", ".") for x in file("class-lists/classes-all-mcdev").readlines()])
+
+for cls in nms_classes:
+    relocClass = cls.replace("net.minecraft.server.", "net.minecraft.server.v1_4_5.")
+
+    subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", "jimple", "-d", "jimple/cb-reloc",
+        "-v", "-debug",
+        "-cp", classpath + ":" + cb_jar,
+        "--allow-phantom-refs",  # TODO: remove after finding all symbols
+        relocClass))
+
+    # Remove the version number from the package (due to maven shade relocation), for comparison with mc-dev
+    unrelocData = file("jimple/cb-reloc/" + relocClass + ".jimple").read().replace("v1_4_5.", "")
+    file("jimple/cb/" + cls + ".jimple").write(unrelocData)
+
 # TODO: mc-dev, too
-subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", "jimple", "-d", "jimple/cb",
-    "-v", "-debug",
-    "-cp", classpath + ":" + cb_jar,
-    "--allow-phantom-refs",  # TODO: remove after finding all symbols
-    "net.minecraft.server.v1_4_5.AABBPool"))
-# TODO: investigate Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: -32768 at soot.coffi.cp_info.getTypeDescr(cp_info.java:239) - https://gist.github.com/4343179
