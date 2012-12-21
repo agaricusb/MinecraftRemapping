@@ -5,8 +5,11 @@
 
 import os, subprocess
 
-output_format = "jimple"
-output_format = "baf"
+classes_file = "1.4.5/classes-all-mcdev"
+
+#output_format = "jimple"
+#output_format = "baf"
+output_format = "jasmin"
 
 def runSoot(outdir, jar, cls):
     subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", output_format, "-d", outdir,
@@ -33,7 +36,7 @@ mcdev_jar = "../jars/minecraft-server-1.4.5.jar"
 classpath = "/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/jre/lib/jce.jar"
 classpath += ":".join(os.getenv("CLASSPATH", ""))
 
-nms_classes = filter(lambda x: x.startswith("net"), [x.strip().replace("/", ".") for x in file("class-lists/classes-all-mcdev").readlines()])
+nms_classes = filter(lambda x: x.startswith("net"), [x.strip().replace("/", ".") for x in file(classes_file).readlines()])
 
 for cls in nms_classes:
     # CraftBukkit
