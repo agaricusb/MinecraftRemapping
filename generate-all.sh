@@ -31,9 +31,14 @@ python -u jpdiff.py $OUT_DIR/classes.srg $VANILLA_DIR $MCDEV_DIR | tee $OUT_DIR/
 # CB -> MCP
 python chain.py $MCPCONF $OUT_DIR/obf2cb.srg > $OUT_DIR/cb2mcp.srg
 
+
 # Reversed
 python reverse-srg.py $OUT_DIR/obf2cb.srg > $OUT_DIR/cb2obf.srg
 python reverse-srg.py $OUT_DIR/cb2mcp.srg > $OUT_DIR/mcp2cb.srg
+
+# obf <-> MCP - this is like what MCP ships, except with merged descriptive symbol names
+python chain.py $OUT_DIR/cb2mcp.srg $OUT_DIR/cb2obf.srg > $OUT_DIR/obf2mcp.srg
+python reverse-srg.py $OUT_DIR/obf2mcp.srg > $OUT_DIR/mcp2obf.srg
 
 # Split by type for easier processing
 grep FD: $OUT_DIR/cb2mcp.srg > $OUT_DIR/cb2mcp-only-fields.srg
@@ -50,4 +55,5 @@ python prefix-srg.py $OUT_DIR/cb2mcp-only-classes.srg cbtmp_ > $OUT_DIR/cb2mcp-o
 python prefix-srg.py $OUT_DIR/mcp2cb-only-methods.srg cbtmp_ > $OUT_DIR/mcp2cb-only-methods-prefixed.srg
 python prefix-srg.py $OUT_DIR/mcp2cb-only-fields.srg cbtmp_ > $OUT_DIR/mcp2cb-only-fields-prefixed.srg
 python prefix-srg.py $OUT_DIR/mcp2cb-only-classes.srg cbtmp_ > $OUT_DIR/mcp2cb-only-classes-prefixed.srg
+
 
