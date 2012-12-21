@@ -2,48 +2,52 @@
 
 # original obfuscated jar from Mojang
 # http://assets.minecraft.net/1_4_5/minecraft.jar
-VANILLA=minecraft_server.jar
+VANILLA=minecraft_server-146.jar
+VANILLA_DIR=vanilla146
 
 # internally renamed jar from Bukkit
 # http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/1.4.5/minecraft-server-1.4.5.jar
-MCDEV=minecraft-server-1.4.5.jar
+MCDEV=minecraft-server-1.4.6.jar
+MCDEV_DIR=mcdev146
 
 # MCP deobfuscation mappings from Ocean Labs
-MCPCONF=../mcp723-clean/conf/
+MCPCONF=../mcp725-clean/conf/
 
+# Location to store generated mappings (must already exist)
+OUT_DIR=1.4.6/
 
 # obfuscated -> CB
 
 # Class mappings (CL:)
-python zip-class-diff.py $VANILLA $MCDEV | sort > classes.srg
+python zip-class-diff.py $VANILLA $MCDEV | sort > $OUT_DIR/classes.srg
 
 # Method and field (MD: and FD:)
-rm -rf vanilla/
-rm -rf mc-dev/
-unzip $VANILLA -d vanilla/
-unzip $MCDEV -d mc-dev/
-python -u jpdiff.py | tee obf2cb.srg
+rm -rf $VANILLA_DIR/
+rm -rf $MCDEV_DIR/
+unzip $VANILLA -d $VANILLA_DIR/
+unzip $MCDEV -d $MCDEV_DIR/
+python -u jpdiff.py $OUT_DIR/classes.srg $VANILLA_DIR $MCDEV_DIR | tee $OUT_DIR/obf2cb.srg
 
 # CB -> MCP
-python chain.py $MCPCONF obf2cb.srg > cb2mcp.srg
+python chain.py $MCPCONF $OUT_DIR/obf2cb.srg > $OUT_DIR/cb2mcp.srg
 
 # Reversed
-python reverse-srg.py obf2cb.srg > cb2obf.srg
-python reverse-srg.py cb2mcp.srg > mcp2cb.srg
+python reverse-srg.py $OUT_DIR/obf2cb.srg > $OUT_DIR/cb2obf.srg
+python reverse-srg.py $OUT_DIR/cb2mcp.srg > $OUT_DIR/mcp2cb.srg
 
 # Split by type for easier processing
-grep FD: cb2mcp.srg > cb2mcp-only-fields.srg
-grep MD: cb2mcp.srg > cb2mcp-only-methods.srg
-grep CL: cb2mcp.srg > cb2mcp-only-classes.srg
-grep FD: mcp2cb.srg > mcp2cb-only-fields.srg
-grep MD: mcp2cb.srg > mcp2cb-only-methods.srg
-grep CL: mcp2cb.srg > mcp2cb-only-classes.srg
+grep FD: $OUT_DIR/cb2mcp.srg > $OUT_DIR/cb2mcp-only-fields.srg
+grep MD: $OUT_DIR/cb2mcp.srg > $OUT_DIR/cb2mcp-only-methods.srg
+grep CL: $OUT_DIR/cb2mcp.srg > $OUT_DIR/cb2mcp-only-classes.srg
+grep FD: $OUT_DIR/mcp2cb.srg > $OUT_DIR/mcp2cb-only-fields.srg
+grep MD: $OUT_DIR/mcp2cb.srg > $OUT_DIR/mcp2cb-only-methods.srg
+grep CL: $OUT_DIR/mcp2cb.srg > $OUT_DIR/mcp2cb-only-classes.srg
 
 # Temporary prefixes for atomic remapping
-python prefix-srg.py cb2mcp-only-methods.srg cbtmp_ > cb2mcp-only-methods-prefixed.srg
-python prefix-srg.py cb2mcp-only-fields.srg cbtmp_ > cb2mcp-only-fields-prefixed.srg
-python prefix-srg.py cb2mcp-only-classes.srg cbtmp_ > cb2mcp-only-classes-prefixed.srg
-python prefix-srg.py mcp2cb-only-methods.srg cbtmp_ > mcp2cb-only-methods-prefixed.srg
-python prefix-srg.py mcp2cb-only-fields.srg cbtmp_ > mcp2cb-only-fields-prefixed.srg
-python prefix-srg.py mcp2cb-only-classes.srg cbtmp_ > mcp2cb-only-classes-prefixed.srg
+python prefix-srg.py $OUT_DIR/cb2mcp-only-methods.srg cbtmp_ > $OUT_DIR/cb2mcp-only-methods-prefixed.srg
+python prefix-srg.py $OUT_DIR/cb2mcp-only-fields.srg cbtmp_ > $OUT_DIR/cb2mcp-only-fields-prefixed.srg
+python prefix-srg.py $OUT_DIR/cb2mcp-only-classes.srg cbtmp_ > $OUT_DIR/cb2mcp-only-classes-prefixed.srg
+python prefix-srg.py $OUT_DIR/mcp2cb-only-methods.srg cbtmp_ > $OUT_DIR/mcp2cb-only-methods-prefixed.srg
+python prefix-srg.py $OUT_DIR/mcp2cb-only-fields.srg cbtmp_ > $OUT_DIR/mcp2cb-only-fields-prefixed.srg
+python prefix-srg.py $OUT_DIR/mcp2cb-only-classes.srg cbtmp_ > $OUT_DIR/mcp2cb-only-classes-prefixed.srg
 

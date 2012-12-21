@@ -2,6 +2,8 @@
 
 # javap-based diff of internally-renamed Java class files into a .srg
 
+# Note: you probably want to use https://github.com/md-5/SpecialSource instead
+
 # Requires:
 #  classes.srg - from zip-class-diff.py
 #  vanilla/ - extracted minecraft_server.jar
@@ -21,16 +23,17 @@ JAVAP = ["javap", "-s", "-private"]
 
 import os
 import subprocess
+import sys
 
 def debug(s):
     #print s
     pass
 
 # Get provided map of obfuscated class names to CB names
-def getClassMap():
+def getClassMap(filename):
     obf2cb = {}
     i = 0
-    for line in file("classes.srg"):
+    for line in file(filename):
         i += 1
         line = line.strip()
         assert line.startswith("CL: ")
@@ -93,9 +96,9 @@ def parseDeclName(decl):
 
     return name
 
-def diffMembers(obfClass, cbClass):
-    obfClassDecl, obfMembers = dumpMembers("vanilla/"+obfClass)
-    cbClassDecl, cbMembers = dumpMembers("mc-dev/"+cbClass)
+def diffMembers(obfClass, cbClass, vanillaDir, mcdevDir):
+    obfClassDecl, obfMembers = dumpMembers(os.path.join(vanillaDir, obfClass))
+    cbClassDecl, cbMembers = dumpMembers(os.path.join(mcdevDir, cbClass))
 
     debug(obfClassDecl)
     debug(cbClassDecl)
@@ -124,15 +127,23 @@ PK: net/minecraft net/minecraft
 PK: net/minecraft/server net/minecraft/server"""
 
 def main():
+    if len(sys.argv) != 4:
+        print "Usage: %s classes.srg vanilla/ mc-dev/" % (sys.argv[0],)
+        raise SystemExit
+
+    classesSrgFilename = sys.argv[1]
+    vanillaDir = sys.argv[2]
+    mcdevDir = sys.argv[3]
+
     printPackage()
 
-    classes_obf2cb = getClassMap()
+    classes_obf2cb = getClassMap(classesSrgFilename)
     printClasses(classes_obf2cb)
 
     for obf in sorted(classes_obf2cb.keys()):
         cb = classes_obf2cb[obf]
         debug(" ".join(("***",obf,cb)))
-        diffMembers(obf,cb)
+        diffMembers(obf,cb,vanillaDir,mcdevDir)
 
 if __name__ == "__main__":
     main()
