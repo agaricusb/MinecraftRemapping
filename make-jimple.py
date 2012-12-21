@@ -5,8 +5,11 @@
 
 import os, subprocess
 
+output_format = "jimple"
+output_format = "baf"
+
 def runSoot(outdir, jar, cls):
-    subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", "jimple", "-d", outdir,
+    subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", output_format, "-d", outdir,
         "-v", "-debug",
         "-cp", classpath + ":" + jar,
         "--allow-phantom-refs",  # TODO: remove after finding all symbols
@@ -36,11 +39,11 @@ for cls in nms_classes:
     # CraftBukkit
     relocClass = cls.replace("net.minecraft.server.", "net.minecraft.server.v1_4_5.")
 
-    runSoot("jimple/cb-reloc", cb_jar, relocClass)
+    runSoot(output_format + "/cb-reloc", cb_jar, relocClass)
 
     # Remove the version number from the package (due to maven shade relocation), for comparison with mc-dev
-    unrelocData = file("jimple/cb-reloc/" + relocClass + ".jimple").read().replace("v1_4_5.", "").replace("v1_4_5/", "")
-    file("jimple/cb/" + cls + ".jimple", "w").write(unrelocData)
+    unrelocData = file(output_format + "/cb-reloc/" + relocClass + "." + output_format).read().replace("v1_4_5.", "").replace("v1_4_5/", "")
+    file(output_format + "/cb/" + cls + "." + output_format, "w").write(unrelocData)
 
     # mc-dev
-    runSoot("jimple/mcdev", mcdev_jar, cls)
+    runSoot(output_format + "/mcdev", mcdev_jar, cls)
