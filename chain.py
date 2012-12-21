@@ -7,6 +7,10 @@ import sys, os
 global verbose
 
 def process(filename):
+    reverse = False
+    if filename.startswith("^"):
+        filename = filename[1:]
+        reverse = True
     f = file(filename)
     classes_o2d = {}; classes_d2o = {}
     fields_o2d = {}; fields_d2o = {}
@@ -35,7 +39,10 @@ def process(filename):
         else:
             assert "Unknown type " + kind
 
-    return {"CL": classes_o2d, "FD": fields_o2d, "MD": methods_o2d}
+    if not reverse:
+        return {"CL": classes_o2d, "FD": fields_o2d, "MD": methods_o2d}
+    else:
+        return {"CL": classes_d2o, "FD": fields_d2o, "MD": methods_d2o}
 
 # Load fields/methods.csv mapping "searge" name (func_XXX/field_XXX) to descriptive MCP name
 def loadDescriptiveNamesCSV(fn):
@@ -71,7 +78,10 @@ def chain(mcpdir, cbsrg):
         raise SystemExit
 
     mcp = process(mcpsrg)
-    cb = process(cbsrg)
+    if not cbsrg == "-":
+        cb = process(cbsrg)
+    else:
+        cb = None  # special case - no chaining, used for extracting MCP descriptions
 
     # Map MCP indexed names to descriptive names
     if fields_fn and methods_fn:
@@ -104,28 +114,32 @@ def chain(mcpdir, cbsrg):
 
     for kind in ("CL", "FD", "MD"):
         mapMCP = mcp[kind]
-        mapCB = cb[kind]
+        if cb is not None:
+            mapCB = cb[kind]
 
-        missing = set(mapMCP.keys()) - set(mapCB.keys())
-        if len(missing) != 0 and verbose:
-            print "CB mappings missing from MCP mappings: %s" % (missing,)
-            import pprint
-            print "=== mapMCP ==="
-            pprint.pprint(mapMCP)
-            print "=== mapCB ==="
-            pprint.pprint(mapCB)
-            print "== missing ==="
-            pprint.pprint(missing)
+            missing = set(mapMCP.keys()) - set(mapCB.keys())
+            if len(missing) != 0 and verbose:
+                print "CB mappings missing from MCP mappings: %s" % (missing,)
+                import pprint
+                print "=== mapMCP ==="
+                pprint.pprint(mapMCP)
+                print "=== mapCB ==="
+                pprint.pprint(mapCB)
+                print "== missing ==="
+                pprint.pprint(missing)
 
-        surplus = set(mapCB.keys()) - set(mapMCP.keys())
-        if len(surplus) != 0:
-           #print "CB mappings has extra mappings not in MCP: %s" % (surplus,) # no problem, probably just constructors (no rename)
-           pass
+            surplus = set(mapCB.keys()) - set(mapMCP.keys())
+            if len(surplus) != 0:
+               #print "CB mappings has extra mappings not in MCP: %s" % (surplus,) # no problem, probably just constructors (no rename)
+               pass
 
         for obf in sorted(mapMCP.keys()):
-            if not mapCB.has_key(obf) or not mapMCP.has_key(obf): continue
+            if cb is not None:
+                if not mapCB.has_key(obf) or not mapMCP.has_key(obf): continue
 
-            print "%s: %s %s" % (kind, mapCB[obf], descriptiveName(mapMCP[obf]))
+                print "%s: %s %s" % (kind, mapCB[obf], descriptiveName(mapMCP[obf]))
+            else:
+                print "%s: %s %s" % (kind, obf, descriptiveName(mapMCP[obf]))
 
 def main():
     global verbose
