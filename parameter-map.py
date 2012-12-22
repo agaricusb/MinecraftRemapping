@@ -1,26 +1,30 @@
 #!/usr/bin/python
 
-import re, os
+import re, os, csv
 
 MCP_CONF = "../MinecraftForge/mcp/conf"
 
-# Get mapping from parameter number (p_####) to name in source (par#X..)
-def getParamNames():
-    paramNum2Name = {}
-    filename = os.path.join(MCP_CONF, "params.csv")
+# Read MCP's comma-separated-values files
+def readCSV(filename):
+    path = os.path.join(MCP_CONF, filename)
+    d = {}
+    header = True
 
-    for line in file(filename):
-        tokens = line.split(",")
-        if tokens[0] == "param": continue
+    for row in csv.reader(file(path), delimiter=","):
+        if header: 
+            header = False
+            continue
+        d[row[0]] = row[1]
 
-        number, name, side = tokens
+    return d
 
-        paramNum2Name[number] = name
-
-    return paramNum2Name
 
 def readExc():
-    paramNum2Name = getParamNames()
+    # Mapping from parameter number (p_####) to name in source (par#X..)
+    paramNum2Name = readCSV("params.csv")
+
+    # Method nmbers (func_####) to descriptive name in source
+    methodNum2Name = readCSV("methods.csv")
 
     exc_re = re.compile(r"^([^.]+)\.([^(]+)(\([^=]+)=([^|]*)\|(.*)")
 
@@ -28,6 +32,16 @@ def readExc():
     for line in file(excFilename).readlines():
         match = re.match(exc_re, line)
         className, methodNumber, methodSig, exceptionsString, paramNumbersString = match.groups()
+
+        if methodNumber == "<init>":
+            # constructor
+            methodName = className.split("/")[-1]
+        elif methodNum2Name.has_key(methodNumber):
+            # descriptive name
+            methodName = methodNum2Name[methodNumber]
+        else:
+            # no one named this method
+            methodName = methodNumber
 
         # List of classes thrown as exceptions
         exceptions = exceptionsString.split(",")
@@ -39,7 +53,7 @@ def readExc():
 
         paramNames = [paramNum2Name[x] for x in paramNumbers]
 
-        print [className, methodNumber, methodSig, exceptions, paramNames]
+        print [className, methodName, methodSig, exceptions, paramNames]
 
 def main():
     readExc()
