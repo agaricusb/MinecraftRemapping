@@ -1,24 +1,49 @@
 #!/usr/bin/python
 
-import re
+import re, os
 
-excFilename = "../MinecraftForge/mcp/conf/packaged.exc"
+MCP_CONF = "../MinecraftForge/mcp/conf"
 
-EXC_RE = re.compile(r"^([^.]+)\.([^(]+)(\([^=]+)=([^|]*)\|(.*)")
+# Get mapping from parameter number (p_####) to name in source (par#X..)
+def getParamNames():
+    paramNum2Name = {}
+    filename = os.path.join(MCP_CONF, "params.csv")
 
-for line in file(excFilename).readlines():
-    if len(line) == 0: break
+    for line in file(filename):
+        tokens = line.split(",")
+        if tokens[0] == "param": continue
 
-    match = re.match(EXC_RE, line)
-    className, methodNumber, methodSig, exceptionsString, paramNumbersString = match.groups()
+        number, name, side = tokens
 
-    # List of classes thrown as exceptions
-    exceptions = exceptionsString.split(",")
-    if exceptions == ['']: exceptions = []
+        paramNum2Name[number] = name
 
-    # Parameters by number, p_XXXXX_X..
-    paramNumbers = paramNumbersString.split(",")
-    if paramNumbers == ['']: paramNumbers = []
+    return paramNum2Name
 
-    print [className, methodNumber, methodSig, exceptions, paramNumbers]
+def readExc():
+    paramNum2Name = getParamNames()
+
+    exc_re = re.compile(r"^([^.]+)\.([^(]+)(\([^=]+)=([^|]*)\|(.*)")
+
+    excFilename = os.path.join(MCP_CONF, "packaged.exc")
+    for line in file(excFilename).readlines():
+        match = re.match(exc_re, line)
+        className, methodNumber, methodSig, exceptionsString, paramNumbersString = match.groups()
+
+        # List of classes thrown as exceptions
+        exceptions = exceptionsString.split(",")
+        if exceptions == ['']: exceptions = []
+
+        # Parameters by number, p_XXXXX_X..
+        paramNumbers = paramNumbersString.split(",")
+        if paramNumbers == ['']: paramNumbers = []
+
+        paramNames = [paramNum2Name[x] for x in paramNumbers]
+
+        print [className, methodNumber, methodSig, exceptions, paramNames]
+
+def main():
+    readExc()
+
+if __name__ == "__main__":
+    main()
 
