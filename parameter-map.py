@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-import re, os, csv
+# Extract parameter mappings from MCP into a "PA: " mapping for easier parsing by ApplySrg2Source
+
+import re, os, csv, sys
 
 MCP_CONF = "../MinecraftForge/mcp/conf"
 
 # Read MCP's comma-separated-values files
-def readCSV(filename):
-    path = os.path.join(MCP_CONF, filename)
+def readCSV(path):
     d = {}
     header = True
 
@@ -19,17 +20,26 @@ def readCSV(filename):
     return d
 
 
-def readExc():
+def main():
+    if len(sys.argv) < 3:
+        print "Usage: %s mcp-conf-dir exc-file.exc" % (sys.argv[0],)
+        print "Examples:"
+        print "\t%s ../MinecraftForge/mcp/conf packaged.exc" % (sys.argv[0],)
+        print "\t%s ../MinecraftForge/mcp/conf joined.exc" % (sys.argv[0],)
+        raise SystemExit
+
+    mcpDir = sys.argv[1]
+    excFilename = sys.argv[2]
+
     # Mapping from parameter number (p_####) to name in source (par#X..)
-    paramNum2Name = readCSV("params.csv")
+    paramNum2Name = readCSV(os.path.join(mcpDir, "params.csv"))
 
     # Method nmbers (func_####) to descriptive name in source
-    methodNum2Name = readCSV("methods.csv")
+    methodNum2Name = readCSV(os.path.join(mcpDir, "methods.csv"))
 
     exc_re = re.compile(r"^([^.]+)\.([^(]+)(\([^=]+)=([^|]*)\|(.*)")
 
-    excFilename = os.path.join(MCP_CONF, "packaged.exc")
-    for line in file(excFilename).readlines():
+    for line in file(os.path.join(mcpDir, excFilename)).readlines():
         match = re.match(exc_re, line)
         className, methodNumber, methodSig, exceptionsString, paramNumbersString = match.groups()
 
@@ -53,10 +63,9 @@ def readExc():
 
         paramNames = [paramNum2Name[x] for x in paramNumbers]
 
-        print [className, methodName, methodSig, exceptions, paramNames]
+        #print [className, methodName, methodSig, exceptions, paramNames]
 
-def main():
-    readExc()
+        print " ".join(["PA:", className + "/" + methodName, methodSig] + paramNames)
 
 if __name__ == "__main__":
     main()
