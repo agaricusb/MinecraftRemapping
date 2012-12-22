@@ -74,34 +74,27 @@ def main():
             # no one named this method
             methodName = methodNumber
 
+        fullMethodName = className + "/" + methodName
+
         # Second optional renaming pass, for translating MCP -> CB
         if classNameRemap is not None and methodNameRemap is not None:
-            if classNameRemap.has_key(className):
-                newClassName = classNameRemap[className]
-            else:
-                # If remapping joined through CB, this is probably a client-only class - ignore it
-                #print "COULD NOT REMAP CLASS:" + className
-                newClassName = className
-                ignoredClasses.add(className)
-                continue
-            if className in ignoredClasses: continue
-
-            key = className + "/" + methodName + " " + methodSig
+            key = fullMethodName + " " + methodSig
             if methodNameRemap.has_key(key):
-                methodName, methodSig = methodNameRemap[key]
+                fullMethodName, methodSig = methodNameRemap[key]
             else:
                 if methodName == className.split("/")[-1]:
                     # Method name is class name.. this is a constructor
-                    # No .srg remapping needed; since implied by class rename
-                    methodName = newClassName
+                    # Rename implied by CL: .srg entry instead of MD:
+                    if not classNameRemap.has_key(className):
+                        # No class mapping entry, probably a client-only class, included
+                        # in joined mappings but we're remapping through CB, server-only
+                        continue
+                    newClassName = classNameRemap[className]
+                    fullMethodName = newClassName + "/" + newClassName.split("/")[-1]
                 else:
                     # This is probably a client-only method - ignore it, too
                     #print "COULD NOT REMAP METHOD:" + key
                     continue
-
-
-            className = newClassName
-
 
         # List of classes thrown as exceptions
         exceptions = exceptionsString.split(",")
@@ -113,9 +106,7 @@ def main():
 
         paramNames = [paramNum2Name[x] for x in paramNumbers]
 
-        #print [className, methodName, methodSig, exceptions, paramNames]
-
-        print " ".join(["PA:", className + "/" + methodName, methodSig] + paramNames)
+        print " ".join(["PA:", fullMethodName, methodSig] + paramNames)
 
 if __name__ == "__main__":
     main()
