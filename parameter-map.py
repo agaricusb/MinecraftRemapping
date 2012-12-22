@@ -32,6 +32,14 @@ def readRemapSrg(path):
             classMap[oldName] = newName
 
     return methodMap, classMap
+
+def remapSig(sig, classMap):
+    for k, v in classMap.iteritems():
+        # yeah..
+        sig = sig.replace("L" + k + ";", "L" + v + ";")
+
+    return sig
+    
     
 def main():
     if len(sys.argv) < 3:
@@ -95,6 +103,9 @@ def main():
                     # This is probably a client-only method - ignore it, too
                     #print "COULD NOT REMAP METHOD:" + key
                     continue
+
+            # Remap classes in signature
+            methodSig = remapSig(methodSig, classNameRemap)
 
         # List of classes thrown as exceptions
         exceptions = exceptionsString.split(",")
