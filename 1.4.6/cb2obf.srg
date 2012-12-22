@@ -1,3 +1,7 @@
+PK: . net/minecraft/server
+PK: net net
+PK: net/minecraft net/minecraft
+PK: net/minecraft/server net/minecraft/server
 CL: net/minecraft/server/AABBPool aog
 CL: net/minecraft/server/AABBPoolThreadLocal aof
 CL: net/minecraft/server/Achievement jg
@@ -12307,7 +12311,3 @@ MD: org/bouncycastle/jce/provider/BouncyCastleProvider/b ()V apm/b ()V
 MD: org/bouncycastle/jce/provider/BouncyCastleProvider/org.bouncycastle.jce.provider.BouncyCastleProvider ()V apm/apm ()V
 MD: org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/org.bouncycastle.jce.provider.BouncyCastleProviderConfiguration ()V apo/apo ()V
 MD: org/bouncycastle/util/Strings/a (Ljava/lang/String;)Ljava/lang/String; app/a (Ljava/lang/String;)Ljava/lang/String;
-PK: . net/minecraft/server
-PK: net net
-PK: net/minecraft net/minecraft
-PK: net/minecraft/server net/minecraft/server
