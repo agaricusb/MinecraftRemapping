@@ -9,7 +9,8 @@ classes_file = "1.4.5/classes-all-mcdev"
 
 #output_format = "jimple"
 #output_format = "baf"
-output_format = "jasmin"
+#output_format = "jasmin"
+output_format = "grimp"
 
 def runSoot(outdir, jar, cls):
     subprocess.call(("java", "-jar", "../soot/soot-2.5.0.jar", "-f", output_format, "-d", outdir,
