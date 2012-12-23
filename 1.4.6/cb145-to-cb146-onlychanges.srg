@@ -1,0 +1,560 @@
+CL: net/minecraft/server/CreativeModeTab10 net/minecraft/server/CreativeModeTab7
+CL: net/minecraft/server/CreativeModeTab11 net/minecraft/server/CreativeModeTab8
+CL: net/minecraft/server/CreativeModeTab12 net/minecraft/server/CreativeModeTab9
+CL: net/minecraft/server/CreativeModeTab2 net/minecraft/server/CreativeModeTab10
+CL: net/minecraft/server/CreativeModeTab3 net/minecraft/server/CreativeModeTab11
+CL: net/minecraft/server/CreativeModeTab4 net/minecraft/server/CreativeModeTab12
+CL: net/minecraft/server/CreativeModeTab5 net/minecraft/server/CreativeModeTab2
+CL: net/minecraft/server/CreativeModeTab6 net/minecraft/server/CreativeModeTab3
+CL: net/minecraft/server/CreativeModeTab7 net/minecraft/server/CreativeModeTab4
+CL: net/minecraft/server/CreativeModeTab8 net/minecraft/server/CreativeModeTab5
+CL: net/minecraft/server/CreativeModeTab9 net/minecraft/server/CreativeModeTab6
+CL: net/minecraft/server/DemoItemInWorldManager net/minecraft/server/DemoPlayerInteractManager
+CL: net/minecraft/server/EmptyClass net/minecraft/server/EmptyClass2
+CL: net/minecraft/server/EmptyClass2 net/minecraft/server/EmptyClass
+CL: net/minecraft/server/ItemInWorldManager net/minecraft/server/PlayerInteractManager
+CL: net/minecraft/server/NetHandler net/minecraft/server/Connection
+CL: net/minecraft/server/NetLoginHandler net/minecraft/server/PendingConnection
+CL: net/minecraft/server/NetServerHandler net/minecraft/server/PlayerConnection
+CL: net/minecraft/server/PlayerInstance net/minecraft/server/PlayerChunk
+CL: net/minecraft/server/PlayerManager net/minecraft/server/PlayerChunkMap
+CL: net/minecraft/server/RecipesArmorDye net/minecraft/server/RecipeArmorDye
+CL: net/minecraft/server/RecipesMapClone net/minecraft/server/RecipeMapClone
+CL: net/minecraft/server/RecipesMapExtend net/minecraft/server/RecipeMapExtend
+CL: net/minecraft/server/ServerConfigurationManager net/minecraft/server/DedicatedPlayerList
+CL: net/minecraft/server/ServerConfigurationManagerAbstract net/minecraft/server/PlayerList
+FD: net/minecraft/server/DataWatcher/a net/minecraft/server/DataWatcher/b
+FD: net/minecraft/server/DataWatcher/b net/minecraft/server/DataWatcher/c
+FD: net/minecraft/server/DataWatcher/c net/minecraft/server/DataWatcher/d
+FD: net/minecraft/server/DataWatcher/d net/minecraft/server/DataWatcher/e
+FD: net/minecraft/server/DemoItemInWorldManager/c net/minecraft/server/DemoPlayerInteractManager/c
+FD: net/minecraft/server/DemoItemInWorldManager/d net/minecraft/server/DemoPlayerInteractManager/d
+FD: net/minecraft/server/DemoItemInWorldManager/e net/minecraft/server/DemoPlayerInteractManager/e
+FD: net/minecraft/server/DemoItemInWorldManager/f net/minecraft/server/DemoPlayerInteractManager/f
+FD: net/minecraft/server/DemoWorldServer/K net/minecraft/server/DemoWorldServer/J
+FD: net/minecraft/server/EnchantmentProtection/A net/minecraft/server/EnchantmentProtection/C
+FD: net/minecraft/server/EnchantmentProtection/B net/minecraft/server/EnchantmentProtection/D
+FD: net/minecraft/server/EnchantmentProtection/C net/minecraft/server/EnchantmentProtection/E
+FD: net/minecraft/server/EnchantmentProtection/D net/minecraft/server/EnchantmentProtection/F
+FD: net/minecraft/server/EnchantmentWeaponDamage/A net/minecraft/server/EnchantmentWeaponDamage/C
+FD: net/minecraft/server/EnchantmentWeaponDamage/B net/minecraft/server/EnchantmentWeaponDamage/D
+FD: net/minecraft/server/EnchantmentWeaponDamage/C net/minecraft/server/EnchantmentWeaponDamage/E
+FD: net/minecraft/server/EnchantmentWeaponDamage/D net/minecraft/server/EnchantmentWeaponDamage/F
+FD: net/minecraft/server/Entity/aq net/minecraft/server/Entity/ar
+FD: net/minecraft/server/Entity/ar net/minecraft/server/Entity/as
+FD: net/minecraft/server/Entity/h net/minecraft/server/Entity/ap
+FD: net/minecraft/server/EntityArrow/as net/minecraft/server/EntityArrow/at
+FD: net/minecraft/server/EntityArrow/au net/minecraft/server/EntityArrow/av
+FD: net/minecraft/server/EntityEnderDragon/bI net/minecraft/server/EntityEnderDragon/bJ
+FD: net/minecraft/server/EntityEnderDragon/bJ net/minecraft/server/EntityEnderDragon/bK
+FD: net/minecraft/server/EntityEnderDragon/bK net/minecraft/server/EntityEnderDragon/bL
+FD: net/minecraft/server/EntityEnderDragon/bL net/minecraft/server/EntityEnderDragon/bM
+FD: net/minecraft/server/EntityEnderDragon/bM net/minecraft/server/EntityEnderDragon/bN
+FD: net/minecraft/server/EntityEnderDragon/bN net/minecraft/server/EntityEnderDragon/bO
+FD: net/minecraft/server/EntityEnderDragon/bO net/minecraft/server/EntityEnderDragon/bP
+FD: net/minecraft/server/EntityEnderDragon/bP net/minecraft/server/EntityEnderDragon/bQ
+FD: net/minecraft/server/EntityEnderDragon/bQ net/minecraft/server/EntityEnderDragon/bR
+FD: net/minecraft/server/EntityEnderDragon/bR net/minecraft/server/EntityEnderDragon/bS
+FD: net/minecraft/server/EntityFireball/as net/minecraft/server/EntityFireball/at
+FD: net/minecraft/server/EntityFishingHook/as net/minecraft/server/EntityFishingHook/at
+FD: net/minecraft/server/EntityFishingHook/at net/minecraft/server/EntityFishingHook/au
+FD: net/minecraft/server/EntityFishingHook/au net/minecraft/server/EntityFishingHook/av
+FD: net/minecraft/server/EntityFishingHook/av net/minecraft/server/EntityFishingHook/aw
+FD: net/minecraft/server/EntityFishingHook/aw net/minecraft/server/EntityFishingHook/ax
+FD: net/minecraft/server/EntityFishingHook/ax net/minecraft/server/EntityFishingHook/ay
+FD: net/minecraft/server/EntityFishingHook/ay net/minecraft/server/EntityFishingHook/az
+FD: net/minecraft/server/EntityHuman/bM net/minecraft/server/EntityHuman/bN
+FD: net/minecraft/server/EntityHuman/bN net/minecraft/server/EntityHuman/bO
+FD: net/minecraft/server/EntityHuman/bO net/minecraft/server/EntityHuman/bP
+FD: net/minecraft/server/EntityHuman/bP net/minecraft/server/EntityHuman/bQ
+FD: net/minecraft/server/EntityHuman/bR net/minecraft/server/EntityHuman/bS
+FD: net/minecraft/server/EntityHuman/bS net/minecraft/server/EntityHuman/bT
+FD: net/minecraft/server/EntityHuman/bT net/minecraft/server/EntityHuman/bU
+FD: net/minecraft/server/EntityHuman/bU net/minecraft/server/EntityHuman/bV
+FD: net/minecraft/server/EntityHuman/bV net/minecraft/server/EntityHuman/bW
+FD: net/minecraft/server/EntityHuman/bW net/minecraft/server/EntityHuman/bX
+FD: net/minecraft/server/EntityHuman/bX net/minecraft/server/EntityHuman/bY
+FD: net/minecraft/server/EntityHuman/bZ net/minecraft/server/EntityHuman/ca
+FD: net/minecraft/server/EntityHuman/ca net/minecraft/server/EntityHuman/cb
+FD: net/minecraft/server/EntityHuman/cb net/minecraft/server/EntityHuman/cc
+FD: net/minecraft/server/EntityHuman/cg net/minecraft/server/EntityHuman/ch
+FD: net/minecraft/server/EntityHuman/ch net/minecraft/server/EntityHuman/ci
+FD: net/minecraft/server/EntityItem/d net/minecraft/server/EntityItem/c
+FD: net/minecraft/server/EntityItem/e net/minecraft/server/EntityItem/d
+FD: net/minecraft/server/EntityLiving/aA net/minecraft/server/EntityLiving/aB
+FD: net/minecraft/server/EntityLiving/aB net/minecraft/server/EntityLiving/aC
+FD: net/minecraft/server/EntityLiving/aC net/minecraft/server/EntityLiving/aD
+FD: net/minecraft/server/EntityLiving/aD net/minecraft/server/EntityLiving/aE
+FD: net/minecraft/server/EntityLiving/aE net/minecraft/server/EntityLiving/aF
+FD: net/minecraft/server/EntityLiving/aG net/minecraft/server/EntityLiving/aH
+FD: net/minecraft/server/EntityLiving/aH net/minecraft/server/EntityLiving/aI
+FD: net/minecraft/server/EntityLiving/aI net/minecraft/server/EntityLiving/aJ
+FD: net/minecraft/server/EntityLiving/aJ net/minecraft/server/EntityLiving/aK
+FD: net/minecraft/server/EntityLiving/aK net/minecraft/server/EntityLiving/aL
+FD: net/minecraft/server/EntityLiving/aL net/minecraft/server/EntityLiving/aM
+FD: net/minecraft/server/EntityLiving/aM net/minecraft/server/EntityLiving/aN
+FD: net/minecraft/server/EntityLiving/aN net/minecraft/server/EntityLiving/aO
+FD: net/minecraft/server/EntityLiving/aO net/minecraft/server/EntityLiving/aP
+FD: net/minecraft/server/EntityLiving/aP net/minecraft/server/EntityLiving/aQ
+FD: net/minecraft/server/EntityLiving/aR net/minecraft/server/EntityLiving/aS
+FD: net/minecraft/server/EntityLiving/aS net/minecraft/server/EntityLiving/aT
+FD: net/minecraft/server/EntityLiving/aT net/minecraft/server/EntityLiving/aU
+FD: net/minecraft/server/EntityLiving/aV net/minecraft/server/EntityLiving/aW
+FD: net/minecraft/server/EntityLiving/aW net/minecraft/server/EntityLiving/aX
+FD: net/minecraft/server/EntityLiving/aZ net/minecraft/server/EntityLiving/ba
+FD: net/minecraft/server/EntityLiving/as net/minecraft/server/EntityLiving/at
+FD: net/minecraft/server/EntityLiving/au net/minecraft/server/EntityLiving/av
+FD: net/minecraft/server/EntityLiving/av net/minecraft/server/EntityLiving/aw
+FD: net/minecraft/server/EntityLiving/aw net/minecraft/server/EntityLiving/ax
+FD: net/minecraft/server/EntityLiving/ax net/minecraft/server/EntityLiving/ay
+FD: net/minecraft/server/EntityLiving/ay net/minecraft/server/EntityLiving/az
+FD: net/minecraft/server/EntityLiving/az net/minecraft/server/EntityLiving/aA
+FD: net/minecraft/server/EntityLiving/bA net/minecraft/server/EntityLiving/bB
+FD: net/minecraft/server/EntityLiving/bB net/minecraft/server/EntityLiving/bC
+FD: net/minecraft/server/EntityLiving/bC net/minecraft/server/EntityLiving/bD
+FD: net/minecraft/server/EntityLiving/bD net/minecraft/server/EntityLiving/bE
+FD: net/minecraft/server/EntityLiving/bE net/minecraft/server/EntityLiving/bF
+FD: net/minecraft/server/EntityLiving/bF net/minecraft/server/EntityLiving/bG
+FD: net/minecraft/server/EntityLiving/bG net/minecraft/server/EntityLiving/bH
+FD: net/minecraft/server/EntityLiving/bH net/minecraft/server/EntityLiving/bI
+FD: net/minecraft/server/EntityLiving/bM net/minecraft/server/EntityLiving/bN
+FD: net/minecraft/server/EntityLiving/bN net/minecraft/server/EntityLiving/bO
+FD: net/minecraft/server/EntityLiving/bO net/minecraft/server/EntityLiving/bP
+FD: net/minecraft/server/EntityLiving/bP net/minecraft/server/EntityLiving/bQ
+FD: net/minecraft/server/EntityLiving/bQ net/minecraft/server/EntityLiving/bR
+FD: net/minecraft/server/EntityLiving/bS net/minecraft/server/EntityLiving/bT
+FD: net/minecraft/server/EntityLiving/bU net/minecraft/server/EntityLiving/bV
+FD: net/minecraft/server/EntityLiving/bV net/minecraft/server/EntityLiving/bW
+FD: net/minecraft/server/EntityLiving/ba net/minecraft/server/EntityLiving/bb
+FD: net/minecraft/server/EntityLiving/bb net/minecraft/server/EntityLiving/bc
+FD: net/minecraft/server/EntityLiving/bc net/minecraft/server/EntityLiving/bd
+FD: net/minecraft/server/EntityLiving/bd net/minecraft/server/EntityLiving/be
+FD: net/minecraft/server/EntityLiving/be net/minecraft/server/EntityLiving/bf
+FD: net/minecraft/server/EntityLiving/bf net/minecraft/server/EntityLiving/bg
+FD: net/minecraft/server/EntityLiving/bg net/minecraft/server/EntityLiving/bh
+FD: net/minecraft/server/EntityLiving/bh net/minecraft/server/EntityLiving/bi
+FD: net/minecraft/server/EntityLiving/bk net/minecraft/server/EntityLiving/bl
+FD: net/minecraft/server/EntityLiving/bp net/minecraft/server/EntityLiving/bq
+FD: net/minecraft/server/EntityLiving/bq net/minecraft/server/EntityLiving/br
+FD: net/minecraft/server/EntityLiving/bs net/minecraft/server/EntityLiving/bt
+FD: net/minecraft/server/EntityLiving/bt net/minecraft/server/EntityLiving/bu
+FD: net/minecraft/server/EntityLiving/bu net/minecraft/server/EntityLiving/bv
+FD: net/minecraft/server/EntityLiving/bv net/minecraft/server/EntityLiving/bw
+FD: net/minecraft/server/EntityLiving/bw net/minecraft/server/EntityLiving/bx
+FD: net/minecraft/server/EntityLiving/bx net/minecraft/server/EntityLiving/by
+FD: net/minecraft/server/EntityLiving/by net/minecraft/server/EntityLiving/bz
+FD: net/minecraft/server/EntityMinecart/as net/minecraft/server/EntityMinecart/at
+FD: net/minecraft/server/EntityMinecart/at net/minecraft/server/EntityMinecart/au
+FD: net/minecraft/server/EntityMinecart/au net/minecraft/server/EntityMinecart/av
+FD: net/minecraft/server/EntityMinecart/av net/minecraft/server/EntityMinecart/aw
+FD: net/minecraft/server/EntityMinecart/aw net/minecraft/server/EntityMinecart/ax
+FD: net/minecraft/server/EntityPlayer/ck net/minecraft/server/EntityPlayer/cl
+FD: net/minecraft/server/EntityPlayer/cl net/minecraft/server/EntityPlayer/cm
+FD: net/minecraft/server/EntityPlayer/cm net/minecraft/server/EntityPlayer/cn
+FD: net/minecraft/server/EntityPlayer/cp net/minecraft/server/EntityPlayer/cq
+FD: net/minecraft/server/EntityPlayer/cq net/minecraft/server/EntityPlayer/cr
+FD: net/minecraft/server/EntityPlayer/cr net/minecraft/server/EntityPlayer/cs
+FD: net/minecraft/server/EntityPlayer/itemInWorldManager net/minecraft/server/EntityPlayer/playerInteractManager
+FD: net/minecraft/server/EntityPlayer/netServerHandler net/minecraft/server/EntityPlayer/playerConnection
+FD: net/minecraft/server/EntitySquid/bI net/minecraft/server/EntitySquid/bJ
+FD: net/minecraft/server/EntitySquid/bJ net/minecraft/server/EntitySquid/bK
+FD: net/minecraft/server/EntitySquid/bK net/minecraft/server/EntitySquid/bL
+FD: net/minecraft/server/EntitySquid/bL net/minecraft/server/EntitySquid/bM
+FD: net/minecraft/server/EntitySquid/bM net/minecraft/server/EntitySquid/bN
+FD: net/minecraft/server/EntitySquid/bN net/minecraft/server/EntitySquid/bO
+FD: net/minecraft/server/EntitySquid/bO net/minecraft/server/EntitySquid/bP
+FD: net/minecraft/server/EntityVillager/bI net/minecraft/server/EntityVillager/bJ
+FD: net/minecraft/server/EntityVillager/bJ net/minecraft/server/EntityVillager/bK
+FD: net/minecraft/server/EntityVillager/bK net/minecraft/server/EntityVillager/bL
+FD: net/minecraft/server/EntityVillager/bL net/minecraft/server/EntityVillager/bM
+FD: net/minecraft/server/EntityVillager/bM net/minecraft/server/EntityVillager/bN
+FD: net/minecraft/server/EntityVillager/bN net/minecraft/server/EntityVillager/bO
+FD: net/minecraft/server/EntityVillager/bO net/minecraft/server/EntityVillager/bP
+FD: net/minecraft/server/EntityWither/bI net/minecraft/server/EntityWither/bJ
+FD: net/minecraft/server/Item/cj net/minecraft/server/Item/cm
+FD: net/minecraft/server/Item/ck net/minecraft/server/Item/cn
+FD: net/minecraft/server/Item/cl net/minecraft/server/Item/co
+FD: net/minecraft/server/ItemArmor/cl net/minecraft/server/ItemArmor/co
+FD: net/minecraft/server/ItemArmor/cm net/minecraft/server/ItemArmor/cp
+FD: net/minecraft/server/ItemFood/cl net/minecraft/server/ItemFood/co
+FD: net/minecraft/server/ItemFood/cm net/minecraft/server/ItemFood/cp
+FD: net/minecraft/server/ItemFood/cn net/minecraft/server/ItemFood/cq
+FD: net/minecraft/server/ItemFood/co net/minecraft/server/ItemFood/cr
+FD: net/minecraft/server/ItemFood/cp net/minecraft/server/ItemFood/cs
+FD: net/minecraft/server/ItemFood/cq net/minecraft/server/ItemFood/ct
+FD: net/minecraft/server/ItemInWorldManager/currentTick net/minecraft/server/PlayerInteractManager/currentTick
+FD: net/minecraft/server/ItemInWorldManager/d net/minecraft/server/PlayerInteractManager/d
+FD: net/minecraft/server/ItemInWorldManager/f net/minecraft/server/PlayerInteractManager/f
+FD: net/minecraft/server/ItemInWorldManager/g net/minecraft/server/PlayerInteractManager/g
+FD: net/minecraft/server/ItemInWorldManager/gamemode net/minecraft/server/PlayerInteractManager/gamemode
+FD: net/minecraft/server/ItemInWorldManager/h net/minecraft/server/PlayerInteractManager/h
+FD: net/minecraft/server/ItemInWorldManager/j net/minecraft/server/PlayerInteractManager/j
+FD: net/minecraft/server/ItemInWorldManager/k net/minecraft/server/PlayerInteractManager/k
+FD: net/minecraft/server/ItemInWorldManager/l net/minecraft/server/PlayerInteractManager/l
+FD: net/minecraft/server/ItemInWorldManager/lastDigTick net/minecraft/server/PlayerInteractManager/lastDigTick
+FD: net/minecraft/server/ItemInWorldManager/m net/minecraft/server/PlayerInteractManager/m
+FD: net/minecraft/server/ItemInWorldManager/n net/minecraft/server/PlayerInteractManager/n
+FD: net/minecraft/server/ItemInWorldManager/o net/minecraft/server/PlayerInteractManager/o
+FD: net/minecraft/server/ItemInWorldManager/player net/minecraft/server/PlayerInteractManager/player
+FD: net/minecraft/server/ItemInWorldManager/world net/minecraft/server/PlayerInteractManager/world
+FD: net/minecraft/server/ItemTool/cl net/minecraft/server/ItemTool/co
+FD: net/minecraft/server/NetLoginHandler/c net/minecraft/server/PendingConnection/c
+FD: net/minecraft/server/NetLoginHandler/d net/minecraft/server/PendingConnection/d
+FD: net/minecraft/server/NetLoginHandler/g net/minecraft/server/PendingConnection/g
+FD: net/minecraft/server/NetLoginHandler/h net/minecraft/server/PendingConnection/h
+FD: net/minecraft/server/NetLoginHandler/i net/minecraft/server/PendingConnection/i
+FD: net/minecraft/server/NetLoginHandler/k net/minecraft/server/PendingConnection/l
+FD: net/minecraft/server/NetLoginHandler/logger net/minecraft/server/PendingConnection/logger
+FD: net/minecraft/server/NetLoginHandler/loginKey net/minecraft/server/PendingConnection/loginKey
+FD: net/minecraft/server/NetLoginHandler/networkManager net/minecraft/server/PendingConnection/networkManager
+FD: net/minecraft/server/NetLoginHandler/random net/minecraft/server/PendingConnection/random
+FD: net/minecraft/server/NetLoginHandler/server net/minecraft/server/PendingConnection/server
+FD: net/minecraft/server/NetServerHandler/checkMovement net/minecraft/server/PlayerConnection/checkMovement
+FD: net/minecraft/server/NetServerHandler/disconnected net/minecraft/server/PlayerConnection/disconnected
+FD: net/minecraft/server/NetServerHandler/f net/minecraft/server/PlayerConnection/f
+FD: net/minecraft/server/NetServerHandler/g net/minecraft/server/PlayerConnection/g
+FD: net/minecraft/server/NetServerHandler/h net/minecraft/server/PlayerConnection/h
+FD: net/minecraft/server/NetServerHandler/i net/minecraft/server/PlayerConnection/i
+FD: net/minecraft/server/NetServerHandler/j net/minecraft/server/PlayerConnection/j
+FD: net/minecraft/server/NetServerHandler/k net/minecraft/server/PlayerConnection/k
+FD: net/minecraft/server/NetServerHandler/l net/minecraft/server/PlayerConnection/l
+FD: net/minecraft/server/NetServerHandler/logger net/minecraft/server/PlayerConnection/logger
+FD: net/minecraft/server/NetServerHandler/m net/minecraft/server/PlayerConnection/m
+FD: net/minecraft/server/NetServerHandler/minecraftServer net/minecraft/server/PlayerConnection/minecraftServer
+FD: net/minecraft/server/NetServerHandler/networkManager net/minecraft/server/PlayerConnection/networkManager
+FD: net/minecraft/server/NetServerHandler/player net/minecraft/server/PlayerConnection/player
+FD: net/minecraft/server/NetServerHandler/q net/minecraft/server/PlayerConnection/q
+FD: net/minecraft/server/NetServerHandler/s net/minecraft/server/PlayerConnection/s
+FD: net/minecraft/server/NetServerHandler/x net/minecraft/server/PlayerConnection/x
+FD: net/minecraft/server/NetServerHandler/y net/minecraft/server/PlayerConnection/y
+FD: net/minecraft/server/NetServerHandler/z net/minecraft/server/PlayerConnection/z
+FD: net/minecraft/server/NetworkManager/packetListener net/minecraft/server/NetworkManager/connection
+FD: net/minecraft/server/Packet23VehicleSpawn/h net/minecraft/server/Packet23VehicleSpawn/j
+FD: net/minecraft/server/Packet23VehicleSpawn/i net/minecraft/server/Packet23VehicleSpawn/k
+FD: net/minecraft/server/PlayerInstance/b net/minecraft/server/PlayerChunk/b
+FD: net/minecraft/server/PlayerInstance/dirtyBlocks net/minecraft/server/PlayerChunk/dirtyBlocks
+FD: net/minecraft/server/PlayerInstance/dirtyCount net/minecraft/server/PlayerChunk/dirtyCount
+FD: net/minecraft/server/PlayerInstance/f net/minecraft/server/PlayerChunk/f
+FD: net/minecraft/server/PlayerInstance/location net/minecraft/server/PlayerChunk/location
+FD: net/minecraft/server/PlayerInstance/playerManager net/minecraft/server/PlayerChunk/playerChunkMap
+FD: net/minecraft/server/PlayerManager/c net/minecraft/server/PlayerChunkMap/c
+FD: net/minecraft/server/PlayerManager/d net/minecraft/server/PlayerChunkMap/d
+FD: net/minecraft/server/PlayerManager/e net/minecraft/server/PlayerChunkMap/e
+FD: net/minecraft/server/PlayerManager/f net/minecraft/server/PlayerChunkMap/f
+FD: net/minecraft/server/PlayerManager/managedPlayers net/minecraft/server/PlayerChunkMap/managedPlayers
+FD: net/minecraft/server/PlayerManager/world net/minecraft/server/PlayerChunkMap/world
+FD: net/minecraft/server/ServerConfigurationManager/e net/minecraft/server/DedicatedPlayerList/e
+FD: net/minecraft/server/ServerConfigurationManager/f net/minecraft/server/DedicatedPlayerList/f
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/a net/minecraft/server/PlayerList/a
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/banByIP net/minecraft/server/PlayerList/banByIP
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/banByName net/minecraft/server/PlayerList/banByName
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/d net/minecraft/server/PlayerList/d
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/e net/minecraft/server/PlayerList/e
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/hasWhitelist net/minecraft/server/PlayerList/hasWhitelist
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/m net/minecraft/server/PlayerList/m
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/maxPlayers net/minecraft/server/PlayerList/maxPlayers
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/n net/minecraft/server/PlayerList/n
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/o net/minecraft/server/PlayerList/o
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/operators net/minecraft/server/PlayerList/operators
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/playerFileData net/minecraft/server/PlayerList/playerFileData
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/players net/minecraft/server/PlayerList/players
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/server net/minecraft/server/PlayerList/server
+FD: net/minecraft/server/ServerConfigurationManagerAbstract/whitelist net/minecraft/server/PlayerList/whitelist
+FD: net/minecraft/server/StructurePieceTreasure/d net/minecraft/server/StructurePieceTreasure/c
+FD: net/minecraft/server/StructurePieceTreasure/e net/minecraft/server/StructurePieceTreasure/d
+FD: net/minecraft/server/ThreadLoginVerifier/netLoginHandler net/minecraft/server/ThreadLoginVerifier/pendingConnection
+FD: net/minecraft/server/World/I net/minecraft/server/World/H
+FD: net/minecraft/server/World/K net/minecraft/server/World/J
+FD: net/minecraft/server/World/L net/minecraft/server/World/K
+FD: net/minecraft/server/World/M net/minecraft/server/World/L
+FD: net/minecraft/server/World/N net/minecraft/server/World/M
+FD: net/minecraft/server/World/O net/minecraft/server/World/N
+FD: net/minecraft/server/World/P net/minecraft/server/World/O
+FD: net/minecraft/server/World/w net/minecraft/server/World/v
+FD: net/minecraft/server/WorldServer/M net/minecraft/server/WorldServer/L
+FD: net/minecraft/server/WorldServer/N net/minecraft/server/WorldServer/M
+FD: net/minecraft/server/WorldServer/O net/minecraft/server/WorldServer/N
+FD: net/minecraft/server/WorldServer/Q net/minecraft/server/WorldServer/P
+FD: net/minecraft/server/WorldServer/R net/minecraft/server/WorldServer/Q
+FD: net/minecraft/server/WorldServer/S net/minecraft/server/WorldServer/R
+FD: net/minecraft/server/WorldServer/T net/minecraft/server/WorldServer/S
+MD: net/minecraft/server/BlockFluids/d (I)F net/minecraft/server/BlockFluids/e (I)F
+MD: net/minecraft/server/BlockLever/d (I)I net/minecraft/server/BlockLever/e (I)I
+MD: net/minecraft/server/BlockMinecartTrack/d (I)Z net/minecraft/server/BlockMinecartTrack/e (I)Z
+MD: net/minecraft/server/DedicatedServer/getServerConfigurationManager ()Lnet/minecraft/server/ServerConfigurationManagerAbstract; net/minecraft/server/DedicatedServer/getPlayerList ()Lnet/minecraft/server/PlayerList;
+MD: net/minecraft/server/DemoItemInWorldManager/a ()V net/minecraft/server/DemoPlayerInteractManager/a ()V
+MD: net/minecraft/server/DemoItemInWorldManager/a (III)V net/minecraft/server/DemoPlayerInteractManager/a (III)V
+MD: net/minecraft/server/DemoItemInWorldManager/breakBlock (III)Z net/minecraft/server/DemoPlayerInteractManager/breakBlock (III)Z
+MD: net/minecraft/server/DemoItemInWorldManager/dig (IIII)V net/minecraft/server/DemoPlayerInteractManager/dig (IIII)V
+MD: net/minecraft/server/DemoItemInWorldManager/e ()V net/minecraft/server/DemoPlayerInteractManager/e ()V
+MD: net/minecraft/server/DemoItemInWorldManager/interact (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;IIIIFFF)Z net/minecraft/server/DemoPlayerInteractManager/interact (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;IIIIFFF)Z
+MD: net/minecraft/server/DemoItemInWorldManager/useItem (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/DemoPlayerInteractManager/useItem (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EntityHuman/bS ()F net/minecraft/server/EntityHuman/bR ()F
+MD: net/minecraft/server/EntityHuman/bT ()Lnet/minecraft/server/ItemStack; net/minecraft/server/EntityHuman/bS ()Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/EntityHuman/bU ()V net/minecraft/server/EntityHuman/bT ()V
+MD: net/minecraft/server/EntityHuman/bW ()Z net/minecraft/server/EntityHuman/bV ()Z
+MD: net/minecraft/server/EntityHuman/ce ()Z net/minecraft/server/EntityHuman/cd ()Z
+MD: net/minecraft/server/EntityHuman/f (Z)Z net/minecraft/server/EntityHuman/g (Z)Z
+MD: net/minecraft/server/EntityItem/d ()V net/minecraft/server/EntityItem/g ()V
+MD: net/minecraft/server/Item/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/Item/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/Item/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/Item/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/Item/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/Item/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/Item/g (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/Item/i (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/Item/h (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/Item/j (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/Item/i (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/Item/k (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/Item/j (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/Item/l (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/Item/k (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/Item/d_ (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/ItemArmor/b_ (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/ItemArmor/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/ItemBlock/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemBlock/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemBow/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/ItemBow/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/ItemBow/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/ItemBow/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/ItemCloth/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemCloth/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemCoal/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemCoal/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemDye/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemDye/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemFood/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/ItemFood/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/ItemFood/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/ItemFood/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/ItemInWorldManager/a ()V net/minecraft/server/PlayerInteractManager/a ()V
+MD: net/minecraft/server/ItemInWorldManager/a (III)V net/minecraft/server/PlayerInteractManager/a (III)V
+MD: net/minecraft/server/ItemInWorldManager/a (Lnet/minecraft/server/WorldServer;)V net/minecraft/server/PlayerInteractManager/a (Lnet/minecraft/server/WorldServer;)V
+MD: net/minecraft/server/ItemInWorldManager/b (Lnet/minecraft/server/EnumGamemode;)V net/minecraft/server/PlayerInteractManager/b (Lnet/minecraft/server/EnumGamemode;)V
+MD: net/minecraft/server/ItemInWorldManager/breakBlock (III)Z net/minecraft/server/PlayerInteractManager/breakBlock (III)Z
+MD: net/minecraft/server/ItemInWorldManager/c (III)V net/minecraft/server/PlayerInteractManager/c (III)V
+MD: net/minecraft/server/ItemInWorldManager/d (III)Z net/minecraft/server/PlayerInteractManager/d (III)Z
+MD: net/minecraft/server/ItemInWorldManager/dig (IIII)V net/minecraft/server/PlayerInteractManager/dig (IIII)V
+MD: net/minecraft/server/ItemInWorldManager/getGameMode ()Lnet/minecraft/server/EnumGamemode; net/minecraft/server/PlayerInteractManager/getGameMode ()Lnet/minecraft/server/EnumGamemode;
+MD: net/minecraft/server/ItemInWorldManager/interact (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;IIIIFFF)Z net/minecraft/server/PlayerInteractManager/interact (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;IIIIFFF)Z
+MD: net/minecraft/server/ItemInWorldManager/isCreative ()Z net/minecraft/server/PlayerInteractManager/isCreative ()Z
+MD: net/minecraft/server/ItemInWorldManager/setGameMode (Lnet/minecraft/server/EnumGamemode;)V net/minecraft/server/PlayerInteractManager/setGameMode (Lnet/minecraft/server/EnumGamemode;)V
+MD: net/minecraft/server/ItemInWorldManager/useItem (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/PlayerInteractManager/useItem (Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/ItemLeaves/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemLeaves/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemMilkBucket/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/ItemMilkBucket/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/ItemMilkBucket/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/ItemMilkBucket/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/ItemMonsterEgg/j (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemMonsterEgg/l (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemMultiTexture/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemMultiTexture/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemPotion/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/ItemPotion/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/ItemPotion/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/ItemPotion/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/ItemPotion/j (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemPotion/l (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemPotion/l (Lnet/minecraft/server/ItemStack;)Ljava/util/List; net/minecraft/server/ItemPotion/g (Lnet/minecraft/server/ItemStack;)Ljava/util/List;
+MD: net/minecraft/server/ItemSkull/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemSkull/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemSkull/j (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemSkull/l (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemStep/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemStep/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemSword/a (Lnet/minecraft/server/ItemStack;)I net/minecraft/server/ItemSword/c_ (Lnet/minecraft/server/ItemStack;)I
+MD: net/minecraft/server/ItemSword/d_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation; net/minecraft/server/ItemSword/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
+MD: net/minecraft/server/ItemWithAuxData/c_ (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemWithAuxData/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/ItemWrittenBook/j (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/server/ItemWrittenBook/l (Lnet/minecraft/server/ItemStack;)Ljava/lang/String;
+MD: net/minecraft/server/MinecraftServer/getServerConfigurationManager ()Lnet/minecraft/server/ServerConfigurationManagerAbstract; net/minecraft/server/MinecraftServer/getPlayerList ()Lnet/minecraft/server/PlayerList;
+MD: net/minecraft/server/NetHandler/a ()Z net/minecraft/server/Connection/a ()Z
+MD: net/minecraft/server/NetHandler/a (Ljava/lang/String;[Ljava/lang/Object;)V net/minecraft/server/Connection/a (Ljava/lang/String;[Ljava/lang/Object;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet0KeepAlive;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet0KeepAlive;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet100OpenWindow;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet100OpenWindow;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet102WindowClick;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet102WindowClick;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet103SetSlot;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet103SetSlot;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet104WindowItems;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet104WindowItems;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet105CraftProgressBar;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet105CraftProgressBar;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet106Transaction;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet106Transaction;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet107SetCreativeSlot;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet107SetCreativeSlot;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet108ButtonClick;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet108ButtonClick;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet10Flying;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet10Flying;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet130UpdateSign;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet130UpdateSign;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet131ItemData;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet131ItemData;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet132TileEntityData;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet132TileEntityData;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet14BlockDig;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet14BlockDig;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet15Place;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet15Place;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet16BlockItemSwitch;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet16BlockItemSwitch;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet17EntityLocationAction;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet17EntityLocationAction;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet18ArmAnimation;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet18ArmAnimation;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet19EntityAction;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet19EntityAction;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet1Login;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet1Login;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet200Statistic;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet200Statistic;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet201PlayerInfo;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet201PlayerInfo;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet202Abilities;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet202Abilities;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet203TabComplete;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet203TabComplete;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet204LocaleAndViewDistance;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet204LocaleAndViewDistance;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet205ClientCommand;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet205ClientCommand;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet20NamedEntitySpawn;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet20NamedEntitySpawn;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet22Collect;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet22Collect;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet23VehicleSpawn;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet23VehicleSpawn;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet24MobSpawn;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet24MobSpawn;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet250CustomPayload;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet250CustomPayload;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet252KeyResponse;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet252KeyResponse;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet253KeyRequest;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet253KeyRequest;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet254GetInfo;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet254GetInfo;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet255KickDisconnect;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet255KickDisconnect;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet25EntityPainting;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet25EntityPainting;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet26AddExpOrb;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet26AddExpOrb;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet28EntityVelocity;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet28EntityVelocity;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet29DestroyEntity;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet29DestroyEntity;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet2Handshake;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet2Handshake;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet30Entity;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet30Entity;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet34EntityTeleport;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet34EntityTeleport;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet35EntityHeadRotation;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet35EntityHeadRotation;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet38EntityStatus;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet38EntityStatus;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet39AttachEntity;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet39AttachEntity;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet3Chat;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet3Chat;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet40EntityMetadata;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet40EntityMetadata;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet41MobEffect;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet41MobEffect;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet42RemoveMobEffect;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet42RemoveMobEffect;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet43SetExperience;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet43SetExperience;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet4UpdateTime;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet4UpdateTime;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet51MapChunk;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet51MapChunk;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet52MultiBlockChange;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet52MultiBlockChange;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet53BlockChange;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet53BlockChange;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet54PlayNoteBlock;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet54PlayNoteBlock;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet55BlockBreakAnimation;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet55BlockBreakAnimation;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet56MapChunkBulk;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet56MapChunkBulk;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet5EntityEquipment;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet5EntityEquipment;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet60Explosion;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet60Explosion;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet61WorldEvent;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet61WorldEvent;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet62NamedSoundEffect;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet62NamedSoundEffect;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet6SpawnPosition;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet6SpawnPosition;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet70Bed;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet70Bed;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet71Weather;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet71Weather;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet7UseEntity;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet7UseEntity;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet8UpdateHealth;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet8UpdateHealth;)V
+MD: net/minecraft/server/NetHandler/a (Lnet/minecraft/server/Packet9Respawn;)V net/minecraft/server/Connection/a (Lnet/minecraft/server/Packet9Respawn;)V
+MD: net/minecraft/server/NetHandler/b ()Z net/minecraft/server/Connection/b ()Z
+MD: net/minecraft/server/NetHandler/handleContainerClose (Lnet/minecraft/server/Packet101CloseWindow;)V net/minecraft/server/Connection/handleContainerClose (Lnet/minecraft/server/Packet101CloseWindow;)V
+MD: net/minecraft/server/NetHandler/onUnhandledPacket (Lnet/minecraft/server/Packet;)V net/minecraft/server/Connection/onUnhandledPacket (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/NetLoginHandler/a ()Z net/minecraft/server/PendingConnection/a ()Z
+MD: net/minecraft/server/NetLoginHandler/a (Ljava/lang/String;[Ljava/lang/Object;)V net/minecraft/server/PendingConnection/a (Ljava/lang/String;[Ljava/lang/Object;)V
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/NetLoginHandler;)Ljava/lang/String; net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/PendingConnection;)Ljava/lang/String;
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/NetLoginHandler;Z)Z net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/PendingConnection;Z)Z
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/Packet1Login;)V net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/Packet1Login;)V
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/Packet205ClientCommand;)V net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/Packet205ClientCommand;)V
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/Packet252KeyResponse;)V net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/Packet252KeyResponse;)V
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/Packet254GetInfo;)V net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/Packet254GetInfo;)V
+MD: net/minecraft/server/NetLoginHandler/a (Lnet/minecraft/server/Packet2Handshake;)V net/minecraft/server/PendingConnection/a (Lnet/minecraft/server/Packet2Handshake;)V
+MD: net/minecraft/server/NetLoginHandler/b (Lnet/minecraft/server/NetLoginHandler;)Lnet/minecraft/server/MinecraftServer; net/minecraft/server/PendingConnection/b (Lnet/minecraft/server/PendingConnection;)Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/NetLoginHandler/c ()V net/minecraft/server/PendingConnection/c ()V
+MD: net/minecraft/server/NetLoginHandler/c (Lnet/minecraft/server/NetLoginHandler;)Ljavax/crypto/SecretKey; net/minecraft/server/PendingConnection/c (Lnet/minecraft/server/PendingConnection;)Ljavax/crypto/SecretKey;
+MD: net/minecraft/server/NetLoginHandler/d ()V net/minecraft/server/PendingConnection/d ()V
+MD: net/minecraft/server/NetLoginHandler/d (Lnet/minecraft/server/NetLoginHandler;)Ljava/lang/String; net/minecraft/server/PendingConnection/d (Lnet/minecraft/server/PendingConnection;)Ljava/lang/String;
+MD: net/minecraft/server/NetLoginHandler/disconnect (Ljava/lang/String;)V net/minecraft/server/PendingConnection/disconnect (Ljava/lang/String;)V
+MD: net/minecraft/server/NetLoginHandler/getName ()Ljava/lang/String; net/minecraft/server/PendingConnection/getName ()Ljava/lang/String;
+MD: net/minecraft/server/NetLoginHandler/onUnhandledPacket (Lnet/minecraft/server/Packet;)V net/minecraft/server/PendingConnection/onUnhandledPacket (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/NetServerHandler/a ()Z net/minecraft/server/PlayerConnection/a ()Z
+MD: net/minecraft/server/NetServerHandler/a (DDDFF)V net/minecraft/server/PlayerConnection/a (DDDFF)V
+MD: net/minecraft/server/NetServerHandler/a (Ljava/lang/String;[Ljava/lang/Object;)V net/minecraft/server/PlayerConnection/a (Ljava/lang/String;[Ljava/lang/Object;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet0KeepAlive;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet0KeepAlive;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet102WindowClick;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet102WindowClick;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet106Transaction;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet106Transaction;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet107SetCreativeSlot;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet107SetCreativeSlot;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet108ButtonClick;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet108ButtonClick;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet10Flying;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet10Flying;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet130UpdateSign;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet130UpdateSign;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet14BlockDig;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet14BlockDig;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet15Place;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet15Place;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet16BlockItemSwitch;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet16BlockItemSwitch;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet18ArmAnimation;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet18ArmAnimation;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet19EntityAction;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet19EntityAction;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet202Abilities;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet202Abilities;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet203TabComplete;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet203TabComplete;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet204LocaleAndViewDistance;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet204LocaleAndViewDistance;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet205ClientCommand;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet205ClientCommand;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet250CustomPayload;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet250CustomPayload;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet255KickDisconnect;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet255KickDisconnect;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet3Chat;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet3Chat;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet7UseEntity;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet7UseEntity;)V
+MD: net/minecraft/server/NetServerHandler/a (Lnet/minecraft/server/Packet9Respawn;)V net/minecraft/server/PlayerConnection/a (Lnet/minecraft/server/Packet9Respawn;)V
+MD: net/minecraft/server/NetServerHandler/b ()Z net/minecraft/server/PlayerConnection/b ()Z
+MD: net/minecraft/server/NetServerHandler/d ()V net/minecraft/server/PlayerConnection/d ()V
+MD: net/minecraft/server/NetServerHandler/disconnect (Ljava/lang/String;)V net/minecraft/server/PlayerConnection/disconnect (Ljava/lang/String;)V
+MD: net/minecraft/server/NetServerHandler/handleCommand (Ljava/lang/String;)V net/minecraft/server/PlayerConnection/handleCommand (Ljava/lang/String;)V
+MD: net/minecraft/server/NetServerHandler/handleContainerClose (Lnet/minecraft/server/Packet101CloseWindow;)V net/minecraft/server/PlayerConnection/handleContainerClose (Lnet/minecraft/server/Packet101CloseWindow;)V
+MD: net/minecraft/server/NetServerHandler/lowPriorityCount ()I net/minecraft/server/PlayerConnection/lowPriorityCount ()I
+MD: net/minecraft/server/NetServerHandler/onUnhandledPacket (Lnet/minecraft/server/Packet;)V net/minecraft/server/PlayerConnection/onUnhandledPacket (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/NetServerHandler/sendPacket (Lnet/minecraft/server/Packet;)V net/minecraft/server/PlayerConnection/sendPacket (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/PlayerInstance/a ()V net/minecraft/server/PlayerChunk/a ()V
+MD: net/minecraft/server/PlayerInstance/a (III)V net/minecraft/server/PlayerChunk/a (III)V
+MD: net/minecraft/server/PlayerInstance/a (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunk/a (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/PlayerInstance/a (Lnet/minecraft/server/PlayerInstance;)Lnet/minecraft/server/ChunkCoordIntPair; net/minecraft/server/PlayerChunk/a (Lnet/minecraft/server/PlayerChunk;)Lnet/minecraft/server/ChunkCoordIntPair;
+MD: net/minecraft/server/PlayerInstance/b (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunk/b (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/PlayerInstance/b (Lnet/minecraft/server/PlayerInstance;)Ljava/util/List; net/minecraft/server/PlayerChunk/b (Lnet/minecraft/server/PlayerChunk;)Ljava/util/List;
+MD: net/minecraft/server/PlayerInstance/sendAll (Lnet/minecraft/server/Packet;)V net/minecraft/server/PlayerChunk/sendAll (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/PlayerInstance/sendTileEntity (Lnet/minecraft/server/TileEntity;)V net/minecraft/server/PlayerChunk/sendTileEntity (Lnet/minecraft/server/TileEntity;)V
+MD: net/minecraft/server/PlayerManager/a ()Lnet/minecraft/server/WorldServer; net/minecraft/server/PlayerChunkMap/a ()Lnet/minecraft/server/WorldServer;
+MD: net/minecraft/server/PlayerManager/a (IIIII)Z net/minecraft/server/PlayerChunkMap/a (IIIII)Z
+MD: net/minecraft/server/PlayerManager/a (IIZ)Lnet/minecraft/server/PlayerInstance; net/minecraft/server/PlayerChunkMap/a (IIZ)Lnet/minecraft/server/PlayerChunk;
+MD: net/minecraft/server/PlayerManager/a (Lnet/minecraft/server/EntityPlayer;II)Z net/minecraft/server/PlayerChunkMap/a (Lnet/minecraft/server/EntityPlayer;II)Z
+MD: net/minecraft/server/PlayerManager/a (Lnet/minecraft/server/PlayerManager;)Lnet/minecraft/server/WorldServer; net/minecraft/server/PlayerChunkMap/a (Lnet/minecraft/server/PlayerChunkMap;)Lnet/minecraft/server/WorldServer;
+MD: net/minecraft/server/PlayerManager/addPlayer (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunkMap/addPlayer (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/PlayerManager/b (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunkMap/b (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/PlayerManager/b (Lnet/minecraft/server/PlayerManager;)Lnet/minecraft/server/LongHashMap; net/minecraft/server/PlayerChunkMap/b (Lnet/minecraft/server/PlayerChunkMap;)Lnet/minecraft/server/LongHashMap;
+MD: net/minecraft/server/PlayerManager/c (Lnet/minecraft/server/PlayerManager;)Ljava/util/List; net/minecraft/server/PlayerChunkMap/c (Lnet/minecraft/server/PlayerChunkMap;)Ljava/util/List;
+MD: net/minecraft/server/PlayerManager/flagDirty (III)V net/minecraft/server/PlayerChunkMap/flagDirty (III)V
+MD: net/minecraft/server/PlayerManager/flush ()V net/minecraft/server/PlayerChunkMap/flush ()V
+MD: net/minecraft/server/PlayerManager/getFurthestViewableBlock (I)I net/minecraft/server/PlayerChunkMap/getFurthestViewableBlock (I)I
+MD: net/minecraft/server/PlayerManager/movePlayer (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunkMap/movePlayer (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/PlayerManager/removePlayer (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerChunkMap/removePlayer (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/RecipesArmorDye/a ()I net/minecraft/server/RecipeArmorDye/a ()I
+MD: net/minecraft/server/RecipesArmorDye/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack; net/minecraft/server/RecipeArmorDye/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/RecipesArmorDye/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z net/minecraft/server/RecipeArmorDye/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z
+MD: net/minecraft/server/RecipesArmorDye/b ()Lnet/minecraft/server/ItemStack; net/minecraft/server/RecipeArmorDye/b ()Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/RecipesMapClone/a ()I net/minecraft/server/RecipeMapClone/a ()I
+MD: net/minecraft/server/RecipesMapClone/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack; net/minecraft/server/RecipeMapClone/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/RecipesMapClone/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z net/minecraft/server/RecipeMapClone/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z
+MD: net/minecraft/server/RecipesMapClone/b ()Lnet/minecraft/server/ItemStack; net/minecraft/server/RecipeMapClone/b ()Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/RecipesMapExtend/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack; net/minecraft/server/RecipeMapExtend/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/RecipesMapExtend/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z net/minecraft/server/RecipeMapExtend/a (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Z
+MD: net/minecraft/server/ServerConfigurationManager/addOp (Ljava/lang/String;)V net/minecraft/server/DedicatedPlayerList/addOp (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManager/addWhitelist (Ljava/lang/String;)V net/minecraft/server/DedicatedPlayerList/addWhitelist (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManager/getServer ()Lnet/minecraft/server/DedicatedServer; net/minecraft/server/DedicatedPlayerList/getServer ()Lnet/minecraft/server/DedicatedServer;
+MD: net/minecraft/server/ServerConfigurationManager/getServer ()Lnet/minecraft/server/MinecraftServer; net/minecraft/server/DedicatedPlayerList/getServer ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/ServerConfigurationManager/isWhitelisted (Ljava/lang/String;)Z net/minecraft/server/DedicatedPlayerList/isWhitelisted (Ljava/lang/String;)Z
+MD: net/minecraft/server/ServerConfigurationManager/reloadWhitelist ()V net/minecraft/server/DedicatedPlayerList/reloadWhitelist ()V
+MD: net/minecraft/server/ServerConfigurationManager/removeOp (Ljava/lang/String;)V net/minecraft/server/DedicatedPlayerList/removeOp (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManager/removeWhitelist (Ljava/lang/String;)V net/minecraft/server/DedicatedPlayerList/removeWhitelist (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManager/setHasWhitelist (Z)V net/minecraft/server/DedicatedPlayerList/setHasWhitelist (Z)V
+MD: net/minecraft/server/ServerConfigurationManager/t ()V net/minecraft/server/DedicatedPlayerList/t ()V
+MD: net/minecraft/server/ServerConfigurationManager/u ()V net/minecraft/server/DedicatedPlayerList/u ()V
+MD: net/minecraft/server/ServerConfigurationManager/v ()V net/minecraft/server/DedicatedPlayerList/v ()V
+MD: net/minecraft/server/ServerConfigurationManager/w ()V net/minecraft/server/DedicatedPlayerList/w ()V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a ()I net/minecraft/server/PlayerList/a ()I
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/ChunkCoordinates;IIIIII)Ljava/util/List; net/minecraft/server/PlayerList/a (Lnet/minecraft/server/ChunkCoordinates;IIIIII)Ljava/util/List;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/Entity;ILnet/minecraft/server/WorldServer;Lnet/minecraft/server/WorldServer;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/Entity;ILnet/minecraft/server/WorldServer;Lnet/minecraft/server/WorldServer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/World;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/World;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/WorldServer;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/WorldServer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/INetworkManager;Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/INetworkManager;Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/a (Lnet/minecraft/server/Packet;I)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/Packet;I)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/addOp (Ljava/lang/String;)V net/minecraft/server/PlayerList/addOp (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/addWhitelist (Ljava/lang/String;)V net/minecraft/server/PlayerList/addWhitelist (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/attemptLogin (Ljava/net/SocketAddress;Ljava/lang/String;)Ljava/lang/String; net/minecraft/server/PlayerList/attemptLogin (Ljava/net/SocketAddress;Ljava/lang/String;)Ljava/lang/String;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/b (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/b (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/b (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/WorldServer;)V net/minecraft/server/PlayerList/b (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/WorldServer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/c ()Ljava/lang/String; net/minecraft/server/PlayerList/c ()Ljava/lang/String;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/c (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/c (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/changeDimension (Lnet/minecraft/server/EntityPlayer;I)V net/minecraft/server/PlayerList/changeDimension (Lnet/minecraft/server/EntityPlayer;I)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/d ()[Ljava/lang/String; net/minecraft/server/PlayerList/d ()[Ljava/lang/String;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/d (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/d (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/disconnect (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/disconnect (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/f (Ljava/lang/String;)Lnet/minecraft/server/EntityPlayer; net/minecraft/server/PlayerList/f (Ljava/lang/String;)Lnet/minecraft/server/EntityPlayer;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getHasWhitelist ()Z net/minecraft/server/PlayerList/getHasWhitelist ()Z
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getIPBans ()Lnet/minecraft/server/BanList; net/minecraft/server/PlayerList/getIPBans ()Lnet/minecraft/server/BanList;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getMaxPlayers ()I net/minecraft/server/PlayerList/getMaxPlayers ()I
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getNameBans ()Lnet/minecraft/server/BanList; net/minecraft/server/PlayerList/getNameBans ()Lnet/minecraft/server/BanList;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getOPs ()Ljava/util/Set; net/minecraft/server/PlayerList/getOPs ()Ljava/util/Set;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getPlayerCount ()I net/minecraft/server/PlayerList/getPlayerCount ()I
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getSeenPlayers ()[Ljava/lang/String; net/minecraft/server/PlayerList/getSeenPlayers ()[Ljava/lang/String;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getServer ()Lnet/minecraft/server/MinecraftServer; net/minecraft/server/PlayerList/getServer ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/getWhitelisted ()Ljava/util/Set; net/minecraft/server/PlayerList/getWhitelisted ()Ljava/util/Set;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/isOp (Ljava/lang/String;)Z net/minecraft/server/PlayerList/isOp (Ljava/lang/String;)Z
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/isWhitelisted (Ljava/lang/String;)Z net/minecraft/server/PlayerList/isWhitelisted (Ljava/lang/String;)Z
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/j (Ljava/lang/String;)Ljava/util/List; net/minecraft/server/PlayerList/j (Ljava/lang/String;)Ljava/util/List;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/moveToWorld (Lnet/minecraft/server/EntityPlayer;IZ)Lnet/minecraft/server/EntityPlayer; net/minecraft/server/PlayerList/moveToWorld (Lnet/minecraft/server/EntityPlayer;IZ)Lnet/minecraft/server/EntityPlayer;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/o ()I net/minecraft/server/PlayerList/o ()I
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/processLogin (Ljava/lang/String;)Lnet/minecraft/server/EntityPlayer; net/minecraft/server/PlayerList/processLogin (Ljava/lang/String;)Lnet/minecraft/server/EntityPlayer;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/q ()Lnet/minecraft/server/NBTTagCompound; net/minecraft/server/PlayerList/q ()Lnet/minecraft/server/NBTTagCompound;
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/r ()V net/minecraft/server/PlayerList/r ()V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/reloadWhitelist ()V net/minecraft/server/PlayerList/reloadWhitelist ()V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/removeOp (Ljava/lang/String;)V net/minecraft/server/PlayerList/removeOp (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/removeWhitelist (Ljava/lang/String;)V net/minecraft/server/PlayerList/removeWhitelist (Ljava/lang/String;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/savePlayers ()V net/minecraft/server/PlayerList/savePlayers ()V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/sendAll (Lnet/minecraft/server/Packet;)V net/minecraft/server/PlayerList/sendAll (Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/sendPacketNearby (DDDDILnet/minecraft/server/Packet;)V net/minecraft/server/PlayerList/sendPacketNearby (DDDDILnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/sendPacketNearby (Lnet/minecraft/server/EntityHuman;DDDDILnet/minecraft/server/Packet;)V net/minecraft/server/PlayerList/sendPacketNearby (Lnet/minecraft/server/EntityHuman;DDDDILnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/setHasWhitelist (Z)V net/minecraft/server/PlayerList/setHasWhitelist (Z)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/setPlayerFileData ([Lnet/minecraft/server/WorldServer;)V net/minecraft/server/PlayerList/setPlayerFileData ([Lnet/minecraft/server/WorldServer;)V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/tick ()V net/minecraft/server/PlayerList/tick ()V
+MD: net/minecraft/server/ServerConfigurationManagerAbstract/updateClient (Lnet/minecraft/server/EntityPlayer;)V net/minecraft/server/PlayerList/updateClient (Lnet/minecraft/server/EntityPlayer;)V
+MD: net/minecraft/server/WorldServer/getPlayerManager ()Lnet/minecraft/server/PlayerManager; net/minecraft/server/WorldServer/getPlayerChunkMap ()Lnet/minecraft/server/PlayerChunkMap;
