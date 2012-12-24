@@ -108,9 +108,9 @@ def readSrg(filename):
 
             methodMap[inName + " " + outName] = (outName, outSig)
         else:
-            assert "Unknown type " + kind
+            assert False, "Unknown type " + kind
 
-    return packageMap, classMap, methodMap, classMap
+    return packageMap, classMap, fieldMap, methodMap
 
 # Remap method signatures through a class map
 def remapSig(sig, classMap):

@@ -3,40 +3,60 @@
 # Process symbol range maps produced by ApplySrg2Source
 
 import os
-
+import srglib
 
 srcRoot = "../CraftBukkit"
-rangeMap = "/tmp/nms4"
+rangeMapFile = "/tmp/nms"
+mcpDir = "../mcp725-pkgd/conf"
+srgFile = "1.4.6/cb2pkgmcp.srg"
 
-def loadSrg(filename):
+# Read ApplySrg2Source symbol range map into a dictionary
+# keyed by filename, with a dict for each symbol type
+def readRangeMap(filename):
+    rangeMap = {}
     for line in file(filename).readlines():
-        line = line.strip()
-        tokens = line.split(" ")
-        kind = tokens[0]
-        args = tokens[1:]
-        if kind == "PK:":  # package
-            print line
-        elif kind == "CL:": # class
-            inName, outName = args
-            print kind, inName, applyPrefix(outName, prefix)
-        elif kind == "FD:": # field
-            inName, outName = args
-            print kind, inName, applyPrefix(outName, prefix)
-        elif kind == "MD:": # method
-            inName, inSig, outName, outSig = args
-            print kind, inName, inSig, applyPrefix(outName, prefix), outSig
+        tokens = line.strip().split("|")
+        if tokens[0] != "@": continue
+        filename, startRangeStr, endRangeStr, kind = tokens[1:5]
+        startRange = int(startRangeStr)
+        endRange = int(endRangeStr)
+        info = tokens[5:]
+
+        k = {"start":startRange, "end":endRange}
+        if kind == "package":
+            k["packageName"] = info
+        elif kind == "class":
+            k["className"] = info
+        elif kind == "field":
+            k["className"], k["fieldName"] = info
+        elif kind == "method":
+            k["className"], k["methodName"], k["methodSignature"] = info
+        elif kind == "param":
+            k["className"], k["methodName"], k["methodSignature"], k["parameterName"], k["parameterIndex"] = info
+        elif kind == "localvar":
+            k["className"], k["methodName"], k["methodSignature"], k["variableName"], k["variableIndex"] = info
         else:
-            print line
+            assert False, "Unknown kind: "+kind
 
-for line in file(rangeMap).readlines():
-    tokens = line.strip().split(",")
-    if tokens[0] != "@": continue
-    filename, startRangeStr, endRangeStr, kind = tokens[1:5]
-    info = tokens[5:]
-    startRange = int(startRangeStr.replace("(",""))
-    endRange = int(endRangeStr.replace(")",""))
+        if not rangeMap.has_key(filename):
+            rangeMap[filename] = {"package":[], "class":[], "field":[], "method":[], "param":[], "localvar":[]}
 
-    data = file(os.path.join(srcRoot, filename)).read()
-    oldName = data[startRange:endRange]
+        rangeMap[filename][kind] = k
 
-    print filename,[startRange,endRange],kind,info
+        #data = file(os.path.join(srcRoot, filename)).read()
+        #oldName = data[startRange:endRange]
+        #print filename,[startRange,endRange],kind,info
+
+    return rangeMap
+
+def main():
+    paramMap = srglib.readParameterMap(mcpDir)
+    packageMap, classMap, fieldMap, methodMap = srglib.readSrg(srgFile)
+    rangeMapByFile = readRangeMap(rangeMapFile)
+
+    for filename, rangeMap in rangeMapByFile.iteritems():
+        print filename,rangeMap
+
+if __name__ == "__main__":
+    main()
+
