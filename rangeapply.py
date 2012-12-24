@@ -67,6 +67,7 @@ def getRenameMaps(srgFile, mcpDir):
     for old,new in methodMap.iteritems():
         maps["method "+old]=new
 
+    # TODO: param map has to be translated! XXX XXX XXX XXX
     paramMap = srglib.readParameterMap(mcpDir)
     for old,new in paramMap.iteritems():
         for i in range(0,len(new)):
@@ -77,7 +78,7 @@ def getRenameMaps(srgFile, mcpDir):
 
 
 def main():
-    renameMaps = getRenameMaps(srgFile, mcpDir)
+    renameMap = getRenameMaps(srgFile, mcpDir)
     rangeMapByFile = readRangeMap(rangeMapFile)
 
     for filename, rangeMap in rangeMapByFile.iteritems():
@@ -85,7 +86,12 @@ def main():
 
         for key,r in rangeMap.iteritems():
             start, end = r
-            print data[start:end]
+            oldName = data[start:end]
+            if not renameMap.has_key(key):
+                print "No rename for "+key
+                continue
+            newName = renameMap[key]
+            print oldName,"->",newName
 
 if __name__ == "__main__":
     main()
