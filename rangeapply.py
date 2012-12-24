@@ -11,7 +11,7 @@ mcpDir = "../mcp725-pkgd/conf"
 srgFile = "1.4.6/cb2pkgmcp.srg"
 
 # Read ApplySrg2Source symbol range map into a dictionary
-# keyed by filename, with a dict for each symbol type
+# Keyed by filename -> dict of unique identifiers -> range
 def readRangeMap(filename):
     rangeMap = {}
     for line in file(filename).readlines():
@@ -22,40 +22,70 @@ def readRangeMap(filename):
         endRange = int(endRangeStr)
         info = tokens[5:]
 
-        k = {"start":startRange, "end":endRange}
+        # Build unique identifier for symbol
         if kind == "package":
-            k["packageName"] = info
+            packageName, = info
+            key = "package "+packageName
         elif kind == "class":
-            k["className"] = info
+            className, = info
+            key = "class "+className
         elif kind == "field":
-            k["className"], k["fieldName"] = info
+            className, fieldName = info
+            key = "field "+className.replace(".","/")+"/"+fieldName
         elif kind == "method":
-            k["className"], k["methodName"], k["methodSignature"] = info
+            className, methodName, methodSignature = info
+            key = "method "+className.replace(".","/")+"/"+methodName+" "+methodSignature
         elif kind == "param":
-            k["className"], k["methodName"], k["methodSignature"], k["parameterName"], k["parameterIndex"] = info
+            className, methodName, methodSignature, parameterName, parameterIndex = info
+            key = "param "+className.replace(".","/")+"/"+methodName+" "+methodSignature+" "+str(parameterIndex)  # ignore old name (positional)
         elif kind == "localvar":
-            k["className"], k["methodName"], k["methodSignature"], k["variableName"], k["variableIndex"] = info
+            className, methodName, methodSignature, variableName, variableIndex = info
+            key = "localvar "+className.replace(".","/")+"/"+methodName+" "+methodSignature+" "+str(variableIndex) # ignore old name (positional)
         else:
             assert False, "Unknown kind: "+kind
 
+
         if not rangeMap.has_key(filename):
-            rangeMap[filename] = {"package":[], "class":[], "field":[], "method":[], "param":[], "localvar":[]}
+            rangeMap[filename] = {}
 
-        rangeMap[filename][kind] = k
-
-        #data = file(os.path.join(srcRoot, filename)).read()
-        #oldName = data[startRange:endRange]
-        #print filename,[startRange,endRange],kind,info
+        # Map to range
+        rangeMap[filename][key] = (startRange, endRange)
 
     return rangeMap
 
-def main():
-    paramMap = srglib.readParameterMap(mcpDir)
+# Get all rename maps, keyed by globally unique symbol identifier, values are new names
+def getRenameMaps(srgFile, mcpDir):
+    maps = {}
+
     packageMap, classMap, fieldMap, methodMap = srglib.readSrg(srgFile)
+    for old,new in packageMap.iteritems():
+        maps["package "+old]=new
+    for old,new in classMap.iteritems():
+        maps["class "+old]=new
+    for old,new in fieldMap.iteritems():
+        maps["field "+old]=new
+    for old,new in methodMap.iteritems():
+        maps["method "+old]=new
+
+    paramMap = srglib.readParameterMap(mcpDir)
+    for old,new in paramMap.iteritems():
+        for i in range(0,len(new)):
+            maps["param %s %s" % (old, i)] = new[i]
+    # TODO: local variable map
+
+    return maps
+
+
+def main():
+    renameMaps = getRenameMaps(srgFile, mcpDir)
     rangeMapByFile = readRangeMap(rangeMapFile)
 
     for filename, rangeMap in rangeMapByFile.iteritems():
-        print filename,rangeMap
+        data = file(os.path.join(srcRoot, filename)).read()
+
+        for key,r in rangeMap.iteritems():
+            start, end = r
+            print data[start:end]
 
 if __name__ == "__main__":
     main()

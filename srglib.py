@@ -106,7 +106,7 @@ def readSrg(filename):
         elif kind == "MD": 
             inName, inSig, outName, outSig = args
 
-            methodMap[inName + " " + outName] = (outName, outSig)
+            methodMap[inName + " " + inSig] = outName
         else:
             assert False, "Unknown type " + kind
 
