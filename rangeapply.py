@@ -130,6 +130,24 @@ def addImports(data, newImports):
     return "\n".join(splice)
 
 
+# Check whether a unique identifier method key is a constructor, if so return full class name for remapping, else None
+def getConstructor(key):
+    tokens = key.split(" ", 2)  # TODO: switch to non-conflicting separator..types can have spaces :(
+    if tokens[0] != "method": return None
+    print tokens
+    kind, fullMethodName, methodSig = tokens
+    if methodSig[-1] != "V": return None # constructors marked with 'V' return type signature in ApplySrg2Source and MCP
+    fullClassName = srglib.splitPackageName(fullMethodName)
+    methodName = srglib.splitBaseName(fullMethodName)
+
+    packageName = srglib.splitPackageName(fullClassName)
+    className = srglib.splitBaseName(fullClassName)
+
+    if className == methodName: # constructor has same name as class
+        return fullClassName
+    else:
+        return None
+
 def getNewName(key, oldName, renameMap):
     if key.startswith("localvar"):
         # Temporary hack to rename local variables without a mapping
@@ -138,8 +156,22 @@ def getNewName(key, oldName, renameMap):
         newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
     else:
         if not renameMap.has_key(key):
-            return None
-        newName = renameMap[key]
+            constructorClassName = getConstructor(key)
+            if constructorClassName is not None:
+                # Constructors are not in the method map (from .srg, and can't be derived
+                # exclusively from the class map since we don't know all the parameters).. so we
+                # have to synthesize a rename from the class map here. Ugh..but, it works.
+                print "FOUND CONSTR",key,constructorClassName
+                if renameMap.has_key("class "+constructorClassName):
+                    # Rename constructor to new class name
+                    newName = srglib.splitBaseName(renameMap["class "+constructorClassName])
+                else:
+                    return None
+            else:
+                # Not renaming this
+                return None
+        else:
+            newName = renameMap[key]
 
     return newName+"/*was:"+oldName+"*/"
 
