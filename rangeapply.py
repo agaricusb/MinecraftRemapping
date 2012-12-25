@@ -87,6 +87,29 @@ def getRenameMaps(srgFile, mcpDir):
 
     return maps
 
+# Sort range map by starting offset
+# Needed since symbol range output is not always guaranteed to be in source file order
+def sortRangeMap(rangeMap):
+    sortedRangeMap = []
+
+    print "---"
+    starts = {}
+    for key,r in rangeMap.iteritems():
+        start,end = r
+        assert not starts.has_key(start), "Range map invalid: multiple symbols starting at "+start
+        starts[start] = end,key
+    prevEnd = 0
+    for start in sorted(starts.keys()):
+        end,key = starts[start]
+        sortedRangeMap.append((key, start, end))
+
+        # sanity check
+        assert start > prevEnd, "Range map invalid: overlapping symbols at "+start
+        prevEnd = end
+        print start,end
+
+    return sortedRangeMap
+
 
 def main():
     renameMap = getRenameMaps(srgFile, mcpDir)
@@ -95,14 +118,29 @@ def main():
     for filename, rangeMap in rangeMapByFile.iteritems():
         data = file(os.path.join(srcRoot, filename)).read()
 
-        for key,r in rangeMap.iteritems():
-            start, end = r
-            oldName = data[start:end]
-            if not renameMap.has_key(key):
-                print "No rename for "+key
-                continue
-            newName = renameMap[key]
+        shift = 0
+
+        sortedRangeMap = sortRangeMap(rangeMap)
+
+        for key,start,end in sortedRangeMap:
+            oldName = data[start+shift:end+shift]
+
+            if key.startswith("localvar"):
+                # Temporary hack to rename local variables without a mapping
+                # This is not accurate.. variables are not always monotonic nor sequential
+                # TODO: extract local variable map from MCP source with same tool, range map -> local var
+                newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
+            else:
+                if not renameMap.has_key(key):
+                    print "No rename for "+key
+                    continue
+                newName = renameMap[key]
+
             print "Rename",key,"::",oldName,"->",newName
+
+            data = data[0:start+shift] + oldName + data[end+shift:]
+            #shift = len(newName) - len(oldName)
+            print shift
 
 if __name__ == "__main__":
     main()
