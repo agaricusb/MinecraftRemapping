@@ -9,6 +9,8 @@ srcRoot = "../CraftBukkit"
 rangeMapFile = "/tmp/nms"
 mcpDir = "../mcp725-pkgd/conf"
 srgFile = "1.4.6/cb2pkgmcp.srg"
+rewriteFiles = True
+renameFiles = True
 
 # Read ApplySrg2Source symbol range map into a dictionary
 # Keyed by filename -> dict of unique identifiers -> range
@@ -151,6 +153,8 @@ def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
 
     sortedRangeMap = sortRangeMap(rangeMap)
 
+    firstClassNewName = None
+
     for key,start,end in sortedRangeMap:
         oldName = data[start+shift:end+shift]
 
@@ -170,6 +174,9 @@ def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
         if importMap.has_key(key):
             # this rename requires adding an import
             importsToAdd.append(importMap[key])
+        if firstClassNewName is None and key.startswith("class "):
+            # remember first class declared in this file, for renaming the file
+            firstClassNewName = renameMap[key]
 
         # Rename algorithm: 
         # 1. textually replace text at specified range with new text
@@ -180,9 +187,16 @@ def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
     # Lastly, update imports
     data = addImports(data, importsToAdd)
 
-    print "Writing",path,
-    file(path,"w").write(data)
-    print
+    newPackage = srglib.sourceName2Internal(renameMap["package "+filename])
+    newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
+    newPath = os.path.join(srcRoot, newFilename)
+
+    if rewriteFiles:
+        print "Writing",filename
+        file(path,"w").write(data)
+    if renameFiles:
+        print "Rename file",filename,"->",newFilename
+        srglib.rename_path(path, newPath)
 
 def main():
     renameMap, importMap = getRenameMaps(srgFile, mcpDir)

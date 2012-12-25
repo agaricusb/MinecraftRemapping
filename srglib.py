@@ -173,4 +173,13 @@ def remapSig(sig, classMap):
         sig = sig.replace("L" + k + ";", "L" + v + ";")
 
     return sig
-    
+  
+# Rename file to path possibly containing non-existent directories, created as necessary
+def rename_path(oldPath, newPath):
+    dirComponents = os.path.dirname(newPath).split(os.path.sep)
+    for i in range(2,len(dirComponents)+1):
+        intermediateDir = os.path.sep.join(dirComponents[0:i])
+        if not os.path.exists(intermediateDir):
+            os.mkdir(intermediateDir)
+
+    os.rename(oldPath, newPath)
