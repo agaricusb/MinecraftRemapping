@@ -110,37 +110,48 @@ def sortRangeMap(rangeMap):
 
     return sortedRangeMap
 
+# Rename symbols in source code
+def processJavaSourceFile(filename, rangeMap, renameMap):
+    path = os.path.join(srcRoot, filename)
+
+    data = file(path).read()
+
+    shift = 0
+
+    sortedRangeMap = sortRangeMap(rangeMap)
+
+    for key,start,end in sortedRangeMap:
+        oldName = data[start+shift:end+shift]
+
+        if key.startswith("localvar"):
+            # Temporary hack to rename local variables without a mapping
+            # This is not accurate.. variables are not always monotonic nor sequential
+            # TODO: extract local variable map from MCP source with same tool, range map -> local var
+            newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
+        else:
+            if not renameMap.has_key(key):
+                print "No rename for "+key
+                continue
+            newName = renameMap[key]
+
+        print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
+
+        # Rename algorithm: 
+        # 1. textually replace text at specified range with new text
+        # 2. shift future ranges by difference in text length
+        data = data[0:start+shift] + newName + data[end+shift:]
+        shift += len(newName) - len(oldName)
+
+    print "Writing",path,
+    file(path,"w").write(data)
+    print
 
 def main():
     renameMap = getRenameMaps(srgFile, mcpDir)
     rangeMapByFile = readRangeMap(rangeMapFile)
 
     for filename, rangeMap in rangeMapByFile.iteritems():
-        data = file(os.path.join(srcRoot, filename)).read()
-
-        shift = 0
-
-        sortedRangeMap = sortRangeMap(rangeMap)
-
-        for key,start,end in sortedRangeMap:
-            oldName = data[start+shift:end+shift]
-
-            if key.startswith("localvar"):
-                # Temporary hack to rename local variables without a mapping
-                # This is not accurate.. variables are not always monotonic nor sequential
-                # TODO: extract local variable map from MCP source with same tool, range map -> local var
-                newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
-            else:
-                if not renameMap.has_key(key):
-                    print "No rename for "+key
-                    continue
-                newName = renameMap[key]
-
-            print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
-
-            data = data[0:start+shift] + newName + data[end+shift:]
-            shift += len(newName) - len(oldName)
-            print "|",data[0:500],"|"
+        processJavaSourceFile(filename, rangeMap, renameMap)
 
 if __name__ == "__main__":
     main()
