@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
-# srglib: routines for manipulating MCP's .srg, .csv, and .exc files
+# srglib: routines for manipulating FML/MCP's .srg, .csv, and .exc files
 
 # Not all of the tools use this library yet
 
 import re, os, csv, sys
 
 EXC_RE = re.compile(r"^([^.]+)\.([^(]+)(\([^=]+)=([^|]*)\|(.*)")
-
 
 # Get map from full descriptive method name + signature -> list of descriptive parameter names
 def readParameterMap(mcpConfDir):
@@ -99,14 +98,18 @@ def readExc(filename):
 
 # Mapping from parameter number (p_####) to name in source (par#X..)
 def readDescriptiveParameterNames(mcpConfDir):
-    return readCSV(os.path.join(mcpConfDir, "params.csv"))
+    return readCSVMap(os.path.join(mcpConfDir, "params.csv"))
 
-# Method nmbers (func_####) to descriptive name in source
+# Method numbers (func_####) to descriptive name in source
 def readDescriptiveMethodNames(mcpConfDir):
-    return readCSV(os.path.join(mcpConfDir, "methods.csv"))
+    return readCSVMap(os.path.join(mcpConfDir, "methods.csv"))
 
-# Read MCP's comma-separated-values files
-def readCSV(path):
+# Class name to package, from FML/MCP's repackaging
+def readClassPackageMap(mcpConfDir):
+    return readCSVMap(os.path.join(mcpConfDir, "packages.csv"))
+
+# Read MCP's comma-separated-values files into key->value map
+def readCSVMap(path):
     d = {}
     header = True
 

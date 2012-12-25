@@ -57,15 +57,23 @@ def readRangeMap(filename):
 def getRenameMaps(srgFile, mcpDir):
     maps = {}
 
-    packageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
-    for old,new in packageMap.iteritems():
-        maps["package "+old]=new
+    # CB -> packaged MCP class/field/method
+    _notReallyThePackageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
     for old,new in classMap.iteritems():
         maps["class "+old]=new
     for old,new in fieldMap.iteritems():
         maps["field "+old]=new
     for old,new in methodMap.iteritems():
         maps["method "+old]=new
+
+    # MCP class name -> FML/MCP package name
+#    print classMap
+#    mcpClass2Package = srglib.readClassPackageMap(mcpDir)
+#    for cbClass, mcpClass in classMap.iteritems():
+#        mcpPackage = mcpClass2Package[mcpClass]
+#        packageMap[cbClass] = mcpClass
+#    print packageMap
+#    raise SystemExit
 
     # Read parameter map.. it comes from MCP with MCP namings, so have to remap to CB 
     mcpParamMap = srglib.readParameterMap(mcpDir)
