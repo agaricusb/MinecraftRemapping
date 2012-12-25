@@ -25,22 +25,23 @@ def readRangeMap(filename):
         # Build unique identifier for symbol
         if kind == "package":
             packageName, = info
-            key = "package "+packageName
+            #key = "package "+packageName # ignore old name (unique identifier is filename)
+            key = "package "+filename
         elif kind == "class":
             className, = info
-            key = "class "+className
+            key = "class "+srglib.sourceName2Internal(className)
         elif kind == "field":
             className, fieldName = info
-            key = "field "+className.replace(".","/")+"/"+fieldName
+            key = "field "+srglib.sourceName2Internal(className)+"/"+fieldName
         elif kind == "method":
             className, methodName, methodSignature = info
-            key = "method "+className.replace(".","/")+"/"+methodName+" "+methodSignature
+            key = "method "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature
         elif kind == "param":
             className, methodName, methodSignature, parameterName, parameterIndex = info
-            key = "param "+className.replace(".","/")+"/"+methodName+" "+methodSignature+" "+str(parameterIndex)  # ignore old name (positional)
+            key = "param "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature+" "+str(parameterIndex)  # ignore old name (positional)
         elif kind == "localvar":
             className, methodName, methodSignature, variableName, variableIndex = info
-            key = "localvar "+className.replace(".","/")+"/"+methodName+" "+methodSignature+" "+str(variableIndex) # ignore old name (positional)
+            key = "localvar "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature+" "+str(variableIndex) # ignore old name (positional)
         else:
             assert False, "Unknown kind: "+kind
 
@@ -60,20 +61,17 @@ def getRenameMaps(srgFile, mcpDir):
     # CB -> packaged MCP class/field/method
     _notReallyThePackageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
     for old,new in classMap.iteritems():
-        maps["class "+old]=new
+        maps["class "+old]=srglib.internalName2Source(new)
     for old,new in fieldMap.iteritems():
-        maps["field "+old]=new
+        maps["field "+old]=srglib.splitBaseName(new)
     for old,new in methodMap.iteritems():
-        maps["method "+old]=new
+        maps["method "+old]=srglib.splitBaseName(new)
 
-    # MCP class name -> FML/MCP package name
-#    print classMap
-#    mcpClass2Package = srglib.readClassPackageMap(mcpDir)
-#    for cbClass, mcpClass in classMap.iteritems():
-#        mcpPackage = mcpClass2Package[mcpClass]
-#        packageMap[cbClass] = mcpClass
-#    print packageMap
-#    raise SystemExit
+    # CB source file -> package
+    for cbClass, mcpClass in classMap.iteritems():
+        cbFile = "src/main/java/"+cbClass+".java"
+        mcpPackage = srglib.splitPackageName(mcpClass)
+        maps["package "+cbFile] = srglib.internalName2Source(mcpPackage)
 
     # Read parameter map.. it comes from MCP with MCP namings, so have to remap to CB 
     mcpParamMap = srglib.readParameterMap(mcpDir)
@@ -104,7 +102,7 @@ def main():
                 print "No rename for "+key
                 continue
             newName = renameMap[key]
-            print oldName,"->",newName
+            print "Rename",key,"::",oldName,"->",newName
 
 if __name__ == "__main__":
     main()

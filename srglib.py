@@ -121,6 +121,21 @@ def readCSVMap(path):
 
     return d
 
+def splitPackageName(fullClassName, sep="/"):
+    return sep.join(fullClassName.split(sep)[:-1])
+
+def splitBaseName(fullClassName, sep="/"):
+    return fullClassName.split(sep)[-1]
+
+# Java bytecode internally uses "/" to separate package/class names, but
+# source code uses "." -- these routines convert between the two
+
+def internalName2Source(internalName):
+    return internalName.replace("/",".")
+
+def sourceName2Internal(sourceName):
+    return sourceName.replace(".","/")
+
 # Read MCP's .srg mappings
 def readSrg(filename):
     packageMap = {}
