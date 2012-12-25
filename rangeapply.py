@@ -104,7 +104,7 @@ def getRenameMaps(srgFile, mcpDir):
     return maps, importMaps
 
 # Add new import statements to source
-def addImports(data, newImports):
+def updateImports(data, newImports, importMap):
     lines = data.split("\n")
     lastNativeImport = None
     existingImports = []
@@ -113,7 +113,15 @@ def addImports(data, newImports):
     for i, line in enumerate(lines):
         if line.startswith("import net.minecraft"):
             lastNativeImport = i
-            existingImports.append(line)
+
+            #import pprint;pprint.pprint(importMap)
+            oldClass = line.replace("import ", "").replace(";", "");
+            print oldClass
+            if oldClass == "net.minecraft.server.*":
+                newClass = "net.minecraft.*" # TODO
+            else:
+                newClass = importMap["class "+srglib.sourceName2Internal(oldClass)]
+            existingImports.append("import %s;" % (newClass,))
 
     if  lastNativeImport is None:
         insertionPoint = 2
@@ -257,8 +265,8 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         data = data[0:start+shift] + newName + data[end+shift:]
         shift += len(newName) - len(oldName)
 
-    # Lastly, update imports
-    data = addImports(data, importsToAdd)
+    # Lastly, update imports - this is separate from symbol range manipulation above
+    data = updateImports(data, importsToAdd, importMap)
 
     if rewriteFiles:
         print "Writing",filename
