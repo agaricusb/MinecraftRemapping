@@ -29,9 +29,26 @@ def readRangeMap(filename):
 
         # Build unique identifier for symbol
         if kind == "package":
-            packageName, = info
+            packageName, forClass = info
+
             #key = "package "+packageName # ignore old name (unique identifier is filename)
-            key = "package "+filename
+            if forClass == "(file)":
+                if filename.startswith("src/test"): continue # ignore unit tests, not the main tree
+
+                topLevelClass = getTopLevelClassForFilename(filename)
+
+                if topLevelClass is None:
+                    assert False, "package range map for package '%s' for file '%s' unrecognizable top-level class (%s)" % (packageName, filename, tokens)
+
+                forClass = topLevelClass
+            else:
+                forClass = srglib.sourceName2Internal(forClass)  # . -> / 
+   
+
+            # 'forClass' is the class that is in this package; when the class is
+            # remapped to a different package, this range should be updated
+            key = "package "+forClass
+            
         elif kind == "class":
             className, = info
             key = "class "+srglib.sourceName2Internal(className)
@@ -79,11 +96,11 @@ def getRenameMaps(srgFile, mcpDir):
     for old,new in methodMap.iteritems():
         maps["method "+old]=srglib.splitBaseName(new)
 
-    # CB source file -> package
+    # CB class -> MCP package name
     for cbClass, mcpClass in classMap.iteritems():
         cbFile = "src/main/java/"+cbClass+".java"
         mcpPackage = srglib.splitPackageName(mcpClass)
-        maps["package "+cbFile] = srglib.internalName2Source(mcpPackage)
+        maps["package "+cbClass] = srglib.internalName2Source(mcpPackage)
 
     # Read parameter map.. it comes from MCP with MCP namings, so have to remap to CB 
     mcpParamMap = srglib.readParameterMap(mcpDir)
@@ -223,6 +240,14 @@ def sortRangeList(rangeList):
     rangeList[:] = []
     rangeList.extend(newRangeList)
 
+# Get the top-level class required to be declared in a file by its given name, if in the main tree
+# This is an internal name, including slashes for packages components
+def getTopLevelClassForFilename(filename):
+    if filename.startswith("src/main/java/"):
+        return filename.replace("src/main/java/", "").replace(".java", "")
+    else:
+        return None
+
 # Rename symbols in source code
 def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
@@ -279,8 +304,9 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         file(path,"w").write(data)
 
     if renameFiles:
-        if renameMap.has_key("package "+filename):  # rename if package changed
-            newPackage = srglib.sourceName2Internal(renameMap["package "+filename])
+        topLevelClass = getTopLevelClassForFilename(filename)
+        if topLevelClass is not None and renameMap.has_key("package "+topLevelClass):  # rename if package changed
+            newPackage = srglib.sourceName2Internal(renameMap["package "+topLevelClass])
             newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
             newPath = os.path.join(srcRoot, newFilename)
 
