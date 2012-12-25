@@ -116,7 +116,7 @@ def addImports(data, newImports):
             existingImports.append(line)
 
     if  lastNativeImport is None:
-        insertionPoint = 3
+        insertionPoint = 2
     else:
         insertionPoint = lastNativeImport
 
@@ -174,6 +174,13 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
+    if "\r" in data:
+        # BlockJukebox is the only file with CRLF line endings in NMS.. and.. IntelliJ IDEA treats offsets 
+        # as line endings being one character, whether LF or CR+LF. So remove the extraneous character or
+        # offsets will be all off :.
+        print "Warning: %s has CRLF line endings; consider switching to LF" % (filename,)
+        data = data.replace("\r", "")
+
     importsToAdd = set()
 
     shift = 0
@@ -184,8 +191,8 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         oldName = data[start+shift:end+shift]
 
         if oldName != expectedOldText:
-            print "Rename sanity check failed: expected '%s' at [%s:%s] in %s, but found '%s'" % (
-                expectedOldText, start, end, filename, oldName)
+            print "Rename sanity check failed: expected '%s' at [%s,%s] (shifted %s to [%s,%s]) in %s, but found '%s'" % (
+                expectedOldText, start, end, start+shift, shift, end+shift, filename, oldName)
             print "Regenerate symbol map on latest sources or start with fresh source and try again"
             raise SystemExit
 
