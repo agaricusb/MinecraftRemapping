@@ -57,6 +57,10 @@ def readRangeMap(filename):
         # Map to range
         rangeMap[filename].append((startRange, endRange, expectedOldText, key))
 
+    # Sort and check
+    for filename in sorted(rangeMap.keys()):
+        sortRangeList(rangeMap[filename])
+
     return rangeMap
 
 # Get all rename maps, keyed by globally unique symbol identifier, values are new names
@@ -154,6 +158,7 @@ def sortRangeList(rangeList):
                 "Range map invalid: multiple symbols starting at [%s,%s] %s = %s & [%s,%s] %s = %s" % (
                     start, end, expectedOldText, key,
                     otherStart, otherEnd, otherExpectedOldText, otherKey)
+            continue # skip duplicate
 
         starts[start] = start,end,expectedOldText,key
 
@@ -169,8 +174,6 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
-    sortRangeList(rangeList)
-
     importsToAdd = set()
 
     shift = 0
@@ -183,7 +186,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         if oldName != expectedOldText:
             print "Rename sanity check failed: expected '%s' at [%s:%s] in %s, but found '%s'" % (
                 expectedOldText, start, end, filename, oldName)
-            print "Regenerate symbol map on latest sources and try again"
+            print "Regenerate symbol map on latest sources or start with fresh source and try again"
             raise SystemExit
 
         newName = getNewName(key, oldName, renameMap)
