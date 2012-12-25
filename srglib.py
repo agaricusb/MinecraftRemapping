@@ -40,6 +40,43 @@ def readParameterMap(mcpConfDir):
 
     return paramMap
 
+# Remap a parameter map's method signatures (keeping the parameter names intact)
+# Returns new map, and list of methods not found in mapping and were removed
+def remapParameterMap(paramMap, methodMap, methodSigMap):
+    newParamMap = {}
+    removed = []
+    for methodInfo, paramNames in paramMap.iteritems():
+        if not methodMap.has_key(methodInfo):
+            removed.append(methodInfo)
+            continue
+
+        newFullMethodName = methodMap[methodInfo]
+        newMethodSig = methodSigMap[methodInfo]
+
+        newParamMap[newFullMethodName + " " + newMethodSig] = paramNames
+
+    return newParamMap, removed
+
+def invertDict(d):
+    r = {}
+    for k,v in d.iteritems():
+        r[v] = k
+    return r
+
+# Invert a method + method signature map, undoing the mapping
+def invertMethodMap(inMethodMap, inSigMap):
+    outMethodMap = {}
+    outSigMap = {}
+    assert len(inMethodMap) == len(inSigMap), "invertMethodMap given method map size != in sig map size"
+    for inInfo, outName in inMethodMap.iteritems():
+        inName, inSig = inInfo.split(" ")
+        outSig = inSigMap[inInfo]
+
+        outMethodMap[outName + " " + outSig] = inName
+        outSigMap[outName + " "+ outSig] = inSig
+
+    return outMethodMap, outSigMap
+
 # Read .exc file, returning list of tuples per line,
 # tuples of class name, method number, signature, list of exceptions through, and list of parameter numbers
 def readExc(filename):
@@ -59,9 +96,6 @@ def readExc(filename):
         exc.append((className, methodNumber, methodSig, exceptions, paramNumbers))
 
     return exc
-
-
-
 
 # Mapping from parameter number (p_####) to name in source (par#X..)
 def readDescriptiveParameterNames(mcpConfDir):
@@ -89,7 +123,8 @@ def readSrg(filename):
     packageMap = {}
     classMap = {}
     fieldMap = {}
-    methodMap = {}
+    methodMap = {} # not to be confused with methodMan
+    methodSigMap = {}
     for line in file(filename).readlines():
         line = line.strip()
         kind, argsString = line.split(": ")
@@ -107,10 +142,11 @@ def readSrg(filename):
             inName, inSig, outName, outSig = args
 
             methodMap[inName + " " + inSig] = outName
+            methodSigMap[inName + " " + inSig] = outSig  # fundamentally the same signature, but with types replaced (alternative to remapSig(inSig))
         else:
             assert False, "Unknown type " + kind
 
-    return packageMap, classMap, fieldMap, methodMap
+    return packageMap, classMap, fieldMap, methodMap, methodSigMap
 
 # Remap method signatures through a class map
 def remapSig(sig, classMap):

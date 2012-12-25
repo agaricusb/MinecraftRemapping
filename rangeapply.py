@@ -57,7 +57,7 @@ def readRangeMap(filename):
 def getRenameMaps(srgFile, mcpDir):
     maps = {}
 
-    packageMap, classMap, fieldMap, methodMap = srglib.readSrg(srgFile)
+    packageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
     for old,new in packageMap.iteritems():
         maps["package "+old]=new
     for old,new in classMap.iteritems():
@@ -67,10 +67,15 @@ def getRenameMaps(srgFile, mcpDir):
     for old,new in methodMap.iteritems():
         maps["method "+old]=new
 
-    # TODO: param map has to be translated! XXX XXX XXX XXX
-    paramMap = srglib.readParameterMap(mcpDir)
-    for old,new in paramMap.iteritems():
+    # Read parameter map.. it comes from MCP with MCP namings, so have to remap to CB 
+    mcpParamMap = srglib.readParameterMap(mcpDir)
+    invMethodMap, invMethodSigMap = srglib.invertMethodMap(methodMap, methodSigMap)
+    cbParamMap, removedParamMap = srglib.remapParameterMap(mcpParamMap, invMethodMap, invMethodSigMap)
+    # removedParamMap = methods in FML/MCP repackaged+joined but not CB = client-only methods
+
+    for old,new in cbParamMap.iteritems():
         for i in range(0,len(new)):
+            #print "RENPARAM","param %s %s" % (old, i),"->",new[i]
             maps["param %s %s" % (old, i)] = new[i]
     # TODO: local variable map
 
