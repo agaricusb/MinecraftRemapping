@@ -10,10 +10,11 @@ rangeMapFile = "/tmp/nms"
 mcpDir = "../mcp725-pkgd/conf"
 srgFile = "1.4.6/cb2pkgmcp.srg"
 rewriteFiles = True
-renameFiles = True
+#renameFiles = True
+renameFiles = False
 
 # Read ApplySrg2Source symbol range map into a dictionary
-# Keyed by filename -> dict of unique identifiers -> range
+# Keyed by filename -> list of (range start, end, key)
 def readRangeMap(filename):
     rangeMap = {}
     for line in file(filename).readlines():
@@ -49,10 +50,10 @@ def readRangeMap(filename):
 
 
         if not rangeMap.has_key(filename):
-            rangeMap[filename] = {}
+            rangeMap[filename] = []
 
         # Map to range
-        rangeMap[filename][key] = (startRange, endRange)
+        rangeMap[filename].append((startRange, endRange, key))
 
     return rangeMap
 
@@ -91,29 +92,6 @@ def getRenameMaps(srgFile, mcpDir):
 
     return maps, importMaps
 
-# Sort range map by starting offset
-# Needed since symbol range output is not always guaranteed to be in source file order
-def sortRangeMap(rangeMap):
-    sortedRangeMap = []
-
-    print "---"
-    starts = {}
-    for key,r in rangeMap.iteritems():
-        start,end = r
-        assert not starts.has_key(start), "Range map invalid: multiple symbols starting at "+start
-        starts[start] = end,key
-    prevEnd = 0
-    for start in sorted(starts.keys()):
-        end,key = starts[start]
-        sortedRangeMap.append((key, start, end))
-
-        # sanity check
-        assert start > prevEnd, "Range map invalid: overlapping symbols at "+start
-        prevEnd = end
-        #print start,end
-
-    return sortedRangeMap
-
 # Add new import statements to source
 def addImports(data, newImports):
     lines = data.split("\n")
@@ -141,9 +119,36 @@ def addImports(data, newImports):
     return "\n".join(splice)
 
 
+def getNewName(key, oldName, renameMap):
+    if key.startswith("localvar"):
+        # Temporary hack to rename local variables without a mapping
+        # This is not accurate.. variables are not always monotonic nor sequential
+        # TODO: extract local variable map from MCP source with same tool, range map -> local var
+        newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
+    else:
+        if not renameMap.has_key(key):
+            return None
+        newName = renameMap[key]
+
+    return newName+"/*was:"+oldName+"*/"
+
+# Sort range list by starting offset
+# Needed since symbol range output is not always guaranteed to be in source file order
+def sortRangeList(rangeList):
+    rangeList.sort()  # sorts by keys, tuple, first element is start
+
+    starts = {}
+    prevEnd = 0
+    for start,end,key in rangeList:
+        assert not starts.has_key(start), "Range map invalid: multiple symbols starting at "+start
+        starts[start] = start
+
+        # sanity check
+        assert start > prevEnd, "Range map invalid: overlapping symbols at "+start
+        prevEnd = end
 
 # Rename symbols in source code
-def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
+def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
@@ -151,23 +156,15 @@ def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
 
     shift = 0
 
-    sortedRangeMap = sortRangeMap(rangeMap)
-
     firstClassNewName = None
 
-    for key,start,end in sortedRangeMap:
+    for start,end,key in rangeList:
         oldName = data[start+shift:end+shift]
 
-        if key.startswith("localvar"):
-            # Temporary hack to rename local variables without a mapping
-            # This is not accurate.. variables are not always monotonic nor sequential
-            # TODO: extract local variable map from MCP source with same tool, range map -> local var
-            newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
-        else:
-            if not renameMap.has_key(key):
-                print "No rename for "+key
-                continue
-            newName = renameMap[key]
+        newName = getNewName(key, oldName, renameMap)
+        if newName is None:
+            print "No rename for "+key
+            continue
 
         print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
 
