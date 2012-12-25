@@ -39,6 +39,7 @@ def readRangeMap(filename):
             className, fieldName = info
             key = "field "+srglib.sourceName2Internal(className)+"/"+fieldName
         elif kind == "method":
+            if expectedOldText in ("super", "this"): continue # hack: avoid erroneously replacing super/this calls
             className, methodName, methodSignature = info
             key = "method "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature
         elif kind == "param":
@@ -202,8 +203,8 @@ def sortRangeList(rangeList):
         if starts.has_key(start):
             # If duplicate, must be identical symbol
             otherStart, otherEnd, otherExpectedOldText, otherKey = starts[start]
-            assert otherStart == start and otherEnd == end and otherExpectedOldText == expectedOldText and otherKey == key, \
-                "Range map invalid: multiple symbols starting at [%s,%s] %s = %s & [%s,%s] %s = %s" % (
+            if not (otherStart == start and otherEnd == end and otherExpectedOldText == expectedOldText and otherKey == key):
+                print "WARNING: Range map invalid: multiple symbols starting at [%s,%s] '%s' = %s & [%s,%s] '%s' = %s" % (
                     start, end, expectedOldText, key,
                     otherStart, otherEnd, otherExpectedOldText, otherKey)
             continue  # ignore duplicate 
