@@ -106,36 +106,41 @@ def getRenameMaps(srgFile, mcpDir):
 # Add new import statements to source
 def updateImports(data, newImports, importMap):
     lines = data.split("\n")
-    lastNativeImport = None
-    existingImports = []
     # Parse the existing imports and find out where to add ours
     # This doesn't use Psi.. but the syntax is easy enough to parse here
+    newLines = []
+    addedNewImports = False
+
+    newImportLines = []
+    for imp in sorted(list(newImports)):
+        newImportLines.append("import %s;" % (imp,))
+
     for i, line in enumerate(lines):
         if line.startswith("import net.minecraft"):
-            lastNativeImport = i
+            # Add our new imports first, before existing NMS imports
+            if not addedNewImports:
+                print "Adding %s imports" % (len(newImportLines,))
+                newLines.extend(newImportLines)
 
-            #import pprint;pprint.pprint(importMap)
+                addedNewImports = True
+
+            # Rewrite NMS imports
             oldClass = line.replace("import ", "").replace(";", "");
             print oldClass
             if oldClass == "net.minecraft.server.*":
                 newClass = "net.minecraft.*" # TODO
             else:
                 newClass = importMap["class "+srglib.sourceName2Internal(oldClass)]
-            existingImports.append("import %s;" % (newClass,))
+            newLine = "import %s;" % (newClass,)
+            if newLine not in newImportLines:  # if not already added
+                newLines.append(newLine)
+        else:
+            newLines.append(line)
 
-    if  lastNativeImport is None:
-        insertionPoint = 2
-    else:
-        insertionPoint = lastNativeImport
+    if not addedNewImports:
+        newLines = newLines[0:2] + newImportLines + newLines[2:]
 
-    importsToAdd = []
-    for imp in sorted(list(newImports)):
-        if imp in existingImports: continue
-        importsToAdd.append("import %s;" % (imp,))
-    print "Adding %s imports" % (len(newImports,))
-
-    splice = lines[0:insertionPoint] + importsToAdd + lines[insertionPoint:]
-    return "\n".join(splice)
+    return "\n".join(newLines)
 
 
 # Check whether a unique identifier method key is a constructor, if so return full class name for remapping, else None
