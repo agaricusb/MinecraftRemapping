@@ -33,14 +33,7 @@ def readRangeMap(filename):
 
             #key = "package "+packageName # ignore old name (unique identifier is filename)
             if forClass == "(file)":
-                if filename.startswith("src/test"): continue # ignore unit tests, not the main tree
-
-                topLevelClass = getTopLevelClassForFilename(filename)
-
-                if topLevelClass is None:
-                    assert False, "package range map for package '%s' for file '%s' unrecognizable top-level class (%s)" % (packageName, filename, tokens)
-
-                forClass = topLevelClass
+                forClass = getTopLevelClassForFilename(filename)
             else:
                 forClass = srglib.sourceName2Internal(forClass)  # . -> / 
    
@@ -243,10 +236,14 @@ def sortRangeList(rangeList):
 # Get the top-level class required to be declared in a file by its given name, if in the main tree
 # This is an internal name, including slashes for packages components
 def getTopLevelClassForFilename(filename):
-    if filename.startswith("src/main/java/"):
-        return filename.replace("src/main/java/", "").replace(".java", "")
-    else:
-        return None
+    withoutExt, ext = os.path.splitext(filename)
+    parts = withoutExt.split(os.path.sep)
+    # expect project-relative pathname, standard Maven structure
+    assert parts[0] == "src", "unexpected filename '%s', not in src" % (filename,)
+    assert parts[1] in ("main", "test"), "unexpected filename '%s', not in src/{test,main}" % (filename,)
+    assert parts[2] == "java", "unexpected filename '%s', not in src/{test,main}/java" % (filename,)
+
+    return "/".join(parts[3:])  # "internal" fully-qualified class name, separated by /
 
 # Rename symbols in source code
 def processJavaSourceFile(filename, rangeList, renameMap, importMap):
@@ -305,7 +302,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
     if renameFiles:
         topLevelClass = getTopLevelClassForFilename(filename)
-        if topLevelClass is not None and renameMap.has_key("package "+topLevelClass):  # rename if package changed
+        if renameMap.has_key("package "+topLevelClass):  # rename if package changed
             newPackage = srglib.sourceName2Internal(renameMap["package "+topLevelClass])
             newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
             newPath = os.path.join(srcRoot, newFilename)
