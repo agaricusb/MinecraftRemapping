@@ -145,11 +145,14 @@ def getNewName(key, oldName, renameMap):
 
 # Sort range list by starting offset
 # Needed since symbol range output is not always guaranteed to be in source file order
+# Also runs a sanity checks, removes duplicates, verifies non-overlapping
+# Modifies list in-place
 def sortRangeList(rangeList):
     rangeList.sort()  # sorts by keys, tuple, first element is start
 
     starts = {}
     prevEnd = 0
+    newRangeList = []
     for start,end,expectedOldText,key in rangeList:
         if starts.has_key(start):
             # If duplicate, must be identical symbol
@@ -158,16 +161,21 @@ def sortRangeList(rangeList):
                 "Range map invalid: multiple symbols starting at [%s,%s] %s = %s & [%s,%s] %s = %s" % (
                     start, end, expectedOldText, key,
                     otherStart, otherEnd, otherExpectedOldText, otherKey)
-            continue # skip duplicate
+            continue  # ignore duplicate 
 
         starts[start] = start,end,expectedOldText,key
 
         # sanity check
-        assert start > prevEnd, "Range map invalid: overlapping symbols at %s > %s: " % (start, prevEnd)
+        assert start > prevEnd, "Range map invalid: overlapping symbols, failed check %s > %s: with '%s' = %s" % (start, prevEnd, expectedOldText, key)
         prevEnd = end
 
         assert len(expectedOldText)==end-start, "Range map invalid: expected old text '%s' length %s != %s (%s - %s)" % (
             expectedOldText, len(expectedOldText), end-start, end, start)
+
+        newRangeList.append((start,end,expectedOldText,key))
+
+    rangeList[:] = []
+    rangeList.extend(newRangeList)
 
 # Rename symbols in source code
 def processJavaSourceFile(filename, rangeList, renameMap, importMap):
@@ -192,8 +200,9 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
         if oldName != expectedOldText:
             print "Rename sanity check failed: expected '%s' at [%s,%s] (shifted %s to [%s,%s]) in %s, but found '%s'" % (
-                expectedOldText, start, end, start+shift, shift, end+shift, filename, oldName)
+                expectedOldText, start, end, shift, start+shift, end+shift, filename, oldName)
             print "Regenerate symbol map on latest sources or start with fresh source and try again"
+            #file("/tmp/a","w").write(data)
             raise SystemExit
 
         newName = getNewName(key, oldName, renameMap)
