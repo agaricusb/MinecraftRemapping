@@ -57,11 +57,13 @@ def readRangeMap(filename):
 # Get all rename maps, keyed by globally unique symbol identifier, values are new names
 def getRenameMaps(srgFile, mcpDir):
     maps = {}
+    importMaps = {}
 
     # CB -> packaged MCP class/field/method
     _notReallyThePackageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
     for old,new in classMap.iteritems():
-        maps["class "+old]=srglib.internalName2Source(new)
+        maps["class "+old]=srglib.splitBaseName(new) 
+        importMaps["class "+old]=srglib.internalName2Source(new)  # when renaming class, need to import it, too
     for old,new in fieldMap.iteritems():
         maps["field "+old]=srglib.splitBaseName(new)
     for old,new in methodMap.iteritems():
@@ -85,7 +87,7 @@ def getRenameMaps(srgFile, mcpDir):
             maps["param %s %s" % (old, i)] = new[i]
     # TODO: local variable map
 
-    return maps
+    return maps, importMaps
 
 # Sort range map by starting offset
 # Needed since symbol range output is not always guaranteed to be in source file order
@@ -110,11 +112,40 @@ def sortRangeMap(rangeMap):
 
     return sortedRangeMap
 
-# Rename symbols in source code
-def processJavaSourceFile(filename, rangeMap, renameMap):
-    path = os.path.join(srcRoot, filename)
+# Add new import statements to source
+def addImports(data, newImports):
+    lines = data.split("\n")
+    lastNativeImport = None
+    existingImports = []
+    # Parse the existing imports and find out where to add ours
+    # This doesn't use Psi.. but the syntax is easy enough to parse here
+    for i, line in enumerate(lines):
+        if line.startswith("import net.minecraft"):
+            lastNativeImport = i
+            existingImports.append(line)
 
+    if  lastNativeImport is None:
+        insertionPoint = 3
+    else:
+        insertionPoint = lastNativeImport
+
+    importsToAdd = []
+    for imp in newImports:
+        if imp in existingImports: continue
+        importsToAdd.append("import %s;" % (imp,))
+    print "Adding %s imports" % (len(newImports,))
+
+    splice = lines[0:insertionPoint] + importsToAdd + lines[insertionPoint:]
+    return "\n".join(splice)
+
+
+
+# Rename symbols in source code
+def processJavaSourceFile(filename, rangeMap, renameMap, importMap):
+    path = os.path.join(srcRoot, filename)
     data = file(path).read()
+
+    importsToAdd = []
 
     shift = 0
 
@@ -136,22 +167,29 @@ def processJavaSourceFile(filename, rangeMap, renameMap):
 
         print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
 
+        if importMap.has_key(key):
+            # this rename requires adding an import
+            importsToAdd.append(importMap[key])
+
         # Rename algorithm: 
         # 1. textually replace text at specified range with new text
         # 2. shift future ranges by difference in text length
         data = data[0:start+shift] + newName + data[end+shift:]
         shift += len(newName) - len(oldName)
 
+    # Lastly, update imports
+    data = addImports(data, importsToAdd)
+
     print "Writing",path,
     file(path,"w").write(data)
     print
 
 def main():
-    renameMap = getRenameMaps(srgFile, mcpDir)
+    renameMap, importMap = getRenameMaps(srgFile, mcpDir)
     rangeMapByFile = readRangeMap(rangeMapFile)
 
-    for filename, rangeMap in rangeMapByFile.iteritems():
-        processJavaSourceFile(filename, rangeMap, renameMap)
+    for filename in sorted(rangeMapByFile.keys()):
+        processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap)
 
 if __name__ == "__main__":
     main()
