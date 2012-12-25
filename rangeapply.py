@@ -191,16 +191,18 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     # Lastly, update imports
     data = addImports(data, importsToAdd)
 
-    newPackage = srglib.sourceName2Internal(renameMap["package "+filename])
-    newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
-    newPath = os.path.join(srcRoot, newFilename)
-
     if rewriteFiles:
         print "Writing",filename
         file(path,"w").write(data)
+
     if renameFiles:
-        print "Rename file",filename,"->",newFilename
-        srglib.rename_path(path, newPath)
+        if renameMap.has_key("package "+filename):  # rename if package changed
+            newPackage = srglib.sourceName2Internal(renameMap["package "+filename])
+            newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
+            newPath = os.path.join(srcRoot, newFilename)
+
+            print "Rename file",filename,"->",newFilename
+            srglib.rename_path(path, newPath)
 
 def main():
     renameMap, importMap = getRenameMaps(srgFile, mcpDir)
