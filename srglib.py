@@ -148,6 +148,7 @@ def internalName2Source(internalName):
     return internalName.replace("/",".")
 
 def sourceName2Internal(sourceName):
+    if sourceName is None: return None
     return sourceName.replace(".","/")
 
 # Read MCP's .srg mappings

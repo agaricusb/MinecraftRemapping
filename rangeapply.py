@@ -70,7 +70,7 @@ def readRangeMap(filename):
 
     # Sort and check
     for filename in sorted(rangeMap.keys()):
-        sortRangeList(rangeMap[filename])
+        sortRangeList(rangeMap[filename], filename)
 
     return rangeMap
 
@@ -203,7 +203,7 @@ def getNewName(key, oldName, renameMap):
 # Needed since symbol range output is not always guaranteed to be in source file order
 # Also runs a sanity checks, removes duplicates, verifies non-overlapping
 # Modifies list in-place
-def sortRangeList(rangeList):
+def sortRangeList(rangeList, filename):
     rangeList.sort()  # sorts by keys, tuple, first element is start
 
     starts = {}
@@ -214,7 +214,8 @@ def sortRangeList(rangeList):
             # If duplicate, must be identical symbol
             otherStart, otherEnd, otherExpectedOldText, otherKey = starts[start]
             if not (otherStart == start and otherEnd == end and otherExpectedOldText == expectedOldText and otherKey == key):
-                print "WARNING: Range map invalid: multiple symbols starting at [%s,%s] '%s' = %s & [%s,%s] '%s' = %s" % (
+                print "WARNING: Range map for %s has multiple symbols starting at [%s,%s] '%s' = %s & [%s,%s] '%s' = %s" % (
+                    filename,
                     start, end, expectedOldText, key,
                     otherStart, otherEnd, otherExpectedOldText, otherKey)
             continue  # ignore duplicate 
@@ -261,7 +262,18 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
     shift = 0
 
-    firstClassNewName = None
+    # Existing package/class name (with package, internal) derived from filename
+    oldTopLevelClassFullName = getTopLevelClassForFilename(filename)
+    oldTopLevelClassPackage = srglib.splitPackageName(oldTopLevelClassFullName)
+    oldTopLevelClassName = srglib.splitBaseName(oldTopLevelClassFullName)
+
+    # New package/class name through mapping
+    newTopLevelClassPackage = srglib.sourceName2Internal(renameMap.get("package "+oldTopLevelClassFullName))
+    newTopLevelClassName = renameMap.get("class "+oldTopLevelClassFullName)
+    if newTopLevelClassPackage is not None and newTopLevelClassName is None:
+        assert False, "filename %s found package %s->%s but no class map for %s" % (filename, oldTopLevelClassPackage, newTopLevelClassPackage, newTopLevelClassName)
+    if newTopLevelClassPackage is None and newTopLevelClassName is not None:
+        assert False, "filename %s found class map %s->%s but no package map for %s" % (filename, oldTopLevelClassName, newTopLevelClassName, oldTopLevelClassPackage)
 
     for start,end,expectedOldText,key in rangeList:
         oldName = data[start+shift:end+shift]
@@ -283,9 +295,6 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         if importMap.has_key(key):
             # this rename requires adding an import
             importsToAdd.add(importMap[key])
-        if firstClassNewName is None and key.startswith("class "):
-            # remember first class declared in this file, for renaming the file
-            firstClassNewName = renameMap[key]
 
         # Rename algorithm: 
         # 1. textually replace text at specified range with new text
@@ -301,10 +310,8 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
         file(path,"w").write(data)
 
     if renameFiles:
-        topLevelClass = getTopLevelClassForFilename(filename)
-        if renameMap.has_key("package "+topLevelClass):  # rename if package changed
-            newPackage = srglib.sourceName2Internal(renameMap["package "+topLevelClass])
-            newFilename = os.path.join(srcRoot, "src/main/java/", newPackage, firstClassNewName + ".java")
+        if newTopLevelClassPackage is not None: # rename if package changed
+            newFilename = os.path.join(srcRoot, "src/main/java/", newTopLevelClassPackage, newTopLevelClassName + ".java")
             newPath = os.path.join(srcRoot, newFilename)
 
             print "Rename file",filename,"->",newFilename
