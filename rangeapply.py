@@ -10,8 +10,8 @@ rangeMapFile = "/tmp/nms"
 mcpDir = "../mcp725-pkgd/conf"
 srgFile = "1.4.6/cb2pkgmcp.srg"
 rewriteFiles = True
-#renameFiles = True
-renameFiles = False
+renameFiles = True
+#renameFiles = False
 
 dumpRenameMap = True
 
@@ -117,7 +117,7 @@ def addImports(data, newImports):
         insertionPoint = lastNativeImport
 
     importsToAdd = []
-    for imp in newImports:
+    for imp in sorted(list(newImports)):
         if imp in existingImports: continue
         importsToAdd.append("import %s;" % (imp,))
     print "Adding %s imports" % (len(newImports,))
@@ -159,7 +159,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
-    importsToAdd = []
+    importsToAdd = set()
 
     shift = 0
 
@@ -177,7 +177,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
         if importMap.has_key(key):
             # this rename requires adding an import
-            importsToAdd.append(importMap[key])
+            importsToAdd.add(importMap[key])
         if firstClassNewName is None and key.startswith("class "):
             # remember first class declared in this file, for renaming the file
             firstClassNewName = renameMap[key]

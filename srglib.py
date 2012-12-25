@@ -46,7 +46,6 @@ def remapParameterMap(paramMap, methodMap, methodSigMap, classMap):
     newParamMap = {}
     removed = []
     for methodInfo, paramNames in paramMap.iteritems():
-        print "MI",methodInfo
         if "<init>" in methodInfo:
             # constructor - remap to new name through class map, not method map
             fullMethodName, methodSig = methodInfo.split(" ")
