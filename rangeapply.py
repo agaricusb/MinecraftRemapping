@@ -106,7 +106,7 @@ def sortRangeMap(rangeMap):
         # sanity check
         assert start > prevEnd, "Range map invalid: overlapping symbols at "+start
         prevEnd = end
-        print start,end
+        #print start,end
 
     return sortedRangeMap
 
@@ -136,11 +136,11 @@ def main():
                     continue
                 newName = renameMap[key]
 
-            print "Rename",key,"::",oldName,"->",newName
+            print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
 
-            data = data[0:start+shift] + oldName + data[end+shift:]
-            #shift = len(newName) - len(oldName)
-            print shift
+            data = data[0:start+shift] + newName + data[end+shift:]
+            shift += len(newName) - len(oldName)
+            print "|",data[0:500],"|"
 
 if __name__ == "__main__":
     main()
