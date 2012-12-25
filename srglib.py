@@ -22,7 +22,8 @@ def readParameterMap(mcpConfDir):
          
         if methodNumber == "<init>":
             # constructor
-            methodName = className.split("/")[-1]
+            #methodName = className.split("/")[-1]
+            methodName = "<init>"
         elif methodNum2Name.has_key(methodNumber):
             # descriptive name
             methodName = methodNum2Name[methodNumber]
@@ -41,16 +42,30 @@ def readParameterMap(mcpConfDir):
 
 # Remap a parameter map's method signatures (keeping the parameter names intact)
 # Returns new map, and list of methods not found in mapping and were removed
-def remapParameterMap(paramMap, methodMap, methodSigMap):
+def remapParameterMap(paramMap, methodMap, methodSigMap, classMap):
     newParamMap = {}
     removed = []
     for methodInfo, paramNames in paramMap.iteritems():
-        if not methodMap.has_key(methodInfo):
+        print "MI",methodInfo
+        if "<init>" in methodInfo:
+            # constructor - remap to new name through class map, not method map
+            fullMethodName, methodSig = methodInfo.split(" ")
+            className = splitPackageName(fullMethodName)
+            if not classMap.has_key(className):
+                # not in class map - probably client-only class
+                removed.append(methodInfo)
+                continue
+            newClassName = classMap[className]
+            constructorName = splitBaseName(newClassName)
+            newFullMethodName = newClassName + "/" + splitBaseName(newClassName)
+            newMethodSig = remapSig(methodSig, classMap)
+        elif not methodMap.has_key(methodInfo):
+            # not in method map - probably client-only method
             removed.append(methodInfo)
             continue
-
-        newFullMethodName = methodMap[methodInfo]
-        newMethodSig = methodSigMap[methodInfo]
+        else:
+            newFullMethodName = methodMap[methodInfo]
+            newMethodSig = methodSigMap[methodInfo]
 
         newParamMap[newFullMethodName + " " + newMethodSig] = paramNames
 
@@ -169,7 +184,7 @@ def readSrg(filename):
 # Remap method signatures through a class map
 def remapSig(sig, classMap):
     for k, v in classMap.iteritems():
-        # yeah..
+        # TODO: performance - parse L..; then lookup, instead of iterating thousand times
         sig = sig.replace("L" + k + ";", "L" + v + ";")
 
     return sig

@@ -13,6 +13,8 @@ rewriteFiles = True
 #renameFiles = True
 renameFiles = False
 
+dumpRenameMap = True
+
 # Read ApplySrg2Source symbol range map into a dictionary
 # Keyed by filename -> list of (range start, end, key)
 def readRangeMap(filename):
@@ -81,14 +83,19 @@ def getRenameMaps(srgFile, mcpDir):
     # Read parameter map.. it comes from MCP with MCP namings, so have to remap to CB 
     mcpParamMap = srglib.readParameterMap(mcpDir)
     invMethodMap, invMethodSigMap = srglib.invertMethodMap(methodMap, methodSigMap)
-    cbParamMap, removedParamMap = srglib.remapParameterMap(mcpParamMap, invMethodMap, invMethodSigMap)
+    invClassMap = srglib.invertDict(classMap)
+    cbParamMap, removedParamMap = srglib.remapParameterMap(mcpParamMap, invMethodMap, invMethodSigMap, invClassMap)
     # removedParamMap = methods in FML/MCP repackaged+joined but not CB = client-only methods
 
     for old,new in cbParamMap.iteritems():
         for i in range(0,len(new)):
-            #print "RENPARAM","param %s %s" % (old, i),"->",new[i]
             maps["param %s %s" % (old, i)] = new[i]
     # TODO: local variable map
+
+    if dumpRenameMap:
+        for key in sorted(maps.keys()):
+            newName = maps[key]
+            print "RENAME MAP: %s -> %s" % (key, newName)
 
     return maps, importMaps
 
