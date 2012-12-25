@@ -16,16 +16,16 @@ renameFiles = True
 dumpRenameMap = True
 
 # Read ApplySrg2Source symbol range map into a dictionary
-# Keyed by filename -> list of (range start, end, key)
+# Keyed by filename -> list of (range start, end, expectedOldText, key)
 def readRangeMap(filename):
     rangeMap = {}
     for line in file(filename).readlines():
         tokens = line.strip().split("|")
         if tokens[0] != "@": continue
-        filename, startRangeStr, endRangeStr, kind = tokens[1:5]
+        filename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
         startRange = int(startRangeStr)
         endRange = int(endRangeStr)
-        info = tokens[5:]
+        info = tokens[6:]
 
         # Build unique identifier for symbol
         if kind == "package":
@@ -55,7 +55,7 @@ def readRangeMap(filename):
             rangeMap[filename] = []
 
         # Map to range
-        rangeMap[filename].append((startRange, endRange, key))
+        rangeMap[filename].append((startRange, endRange, expectedOldText, key))
 
     return rangeMap
 
@@ -146,18 +146,30 @@ def sortRangeList(rangeList):
 
     starts = {}
     prevEnd = 0
-    for start,end,key in rangeList:
-        assert not starts.has_key(start), "Range map invalid: multiple symbols starting at "+start
-        starts[start] = start
+    for start,end,expectedOldText,key in rangeList:
+        if starts.has_key(start):
+            # If duplicate, must be identical symbol
+            otherStart, otherEnd, otherExpectedOldText, otherKey = starts[start]
+            assert otherStart == start and otherEnd == end and otherExpectedOldText == expectedOldText and otherKey == key, \
+                "Range map invalid: multiple symbols starting at [%s,%s] %s = %s & [%s,%s] %s = %s" % (
+                    start, end, expectedOldText, key,
+                    otherStart, otherEnd, otherExpectedOldText, otherKey)
+
+        starts[start] = start,end,expectedOldText,key
 
         # sanity check
-        assert start > prevEnd, "Range map invalid: overlapping symbols at "+start
+        assert start > prevEnd, "Range map invalid: overlapping symbols at %s > %s: " % (start, prevEnd)
         prevEnd = end
+
+        assert len(expectedOldText)==end-start, "Range map invalid: expected old text '%s' length %s != %s (%s - %s)" % (
+            expectedOldText, len(expectedOldText), end-start, end, start)
 
 # Rename symbols in source code
 def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
+
+    sortRangeList(rangeList)
 
     importsToAdd = set()
 
@@ -165,8 +177,14 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
     firstClassNewName = None
 
-    for start,end,key in rangeList:
+    for start,end,expectedOldText,key in rangeList:
         oldName = data[start+shift:end+shift]
+
+        if oldName != expectedOldText:
+            print "Rename sanity check failed: expected '%s' at [%s:%s] in %s, but found '%s'" % (
+                expectedOldText, start, end, filename, oldName)
+            print "Regenerate symbol map on latest sources and try again"
+            raise SystemExit
 
         newName = getNewName(key, oldName, renameMap)
         if newName is None:
