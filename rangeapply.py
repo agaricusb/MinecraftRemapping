@@ -28,6 +28,7 @@ def readRangeMap(filename):
         info = tokens[6:]
 
         # Build unique identifier for symbol
+
         if kind == "package":
             packageName, forClass = info
 
@@ -41,7 +42,11 @@ def readRangeMap(filename):
             # 'forClass' is the class that is in this package; when the class is
             # remapped to a different package, this range should be updated
             key = "package "+forClass
-            
+
+
+            # For removing qualified class names with package references, include the dot
+            # Note this won't always match (for initial package statement) and isn't used for NMS
+            #TODO rangeMap[filename].append((startRange, endRange + 1, expectedOldText + ".", "packagePlusDot "+forClass))
         elif kind == "class":
             className, = info
             key = "class "+srglib.sourceName2Internal(className)
@@ -83,8 +88,8 @@ def qualifyClassRenameMaps(renameMap, importMap):
             newRenameMap[key] = importMap[key]  
         elif key.startswith("package "):
             # No package names in classes - removing existing qualifications
-            # TODO: stop replacing top-level package statement too..
-            del newRenameMap[key]
+            newRenameMap[key] = ""
+            #newRenameMap[key.replace("package", "packagePlusDot")] = "" # TODO: important: remove dot
 
     return newRenameMap
 
