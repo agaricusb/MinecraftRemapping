@@ -334,6 +334,10 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     # Lastly, update imports - this is separate from symbol range manipulation above
     data = updateImports(data, importsToAdd, importMap)
 
+    # EXTREMELY UGLY HACK: failing to emit package references in instanceof/new/casts; need to fix
+    # symbol range map extraction XXX TODO TODO .. but, until then:
+    data = data.replace("net.minecraft.server.net.", "net.")
+
     if rewriteFiles:
         print "Writing",filename
         file(path,"w").write(data)
