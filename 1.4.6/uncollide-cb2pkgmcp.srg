@@ -31,6 +31,12 @@ MD: net/minecraft/server/World/setRawTypeIdAndData__API_CB (IIIII)Z net/minecraf
 MD: net/minecraft/server/World/setTypeId__API_CB (IIII)Z net/minecraft/world/World/setTypeId (IIII)Z
 MD: net/minecraft/server/World/setTypeIdAndData__API_CB (IIIII)Z net/minecraft/world/World/setTypeIdAndData (IIIII)Z
 
+# Fields to detect symbol mapping 
+# In original CB source, isUsingMappingCB__Marker_CB is true, after this mapping, isUsingMappingMCP__Marker_CB is true instead
+FD: org/bukkit/craftbukkit/CraftServer/isUsingMappingCB__Marker_CB org/bukkit/craftbukkit/CraftServer/isUsingMappingMCP__Marker_CB
+FD: org/bukkit/craftbukkit/CraftServer/isUsingMappingMCP__Marker_CB org/bukkit/craftbukkit/CraftServer/isUsingMappingCB__Marker_CB
+FD: org/bukkit/craftbukkit/CraftServer/isUsingMappingObf__Marker_CB org/bukkit/craftbukkit/CraftServer/isUsingMappingObf__Marker_CB
+
 # Interface implementors in OBC
 # These are simply the interface method mappings, but with classes replaced by OBC's TODO: automatically generated
 
