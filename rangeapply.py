@@ -74,6 +74,20 @@ def readRangeMap(filename):
 
     return rangeMap
 
+# Transform a rename map to use fully-qualified, removing need for imports
+def qualifyClassRenameMaps(renameMap, importMap):
+    newRenameMap = renameMap.copy()  # shallow copy OK
+    for key, v in renameMap.iteritems():
+        if key.startswith("class "):
+            # Replace with fully-qualified class name (usually imported, but now insert directly when referenced in source)
+            newRenameMap[key] = importMap[key]  
+        elif key.startswith("package "):
+            # No package names in classes - removing existing qualifications
+            # TODO: stop replacing top-level package statement too..
+            del newRenameMap[key]
+
+    return newRenameMap
+
 # Get all rename maps, keyed by globally unique symbol identifier, values are new names
 def getRenameMaps(srgFile, mcpDir):
     maps = {}
@@ -135,13 +149,19 @@ def updateImports(data, newImports, importMap):
 
                 addedNewImports = True
 
+            # If no import map, *remove* NMS imports (OBC rewritten with fully-qualified names)
+            if len(importMap) == 0:
+                continue
+
             # Rewrite NMS imports
             oldClass = line.replace("import ", "").replace(";", "");
             print oldClass
             if oldClass == "net.minecraft.server.*":
-                newClass = "net.minecraft.*" # TODO
+                # wildcard NMS imports (CraftWorld, CraftEntity, CraftPlayer).. bad idea
+                continue
             else:
                 newClass = importMap["class "+srglib.sourceName2Internal(oldClass)]
+
             newLine = "import %s;" % (newClass,)
             if newLine not in newImportLines:  # if not already added
                 newLines.append(newLine)
@@ -275,6 +295,9 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     if newTopLevelClassPackage is None and newTopLevelClassName is not None:
         assert False, "filename %s found class map %s->%s but no package map for %s" % (filename, oldTopLevelClassName, newTopLevelClassName, oldTopLevelClassPackage)
 
+    # Renaming mode
+    isNMS = oldTopLevelClassPackage.startswith("net/minecraft")
+
     for start,end,expectedOldText,key in rangeList:
         oldName = data[start+shift:end+shift]
 
@@ -318,11 +341,19 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
             srglib.rename_path(path, newPath)
 
 def main():
+    print "Reading rename maps..."
     renameMap, importMap = getRenameMaps(srgFile, mcpDir)
+    print "Qualifying rename maps..."
+    qualifiedRenameMap = qualifyClassRenameMaps(renameMap, importMap)
+    print "Reading range map..."
     rangeMapByFile = readRangeMap(rangeMapFile)
+    print "Processing files..."
 
     for filename in sorted(rangeMapByFile.keys()):
-        processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap)
+        if filename.startswith("src/main/java/net/minecraft"):
+            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap)
+        else:
+            processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {})
 
 if __name__ == "__main__":
     main()
