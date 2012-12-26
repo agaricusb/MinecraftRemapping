@@ -1,4 +1,6 @@
 # Fixes for resolving collisions when renaming CB -> packaged FML/MCP
-FD: net/minecraft/server/PlayerConnection/lastPosX net/minecraft/network/NetServerHandler/lastPosXForEvent_CB
-FD: net/minecraft/server/PlayerConnection/lastPosY net/minecraft/network/NetServerHandler/lastPosYForEvent_CB
-FD: net/minecraft/server/PlayerConnection/lastPosZ net/minecraft/network/NetServerHandler/lastPosZForEvent_CB
+FD: net/minecraft/server/PlayerConnection/lastPosX net/minecraft/network/NetServerHandler/lastPosX__ForEvent_CB
+FD: net/minecraft/server/PlayerConnection/lastPosY net/minecraft/network/NetServerHandler/lastPosY__ForEvent_CB
+FD: net/minecraft/server/PlayerConnection/lastPosZ net/minecraft/network/NetServerHandler/lastPosZ__ForEvent_CB
+MD: net/minecraft/server/ChunkRegionLoader/loadChunk (Lnet/minecraft/server/World;II)[Ljava/lang/Object; net/minecraft/world/chunk/storage/AnvilChunkLoader/loadChunk__Async_CB (Lnet/minecraft/world/World;II)[Ljava/lang/Object;
+
