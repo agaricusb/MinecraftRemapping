@@ -187,6 +187,9 @@ def updateImports(data, newImports, importMap):
     # Fortunately, this pattern is easy enough to reliably detect and replace textually!
     newData = newData.replace("net.minecraft.server.net", "net")  # OBC overqualified symbols
     newData = newData.replace("net.minecraft.server.Block", "Block") # NMS overqualified symbols
+    # ..and qualified inner classes, only one.... last ugly hack, I promise :P
+    newData = newData.replace("net.minecraft.block.BlockSapling/*was:BlockSapling*/.net.minecraft.block.BlockSapling.TreeGenerator", "net.minecraft.block.BlockSapling.TreeGenerator")
+    newData = newData.replace("net.minecraft.block.BlockSapling.net.minecraft.block.BlockSapling.TreeGenerator", "net.minecraft.block.BlockSapling.TreeGenerator")
 
     return newData
 
