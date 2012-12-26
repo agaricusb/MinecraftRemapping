@@ -27,6 +27,10 @@ def readRangeMap(filename):
         endRange = int(endRangeStr)
         info = tokens[6:]
 
+        if not rangeMap.has_key(filename):
+            rangeMap[filename] = []
+
+
         # Build unique identifier for symbol
 
         if kind == "package":
@@ -42,11 +46,6 @@ def readRangeMap(filename):
             # 'forClass' is the class that is in this package; when the class is
             # remapped to a different package, this range should be updated
             key = "package "+forClass
-
-
-            # For removing qualified class names with package references, include the dot
-            # Note this won't always match (for initial package statement) and isn't used for NMS
-            #TODO rangeMap[filename].append((startRange, endRange + 1, expectedOldText + ".", "packagePlusDot "+forClass))
         elif kind == "class":
             className, = info
             key = "class "+srglib.sourceName2Internal(className)
@@ -65,10 +64,6 @@ def readRangeMap(filename):
             key = "localvar "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature+" "+str(variableIndex) # ignore old name (positional)
         else:
             assert False, "Unknown kind: "+kind
-
-
-        if not rangeMap.has_key(filename):
-            rangeMap[filename] = []
 
         # Map to range
         rangeMap[filename].append((startRange, endRange, expectedOldText, key))
@@ -89,7 +84,6 @@ def qualifyClassRenameMaps(renameMap, importMap):
         elif key.startswith("package "):
             # No package names in classes - removing existing qualifications
             newRenameMap[key] = ""
-            #newRenameMap[key.replace("package", "packagePlusDot")] = "" # TODO: important: remove dot
 
     return newRenameMap
 
@@ -304,6 +298,13 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     isNMS = oldTopLevelClassPackage.startswith("net/minecraft")
 
     for start,end,expectedOldText,key in rangeList:
+        if renameMap.has_key(key) and len(renameMap[key]) == 0:
+            # Replacing a symbol with no text = removing a symbol
+            assert key.startswith("package "), "unable to remove non-package symbol %s" % (key,)
+            # Remove that pesky extra period after qualified package names
+            end += 1
+            expectedOldText += "."
+
         oldName = data[start+shift:end+shift]
 
         if oldName != expectedOldText:
