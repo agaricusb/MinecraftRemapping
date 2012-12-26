@@ -170,7 +170,25 @@ def updateImports(data, newImports, importMap):
     if not addedNewImports:
         newLines = newLines[0:2] + newImportLines + newLines[2:]
 
-    return "\n".join(newLines)
+    newData = "\n".join(newLines)
+
+    # Warning: ugly hack ahead
+    # The symbol range map extractor is supposed to emit package reference ranges, which we can 
+    # update with the correct new package names. However, it has a bug where the package ranges
+    # are not always emitted on fully-qualified names. For example: (net.minecraft.server.X)Y - a
+    # cast - will fail to recognize the net.minecraft.server package, so it won't be processed by us.
+    # This leads to some qualified names in the original source to becoming "overqualified", that is,
+    # net.minecraft.server.net.minecraft.X; the NMS class is replaced with its fully-qualified name
+    # (in non-NMS source, where we want it to always be fully-qualified): original package name isn't replaced.
+    # Occurs in OBC source which uses fully-qualified NMS names already, and NMS source which (unnecessarily)
+    # uses fully-qualified NMS names, too. Attempted to fix this problem for longer than I should.. 
+    # maybe someone smarter can figure it out -- but until then, in the interest of expediency, I present 
+    # this ugly workaround, replacing the overqualified names after-the-fact.
+    # Fortunately, this pattern is easy enough to reliably detect and replace textually!
+    newData = newData.replace("net.minecraft.server.net", "net")  # OBC overqualified symbols
+    newData = newData.replace("net.minecraft.server.Block", "Block") # NMS overqualified symbols
+
+    return newData
 
 
 # Check whether a unique identifier method key is a constructor, if so return full class name for remapping, else None
