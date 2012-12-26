@@ -8,7 +8,7 @@ import srglib
 srcRoot = "../CraftBukkit"
 rangeMapFile = "/tmp/nms"
 mcpDir = "../mcp725-pkgd/conf"
-srgFile = "1.4.6/cb2pkgmcp.srg"
+srgFiles = ("1.4.6/cb2pkgmcp.srg", "1.4.6/uncollide-cb2pkgmcp.srg")
 rewriteFiles = True
 renameFiles = True
 #renameFiles = False
@@ -88,12 +88,12 @@ def qualifyClassRenameMaps(renameMap, importMap):
     return newRenameMap
 
 # Get all rename maps, keyed by globally unique symbol identifier, values are new names
-def getRenameMaps(srgFile, mcpDir):
+def getRenameMaps(srgFiles, mcpDir):
     maps = {}
     importMaps = {}
 
     # CB -> packaged MCP class/field/method
-    _notReallyThePackageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readSrg(srgFile)
+    _notReallyThePackageMap, classMap, fieldMap, methodMap, methodSigMap = srglib.readMultipleSrgs(srgFiles)
     for old,new in classMap.iteritems():
         maps["class "+old]=srglib.splitBaseName(new) 
         importMaps["class "+old]=srglib.internalName2Source(new)  # when renaming class, need to import it, too
@@ -348,7 +348,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
 
 def main():
     print "Reading rename maps..."
-    renameMap, importMap = getRenameMaps(srgFile, mcpDir)
+    renameMap, importMap = getRenameMaps(srgFiles, mcpDir)
     print "Qualifying rename maps..."
     qualifiedRenameMap = qualifyClassRenameMaps(renameMap, importMap)
     print "Reading range map..."
