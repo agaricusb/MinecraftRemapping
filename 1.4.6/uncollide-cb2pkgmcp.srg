@@ -1,11 +1,23 @@
-# Fixes for resolving collisions when renaming CB -> packaged FML/MCP
+# Fixes for resolving collisions when renaming CB -> packaged FML/MCP,
+# or other mappings which have to be manually added and maintained.
+# This augments the automatically-generated cb2pkgmcp.srg generated from mc-dev.
+
+# New fields added by CB, distinct from deobfuscated methods in MCP with same name
 FD: net/minecraft/server/PlayerConnection/lastPosX net/minecraft/network/NetServerHandler/lastPosX__ForEvent_CB
 FD: net/minecraft/server/PlayerConnection/lastPosY net/minecraft/network/NetServerHandler/lastPosY__ForEvent_CB
 FD: net/minecraft/server/PlayerConnection/lastPosZ net/minecraft/network/NetServerHandler/lastPosZ__ForEvent_CB
+
+# New method added by CB with same name as deobfuscated method
 MD: net/minecraft/server/ChunkRegionLoader/loadChunk (Lnet/minecraft/server/World;II)[Ljava/lang/Object; net/minecraft/world/chunk/storage/AnvilChunkLoader/loadChunk__Async_CB (Lnet/minecraft/world/World;II)[Ljava/lang/Object;
+
+# Redundant colliding synthetic method (type erasure?) - MCP has a manual patch to comment this out; just rename it
 MD: net/minecraft/server/EntityMushroomCow/b (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityCow; net/minecraft/entity/passive/EntityMooshroom/spawnBabyAnimal__SyntheticUnused_CB (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityCow;
+
+# New inner class added by CB, implemented by world generators
 CL: net/minecraft/server/BlockSapling/TreeGenerator net/minecraft/block/BlockSapling/TreeGenerator
 MD: net/minecraft/server/BlockSapling/TreeGenerator/a (Lnet/minecraft/server/World;Ljava/util/Random;III)Z net/minecraft/world/block/BlockSapling/generate (Lnet/minecraft/world/World;Ljava/util/Random;III)Z
+
+# New methods added by CB overriding renamed methods
 MD: org/bukkit/craftbukkit/inventory/CraftContainer/c (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/inventory/Container/isPlayerNotUsingContainer (Lnet/minecraft/entity/player/EntityPlayer;)Z
 MD: net/minecraft/server/EntityBoat/collide (Lnet/minecraft/server/Entity;)V net/minecraft/entity/EntityBoat/applyEntityCollision (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/WorldServer/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/WorldServer/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
