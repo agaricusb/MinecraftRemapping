@@ -160,6 +160,7 @@ def readSrg(filename):
     methodSigMap = {}
     for line in file(filename).readlines():
         line = line.strip()
+        if len(line) == 0 or line.startswith("#"): continue
         kind, argsString = line.split(": ")
         args = argsString.split(" ")
         if kind == "PK":
@@ -180,6 +181,25 @@ def readSrg(filename):
             assert False, "Unknown type " + kind
 
     return packageMap, classMap, fieldMap, methodMap, methodSigMap
+
+# Read multiple .srg's, combined into one
+def readMultipleSrgs(filenames):
+    packageMaps = {}
+    classMaps = {}
+    fieldMaps = {}
+    methodMaps = {}
+    methodSigMaps = {}
+
+    for filename in filenames:
+        packageMap, classMap, fieldMap, methodMap, methodSigMap = readSrg(filename)
+
+        packageMaps.update(packageMap)
+        classMaps.update(classMap)
+        fieldMaps.update(fieldMap)
+        methodMaps.update(methodMap)
+        methodSigMaps.update(methodSigMap)
+
+    return packageMaps, classMaps, fieldMaps, methodMaps, methodSigMaps
 
 # Remap method signatures through a class map
 def remapSig(sig, classMap):
