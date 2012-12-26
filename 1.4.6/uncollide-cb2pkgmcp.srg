@@ -5,3 +5,4 @@ FD: net/minecraft/server/PlayerConnection/lastPosZ net/minecraft/network/NetServ
 MD: net/minecraft/server/ChunkRegionLoader/loadChunk (Lnet/minecraft/server/World;II)[Ljava/lang/Object; net/minecraft/world/chunk/storage/AnvilChunkLoader/loadChunk__Async_CB (Lnet/minecraft/world/World;II)[Ljava/lang/Object;
 MD: net/minecraft/server/EntityMushroomCow/b (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityCow; net/minecraft/entity/passive/EntityMooshroom/spawnBabyAnimal__SyntheticUnused_CB (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityCow;
 CL: net/minecraft/server/BlockSapling/TreeGenerator net/minecraft/block/BlockSapling/TreeGenerator
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/c (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/inventory/Container/isPlayerNotUsingContainer (Lnet/minecraft/entity/player/EntityPlayer;)Z
