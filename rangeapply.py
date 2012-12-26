@@ -191,7 +191,7 @@ def getConstructor(key):
     else:
         return None
 
-def getNewName(key, oldName, renameMap):
+def getNewName(key, oldName, renameMap, shouldAnnotate):
     if key.startswith("localvar"):
         # Temporary hack to rename local variables without a mapping
         # This is not accurate.. variables are not always monotonic nor sequential
@@ -216,7 +216,10 @@ def getNewName(key, oldName, renameMap):
         else:
             newName = renameMap[key]
 
-    return newName+"/*was:"+oldName+"*/"
+    if shouldAnnotate:
+        newName = newName+"/*was:"+oldName+"*/"
+
+    return newName
 
 # Sort range list by starting offset
 # Needed since symbol range output is not always guaranteed to be in source file order
@@ -266,7 +269,7 @@ def getTopLevelClassForFilename(filename):
     return "/".join(parts[3:])  # "internal" fully-qualified class name, separated by /
 
 # Rename symbols in source code
-def processJavaSourceFile(filename, rangeList, renameMap, importMap):
+def processJavaSourceFile(filename, rangeList, renameMap, importMap, renameLocalVars, shouldAnnotate):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
@@ -294,9 +297,6 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
     if newTopLevelClassPackage is None and newTopLevelClassName is not None:
         assert False, "filename %s found class map %s->%s but no package map for %s" % (filename, oldTopLevelClassName, newTopLevelClassName, oldTopLevelClassPackage)
 
-    # Renaming mode
-    isNMS = oldTopLevelClassPackage.startswith("net/minecraft")
-
     for start,end,expectedOldText,key in rangeList:
         if renameMap.has_key(key) and len(renameMap[key]) == 0:
             # Replacing a symbol with no text = removing a symbol
@@ -304,6 +304,10 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
             # Remove that pesky extra period after qualified package names
             end += 1
             expectedOldText += "."
+
+        if renameLocalVars == False and key.startswith("localvar"):
+            # non-NMS, no need to rename local variables
+            continue
 
         oldName = data[start+shift:end+shift]
 
@@ -314,7 +318,7 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap):
             #file("/tmp/a","w").write(data)
             raise SystemExit
 
-        newName = getNewName(key, oldName, renameMap)
+        newName = getNewName(key, oldName, renameMap, shouldAnnotate)
         if newName is None:
             print "No rename for "+key
             continue
@@ -357,9 +361,9 @@ def main():
 
     for filename in sorted(rangeMapByFile.keys()):
         if filename.startswith("src/main/java/net/minecraft"):
-            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap)
+            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap, renameLocalVars=True, shouldAnnotate=True)
         else:
-            processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {})
+            processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {}, renameLocalVars=False, shouldAnnotate=True)
 
 if __name__ == "__main__":
     main()
