@@ -87,7 +87,6 @@ def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMet
 
         if kind != "localvar": continue
 
-        print info
         mcpClassName, mcpMethodName, mcpMethodSignature, variableName, variableIndex = info
 
         mcpClassName = srglib.sourceName2Internal(mcpClassName)
@@ -103,8 +102,6 @@ def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMet
 
         methodName = invMethodMap[key]
         methodSignature = invMethodSigMap[key]
-        print "SIG",methodSignature
-
 
         key = "localvar "+methodName+" "+methodSignature+" "+str(variableIndex)
 
@@ -323,7 +320,7 @@ def getTopLevelClassForFilename(filename):
     return "/".join(parts[3:])  # "internal" fully-qualified class name, separated by /
 
 # Rename symbols in source code
-def processJavaSourceFile(filename, rangeList, renameMap, importMap, renameLocalVars, shouldAnnotate):
+def processJavaSourceFile(filename, rangeList, renameMap, importMap, shouldAnnotate):
     path = os.path.join(srcRoot, filename)
     data = file(path).read()
 
@@ -358,10 +355,6 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap, renameLocal
             # Remove that pesky extra period after qualified package names
             end += 1
             expectedOldText += "."
-
-        if renameLocalVars == False and key.startswith("localvar"):
-            # non-NMS, no need to rename local variables
-            continue
 
         oldName = data[start+shift:end+shift]
 
@@ -415,9 +408,9 @@ def main():
 
     for filename in sorted(rangeMapByFile.keys()):
         if filename.startswith("src/main/java/net/minecraft"):
-            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap, renameLocalVars=True, shouldAnnotate=False)
+            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap, shouldAnnotate=False)
         else:
-            processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {}, renameLocalVars=False, shouldAnnotate=True)
+            processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {}, shouldAnnotate=True)
 
 if __name__ == "__main__":
     main()
