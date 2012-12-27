@@ -206,6 +206,9 @@ def remapSig(sig, classMap):
     def lookup(match):
         className = match.group(1)
         return classMap.get(className, className)
+    return remapSigThrough(sig, lookup)
+
+def remapSigThrough(sig, lookup):
     return re.sub(r"L([^;]+);", lookup, sig)
 
 # Rename file to path possibly containing non-existent directories, created as necessary

@@ -76,7 +76,7 @@ def readRangeMap(filename):
     return rangeMap
 
 # Read existing local variable name from MCP range map to get local variable positional mapping
-def readLocalVariableMap(filename, renameMaps):
+def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMethodSigMap):
     for line in file(filename).readlines():
         tokens = line.strip().split("|")
         if tokens[0] != "@": continue
@@ -87,14 +87,26 @@ def readLocalVariableMap(filename, renameMaps):
 
         if kind != "localvar": continue
 
+        print info
         mcpClassName, mcpMethodName, mcpMethodSignature, variableName, variableIndex = info
 
-        # Range map has MCP names, but we need to map from CB
-        className = renameMaps["class "+mcpClassName]
-        methodName = renameMaps["method "+mcpClassName+"/"+mcpMethodName]
-        methodSignature = srglib.remapSig
+        mcpClassName = srglib.sourceName2Internal(mcpClassName)
 
-        key = "localvar "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature+" "+str(variableIndex)
+        if mcpMethodName == "{}": continue  # TODO: support local variable renaming in initializers
+
+        # Range map has MCP names, but we need to map from CB
+        className = invClassMap[mcpClassName]
+        key = mcpClassName+"/"+mcpMethodName+" "+mcpMethodSignature
+        if not invMethodMap.has_key(key):
+            print "NOTICE: local variables available for %s but no inverse method map; skipping" % (key,)
+            continue
+
+        methodName = invMethodMap[key]
+        methodSignature = invMethodSigMap[key]
+        print "SIG",methodSignature
+
+
+        key = "localvar "+methodName+" "+methodSignature+" "+str(variableIndex)
 
         renameMaps[key] = expectedOldText  # existing name
 
@@ -145,7 +157,7 @@ def getRenameMaps(srgFiles, mcpDir):
             maps["param %s %s" % (old, i)] = new[i]
 
     # Local variable map - position in source -> name; derived from MCP rangemap
-    readLocalVariableMap(mcpRangeMapFile, maps)
+    readLocalVariableMap(mcpRangeMapFile, maps, invClassMap, invMethodMap, invMethodSigMap)
 
     if dumpRenameMap:
         for key in sorted(maps.keys()):
