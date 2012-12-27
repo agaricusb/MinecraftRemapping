@@ -203,12 +203,11 @@ def readMultipleSrgs(filenames):
 
 # Remap method signatures through a class map
 def remapSig(sig, classMap):
-    for k, v in classMap.iteritems():
-        # TODO: performance - parse L..; then lookup, instead of iterating thousand times
-        sig = sig.replace("L" + k + ";", "L" + v + ";")
+    def lookup(match):
+        className = match.group(1)
+        return classMap.get(className, className)
+    return re.sub(r"L([^;]+);", lookup, sig)
 
-    return sig
-  
 # Rename file to path possibly containing non-existent directories, created as necessary
 def rename_path(oldPath, newPath):
     dirComponents = os.path.dirname(newPath).split(os.path.sep)

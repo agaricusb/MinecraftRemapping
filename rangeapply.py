@@ -6,7 +6,8 @@ import os
 import srglib
 
 srcRoot = "../CraftBukkit"
-rangeMapFile = "/tmp/nms"
+cbRangeMapFile = "1.4.6/cb2573.rangemap"
+mcpRangeMapFile = "1.4.6/pkgmcp.rangemap"  # for local variables
 mcpDir = "../mcp725-pkgd/conf"
 srgFiles = ("1.4.6/cb2pkgmcp.srg", "1.4.6/uncollide-cb2pkgmcp.srg")
 rewriteFiles = True
@@ -74,6 +75,30 @@ def readRangeMap(filename):
 
     return rangeMap
 
+# Read existing local variable name from MCP range map to get local variable positional mapping
+def readLocalVariableMap(filename, renameMaps):
+    for line in file(filename).readlines():
+        tokens = line.strip().split("|")
+        if tokens[0] != "@": continue
+        filename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
+        startRange = int(startRangeStr)
+        endRange = int(endRangeStr)
+        info = tokens[6:]
+
+        if kind != "localvar": continue
+
+        mcpClassName, mcpMethodName, mcpMethodSignature, variableName, variableIndex = info
+
+        # Range map has MCP names, but we need to map from CB
+        className = renameMaps["class "+mcpClassName]
+        methodName = renameMaps["method "+mcpClassName+"/"+mcpMethodName]
+        methodSignature = srglib.remapSig
+
+        key = "localvar "+srglib.sourceName2Internal(className)+"/"+methodName+" "+methodSignature+" "+str(variableIndex)
+
+        renameMaps[key] = expectedOldText  # existing name
+
+
 # Transform a rename map to use fully-qualified, removing need for imports
 def qualifyClassRenameMaps(renameMap, importMap):
     newRenameMap = renameMap.copy()  # shallow copy OK
@@ -118,7 +143,9 @@ def getRenameMaps(srgFiles, mcpDir):
     for old,new in cbParamMap.iteritems():
         for i in range(0,len(new)):
             maps["param %s %s" % (old, i)] = new[i]
-    # TODO: local variable map
+
+    # Local variable map - position in source -> name; derived from MCP rangemap
+    readLocalVariableMap(mcpRangeMapFile, maps)
 
     if dumpRenameMap:
         for key in sorted(maps.keys()):
@@ -213,29 +240,23 @@ def getConstructor(key):
         return None
 
 def getNewName(key, oldName, renameMap, shouldAnnotate):
-    if key.startswith("localvar"):
-        # Temporary hack to rename local variables without a mapping
-        # This is not accurate.. variables are not always monotonic nor sequential
-        # TODO: extract local variable map from MCP source with same tool, range map -> local var
-        newName = "var%s" % ((int(key.split(" ")[-1]) + 1),)
-    else:
-        if not renameMap.has_key(key):
-            constructorClassName = getConstructor(key)
-            if constructorClassName is not None:
-                # Constructors are not in the method map (from .srg, and can't be derived
-                # exclusively from the class map since we don't know all the parameters).. so we
-                # have to synthesize a rename from the class map here. Ugh..but, it works.
-                print "FOUND CONSTR",key,constructorClassName
-                if renameMap.has_key("class "+constructorClassName):
-                    # Rename constructor to new class name
-                    newName = srglib.splitBaseName(renameMap["class "+constructorClassName])
-                else:
-                    return None
+    if not renameMap.has_key(key):
+        constructorClassName = getConstructor(key)
+        if constructorClassName is not None:
+            # Constructors are not in the method map (from .srg, and can't be derived
+            # exclusively from the class map since we don't know all the parameters).. so we
+            # have to synthesize a rename from the class map here. Ugh..but, it works.
+            print "FOUND CONSTR",key,constructorClassName
+            if renameMap.has_key("class "+constructorClassName):
+                # Rename constructor to new class name
+                newName = srglib.splitBaseName(renameMap["class "+constructorClassName])
             else:
-                # Not renaming this
                 return None
         else:
-            newName = renameMap[key]
+            # Not renaming this
+            return None
+    else:
+        newName = renameMap[key]
 
     if shouldAnnotate:
         newName = newName+"/*was:"+oldName+"*/"
@@ -377,7 +398,7 @@ def main():
     print "Qualifying rename maps..."
     qualifiedRenameMap = qualifyClassRenameMaps(renameMap, importMap)
     print "Reading range map..."
-    rangeMapByFile = readRangeMap(rangeMapFile)
+    rangeMapByFile = readRangeMap(cbRangeMapFile)
     print "Processing files..."
 
     for filename in sorted(rangeMapByFile.keys()):
