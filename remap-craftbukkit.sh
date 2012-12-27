@@ -6,6 +6,8 @@ CB_ROOT=../CraftBukkit
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
 MCP_PKGD_ROOT=../mcp725-pkgd
 
+DIFF_OUT=/tmp/diff
+
 # TODO: extract CB range map with Srg2Source, on slim
 # TODO: and MCP
 
@@ -21,8 +23,8 @@ python rangeapply.py
 find $CB_ROOT/src/main/java/net/minecraft -name '*.java' -exec astyle --suffix=none {} \;
 
 # Measure differences to get a sense of progress
-diff -ur $MCP_PKGD_ROOT/src/minecraft_server/net/minecraft/ $CB_ROOT/src/main/java/net/minecraft/ > /tmp/diff
+diff -ur $MCP_PKGD_ROOT/src/minecraft_server/net/minecraft/ $CB_ROOT/src/main/java/net/minecraft/ > $DIFF_OUT
 
-wc -l /tmp/diff
+wc -l $DIFF_OUT
 
 

@@ -175,32 +175,40 @@ def updateImports(data, newImports, importMap):
     for imp in sorted(list(newImports)):
         newImportLines.append("import %s;" % (imp,))
 
+    sawImports = False
+
     for i, line in enumerate(lines):
-        if line.startswith("import net.minecraft"):
-            # Add our new imports first, before existing NMS imports
-            if not addedNewImports:
+        if line.startswith("import "):
+            sawImports = True
+
+            if line.startswith("import net.minecraft"):
+                # If no import map, *remove* NMS imports (OBC rewritten with fully-qualified names)
+                if len(importMap) == 0:
+                    continue
+
+                # Rewrite NMS imports
+                oldClass = line.replace("import ", "").replace(";", "");
+                print oldClass
+                if oldClass == "net.minecraft.server.*":
+                    # wildcard NMS imports (CraftWorld, CraftEntity, CraftPlayer).. bad idea
+                    continue
+                else:
+                    newClass = importMap["class "+srglib.sourceName2Internal(oldClass)]
+
+                newLine = "import %s;" % (newClass,)
+                if newLine not in newImportLines:  # if not already added
+                    newLines.append(newLine)
+            else:
+                newLines.append(line)
+        else:
+            if sawImports and not addedNewImports:
+                # Add our new imports right after the last import
                 print "Adding %s imports" % (len(newImportLines,))
                 newLines.extend(newImportLines)
 
                 addedNewImports = True
 
-            # If no import map, *remove* NMS imports (OBC rewritten with fully-qualified names)
-            if len(importMap) == 0:
-                continue
 
-            # Rewrite NMS imports
-            oldClass = line.replace("import ", "").replace(";", "");
-            print oldClass
-            if oldClass == "net.minecraft.server.*":
-                # wildcard NMS imports (CraftWorld, CraftEntity, CraftPlayer).. bad idea
-                continue
-            else:
-                newClass = importMap["class "+srglib.sourceName2Internal(oldClass)]
-
-            newLine = "import %s;" % (newClass,)
-            if newLine not in newImportLines:  # if not already added
-                newLines.append(newLine)
-        else:
             newLines.append(line)
 
     if not addedNewImports:
