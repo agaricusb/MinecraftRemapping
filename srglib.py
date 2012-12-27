@@ -205,7 +205,7 @@ def readMultipleSrgs(filenames):
 def remapSig(sig, classMap):
     def lookup(match):
         className = match.group(1)
-        return classMap.get(className, className)
+        return "L" + classMap.get(className, className) + ";"
     return remapSigThrough(sig, lookup)
 
 def remapSigThrough(sig, lookup):
