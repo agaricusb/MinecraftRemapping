@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
-import os, pprint
+import os, pprint, sys
 import srglib
 
-cbRoot = "../CraftBukkit"
-mcpRoot = "../mcp725-pkgd"
+rewriteFiles = True
 
 """Read javadoc into a dict keyed by line after the javadoc (without whitespace), to array of raw javadoc lines"""
 def readJavadoc(mcpFilenamePath):
@@ -27,7 +26,6 @@ def readJavadoc(mcpFilenamePath):
             # javadoc is enclosed in /** ... */
             javadocLines.append(mcpLine)
             if "*/" in mcpLine:
-                print "Read javadoc: ",javadocLines
                 readingJavadoc = False
                 readingIdentifyingLine = True 
 
@@ -36,18 +34,44 @@ def readJavadoc(mcpFilenamePath):
 
     return javadoc
 
-def process(cbFilenamePath, mcpFilenamePath, className):
-    print ">>>",className
-
+def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
     javadoc = readJavadoc(mcpFilenamePath)
-    pprint.pprint(javadoc)
+    #pprint.pprint(javadoc)
 
+    newLines = []
+    found = 0
+    for line in file(cbFilenamePath).readlines():
+        identifier = killWhitespace(line)
+        if javadoc.has_key(identifier):
+            # This line has associated javadoc
+            found += 1
+
+            newLines.extend(javadoc[identifier])
+
+        newLines.append(line)
+
+    newData = "".join(newLines)
+    if rewriteFiles:
+        file(cbFilenamePath, "w").write(newData)
+
+    missing = len(javadoc) - found
+    if found != 0:
+        print "Added %s javadoc to %s" % (found, className)
+    if missing != 0:
+        print "Unable to add %s javadoc to %s" % (missing, className)
 
 """Get a string with _all_ whitespace removed."""
 def killWhitespace(s):
     return "".join(s.split())
 
 def main():
+    if len(sys.argv) != 3:
+        print "usage: %s cbRoot mcpRoot" % (sys.argv[0],)
+        raise SystemExit
+    
+    cbRoot = sys.argv[1]#"../CraftBukkit"
+    mcpRoot = sys.argv[2]#"../mcp725-pkgd"
+
     cbSrc = os.path.join(cbRoot, "src/main/java/net/minecraft/")
     mcpSrc = os.path.join(mcpRoot, "src/minecraft_server/net/minecraft/")
 
@@ -61,7 +85,7 @@ def main():
         assert os.path.exists(mcpFilenamePath), "CB source %s has no corresponding MCP file at %s" % (cbFilenamePath, mcpFilenamePath)
 
 
-        process(cbFilenamePath, mcpFilenamePath, className)
+        addJavadoc(cbFilenamePath, mcpFilenamePath, className)
 
 if __name__ == "__main__":
     main()
