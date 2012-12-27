@@ -220,3 +220,17 @@ def rename_path(oldPath, newPath):
             os.mkdir(intermediateDir)
 
     os.rename(oldPath, newPath)
+
+# Get all .java file paths recursively within a source directory
+def getJavaSourceFiles(srcdir):
+    paths = []
+    for root, dirs, files in os.walk(srcdir):
+        for fn in files:
+            if not fn.endswith(".java"): continue
+
+            path = os.path.join(root, fn)
+            paths.append(path)
+        for d in dirs:
+            paths.extend(getJavaSourceFiles(os.path.join(root, d)))
+        return paths
+

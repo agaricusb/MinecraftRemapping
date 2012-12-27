@@ -2,6 +2,8 @@
 
 # Add missing imports to NMS after MCP package class rename
 
+# XXX: This is obsolete - used in the older 1.4.5 rename. 1.4.6+ in rangeapply.py
+
 import os, re
 
 import packagify
