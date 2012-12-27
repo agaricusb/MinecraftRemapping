@@ -373,8 +373,10 @@ def processJavaSourceFile(filename, rangeList, renameMap, importMap, shouldAnnot
         print "Rename",key,[start+shift,end+shift],"::",oldName,"->",newName
 
         if importMap.has_key(key):
-            # this rename requires adding an import
-            importsToAdd.add(importMap[key])
+            # This rename requires adding an import, if it crosses packages
+            importPackage = srglib.splitPackageName(srglib.sourceName2Internal(importMap[key]))
+            if importPackage != newTopLevelClassPackage:
+                importsToAdd.add(importMap[key])
 
         # Rename algorithm: 
         # 1. textually replace text at specified range with new text
