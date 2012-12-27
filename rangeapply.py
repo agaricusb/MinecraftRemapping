@@ -382,7 +382,7 @@ def main():
 
     for filename in sorted(rangeMapByFile.keys()):
         if filename.startswith("src/main/java/net/minecraft"):
-            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap, renameLocalVars=True, shouldAnnotate=True)
+            processJavaSourceFile(filename, rangeMapByFile[filename], renameMap, importMap, renameLocalVars=True, shouldAnnotate=False)
         else:
             processJavaSourceFile(filename, rangeMapByFile[filename], qualifiedRenameMap, {}, renameLocalVars=False, shouldAnnotate=True)
 
