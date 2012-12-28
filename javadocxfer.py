@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# Add javadoc from MCP source to CB-renamed source
+
 import os, pprint, sys
 import srglib
 
@@ -11,6 +13,8 @@ def readJavadoc(mcpFilenamePath):
     readingIdentifyingLine = False
     javadocLines = []
     javadoc = {}
+    expectBlankLineBefore = {}
+    lineBeforeJavadoc = None
     for mcpLine in file(mcpFilenamePath).readlines():
         if readingIdentifyingLine:
             # The line after the javadoc is what it refers to
@@ -18,6 +22,7 @@ def readJavadoc(mcpFilenamePath):
             assert len(identifier) != 0, "Nothing associated with javadoc '%s' in %s" % (javadocLines, mcpFilenamePath)
             assert not javadoc.has_key(identifier), "Duplicate javadoc for '%s' in %s: %s" % (identifier, mcpFilenamePath, javadocLines)
             javadoc[identifier] = javadocLines
+            expectBlankLineBefore[identifier] = isBlank(lineBeforeJavadoc)  # TODO: fix non-blank (beginning of class decl)
             javadocLines = []
             readingIdentifyingLine = False
         if "/**" in mcpLine:
@@ -28,27 +33,37 @@ def readJavadoc(mcpFilenamePath):
             if "*/" in mcpLine:
                 readingJavadoc = False
                 readingIdentifyingLine = True 
+        else:
+            lineBeforeJavadoc = mcpLine
 
     assert not readingJavadoc, "Failed to find end of javadoc %s in %s" % (javadocLines, mcpFilenamePath)
     assert not readingIdentifyingLine, "Failed to find javadoc identifier for %s in %s" % (javadocLines, mcpFilenamePath)
 
-    return javadoc
+    return javadoc, expectBlankLineBefore
+
+def isBlank(s):
+    return len(s.strip()) == 0
 
 def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
-    javadoc = readJavadoc(mcpFilenamePath)
+    javadoc, expectBlankLineBefore = readJavadoc(mcpFilenamePath)
     #pprint.pprint(javadoc)
 
     newLines = []
     found = 0
+    previousLine = None
     for line in file(cbFilenamePath).readlines():
         identifier = killWhitespace(line)
         if javadoc.has_key(identifier):
             # This line has associated javadoc
             found += 1
 
+            if expectBlankLineBefore[identifier] and not isBlank(previousLine):
+                newLines.append("\n")
+
             newLines.extend(javadoc[identifier])
 
         newLines.append(line)
+        previousLine = line
 
     newData = "".join(newLines)
     if rewriteFiles:
@@ -58,7 +73,7 @@ def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
     if found != 0:
         print "Added %s javadoc to %s" % (found, className)
     if missing != 0:
-        print "Unable to add %s javadoc to %s" % (missing, className)
+        print "Skipping %s javadoc in %s" % (missing, className)
 
 """Get a string with _all_ whitespace removed."""
 def killWhitespace(s):
