@@ -17,6 +17,8 @@ def process(filename):
     methods_o2d = {}; methods_d2o = {}
     for line in f.readlines():
         line = line.strip()
+        if len(line) == 0: continue
+        assert ": " in line, "Invalid line: %s" % (line,)
         kind, argsString = line.split(": ")
         args = argsString.split(" ")
         if kind == "PK":  # package
@@ -63,10 +65,10 @@ def chain(mcpdir, cbsrg):
         fields_fn = methods_fn = None
     elif mcpdir.endswith("/"):
         # also translate descriptive names through MCP's fields/methods.csv
-        mcpsrg = mcpdir + "server.srg"  # old MCP
+        mcpsrg = mcpdir + "packaged.srg"    # FML uses multi-level packages (not joined.srg)
+        #mcpsrg = mcpdir + "joined.srg"    # flat namespace
         if not os.path.exists(mcpsrg):
-            mcpsrg = mcpdir + "packaged.srg"    # Forge uses multi-level packages (not joined.srg)
-            #mcpsrg = mcpdir + "joined.srg"    # flat namespace
+            mcpsrg = mcpdir + "server.srg"  # old MCP with flat namespace
         if not os.path.exists(mcpsrg):
             print "no .srg found in %s" % (mcpdir,)
             raise SystemExit
@@ -151,9 +153,10 @@ def main():
         print "Usage: %s clean-mcpdir/conf cb-server.srg [-v]" % (sys.argv[0],)
         print "Examples:"
         print "Translate through .srg and descriptive fields.csv/methods.csv:"
-        print "\t%s ../mcp723-clean/conf/ obf2cb.srg > cb2mcp.srg" % (sys.argv[0],)
+        print "\t%s ../mcpXXX-clean/conf/ obf2cb.srg > cb2mcp.srg" % (sys.argv[0],)
+        print "\t%s ../mcpXXX-pkgd/conf/ obf2cb.srg > cb2pkgmcp.srg" % (sys.argv[0],)
         print "Translate only through .srg, leaving indexed func_XXX/field_XXX names:"
-        print "\t%s ../mcp723-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
+        print "\t%s ../mcpXXX-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
         raise SystemExit
 
     mcpdir = sys.argv[1]
