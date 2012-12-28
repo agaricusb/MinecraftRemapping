@@ -6,7 +6,7 @@ import os
 import srglib
 
 srcRoot = "../CraftBukkit"
-cbRangeMapFile = "1.4.6/cb2573.rangemap"
+cbRangeMapFile = "1.4.6/cb2577.rangemap"
 mcpRangeMapFile = "1.4.6/pkgmcp.rangemap"  # for local variables
 mcpDir = "../mcp725-pkgd/conf"
 srgFiles = ("1.4.6/cb2pkgmcp.srg", "1.4.6/uncollide-cb2pkgmcp.srg")
@@ -91,17 +91,28 @@ def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMet
 
         mcpClassName = srglib.sourceName2Internal(mcpClassName)
 
-        if mcpMethodName == "{}": continue  # TODO: support local variable renaming in initializers
-
         # Range map has MCP names, but we need to map from CB
-        className = invClassMap[mcpClassName]
-        key = mcpClassName+"/"+mcpMethodName+" "+mcpMethodSignature
-        if not invMethodMap.has_key(key):
-            print "NOTICE: local variables available for %s but no inverse method map; skipping" % (key,)
-            continue
 
-        methodName = invMethodMap[key]
-        methodSignature = invMethodSigMap[key]
+        className = invClassMap[mcpClassName]
+
+        if mcpMethodName == "{}": 
+            # Initializer - no name
+            methodName = className + "/{}"
+            methodSignature = ""
+        elif srglib.splitBaseName(mcpClassName) == mcpMethodName:
+            # Constructor - same name as class
+            methodName = className + srglib.splitBaseName(className)
+            methodSignature = srglib.remapSig(mcpMethodSignature, invClassMap)
+        else:
+            # Normal method
+            key = mcpClassName+"/"+mcpMethodName+" "+mcpMethodSignature
+            if not invMethodMap.has_key(key):
+                print "NOTICE: local variables available for %s but no inverse method map; skipping" % (key,)
+                # probably a changed signature
+                continue
+
+            methodName = invMethodMap[key]
+            methodSignature = invMethodSigMap[key]
 
         key = "localvar "+methodName+" "+methodSignature+" "+str(variableIndex)
 
