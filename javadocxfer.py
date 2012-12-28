@@ -18,7 +18,7 @@ def readJavadoc(mcpFilenamePath):
     for mcpLine in file(mcpFilenamePath).readlines():
         if readingIdentifyingLine:
             # The line after the javadoc is what it refers to
-            identifier = killWhitespace(mcpLine)
+            identifier = srglib.killWhitespace(mcpLine)
             assert len(identifier) != 0, "Nothing associated with javadoc '%s' in %s" % (javadocLines, mcpFilenamePath)
             assert not javadoc.has_key(identifier), "Duplicate javadoc for '%s' in %s: %s" % (identifier, mcpFilenamePath, javadocLines)
             javadoc[identifier] = javadocLines
@@ -52,7 +52,7 @@ def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
     found = 0
     previousLine = None
     for line in file(cbFilenamePath).readlines():
-        identifier = killWhitespace(line)
+        identifier = srglib.killWhitespace(line)
         if javadoc.has_key(identifier):
             # This line has associated javadoc
             found += 1
@@ -80,10 +80,6 @@ def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
         print "Added %s javadoc to %s" % (found, className)
     if missing != 0:
         print "Skipping %s javadoc in %s" % (missing, className)
-
-"""Get a string with _all_ whitespace removed."""
-def killWhitespace(s):
-    return "".join(s.split())
 
 def main():
     if len(sys.argv) != 3:

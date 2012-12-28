@@ -27,6 +27,8 @@ find $CB_ROOT/src/main/java/net/minecraft -name '*.java' -exec astyle --suffix=n
 
 python javadocxfer.py $CB_ROOT $MCP_ROOT
 
+python whitespaceneutralizer.py $CB_ROOT $MCP_ROOT
+
 # Measure differences to get a sense of progress
 (diff -ur $MCP_ROOT/src/minecraft_server/net/minecraft/ $CB_ROOT/src/main/java/net/minecraft/ > $DIFF_OUT) || true
 

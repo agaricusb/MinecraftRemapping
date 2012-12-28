@@ -234,3 +234,8 @@ def getJavaSourceFiles(srcdir):
             paths.extend(getJavaSourceFiles(os.path.join(root, d)))
         return paths
 
+"""Get a string with _all_ whitespace removed."""
+def killWhitespace(s):
+    return "".join(s.split())
+
+
