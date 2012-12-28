@@ -1,49 +1,52 @@
 #!/usr/bin/python
 
-import sys, os, pprint
+# Reconcile whitespace differences between two codebases, preferring one over the other
+# in order to reduce unnecessary diff lines
+
+import sys, os, pprint, re
 import srglib
 
 rewriteFiles = True
 
-# Get dict of unique lines (ignoring all whitespace), mapped to line number
-def getUniqueLines(filename):
+# Get dict of all lines without whitespace, mapped to line number and original line text
+def getLinesMap(filename):
     seenLines = {}
     for i, originalLine in enumerate(file(filename).readlines()):
-        key = srglib.killWhitespace(originalLine)
+        key = removeNonPrefixWhitespace(originalLine)
         if not seenLines.has_key(key):
             seenLines[key] = []
         seenLines[key].append((i, originalLine))
 
-    uniqueLines = {}
-    for key, seenAt in seenLines.iteritems():
-        if len(seenAt) == 1:
-            uniqueLines[key] = seenAt[0]
+    return seenLines
 
-    return uniqueLines
+# Remove all whitespace except at the very beginning
+def removeNonPrefixWhitespace(s):
+    prefix, rest = re.match(r"(\s*)(.*)", s).groups()
+    return prefix + srglib.killWhitespace(rest)
 
 def neutralizeWhitespace(cbFilenamePath, mcpFilenamePath, className):
-    cbUniqueLines = getUniqueLines(cbFilenamePath)
-    mcpUniqueLines = getUniqueLines(mcpFilenamePath)
+    cbLinesMap = getLinesMap(cbFilenamePath)
+    mcpLinesMap = getLinesMap(mcpFilenamePath)
 
     lineChanges = {}
 
     # Find whitespace-only differences in unique lines
-    for key, (cbLineNo, cbOriginalLine) in cbUniqueLines.iteritems():
-        if not mcpUniqueLines.has_key(key): continue
+    for key in cbLinesMap:
+        for cbLineNo, cbOriginalLine in cbLinesMap[key]:
+            if not mcpLinesMap.has_key(key): continue
 
-        mcpLineNo, mcpOriginalLine = mcpUniqueLines[key]
+            for mcpLineNo, mcpOriginalLine in mcpLinesMap[key]:  # TODO: nested loops really necessary?
+                if cbOriginalLine != mcpOriginalLine:
+                    # Lines are identical except for whitespace
+                    # For example in (casts), CB often has a byte after the closing paren, while MCP
+                    # doesn't.. and there's a space after array initializers { ...}. CB prefers more 
+                    # space. Unfortunately, astyle doesn't fix this. CB seems to be using the jacobe
+                    # tool for reformatting (see Bukkit-MinecraftServer GitHub project), not astyle.
+                    #print "CB:",cbOriginalLine
+                    #print "MC:",mcpOriginalLine
 
-        if cbOriginalLine != mcpOriginalLine:
-            # Lines are identical except for whitespace
-            # For example in (casts), CB often has a byte after the closing paren, while MCP
-            # doesn't.. and there's a space after array initializers { ...}. CB prefers more 
-            # space. Unfortunately, astyle doesn't fix this. CB seems to be using the jacobe
-            # tool for reformatting (see Bukkit-MinecraftServer GitHub project), not astyle.
-            #print "CB:",cbOriginalLine
-            #print "MC:",mcpOriginalLine
-
-            # MCP is right
-            lineChanges[cbLineNo] = mcpOriginalLine
+                    # MCP is right
+                    lineChanges[cbLineNo] = mcpOriginalLine
 
     # Change those lines
     newLines = []
