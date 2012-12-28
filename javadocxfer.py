@@ -22,7 +22,7 @@ def readJavadoc(mcpFilenamePath):
             assert len(identifier) != 0, "Nothing associated with javadoc '%s' in %s" % (javadocLines, mcpFilenamePath)
             assert not javadoc.has_key(identifier), "Duplicate javadoc for '%s' in %s: %s" % (identifier, mcpFilenamePath, javadocLines)
             javadoc[identifier] = javadocLines
-            expectBlankLineBefore[identifier] = isBlank(lineBeforeJavadoc)  # TODO: fix non-blank (beginning of class decl)
+            expectBlankLineBefore[identifier] = isBlank(lineBeforeJavadoc)
             javadocLines = []
             readingIdentifyingLine = False
         if "/**" in mcpLine:
@@ -33,7 +33,7 @@ def readJavadoc(mcpFilenamePath):
             if "*/" in mcpLine:
                 readingJavadoc = False
                 readingIdentifyingLine = True 
-        else:
+        if not readingJavadoc and not readingIdentifyingLine:
             lineBeforeJavadoc = mcpLine
 
     assert not readingJavadoc, "Failed to find end of javadoc %s in %s" % (javadocLines, mcpFilenamePath)
@@ -56,9 +56,15 @@ def addJavadoc(cbFilenamePath, mcpFilenamePath, className):
         if javadoc.has_key(identifier):
             # This line has associated javadoc
             found += 1
-
-            if expectBlankLineBefore[identifier] and not isBlank(previousLine):
-                newLines.append("\n")
+            
+            if expectBlankLineBefore[identifier]:
+                # Add missing blank
+                if not isBlank(previousLine):
+                    newLines.append("\n")
+            else:
+                # Remove extra blank
+                if isBlank(previousLine):
+                    newLines = newLines[:-1]
 
             newLines.extend(javadoc[identifier])
 
