@@ -58,11 +58,23 @@ def neutralizeWhitespace(cbFilenamePath, mcpFilenamePath, className):
         else:
             newLines.append(line)
 
+    # Special case: remove spurious blank line after opening brace of class declaration statement
+    i = 0
+    while i < len(newLines):
+        if isBlank(newLines[i]) and i >= 2:
+            if newLines[i - 1].startswith("{") and "class" in newLines[i - 2]:
+                del newLines[i]
+                count += 1
+        i += 1
+
     if rewriteFiles:
         file(cbFilenamePath, "w").write("".join(newLines))
 
     if count != 0:
         print "Neutralized %s whitespace line differences in %s" % (count, className)
+
+def isBlank(line):
+    return len(srglib.killWhitespace(line)) == 0
 
 def main():
     if len(sys.argv) != 3:
