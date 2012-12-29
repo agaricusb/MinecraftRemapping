@@ -101,7 +101,7 @@ def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMet
             methodSignature = ""
         elif srglib.splitBaseName(mcpClassName) == mcpMethodName:
             # Constructor - same name as class
-            methodName = className + srglib.splitBaseName(className)
+            methodName = className + "/" + srglib.splitBaseName(className)
             methodSignature = srglib.remapSig(mcpMethodSignature, invClassMap)
         else:
             # Normal method
