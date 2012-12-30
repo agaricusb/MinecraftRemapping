@@ -8,12 +8,13 @@ import srglib
 
 # Read ApplySrg2Source symbol range map into a dictionary
 # Keyed by filename -> list of (range start, end, expectedOldText, key)
-def readRangeMap(filename):
+def readRangeMap(filename, srcRoot):
     rangeMap = {}
     for line in file(filename).readlines():
         tokens = line.strip().split("|")
         if tokens[0] != "@": continue
-        filename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
+        absFilename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
+        filename = getProjectRelativePath(absFilename, srcRoot)
         startRange = int(startRangeStr)
         endRange = int(endRangeStr)
         info = tokens[6:]
@@ -66,11 +67,12 @@ def readRangeMap(filename):
     return rangeMap
 
 # Read existing local variable name from MCP range map to get local variable positional mapping
-def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMethodSigMap):
+def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMethodSigMap, srcRoot):
     for line in file(filename).readlines():
         tokens = line.strip().split("|")
         if tokens[0] != "@": continue
-        filename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
+        absFilename, startRangeStr, endRangeStr, expectedOldText, kind = tokens[1:6]
+        filename = getProjectRelativePath(absFilename, srcRoot)
         startRange = int(startRangeStr)
         endRange = int(endRangeStr)
         info = tokens[6:]
@@ -123,7 +125,7 @@ def qualifyClassRenameMaps(renameMap, importMap):
     return newRenameMap
 
 # Get all rename maps, keyed by globally unique symbol identifier, values are new names
-def getRenameMaps(srgFiles, mcpConfDir, mcpRangeMapFile, dumpRenameMap):
+def getRenameMaps(srgFiles, mcpConfDir, mcpRangeMapFile, dumpRenameMap, srcRoot):
     maps = {}
     importMaps = {}
 
@@ -155,7 +157,7 @@ def getRenameMaps(srgFiles, mcpConfDir, mcpRangeMapFile, dumpRenameMap):
             maps["param %s %s" % (old, i)] = new[i]
 
     # Local variable map - position in source -> name; derived from MCP rangemap
-    readLocalVariableMap(mcpRangeMapFile, maps, invClassMap, invMethodMap, invMethodSigMap)
+    readLocalVariableMap(mcpRangeMapFile, maps, invClassMap, invMethodMap, invMethodSigMap, srcRoot)
 
     if dumpRenameMap:
         for key in sorted(maps.keys()):
@@ -372,7 +374,7 @@ def processJavaSourceFile(srcRoot, filename, rangeList, renameMap, importMap, sh
                 expectedOldText, start, end, shift, start+shift, end+shift, filename, oldName)
             print "Regenerate symbol map on latest sources or start with fresh source and try again"
             #file("/tmp/a","w").write(data)
-            raise SystemExit
+            sys.exit(-1)
 
         newName = getNewName(key, oldName, renameMap, shouldAnnotate)
         if newName is None:
@@ -408,6 +410,11 @@ def processJavaSourceFile(srcRoot, filename, rangeList, renameMap, importMap, sh
             print "Rename file",filename,"->",newFilename
             srglib.rename_path(path, newPath)
 
+# Get filename relative to project at srcRoot, instead of an absolute path
+def getProjectRelativePath(absFilename, srcRoot):
+    return absFilename.replace(os.path.commonprefix((absFilename, os.path.abspath(srcRoot))) + "/", "") 
+    
+
 def main():
     parser = argparse.ArgumentParser(description="Remap source code to new symbols using range map")
     parser.add_argument("--srcRoot", help="CraftBukkit source root directory to rename", required=True)
@@ -421,15 +428,17 @@ def main():
     options = parser.parse_args()
 
     print "Reading rename maps..."
-    renameMap, importMap = getRenameMaps(options.srgFiles, options.mcpConfDir, options.mcpRangeMap, options.dumpRenameMap)
+    renameMap, importMap = getRenameMaps(options.srgFiles, options.mcpConfDir, options.mcpRangeMap, options.dumpRenameMap, options.srcRoot)
     print "Qualifying rename maps..."
     qualifiedRenameMap = qualifyClassRenameMaps(renameMap, importMap)
     print "Reading range map..."
-    rangeMapByFile = readRangeMap(options.cbRangeMap)
+    rangeMapByFile = readRangeMap(options.cbRangeMap, options.srcRoot)
     print "Processing files..."
 
     for filename in sorted(rangeMapByFile.keys()):
-        if filename.startswith("src/main/java/net/minecraft"):
+        if filename.startswith("src/main/java/jline"):
+            continue
+        elif filename.startswith("src/main/java/net/minecraft"):
             processJavaSourceFile(options.srcRoot, filename, rangeMapByFile[filename], renameMap, importMap, shouldAnnotate=False, options=options)
         else:
             processJavaSourceFile(options.srcRoot, filename, rangeMapByFile[filename], qualifiedRenameMap, {}, shouldAnnotate=True, options=options)

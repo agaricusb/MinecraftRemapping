@@ -6,25 +6,52 @@ CB_ROOT=../CraftBukkit
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
 MCP_ROOT=../mcp725-pkgd
 
-# CB/MCP patch output
-DIFF_OUT=/tmp/diff
-
 # Python 2.7+ installation 
 PYTHON=/usr/bin/python2.7
 
-# Abort on any command failure
-set -e
+# Location for IntelliJ IDEA
+IDEA=/Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea 
 
-# TODO: extract CB range map with Srg2Source, on slim
-# TODO: and MCP
+# Where to store CB/MCP patch output
+DIFF_OUT=/tmp/diff
 
-CB_RANGEMAP=1.4.6/cb2577.rangemap
+
+# Pre-generated MCP rangemap for local variables
+# TODO: extract rangemap for MCP? probably not necessary to automate, doesn't change much
 MCP_RANGEMAP=1.4.6/pkgmcp.rangemap
 
 SRG_CB2MCP=1.4.6/cb2pkgmcp.srg
 SRG_CB2MCP_FIXES=1.4.6/uncollide-cb2pkgmcp.srg
 
-# TODO: apply prerenamefixes, minecraft-server-pkgmcp
+
+# Abort on any command failure
+set -e
+
+
+# Small fixes to accomodate renaming compatibility
+patch -p1 -d $CB_ROOT < prerenamefixes.patch
+
+# Change minecraft-server library to a "slimmed" version without the same NMS classes CB patches
+# This avoids Psi symbol resolving errors
+patch -p1 -d $CB_ROOT < pom-slim-minecraft-server.patch
+
+# Extract map of symbol ranges in CB source, required for renaming
+# IDEA must have Srg2source plugin installed, it will detect batchmode and automatically run
+CB_RANGEMAP=$CB_ROOT/craftbukkit.rangemap
+mv $CB_RANGEMAP $CB_RANGEMAP.old
+touch $CB_ROOT/srg2source-batchmode
+/Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT
+rm $CB_ROOT/srg2source-batchmode
+if [ ! -e $CB_RANGEMAP ]
+then
+    echo Failed to extract CB rangemap
+    exit -1
+fi
+diff -ur $CB_RANGEMAP.old $CB_RANGEMAP|wc -l
+
+# Change to a new minecraft-server library with MCP names
+patch -p1 -d $CB_ROOT -R < pom-slim-minecraft-server.patch
+patch -p1 -d $CB_ROOT < pom-minecraft-server-pkgmcp.patch
 
 # Apply the renames
 $PYTHON rangeapply.py --srcRoot $CB_ROOT --cbRangeMap $CB_RANGEMAP --mcpRangeMap $MCP_RANGEMAP --mcpConfDir $MCP_ROOT/conf --srgFiles $SRG_CB2MCP $SRG_CB2MCP_FIXES
