@@ -3,8 +3,9 @@
 # Process symbol range maps produced by ApplySrg2Source
 
 import os
-import argparse  # not: requires Python 2.7+
 import srglib
+import argparse  # note: requires Python 2.7+
+import subprocess # for git
 
 # Read ApplySrg2Source symbol range map into a dictionary
 # Keyed by filename -> list of (range start, end, expectedOldText, key)
@@ -369,12 +370,8 @@ def processJavaSourceFile(srcRoot, filename, rangeList, renameMap, importMap, sh
 
         oldName = data[start+shift:end+shift]
 
-        if oldName != expectedOldText:
-            print "Rename sanity check failed: expected '%s' at [%s,%s] (shifted %s to [%s,%s]) in %s, but found '%s'" % (
-                expectedOldText, start, end, shift, start+shift, end+shift, filename, oldName)
-            print "Regenerate symbol map on latest sources or start with fresh source and try again"
-            #file("/tmp/a","w").write(data)
-            sys.exit(-1)
+        assert oldName == expectedOldText, "Rename sanity check failed: expected '%s' at [%s,%s] (shifted %s to [%s,%s]) in %s, but found '%s'\nRegenerate symbol map on latest sources or start with fresh source and try again" % (
+            expectedOldText, start, end, shift, start+shift, end+shift, filename, oldName)
 
         newName = getNewName(key, oldName, renameMap, shouldAnnotate)
         if newName is None:
@@ -404,11 +401,28 @@ def processJavaSourceFile(srcRoot, filename, rangeList, renameMap, importMap, sh
 
     if options.renameFiles:
         if newTopLevelClassPackage is not None: # rename if package changed
-            newFilename = os.path.join(options.srcRoot, "src/main/java/", newTopLevelClassPackage, newTopLevelClassName + ".java")
+            newFilename = os.path.join("src/main/java/", newTopLevelClassPackage, newTopLevelClassName + ".java")
             newPath = os.path.join(options.srcRoot, newFilename)
 
             print "Rename file",filename,"->",newFilename
-            srglib.rename_path(path, newPath)
+
+            if filename != newFilename:
+                # Create any missing directories in new path
+                dirComponents = os.path.dirname(newPath).split(os.path.sep)
+                for i in range(2,len(dirComponents)+1):
+                    intermediateDir = os.path.sep.join(dirComponents[0:i])
+                    if not os.path.exists(intermediateDir):
+                        os.mkdir(intermediateDir)
+
+                #os.rename(path, newPath)
+
+                wd = os.getcwd()
+                os.chdir(options.srcRoot)
+                cmd = "git mv '%s' '%s'" % (filename, newFilename)  # warning: if filename contains quotes..
+                status = os.system(cmd)
+                assert status == 0, "Failed to execute rename command: %s" % (cmd,)
+                os.chdir(wd)
+
 
 # Get filename relative to project at srcRoot, instead of an absolute path
 def getProjectRelativePath(absFilename, srcRoot):
