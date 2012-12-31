@@ -8353,7 +8353,7 @@ MD: net/minecraft/block/BlockRedstoneWire/isProvidingStrongPower (Lnet/minecraft
 MD: net/minecraft/block/BlockRedstoneWire/getRenderType ()I alv/d ()I
 MD: net/minecraft/block/BlockRedstoneWire/getMaxCurrentStrength (Lnet/minecraft/world/World;IIII)I alv/d (Lyc;IIII)I
 MD: net/minecraft/block/BlockRedstoneWire/getCollisionBoundingBoxFromPool (Lnet/minecraft/world/World;III)Lnet/minecraft/util/AxisAlignedBB; alv/e (Lyc;III)Laoe;
-MD: net/minecraft/block/BlockRedstoneWire/canConnectRedstone (Lnet/minecraft/world/IBlockAccess;IIII)Z alv/f (Lym;IIII)Z
+MD: net/minecraft/block/BlockRedstoneWire/isPowerProviderOrWire (Lnet/minecraft/world/IBlockAccess;IIII)Z alv/f (Lym;IIII)Z
 MD: net/minecraft/block/BlockRedstoneWire/onBlockAdded (Lnet/minecraft/world/World;III)V alv/g (Lyc;III)V
 MD: net/minecraft/block/BlockRedstoneWire/isPoweredOrRepeater (Lnet/minecraft/world/IBlockAccess;IIII)Z alv/g (Lym;IIII)Z
 MD: net/minecraft/block/BlockRedstoneWire/canProvidePower ()Z alv/i ()Z

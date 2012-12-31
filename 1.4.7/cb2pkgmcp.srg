@@ -5429,7 +5429,7 @@ MD: net/minecraft/server/BlockRedstoneWire/canPlace (Lnet/minecraft/server/World
 MD: net/minecraft/server/BlockRedstoneWire/d ()I net/minecraft/block/BlockRedstoneWire/getRenderType ()I
 MD: net/minecraft/server/BlockRedstoneWire/doPhysics (Lnet/minecraft/server/World;IIII)V net/minecraft/block/BlockRedstoneWire/onNeighborBlockChange (Lnet/minecraft/world/World;IIII)V
 MD: net/minecraft/server/BlockRedstoneWire/e (Lnet/minecraft/server/World;III)Lnet/minecraft/server/AxisAlignedBB; net/minecraft/block/BlockRedstoneWire/getCollisionBoundingBoxFromPool (Lnet/minecraft/world/World;III)Lnet/minecraft/util/AxisAlignedBB;
-MD: net/minecraft/server/BlockRedstoneWire/f (Lnet/minecraft/server/IBlockAccess;IIII)Z net/minecraft/block/BlockRedstoneWire/canConnectRedstone (Lnet/minecraft/world/IBlockAccess;IIII)Z
+MD: net/minecraft/server/BlockRedstoneWire/f (Lnet/minecraft/server/IBlockAccess;IIII)Z net/minecraft/block/BlockRedstoneWire/isPowerProviderOrWire (Lnet/minecraft/world/IBlockAccess;IIII)Z
 MD: net/minecraft/server/BlockRedstoneWire/g (Lnet/minecraft/server/IBlockAccess;IIII)Z net/minecraft/block/BlockRedstoneWire/isPoweredOrRepeater (Lnet/minecraft/world/IBlockAccess;IIII)Z
 MD: net/minecraft/server/BlockRedstoneWire/getDropType (ILjava/util/Random;I)I net/minecraft/block/BlockRedstoneWire/idDropped (ILjava/util/Random;I)I
 MD: net/minecraft/server/BlockRedstoneWire/getPower (Lnet/minecraft/server/World;IIII)I net/minecraft/block/BlockRedstoneWire/getMaxCurrentStrength (Lnet/minecraft/world/World;IIII)I

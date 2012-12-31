@@ -5349,7 +5349,7 @@ MD: net/minecraft/block/BlockRedstoneTorch/tickRate ()I net/minecraft/server/Blo
 MD: net/minecraft/block/BlockRedstoneTorch/updateTick (Lnet/minecraft/world/World;IIILjava/util/Random;)V net/minecraft/server/BlockRedstoneTorch/b (Lnet/minecraft/server/World;IIILjava/util/Random;)V
 MD: net/minecraft/block/BlockRedstoneWire/breakBlock (Lnet/minecraft/world/World;IIIII)V net/minecraft/server/BlockRedstoneWire/remove (Lnet/minecraft/server/World;IIIII)V
 MD: net/minecraft/block/BlockRedstoneWire/calculateCurrentChanges (Lnet/minecraft/world/World;IIIIII)V net/minecraft/server/BlockRedstoneWire/a (Lnet/minecraft/server/World;IIIIII)V
-MD: net/minecraft/block/BlockRedstoneWire/canConnectRedstone (Lnet/minecraft/world/IBlockAccess;IIII)Z net/minecraft/server/BlockRedstoneWire/f (Lnet/minecraft/server/IBlockAccess;IIII)Z
+MD: net/minecraft/block/BlockRedstoneWire/isPowerProviderOrWire (Lnet/minecraft/world/IBlockAccess;IIII)Z net/minecraft/server/BlockRedstoneWire/f (Lnet/minecraft/server/IBlockAccess;IIII)Z
 MD: net/minecraft/block/BlockRedstoneWire/canPlaceBlockAt (Lnet/minecraft/world/World;III)Z net/minecraft/server/BlockRedstoneWire/canPlace (Lnet/minecraft/server/World;III)Z
 MD: net/minecraft/block/BlockRedstoneWire/canProvidePower ()Z net/minecraft/server/BlockRedstoneWire/isPowerSource ()Z
 MD: net/minecraft/block/BlockRedstoneWire/getBlockTextureFromSideAndMetadata (II)I net/minecraft/server/BlockRedstoneWire/a (II)I
