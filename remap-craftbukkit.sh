@@ -4,7 +4,7 @@
 CB_ROOT=../CraftBukkit
 
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
-MCP_ROOT=../mcp725-pkgd
+MCP_ROOT=../mcp726-pkgd
 
 # Python 2.7+ installation 
 PYTHON=/usr/bin/python2.7
@@ -15,12 +15,15 @@ IDEA=/Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea
 # Where to store CB/MCP patch output
 DIFF_OUT=/tmp/diff
 
-
 # Pre-generated MCP rangemap for local variables
-# TODO: extract rangemap for MCP? probably not necessary to automate, doesn't change much
-MCP_RANGEMAP=1.4.6/pkgmcp.rangemap
+# Currently you need to generate this manually by following the instructions on https://github.com/agaricusb/CraftBukkit/wiki/How-to-decompile-Minecraft-using-MCP-with-FML-repackaged-class-names,-without-FML's-other-changes
+# then importing the sources into IDEA, and extracting the range map with srg2source.
+# TODO: automate extracting rangemap for MCP? probably not necessary to automate, doesn't change much
+#MCP_RANGEMAP=1.4.7/pkgmcp.rangemap
+MCP_RANGEMAP=$MCP_ROOT/mcp726-pkgd.rangemap
 
-SRG_CB2MCP=1.4.6/cb2pkgmcp.srg
+# CB to MCP mapping
+SRG_CB2MCP=1.4.7/cb2pkgmcp.srg
 SRG_CB2MCP_FIXES=1.4.6/uncollide-cb2pkgmcp.srg
 
 
