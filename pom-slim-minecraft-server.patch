@@ -1,0 +1,22 @@
+commit 38e5106ed29ce89d0c105b46c2085b68b35b7c39
+Author: Agaricus <agaricusb@yahoo.com>
+Date:   Mon Dec 24 16:38:18 2012 -0800
+
+    Use 'slimmed' minecraft-server artifact, without the NMS classes CB modifies
+
+diff --git a/pom.xml b/pom.xml
+index 543aa6b..18dcb5f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -59,7 +59,10 @@
+     </dependency>
+     <dependency>
+       <groupId>org.bukkit</groupId>
+-      <artifactId>minecraft-server</artifactId>
++      <!-- minecraft-server without NMS classes also in CB
++      To generate this file see https://github.com/agaricusb/MinecraftRemapping/blob/master/slim-jar.py
++      -->
++      <artifactId>slim-minecraft-server</artifactId>
+       <version>${minecraft.version}</version>
+       <type>jar</type>
+       <scope>compile</scope>
