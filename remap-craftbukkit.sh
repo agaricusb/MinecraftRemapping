@@ -35,10 +35,19 @@ patch -p1 -d $CB_ROOT < prerenamefixes.patch
 # This avoids Psi symbol resolving errors
 patch -p1 -d $CB_ROOT < pom-slim-minecraft-server.patch
 
+# Preflight IDEA with the updated pom, giving it a time to scan the symbols
+rm -f $CB_ROOT/srg2source-batchmode
+/Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT &
+sleep 60
+killall idea
+sleep 2
+killall -9 idea || true
+killall -9 idea || true
+
 # Extract map of symbol ranges in CB source, required for renaming
 # IDEA must have Srg2source plugin installed, it will detect batchmode and automatically run
 CB_RANGEMAP=$CB_ROOT/craftbukkit.rangemap
-mv $CB_RANGEMAP $CB_RANGEMAP.old
+mv $CB_RANGEMAP $CB_RANGEMAP.old || true
 touch $CB_ROOT/srg2source-batchmode
 /Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT
 rm $CB_ROOT/srg2source-batchmode
