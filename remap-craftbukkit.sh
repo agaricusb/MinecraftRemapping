@@ -66,7 +66,7 @@ patch -p1 -d $CB_ROOT -R < pom-slim-minecraft-server.patch
 patch -p1 -d $CB_ROOT < pom-minecraft-server-pkgmcp.patch
 
 # Apply the renames
-$PYTHON rangeapply.py --srcRoot $CB_ROOT --cbRangeMap $CB_RANGEMAP --mcpRangeMap $MCP_RANGEMAP --mcpConfDir $MCP_ROOT/conf --srgFiles $SRG_CB2MCP $SRG_CB2MCP_FIXES
+$PYTHON rangeapply.py --srcRoot $CB_ROOT --srcRangeMap $CB_RANGEMAP --lvRangeMap $MCP_RANGEMAP --mcpConfDir $MCP_ROOT/conf --srgFiles $SRG_CB2MCP $SRG_CB2MCP_FIXES
 
 # TODO: apply javadoc
 
