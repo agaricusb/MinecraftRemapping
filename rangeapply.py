@@ -434,6 +434,8 @@ def processJavaSourceFile(srcRoot, filename, rangeList, renameMap, importMap, sh
 
 # Get filename relative to project at srcRoot, instead of an absolute path
 def getProjectRelativePath(absFilename, srcRoot):
+    if absFilename[0] != "/": return absFilename # so much for absolute
+
     return absFilename.replace(os.path.commonprefix((absFilename, os.path.abspath(srcRoot))) + "/", "") 
     
 
