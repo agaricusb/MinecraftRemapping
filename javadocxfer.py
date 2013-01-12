@@ -99,7 +99,7 @@ def main():
         mcpFilenamePath = os.path.join(mcpSrc, commonPath)
 
         assert os.path.exists(cbFilenamePath), "CB source %s not found?" % (cbFilenamePath,)
-        if mcpFilenamePath.endswith("BaseMod.java") or mcpFilenamePath.endswith("FakeInventory.java") or mcpFilenamePath.endswith("FMLLogJLineBreakProxy.java") or mcpFilenamePath.endswith("TradeEntry.java"): continue  # polluted base files
+        if srglib.isPollution(mcpFilenamePath): continue
         assert os.path.exists(mcpFilenamePath), "CB source %s has no corresponding MCP file at %s" % (cbFilenamePath, mcpFilenamePath)
 
 

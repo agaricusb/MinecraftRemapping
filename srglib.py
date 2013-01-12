@@ -238,4 +238,7 @@ def getJavaSourceFiles(srcdir):
 def killWhitespace(s):
     return "".join(s.split())
 
+"""Get if a file is non-NMS but in NMS namespace"""
+def isPollution(mcpFilenamePath):
+    return mcpFilenamePath.endswith("BaseMod.java") or mcpFilenamePath.endswith("FakeInventory.java") or mcpFilenamePath.endswith("FMLLogJLineBreakProxy.java") or mcpFilenamePath.endswith("TradeEntry.java")
 

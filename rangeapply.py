@@ -462,8 +462,6 @@ def main():
     for filename in sorted(rangeMapByFile.keys()):
         if filename.startswith("src/main/java/jline"):
             continue
-        elif filename.startswith("src/main/java/cpw"):
-            continue
         elif filename.startswith("src/main/java/net/minecraft"):
             processJavaSourceFile(options.srcRoot, filename, rangeMapByFile[filename], renameMap, importMap, shouldAnnotate=False, options=options)
         else:
