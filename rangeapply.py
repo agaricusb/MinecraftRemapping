@@ -86,7 +86,11 @@ def readLocalVariableMap(filename, renameMaps, invClassMap, invMethodMap, invMet
 
         # Range map has MCP names, but we need to map from CB
 
-        className = invClassMap[mcpClassName]
+        if not invClassMap.has_key(mcpClassName):
+            className = "net.minecraft.server." + srglib.splitBaseName(mcpClassName) # fake it, assuming CB mc-dev will choose similar name to MCP
+            print "WARNING: readLocalVariableMap: no CB class name for MCP class name '%s', using %s" % (mcpClassName, className)
+        else:
+            className = invClassMap[mcpClassName]
 
         if mcpMethodName == "{}": 
             # Initializer - no name

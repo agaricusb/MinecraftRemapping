@@ -4,7 +4,7 @@
 CB_ROOT=../CraftBukkit
 
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
-MCP_ROOT=../mcp726-pkgd
+MCP_ROOT=../mcp730-pkgd
 
 # Python 2.7+ installation 
 PYTHON=/usr/bin/python2.7
@@ -20,7 +20,7 @@ DIFF_OUT=/tmp/diff
 # then importing the sources into IDEA, and extracting the range map with srg2source.
 # TODO: automate extracting rangemap for MCP? probably not necessary to automate, doesn't change much
 #MCP_RANGEMAP=1.4.7/pkgmcp.rangemap
-MCP_RANGEMAP=$MCP_ROOT/mcp726-pkgd.rangemap
+MCP_RANGEMAP=$MCP_ROOT/`basename $MCP_ROOT`.rangemap
 
 # CB to MCP mapping
 SRG_CB2MCP=1.4.7/cb2pkgmcp.srg
