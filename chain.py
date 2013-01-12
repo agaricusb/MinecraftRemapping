@@ -76,8 +76,7 @@ def chain(mcpdir, cbsrg):
         fields_fn = mcpdir + "fields.csv"
         methods_fn = mcpdir + "methods.csv"
     else:
-        print "argument must be srg or mcp dir with .srg, fields.csv, and methods.csv"
-        raise SystemExit
+        assert False, "argument must be srg or mcp dir with .srg, fields.csv, and methods.csv"
 
     mcp = process(mcpsrg)
     if not cbsrg == "-":
