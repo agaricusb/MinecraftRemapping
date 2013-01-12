@@ -157,6 +157,8 @@ def main():
         print "\t%s ../mcpXXX-pkgd/conf/ obf2cb.srg > cb2pkgmcp.srg" % (sys.argv[0],)
         print "Translate only through .srg, leaving indexed func_XXX/field_XXX names:"
         print "\t%s ../mcpXXX-clean/conf/server.srg obf2cb.srg" % (sys.argv[0],)
+        print "Only extract descriptions (no chaining):"
+        print "\t%s ../mcpXXX-clean/conf/ -" % (sys.argv[0],)
         raise SystemExit
 
     mcpdir = sys.argv[1]
