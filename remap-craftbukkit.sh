@@ -4,7 +4,7 @@
 CB_ROOT=../CraftBukkit
 
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
-MCP_ROOT=../mcp730-pkgd
+MCP_ROOT=../mcp730-nojad-pkgd
 
 # Python 2.7+ installation 
 PYTHON=/usr/bin/python2.7
