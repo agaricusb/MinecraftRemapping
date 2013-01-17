@@ -2026,8 +2026,8 @@ FD: net/minecraft/server/EntityFireball/h net/minecraft/src/EntityFireball/inTil
 FD: net/minecraft/server/EntityFireball/i net/minecraft/src/EntityFireball/inGround
 FD: net/minecraft/server/EntityFireball/j net/minecraft/src/EntityFireball/ticksAlive
 FD: net/minecraft/server/EntityFireball/shooter net/minecraft/src/EntityFireball/shootingEntity
-FD: net/minecraft/server/EntityFireworks/a net/minecraft/src/EntityFireworkRocket/field_92011_a
-FD: net/minecraft/server/EntityFireworks/b net/minecraft/src/EntityFireworkRocket/field_92010_b
+FD: net/minecraft/server/EntityFireworks/expectedLifespan net/minecraft/src/EntityFireworkRocket/field_92010_b
+FD: net/minecraft/server/EntityFireworks/ticksFlown net/minecraft/src/EntityFireworkRocket/field_92011_a
 FD: net/minecraft/server/EntityFishingHook/a net/minecraft/src/EntityFishHook/shake
 FD: net/minecraft/server/EntityFishingHook/at net/minecraft/src/EntityFishHook/ticksCatchable
 FD: net/minecraft/server/EntityFishingHook/au net/minecraft/src/EntityFishHook/fishPosRotationIncrements
@@ -2144,7 +2144,6 @@ FD: net/minecraft/server/EntityLiving/bF net/minecraft/src/EntityLiving/isJumpin
 FD: net/minecraft/server/EntityLiving/bG net/minecraft/src/EntityLiving/defaultPitch
 FD: net/minecraft/server/EntityLiving/bH net/minecraft/src/EntityLiving/moveSpeed
 FD: net/minecraft/server/EntityLiving/bI net/minecraft/src/EntityLiving/numTicksToChaseTarget
-FD: net/minecraft/server/EntityLiving/bN net/minecraft/src/EntityLiving/attackTarget
 FD: net/minecraft/server/EntityLiving/bO net/minecraft/src/EntityLiving/senses
 FD: net/minecraft/server/EntityLiving/bP net/minecraft/src/EntityLiving/AIMoveSpeed
 FD: net/minecraft/server/EntityLiving/bQ net/minecraft/src/EntityLiving/homePosition
@@ -2181,6 +2180,7 @@ FD: net/minecraft/server/EntityLiving/equipment net/minecraft/src/EntityLiving/e
 FD: net/minecraft/server/EntityLiving/f net/minecraft/src/EntityLiving/revengeTimer
 FD: net/minecraft/server/EntityLiving/g net/minecraft/src/EntityLiving/lastAttackingEntity
 FD: net/minecraft/server/EntityLiving/goalSelector net/minecraft/src/EntityLiving/tasks
+FD: net/minecraft/server/EntityLiving/goalTarget net/minecraft/src/EntityLiving/attackTarget
 FD: net/minecraft/server/EntityLiving/health net/minecraft/src/EntityLiving/health
 FD: net/minecraft/server/EntityLiving/hurtTicks net/minecraft/src/EntityLiving/hurtTime
 FD: net/minecraft/server/EntityLiving/i net/minecraft/src/EntityLiving/field_70748_f
@@ -3572,8 +3572,8 @@ FD: net/minecraft/server/PathfinderGoalSelector/e net/minecraft/src/EntityAITask
 FD: net/minecraft/server/PathfinderGoalSelectorItem/a net/minecraft/src/EntityAITaskEntry/action
 FD: net/minecraft/server/PathfinderGoalSelectorItem/b net/minecraft/src/EntityAITaskEntry/priority
 FD: net/minecraft/server/PathfinderGoalSelectorItem/c net/minecraft/src/EntityAITaskEntry/tasks
-FD: net/minecraft/server/PathfinderGoalSit/a net/minecraft/src/EntityAISit/theEntity
-FD: net/minecraft/server/PathfinderGoalSit/b net/minecraft/src/EntityAISit/isSitting
+FD: net/minecraft/server/PathfinderGoalSit/entity net/minecraft/src/EntityAISit/theEntity
+FD: net/minecraft/server/PathfinderGoalSit/willSit net/minecraft/src/EntityAISit/isSitting
 FD: net/minecraft/server/PathfinderGoalSwell/a net/minecraft/src/EntityAICreeperSwell/swellingCreeper
 FD: net/minecraft/server/PathfinderGoalSwell/b net/minecraft/src/EntityAICreeperSwell/creeperAttackTarget
 FD: net/minecraft/server/PathfinderGoalTakeFlower/a net/minecraft/src/EntityAIFollowGolem/theVillager
@@ -3634,6 +3634,7 @@ FD: net/minecraft/server/PlayerChunkMap/e net/minecraft/src/PlayerManager/player
 FD: net/minecraft/server/PlayerChunkMap/f net/minecraft/src/PlayerManager/xzDirectionsConst
 FD: net/minecraft/server/PlayerChunkMap/managedPlayers net/minecraft/src/PlayerManager/players
 FD: net/minecraft/server/PlayerChunkMap/world net/minecraft/src/PlayerManager/theWorldServer
+FD: net/minecraft/server/PlayerConnection/chatThrottle net/minecraft/src/NetServerHandler/chatSpamThresholdCount
 FD: net/minecraft/server/PlayerConnection/checkMovement net/minecraft/src/NetServerHandler/hasMoved
 FD: net/minecraft/server/PlayerConnection/disconnected net/minecraft/src/NetServerHandler/connectionClosed
 FD: net/minecraft/server/PlayerConnection/f net/minecraft/src/NetServerHandler/currentTicks
@@ -3644,7 +3645,6 @@ FD: net/minecraft/server/PlayerConnection/j net/minecraft/src/NetServerHandler/k
 FD: net/minecraft/server/PlayerConnection/k net/minecraft/src/NetServerHandler/rndmObj
 FD: net/minecraft/server/PlayerConnection/l net/minecraft/src/NetServerHandler/ticksOfLastKeepAlive
 FD: net/minecraft/server/PlayerConnection/logger net/minecraft/src/NetServerHandler/logger
-FD: net/minecraft/server/PlayerConnection/m net/minecraft/src/NetServerHandler/chatSpamThresholdCount
 FD: net/minecraft/server/PlayerConnection/minecraftServer net/minecraft/src/NetServerHandler/mcServer
 FD: net/minecraft/server/PlayerConnection/networkManager net/minecraft/src/NetServerHandler/netManager
 FD: net/minecraft/server/PlayerConnection/player net/minecraft/src/NetServerHandler/playerEntity
@@ -6399,9 +6399,9 @@ MD: net/minecraft/server/DataWatcher/a (Ljava/util/List;Ljava/io/DataOutputStrea
 MD: net/minecraft/server/DataWatcher/b ()Ljava/util/List; net/minecraft/src/DataWatcher/unwatchAndReturnAllWatched ()Ljava/util/List;
 MD: net/minecraft/server/DataWatcher/c ()Ljava/util/List; net/minecraft/src/DataWatcher/func_75685_c ()Ljava/util/List;
 MD: net/minecraft/server/DataWatcher/d ()Z net/minecraft/src/DataWatcher/func_92034_d ()Z
-MD: net/minecraft/server/DataWatcher/f (I)Lnet/minecraft/server/ItemStack; net/minecraft/src/DataWatcher/getWatchableObjectItemStack (I)Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/DataWatcher/getByte (I)B net/minecraft/src/DataWatcher/getWatchableObjectByte (I)B
 MD: net/minecraft/server/DataWatcher/getInt (I)I net/minecraft/src/DataWatcher/getWatchableObjectInt (I)I
+MD: net/minecraft/server/DataWatcher/getItemStack (I)Lnet/minecraft/server/ItemStack; net/minecraft/src/DataWatcher/getWatchableObjectItemStack (I)Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/DataWatcher/getShort (I)S net/minecraft/src/DataWatcher/getWatchableObjectShort (I)S
 MD: net/minecraft/server/DataWatcher/getString (I)Ljava/lang/String; net/minecraft/src/DataWatcher/getWatchableObjectString (I)Ljava/lang/String;
 MD: net/minecraft/server/DataWatcher/h (I)V net/minecraft/src/DataWatcher/func_82708_h (I)V
@@ -6764,7 +6764,6 @@ MD: net/minecraft/server/EntityAnimal/a (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/server/EntityAnimal/aN ()I net/minecraft/src/EntityAnimal/getTalkInterval ()I
 MD: net/minecraft/server/EntityAnimal/b (Lnet/minecraft/server/EntityAnimal;)V net/minecraft/src/EntityAnimal/procreate (Lnet/minecraft/src/EntityAnimal;)V
 MD: net/minecraft/server/EntityAnimal/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityAnimal/writeEntityToNBT (Lnet/minecraft/src/NBTTagCompound;)V
-MD: net/minecraft/server/EntityAnimal/bj ()Z net/minecraft/src/EntityAnimal/canDespawn ()Z
 MD: net/minecraft/server/EntityAnimal/bm ()V net/minecraft/src/EntityAnimal/updateAITick ()V
 MD: net/minecraft/server/EntityAnimal/c ()V net/minecraft/src/EntityAnimal/onLivingUpdate ()V
 MD: net/minecraft/server/EntityAnimal/c (Lnet/minecraft/server/ItemStack;)Z net/minecraft/src/EntityAnimal/isBreedingItem (Lnet/minecraft/src/ItemStack;)Z
@@ -6772,6 +6771,7 @@ MD: net/minecraft/server/EntityAnimal/canSpawn ()Z net/minecraft/src/EntityAnima
 MD: net/minecraft/server/EntityAnimal/damageEntity (Lnet/minecraft/server/DamageSource;I)Z net/minecraft/src/EntityAnimal/attackEntityFrom (Lnet/minecraft/src/DamageSource;I)Z
 MD: net/minecraft/server/EntityAnimal/findTarget ()Lnet/minecraft/server/Entity; net/minecraft/src/EntityAnimal/findPlayerToAttack ()Lnet/minecraft/src/Entity;
 MD: net/minecraft/server/EntityAnimal/getExpValue (Lnet/minecraft/server/EntityHuman;)I net/minecraft/src/EntityAnimal/getExperiencePoints (Lnet/minecraft/src/EntityPlayer;)I
+MD: net/minecraft/server/EntityAnimal/isTypeNotPersistent ()Z net/minecraft/src/EntityAnimal/canDespawn ()Z
 MD: net/minecraft/server/EntityAnimal/mate (Lnet/minecraft/server/EntityAnimal;)Z net/minecraft/src/EntityAnimal/canMateWith (Lnet/minecraft/src/EntityAnimal;)Z
 MD: net/minecraft/server/EntityAnimal/r ()Z net/minecraft/src/EntityAnimal/isInLove ()Z
 MD: net/minecraft/server/EntityAnimal/s ()V net/minecraft/src/EntityAnimal/resetInLove ()V
@@ -7049,7 +7049,7 @@ MD: net/minecraft/server/EntityGolem/aN ()I net/minecraft/src/EntityGolem/getTal
 MD: net/minecraft/server/EntityGolem/aY ()Ljava/lang/String; net/minecraft/src/EntityGolem/getLivingSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityGolem/aZ ()Ljava/lang/String; net/minecraft/src/EntityGolem/getHurtSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityGolem/ba ()Ljava/lang/String; net/minecraft/src/EntityGolem/getDeathSound ()Ljava/lang/String;
-MD: net/minecraft/server/EntityGolem/bj ()Z net/minecraft/src/EntityGolem/canDespawn ()Z
+MD: net/minecraft/server/EntityGolem/isTypeNotPersistent ()Z net/minecraft/src/EntityGolem/canDespawn ()Z
 MD: net/minecraft/server/EntityHanging/L ()Z net/minecraft/src/EntityHanging/canBeCollidedWith ()Z
 MD: net/minecraft/server/EntityHanging/a ()V net/minecraft/src/EntityHanging/entityInit ()V
 MD: net/minecraft/server/EntityHanging/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityHanging/readEntityFromNBT (Lnet/minecraft/src/NBTTagCompound;)V
@@ -7254,7 +7254,6 @@ MD: net/minecraft/server/EntityLiving/aC ()Lnet/minecraft/server/EntityLiving; n
 MD: net/minecraft/server/EntityLiving/aD ()Lnet/minecraft/server/EntityLiving; net/minecraft/src/EntityLiving/getLastAttackingEntity ()Lnet/minecraft/src/EntityLiving;
 MD: net/minecraft/server/EntityLiving/aE ()I net/minecraft/src/EntityLiving/getAge ()I
 MD: net/minecraft/server/EntityLiving/aF ()F net/minecraft/src/EntityLiving/getAIMoveSpeed ()F
-MD: net/minecraft/server/EntityLiving/aG ()Lnet/minecraft/server/EntityLiving; net/minecraft/src/EntityLiving/getAttackTarget ()Lnet/minecraft/src/EntityLiving;
 MD: net/minecraft/server/EntityLiving/aH ()V net/minecraft/src/EntityLiving/eatGrassBonus ()V
 MD: net/minecraft/server/EntityLiving/aI ()Z net/minecraft/src/EntityLiving/isWithinHomeDistanceCurrentPosition ()Z
 MD: net/minecraft/server/EntityLiving/aJ ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/src/EntityLiving/getHomePosition ()Lnet/minecraft/src/ChunkCoordinates;
@@ -7277,7 +7276,6 @@ MD: net/minecraft/server/EntityLiving/as ()I net/minecraft/src/EntityLiving/func
 MD: net/minecraft/server/EntityLiving/b (FFF)F net/minecraft/src/EntityLiving/updateRotation (FFF)F
 MD: net/minecraft/server/EntityLiving/b (IIII)V net/minecraft/src/EntityLiving/setHomeArea (IIII)V
 MD: net/minecraft/server/EntityLiving/b (Lnet/minecraft/server/DamageSource;I)I net/minecraft/src/EntityLiving/applyArmorCalculations (Lnet/minecraft/src/DamageSource;I)I
-MD: net/minecraft/server/EntityLiving/b (Lnet/minecraft/server/EntityLiving;)V net/minecraft/src/EntityLiving/setAttackTarget (Lnet/minecraft/src/EntityLiving;)V
 MD: net/minecraft/server/EntityLiving/b (Lnet/minecraft/server/ItemStack;)I net/minecraft/src/EntityLiving/func_82159_b (Lnet/minecraft/src/ItemStack;)I
 MD: net/minecraft/server/EntityLiving/b (Lnet/minecraft/server/MobEffect;)V net/minecraft/src/EntityLiving/onChangedPotionEffect (Lnet/minecraft/src/PotionEffect;)V
 MD: net/minecraft/server/EntityLiving/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityLiving/writeEntityToNBT (Lnet/minecraft/src/NBTTagCompound;)V
@@ -7298,7 +7296,6 @@ MD: net/minecraft/server/EntityLiving/bf ()Z net/minecraft/src/EntityLiving/isCl
 MD: net/minecraft/server/EntityLiving/bg ()Z net/minecraft/src/EntityLiving/isMovementBlocked ()Z
 MD: net/minecraft/server/EntityLiving/bh ()Z net/minecraft/src/EntityLiving/isBlocking ()Z
 MD: net/minecraft/server/EntityLiving/bi ()V net/minecraft/src/EntityLiving/jump ()V
-MD: net/minecraft/server/EntityLiving/bj ()Z net/minecraft/src/EntityLiving/canDespawn ()Z
 MD: net/minecraft/server/EntityLiving/bk ()V net/minecraft/src/EntityLiving/despawnEntity ()V
 MD: net/minecraft/server/EntityLiving/bl ()V net/minecraft/src/EntityLiving/updateAITasks ()V
 MD: net/minecraft/server/EntityLiving/bm ()V net/minecraft/src/EntityLiving/updateAITick ()V
@@ -7335,6 +7332,7 @@ MD: net/minecraft/server/EntityLiving/getEffects ()Ljava/util/Collection; net/mi
 MD: net/minecraft/server/EntityLiving/getEquipment ()[Lnet/minecraft/server/ItemStack; net/minecraft/src/EntityLiving/getInventory ()[Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/EntityLiving/getEquipment (I)Lnet/minecraft/server/ItemStack; net/minecraft/src/EntityLiving/getEquipmentInSlot (I)Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/EntityLiving/getExpValue (Lnet/minecraft/server/EntityHuman;)I net/minecraft/src/EntityLiving/getExperiencePoints (Lnet/minecraft/src/EntityPlayer;)I
+MD: net/minecraft/server/EntityLiving/getGoalTarget ()Lnet/minecraft/server/EntityLiving; net/minecraft/src/EntityLiving/getAttackTarget ()Lnet/minecraft/src/EntityLiving;
 MD: net/minecraft/server/EntityLiving/getHeadHeight ()F net/minecraft/src/EntityLiving/getEyeHeight ()F
 MD: net/minecraft/server/EntityLiving/getHealth ()I net/minecraft/src/EntityLiving/getHealth ()I
 MD: net/minecraft/server/EntityLiving/getLootId ()I net/minecraft/src/EntityLiving/getDropItemId ()I
@@ -7349,6 +7347,7 @@ MD: net/minecraft/server/EntityLiving/i (F)Lnet/minecraft/server/Vec3D; net/mine
 MD: net/minecraft/server/EntityLiving/isAlive ()Z net/minecraft/src/EntityLiving/isEntityAlive ()Z
 MD: net/minecraft/server/EntityLiving/isBaby ()Z net/minecraft/src/EntityLiving/isChild ()Z
 MD: net/minecraft/server/EntityLiving/isSleeping ()Z net/minecraft/src/EntityLiving/isPlayerSleeping ()Z
+MD: net/minecraft/server/EntityLiving/isTypeNotPersistent ()Z net/minecraft/src/EntityLiving/canDespawn ()Z
 MD: net/minecraft/server/EntityLiving/j_ ()V net/minecraft/src/EntityLiving/onUpdate ()V
 MD: net/minecraft/server/EntityLiving/k (I)V net/minecraft/src/EntityLiving/damageArmor (I)V
 MD: net/minecraft/server/EntityLiving/l (I)V net/minecraft/src/EntityLiving/dropRareDrop (I)V
@@ -7361,6 +7360,7 @@ MD: net/minecraft/server/EntityLiving/q (I)Lnet/minecraft/server/ItemStack; net/
 MD: net/minecraft/server/EntityLiving/r (I)V net/minecraft/src/EntityLiving/setArrowCountInEntity (I)V
 MD: net/minecraft/server/EntityLiving/receive (Lnet/minecraft/server/Entity;I)V net/minecraft/src/EntityLiving/onItemPickup (Lnet/minecraft/src/Entity;I)V
 MD: net/minecraft/server/EntityLiving/setEquipment (ILnet/minecraft/server/ItemStack;)V net/minecraft/src/EntityLiving/setCurrentItemOrArmor (ILnet/minecraft/src/ItemStack;)V
+MD: net/minecraft/server/EntityLiving/setGoalTarget (Lnet/minecraft/server/EntityLiving;)V net/minecraft/src/EntityLiving/setAttackTarget (Lnet/minecraft/src/EntityLiving;)V
 MD: net/minecraft/server/EntityLiving/setHealth (I)V net/minecraft/src/EntityLiving/setEntityHealth (I)V
 MD: net/minecraft/server/EntityLiving/y ()V net/minecraft/src/EntityLiving/onEntityUpdate ()V
 MD: net/minecraft/server/EntityMagmaCube/J ()Z net/minecraft/src/EntityMagmaCube/handleLavaMovement ()Z
@@ -7443,7 +7443,6 @@ MD: net/minecraft/server/EntityOcelot/b (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/server/EntityOcelot/bG ()V net/minecraft/src/EntityOcelot/initCreature ()V
 MD: net/minecraft/server/EntityOcelot/ba ()Ljava/lang/String; net/minecraft/src/EntityOcelot/getDeathSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityOcelot/be ()Z net/minecraft/src/EntityOcelot/isAIEnabled ()Z
-MD: net/minecraft/server/EntityOcelot/bj ()Z net/minecraft/src/EntityOcelot/canDespawn ()Z
 MD: net/minecraft/server/EntityOcelot/bm ()V net/minecraft/src/EntityOcelot/updateAITick ()V
 MD: net/minecraft/server/EntityOcelot/c (Lnet/minecraft/server/ItemStack;)Z net/minecraft/src/EntityOcelot/isBreedingItem (Lnet/minecraft/src/ItemStack;)Z
 MD: net/minecraft/server/EntityOcelot/canSpawn ()Z net/minecraft/src/EntityOcelot/getCanSpawnHere ()Z
@@ -7454,6 +7453,7 @@ MD: net/minecraft/server/EntityOcelot/getCatType ()I net/minecraft/src/EntityOce
 MD: net/minecraft/server/EntityOcelot/getLocalizedName ()Ljava/lang/String; net/minecraft/src/EntityOcelot/getEntityName ()Ljava/lang/String;
 MD: net/minecraft/server/EntityOcelot/getLootId ()I net/minecraft/src/EntityOcelot/getDropItemId ()I
 MD: net/minecraft/server/EntityOcelot/getMaxHealth ()I net/minecraft/src/EntityOcelot/getMaxHealth ()I
+MD: net/minecraft/server/EntityOcelot/isTypeNotPersistent ()Z net/minecraft/src/EntityOcelot/canDespawn ()Z
 MD: net/minecraft/server/EntityOcelot/m (Lnet/minecraft/server/Entity;)Z net/minecraft/src/EntityOcelot/attackEntityAsMob (Lnet/minecraft/src/Entity;)Z
 MD: net/minecraft/server/EntityOcelot/mate (Lnet/minecraft/server/EntityAnimal;)Z net/minecraft/src/EntityOcelot/canMateWith (Lnet/minecraft/src/EntityAnimal;)Z
 MD: net/minecraft/server/EntityOcelot/setCatType (I)V net/minecraft/src/EntityOcelot/setTameSkin (I)V
@@ -7541,7 +7541,6 @@ MD: net/minecraft/server/EntityPlayer/j_ ()V net/minecraft/src/EntityPlayerMP/on
 MD: net/minecraft/server/EntityPlayer/k ()V net/minecraft/src/EntityPlayerMP/closeCraftingGui ()V
 MD: net/minecraft/server/EntityPlayer/l ()V net/minecraft/src/EntityPlayerMP/mountEntityAndWakeUp ()V
 MD: net/minecraft/server/EntityPlayer/levelDown (I)V net/minecraft/src/EntityPlayerMP/addExperienceLevel (I)V
-MD: net/minecraft/server/EntityPlayer/m ()V net/minecraft/src/EntityPlayerMP/setPlayerHealthUpdated ()V
 MD: net/minecraft/server/EntityPlayer/mount (Lnet/minecraft/server/Entity;)V net/minecraft/src/EntityPlayerMP/mountEntity (Lnet/minecraft/src/Entity;)V
 MD: net/minecraft/server/EntityPlayer/n ()V net/minecraft/src/EntityPlayerMP/onItemUseFinish ()V
 MD: net/minecraft/server/EntityPlayer/nextContainerCounter ()V net/minecraft/src/EntityPlayerMP/getNextWindowId ()V
@@ -7560,6 +7559,7 @@ MD: net/minecraft/server/EntityPlayer/setContainerData (Lnet/minecraft/server/Co
 MD: net/minecraft/server/EntityPlayer/startCrafting (III)V net/minecraft/src/EntityPlayerMP/displayGUIWorkbench (III)V
 MD: net/minecraft/server/EntityPlayer/startEnchanting (III)V net/minecraft/src/EntityPlayerMP/displayGUIEnchantment (III)V
 MD: net/minecraft/server/EntityPlayer/syncInventory ()V net/minecraft/src/EntityPlayerMP/addSelfToInternalCraftingInventory ()V
+MD: net/minecraft/server/EntityPlayer/triggerHealthUpdate ()V net/minecraft/src/EntityPlayerMP/setPlayerHealthUpdated ()V
 MD: net/minecraft/server/EntityPlayer/updateAbilities ()V net/minecraft/src/EntityPlayerMP/sendPlayerAbilities ()V
 MD: net/minecraft/server/EntityPlayer/updateInventory (Lnet/minecraft/server/Container;)V net/minecraft/src/EntityPlayerMP/sendContainerToPlayer (Lnet/minecraft/src/Container;)V
 MD: net/minecraft/server/EntityPotion/a (Lnet/minecraft/server/MovingObjectPosition;)V net/minecraft/src/EntityPotion/onImpact (Lnet/minecraft/src/MovingObjectPosition;)V
@@ -7727,11 +7727,11 @@ MD: net/minecraft/server/EntityTameableAnimal/a ()V net/minecraft/src/EntityTame
 MD: net/minecraft/server/EntityTameableAnimal/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityTameable/readEntityFromNBT (Lnet/minecraft/src/NBTTagCompound;)V
 MD: net/minecraft/server/EntityTameableAnimal/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityTameable/writeEntityToNBT (Lnet/minecraft/src/NBTTagCompound;)V
 MD: net/minecraft/server/EntityTameableAnimal/f (Z)V net/minecraft/src/EntityTameable/playTameEffect (Z)V
+MD: net/minecraft/server/EntityTameableAnimal/getGoalSit ()Lnet/minecraft/server/PathfinderGoalSit; net/minecraft/src/EntityTameable/func_70907_r ()Lnet/minecraft/src/EntityAISit;
 MD: net/minecraft/server/EntityTameableAnimal/getOwner ()Lnet/minecraft/server/EntityLiving; net/minecraft/src/EntityTameable/getOwner ()Lnet/minecraft/src/EntityLiving;
 MD: net/minecraft/server/EntityTameableAnimal/getOwnerName ()Ljava/lang/String; net/minecraft/src/EntityTameable/getOwnerName ()Ljava/lang/String;
 MD: net/minecraft/server/EntityTameableAnimal/isSitting ()Z net/minecraft/src/EntityTameable/isSitting ()Z
 MD: net/minecraft/server/EntityTameableAnimal/isTamed ()Z net/minecraft/src/EntityTameable/isTamed ()Z
-MD: net/minecraft/server/EntityTameableAnimal/q ()Lnet/minecraft/server/PathfinderGoalSit; net/minecraft/src/EntityTameable/func_70907_r ()Lnet/minecraft/src/EntityAISit;
 MD: net/minecraft/server/EntityTameableAnimal/setOwnerName (Ljava/lang/String;)V net/minecraft/src/EntityTameable/setOwner (Ljava/lang/String;)V
 MD: net/minecraft/server/EntityTameableAnimal/setSitting (Z)V net/minecraft/src/EntityTameable/setSitting (Z)V
 MD: net/minecraft/server/EntityTameableAnimal/setTamed (Z)V net/minecraft/src/EntityTameable/setTamed (Z)V
@@ -7785,7 +7785,6 @@ MD: net/minecraft/server/EntityVillager/bG ()V net/minecraft/src/EntityVillager/
 MD: net/minecraft/server/EntityVillager/b_ (Lnet/minecraft/server/EntityHuman;)V net/minecraft/src/EntityVillager/setCustomer (Lnet/minecraft/src/EntityPlayer;)V
 MD: net/minecraft/server/EntityVillager/ba ()Ljava/lang/String; net/minecraft/src/EntityVillager/getDeathSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityVillager/be ()Z net/minecraft/src/EntityVillager/isAIEnabled ()Z
-MD: net/minecraft/server/EntityVillager/bj ()Z net/minecraft/src/EntityVillager/canDespawn ()Z
 MD: net/minecraft/server/EntityVillager/bm ()V net/minecraft/src/EntityVillager/updateAITick ()V
 MD: net/minecraft/server/EntityVillager/c (ILjava/util/Random;)I net/minecraft/src/EntityVillager/getRandomCountForBlacksmithItem (ILjava/util/Random;)I
 MD: net/minecraft/server/EntityVillager/c (Lnet/minecraft/server/EntityLiving;)V net/minecraft/src/EntityVillager/setRevengeTarget (Lnet/minecraft/src/EntityLiving;)V
@@ -7796,6 +7795,7 @@ MD: net/minecraft/server/EntityVillager/g (Z)V net/minecraft/src/EntityVillager/
 MD: net/minecraft/server/EntityVillager/getMaxHealth ()I net/minecraft/src/EntityVillager/getMaxHealth ()I
 MD: net/minecraft/server/EntityVillager/getOffers (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/MerchantRecipeList; net/minecraft/src/EntityVillager/getRecipes (Lnet/minecraft/src/EntityPlayer;)Lnet/minecraft/src/MerchantRecipeList;
 MD: net/minecraft/server/EntityVillager/getProfession ()I net/minecraft/src/EntityVillager/getProfession ()I
+MD: net/minecraft/server/EntityVillager/isTypeNotPersistent ()Z net/minecraft/src/EntityVillager/canDespawn ()Z
 MD: net/minecraft/server/EntityVillager/j (F)F net/minecraft/src/EntityVillager/func_82188_j (F)F
 MD: net/minecraft/server/EntityVillager/m_ ()Lnet/minecraft/server/EntityHuman; net/minecraft/src/EntityVillager/getCustomer ()Lnet/minecraft/src/EntityPlayer;
 MD: net/minecraft/server/EntityVillager/n ()Z net/minecraft/src/EntityVillager/isMating ()Z
@@ -7806,9 +7806,9 @@ MD: net/minecraft/server/EntityVillager/setProfession (I)V net/minecraft/src/Ent
 MD: net/minecraft/server/EntityVillager/t (I)V net/minecraft/src/EntityVillager/addDefaultEquipmentAndRecipies (I)V
 MD: net/minecraft/server/EntityWaterAnimal/aN ()I net/minecraft/src/EntityWaterMob/getTalkInterval ()I
 MD: net/minecraft/server/EntityWaterAnimal/bc ()Z net/minecraft/src/EntityWaterMob/canBreatheUnderwater ()Z
-MD: net/minecraft/server/EntityWaterAnimal/bj ()Z net/minecraft/src/EntityWaterMob/canDespawn ()Z
 MD: net/minecraft/server/EntityWaterAnimal/canSpawn ()Z net/minecraft/src/EntityWaterMob/getCanSpawnHere ()Z
 MD: net/minecraft/server/EntityWaterAnimal/getExpValue (Lnet/minecraft/server/EntityHuman;)I net/minecraft/src/EntityWaterMob/getExperiencePoints (Lnet/minecraft/src/EntityPlayer;)I
+MD: net/minecraft/server/EntityWaterAnimal/isTypeNotPersistent ()Z net/minecraft/src/EntityWaterMob/canDespawn ()Z
 MD: net/minecraft/server/EntityWaterAnimal/y ()V net/minecraft/src/EntityWaterMob/onEntityUpdate ()V
 MD: net/minecraft/server/EntityWitch/a ()V net/minecraft/src/EntityWitch/entityInit ()V
 MD: net/minecraft/server/EntityWitch/aY ()Ljava/lang/String; net/minecraft/src/EntityWitch/getLivingSound ()Ljava/lang/String;
@@ -7873,12 +7873,10 @@ MD: net/minecraft/server/EntityWolf/aX ()F net/minecraft/src/EntityWolf/getSound
 MD: net/minecraft/server/EntityWolf/aY ()Ljava/lang/String; net/minecraft/src/EntityWolf/getLivingSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityWolf/aZ ()Ljava/lang/String; net/minecraft/src/EntityWolf/getHurtSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityWolf/b (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityWolf; net/minecraft/src/EntityWolf/spawnBabyAnimal (Lnet/minecraft/src/EntityAgeable;)Lnet/minecraft/src/EntityWolf;
-MD: net/minecraft/server/EntityWolf/b (Lnet/minecraft/server/EntityLiving;)V net/minecraft/src/EntityWolf/setAttackTarget (Lnet/minecraft/src/EntityLiving;)V
 MD: net/minecraft/server/EntityWolf/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/EntityWolf/writeEntityToNBT (Lnet/minecraft/src/NBTTagCompound;)V
 MD: net/minecraft/server/EntityWolf/bM ()Z net/minecraft/src/EntityWolf/func_70922_bv ()Z
 MD: net/minecraft/server/EntityWolf/ba ()Ljava/lang/String; net/minecraft/src/EntityWolf/getDeathSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityWolf/be ()Z net/minecraft/src/EntityWolf/isAIEnabled ()Z
-MD: net/minecraft/server/EntityWolf/bj ()Z net/minecraft/src/EntityWolf/canDespawn ()Z
 MD: net/minecraft/server/EntityWolf/bm ()V net/minecraft/src/EntityWolf/updateAITick ()V
 MD: net/minecraft/server/EntityWolf/bp ()I net/minecraft/src/EntityWolf/getVerticalFaceSpeed ()I
 MD: net/minecraft/server/EntityWolf/bv ()I net/minecraft/src/EntityWolf/getMaxSpawnedInChunk ()I
@@ -7891,12 +7889,14 @@ MD: net/minecraft/server/EntityWolf/getHeadHeight ()F net/minecraft/src/EntityWo
 MD: net/minecraft/server/EntityWolf/getLootId ()I net/minecraft/src/EntityWolf/getDropItemId ()I
 MD: net/minecraft/server/EntityWolf/getMaxHealth ()I net/minecraft/src/EntityWolf/getMaxHealth ()I
 MD: net/minecraft/server/EntityWolf/isAngry ()Z net/minecraft/src/EntityWolf/isAngry ()Z
+MD: net/minecraft/server/EntityWolf/isTypeNotPersistent ()Z net/minecraft/src/EntityWolf/canDespawn ()Z
 MD: net/minecraft/server/EntityWolf/j (Z)V net/minecraft/src/EntityWolf/func_70918_i (Z)V
 MD: net/minecraft/server/EntityWolf/j_ ()V net/minecraft/src/EntityWolf/onUpdate ()V
 MD: net/minecraft/server/EntityWolf/m (Lnet/minecraft/server/Entity;)Z net/minecraft/src/EntityWolf/attackEntityAsMob (Lnet/minecraft/src/Entity;)Z
 MD: net/minecraft/server/EntityWolf/mate (Lnet/minecraft/server/EntityAnimal;)Z net/minecraft/src/EntityWolf/canMateWith (Lnet/minecraft/src/EntityAnimal;)Z
 MD: net/minecraft/server/EntityWolf/setAngry (Z)V net/minecraft/src/EntityWolf/setAngry (Z)V
 MD: net/minecraft/server/EntityWolf/setCollarColor (I)V net/minecraft/src/EntityWolf/setCollarColor (I)V
+MD: net/minecraft/server/EntityWolf/setGoalTarget (Lnet/minecraft/server/EntityLiving;)V net/minecraft/src/EntityWolf/setAttackTarget (Lnet/minecraft/src/EntityLiving;)V
 MD: net/minecraft/server/EntityZombie/a ()V net/minecraft/src/EntityZombie/entityInit ()V
 MD: net/minecraft/server/EntityZombie/a (I)V net/minecraft/src/EntityZombie/startConversion (I)V
 MD: net/minecraft/server/EntityZombie/a (IIII)V net/minecraft/src/EntityZombie/playStepSound (IIII)V
@@ -8450,7 +8450,6 @@ MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/Entity;)I net/minecr
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/EntityItemFrame;)V net/minecraft/src/ItemStack/setItemFrame (Lnet/minecraft/src/EntityItemFrame;)V
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/EntityLiving;)Z net/minecraft/src/ItemStack/interactWith (Lnet/minecraft/src/EntityLiving;)Z
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/EntityLiving;Lnet/minecraft/server/EntityHuman;)V net/minecraft/src/ItemStack/hitEntity (Lnet/minecraft/src/EntityLiving;Lnet/minecraft/src/EntityPlayer;)V
-MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/NBTTagCompound;)Lnet/minecraft/server/ItemStack; net/minecraft/src/ItemStack/loadItemStackFromNBT (Lnet/minecraft/src/NBTTagCompound;)Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/World;IIIILnet/minecraft/server/EntityHuman;)V net/minecraft/src/ItemStack/onBlockDestroyed (Lnet/minecraft/src/World;IIIILnet/minecraft/src/EntityPlayer;)V
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/World;Lnet/minecraft/server/Entity;IZ)V net/minecraft/src/ItemStack/updateAnimation (Lnet/minecraft/src/World;Lnet/minecraft/src/Entity;IZ)V
 MD: net/minecraft/server/ItemStack/a (Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack; net/minecraft/src/ItemStack/useItemRightClick (Lnet/minecraft/src/World;Lnet/minecraft/src/EntityPlayer;)Lnet/minecraft/src/ItemStack;
@@ -8463,6 +8462,7 @@ MD: net/minecraft/server/ItemStack/b (Lnet/minecraft/server/World;Lnet/minecraft
 MD: net/minecraft/server/ItemStack/c (Ljava/lang/String;)V net/minecraft/src/ItemStack/setItemName (Ljava/lang/String;)V
 MD: net/minecraft/server/ItemStack/c (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/src/ItemStack/readFromNBT (Lnet/minecraft/src/NBTTagCompound;)V
 MD: net/minecraft/server/ItemStack/cloneItemStack ()Lnet/minecraft/server/ItemStack; net/minecraft/src/ItemStack/copy ()Lnet/minecraft/src/ItemStack;
+MD: net/minecraft/server/ItemStack/createStack (Lnet/minecraft/server/NBTTagCompound;)Lnet/minecraft/server/ItemStack; net/minecraft/src/ItemStack/loadItemStackFromNBT (Lnet/minecraft/src/NBTTagCompound;)Lnet/minecraft/src/ItemStack;
 MD: net/minecraft/server/ItemStack/d (Lnet/minecraft/server/ItemStack;)Z net/minecraft/src/ItemStack/isItemStackEqual (Lnet/minecraft/src/ItemStack;)Z
 MD: net/minecraft/server/ItemStack/damage (ILnet/minecraft/server/EntityLiving;)V net/minecraft/src/ItemStack/damageItem (ILnet/minecraft/src/EntityLiving;)V
 MD: net/minecraft/server/ItemStack/doMaterialsMatch (Lnet/minecraft/server/ItemStack;)Z net/minecraft/src/ItemStack/isItemEqual (Lnet/minecraft/src/ItemStack;)Z
@@ -8848,7 +8848,6 @@ MD: net/minecraft/server/NBTTagCompound/a (Ljava/lang/String;ILjava/lang/ClassCa
 MD: net/minecraft/server/NBTTagCompound/a (Lnet/minecraft/server/NBTTagCompound;)Ljava/util/Map; net/minecraft/src/NBTTagCompound/getTagMap (Lnet/minecraft/src/NBTTagCompound;)Ljava/util/Map;
 MD: net/minecraft/server/NBTTagCompound/c ()Ljava/util/Collection; net/minecraft/src/NBTTagCompound/getTags ()Ljava/util/Collection;
 MD: net/minecraft/server/NBTTagCompound/clone ()Lnet/minecraft/server/NBTBase; net/minecraft/src/NBTTagCompound/copy ()Lnet/minecraft/src/NBTBase;
-MD: net/minecraft/server/NBTTagCompound/d ()Z net/minecraft/src/NBTTagCompound/hasNoTags ()Z
 MD: net/minecraft/server/NBTTagCompound/equals (Ljava/lang/Object;)Z net/minecraft/src/NBTTagCompound/equals (Ljava/lang/Object;)Z
 MD: net/minecraft/server/NBTTagCompound/get (Ljava/lang/String;)Lnet/minecraft/server/NBTBase; net/minecraft/src/NBTTagCompound/getTag (Ljava/lang/String;)Lnet/minecraft/src/NBTBase;
 MD: net/minecraft/server/NBTTagCompound/getBoolean (Ljava/lang/String;)Z net/minecraft/src/NBTTagCompound/getBoolean (Ljava/lang/String;)Z
@@ -8866,8 +8865,9 @@ MD: net/minecraft/server/NBTTagCompound/getString (Ljava/lang/String;)Ljava/lang
 MD: net/minecraft/server/NBTTagCompound/getTypeId ()B net/minecraft/src/NBTTagCompound/getId ()B
 MD: net/minecraft/server/NBTTagCompound/hasKey (Ljava/lang/String;)Z net/minecraft/src/NBTTagCompound/hasKey (Ljava/lang/String;)Z
 MD: net/minecraft/server/NBTTagCompound/hashCode ()I net/minecraft/src/NBTTagCompound/hashCode ()I
+MD: net/minecraft/server/NBTTagCompound/isEmpty ()Z net/minecraft/src/NBTTagCompound/hasNoTags ()Z
 MD: net/minecraft/server/NBTTagCompound/load (Ljava/io/DataInput;)V net/minecraft/src/NBTTagCompound/load (Ljava/io/DataInput;)V
-MD: net/minecraft/server/NBTTagCompound/o (Ljava/lang/String;)V net/minecraft/src/NBTTagCompound/removeTag (Ljava/lang/String;)V
+MD: net/minecraft/server/NBTTagCompound/remove (Ljava/lang/String;)V net/minecraft/src/NBTTagCompound/removeTag (Ljava/lang/String;)V
 MD: net/minecraft/server/NBTTagCompound/set (Ljava/lang/String;Lnet/minecraft/server/NBTBase;)V net/minecraft/src/NBTTagCompound/setTag (Ljava/lang/String;Lnet/minecraft/src/NBTBase;)V
 MD: net/minecraft/server/NBTTagCompound/setBoolean (Ljava/lang/String;Z)V net/minecraft/src/NBTTagCompound/setBoolean (Ljava/lang/String;Z)V
 MD: net/minecraft/server/NBTTagCompound/setByte (Ljava/lang/String;B)V net/minecraft/src/NBTTagCompound/setByte (Ljava/lang/String;B)V
@@ -9623,9 +9623,9 @@ MD: net/minecraft/server/PathfinderGoalSelector/a (Lnet/minecraft/server/Pathfin
 MD: net/minecraft/server/PathfinderGoalSelector/a (Lnet/minecraft/server/PathfinderGoalSelectorItem;Lnet/minecraft/server/PathfinderGoalSelectorItem;)Z net/minecraft/src/EntityAITasks/areTasksCompatible (Lnet/minecraft/src/EntityAITaskEntry;Lnet/minecraft/src/EntityAITaskEntry;)Z
 MD: net/minecraft/server/PathfinderGoalSelector/b (Lnet/minecraft/server/PathfinderGoalSelectorItem;)Z net/minecraft/src/EntityAITasks/func_75775_b (Lnet/minecraft/src/EntityAITaskEntry;)Z
 MD: net/minecraft/server/PathfinderGoalSit/a ()Z net/minecraft/src/EntityAISit/shouldExecute ()Z
-MD: net/minecraft/server/PathfinderGoalSit/a (Z)V net/minecraft/src/EntityAISit/setSitting (Z)V
 MD: net/minecraft/server/PathfinderGoalSit/c ()V net/minecraft/src/EntityAISit/startExecuting ()V
 MD: net/minecraft/server/PathfinderGoalSit/d ()V net/minecraft/src/EntityAISit/resetTask ()V
+MD: net/minecraft/server/PathfinderGoalSit/setSitting (Z)V net/minecraft/src/EntityAISit/setSitting (Z)V
 MD: net/minecraft/server/PathfinderGoalSwell/a ()Z net/minecraft/src/EntityAICreeperSwell/shouldExecute ()Z
 MD: net/minecraft/server/PathfinderGoalSwell/c ()V net/minecraft/src/EntityAICreeperSwell/startExecuting ()V
 MD: net/minecraft/server/PathfinderGoalSwell/d ()V net/minecraft/src/EntityAICreeperSwell/resetTask ()V
