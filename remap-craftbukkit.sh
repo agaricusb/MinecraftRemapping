@@ -1,10 +1,13 @@
 #!/bin/sh -x
 
+# Minecraft version
+MCVER=1.4.6
+
 # Root of checked out CraftBukkit repository
 CB_ROOT=../CraftBukkit
 
 # MCP decompiled with FML repackaging, but not joined. See https://gist.github.com/4366333
-MCP_ROOT=../mcp730-nojad-pkgd
+MCP_ROOT=../mcp726-pkgd
 
 # Python 2.7+ installation 
 PYTHON=/usr/bin/python2.7
@@ -19,12 +22,11 @@ DIFF_OUT=/tmp/diff
 # Currently you need to generate this manually by following the instructions on https://github.com/agaricusb/CraftBukkit/wiki/How-to-decompile-Minecraft-using-MCP-with-FML-repackaged-class-names,-without-FML's-other-changes
 # then importing the sources into IDEA, and extracting the range map with srg2source.
 # TODO: automate extracting rangemap for MCP? probably not necessary to automate, doesn't change much
-#MCP_RANGEMAP=1.4.7/pkgmcp.rangemap
 MCP_RANGEMAP=$MCP_ROOT/`basename $MCP_ROOT`.rangemap
 
 # CB to MCP mapping
-SRG_CB2MCP=1.4.7/cb2pkgmcp.srg
-SRG_CB2MCP_FIXES=1.4.6/uncollide-cb2pkgmcp.srg
+SRG_CB2MCP=1.4.6/cb-to-pkgmcp147.srg
+SRG_CB2MCP_FIXES=$MCVER/uncollide-cb2pkgmcp.srg
 
 
 # Abort on any command failure
@@ -32,7 +34,7 @@ set -e
 
 
 # Small fixes to accomodate renaming compatibility
-patch -p1 -d $CB_ROOT < prerenamefixes.patch
+patch -p1 -d $CB_ROOT < $MCVER/prerenamefixes.patch
 
 # Change minecraft-server library to a "slimmed" version without the same NMS classes CB patches
 # This avoids Psi symbol resolving errors
@@ -41,7 +43,7 @@ patch -p1 -d $CB_ROOT < pom-slim-minecraft-server.patch
 # Preflight IDEA with the updated pom, giving it a time to scan the symbols
 rm -f $CB_ROOT/srg2source-batchmode
 /Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT &
-sleep 60
+sleep 120
 killall idea
 sleep 2
 killall -9 idea || true
