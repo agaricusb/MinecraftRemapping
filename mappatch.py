@@ -12,9 +12,10 @@ startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"
 cbmcpBranch = "pkgmcp"
 
 shouldPullLatestChanges = False
-shouldCheckoutMaster = True
-shouldRemapInitial = True
-shouldRemapPatches = True
+shouldCheckoutMaster = False#True
+shouldRemapInitial = False#True
+shouldRemapPatches = False#True
+shouldRewritePaths = True
 
 def runRemap():
     print "Starting remap script..."
@@ -111,6 +112,34 @@ def main():
             # Save for comparison to next commit
             saveBranch()
 
+    if shouldRewritePaths:
+        for filename in os.listdir(outDir):
+            if filename[0] == ".": continue
+            print filename
+            path = os.path.join(outDir, filename)
+            lines = file(path).readlines()
+            # Clean up patch, removing stat output
+            # TODO: find out how to stop git show from outputting it in the first place
+            statLine = None
+            for i, line in enumerate(lines):
+                if "files changed, " in line:
+                    statLine = i
+                    break
+            if statLine is None:
+                print "Skipping",path  # probably already processed
+                continue
+            i = statLine - 1
+            while True:
+                assert i > 0, "Could not find patch description in %s" % (path,)
+                if len(line[i].strip()) == 0: break  # blank line separator
+                i -= 1
+            lines = lines[0:i] + lines[statLine + 1:]
+
+            # Fix paths, CBMCP to MCPC+
+            for i, line in enumerate(lines):
+                lines[i] = line.replace("src/main/java", "src/minecraft")
+
+            file(path, "w").write("".join(lines))
 
 if __name__ == "__main__":
     main()
