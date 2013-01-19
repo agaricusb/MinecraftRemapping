@@ -43,11 +43,13 @@ patch -p1 -d $CB_ROOT < pom-slim-minecraft-server.patch
 # Preflight IDEA with the updated pom, giving it a time to scan the symbols
 rm -f $CB_ROOT/srg2source-batchmode
 /Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT &
-sleep 120
-killall idea
-sleep 2
-killall -9 idea || true
-killall -9 idea || true
+echo Ensure the pom is updated, then press enter to continue
+read
+#sleep 120
+#killall idea
+#sleep 2
+#killall -9 idea || true
+#killall -9 idea || true
 
 # Extract map of symbol ranges in CB source, required for renaming
 # IDEA must have Srg2source plugin installed, it will detect batchmode and automatically run
