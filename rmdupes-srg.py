@@ -3,6 +3,7 @@
 # Filter srg removing names that didn't change
 
 import sys
+import srglib
 
 for line in sys.stdin.readlines():
     line = line.strip()
@@ -17,11 +18,11 @@ for line in sys.stdin.readlines():
             print kind, inName, outName
     elif kind == "FD:": # field
         inName, outName = args
-        if inName != outName:
+        if srglib.splitBaseName(inName) != srglib.splitBaseName(outName):
             print kind, inName, outName
     elif kind == "MD:": # method
         inName, inSig, outName, outSig = args
-        if inName != outName:
+        if srglib.splitBaseName(inName) != srglib.splitBaseName(outName):
             print kind, inName, inSig, outName, outSig
     else:
         print line
