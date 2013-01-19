@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 # Minecraft version
-MCVER=1.4.6
+MCVER=1.4.7
 
 # Root of checked out CraftBukkit repository
 CB_ROOT=../CraftBukkit
@@ -25,8 +25,8 @@ DIFF_OUT=/tmp/diff
 MCP_RANGEMAP=$MCP_ROOT/`basename $MCP_ROOT`.rangemap
 
 # CB to MCP mapping
-SRG_CB2MCP=1.4.6/cb-to-pkgmcp147.srg
-SRG_CB2MCP_FIXES=$MCVER/uncollide-cb2pkgmcp.srg
+SRG_CB2MCP=$MCVER/cb2pkgmcp.srg
+SRG_CB2MCP_FIXES=1.4.6/uncollide-cb2pkgmcp.srg
 
 
 # Abort on any command failure

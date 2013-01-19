@@ -8,14 +8,15 @@ import subprocess, os
 srcRoot = "../CraftBukkit"
 scriptDir = "../jars"  # relative to srcRoot
 outDir = "../jars/cbpatches/" # relative to srcRoot
-startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"
+startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
+#startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"  # first dev build of 1.4.6-R0.4 - initial MCPC+ fork
 cbmcpBranch = "pkgmcp"
 
-shouldPullLatestChanges = False
-shouldCheckoutMaster = False#True
-shouldRemapInitial = False#True
-shouldRemapPatches = False#True
-shouldRewritePaths = True#False
+shouldPullLatestChanges = True
+shouldCheckoutMaster = True
+shouldRemapInitial = True
+shouldRemapPatches = True
+shouldRewritePaths = True
 
 def runRemap():
     print "Starting remap script..."
