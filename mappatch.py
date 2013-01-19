@@ -15,7 +15,7 @@ shouldPullLatestChanges = False
 shouldCheckoutMaster = False#True
 shouldRemapInitial = False#True
 shouldRemapPatches = False#True
-shouldRewritePaths = True
+shouldRewritePaths = True#False
 
 def runRemap():
     print "Starting remap script..."
@@ -113,7 +113,7 @@ def main():
             saveBranch()
 
     if shouldRewritePaths:
-        for filename in os.listdir(outDir):
+        for filename in sorted(os.listdir(outDir)):
             if filename[0] == ".": continue
             print filename
             path = os.path.join(outDir, filename)
@@ -131,9 +131,9 @@ def main():
             i = statLine - 1
             while True:
                 assert i > 0, "Could not find patch description in %s" % (path,)
-                if len(line[i].strip()) == 0: break  # blank line separator
+                if len(lines[i].strip()) == 0: break  # blank line separator
                 i -= 1
-            lines = lines[0:i] + lines[statLine + 1:]
+            lines = lines[:i] + lines[statLine + 1:]
 
             # Fix paths, CBMCP to MCPC+
             for i, line in enumerate(lines):
