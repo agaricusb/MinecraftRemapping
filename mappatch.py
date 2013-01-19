@@ -1,4 +1,7 @@
 #!/usr/bin/python
+# Remap patches from git history
+
+# For updating MCPC+ to latest upstream CB
 
 import subprocess, os
 
@@ -9,7 +12,9 @@ startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"
 cbmcpBranch = "pkgmcp"
 
 shouldPullLatestChanges = False
-shouldRemapInitial = False
+shouldCheckoutMaster = True
+shouldRemapInitial = True
+shouldRemapPatches = True
 
 def runRemap():
     print "Starting remap script..."
@@ -21,7 +26,7 @@ def runRemap():
 
 def run(cmd):
     print ">",cmd
-    raw_input()
+    #raw_input()
     assert os.system(cmd) == 0, "Failed to run "+cmd
 
 def runOutput(cmd):
@@ -54,42 +59,58 @@ def readCommitLog():
         commit, message = line.split(" ", 1)
         if commit == startCommit: break
         print commit, message
+        assert not (message.startswith("Automated") and message.endswith("rename")), "Unclean starting point - already has automated commits! Reset and retry."
         commits.append((commit, message))
     commits.reverse()
     return commits
 
+def saveBranch():
+    # Save our remapped changes to the branch for comparison reference
+    run("git branch -D "+cbmcpBranch)
+    run("git checkout -b "+cbmcpBranch)
+    run("git commit -m 'Automated file rename'")  # separate commit for diff visibility
+    run("git commit -am 'Automated symbol rename'")
+
 def main():
     if os.path.basename(os.getcwd()) != os.path.basename(srcRoot): os.chdir(srcRoot)
 
+    if shouldCheckoutMaster:
+        clean()
+        run("git checkout master")
+
     if shouldPullLatestChanges:
         # Get all the latest changes 
-        run("git checkout master")
         run("git pull origin master")
+
+    if shouldCheckoutMaster:
+        run("git checkout master")
 
     commits = readCommitLog()
 
     if shouldRemapInitial:
         # Start from here, creating an initial remap on a branch for the basis of comparison
         run("git checkout "+startCommit)
-        run("git branch -D "+cbmcpBranch)
-        run("git checkout -b "+cbmcpBranch)
         runRemap()
-        run("git commit -m 'Automated file rename'")  # separate commit for diff visibility
-        run("git commit -am 'Automated symbol rename'")
+        saveBranch()
 
-    # Remap commits
-    n = 0
-    for commitInfo in commits:
-        commit, message = commitInfo
-        n += 1
-        filename = "%s/%.4d-%s-%s" % (outDir, n, commit, message.replace(" ", "_"))
-        print "\n\n*** %s %s" % (commit, message)
-        clean()
-        run("git checkout "+commit)
-        runRemap()
-        
-        patch = buildRemappedPatch(commit)
-        file(filename, "w").write(patch)
+    if shouldRemapPatches:
+        # Remap commits, translating patches
+        n = 0
+        for commitInfo in commits:
+            commit, message = commitInfo
+            n += 1
+            filename = "%s/%.4d-%s-%s" % (outDir, n, commit, message.replace(" ", "_"))
+            print "\n\n*** %s %s" % (commit, message)
+            clean()
+            run("git checkout "+commit)
+            runRemap()
+            
+            patch = buildRemappedPatch(commit)
+            file(filename, "w").write(patch)
+
+            # Save for comparison to next commit
+            saveBranch()
+
 
 if __name__ == "__main__":
     main()
