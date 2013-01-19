@@ -45,6 +45,16 @@ rm -f $CB_ROOT/srg2source-batchmode
 /Applications/IntelliJ\ IDEA\ 12.app/Contents/MacOS/idea `pwd`/$CB_ROOT &
 echo Ensure the pom is updated, then press enter to continue
 read
+set +e
+killall -0 idea
+while [ $? -eq 0 ]
+do
+    echo "IDEA is still running! Wait for it to finish, then close and press enter to continue"
+    read
+    killall -0 idea
+done
+set -e
+
 #sleep 120
 #killall idea
 #sleep 2
