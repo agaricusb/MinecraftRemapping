@@ -8,6 +8,7 @@ import subprocess, os
 srcRoot = "../CraftBukkit"
 scriptDir = "../jars"  # relative to srcRoot
 outDir = "../jars/cbpatches/spigot" # relative to srcRoot
+#startCommit = "a05357ee65e95d2eadb6e2f6036c0c6f25243702" # commit in Spigot before filename too long - shade 2.0
 startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # commit before Spigot #425, Refactor processBlockPlace logic. Fixes BUKKIT-3406 and BUKKIT-3454
 #startCommit = "4e8a841fa9b368b55d2b60511a8c0655eb52e29e" # 2nd commit in 1.4.7-R.02, Place beds with the correct data. Fixes BUKKIT-3447
 #startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
@@ -46,7 +47,7 @@ def buildRemappedPatch(commit):
     print header
 
     # Compare against rename of previous commit
-    cmd = ("git", "diff", "pkgmcp")
+    cmd = ("git", "diff", cbmcpBranch)
     diff = runOutput(cmd)
 
     return header + "\n" + diff
@@ -106,6 +107,7 @@ def main():
             n += 1
             safeMessage = "".join(x if x.isalnum() else "_" for x in message)
             filename = "%s/%.4d-%s-%s" % (outDir, n, commit, safeMessage)
+            filename = filename[0:200]
             print "\n\n*** %s %s" % (commit, message)
             clean()
             run("git checkout "+commit)
