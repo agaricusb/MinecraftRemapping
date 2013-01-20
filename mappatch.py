@@ -7,14 +7,16 @@ import subprocess, os
 
 srcRoot = "../CraftBukkit"
 scriptDir = "../jars"  # relative to srcRoot
-outDir = "../jars/cbpatches/" # relative to srcRoot
-startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
+outDir = "../jars/cbpatches" # relative to srcRoot
+startCommit = "4e8a841fa9b368b55d2b60511a8c0655eb52e29e" # 2nd commit in 1.4.7-R.02, Place beds with the correct data. Fixes BUKKIT-3447
+#startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
 #startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"  # first dev build of 1.4.6-R0.4 - initial MCPC+ fork
 cbmcpBranch = "pkgmcp"
+masterBranch = "master"
 
 shouldPullLatestChanges = True
 shouldCheckoutMaster = True
-shouldRemapInitial = True
+shouldRemapInitial = False
 shouldRemapPatches = True
 shouldRewritePaths = True
 
@@ -78,14 +80,14 @@ def main():
 
     if shouldCheckoutMaster:
         clean()
-        run("git checkout master")
+        run("git checkout "+masterBranch)
 
     if shouldPullLatestChanges:
         # Get all the latest changes 
-        run("git pull origin master")
+        run("git pull origin "+masterBranch)
 
     if shouldCheckoutMaster:
-        run("git checkout master")
+        run("git checkout "+masterBranch)
 
     commits = readCommitLog()
 
@@ -101,7 +103,8 @@ def main():
         for commitInfo in commits:
             commit, message = commitInfo
             n += 1
-            filename = "%s/%.4d-%s-%s" % (outDir, n, commit, message.replace(" ", "_"))
+            safeMessage = "".join(x if x.isalnum() else "_" for x in message)
+            filename = "%s/%.4d-%s-%s" % (outDir, n, commit, safeMessage)
             print "\n\n*** %s %s" % (commit, message)
             clean()
             run("git checkout "+commit)
@@ -118,6 +121,7 @@ def main():
             if filename[0] == ".": continue
             print filename
             path = os.path.join(outDir, filename)
+            if not os.path.isfile(path): continue
             lines = file(path).readlines()
             # Clean up patch, removing stat output
             # TODO: find out how to stop git show from outputting it in the first place
