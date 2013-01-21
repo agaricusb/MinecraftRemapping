@@ -1,6 +1,6 @@
-commit 1c872b93eba9f5975a106887e0ba0e34a98c158a
+commit 90510abdbda2900d42a8a29ddc4ad25330502eb6
 Author: Agaricus <agaricusb@yahoo.com>
-Date:   Sat Jan 19 01:41:19 2013 -0800
+Date:   Sun Jan 20 18:55:44 2013 -0800
 
     Pre-rename fixes to accomodate MCP remapping for CraftBukkit 1.4.7
     
@@ -29,7 +29,7 @@ index f29eace..0529081 100644
          return 0;
      }
 diff --git a/src/main/java/net/minecraft/server/ChunkRegionLoader.java b/src/main/java/net/minecraft/server/ChunkRegionLoader.java
-index 88c33d0..f517238 100644
+index 88c33d0..30ceb17 100644
 --- a/src/main/java/net/minecraft/server/ChunkRegionLoader.java
 +++ b/src/main/java/net/minecraft/server/ChunkRegionLoader.java
 @@ -77,7 +77,13 @@ public class ChunkRegionLoader implements IAsyncChunkSaver, IChunkLoader {
@@ -37,7 +37,7 @@ index 88c33d0..f517238 100644
              }
  
 -            nbttagcompound = NBTCompressedStreamTools.a((DataInput) datainputstream);
-+            // CBMCP start - catch exception 
++            // CBMCP start - catch exception
 +            try {
 +                nbttagcompound = NBTCompressedStreamTools.a((DataInput) datainputstream);
 +            } catch (Throwable ex) {
@@ -47,6 +47,19 @@ index 88c33d0..f517238 100644
          }
  
          return this.a(world, i, j, nbttagcompound);
+diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 94b62ac..3842b87 100644
+--- a/src/main/java/net/minecraft/server/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -60,7 +60,7 @@ public class PlayerConnection extends Connection {
+     private long j;
+     private static Random k = new Random();
+     private long l;
+-    private volatile int chatThrottle = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, "chatThrottle"); // CraftBukkit - multithreaded field
++    private volatile int chatThrottle = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, org.bukkit.craftbukkit.CraftServer.isUsingMappingMCP ? "chatSpamThresholdCount" : (org.bukkit.craftbukkit.CraftServer.isUsingMappingCB ? "chatThrottle" : "m")); // CraftBukkit - multithreaded field // CBMCP
+     private int x = 0;
+     private double y;
+     private double z;
 diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src/main/java/net/minecraft/server/PlayerInteractManager.java
 index 5faee12..44dd20a 100644
 --- a/src/main/java/net/minecraft/server/PlayerInteractManager.java
