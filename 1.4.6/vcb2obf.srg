@@ -565,7 +565,7 @@ CL: net/minecraft/server/v1_4_6/MerchantRecipeList xu
 CL: net/minecraft/server/v1_4_6/MethodProfiler kh
 CL: net/minecraft/server/v1_4_6/MinecartTrackLogic als
 CL: net/minecraft/server/v1_4_6/MinecraftEncryption jt
-CL: net/minecraft/server/v1_4_6/MinecraftServer net/minecraft/server/v1_4_6/MinecraftServer
+CL: net/minecraft/server/v1_4_6/MinecraftServer net/minecraft/server/MinecraftServer
 CL: net/minecraft/server/v1_4_6/MobEffect lm
 CL: net/minecraft/server/v1_4_6/MobEffectList ll
 CL: net/minecraft/server/v1_4_6/MojangStatisticsGenerator le
@@ -2872,51 +2872,51 @@ FD: net/minecraft/server/v1_4_6/MinecartTrackLogic/e als/e
 FD: net/minecraft/server/v1_4_6/MinecartTrackLogic/f als/f
 FD: net/minecraft/server/v1_4_6/MinecartTrackLogic/g als/g
 FD: net/minecraft/server/v1_4_6/MinecraftEncryption/a jt/a
-FD: net/minecraft/server/v1_4_6/MinecraftServer/D net/minecraft/server/v1_4_6/MinecraftServer/D
-FD: net/minecraft/server/v1_4_6/MinecraftServer/E net/minecraft/server/v1_4_6/MinecraftServer/E
-FD: net/minecraft/server/v1_4_6/MinecraftServer/F net/minecraft/server/v1_4_6/MinecraftServer/F
-FD: net/minecraft/server/v1_4_6/MinecraftServer/G net/minecraft/server/v1_4_6/MinecraftServer/G
-FD: net/minecraft/server/v1_4_6/MinecraftServer/H net/minecraft/server/v1_4_6/MinecraftServer/H
-FD: net/minecraft/server/v1_4_6/MinecraftServer/I net/minecraft/server/v1_4_6/MinecraftServer/I
-FD: net/minecraft/server/v1_4_6/MinecraftServer/J net/minecraft/server/v1_4_6/MinecraftServer/J
-FD: net/minecraft/server/v1_4_6/MinecraftServer/K net/minecraft/server/v1_4_6/MinecraftServer/K
-FD: net/minecraft/server/v1_4_6/MinecraftServer/N net/minecraft/server/v1_4_6/MinecraftServer/N
-FD: net/minecraft/server/v1_4_6/MinecraftServer/O net/minecraft/server/v1_4_6/MinecraftServer/O
-FD: net/minecraft/server/v1_4_6/MinecraftServer/P net/minecraft/server/v1_4_6/MinecraftServer/P
-FD: net/minecraft/server/v1_4_6/MinecraftServer/Q net/minecraft/server/v1_4_6/MinecraftServer/Q
-FD: net/minecraft/server/v1_4_6/MinecraftServer/R net/minecraft/server/v1_4_6/MinecraftServer/R
-FD: net/minecraft/server/v1_4_6/MinecraftServer/S net/minecraft/server/v1_4_6/MinecraftServer/S
-FD: net/minecraft/server/v1_4_6/MinecraftServer/T net/minecraft/server/v1_4_6/MinecraftServer/T
-FD: net/minecraft/server/v1_4_6/MinecraftServer/allowFlight net/minecraft/server/v1_4_6/MinecraftServer/B
-FD: net/minecraft/server/v1_4_6/MinecraftServer/convertable net/minecraft/server/v1_4_6/MinecraftServer/m
-FD: net/minecraft/server/v1_4_6/MinecraftServer/d net/minecraft/server/v1_4_6/MinecraftServer/d
-FD: net/minecraft/server/v1_4_6/MinecraftServer/demoMode net/minecraft/server/v1_4_6/MinecraftServer/M
-FD: net/minecraft/server/v1_4_6/MinecraftServer/e net/minecraft/server/v1_4_6/MinecraftServer/e
-FD: net/minecraft/server/v1_4_6/MinecraftServer/f net/minecraft/server/v1_4_6/MinecraftServer/f
-FD: net/minecraft/server/v1_4_6/MinecraftServer/g net/minecraft/server/v1_4_6/MinecraftServer/g
-FD: net/minecraft/server/v1_4_6/MinecraftServer/h net/minecraft/server/v1_4_6/MinecraftServer/h
-FD: net/minecraft/server/v1_4_6/MinecraftServer/i net/minecraft/server/v1_4_6/MinecraftServer/i
-FD: net/minecraft/server/v1_4_6/MinecraftServer/isRunning net/minecraft/server/v1_4_6/MinecraftServer/u
-FD: net/minecraft/server/v1_4_6/MinecraftServer/isStopped net/minecraft/server/v1_4_6/MinecraftServer/v
-FD: net/minecraft/server/v1_4_6/MinecraftServer/j net/minecraft/server/v1_4_6/MinecraftServer/j
-FD: net/minecraft/server/v1_4_6/MinecraftServer/k net/minecraft/server/v1_4_6/MinecraftServer/k
-FD: net/minecraft/server/v1_4_6/MinecraftServer/l net/minecraft/server/v1_4_6/MinecraftServer/l
-FD: net/minecraft/server/v1_4_6/MinecraftServer/log net/minecraft/server/v1_4_6/MinecraftServer/a
-FD: net/minecraft/server/v1_4_6/MinecraftServer/methodProfiler net/minecraft/server/v1_4_6/MinecraftServer/b
-FD: net/minecraft/server/v1_4_6/MinecraftServer/motd net/minecraft/server/v1_4_6/MinecraftServer/C
-FD: net/minecraft/server/v1_4_6/MinecraftServer/n net/minecraft/server/v1_4_6/MinecraftServer/n
-FD: net/minecraft/server/v1_4_6/MinecraftServer/onlineMode net/minecraft/server/v1_4_6/MinecraftServer/x
-FD: net/minecraft/server/v1_4_6/MinecraftServer/p net/minecraft/server/v1_4_6/MinecraftServer/p
-FD: net/minecraft/server/v1_4_6/MinecraftServer/pvpMode net/minecraft/server/v1_4_6/MinecraftServer/A
-FD: net/minecraft/server/v1_4_6/MinecraftServer/q net/minecraft/server/v1_4_6/MinecraftServer/q
-FD: net/minecraft/server/v1_4_6/MinecraftServer/s net/minecraft/server/v1_4_6/MinecraftServer/s
-FD: net/minecraft/server/v1_4_6/MinecraftServer/serverIp net/minecraft/server/v1_4_6/MinecraftServer/r
-FD: net/minecraft/server/v1_4_6/MinecraftServer/spawnAnimals net/minecraft/server/v1_4_6/MinecraftServer/y
-FD: net/minecraft/server/v1_4_6/MinecraftServer/spawnNPCs net/minecraft/server/v1_4_6/MinecraftServer/z
-FD: net/minecraft/server/v1_4_6/MinecraftServer/t net/minecraft/server/v1_4_6/MinecraftServer/t
-FD: net/minecraft/server/v1_4_6/MinecraftServer/ticks net/minecraft/server/v1_4_6/MinecraftServer/w
-FD: net/minecraft/server/v1_4_6/MinecraftServer/universe net/minecraft/server/v1_4_6/MinecraftServer/o
-FD: net/minecraft/server/v1_4_6/MinecraftServer/worldServer net/minecraft/server/v1_4_6/MinecraftServer/c
+FD: net/minecraft/server/v1_4_6/MinecraftServer/D net/minecraft/server/MinecraftServer/D
+FD: net/minecraft/server/v1_4_6/MinecraftServer/E net/minecraft/server/MinecraftServer/E
+FD: net/minecraft/server/v1_4_6/MinecraftServer/F net/minecraft/server/MinecraftServer/F
+FD: net/minecraft/server/v1_4_6/MinecraftServer/G net/minecraft/server/MinecraftServer/G
+FD: net/minecraft/server/v1_4_6/MinecraftServer/H net/minecraft/server/MinecraftServer/H
+FD: net/minecraft/server/v1_4_6/MinecraftServer/I net/minecraft/server/MinecraftServer/I
+FD: net/minecraft/server/v1_4_6/MinecraftServer/J net/minecraft/server/MinecraftServer/J
+FD: net/minecraft/server/v1_4_6/MinecraftServer/K net/minecraft/server/MinecraftServer/K
+FD: net/minecraft/server/v1_4_6/MinecraftServer/N net/minecraft/server/MinecraftServer/N
+FD: net/minecraft/server/v1_4_6/MinecraftServer/O net/minecraft/server/MinecraftServer/O
+FD: net/minecraft/server/v1_4_6/MinecraftServer/P net/minecraft/server/MinecraftServer/P
+FD: net/minecraft/server/v1_4_6/MinecraftServer/Q net/minecraft/server/MinecraftServer/Q
+FD: net/minecraft/server/v1_4_6/MinecraftServer/R net/minecraft/server/MinecraftServer/R
+FD: net/minecraft/server/v1_4_6/MinecraftServer/S net/minecraft/server/MinecraftServer/S
+FD: net/minecraft/server/v1_4_6/MinecraftServer/T net/minecraft/server/MinecraftServer/T
+FD: net/minecraft/server/v1_4_6/MinecraftServer/allowFlight net/minecraft/server/MinecraftServer/B
+FD: net/minecraft/server/v1_4_6/MinecraftServer/convertable net/minecraft/server/MinecraftServer/m
+FD: net/minecraft/server/v1_4_6/MinecraftServer/d net/minecraft/server/MinecraftServer/d
+FD: net/minecraft/server/v1_4_6/MinecraftServer/demoMode net/minecraft/server/MinecraftServer/M
+FD: net/minecraft/server/v1_4_6/MinecraftServer/e net/minecraft/server/MinecraftServer/e
+FD: net/minecraft/server/v1_4_6/MinecraftServer/f net/minecraft/server/MinecraftServer/f
+FD: net/minecraft/server/v1_4_6/MinecraftServer/g net/minecraft/server/MinecraftServer/g
+FD: net/minecraft/server/v1_4_6/MinecraftServer/h net/minecraft/server/MinecraftServer/h
+FD: net/minecraft/server/v1_4_6/MinecraftServer/i net/minecraft/server/MinecraftServer/i
+FD: net/minecraft/server/v1_4_6/MinecraftServer/isRunning net/minecraft/server/MinecraftServer/u
+FD: net/minecraft/server/v1_4_6/MinecraftServer/isStopped net/minecraft/server/MinecraftServer/v
+FD: net/minecraft/server/v1_4_6/MinecraftServer/j net/minecraft/server/MinecraftServer/j
+FD: net/minecraft/server/v1_4_6/MinecraftServer/k net/minecraft/server/MinecraftServer/k
+FD: net/minecraft/server/v1_4_6/MinecraftServer/l net/minecraft/server/MinecraftServer/l
+FD: net/minecraft/server/v1_4_6/MinecraftServer/log net/minecraft/server/MinecraftServer/a
+FD: net/minecraft/server/v1_4_6/MinecraftServer/methodProfiler net/minecraft/server/MinecraftServer/b
+FD: net/minecraft/server/v1_4_6/MinecraftServer/motd net/minecraft/server/MinecraftServer/C
+FD: net/minecraft/server/v1_4_6/MinecraftServer/n net/minecraft/server/MinecraftServer/n
+FD: net/minecraft/server/v1_4_6/MinecraftServer/onlineMode net/minecraft/server/MinecraftServer/x
+FD: net/minecraft/server/v1_4_6/MinecraftServer/p net/minecraft/server/MinecraftServer/p
+FD: net/minecraft/server/v1_4_6/MinecraftServer/pvpMode net/minecraft/server/MinecraftServer/A
+FD: net/minecraft/server/v1_4_6/MinecraftServer/q net/minecraft/server/MinecraftServer/q
+FD: net/minecraft/server/v1_4_6/MinecraftServer/s net/minecraft/server/MinecraftServer/s
+FD: net/minecraft/server/v1_4_6/MinecraftServer/serverIp net/minecraft/server/MinecraftServer/r
+FD: net/minecraft/server/v1_4_6/MinecraftServer/spawnAnimals net/minecraft/server/MinecraftServer/y
+FD: net/minecraft/server/v1_4_6/MinecraftServer/spawnNPCs net/minecraft/server/MinecraftServer/z
+FD: net/minecraft/server/v1_4_6/MinecraftServer/t net/minecraft/server/MinecraftServer/t
+FD: net/minecraft/server/v1_4_6/MinecraftServer/ticks net/minecraft/server/MinecraftServer/w
+FD: net/minecraft/server/v1_4_6/MinecraftServer/universe net/minecraft/server/MinecraftServer/o
+FD: net/minecraft/server/v1_4_6/MinecraftServer/worldServer net/minecraft/server/MinecraftServer/c
 FD: net/minecraft/server/v1_4_6/MobEffect/ambient lm/e
 FD: net/minecraft/server/v1_4_6/MobEffect/amplification lm/c
 FD: net/minecraft/server/v1_4_6/MobEffect/duration lm/b
@@ -6476,7 +6476,7 @@ MD: net/minecraft/server/v1_4_6/ControllerMove/net.minecraft.server.ControllerMo
 MD: net/minecraft/server/v1_4_6/ConvertProgressUpdater/a (I)V fw/a (I)V
 MD: net/minecraft/server/v1_4_6/ConvertProgressUpdater/a (Ljava/lang/String;)V fw/a (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/ConvertProgressUpdater/c (Ljava/lang/String;)V fw/c (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/ConvertProgressUpdater/net.minecraft.server.ConvertProgressUpdater (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fw/fw (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/ConvertProgressUpdater/net.minecraft.server.ConvertProgressUpdater (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fw/fw (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/Convertable/a (Ljava/lang/String;Z)Lnet/minecraft/server/v1_4_6/IDataManager; aij/a (Ljava/lang/String;Z)Laih;
 MD: net/minecraft/server/v1_4_6/Convertable/convert (Ljava/lang/String;Lnet/minecraft/server/v1_4_6/IProgressUpdate;)Z aij/a (Ljava/lang/String;Lkj;)Z
 MD: net/minecraft/server/v1_4_6/Convertable/d ()V aij/d ()V
@@ -6588,13 +6588,13 @@ MD: net/minecraft/server/v1_4_6/CrashReportOperatingSystem/call ()Ljava/lang/Obj
 MD: net/minecraft/server/v1_4_6/CrashReportOperatingSystem/net.minecraft.server.CrashReportOperatingSystem (Lnet/minecraft/server/v1_4_6/CrashReport;)V c/c (La;)V
 MD: net/minecraft/server/v1_4_6/CrashReportPlayerCount/a ()Ljava/lang/String; gb/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportPlayerCount/call ()Ljava/lang/Object; gb/call ()Ljava/lang/Object;
-MD: net/minecraft/server/v1_4_6/CrashReportPlayerCount/net.minecraft.server.CrashReportPlayerCount (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gb/gb (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/CrashReportPlayerCount/net.minecraft.server.CrashReportPlayerCount (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gb/gb (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/CrashReportPlayers/a ()Ljava/lang/String; ye/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportPlayers/call ()Ljava/lang/Object; ye/call ()Ljava/lang/Object;
 MD: net/minecraft/server/v1_4_6/CrashReportPlayers/net.minecraft.server.CrashReportPlayers (Lnet/minecraft/server/v1_4_6/World;)V ye/ye (Lyc;)V
 MD: net/minecraft/server/v1_4_6/CrashReportProfilerPosition/a ()Ljava/lang/String; fz/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportProfilerPosition/call ()Ljava/lang/Object; fz/call ()Ljava/lang/Object;
-MD: net/minecraft/server/v1_4_6/CrashReportProfilerPosition/net.minecraft.server.CrashReportProfilerPosition (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fz/fz (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/CrashReportProfilerPosition/net.minecraft.server.CrashReportProfilerPosition (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fz/fz (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/CrashReportSourceBlockType/a ()Ljava/lang/String; yd/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportSourceBlockType/call ()Ljava/lang/Object; yd/call ()Ljava/lang/Object;
 MD: net/minecraft/server/v1_4_6/CrashReportSourceBlockType/net.minecraft.server.CrashReportSourceBlockType (Lnet/minecraft/server/v1_4_6/World;I)V yd/yd (Lyc;I)V
@@ -6622,7 +6622,7 @@ MD: net/minecraft/server/v1_4_6/CrashReportType/call ()Ljava/lang/Object; hs/cal
 MD: net/minecraft/server/v1_4_6/CrashReportType/net.minecraft.server.CrashReportType (Lnet/minecraft/server/v1_4_6/DedicatedServer;)V hs/hs (Lho;)V
 MD: net/minecraft/server/v1_4_6/CrashReportVec3DPoolSize/a ()Ljava/lang/String; ga/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportVec3DPoolSize/call ()Ljava/lang/Object; ga/call ()Ljava/lang/Object;
-MD: net/minecraft/server/v1_4_6/CrashReportVec3DPoolSize/net.minecraft.server.CrashReportVec3DPoolSize (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ga/ga (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/CrashReportVec3DPoolSize/net.minecraft.server.CrashReportVec3DPoolSize (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ga/ga (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/CrashReportVersion/a ()Ljava/lang/String; b/a ()Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/CrashReportVersion/call ()Ljava/lang/Object; b/call ()Ljava/lang/Object;
 MD: net/minecraft/server/v1_4_6/CrashReportVersion/net.minecraft.server.CrashReportVersion (Lnet/minecraft/server/v1_4_6/CrashReport;)V b/b (La;)V
@@ -6689,7 +6689,7 @@ MD: net/minecraft/server/v1_4_6/DataWatcher/watch (ILjava/lang/Object;)V mj/b (I
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/addOp (Ljava/lang/String;)V hn/b (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/addWhitelist (Ljava/lang/String;)V hn/h (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/getServer ()Lnet/minecraft/server/v1_4_6/DedicatedServer; hn/s ()Lho;
-MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; hn/p ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; hn/p ()Lnet/minecraft/server/MinecraftServer;
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/isWhitelisted (Ljava/lang/String;)Z hn/d (Ljava/lang/String;)Z
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/net.minecraft.server.DedicatedPlayerList (Lnet/minecraft/server/v1_4_6/DedicatedServer;)V hn/hn (Lho;)V
 MD: net/minecraft/server/v1_4_6/DedicatedPlayerList/reloadWhitelist ()V hn/j ()V
@@ -6735,8 +6735,8 @@ MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/a ()V ht/a ()V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/a (Ljava/net/InetAddress;)V ht/a (Ljava/net/InetAddress;)V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/b ()V ht/b ()V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/c ()Lnet/minecraft/server/v1_4_6/DedicatedServer; ht/c ()Lho;
-MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer; ht/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
-MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/net.minecraft.server.DedicatedServerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/InetAddress;I)V ht/ht (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/InetAddress;I)V
+MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer; ht/d ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/DedicatedServerConnection/net.minecraft.server.DedicatedServerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/InetAddress;I)V ht/ht (Lnet/minecraft/server/MinecraftServer;Ljava/net/InetAddress;I)V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnectionThread/a ()V hu/a ()V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnectionThread/a (Ljava/net/InetAddress;)V hu/a (Ljava/net/InetAddress;)V
 MD: net/minecraft/server/v1_4_6/DedicatedServerConnectionThread/a (Lnet/minecraft/server/v1_4_6/PendingConnection;)V hu/a (Lit;)V
@@ -6752,29 +6752,29 @@ MD: net/minecraft/server/v1_4_6/DemoPlayerInteractManager/e ()V ig/e ()V
 MD: net/minecraft/server/v1_4_6/DemoPlayerInteractManager/interact (Lnet/minecraft/server/v1_4_6/EntityHuman;Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/ItemStack;IIIIFFF)Z ig/a (Lqx;Lyc;Lur;IIIIFFF)Z
 MD: net/minecraft/server/v1_4_6/DemoPlayerInteractManager/net.minecraft.server.DemoPlayerInteractManager (Lnet/minecraft/server/v1_4_6/World;)V ig/ig (Lyc;)V
 MD: net/minecraft/server/v1_4_6/DemoPlayerInteractManager/useItem (Lnet/minecraft/server/v1_4_6/EntityHuman;Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/ItemStack;)Z ig/a (Lqx;Lyc;Lur;)Z
-MD: net/minecraft/server/v1_4_6/DemoWorldServer/net.minecraft.server.DemoWorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/MethodProfiler;)V if/if (Lnet/minecraft/server/v1_4_6/MinecraftServer;Laih;Ljava/lang/String;ILkh;)V
+MD: net/minecraft/server/v1_4_6/DemoWorldServer/net.minecraft.server.DemoWorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/MethodProfiler;)V if/if (Lnet/minecraft/server/MinecraftServer;Laih;Ljava/lang/String;ILkh;)V
 MD: net/minecraft/server/v1_4_6/Direction/a (DD)I q/a (DD)I
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorArrow/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; fs/a (Lyc;Lbg;)Lrf;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorArrow/net.minecraft.server.DispenseBehaviorArrow (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fs/fs (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorArrow/net.minecraft.server.DispenseBehaviorArrow (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fs/fs (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorBoat/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V ft/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorBoat/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; ft/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorBoat/net.minecraft.server.DispenseBehaviorBoat (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ft/ft (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorBoat/net.minecraft.server.DispenseBehaviorBoat (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ft/ft (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorEgg/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; gc/a (Lyc;Lbg;)Lrf;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorEgg/net.minecraft.server.DispenseBehaviorEgg (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gc/gc (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorEgg/net.minecraft.server.DispenseBehaviorEgg (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gc/gc (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorEmptyBucket/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; fv/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorEmptyBucket/net.minecraft.server.DispenseBehaviorEmptyBucket (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fv/fv (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorEmptyBucket/net.minecraft.server.DispenseBehaviorEmptyBucket (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fv/fv (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorExpBottle/a ()F ge/a ()F
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorExpBottle/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; ge/a (Lyc;Lbg;)Lrf;
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorExpBottle/b ()F ge/b ()F
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorExpBottle/net.minecraft.server.DispenseBehaviorExpBottle (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ge/ge (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorExpBottle/net.minecraft.server.DispenseBehaviorExpBottle (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ge/ge (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorFilledBucket/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; fu/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorFilledBucket/net.minecraft.server.DispenseBehaviorFilledBucket (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fu/fu (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorFilledBucket/net.minecraft.server.DispenseBehaviorFilledBucket (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V fu/fu (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireball/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V gj/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireball/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; gj/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireball/net.minecraft.server.DispenseBehaviorFireball (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gj/gj (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireball/net.minecraft.server.DispenseBehaviorFireball (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gj/gj (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireworks/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V gi/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireworks/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; gi/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireworks/net.minecraft.server.DispenseBehaviorFireworks (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gi/gi (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorFireworks/net.minecraft.server.DispenseBehaviorFireworks (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gi/gi (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorItem/a (Lnet/minecraft/server/v1_4_6/EnumFacing;)I az/a (Lbd;)I
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorItem/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V az/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorItem/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/EnumFacing;)V az/a (Lax;Lbd;)V
@@ -6784,13 +6784,13 @@ MD: net/minecraft/server/v1_4_6/DispenseBehaviorItem/b (Lnet/minecraft/server/v1
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorItem/net.minecraft.server.DispenseBehaviorItem ()V az/az ()V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorMinecart/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V gk/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorMinecart/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; gk/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorMinecart/net.minecraft.server.DispenseBehaviorMinecart (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gk/gk (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorMinecart/net.minecraft.server.DispenseBehaviorMinecart (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gk/gk (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorMonsterEgg/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; gh/b (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorMonsterEgg/net.minecraft.server.DispenseBehaviorMonsterEgg (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gh/gh (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorMonsterEgg/net.minecraft.server.DispenseBehaviorMonsterEgg (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gh/gh (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorNoop/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; bc/a (Lax;Lur;)Lur;
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorNoop/net.minecraft.server.DispenseBehaviorNoop ()V bc/bc ()V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorPotion/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; gf/a (Lax;Lur;)Lur;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorPotion/net.minecraft.server.DispenseBehaviorPotion (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gf/gf (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorPotion/net.minecraft.server.DispenseBehaviorPotion (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gf/gf (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/a ()F fl/a ()F
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/a (Lnet/minecraft/server/v1_4_6/ISourceBlock;)V fl/a (Lax;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; fl/a (Lyc;Lbg;)Lrf;
@@ -6798,7 +6798,7 @@ MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/b ()F fl/b ()F
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/b (Lnet/minecraft/server/v1_4_6/ISourceBlock;Lnet/minecraft/server/v1_4_6/ItemStack;)Lnet/minecraft/server/v1_4_6/ItemStack; fl/b (Lax;Lur;)Lur;
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorProjectile/net.minecraft.server.DispenseBehaviorProjectile ()V fl/fl ()V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorSnowBall/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; gd/a (Lyc;Lbg;)Lrf;
-MD: net/minecraft/server/v1_4_6/DispenseBehaviorSnowBall/net.minecraft.server.DispenseBehaviorSnowBall (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gd/gd (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/DispenseBehaviorSnowBall/net.minecraft.server.DispenseBehaviorSnowBall (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gd/gd (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorThrownPotion/a ()F gg/a ()F
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorThrownPotion/a (Lnet/minecraft/server/v1_4_6/World;Lnet/minecraft/server/v1_4_6/IPosition;)Lnet/minecraft/server/v1_4_6/IProjectile; gg/a (Lyc;Lbg;)Lrf;
 MD: net/minecraft/server/v1_4_6/DispenseBehaviorThrownPotion/b ()F gg/b ()F
@@ -7941,7 +7941,7 @@ MD: net/minecraft/server/v1_4_6/EntityPlayer/levelDown (I)V iq/a (I)V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/m ()V iq/m ()V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/mount (Lnet/minecraft/server/v1_4_6/Entity;)V iq/a (Llq;)V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/n ()V iq/n ()V
-MD: net/minecraft/server/v1_4_6/EntityPlayer/net.minecraft.server.EntityPlayer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/World;Ljava/lang/String;Lnet/minecraft/server/v1_4_6/PlayerInteractManager;)V iq/iq (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lyc;Ljava/lang/String;Lir;)V
+MD: net/minecraft/server/v1_4_6/EntityPlayer/net.minecraft.server.EntityPlayer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/World;Ljava/lang/String;Lnet/minecraft/server/v1_4_6/PlayerInteractManager;)V iq/iq (Lnet/minecraft/server/MinecraftServer;Lyc;Ljava/lang/String;Lir;)V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/nextContainerCounter ()V iq/cg ()V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/openAnvil (III)V iq/d (III)V
 MD: net/minecraft/server/v1_4_6/EntityPlayer/openBeacon (Lnet/minecraft/server/v1_4_6/TileEntityBeacon;)V iq/a (Lank;)V
@@ -8520,7 +8520,7 @@ MD: net/minecraft/server/v1_4_6/GuiLogOutputHandler/publish (Ljava/util/logging/
 MD: net/minecraft/server/v1_4_6/GuiStatsComponent/a ()V ia/a ()V
 MD: net/minecraft/server/v1_4_6/GuiStatsComponent/a (Lnet/minecraft/server/v1_4_6/GuiStatsComponent;)V ia/a (Lia;)V
 MD: net/minecraft/server/v1_4_6/GuiStatsComponent/a ([J)D ia/a ([J)D
-MD: net/minecraft/server/v1_4_6/GuiStatsComponent/net.minecraft.server.GuiStatsComponent (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ia/ia (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/GuiStatsComponent/net.minecraft.server.GuiStatsComponent (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V ia/ia (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/GuiStatsComponent/paint (Ljava/awt/Graphics;)V ia/paint (Ljava/awt/Graphics;)V
 MD: net/minecraft/server/v1_4_6/GuiStatsListener/actionPerformed (Ljava/awt/event/ActionEvent;)V ib/actionPerformed (Ljava/awt/event/ActionEvent;)V
 MD: net/minecraft/server/v1_4_6/GuiStatsListener/net.minecraft.server.GuiStatsListener (Lnet/minecraft/server/v1_4_6/GuiStatsComponent;)V ib/ib (Lia;)V
@@ -9259,110 +9259,110 @@ MD: net/minecraft/server/v1_4_6/MinecraftEncryption/a (ZLjava/security/Key;)Lnet
 MD: net/minecraft/server/v1_4_6/MinecraftEncryption/a ([B)Ljava/security/PublicKey; jt/a ([B)Ljava/security/PublicKey;
 MD: net/minecraft/server/v1_4_6/MinecraftEncryption/b ()Ljava/security/KeyPair; jt/b ()Ljava/security/KeyPair;
 MD: net/minecraft/server/v1_4_6/MinecraftEncryption/b (Ljava/security/Key;[B)[B jt/b (Ljava/security/Key;[B)[B
-MD: net/minecraft/server/v1_4_6/MinecraftServer/F ()Ljava/security/KeyPair; net/minecraft/server/v1_4_6/MinecraftServer/F ()Ljava/security/KeyPair;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/G ()I net/minecraft/server/v1_4_6/MinecraftServer/G ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/H ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/H ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/I ()Z net/minecraft/server/v1_4_6/MinecraftServer/I ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/J ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/J ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/M ()Z net/minecraft/server/v1_4_6/MinecraftServer/M ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/P ()V net/minecraft/server/v1_4_6/MinecraftServer/P ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/S ()I net/minecraft/server/v1_4_6/MinecraftServer/S ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/T ()Z net/minecraft/server/v1_4_6/MinecraftServer/T ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (ILjava/lang/String;)Z net/minecraft/server/v1_4_6/MinecraftServer/a (ILjava/lang/String;)Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/server/v1_4_6/WorldType;Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;Ljava/lang/String;JLyn;Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/security/KeyPair;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/security/KeyPair;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/CrashReport;)V net/minecraft/server/v1_4_6/MinecraftServer/a (La;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/EnumGamemode;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Lyl;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/EnumGamemode;Z)Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/a (Lyl;Z)Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/ICommandListener;Ljava/lang/String;)Ljava/util/List; net/minecraft/server/v1_4_6/MinecraftServer/a (Laa;Ljava/lang/String;)Ljava/util/List;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/IUpdatePlayerListBox;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Lgp;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/MinecraftServer;)Lnet/minecraft/server/v1_4_6/PlayerList; net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/MinecraftServer;)Lgm;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/MojangStatisticsGenerator;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Lle;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/PlayerList;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Lgm;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/a_ (Ljava/lang/String;I)V net/minecraft/server/v1_4_6/MinecraftServer/a_ (Ljava/lang/String;I)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/ae ()Lnet/minecraft/server/v1_4_6/ServerConnection; net/minecraft/server/v1_4_6/MinecraftServer/ae ()Liw;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/ag ()Z net/minecraft/server/v1_4_6/MinecraftServer/ag ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/ah ()I net/minecraft/server/v1_4_6/MinecraftServer/ah ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/ai ()V net/minecraft/server/v1_4_6/MinecraftServer/ai ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/al ()V net/minecraft/server/v1_4_6/MinecraftServer/al ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/b ()Lnet/minecraft/server/v1_4_6/ChunkCoordinates; net/minecraft/server/v1_4_6/MinecraftServer/b ()Ls;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/b (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Lnet/minecraft/server/v1_4_6/CrashReport;)Lnet/minecraft/server/v1_4_6/CrashReport; net/minecraft/server/v1_4_6/MinecraftServer/b (La;)La;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Lnet/minecraft/server/v1_4_6/MojangStatisticsGenerator;)V net/minecraft/server/v1_4_6/MinecraftServer/b (Lle;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Z)V net/minecraft/server/v1_4_6/MinecraftServer/b (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/c (I)V net/minecraft/server/v1_4_6/MinecraftServer/c (I)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/c (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/c (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/c (Z)V net/minecraft/server/v1_4_6/MinecraftServer/c (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/d (I)V net/minecraft/server/v1_4_6/MinecraftServer/d (I)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/d (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/d (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/e ()V net/minecraft/server/v1_4_6/MinecraftServer/e ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/e (Ljava/lang/String;)Ljava/io/File; net/minecraft/server/v1_4_6/MinecraftServer/e (Ljava/lang/String;)Ljava/io/File;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getAllowFlight ()Z net/minecraft/server/v1_4_6/MinecraftServer/Y ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getAllowNether ()Z net/minecraft/server/v1_4_6/MinecraftServer/s ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getCommandHandler ()Lnet/minecraft/server/v1_4_6/ICommandHandler; net/minecraft/server/v1_4_6/MinecraftServer/E ()Lz;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getConvertable ()Lnet/minecraft/server/v1_4_6/Convertable; net/minecraft/server/v1_4_6/MinecraftServer/N ()Laij;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getDifficulty ()I net/minecraft/server/v1_4_6/MinecraftServer/h ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getEnableCommandBlock ()Z net/minecraft/server/v1_4_6/MinecraftServer/Z ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getGamemode ()Lnet/minecraft/server/v1_4_6/EnumGamemode; net/minecraft/server/v1_4_6/MinecraftServer/g ()Lyl;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getGenerateStructures ()Z net/minecraft/server/v1_4_6/MinecraftServer/f ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getMaxBuildHeight ()I net/minecraft/server/v1_4_6/MinecraftServer/ab ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getMotd ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/aa ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getName ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/c_ ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getOnlineMode ()Z net/minecraft/server/v1_4_6/MinecraftServer/U ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlayerList ()Lnet/minecraft/server/v1_4_6/PlayerList; net/minecraft/server/v1_4_6/MinecraftServer/ad ()Lgm;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlayers ()[Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/A ()[Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlugins ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/B ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getPvP ()Z net/minecraft/server/v1_4_6/MinecraftServer/X ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; net/minecraft/server/v1_4_6/MinecraftServer/D ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getServerIp ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/l ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getServerModName ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/getServerModName ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getSnooperEnabled ()Z net/minecraft/server/v1_4_6/MinecraftServer/R ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnAnimals ()Z net/minecraft/server/v1_4_6/MinecraftServer/V ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnMonsters ()Z net/minecraft/server/v1_4_6/MinecraftServer/L ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnNPCs ()Z net/minecraft/server/v1_4_6/MinecraftServer/W ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnProtection ()I net/minecraft/server/v1_4_6/MinecraftServer/ak ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getTexturePack ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/Q ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getVersion ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/x ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/getWorldServer (I)Lnet/minecraft/server/v1_4_6/WorldServer; net/minecraft/server/v1_4_6/MinecraftServer/a (I)Lin;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/h (Ljava/lang/String;)Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/h (Ljava/lang/String;)Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/i (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/i (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/info (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/f (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/init ()Z net/minecraft/server/v1_4_6/MinecraftServer/c ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/isDebugging ()Z net/minecraft/server/v1_4_6/MinecraftServer/C ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/isHardcore ()Z net/minecraft/server/v1_4_6/MinecraftServer/i ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/isRunning ()Z net/minecraft/server/v1_4_6/MinecraftServer/m ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/isStopped ()Z net/minecraft/server/v1_4_6/MinecraftServer/ac ()Z
-MD: net/minecraft/server/v1_4_6/MinecraftServer/j ()V net/minecraft/server/v1_4_6/MinecraftServer/j ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/j (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/j (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/k (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/k (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/l (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/l (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/main ([Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/main ([Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/net.minecraft.server.MinecraftServer (Ljava/io/File;)V net/minecraft/server/v1_4_6/MinecraftServer/net.minecraft.server.MinecraftServer (Ljava/io/File;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/o ()Ljava/io/File; net/minecraft/server/v1_4_6/MinecraftServer/o ()Ljava/io/File;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/p ()V net/minecraft/server/v1_4_6/MinecraftServer/p ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/q ()V net/minecraft/server/v1_4_6/MinecraftServer/q ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/r ()V net/minecraft/server/v1_4_6/MinecraftServer/r ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/run ()V net/minecraft/server/v1_4_6/MinecraftServer/run ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/safeShutdown ()V net/minecraft/server/v1_4_6/MinecraftServer/n ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/saveChunks (Z)V net/minecraft/server/v1_4_6/MinecraftServer/a (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/sendMessage (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setAllowFlight (Z)V net/minecraft/server/v1_4_6/MinecraftServer/h (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setMotd (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/o (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setOnlineMode (Z)V net/minecraft/server/v1_4_6/MinecraftServer/d (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setPort (I)V net/minecraft/server/v1_4_6/MinecraftServer/b (I)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setPvP (Z)V net/minecraft/server/v1_4_6/MinecraftServer/g (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setSpawnAnimals (Z)V net/minecraft/server/v1_4_6/MinecraftServer/e (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setSpawnNPCs (Z)V net/minecraft/server/v1_4_6/MinecraftServer/f (Z)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/setTexturePack (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/n (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/stop ()V net/minecraft/server/v1_4_6/MinecraftServer/k ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/t ()V net/minecraft/server/v1_4_6/MinecraftServer/t ()V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/u ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/u ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/v ()I net/minecraft/server/v1_4_6/MinecraftServer/v ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/w ()Ljava/lang/String; net/minecraft/server/v1_4_6/MinecraftServer/w ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/MinecraftServer/warning (Ljava/lang/String;)V net/minecraft/server/v1_4_6/MinecraftServer/g (Ljava/lang/String;)V
-MD: net/minecraft/server/v1_4_6/MinecraftServer/y ()I net/minecraft/server/v1_4_6/MinecraftServer/y ()I
-MD: net/minecraft/server/v1_4_6/MinecraftServer/z ()I net/minecraft/server/v1_4_6/MinecraftServer/z ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/F ()Ljava/security/KeyPair; net/minecraft/server/MinecraftServer/F ()Ljava/security/KeyPair;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/G ()I net/minecraft/server/MinecraftServer/G ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/H ()Ljava/lang/String; net/minecraft/server/MinecraftServer/H ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/I ()Z net/minecraft/server/MinecraftServer/I ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/J ()Ljava/lang/String; net/minecraft/server/MinecraftServer/J ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/M ()Z net/minecraft/server/MinecraftServer/M ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/P ()V net/minecraft/server/MinecraftServer/P ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/S ()I net/minecraft/server/MinecraftServer/S ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/T ()Z net/minecraft/server/MinecraftServer/T ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (ILjava/lang/String;)Z net/minecraft/server/MinecraftServer/a (ILjava/lang/String;)Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/server/v1_4_6/WorldType;Ljava/lang/String;)V net/minecraft/server/MinecraftServer/a (Ljava/lang/String;Ljava/lang/String;JLyn;Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; net/minecraft/server/MinecraftServer/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Ljava/security/KeyPair;)V net/minecraft/server/MinecraftServer/a (Ljava/security/KeyPair;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/CrashReport;)V net/minecraft/server/MinecraftServer/a (La;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/EnumGamemode;)V net/minecraft/server/MinecraftServer/a (Lyl;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/EnumGamemode;Z)Ljava/lang/String; net/minecraft/server/MinecraftServer/a (Lyl;Z)Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/ICommandListener;Ljava/lang/String;)Ljava/util/List; net/minecraft/server/MinecraftServer/a (Laa;Ljava/lang/String;)Ljava/util/List;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/IUpdatePlayerListBox;)V net/minecraft/server/MinecraftServer/a (Lgp;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/MinecraftServer;)Lnet/minecraft/server/v1_4_6/PlayerList; net/minecraft/server/MinecraftServer/a (Lnet/minecraft/server/MinecraftServer;)Lgm;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/MojangStatisticsGenerator;)V net/minecraft/server/MinecraftServer/a (Lle;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a (Lnet/minecraft/server/v1_4_6/PlayerList;)V net/minecraft/server/MinecraftServer/a (Lgm;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/a_ (Ljava/lang/String;I)V net/minecraft/server/MinecraftServer/a_ (Ljava/lang/String;I)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/ae ()Lnet/minecraft/server/v1_4_6/ServerConnection; net/minecraft/server/MinecraftServer/ae ()Liw;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/ag ()Z net/minecraft/server/MinecraftServer/ag ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/ah ()I net/minecraft/server/MinecraftServer/ah ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/ai ()V net/minecraft/server/MinecraftServer/ai ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/al ()V net/minecraft/server/MinecraftServer/al ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/b ()Lnet/minecraft/server/v1_4_6/ChunkCoordinates; net/minecraft/server/MinecraftServer/b ()Ls;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/b (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Lnet/minecraft/server/v1_4_6/CrashReport;)Lnet/minecraft/server/v1_4_6/CrashReport; net/minecraft/server/MinecraftServer/b (La;)La;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Lnet/minecraft/server/v1_4_6/MojangStatisticsGenerator;)V net/minecraft/server/MinecraftServer/b (Lle;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/b (Z)V net/minecraft/server/MinecraftServer/b (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/c (I)V net/minecraft/server/MinecraftServer/c (I)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/c (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/c (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/c (Z)V net/minecraft/server/MinecraftServer/c (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/d (I)V net/minecraft/server/MinecraftServer/d (I)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/d (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/d (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/e ()V net/minecraft/server/MinecraftServer/e ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/e (Ljava/lang/String;)Ljava/io/File; net/minecraft/server/MinecraftServer/e (Ljava/lang/String;)Ljava/io/File;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getAllowFlight ()Z net/minecraft/server/MinecraftServer/Y ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getAllowNether ()Z net/minecraft/server/MinecraftServer/s ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getCommandHandler ()Lnet/minecraft/server/v1_4_6/ICommandHandler; net/minecraft/server/MinecraftServer/E ()Lz;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getConvertable ()Lnet/minecraft/server/v1_4_6/Convertable; net/minecraft/server/MinecraftServer/N ()Laij;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getDifficulty ()I net/minecraft/server/MinecraftServer/h ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getEnableCommandBlock ()Z net/minecraft/server/MinecraftServer/Z ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getGamemode ()Lnet/minecraft/server/v1_4_6/EnumGamemode; net/minecraft/server/MinecraftServer/g ()Lyl;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getGenerateStructures ()Z net/minecraft/server/MinecraftServer/f ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getMaxBuildHeight ()I net/minecraft/server/MinecraftServer/ab ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getMotd ()Ljava/lang/String; net/minecraft/server/MinecraftServer/aa ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getName ()Ljava/lang/String; net/minecraft/server/MinecraftServer/c_ ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getOnlineMode ()Z net/minecraft/server/MinecraftServer/U ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlayerList ()Lnet/minecraft/server/v1_4_6/PlayerList; net/minecraft/server/MinecraftServer/ad ()Lgm;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlayers ()[Ljava/lang/String; net/minecraft/server/MinecraftServer/A ()[Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getPlugins ()Ljava/lang/String; net/minecraft/server/MinecraftServer/B ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getPvP ()Z net/minecraft/server/MinecraftServer/X ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; net/minecraft/server/MinecraftServer/D ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getServerIp ()Ljava/lang/String; net/minecraft/server/MinecraftServer/l ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getServerModName ()Ljava/lang/String; net/minecraft/server/MinecraftServer/getServerModName ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getSnooperEnabled ()Z net/minecraft/server/MinecraftServer/R ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnAnimals ()Z net/minecraft/server/MinecraftServer/V ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnMonsters ()Z net/minecraft/server/MinecraftServer/L ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnNPCs ()Z net/minecraft/server/MinecraftServer/W ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getSpawnProtection ()I net/minecraft/server/MinecraftServer/ak ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getTexturePack ()Ljava/lang/String; net/minecraft/server/MinecraftServer/Q ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getVersion ()Ljava/lang/String; net/minecraft/server/MinecraftServer/x ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/getWorldServer (I)Lnet/minecraft/server/v1_4_6/WorldServer; net/minecraft/server/MinecraftServer/a (I)Lin;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/h (Ljava/lang/String;)Ljava/lang/String; net/minecraft/server/MinecraftServer/h (Ljava/lang/String;)Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/i (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/i (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/info (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/f (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/init ()Z net/minecraft/server/MinecraftServer/c ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/isDebugging ()Z net/minecraft/server/MinecraftServer/C ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/isHardcore ()Z net/minecraft/server/MinecraftServer/i ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/isRunning ()Z net/minecraft/server/MinecraftServer/m ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/isStopped ()Z net/minecraft/server/MinecraftServer/ac ()Z
+MD: net/minecraft/server/v1_4_6/MinecraftServer/j ()V net/minecraft/server/MinecraftServer/j ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/j (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/j (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/k (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/k (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/l (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/l (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/main ([Ljava/lang/String;)V net/minecraft/server/MinecraftServer/main ([Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/net.minecraft.server.MinecraftServer (Ljava/io/File;)V net/minecraft/server/MinecraftServer/net.minecraft.server.MinecraftServer (Ljava/io/File;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/o ()Ljava/io/File; net/minecraft/server/MinecraftServer/o ()Ljava/io/File;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/p ()V net/minecraft/server/MinecraftServer/p ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/q ()V net/minecraft/server/MinecraftServer/q ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/r ()V net/minecraft/server/MinecraftServer/r ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/run ()V net/minecraft/server/MinecraftServer/run ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/safeShutdown ()V net/minecraft/server/MinecraftServer/n ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/saveChunks (Z)V net/minecraft/server/MinecraftServer/a (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/sendMessage (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/a (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setAllowFlight (Z)V net/minecraft/server/MinecraftServer/h (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setMotd (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/o (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setOnlineMode (Z)V net/minecraft/server/MinecraftServer/d (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setPort (I)V net/minecraft/server/MinecraftServer/b (I)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setPvP (Z)V net/minecraft/server/MinecraftServer/g (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setSpawnAnimals (Z)V net/minecraft/server/MinecraftServer/e (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setSpawnNPCs (Z)V net/minecraft/server/MinecraftServer/f (Z)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/setTexturePack (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/n (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/stop ()V net/minecraft/server/MinecraftServer/k ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/t ()V net/minecraft/server/MinecraftServer/t ()V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/u ()Ljava/lang/String; net/minecraft/server/MinecraftServer/u ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/v ()I net/minecraft/server/MinecraftServer/v ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/w ()Ljava/lang/String; net/minecraft/server/MinecraftServer/w ()Ljava/lang/String;
+MD: net/minecraft/server/v1_4_6/MinecraftServer/warning (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/g (Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/MinecraftServer/y ()I net/minecraft/server/MinecraftServer/y ()I
+MD: net/minecraft/server/v1_4_6/MinecraftServer/z ()I net/minecraft/server/MinecraftServer/z ()I
 MD: net/minecraft/server/v1_4_6/MobEffect/a (Lnet/minecraft/server/v1_4_6/MobEffect;)V lm/a (Llm;)V
 MD: net/minecraft/server/v1_4_6/MobEffect/a (Lnet/minecraft/server/v1_4_6/NBTTagCompound;)Lnet/minecraft/server/v1_4_6/NBTTagCompound; lm/a (Lbq;)Lbq;
 MD: net/minecraft/server/v1_4_6/MobEffect/b (Lnet/minecraft/server/v1_4_6/EntityLiving;)V lm/b (Lmd;)V
@@ -10497,14 +10497,14 @@ MD: net/minecraft/server/v1_4_6/PendingConnection/a (Lnet/minecraft/server/v1_4_
 MD: net/minecraft/server/v1_4_6/PendingConnection/a (Lnet/minecraft/server/v1_4_6/Packet2Handshake;)V it/a (Lcy;)V
 MD: net/minecraft/server/v1_4_6/PendingConnection/a (Lnet/minecraft/server/v1_4_6/PendingConnection;)Ljava/lang/String; it/a (Lit;)Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/PendingConnection/a (Lnet/minecraft/server/v1_4_6/PendingConnection;Z)Z it/a (Lit;Z)Z
-MD: net/minecraft/server/v1_4_6/PendingConnection/b (Lnet/minecraft/server/v1_4_6/PendingConnection;)Lnet/minecraft/server/v1_4_6/MinecraftServer; it/b (Lit;)Lnet/minecraft/server/v1_4_6/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/PendingConnection/b (Lnet/minecraft/server/v1_4_6/PendingConnection;)Lnet/minecraft/server/v1_4_6/MinecraftServer; it/b (Lit;)Lnet/minecraft/server/MinecraftServer;
 MD: net/minecraft/server/v1_4_6/PendingConnection/c ()V it/c ()V
 MD: net/minecraft/server/v1_4_6/PendingConnection/c (Lnet/minecraft/server/v1_4_6/PendingConnection;)Ljavax/crypto/SecretKey; it/c (Lit;)Ljavax/crypto/SecretKey;
 MD: net/minecraft/server/v1_4_6/PendingConnection/d ()V it/d ()V
 MD: net/minecraft/server/v1_4_6/PendingConnection/d (Lnet/minecraft/server/v1_4_6/PendingConnection;)Ljava/lang/String; it/d (Lit;)Ljava/lang/String;
 MD: net/minecraft/server/v1_4_6/PendingConnection/disconnect (Ljava/lang/String;)V it/a (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/PendingConnection/getName ()Ljava/lang/String; it/e ()Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/PendingConnection/net.minecraft.server.PendingConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/Socket;Ljava/lang/String;)V it/it (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/Socket;Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/PendingConnection/net.minecraft.server.PendingConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/net/Socket;Ljava/lang/String;)V it/it (Lnet/minecraft/server/MinecraftServer;Ljava/net/Socket;Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/PendingConnection/onUnhandledPacket (Lnet/minecraft/server/v1_4_6/Packet;)V it/a (Lef;)V
 MD: net/minecraft/server/v1_4_6/PlayerAbilities/a ()F qv/a ()F
 MD: net/minecraft/server/v1_4_6/PlayerAbilities/a (Lnet/minecraft/server/v1_4_6/NBTTagCompound;)V qv/a (Lbq;)V
@@ -10565,7 +10565,7 @@ MD: net/minecraft/server/v1_4_6/PlayerConnection/disconnect (Ljava/lang/String;)
 MD: net/minecraft/server/v1_4_6/PlayerConnection/handleCommand (Ljava/lang/String;)V iv/d (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/PlayerConnection/handleContainerClose (Lnet/minecraft/server/v1_4_6/Packet101CloseWindow;)V iv/a (Ldd;)V
 MD: net/minecraft/server/v1_4_6/PlayerConnection/lowPriorityCount ()I iv/e ()I
-MD: net/minecraft/server/v1_4_6/PlayerConnection/net.minecraft.server.PlayerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/INetworkManager;Lnet/minecraft/server/v1_4_6/EntityPlayer;)V iv/iv (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lce;Liq;)V
+MD: net/minecraft/server/v1_4_6/PlayerConnection/net.minecraft.server.PlayerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/INetworkManager;Lnet/minecraft/server/v1_4_6/EntityPlayer;)V iv/iv (Lnet/minecraft/server/MinecraftServer;Lce;Liq;)V
 MD: net/minecraft/server/v1_4_6/PlayerConnection/onUnhandledPacket (Lnet/minecraft/server/v1_4_6/Packet;)V iv/a (Lef;)V
 MD: net/minecraft/server/v1_4_6/PlayerConnection/sendPacket (Lnet/minecraft/server/v1_4_6/Packet;)V iv/b (Lef;)V
 MD: net/minecraft/server/v1_4_6/PlayerDistanceComparator/a (Lnet/minecraft/server/v1_4_6/EntityPlayer;Lnet/minecraft/server/v1_4_6/EntityPlayer;)I gl/a (Liq;Liq;)I
@@ -10651,14 +10651,14 @@ MD: net/minecraft/server/v1_4_6/PlayerList/getNameBans ()Lnet/minecraft/server/v
 MD: net/minecraft/server/v1_4_6/PlayerList/getOPs ()Ljava/util/Set; gm/i ()Ljava/util/Set;
 MD: net/minecraft/server/v1_4_6/PlayerList/getPlayerCount ()I gm/k ()I
 MD: net/minecraft/server/v1_4_6/PlayerList/getSeenPlayers ()[Ljava/lang/String; gm/m ()[Ljava/lang/String;
-MD: net/minecraft/server/v1_4_6/PlayerList/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; gm/p ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/PlayerList/getServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; gm/p ()Lnet/minecraft/server/MinecraftServer;
 MD: net/minecraft/server/v1_4_6/PlayerList/getWhitelisted ()Ljava/util/Set; gm/h ()Ljava/util/Set;
 MD: net/minecraft/server/v1_4_6/PlayerList/isOp (Ljava/lang/String;)Z gm/e (Ljava/lang/String;)Z
 MD: net/minecraft/server/v1_4_6/PlayerList/isWhitelisted (Ljava/lang/String;)Z gm/d (Ljava/lang/String;)Z
 MD: net/minecraft/server/v1_4_6/PlayerList/j (Ljava/lang/String;)Ljava/util/List; gm/j (Ljava/lang/String;)Ljava/util/List;
 MD: net/minecraft/server/v1_4_6/PlayerList/k (Ljava/lang/String;)V gm/k (Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/PlayerList/moveToWorld (Lnet/minecraft/server/v1_4_6/EntityPlayer;IZ)Lnet/minecraft/server/v1_4_6/EntityPlayer; gm/a (Liq;IZ)Liq;
-MD: net/minecraft/server/v1_4_6/PlayerList/net.minecraft.server.PlayerList (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gm/gm (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/PlayerList/net.minecraft.server.PlayerList (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V gm/gm (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/PlayerList/o ()I gm/o ()I
 MD: net/minecraft/server/v1_4_6/PlayerList/processLogin (Ljava/lang/String;)Lnet/minecraft/server/v1_4_6/EntityPlayer; gm/a (Ljava/lang/String;)Liq;
 MD: net/minecraft/server/v1_4_6/PlayerList/q ()Lnet/minecraft/server/v1_4_6/NBTTagCompound; gm/q ()Lbq;
@@ -10675,7 +10675,7 @@ MD: net/minecraft/server/v1_4_6/PlayerList/setPlayerFileData ([Lnet/minecraft/se
 MD: net/minecraft/server/v1_4_6/PlayerList/tick ()V gm/b ()V
 MD: net/minecraft/server/v1_4_6/PlayerList/updateClient (Lnet/minecraft/server/v1_4_6/EntityPlayer;)V gm/f (Liq;)V
 MD: net/minecraft/server/v1_4_6/PlayerListBox/a ()V hz/a ()V
-MD: net/minecraft/server/v1_4_6/PlayerListBox/net.minecraft.server.PlayerListBox (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V hz/hz (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/PlayerListBox/net.minecraft.server.PlayerListBox (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V hz/hz (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/PlayerSelector/c (Ljava/lang/String;)I ab/c (Ljava/lang/String;)I
 MD: net/minecraft/server/v1_4_6/PlayerSelector/d (Ljava/lang/String;)I ab/d (Ljava/lang/String;)I
 MD: net/minecraft/server/v1_4_6/PlayerSelector/e (Ljava/lang/String;)I ab/e (Ljava/lang/String;)I
@@ -10885,13 +10885,13 @@ MD: net/minecraft/server/v1_4_6/SecondaryWorldData/setType (Lnet/minecraft/serve
 MD: net/minecraft/server/v1_4_6/SecondaryWorldData/setWeatherDuration (I)V ahu/g (I)V
 MD: net/minecraft/server/v1_4_6/SecondaryWorldData/shouldGenerateMapFeatures ()Z ahu/s ()Z
 MD: net/minecraft/server/v1_4_6/SecondaryWorldServer/a ()V ih/a ()V
-MD: net/minecraft/server/v1_4_6/SecondaryWorldServer/net.minecraft.server.SecondaryWorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/WorldSettings;Lnet/minecraft/server/v1_4_6/WorldServer;Lnet/minecraft/server/v1_4_6/MethodProfiler;)V ih/ih (Lnet/minecraft/server/v1_4_6/MinecraftServer;Laih;Ljava/lang/String;ILyk;Lin;Lkh;)V
+MD: net/minecraft/server/v1_4_6/SecondaryWorldServer/net.minecraft.server.SecondaryWorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/WorldSettings;Lnet/minecraft/server/v1_4_6/WorldServer;Lnet/minecraft/server/v1_4_6/MethodProfiler;)V ih/ih (Lnet/minecraft/server/MinecraftServer;Laih;Ljava/lang/String;ILyk;Lin;Lkh;)V
 MD: net/minecraft/server/v1_4_6/ServerCommand/net.minecraft.server.ServerCommand (Ljava/lang/String;Lnet/minecraft/server/v1_4_6/ICommandListener;)V fo/fo (Ljava/lang/String;Laa;)V
 MD: net/minecraft/server/v1_4_6/ServerConnection/a ()V iw/a ()V
 MD: net/minecraft/server/v1_4_6/ServerConnection/a (Lnet/minecraft/server/v1_4_6/PlayerConnection;)V iw/a (Liv;)V
 MD: net/minecraft/server/v1_4_6/ServerConnection/b ()V iw/b ()V
-MD: net/minecraft/server/v1_4_6/ServerConnection/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer; iw/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
-MD: net/minecraft/server/v1_4_6/ServerConnection/net.minecraft.server.ServerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V iw/iw (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V
+MD: net/minecraft/server/v1_4_6/ServerConnection/d ()Lnet/minecraft/server/v1_4_6/MinecraftServer; iw/d ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/ServerConnection/net.minecraft.server.ServerConnection (Lnet/minecraft/server/v1_4_6/MinecraftServer;)V iw/iw (Lnet/minecraft/server/MinecraftServer;)V
 MD: net/minecraft/server/v1_4_6/ServerGUI/a (Lnet/minecraft/server/v1_4_6/DedicatedServer;)V hv/a (Lho;)V
 MD: net/minecraft/server/v1_4_6/ServerGUI/a (Lnet/minecraft/server/v1_4_6/ServerGUI;)Lnet/minecraft/server/v1_4_6/DedicatedServer; hv/a (Lhv;)Lho;
 MD: net/minecraft/server/v1_4_6/ServerGUI/b ()Ljavax/swing/JComponent; hv/b ()Ljavax/swing/JComponent;
@@ -11099,7 +11099,7 @@ MD: net/minecraft/server/v1_4_6/ThreadCommandReader/net.minecraft.server.ThreadC
 MD: net/minecraft/server/v1_4_6/ThreadCommandReader/run ()V hq/run ()V
 MD: net/minecraft/server/v1_4_6/ThreadLoginVerifier/net.minecraft.server.ThreadLoginVerifier (Lnet/minecraft/server/v1_4_6/PendingConnection;)V iu/iu (Lit;)V
 MD: net/minecraft/server/v1_4_6/ThreadLoginVerifier/run ()V iu/run ()V
-MD: net/minecraft/server/v1_4_6/ThreadServerApplication/net.minecraft.server.ThreadServerApplication (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/lang/String;)V fy/fy (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/lang/String;)V
+MD: net/minecraft/server/v1_4_6/ThreadServerApplication/net.minecraft.server.ThreadServerApplication (Lnet/minecraft/server/v1_4_6/MinecraftServer;Ljava/lang/String;)V fy/fy (Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)V
 MD: net/minecraft/server/v1_4_6/ThreadServerApplication/run ()V fy/run ()V
 MD: net/minecraft/server/v1_4_6/ThreadShutdown/net.minecraft.server.ThreadShutdown (Lnet/minecraft/server/v1_4_6/DedicatedServer;)V fx/fx (Lho;)V
 MD: net/minecraft/server/v1_4_6/ThreadShutdown/run ()V fx/run ()V
@@ -12069,7 +12069,7 @@ MD: net/minecraft/server/v1_4_6/WorldManager/a (Lnet/minecraft/server/v1_4_6/Ent
 MD: net/minecraft/server/v1_4_6/WorldManager/b (III)V ij/b (III)V
 MD: net/minecraft/server/v1_4_6/WorldManager/b (IIIII)V ij/b (IIIII)V
 MD: net/minecraft/server/v1_4_6/WorldManager/b (Lnet/minecraft/server/v1_4_6/Entity;)V ij/b (Llq;)V
-MD: net/minecraft/server/v1_4_6/WorldManager/net.minecraft.server.WorldManager (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/WorldServer;)V ij/ij (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lin;)V
+MD: net/minecraft/server/v1_4_6/WorldManager/net.minecraft.server.WorldManager (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/WorldServer;)V ij/ij (Lnet/minecraft/server/MinecraftServer;Lin;)V
 MD: net/minecraft/server/v1_4_6/WorldMap/a (ILnet/minecraft/server/v1_4_6/World;Ljava/lang/String;DDD)V ahn/a (ILyc;Ljava/lang/String;DDD)V
 MD: net/minecraft/server/v1_4_6/WorldMap/a (Lnet/minecraft/server/v1_4_6/EntityHuman;)Lnet/minecraft/server/v1_4_6/WorldMapHumanTracker; ahn/a (Lqx;)Laho;
 MD: net/minecraft/server/v1_4_6/WorldMap/a (Lnet/minecraft/server/v1_4_6/EntityHuman;Lnet/minecraft/server/v1_4_6/ItemStack;)V ahn/a (Lqx;Lur;)V
@@ -12169,7 +12169,7 @@ MD: net/minecraft/server/v1_4_6/WorldServer/everyoneSleeping ()V in/c ()V
 MD: net/minecraft/server/v1_4_6/WorldServer/g ()V in/g ()V
 MD: net/minecraft/server/v1_4_6/WorldServer/getDimensionSpawn ()Lnet/minecraft/server/v1_4_6/ChunkCoordinates; in/l ()Ls;
 MD: net/minecraft/server/v1_4_6/WorldServer/getEntity (I)Lnet/minecraft/server/v1_4_6/Entity; in/a (I)Llq;
-MD: net/minecraft/server/v1_4_6/WorldServer/getMinecraftServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; in/o ()Lnet/minecraft/server/v1_4_6/MinecraftServer;
+MD: net/minecraft/server/v1_4_6/WorldServer/getMinecraftServer ()Lnet/minecraft/server/v1_4_6/MinecraftServer; in/o ()Lnet/minecraft/server/MinecraftServer;
 MD: net/minecraft/server/v1_4_6/WorldServer/getPlayerChunkMap ()Lnet/minecraft/server/v1_4_6/PlayerChunkMap; in/r ()Lik;
 MD: net/minecraft/server/v1_4_6/WorldServer/getTileEntities (IIIIII)Ljava/util/List; in/b (IIIIII)Ljava/util/List;
 MD: net/minecraft/server/v1_4_6/WorldServer/getTracker ()Lnet/minecraft/server/v1_4_6/EntityTracker; in/p ()Lii;
@@ -12177,7 +12177,7 @@ MD: net/minecraft/server/v1_4_6/WorldServer/i ()V in/i ()V
 MD: net/minecraft/server/v1_4_6/WorldServer/j ()Lnet/minecraft/server/v1_4_6/IChunkProvider; in/j ()Lzw;
 MD: net/minecraft/server/v1_4_6/WorldServer/k ()V in/k ()V
 MD: net/minecraft/server/v1_4_6/WorldServer/n ()V in/n ()V
-MD: net/minecraft/server/v1_4_6/WorldServer/net.minecraft.server.WorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/WorldSettings;Lnet/minecraft/server/v1_4_6/MethodProfiler;)V in/in (Lnet/minecraft/server/v1_4_6/MinecraftServer;Laih;Ljava/lang/String;ILyk;Lkh;)V
+MD: net/minecraft/server/v1_4_6/WorldServer/net.minecraft.server.WorldServer (Lnet/minecraft/server/v1_4_6/MinecraftServer;Lnet/minecraft/server/v1_4_6/IDataManager;Ljava/lang/String;ILnet/minecraft/server/v1_4_6/WorldSettings;Lnet/minecraft/server/v1_4_6/MethodProfiler;)V in/in (Lnet/minecraft/server/MinecraftServer;Laih;Ljava/lang/String;ILyk;Lkh;)V
 MD: net/minecraft/server/v1_4_6/WorldServer/playNote (IIIIII)V in/c (IIIIII)V
 MD: net/minecraft/server/v1_4_6/WorldServer/s ()Lnet/minecraft/server/v1_4_6/PortalTravelAgent; in/s ()Lyq;
 MD: net/minecraft/server/v1_4_6/WorldServer/save (ZLnet/minecraft/server/v1_4_6/IProgressUpdate;)V in/a (ZLkj;)V
