@@ -86,6 +86,7 @@ $PYTHON rangeapply.py --srcRoot $CB_ROOT --srcRangeMap $CB_RANGEMAP --lvRangeMap
 
 # Reformat source style in NMS (only; not OBC) to more closely resemble MCP
 # This assumes you have astyle installed and ~/.astylerc copied from conf/astyle.cfg
+#ARTISTIC_STYLE_OPTIONS=../mcp726-pkgd/conf/astyle.cfg astyle --suffix=none -R $CB_ROOT/src/main/java/net/minecraft # TODO
 find $CB_ROOT/src/main/java/net/minecraft -name '*.java' -exec astyle --suffix=none {} \;
 
 $PYTHON javadocxfer.py $CB_ROOT $MCP_ROOT
