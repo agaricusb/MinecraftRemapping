@@ -1,46 +1,35 @@
 #!/usr/bin/python
-# Remap patches from git history
-
-# For updating MCPC+ to latest upstream CB
+# Create MCP patches between releases of Forge from git history
 
 import subprocess, os
 
-srcRoot = "../CraftBukkit"
-scriptDir = "../Srg2Source/python"  # relative to srcRoot
-outDir = "../jars/cbpatches" # relative to srcRoot
-startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # Refactor processBlockPlace logic
-#startCommit = "a05357ee65e95d2eadb6e2f6036c0c6f25243702" # commit in Spigot before filename too long - shade 2.0
-#startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # commit before Spigot #425, Refactor processBlockPlace logic. Fixes BUKKIT-3406 and BUKKIT-3454
-#startCommit = "4e8a841fa9b368b55d2b60511a8c0655eb52e29e" # 2nd commit in 1.4.7-R.02, Place beds with the correct data. Fixes BUKKIT-3447
-#startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
-#startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"  # first dev build of 1.4.6-R0.4 - initial MCPC+ fork
-cbmcpBranch = "pkgmcp"
+srcRoot = "../MinecraftForge"
+outDir = "../jars/forgepatches" # relative to srcRoot
+startCommit = "3a9c7b4532240b70dac5f72082cbcedc0dd41335" # build 497, released 2013-01-01
+patchBranch = "mcppatch"
 masterBranch = "master"
 
 shouldPullLatestChanges = True
 shouldCheckoutMaster = True
-shouldRemapInitial = True
-shouldRemapPatches = True
+shouldRemapPatches = False
 shouldRewritePaths = True
 
-def runRemap():
-    print "Starting remap script..."
-    pushd = os.getcwd()
-    os.chdir(scriptDir)
-    run("./remap-craftbukkit.py")
-    os.chdir(pushd)
-    print "Remap script finished"
+def build():
+    print "Starting build..."
+    run("py setup.py")
+    run("py release.py")  # patches MCP source
+    print "Complete"
 
 def run(cmd):
     print ">",cmd
-    #raw_input()
+    raw_input()
     assert os.system(cmd) == 0, "Failed to run "+cmd
 
 def runOutput(cmd):
     return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.read()
 
 
-def buildRemappedPatch(commit):
+def buildMCPPatch(commit):
     # Get the header from the original commit
     header = runOutput(("git", "show", commit, 
         "--format=email",       # email format is for git-format-diff/git-am
@@ -48,15 +37,15 @@ def buildRemappedPatch(commit):
     print header
 
     # Compare against rename of previous commit
-    cmd = ("git", "diff", cbmcpBranch)
+    cmd = ("git", "diff", patchBranch)
     diff = runOutput(cmd)
 
     return header + "\n" + diff
 
 def clean():
     # Clean out even non-repository or moved files
-    run("rm -rf src")
-    run("git reset --hard HEAD")
+    pass
+    # TODO: needed?
 
 def readCommitLog():
     # Get commit IDs and messages after the starting commit, in reverse chronological order
@@ -73,8 +62,8 @@ def readCommitLog():
 
 def saveBranch():
     # Save our remapped changes to the branch for comparison reference
-    run("git branch -D "+cbmcpBranch)
-    run("git checkout -b "+cbmcpBranch)
+    run("git branch -D "+patchBranch)
+    run("git checkout -b "+patchBranch)
     run("git commit -m 'Automated file rename'")  # separate commit for diff visibility
     run("git commit -am 'Automated symbol rename'")
 
@@ -94,12 +83,6 @@ def main():
 
     commits = readCommitLog()
 
-    if shouldRemapInitial:
-        # Start from here, creating an initial remap on a branch for the basis of comparison
-        run("git checkout "+startCommit)
-        runRemap()
-        saveBranch()
-
     if shouldRemapPatches:
         # Remap commits, translating patches
         n = 0
@@ -112,9 +95,9 @@ def main():
             print "\n\n*** %s %s" % (commit, message)
             clean()
             run("git checkout "+commit)
-            runRemap()
+            build()
             
-            patch = buildRemappedPatch(commit)
+            patch = buildMCPPatch(commit)
             file(filename, "w").write(patch)
 
             # Save for comparison to next commit
@@ -144,9 +127,9 @@ def main():
                 i -= 1
             lines = lines[:i] + lines[statLine + 1:]
 
-            # Fix paths, CBMCP to MCPC+
+            # Fix paths, Forge to MCPC+
             for i, line in enumerate(lines):
-                lines[i] = line.replace("src/main/java", "src/minecraft")
+                lines[i] = line.replace("mcp/src/minecraft", "src/minecraft")
 
             file(path, "w").write("".join(lines))
 
