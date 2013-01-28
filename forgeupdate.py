@@ -5,15 +5,16 @@ import subprocess, os
 
 srcRoot = "../MinecraftForge"
 outDir = "../jars/forgepatches" # relative to srcRoot
-startCommit = "3a9c7b4532240b70dac5f72082cbcedc0dd41335" # build 497, released 2013-01-01
+startCommit = "f20ea649c6fbf4e49ccb857e6ea9d3333cf6d6a9" # Attempt to fix a possible NPE in the...
+#startCommit = "3a9c7b4532240b70dac5f72082cbcedc0dd41335" # build 497, released 2013-01-01
 patchBranch = "mcppatch"
 masterBranch = "master"
 
-shouldPullLatestChanges = False
-shouldCheckoutMaster = True
-shouldBuildInitial = True
-shouldBuildPatches = True
-shouldRewritePaths = False#True
+shouldPullLatestChanges = False#True
+shouldCheckoutMaster = False#True
+shouldBuildInitial = False#True
+shouldBuildPatches = False#True
+shouldRewritePaths = True
 
 def build():
     print "Starting build..."
@@ -153,6 +154,8 @@ def main():
             # Fix paths, Forge to MCPC+
             for i, line in enumerate(lines):
                 lines[i] = line.replace("mcp/src/minecraft", "src/minecraft")
+            # TODO: remove extraneous files (patches of patches)..but requires more
+            # intelligent diff parsing :(
 
             file(path, "w").write("".join(lines))
 
