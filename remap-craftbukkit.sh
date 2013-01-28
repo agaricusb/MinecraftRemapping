@@ -1,5 +1,8 @@
 #!/bin/sh -x
 
+echo Moved to https://github.com/agaricusb/Srg2Source
+exit -1
+
 # Minecraft version
 MCVER=1.4.7
 

@@ -2,6 +2,8 @@
 
 # Add javadoc from MCP source to CB-renamed source
 
+raise Exception("Moved to https://github.com/agaricusb/Srg2Source")
+
 import os, pprint, sys
 import srglib
 

@@ -8,7 +8,8 @@ import subprocess, os
 srcRoot = "../CraftBukkit"
 scriptDir = "../Srg2Source/python"  # relative to srcRoot
 outDir = "../jars/cbpatches" # relative to srcRoot
-startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # Refactor processBlockPlace logic
+startCommit = "deda98a3b2562660ce2e359e099deb5f59fe7f80" # Update Fireballs to account for ExplosionPower
+#startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # Refactor processBlockPlace logic
 #startCommit = "a05357ee65e95d2eadb6e2f6036c0c6f25243702" # commit in Spigot before filename too long - shade 2.0
 #startCommit = "ed63bd525b36780e57d1576842e3d45f4bf5d55d" # commit before Spigot #425, Refactor processBlockPlace logic. Fixes BUKKIT-3406 and BUKKIT-3454
 #startCommit = "4e8a841fa9b368b55d2b60511a8c0655eb52e29e" # 2nd commit in 1.4.7-R.02, Place beds with the correct data. Fixes BUKKIT-3447

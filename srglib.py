@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# note: also copied in https://github.com/agaricusb/Srg2Source - but some scripts here still use this versio!
+
 # srglib: routines for manipulating FML/MCP's .srg, .csv, and .exc files
 
 # Not all of the tools use this library yet

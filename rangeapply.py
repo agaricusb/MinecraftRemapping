@@ -2,6 +2,8 @@
 
 # Process symbol range maps produced by ApplySrg2Source
 
+raise Exception("Moved to https://github.com/agaricusb/Srg2Source")
+
 import os
 import srglib
 import argparse  # note: requires Python 2.7+

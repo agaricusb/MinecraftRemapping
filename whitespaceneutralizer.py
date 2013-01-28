@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+raise Exception("Moved to https://github.com/agaricusb/Srg2Source")
+
 # Reconcile whitespace differences between two codebases, preferring one over the other
 # in order to reduce unnecessary diff lines
 
