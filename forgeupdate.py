@@ -17,7 +17,13 @@ shouldRewritePaths = False#True
 
 def build():
     print "Starting build..."
-    ##run("py setup.py") # installs MCP, decompiles
+    print "Rerun setup first?"
+    if raw_input().startswith("y"):
+        print "Rerunning setup..."  # TODO: automatic, if commit changes FML.. or always?
+        run("py setup.py") # installs MCP, decompiles
+        print "Continue?"
+        raw_input()
+
     run("py release.py")  # patches MCP source
     # TODO: pass --force to mcp cleanup to avoid confirmation prompt
     print "Complete"
@@ -43,6 +49,9 @@ def buildMCPPatch(commit):
     # Compare against rename of previous commit
     cmd = ("git", "diff", patchBranch)
     diff = runOutput(cmd)
+
+    print "Waiting"
+    raw_input()
 
     return header + "\n" + diff
 
