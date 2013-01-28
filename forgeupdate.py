@@ -9,21 +9,24 @@ startCommit = "3a9c7b4532240b70dac5f72082cbcedc0dd41335" # build 497, released 2
 patchBranch = "mcppatch"
 masterBranch = "master"
 
-shouldPullLatestChanges = True
+shouldPullLatestChanges = False
 shouldCheckoutMaster = True
-shouldRemapPatches = False
-shouldRewritePaths = True
+shouldBuildInitial = True
+shouldBuildPatches = True
+shouldRewritePaths = False#True
 
 def build():
     print "Starting build..."
-    run("py setup.py")
+    ##run("py setup.py") # installs MCP, decompiles
     run("py release.py")  # patches MCP source
+    # TODO: pass --force to mcp cleanup to avoid confirmation prompt
     print "Complete"
 
 def run(cmd):
     print ">",cmd
-    raw_input()
-    assert os.system(cmd) == 0, "Failed to run "+cmd
+    #raw_input()
+    status = os.system(cmd)
+    assert status == 0, "Failed to run %s: status %s" % (cmd, status)
 
 def runOutput(cmd):
     return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.read()
@@ -36,6 +39,7 @@ def buildMCPPatch(commit):
         "--stat"))              # omit the actual diff (since it isn't remapped), only show stats
     print header
 
+    run("git add -f mcp/src")  # the meat
     # Compare against rename of previous commit
     cmd = ("git", "diff", patchBranch)
     diff = runOutput(cmd)
@@ -55,17 +59,20 @@ def readCommitLog():
         commit, message = line.split(" ", 1)
         if commit == startCommit: break
         print commit, message
-        assert not (message.startswith("Automated") and message.endswith("rename")), "Unclean starting point - already has automated commits! Reset and retry."
+        assert not (message.startswith("Automated") and message.endswith("build")), "Unclean starting point - already has automated commits! Reset and retry."
         commits.append((commit, message))
     commits.reverse()
     return commits
 
 def saveBranch():
     # Save our remapped changes to the branch for comparison reference
-    run("git branch -D "+patchBranch)
+    try:
+        run("git branch -D "+patchBranch)
+    except:
+        pass
     run("git checkout -b "+patchBranch)
-    run("git commit -m 'Automated file rename'")  # separate commit for diff visibility
-    run("git commit -am 'Automated symbol rename'")
+    run("git add -f mcp/src")  # the meat
+    run("git commit mcp/src -m 'Automated build'")
 
 def main():
     if os.path.basename(os.getcwd()) != os.path.basename(srcRoot): os.chdir(srcRoot)
@@ -83,8 +90,15 @@ def main():
 
     commits = readCommitLog()
 
-    if shouldRemapPatches:
-        # Remap commits, translating patches
+    if shouldBuildInitial:
+        # Start from here, creating an initial remap on a branch for the basis of comparison
+        run("git checkout "+startCommit)
+        build()
+        saveBranch()
+
+
+    if shouldBuildPatches:
+        # Build Forge, generating patches from MCP source per commit
         n = 0
         for commitInfo in commits:
             commit, message = commitInfo
