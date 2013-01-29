@@ -2507,6 +2507,7 @@ net/minecraft/server/MinecraftServer m ()Z isRunning
 net/minecraft/server/MinecraftServer m convertable
 net/minecraft/server/MinecraftServer n ()V safeShutdown
 net/minecraft/server/MinecraftServer n (Ljava/lang/String;)V setTexturePack
+net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 net/minecraft/server/MinecraftServer o (Ljava/lang/String;)V setMotd
 net/minecraft/server/MinecraftServer o universe
 net/minecraft/server/MinecraftServer r serverIp

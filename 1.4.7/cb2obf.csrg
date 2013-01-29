@@ -2512,6 +2512,7 @@ net/minecraft/server/MinecraftServer isStopped v
 net/minecraft/server/MinecraftServer log a
 net/minecraft/server/MinecraftServer methodProfiler b
 net/minecraft/server/MinecraftServer motd C
+net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 net/minecraft/server/MinecraftServer onlineMode x
 net/minecraft/server/MinecraftServer pvpMode A
 net/minecraft/server/MinecraftServer safeShutdown ()V n
