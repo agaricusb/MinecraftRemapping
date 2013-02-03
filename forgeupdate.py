@@ -4,22 +4,24 @@
 import subprocess, os
 
 srcRoot = "../MinecraftForge"
-outDir = "../jars/forgepatches" # relative to srcRoot
-startCommit = "f20ea649c6fbf4e49ccb857e6ea9d3333cf6d6a9" # Attempt to fix a possible NPE in the...
+outDir = "../jars/upstream-patches/forge" # relative to srcRoot
+startCommit = "fb87773c3ab77522a27651dcf20066277bb5e88d" # Added input getters for..
+#startCommit = "f06e0be5e59723808305f4c4aeb89c9108c79230" # We try and log a message.. - last commit of Forge 516
+#startCommit = "f20ea649c6fbf4e49ccb857e6ea9d3333cf6d6a9" # Attempt to fix a possible NPE in the...
 #startCommit = "3a9c7b4532240b70dac5f72082cbcedc0dd41335" # build 497, released 2013-01-01
 patchBranch = "mcppatch"
 masterBranch = "master"
 
-shouldPullLatestChanges = False#True
-shouldCheckoutMaster = False#True
-shouldBuildInitial = False#True
-shouldBuildPatches = False#True
+shouldPullLatestChanges = True
+shouldCheckoutMaster = True
+shouldBuildInitial = True
+shouldBuildPatches = True
 shouldRewritePaths = True
 
 def build():
     print "Starting build..."
     print "Rerun setup first?"
-    if raw_input().startswith("y"):
+    if True or raw_input().startswith("y"):
         print "Rerunning setup..."  # TODO: automatic, if commit changes FML.. or always?
         run("py setup.py") # installs MCP, decompiles
         print "Continue?"
@@ -51,8 +53,8 @@ def buildMCPPatch(commit):
     cmd = ("git", "diff", patchBranch)
     diff = runOutput(cmd)
 
-    print "Waiting"
-    raw_input()
+    #print "Waiting"
+    #raw_input()
 
     return header + "\n" + diff
 
