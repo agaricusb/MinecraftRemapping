@@ -8,7 +8,8 @@ import subprocess, os
 srcRoot = "../CraftBukkit"
 scriptDir = "../Srg2Source/python"  # relative to srcRoot
 outDir = "../jars/upstream-patches/craftbukkit" # relative to srcRoot
-startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # Remove erroneous break.. before update to 1.4.7-R1.0
+startCommit = "27f73b62998ef7ba6b951a5cc7acbb95a1a17bed" # Updated version to 1.4.7-R1.0 in pom.xml for RB.
+#startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # Remove erroneous break.. before update to 1.4.7-R1.0
 #startCommit = "6b4ae3cdc7da8c8a886c0d2e1e57363cfd151f46" # Spigot - Add Custom Timings to various points
 #startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # before spigot - Remove erroneous break statement in scheduler. Fixes BUKKIT-3395
 #startCommit = "deda98a3b2562660ce2e359e099deb5f59fe7f80" # Update Fireballs to account for ExplosionPower
