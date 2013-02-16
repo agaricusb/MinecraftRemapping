@@ -1374,10 +1374,10 @@ FD: net/minecraft/crash/CrashReport/description net/minecraft/server/CrashReport
 FD: net/minecraft/crash/CrashReport/field_85059_f net/minecraft/server/CrashReport/f
 FD: net/minecraft/crash/CrashReport/field_85060_g net/minecraft/server/CrashReport/g
 FD: net/minecraft/crash/CrashReport/field_85061_c net/minecraft/server/CrashReport/c
-FD: net/minecraft/crash/CrashReportCategory/field_85075_d net/minecraft/server/CrashReportSystemDetails/d
 FD: net/minecraft/crash/CrashReportCategory/field_85076_b net/minecraft/server/CrashReportSystemDetails/b
 FD: net/minecraft/crash/CrashReportCategory/field_85077_c net/minecraft/server/CrashReportSystemDetails/c
 FD: net/minecraft/crash/CrashReportCategory/field_85078_a net/minecraft/server/CrashReportSystemDetails/a
+FD: net/minecraft/crash/CrashReportCategory/stackTrace net/minecraft/server/CrashReportSystemDetails/d
 FD: net/minecraft/crash/CrashReportCategoryEntry/field_85091_b net/minecraft/server/CrashReportDetail/b
 FD: net/minecraft/crash/CrashReportCategoryEntry/field_85092_a net/minecraft/server/CrashReportDetail/a
 FD: net/minecraft/creativetab/CreativeTabs/backgroundImageName net/minecraft/server/CreativeModeTab/p
@@ -1399,7 +1399,7 @@ FD: net/minecraft/creativetab/CreativeTabs/tabRedstone net/minecraft/server/Crea
 FD: net/minecraft/creativetab/CreativeTabs/tabTools net/minecraft/server/CreativeModeTab/i
 FD: net/minecraft/creativetab/CreativeTabs/tabTransport net/minecraft/server/CreativeModeTab/e
 FD: net/minecraft/dispenser/BehaviorArrowDispense/mcServer net/minecraft/server/DispenseBehaviorArrow/b
-FD: net/minecraft/dispenser/BehaviorBucketEmptyDispense/field_92018_c net/minecraft/server/DispenseBehaviorEmptyBucket/c
+FD: net/minecraft/dispenser/BehaviorBucketEmptyDispense/field_92073_c net/minecraft/server/DispenseBehaviorEmptyBucket/c
 FD: net/minecraft/dispenser/BehaviorBucketEmptyDispense/mcServer net/minecraft/server/DispenseBehaviorEmptyBucket/b
 FD: net/minecraft/dispenser/BehaviorBucketFullDispense/defaultItemDispenseBehavior net/minecraft/server/DispenseBehaviorFilledBucket/c
 FD: net/minecraft/dispenser/BehaviorBucketFullDispense/mcServer net/minecraft/server/DispenseBehaviorFilledBucket/b
@@ -1418,9 +1418,9 @@ FD: net/minecraft/dispenser/BehaviorPotionDispenseLogic/potionDispenseBehavior n
 FD: net/minecraft/dispenser/BehaviorPotionDispenseLogic/potionStackToDispense net/minecraft/server/DispenseBehaviorThrownPotion/b
 FD: net/minecraft/dispenser/BehaviorSnowballDispense/theServer net/minecraft/server/DispenseBehaviorSnowBall/b
 FD: net/minecraft/dispenser/IBehaviorDispenseItem/itemDispenseBehaviorProvider net/minecraft/server/IDispenseBehavior/a
-FD: net/minecraft/dispenser/PositionImpl/field_82628_b net/minecraft/server/Position/b
-FD: net/minecraft/dispenser/PositionImpl/field_82629_c net/minecraft/server/Position/c
-FD: net/minecraft/dispenser/PositionImpl/field_82630_a net/minecraft/server/Position/a
+FD: net/minecraft/dispenser/PositionImpl/x net/minecraft/server/Position/a
+FD: net/minecraft/dispenser/PositionImpl/y net/minecraft/server/Position/b
+FD: net/minecraft/dispenser/PositionImpl/z net/minecraft/server/Position/c
 FD: net/minecraft/dispenser/RegistryDefaulted/defaultObject net/minecraft/server/RegistryDefault/b
 FD: net/minecraft/dispenser/RegistrySimple/registryObjects net/minecraft/server/RegistrySimple/a
 FD: net/minecraft/enchantment/Enchantment/aquaAffinity net/minecraft/server/Enchantment/WATER_WORKER
@@ -1430,8 +1430,8 @@ FD: net/minecraft/enchantment/Enchantment/effectId net/minecraft/server/Enchantm
 FD: net/minecraft/enchantment/Enchantment/efficiency net/minecraft/server/Enchantment/DIG_SPEED
 FD: net/minecraft/enchantment/Enchantment/enchantmentsList net/minecraft/server/Enchantment/byId
 FD: net/minecraft/enchantment/Enchantment/featherFalling net/minecraft/server/Enchantment/PROTECTION_FALL
-FD: net/minecraft/enchantment/Enchantment/field_92038_c net/minecraft/server/Enchantment/c
-FD: net/minecraft/enchantment/Enchantment/field_92039_k net/minecraft/server/Enchantment/THORNS
+FD: net/minecraft/enchantment/Enchantment/field_92090_c net/minecraft/server/Enchantment/c
+FD: net/minecraft/enchantment/Enchantment/field_92091_k net/minecraft/server/Enchantment/THORNS
 FD: net/minecraft/enchantment/Enchantment/fireAspect net/minecraft/server/Enchantment/FIRE_ASPECT
 FD: net/minecraft/enchantment/Enchantment/fireProtection net/minecraft/server/Enchantment/PROTECTION_FIRE
 FD: net/minecraft/enchantment/Enchantment/flame net/minecraft/server/Enchantment/ARROW_FIRE
@@ -1482,8 +1482,8 @@ FD: net/minecraft/enchantment/EnumEnchantmentType/digger net/minecraft/server/En
 FD: net/minecraft/enchantment/EnumEnchantmentType/weapon net/minecraft/server/EnchantmentSlotType/WEAPON
 FD: net/minecraft/entity/CallableEntityType/field_85155_a net/minecraft/server/CrashReportEntityType/a
 FD: net/minecraft/entity/DataWatcher/dataTypes net/minecraft/server/DataWatcher/b
-FD: net/minecraft/entity/DataWatcher/field_75694_d net/minecraft/server/DataWatcher/e
-FD: net/minecraft/entity/DataWatcher/field_92035_a net/minecraft/server/DataWatcher/a
+FD: net/minecraft/entity/DataWatcher/field_92086_a net/minecraft/server/DataWatcher/a
+FD: net/minecraft/entity/DataWatcher/lock net/minecraft/server/DataWatcher/e
 FD: net/minecraft/entity/DataWatcher/objectChanged net/minecraft/server/DataWatcher/d
 FD: net/minecraft/entity/DataWatcher/watchedObjects net/minecraft/server/DataWatcher/c
 FD: net/minecraft/entity/Entity/addedToChunk net/minecraft/server/Entity/ah
@@ -1502,7 +1502,6 @@ FD: net/minecraft/entity/Entity/fallDistance net/minecraft/server/Entity/fallDis
 FD: net/minecraft/entity/Entity/field_70135_K net/minecraft/server/Entity/K
 FD: net/minecraft/entity/Entity/field_82151_R net/minecraft/server/Entity/R
 FD: net/minecraft/entity/Entity/field_82152_aq net/minecraft/server/Entity/ar
-FD: net/minecraft/entity/Entity/field_82153_h net/minecraft/server/Entity/ap
 FD: net/minecraft/entity/Entity/fire net/minecraft/server/Entity/fireTicks
 FD: net/minecraft/entity/Entity/fireResistance net/minecraft/server/Entity/maxFireTicks
 FD: net/minecraft/entity/Entity/firstUpdate net/minecraft/server/Entity/justCreated
@@ -1548,6 +1547,7 @@ FD: net/minecraft/entity/Entity/rotationPitch net/minecraft/server/Entity/pitch
 FD: net/minecraft/entity/Entity/rotationYaw net/minecraft/server/Entity/yaw
 FD: net/minecraft/entity/Entity/stepHeight net/minecraft/server/Entity/X
 FD: net/minecraft/entity/Entity/ticksExisted net/minecraft/server/Entity/ticksLived
+FD: net/minecraft/entity/Entity/timeInPortal net/minecraft/server/Entity/ap
 FD: net/minecraft/entity/Entity/timeUntilPortal net/minecraft/server/Entity/portalCooldown
 FD: net/minecraft/entity/Entity/velocityChanged net/minecraft/server/Entity/velocityChanged
 FD: net/minecraft/entity/Entity/width net/minecraft/server/Entity/width
@@ -1932,11 +1932,11 @@ FD: net/minecraft/entity/ai/EntityLookHelper/posX net/minecraft/server/Controlle
 FD: net/minecraft/entity/ai/EntityLookHelper/posY net/minecraft/server/ControllerLook/f
 FD: net/minecraft/entity/ai/EntityLookHelper/posZ net/minecraft/server/ControllerLook/g
 FD: net/minecraft/entity/ai/EntityMoveHelper/entity net/minecraft/server/ControllerMove/a
-FD: net/minecraft/entity/ai/EntityMoveHelper/field_75643_f net/minecraft/server/ControllerMove/f
 FD: net/minecraft/entity/ai/EntityMoveHelper/posX net/minecraft/server/ControllerMove/b
 FD: net/minecraft/entity/ai/EntityMoveHelper/posY net/minecraft/server/ControllerMove/c
 FD: net/minecraft/entity/ai/EntityMoveHelper/posZ net/minecraft/server/ControllerMove/d
 FD: net/minecraft/entity/ai/EntityMoveHelper/speed net/minecraft/server/ControllerMove/e
+FD: net/minecraft/entity/ai/EntityMoveHelper/update net/minecraft/server/ControllerMove/f
 FD: net/minecraft/entity/ai/EntitySenses/entityObj net/minecraft/server/EntitySenses/entity
 FD: net/minecraft/entity/ai/EntitySenses/seenEntities net/minecraft/server/EntitySenses/seenEntities
 FD: net/minecraft/entity/ai/EntitySenses/unseenEntities net/minecraft/server/EntitySenses/unseenEntities
@@ -1998,18 +1998,18 @@ FD: net/minecraft/entity/item/EntityFallingSand/isAnvil net/minecraft/server/Ent
 FD: net/minecraft/entity/item/EntityFallingSand/isBreakingAnvil net/minecraft/server/EntityFallingBlock/e
 FD: net/minecraft/entity/item/EntityFallingSand/metadata net/minecraft/server/EntityFallingBlock/data
 FD: net/minecraft/entity/item/EntityFallingSand/shouldDropItem net/minecraft/server/EntityFallingBlock/dropItem
-FD: net/minecraft/entity/item/EntityFireworkRocket/field_92010_b net/minecraft/server/EntityFireworks/expectedLifespan
-FD: net/minecraft/entity/item/EntityFireworkRocket/field_92011_a net/minecraft/server/EntityFireworks/ticksFlown
+FD: net/minecraft/entity/item/EntityFireworkRocket/fireworkAge net/minecraft/server/EntityFireworks/ticksFlown
+FD: net/minecraft/entity/item/EntityFireworkRocket/lifetime net/minecraft/server/EntityFireworks/expectedLifespan
 FD: net/minecraft/entity/item/EntityItem/age net/minecraft/server/EntityItem/age
 FD: net/minecraft/entity/item/EntityItem/delayBeforeCanPickup net/minecraft/server/EntityItem/pickupDelay
 FD: net/minecraft/entity/item/EntityItem/health net/minecraft/server/EntityItem/d
 FD: net/minecraft/entity/item/EntityItem/hoverStart net/minecraft/server/EntityItem/c
 FD: net/minecraft/entity/item/EntityItemFrame/itemDropChance net/minecraft/server/EntityItemFrame/e
 FD: net/minecraft/entity/item/EntityMinecart/cargoItems net/minecraft/server/EntityMinecart/items
-FD: net/minecraft/entity/item/EntityMinecart/field_70499_f net/minecraft/server/EntityMinecart/f
 FD: net/minecraft/entity/item/EntityMinecart/field_82344_g net/minecraft/server/EntityMinecart/g
 FD: net/minecraft/entity/item/EntityMinecart/field_82345_h net/minecraft/server/EntityMinecart/h
 FD: net/minecraft/entity/item/EntityMinecart/fuel net/minecraft/server/EntityMinecart/e
+FD: net/minecraft/entity/item/EntityMinecart/isInReverse net/minecraft/server/EntityMinecart/f
 FD: net/minecraft/entity/item/EntityMinecart/matrix net/minecraft/server/EntityMinecart/matrix
 FD: net/minecraft/entity/item/EntityMinecart/minecartPitch net/minecraft/server/EntityMinecart/ax
 FD: net/minecraft/entity/item/EntityMinecart/minecartType net/minecraft/server/EntityMinecart/type
@@ -2042,7 +2042,7 @@ FD: net/minecraft/entity/monster/EntityEnderman/teleportDelay net/minecraft/serv
 FD: net/minecraft/entity/monster/EntityGhast/aggroCooldown net/minecraft/server/EntityGhast/i
 FD: net/minecraft/entity/monster/EntityGhast/attackCounter net/minecraft/server/EntityGhast/g
 FD: net/minecraft/entity/monster/EntityGhast/courseChangeCooldown net/minecraft/server/EntityGhast/b
-FD: net/minecraft/entity/monster/EntityGhast/field_92009_j net/minecraft/server/EntityGhast/explosionPower
+FD: net/minecraft/entity/monster/EntityGhast/explosionStrength net/minecraft/server/EntityGhast/explosionPower
 FD: net/minecraft/entity/monster/EntityGhast/prevAttackCounter net/minecraft/server/EntityGhast/f
 FD: net/minecraft/entity/monster/EntityGhast/targetedEntity net/minecraft/server/EntityGhast/target
 FD: net/minecraft/entity/monster/EntityGhast/waypointX net/minecraft/server/EntityGhast/c
@@ -2055,8 +2055,8 @@ FD: net/minecraft/entity/monster/EntityIronGolem/villageObj net/minecraft/server
 FD: net/minecraft/entity/monster/EntityPigZombie/angerLevel net/minecraft/server/EntityPigZombie/angerLevel
 FD: net/minecraft/entity/monster/EntityPigZombie/randomSoundDelay net/minecraft/server/EntityPigZombie/soundDelay
 FD: net/minecraft/entity/monster/EntitySilverfish/allySummonCooldown net/minecraft/server/EntitySilverfish/d
-FD: net/minecraft/entity/monster/EntitySkeleton/field_85037_d net/minecraft/server/EntitySkeleton/d
-FD: net/minecraft/entity/monster/EntitySkeleton/field_85038_e net/minecraft/server/EntitySkeleton/e
+FD: net/minecraft/entity/monster/EntitySkeleton/aiArrowAttack net/minecraft/server/EntitySkeleton/d
+FD: net/minecraft/entity/monster/EntitySkeleton/aiAttackOnCollide net/minecraft/server/EntitySkeleton/e
 FD: net/minecraft/entity/monster/EntitySlime/field_70811_b net/minecraft/server/EntitySlime/c
 FD: net/minecraft/entity/monster/EntitySlime/field_70812_c net/minecraft/server/EntitySlime/d
 FD: net/minecraft/entity/monster/EntitySlime/field_70813_a net/minecraft/server/EntitySlime/b
@@ -2233,7 +2233,7 @@ FD: net/minecraft/entity/projectile/EntityFishHook/ticksInGround net/minecraft/s
 FD: net/minecraft/entity/projectile/EntityFishHook/xTile net/minecraft/server/EntityFishingHook/d
 FD: net/minecraft/entity/projectile/EntityFishHook/yTile net/minecraft/server/EntityFishingHook/e
 FD: net/minecraft/entity/projectile/EntityFishHook/zTile net/minecraft/server/EntityFishingHook/f
-FD: net/minecraft/entity/projectile/EntityLargeFireball/field_92012_e net/minecraft/server/EntityLargeFireball/e
+FD: net/minecraft/entity/projectile/EntityLargeFireball/field_92057_e net/minecraft/server/EntityLargeFireball/e
 FD: net/minecraft/entity/projectile/EntityPotion/potionDamage net/minecraft/server/EntityPotion/c
 FD: net/minecraft/entity/projectile/EntityThrowable/inGround net/minecraft/server/EntityProjectile/inGround
 FD: net/minecraft/entity/projectile/EntityThrowable/inTile net/minecraft/server/EntityProjectile/inBlockId
@@ -2337,9 +2337,9 @@ FD: net/minecraft/inventory/SlotMerchantResult/theMerchant net/minecraft/server/
 FD: net/minecraft/inventory/SlotMerchantResult/theMerchantInventory net/minecraft/server/SlotMerchantResult/a
 FD: net/minecraft/inventory/SlotMerchantResult/thePlayer net/minecraft/server/SlotMerchantResult/b
 FD: net/minecraft/inventory/SlotRepair/anvil net/minecraft/server/SlotAnvilResult/e
-FD: net/minecraft/inventory/SlotRepair/field_82871_d net/minecraft/server/SlotAnvilResult/d
-FD: net/minecraft/inventory/SlotRepair/field_82873_b net/minecraft/server/SlotAnvilResult/b
-FD: net/minecraft/inventory/SlotRepair/field_82874_c net/minecraft/server/SlotAnvilResult/c
+FD: net/minecraft/inventory/SlotRepair/blockPosX net/minecraft/server/SlotAnvilResult/b
+FD: net/minecraft/inventory/SlotRepair/blockPosY net/minecraft/server/SlotAnvilResult/c
+FD: net/minecraft/inventory/SlotRepair/blockPosZ net/minecraft/server/SlotAnvilResult/d
 FD: net/minecraft/inventory/SlotRepair/theWorld net/minecraft/server/SlotAnvilResult/a
 FD: net/minecraft/item/EnumAction/$VALUES net/minecraft/server/EnumAnimation/f
 FD: net/minecraft/item/EnumAction/block net/minecraft/server/EnumAnimation/d
@@ -2418,15 +2418,15 @@ FD: net/minecraft/item/Item/dyePowder net/minecraft/server/Item/INK_SACK
 FD: net/minecraft/item/Item/egg net/minecraft/server/Item/EGG
 FD: net/minecraft/item/Item/emerald net/minecraft/server/Item/EMERALD
 FD: net/minecraft/item/Item/emptyMap net/minecraft/server/Item/MAP_EMPTY
+FD: net/minecraft/item/Item/enchantedBook net/minecraft/server/Item/ENCHANTED_BOOK
 FD: net/minecraft/item/Item/enderPearl net/minecraft/server/Item/ENDER_PEARL
 FD: net/minecraft/item/Item/expBottle net/minecraft/server/Item/EXP_BOTTLE
 FD: net/minecraft/item/Item/eyeOfEnder net/minecraft/server/Item/EYE_OF_ENDER
 FD: net/minecraft/item/Item/feather net/minecraft/server/Item/FEATHER
 FD: net/minecraft/item/Item/fermentedSpiderEye net/minecraft/server/Item/FERMENTED_SPIDER_EYE
-FD: net/minecraft/item/Item/field_92052_bU net/minecraft/server/Item/FIREWORKS
-FD: net/minecraft/item/Item/field_92053_bW net/minecraft/server/Item/ENCHANTED_BOOK
-FD: net/minecraft/item/Item/field_92054_bV net/minecraft/server/Item/FIREWORKS_CHARGE
 FD: net/minecraft/item/Item/fireballCharge net/minecraft/server/Item/FIREBALL
+FD: net/minecraft/item/Item/firework net/minecraft/server/Item/FIREWORKS
+FD: net/minecraft/item/Item/fireworkCharge net/minecraft/server/Item/FIREWORKS_CHARGE
 FD: net/minecraft/item/Item/fishCooked net/minecraft/server/Item/COOKED_FISH
 FD: net/minecraft/item/Item/fishRaw net/minecraft/server/Item/RAW_FISH
 FD: net/minecraft/item/Item/fishingRod net/minecraft/server/Item/FISHING_ROD
@@ -2614,7 +2614,7 @@ FD: net/minecraft/item/crafting/CraftingManager/recipes net/minecraft/server/Cra
 FD: net/minecraft/item/crafting/FurnaceRecipes/experienceList net/minecraft/server/RecipesFurnace/c
 FD: net/minecraft/item/crafting/FurnaceRecipes/smeltingBase net/minecraft/server/RecipesFurnace/a
 FD: net/minecraft/item/crafting/FurnaceRecipes/smeltingList net/minecraft/server/RecipesFurnace/recipes
-FD: net/minecraft/item/crafting/RecipeFireworks/field_92050_a net/minecraft/server/RecipeFireworks/a
+FD: net/minecraft/item/crafting/RecipeFireworks/field_92102_a net/minecraft/server/RecipeFireworks/a
 FD: net/minecraft/item/crafting/RecipeSorter/craftingManager net/minecraft/server/RecipeSorter/a
 FD: net/minecraft/item/crafting/RecipesArmor/recipeItems net/minecraft/server/RecipesArmor/b
 FD: net/minecraft/item/crafting/RecipesArmor/recipePatterns net/minecraft/server/RecipesArmor/a
@@ -2623,7 +2623,7 @@ FD: net/minecraft/item/crafting/RecipesTools/recipeItems net/minecraft/server/Re
 FD: net/minecraft/item/crafting/RecipesTools/recipePatterns net/minecraft/server/RecipesTools/a
 FD: net/minecraft/item/crafting/RecipesWeapons/recipeItems net/minecraft/server/RecipesWeapons/b
 FD: net/minecraft/item/crafting/RecipesWeapons/recipePatterns net/minecraft/server/RecipesWeapons/a
-FD: net/minecraft/item/crafting/ShapedRecipes/field_92049_f net/minecraft/server/ShapedRecipes/f
+FD: net/minecraft/item/crafting/ShapedRecipes/field_92101_f net/minecraft/server/ShapedRecipes/f
 FD: net/minecraft/item/crafting/ShapedRecipes/recipeHeight net/minecraft/server/ShapedRecipes/height
 FD: net/minecraft/item/crafting/ShapedRecipes/recipeItems net/minecraft/server/ShapedRecipes/items
 FD: net/minecraft/item/crafting/ShapedRecipes/recipeOutput net/minecraft/server/ShapedRecipes/result
@@ -2661,7 +2661,7 @@ FD: net/minecraft/network/NetLoginHandler/clientUsername net/minecraft/server/Pe
 FD: net/minecraft/network/NetLoginHandler/connectionComplete net/minecraft/server/PendingConnection/c
 FD: net/minecraft/network/NetLoginHandler/connectionTimer net/minecraft/server/PendingConnection/g
 FD: net/minecraft/network/NetLoginHandler/field_72544_i net/minecraft/server/PendingConnection/i
-FD: net/minecraft/network/NetLoginHandler/field_92028_k net/minecraft/server/PendingConnection/k
+FD: net/minecraft/network/NetLoginHandler/field_92079_k net/minecraft/server/PendingConnection/k
 FD: net/minecraft/network/NetLoginHandler/logger net/minecraft/server/PendingConnection/logger
 FD: net/minecraft/network/NetLoginHandler/loginServerId net/minecraft/server/PendingConnection/loginKey
 FD: net/minecraft/network/NetLoginHandler/mcServer net/minecraft/server/PendingConnection/server
@@ -2846,8 +2846,8 @@ FD: net/minecraft/network/packet/Packet20NamedEntitySpawn/zPosition net/minecraf
 FD: net/minecraft/network/packet/Packet22Collect/collectedEntityId net/minecraft/server/Packet22Collect/a
 FD: net/minecraft/network/packet/Packet22Collect/collectorEntityId net/minecraft/server/Packet22Collect/b
 FD: net/minecraft/network/packet/Packet23VehicleSpawn/entityId net/minecraft/server/Packet23VehicleSpawn/a
-FD: net/minecraft/network/packet/Packet23VehicleSpawn/field_92025_h net/minecraft/server/Packet23VehicleSpawn/h
-FD: net/minecraft/network/packet/Packet23VehicleSpawn/field_92026_i net/minecraft/server/Packet23VehicleSpawn/i
+FD: net/minecraft/network/packet/Packet23VehicleSpawn/field_92077_h net/minecraft/server/Packet23VehicleSpawn/h
+FD: net/minecraft/network/packet/Packet23VehicleSpawn/field_92078_i net/minecraft/server/Packet23VehicleSpawn/i
 FD: net/minecraft/network/packet/Packet23VehicleSpawn/speedX net/minecraft/server/Packet23VehicleSpawn/e
 FD: net/minecraft/network/packet/Packet23VehicleSpawn/speedY net/minecraft/server/Packet23VehicleSpawn/f
 FD: net/minecraft/network/packet/Packet23VehicleSpawn/speedZ net/minecraft/server/Packet23VehicleSpawn/g
@@ -2976,7 +2976,7 @@ FD: net/minecraft/network/packet/Packet56MapChunks/dataLength net/minecraft/serv
 FD: net/minecraft/network/packet/Packet56MapChunks/field_73584_f net/minecraft/server/Packet56MapChunkBulk/inflatedBuffers
 FD: net/minecraft/network/packet/Packet56MapChunks/field_73588_b net/minecraft/server/Packet56MapChunkBulk/b
 FD: net/minecraft/network/packet/Packet56MapChunks/field_73590_a net/minecraft/server/Packet56MapChunkBulk/a
-FD: net/minecraft/network/packet/Packet56MapChunks/field_92024_h net/minecraft/server/Packet56MapChunkBulk/h
+FD: net/minecraft/network/packet/Packet56MapChunks/field_92076_h net/minecraft/server/Packet56MapChunkBulk/h
 FD: net/minecraft/network/packet/Packet5PlayerInventory/entityID net/minecraft/server/Packet5EntityEquipment/a
 FD: net/minecraft/network/packet/Packet5PlayerInventory/itemSlot net/minecraft/server/Packet5EntityEquipment/c
 FD: net/minecraft/network/packet/Packet5PlayerInventory/slot net/minecraft/server/Packet5EntityEquipment/b
@@ -3184,10 +3184,10 @@ FD: net/minecraft/profiler/ProfilerResult/field_76330_b net/minecraft/server/Pro
 FD: net/minecraft/profiler/ProfilerResult/field_76331_c net/minecraft/server/ProfilerInfo/c
 FD: net/minecraft/profiler/ProfilerResult/field_76332_a net/minecraft/server/ProfilerInfo/a
 FD: net/minecraft/server/CallableIsServerModded/mcServer net/minecraft/server/CrashReportProfilerPosition/a
-FD: net/minecraft/server/CallableServerMemoryStats/field_92023_a net/minecraft/server/CrashReportPlayerCount/a
+FD: net/minecraft/server/CallableServerMemoryStats/field_92075_a net/minecraft/server/CrashReportPlayerCount/a
 FD: net/minecraft/server/CallableServerProfiler/mcServer net/minecraft/server/CrashReportVec3DPoolSize/a
-FD: net/minecraft/server/ConvertingProgressUpdate/field_92019_b net/minecraft/server/ConvertProgressUpdater/b
-FD: net/minecraft/server/ConvertingProgressUpdate/field_92020_a net/minecraft/server/ConvertProgressUpdater/a
+FD: net/minecraft/server/ConvertingProgressUpdate/field_92029_b net/minecraft/server/ConvertProgressUpdater/b
+FD: net/minecraft/server/ConvertingProgressUpdate/field_92030_a net/minecraft/server/ConvertProgressUpdater/a
 FD: net/minecraft/server/MinecraftServer/allowFlight net/minecraft/server/MinecraftServer/allowFlight
 FD: net/minecraft/server/MinecraftServer/anvilConverterForAnvilFile net/minecraft/server/MinecraftServer/convertable
 FD: net/minecraft/server/MinecraftServer/anvilFile net/minecraft/server/MinecraftServer/universe
@@ -3245,7 +3245,7 @@ FD: net/minecraft/server/ThreadDedicatedServer/field_92021_a net/minecraft/serve
 FD: net/minecraft/server/ThreadMinecraftServer/mcServer net/minecraft/server/ThreadServerApplication/a
 FD: net/minecraft/server/dedicated/CallableServerType/field_85171_a net/minecraft/server/CrashReportType/a
 FD: net/minecraft/server/dedicated/CallableType/theDecitatedServer net/minecraft/server/CrashReportModded/a
-FD: net/minecraft/server/dedicated/ConsoleLogFormatter/simpleDateFormatLogFormatter net/minecraft/server/ConsoleLogFormatter/a
+FD: net/minecraft/server/dedicated/ConsoleLogFormatter/dateFormat net/minecraft/server/ConsoleLogFormatter/a
 FD: net/minecraft/server/dedicated/ConsoleLogManager/loggerLogManager net/minecraft/server/ConsoleLogManager/a
 FD: net/minecraft/server/dedicated/DedicatedPlayerList/opsList net/minecraft/server/DedicatedPlayerList/e
 FD: net/minecraft/server/dedicated/DedicatedPlayerList/whiteList net/minecraft/server/DedicatedPlayerList/f
@@ -3460,8 +3460,7 @@ FD: net/minecraft/tileentity/TileEntityFurnace/furnaceBurnTime net/minecraft/ser
 FD: net/minecraft/tileentity/TileEntityFurnace/furnaceCookTime net/minecraft/server/TileEntityFurnace/cookTime
 FD: net/minecraft/tileentity/TileEntityFurnace/furnaceItemStacks net/minecraft/server/TileEntityFurnace/items
 FD: net/minecraft/tileentity/TileEntityMobSpawner/delay net/minecraft/server/TileEntityMobSpawner/spawnDelay
-FD: net/minecraft/tileentity/TileEntityMobSpawner/field_92016_e net/minecraft/server/TileEntityMobSpawner/mobs
-FD: net/minecraft/tileentity/TileEntityMobSpawner/field_92017_j net/minecraft/server/TileEntityMobSpawner/j
+FD: net/minecraft/tileentity/TileEntityMobSpawner/field_92060_e net/minecraft/server/TileEntityMobSpawner/mobs
 FD: net/minecraft/tileentity/TileEntityMobSpawner/maxNearbyEntities net/minecraft/server/TileEntityMobSpawner/maxNearbyEntities
 FD: net/minecraft/tileentity/TileEntityMobSpawner/maxSpawnDelay net/minecraft/server/TileEntityMobSpawner/maxSpawnDelay
 FD: net/minecraft/tileentity/TileEntityMobSpawner/minSpawnDelay net/minecraft/server/TileEntityMobSpawner/minSpawnDelay
@@ -3469,12 +3468,13 @@ FD: net/minecraft/tileentity/TileEntityMobSpawner/mobID net/minecraft/server/Til
 FD: net/minecraft/tileentity/TileEntityMobSpawner/requiredPlayerRange net/minecraft/server/TileEntityMobSpawner/requiredPlayerRange
 FD: net/minecraft/tileentity/TileEntityMobSpawner/spawnCount net/minecraft/server/TileEntityMobSpawner/spawnCount
 FD: net/minecraft/tileentity/TileEntityMobSpawner/spawnRange net/minecraft/server/TileEntityMobSpawner/spawnRange
+FD: net/minecraft/tileentity/TileEntityMobSpawner/spawnedMob net/minecraft/server/TileEntityMobSpawner/j
 FD: net/minecraft/tileentity/TileEntityMobSpawner/spawnerTags net/minecraft/server/TileEntityMobSpawner/spawnData
 FD: net/minecraft/tileentity/TileEntityMobSpawner/yaw net/minecraft/server/TileEntityMobSpawner/b
 FD: net/minecraft/tileentity/TileEntityMobSpawner/yaw2 net/minecraft/server/TileEntityMobSpawner/c
-FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92031_d net/minecraft/server/TileEntityMobSpawnerData/d
-FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92032_b net/minecraft/server/TileEntityMobSpawnerData/b
-FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92033_c net/minecraft/server/TileEntityMobSpawnerData/c
+FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92082_d net/minecraft/server/TileEntityMobSpawnerData/d
+FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92083_b net/minecraft/server/TileEntityMobSpawnerData/b
+FD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/field_92084_c net/minecraft/server/TileEntityMobSpawnerData/c
 FD: net/minecraft/tileentity/TileEntityNote/note net/minecraft/server/TileEntityNote/note
 FD: net/minecraft/tileentity/TileEntityNote/previousRedstoneState net/minecraft/server/TileEntityNote/b
 FD: net/minecraft/tileentity/TileEntityPiston/extending net/minecraft/server/TileEntityPiston/d
@@ -3587,10 +3587,10 @@ FD: net/minecraft/util/EnumFacing/UP net/minecraft/server/EnumFacing/b
 FD: net/minecraft/util/EnumFacing/WEST net/minecraft/server/EnumFacing/f
 FD: net/minecraft/util/EnumFacing/field_82603_g net/minecraft/server/EnumFacing/g
 FD: net/minecraft/util/EnumFacing/field_82609_l net/minecraft/server/EnumFacing/l
-FD: net/minecraft/util/EnumFacing/field_82611_j net/minecraft/server/EnumFacing/j
-FD: net/minecraft/util/EnumFacing/field_82612_k net/minecraft/server/EnumFacing/k
 FD: net/minecraft/util/EnumFacing/field_82613_h net/minecraft/server/EnumFacing/h
-FD: net/minecraft/util/EnumFacing/field_82614_i net/minecraft/server/EnumFacing/i
+FD: net/minecraft/util/EnumFacing/frontOffsetX net/minecraft/server/EnumFacing/i
+FD: net/minecraft/util/EnumFacing/frontOffsetY net/minecraft/server/EnumFacing/j
+FD: net/minecraft/util/EnumFacing/frontOffsetZ net/minecraft/server/EnumFacing/k
 FD: net/minecraft/util/EnumMovingObjectType/$VALUES net/minecraft/server/EnumMovingObjectType/c
 FD: net/minecraft/util/EnumMovingObjectType/ENTITY net/minecraft/server/EnumMovingObjectType/ENTITY
 FD: net/minecraft/util/EnumMovingObjectType/TILE net/minecraft/server/EnumMovingObjectType/TILE
@@ -3754,8 +3754,8 @@ FD: net/minecraft/world/SpawnerAnimals/eligibleChunksForSpawning net/minecraft/s
 FD: net/minecraft/world/SpawnerAnimals/nightSpawnEntities net/minecraft/server/SpawnerCreature/a
 FD: net/minecraft/world/Teleporter/field_85190_d net/minecraft/server/PortalTravelAgent/d
 FD: net/minecraft/world/Teleporter/field_85191_c net/minecraft/server/PortalTravelAgent/c
-FD: net/minecraft/world/Teleporter/field_85192_a net/minecraft/server/PortalTravelAgent/a
 FD: net/minecraft/world/Teleporter/random net/minecraft/server/PortalTravelAgent/b
+FD: net/minecraft/world/Teleporter/worldServerInstance net/minecraft/server/PortalTravelAgent/a
 FD: net/minecraft/world/World/DIST_HASH_MAGIC net/minecraft/server/World/l
 FD: net/minecraft/world/World/activeChunkSet net/minecraft/server/World/chunkTickList
 FD: net/minecraft/world/World/addedTileEntityList net/minecraft/server/World/a
@@ -4035,15 +4035,15 @@ FD: net/minecraft/world/gen/ChunkProviderEnd/noiseGen2 net/minecraft/server/Chun
 FD: net/minecraft/world/gen/ChunkProviderEnd/noiseGen3 net/minecraft/server/ChunkProviderTheEnd/l
 FD: net/minecraft/world/gen/ChunkProviderEnd/noiseGen4 net/minecraft/server/ChunkProviderTheEnd/a
 FD: net/minecraft/world/gen/ChunkProviderEnd/noiseGen5 net/minecraft/server/ChunkProviderTheEnd/b
-FD: net/minecraft/world/gen/ChunkProviderFlat/field_82696_f net/minecraft/server/ChunkProviderFlat/f
 FD: net/minecraft/world/gen/ChunkProviderFlat/field_82697_g net/minecraft/server/ChunkProviderFlat/g
 FD: net/minecraft/world/gen/ChunkProviderFlat/field_82698_d net/minecraft/server/ChunkProviderFlat/d
 FD: net/minecraft/world/gen/ChunkProviderFlat/field_82699_e net/minecraft/server/ChunkProviderFlat/e
 FD: net/minecraft/world/gen/ChunkProviderFlat/field_82700_c net/minecraft/server/ChunkProviderFlat/c
-FD: net/minecraft/world/gen/ChunkProviderFlat/field_82701_j net/minecraft/server/ChunkProviderFlat/j
 FD: net/minecraft/world/gen/ChunkProviderFlat/field_82702_h net/minecraft/server/ChunkProviderFlat/h
-FD: net/minecraft/world/gen/ChunkProviderFlat/field_82703_i net/minecraft/server/ChunkProviderFlat/i
+FD: net/minecraft/world/gen/ChunkProviderFlat/lavaLakeGenerator net/minecraft/server/ChunkProviderFlat/j
 FD: net/minecraft/world/gen/ChunkProviderFlat/random net/minecraft/server/ChunkProviderFlat/b
+FD: net/minecraft/world/gen/ChunkProviderFlat/structureGenerators net/minecraft/server/ChunkProviderFlat/f
+FD: net/minecraft/world/gen/ChunkProviderFlat/waterLakeGenerator net/minecraft/server/ChunkProviderFlat/i
 FD: net/minecraft/world/gen/ChunkProviderFlat/worldObj net/minecraft/server/ChunkProviderFlat/a
 FD: net/minecraft/world/gen/ChunkProviderGenerate/biomesForGeneration net/minecraft/server/ChunkProviderGenerate/z
 FD: net/minecraft/world/gen/ChunkProviderGenerate/caveGenerator net/minecraft/server/ChunkProviderGenerate/t
@@ -4322,15 +4322,15 @@ FD: net/minecraft/world/gen/structure/StructureVillagePieceWeight/villagePieceWe
 FD: net/minecraft/world/gen/structure/StructureVillagePieceWeight/villagePiecesLimit net/minecraft/server/WorldGenVillagePieceWeight/d
 FD: net/minecraft/world/gen/structure/StructureVillagePieceWeight/villagePiecesSpawned net/minecraft/server/WorldGenVillagePieceWeight/c
 FD: net/minecraft/world/gen/structure/StructureVillageStart/hasMoreThanTwoComponents net/minecraft/server/WorldGenVillageStart/c
-FD: net/minecraft/world/storage/CallableLevelDimension/field_85115_a net/minecraft/server/CrashReportLevelDimension/a
-FD: net/minecraft/world/storage/CallableLevelGamemode/field_85109_a net/minecraft/server/CrashReportLevelGameMode/a
-FD: net/minecraft/world/storage/CallableLevelGenerator/field_85139_a net/minecraft/server/CrashReportLevelGenerator/a
-FD: net/minecraft/world/storage/CallableLevelGeneratorOptions/field_85141_a net/minecraft/server/CrashReportLevelGeneratorOptions/a
-FD: net/minecraft/world/storage/CallableLevelSeed/field_85143_a net/minecraft/server/CrashReportLevelSeed/a
-FD: net/minecraft/world/storage/CallableLevelSpawnLocation/field_85135_a net/minecraft/server/CrashReportLevelSpawnLocation/a
-FD: net/minecraft/world/storage/CallableLevelStorageVersion/field_85113_a net/minecraft/server/CrashReportLevelStorageVersion/a
-FD: net/minecraft/world/storage/CallableLevelTime/field_85137_a net/minecraft/server/CrashReportLevelTime/a
-FD: net/minecraft/world/storage/CallableLevelWeather/field_85111_a net/minecraft/server/CrashReportLevelWeather/a
+FD: net/minecraft/world/storage/CallableLevelDimension/worldInfoInstance net/minecraft/server/CrashReportLevelDimension/a
+FD: net/minecraft/world/storage/CallableLevelGamemode/worldInfoInstance net/minecraft/server/CrashReportLevelGameMode/a
+FD: net/minecraft/world/storage/CallableLevelGenerator/worldInfoInstance net/minecraft/server/CrashReportLevelGenerator/a
+FD: net/minecraft/world/storage/CallableLevelGeneratorOptions/worldInfoInstance net/minecraft/server/CrashReportLevelGeneratorOptions/a
+FD: net/minecraft/world/storage/CallableLevelSeed/worldInfoInstance net/minecraft/server/CrashReportLevelSeed/a
+FD: net/minecraft/world/storage/CallableLevelSpawnLocation/worldInfoInstance net/minecraft/server/CrashReportLevelSpawnLocation/a
+FD: net/minecraft/world/storage/CallableLevelStorageVersion/worldInfoInstance net/minecraft/server/CrashReportLevelStorageVersion/a
+FD: net/minecraft/world/storage/CallableLevelTime/worldInfoInstance net/minecraft/server/CrashReportLevelTime/a
+FD: net/minecraft/world/storage/CallableLevelWeather/worldInfoInstance net/minecraft/server/CrashReportLevelWeather/a
 FD: net/minecraft/world/storage/DerivedWorldInfo/theWorldInfo net/minecraft/server/SecondaryWorldData/a
 FD: net/minecraft/world/storage/MapCoord/centerX net/minecraft/server/WorldMapDecoration/locX
 FD: net/minecraft/world/storage/MapCoord/centerZ net/minecraft/server/WorldMapDecoration/locY
@@ -4394,209 +4394,209 @@ FD: net/minecraft/world/storage/WorldInfo/thunderTime net/minecraft/server/World
 FD: net/minecraft/world/storage/WorldInfo/thundering net/minecraft/server/WorldData/isThundering
 FD: net/minecraft/world/storage/WorldInfo/totalTime net/minecraft/server/WorldData/time
 FD: net/minecraft/world/storage/WorldInfo/worldTime net/minecraft/server/WorldData/dayTime
-FD: org/bouncycastle/asn1/DERObjectIdentifier/field_71610_b org/bouncycastle/asn1/DERObjectIdentifier/b
-FD: org/bouncycastle/asn1/DERObjectIdentifier/field_71611_a org/bouncycastle/asn1/DERObjectIdentifier/a
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71589_f org/bouncycastle/asn1/bc/BCObjectIdentifiers/f
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71590_g org/bouncycastle/asn1/bc/BCObjectIdentifiers/g
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71591_d org/bouncycastle/asn1/bc/BCObjectIdentifiers/d
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71592_e org/bouncycastle/asn1/bc/BCObjectIdentifiers/e
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71593_b org/bouncycastle/asn1/bc/BCObjectIdentifiers/b
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71594_c org/bouncycastle/asn1/bc/BCObjectIdentifiers/c
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71595_a org/bouncycastle/asn1/bc/BCObjectIdentifiers/a
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71596_n org/bouncycastle/asn1/bc/BCObjectIdentifiers/n
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71597_o org/bouncycastle/asn1/bc/BCObjectIdentifiers/o
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71598_l org/bouncycastle/asn1/bc/BCObjectIdentifiers/l
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71599_m org/bouncycastle/asn1/bc/BCObjectIdentifiers/m
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71600_j org/bouncycastle/asn1/bc/BCObjectIdentifiers/j
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71601_k org/bouncycastle/asn1/bc/BCObjectIdentifiers/k
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71602_h org/bouncycastle/asn1/bc/BCObjectIdentifiers/h
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71603_i org/bouncycastle/asn1/bc/BCObjectIdentifiers/i
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71604_q org/bouncycastle/asn1/bc/BCObjectIdentifiers/q
-FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/field_71605_p org/bouncycastle/asn1/bc/BCObjectIdentifiers/p
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71613_D org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/D
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71614_E org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/E
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71615_F org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/F
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71616_G org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/G
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71617_A org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/A
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71618_B org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/B
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71619_C org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/C
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71620_L org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/L
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71621_M org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/M
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71622_N org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/N
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71623_O org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/O
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71624_H org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/H
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71625_I org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/I
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71626_J org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/J
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71627_K org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/K
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71628_U org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/U
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71629_T org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/T
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71630_W org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/W
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71631_V org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/V
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71632_Q org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Q
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71633_P org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/P
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71634_S org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/S
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71635_R org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/R
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71636_Y org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Y
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71637_X org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/X
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71638_Z org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Z
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71639_f org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/f
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71640_g org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/g
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71641_d org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/d
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71642_e org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/e
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71643_b org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/b
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71644_c org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/c
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71645_a org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/a
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71646_n org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/n
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71647_o org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/o
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71648_l org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/l
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71649_m org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/m
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71650_j org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/j
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71651_k org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/k
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71652_h org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/h
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71653_i org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/i
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71654_w org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/w
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71655_v org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/v
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71656_u org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/u
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71657_t org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/t
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71658_s org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/s
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71659_r org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/r
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71660_q org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/q
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71661_p org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/p
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71662_z org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/z
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71663_y org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/y
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71664_x org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/x
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71665_bw org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bw
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71666_bv org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bv
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71667_by org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/by
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71668_bx org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bx
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71669_bs org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bs
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71670_br org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/br
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71671_bu org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bu
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71672_bt org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bt
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71673_bn org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bn
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71674_bo org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bo
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71675_bp org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bp
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71676_bq org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bq
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71677_bj org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bj
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71678_bk org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bk
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71679_bl org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bl
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71680_bm org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bm
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71681_bf org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bf
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71682_bg org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bg
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71683_bh org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bh
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71684_bi org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bi
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71685_bb org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bb
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71686_bc org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bc
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71687_bd org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bd
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71688_be org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/be
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71689_aZ org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aZ
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71690_aY org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aY
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71691_aR org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aR
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71692_aQ org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aQ
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71693_aT org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aT
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71694_aS org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aS
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71695_aV org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aV
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71696_aU org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aU
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71697_aX org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aX
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71698_aW org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aW
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71699_aI org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aI
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71700_aJ org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aJ
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71701_aK org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aK
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71702_aL org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aL
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71703_aM org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aM
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71704_aN org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aN
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71705_aO org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aO
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71706_aP org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aP
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71707_aA org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aA
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71708_aB org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aB
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71709_aC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aC
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71710_aD org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aD
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71711_aE org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aE
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71712_aF org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aF
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71713_aG org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aG
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71714_aH org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aH
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71715_az org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/az
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71716_ay org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ay
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71717_ba org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ba
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71718_at org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/at
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71719_as org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/as
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71720_ar org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ar
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71721_aq org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aq
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71722_ax org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ax
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71723_aw org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aw
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71724_av org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/av
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71725_au org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/au
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71726_ak org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ak
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71727_al org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/al
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71728_ai org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ai
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71729_aj org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aj
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71730_ao org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ao
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71731_ap org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ap
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71732_am org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/am
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71733_an org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/an
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71734_ac org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ac
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71735_ad org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ad
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71736_aa org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aa
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71737_ab org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ab
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71738_ag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ag
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71739_ah org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ah
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71740_ae org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ae
-FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/field_71741_af org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/af
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71796_f org/bouncycastle/crypto/BufferedBlockCipher/f
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71797_d org/bouncycastle/crypto/BufferedBlockCipher/d
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71798_e org/bouncycastle/crypto/BufferedBlockCipher/e
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71799_b org/bouncycastle/crypto/BufferedBlockCipher/b
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71800_c org/bouncycastle/crypto/BufferedBlockCipher/c
-FD: org/bouncycastle/crypto/BufferedBlockCipher/field_71801_a org/bouncycastle/crypto/BufferedBlockCipher/a
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71824_f org/bouncycastle/crypto/engines/AESFastEngine/f
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71825_g org/bouncycastle/crypto/engines/AESFastEngine/g
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71826_d org/bouncycastle/crypto/engines/AESFastEngine/d
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71827_e org/bouncycastle/crypto/engines/AESFastEngine/e
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71828_b org/bouncycastle/crypto/engines/AESFastEngine/b
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71829_c org/bouncycastle/crypto/engines/AESFastEngine/c
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71830_a org/bouncycastle/crypto/engines/AESFastEngine/a
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71831_n org/bouncycastle/crypto/engines/AESFastEngine/n
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71832_o org/bouncycastle/crypto/engines/AESFastEngine/o
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71833_l org/bouncycastle/crypto/engines/AESFastEngine/l
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71834_m org/bouncycastle/crypto/engines/AESFastEngine/m
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71835_j org/bouncycastle/crypto/engines/AESFastEngine/j
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71836_k org/bouncycastle/crypto/engines/AESFastEngine/k
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71837_h org/bouncycastle/crypto/engines/AESFastEngine/h
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71838_i org/bouncycastle/crypto/engines/AESFastEngine/i
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71839_r org/bouncycastle/crypto/engines/AESFastEngine/r
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71840_q org/bouncycastle/crypto/engines/AESFastEngine/q
-FD: org/bouncycastle/crypto/engines/AESFastEngine/field_71841_p org/bouncycastle/crypto/engines/AESFastEngine/p
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74853_f org/bouncycastle/crypto/io/CipherInputStream/f
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74854_g org/bouncycastle/crypto/io/CipherInputStream/g
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74855_d org/bouncycastle/crypto/io/CipherInputStream/d
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74856_e org/bouncycastle/crypto/io/CipherInputStream/e
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74857_b org/bouncycastle/crypto/io/CipherInputStream/b
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74858_c org/bouncycastle/crypto/io/CipherInputStream/c
-FD: org/bouncycastle/crypto/io/CipherInputStream/field_74859_a org/bouncycastle/crypto/io/CipherInputStream/a
-FD: org/bouncycastle/crypto/io/CipherOutputStream/field_74846_d org/bouncycastle/crypto/io/CipherOutputStream/d
-FD: org/bouncycastle/crypto/io/CipherOutputStream/field_74847_b org/bouncycastle/crypto/io/CipherOutputStream/b
-FD: org/bouncycastle/crypto/io/CipherOutputStream/field_74848_c org/bouncycastle/crypto/io/CipherOutputStream/c
-FD: org/bouncycastle/crypto/io/CipherOutputStream/field_74849_a org/bouncycastle/crypto/io/CipherOutputStream/a
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71809_f org/bouncycastle/crypto/modes/CFBBlockCipher/f
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71810_d org/bouncycastle/crypto/modes/CFBBlockCipher/d
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71811_e org/bouncycastle/crypto/modes/CFBBlockCipher/e
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71812_b org/bouncycastle/crypto/modes/CFBBlockCipher/b
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71813_c org/bouncycastle/crypto/modes/CFBBlockCipher/c
-FD: org/bouncycastle/crypto/modes/CFBBlockCipher/field_71814_a org/bouncycastle/crypto/modes/CFBBlockCipher/a
+FD: org/bouncycastle/asn1/DERObjectIdentifier/cache org/bouncycastle/asn1/DERObjectIdentifier/b
+FD: org/bouncycastle/asn1/DERObjectIdentifier/identifier org/bouncycastle/asn1/DERObjectIdentifier/a
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc org/bouncycastle/asn1/bc/BCObjectIdentifiers/a
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe org/bouncycastle/asn1/bc/BCObjectIdentifiers/b
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1 org/bouncycastle/asn1/bc/BCObjectIdentifiers/c
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1_pkcs12 org/bouncycastle/asn1/bc/BCObjectIdentifiers/i
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1_pkcs12_aes128_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/l
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1_pkcs12_aes192_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/m
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1_pkcs12_aes256_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/n
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha1_pkcs5 org/bouncycastle/asn1/bc/BCObjectIdentifiers/h
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha224 org/bouncycastle/asn1/bc/BCObjectIdentifiers/g
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256 org/bouncycastle/asn1/bc/BCObjectIdentifiers/d
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256_pkcs12 org/bouncycastle/asn1/bc/BCObjectIdentifiers/k
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256_pkcs12_aes128_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/o
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256_pkcs12_aes192_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/p
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256_pkcs12_aes256_cbc org/bouncycastle/asn1/bc/BCObjectIdentifiers/q
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha256_pkcs5 org/bouncycastle/asn1/bc/BCObjectIdentifiers/j
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha384 org/bouncycastle/asn1/bc/BCObjectIdentifiers/e
+FD: org/bouncycastle/asn1/bc/BCObjectIdentifiers/bc_pbe_sha512 org/bouncycastle/asn1/bc/BCObjectIdentifiers/f
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/RC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/C
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bagtypes org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bi
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/canNotDecryptAny org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ap
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/certBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bl
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/certTypes org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ai
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/crlBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bm
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/crlTypes org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/al
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/data org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/M
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/des_EDE3_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/B
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/dhKeyAgreement org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/q
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/digestAlgorithm org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/D
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/digestedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Q
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/encryptedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/R
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/encryptionAlgorithm org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/A
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/envelopedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/O
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_PBES2 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/y
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_PBKDF2 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/z
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_RSAES_OAEP org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/h
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_RSASSA_PSS org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/k
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aE
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_commitmentType org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bc
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_contentHint org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aG
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_contentIdentifier org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aM
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_contentReference org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aI
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_encrypKeyPref org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aJ
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_archiveTimestamp org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ba
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_certCRLTimestamp org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aZ
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_certValues org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aW
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_certificateRefs org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aU
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_commitmentType org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aP
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_contentTimestamp org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aT
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_escTimeStamp org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aY
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_otherSigCert org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aS
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_revocationRefs org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aV
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_revocationValues org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aX
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_sigPolicyId org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aO
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_signerAttr org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aR
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_ets_signerLocation org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aQ
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_msgSigDigest org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aH
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_otherSigCert org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/be
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_receiptRequest org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aF
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_sigPolicyId org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bb
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_signatureTimeStampToken org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aN
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_signerLocation org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bd
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_signingCertificate org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aK
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_aa_signingCertificateV2 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aL
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_alg_CMS3DESwrap org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bx
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_alg_CMSRC2wrap org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/by
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_alg_PWRI_KEK org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/an
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ar
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct_TSTInfo org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/at
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct_authData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/as
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct_authEnvelopedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/av
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct_compressedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/au
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_ct_timestampedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aw
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ax
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfApproval org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aC
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfCreation org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aD
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfDelivery org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aA
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfOrigin org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ay
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfReceipt org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/az
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_cti_ets_proofOfSender org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aB
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_hmacWithSHA1 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/H
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_hmacWithSHA224 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/I
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_hmacWithSHA256 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/J
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_hmacWithSHA384 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/K
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_hmacWithSHA512 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/L
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_mgf1 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/i
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_pSpecified org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/j
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_spq_ets_unotice org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bg
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/id_spq_ets_uri org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bf
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/keyBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bj
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md2 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/E
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md2WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/c
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md4 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/F
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md4WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/d
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md5 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/G
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/md5WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/e
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithMD2AndDES_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/s
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithMD2AndRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/t
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithMD5AndDES_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/u
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithMD5AndRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/v
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHA1AndDES_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/w
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHA1AndRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/x
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd128BitRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bu
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd128BitRC4 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bq
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd2_KeyTripleDES_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bt
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd3_KeyTripleDES_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bs
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd40BitRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bv
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbeWithSHAAnd40BitRC4 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/br
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pbewithSHAAnd40BitRC2_CBC org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bw
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs8ShroudedKeyBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bk
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_1 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/a
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_12 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bh
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_12PbeIds org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bp
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_3 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/p
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_5 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/r
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9 org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/S
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_challengePassword org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Z
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_contentType org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/V
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_counterSignature org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/Y
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_emailAddress org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/T
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_extendedCertificateAttributes org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ab
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_extensionRequest org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ad
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_friendlyName org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/af
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_localKeyId org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ag
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_messageDigest org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/W
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_signingDescription org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ac
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_signingTime org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/X
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_smimeCapabilities org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ae
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_unstructuredAddress org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aa
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/pkcs_9_at_unstructuredName org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/U
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/preferSignedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ao
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/rsaEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/b
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sMIMECapabilitiesVersions org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aq
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/safeContentsBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bo
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sdsiCertificate org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ak
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/secretBag org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/bn
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sha1WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/f
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sha224WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/o
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sha256WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/l
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sha384WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/m
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/sha512WithRSAEncryption org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/n
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/signedAndEnvelopedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/P
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/signedData org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/N
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/srsaOAEPEncryptionSET org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/g
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/x509Certificate org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/aj
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/x509Crl org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/am
+FD: org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/x509certType org/bouncycastle/asn1/pkcs/PKCSObjectIdentifiers/ah
+FD: org/bouncycastle/crypto/BufferedBlockCipher/buf org/bouncycastle/crypto/BufferedBlockCipher/a
+FD: org/bouncycastle/crypto/BufferedBlockCipher/bufOff org/bouncycastle/crypto/BufferedBlockCipher/b
+FD: org/bouncycastle/crypto/BufferedBlockCipher/cipher org/bouncycastle/crypto/BufferedBlockCipher/d
+FD: org/bouncycastle/crypto/BufferedBlockCipher/forEncryption org/bouncycastle/crypto/BufferedBlockCipher/c
+FD: org/bouncycastle/crypto/BufferedBlockCipher/partialBlockOkay org/bouncycastle/crypto/BufferedBlockCipher/e
+FD: org/bouncycastle/crypto/BufferedBlockCipher/pgpCFB org/bouncycastle/crypto/BufferedBlockCipher/f
+FD: org/bouncycastle/crypto/engines/AESFastEngine/C0 org/bouncycastle/crypto/engines/AESFastEngine/n
+FD: org/bouncycastle/crypto/engines/AESFastEngine/C1 org/bouncycastle/crypto/engines/AESFastEngine/o
+FD: org/bouncycastle/crypto/engines/AESFastEngine/C2 org/bouncycastle/crypto/engines/AESFastEngine/p
+FD: org/bouncycastle/crypto/engines/AESFastEngine/C3 org/bouncycastle/crypto/engines/AESFastEngine/q
+FD: org/bouncycastle/crypto/engines/AESFastEngine/ROUNDS org/bouncycastle/crypto/engines/AESFastEngine/l
+FD: org/bouncycastle/crypto/engines/AESFastEngine/S org/bouncycastle/crypto/engines/AESFastEngine/a
+FD: org/bouncycastle/crypto/engines/AESFastEngine/Si org/bouncycastle/crypto/engines/AESFastEngine/b
+FD: org/bouncycastle/crypto/engines/AESFastEngine/T0 org/bouncycastle/crypto/engines/AESFastEngine/d
+FD: org/bouncycastle/crypto/engines/AESFastEngine/T1 org/bouncycastle/crypto/engines/AESFastEngine/e
+FD: org/bouncycastle/crypto/engines/AESFastEngine/T2 org/bouncycastle/crypto/engines/AESFastEngine/f
+FD: org/bouncycastle/crypto/engines/AESFastEngine/T3 org/bouncycastle/crypto/engines/AESFastEngine/g
+FD: org/bouncycastle/crypto/engines/AESFastEngine/Tinv0 org/bouncycastle/crypto/engines/AESFastEngine/h
+FD: org/bouncycastle/crypto/engines/AESFastEngine/Tinv1 org/bouncycastle/crypto/engines/AESFastEngine/i
+FD: org/bouncycastle/crypto/engines/AESFastEngine/Tinv2 org/bouncycastle/crypto/engines/AESFastEngine/j
+FD: org/bouncycastle/crypto/engines/AESFastEngine/Tinv3 org/bouncycastle/crypto/engines/AESFastEngine/k
+FD: org/bouncycastle/crypto/engines/AESFastEngine/WorkingKey org/bouncycastle/crypto/engines/AESFastEngine/m
+FD: org/bouncycastle/crypto/engines/AESFastEngine/forEncryption org/bouncycastle/crypto/engines/AESFastEngine/r
+FD: org/bouncycastle/crypto/engines/AESFastEngine/rcon org/bouncycastle/crypto/engines/AESFastEngine/c
+FD: org/bouncycastle/crypto/io/CipherInputStream/buf org/bouncycastle/crypto/io/CipherInputStream/c
+FD: org/bouncycastle/crypto/io/CipherInputStream/bufOff org/bouncycastle/crypto/io/CipherInputStream/e
+FD: org/bouncycastle/crypto/io/CipherInputStream/finalized org/bouncycastle/crypto/io/CipherInputStream/g
+FD: org/bouncycastle/crypto/io/CipherInputStream/inBuf org/bouncycastle/crypto/io/CipherInputStream/d
+FD: org/bouncycastle/crypto/io/CipherInputStream/maxBuf org/bouncycastle/crypto/io/CipherInputStream/f
+FD: org/bouncycastle/crypto/io/CipherInputStream/theBufferedBlockCipher org/bouncycastle/crypto/io/CipherInputStream/a
+FD: org/bouncycastle/crypto/io/CipherInputStream/theStreamCipher org/bouncycastle/crypto/io/CipherInputStream/b
+FD: org/bouncycastle/crypto/io/CipherOutputStream/buf org/bouncycastle/crypto/io/CipherOutputStream/d
+FD: org/bouncycastle/crypto/io/CipherOutputStream/oneByte org/bouncycastle/crypto/io/CipherOutputStream/c
+FD: org/bouncycastle/crypto/io/CipherOutputStream/theBufferedBlockCipher org/bouncycastle/crypto/io/CipherOutputStream/a
+FD: org/bouncycastle/crypto/io/CipherOutputStream/theStreamCipher org/bouncycastle/crypto/io/CipherOutputStream/b
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/IV org/bouncycastle/crypto/modes/CFBBlockCipher/a
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/blockSize org/bouncycastle/crypto/modes/CFBBlockCipher/d
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/cfbOutV org/bouncycastle/crypto/modes/CFBBlockCipher/c
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/cfbV org/bouncycastle/crypto/modes/CFBBlockCipher/b
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/cipher org/bouncycastle/crypto/modes/CFBBlockCipher/e
+FD: org/bouncycastle/crypto/modes/CFBBlockCipher/encrypting org/bouncycastle/crypto/modes/CFBBlockCipher/f
 FD: org/bouncycastle/crypto/params/KeyParameter/key org/bouncycastle/crypto/params/KeyParameter/a
 FD: org/bouncycastle/crypto/params/ParametersWithIV/iv org/bouncycastle/crypto/params/ParametersWithIV/a
 FD: org/bouncycastle/crypto/params/ParametersWithIV/parameters org/bouncycastle/crypto/params/ParametersWithIV/b
 FD: org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/actions org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/a
 FD: org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/permissionMask org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/b
+FD: org/bouncycastle/jce/provider/BouncyCastleProvider/ASYMMETRIC_CIPHERS org/bouncycastle/jce/provider/BouncyCastleProvider/g
+FD: org/bouncycastle/jce/provider/BouncyCastleProvider/ASYMMETRIC_GENERIC org/bouncycastle/jce/provider/BouncyCastleProvider/f
 FD: org/bouncycastle/jce/provider/BouncyCastleProvider/CONFIGURATION org/bouncycastle/jce/provider/BouncyCastleProvider/b
+FD: org/bouncycastle/jce/provider/BouncyCastleProvider/DIGESTS org/bouncycastle/jce/provider/BouncyCastleProvider/h
 FD: org/bouncycastle/jce/provider/BouncyCastleProvider/PROVIDER_NAME org/bouncycastle/jce/provider/BouncyCastleProvider/a
-FD: org/bouncycastle/jce/provider/BouncyCastleProvider/field_74822_f org/bouncycastle/jce/provider/BouncyCastleProvider/f
-FD: org/bouncycastle/jce/provider/BouncyCastleProvider/field_74823_g org/bouncycastle/jce/provider/BouncyCastleProvider/g
-FD: org/bouncycastle/jce/provider/BouncyCastleProvider/field_74825_e org/bouncycastle/jce/provider/BouncyCastleProvider/e
-FD: org/bouncycastle/jce/provider/BouncyCastleProvider/field_74829_h org/bouncycastle/jce/provider/BouncyCastleProvider/h
+FD: org/bouncycastle/jce/provider/BouncyCastleProvider/SYMMETRIC_CIPHERS org/bouncycastle/jce/provider/BouncyCastleProvider/e
 FD: org/bouncycastle/jce/provider/BouncyCastleProvider/info org/bouncycastle/jce/provider/BouncyCastleProvider/c
 FD: org/bouncycastle/jce/provider/BouncyCastleProvider/keyInfoConverters org/bouncycastle/jce/provider/BouncyCastleProvider/d
-FD: org/bouncycastle/jce/provider/BouncyCastleProviderAction/field_74801_a org/bouncycastle/jce/provider/BouncyCastleProvider$1/a
+FD: org/bouncycastle/jce/provider/BouncyCastleProviderAction/theBouncyCastleProvider org/bouncycastle/jce/provider/BouncyCastleProvider$1/a
 FD: org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/BC_DH_LOCAL_PERMISSION org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/c
 FD: org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/BC_DH_PERMISSION org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/d
 FD: org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/BC_EC_LOCAL_PERMISSION org/bouncycastle/jce/provider/BouncyCastleProviderConfiguration/a
@@ -6034,7 +6034,7 @@ MD: net/minecraft/dispenser/RegistrySimple/putObject (Ljava/lang/Object;Ljava/la
 MD: net/minecraft/enchantment/Enchantment/calcModifierDamage (ILnet/minecraft/util/DamageSource;)I net/minecraft/server/Enchantment/a (ILnet/minecraft/server/DamageSource;)I
 MD: net/minecraft/enchantment/Enchantment/calcModifierLiving (ILnet/minecraft/entity/EntityLiving;)I net/minecraft/server/Enchantment/a (ILnet/minecraft/server/EntityLiving;)I
 MD: net/minecraft/enchantment/Enchantment/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z net/minecraft/server/Enchantment/a (Lnet/minecraft/server/Enchantment;)Z
-MD: net/minecraft/enchantment/Enchantment/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/Enchantment/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/Enchantment/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/Enchantment/canEnchant (Lnet/minecraft/server/ItemStack;)Z
 MD: net/minecraft/enchantment/Enchantment/getMaxEnchantability (I)I net/minecraft/server/Enchantment/b (I)I
 MD: net/minecraft/enchantment/Enchantment/getMaxLevel ()I net/minecraft/server/Enchantment/getMaxLevel ()I
 MD: net/minecraft/enchantment/Enchantment/getMinEnchantability (I)I net/minecraft/server/Enchantment/a (I)I
@@ -6057,17 +6057,17 @@ MD: net/minecraft/enchantment/EnchantmentArrowKnockback/getMaxLevel ()I net/mine
 MD: net/minecraft/enchantment/EnchantmentArrowKnockback/getMinEnchantability (I)I net/minecraft/server/EnchantmentArrowKnockback/a (I)I
 MD: net/minecraft/enchantment/EnchantmentDamage/calcModifierLiving (ILnet/minecraft/entity/EntityLiving;)I net/minecraft/server/EnchantmentWeaponDamage/a (ILnet/minecraft/server/EntityLiving;)I
 MD: net/minecraft/enchantment/EnchantmentDamage/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z net/minecraft/server/EnchantmentWeaponDamage/a (Lnet/minecraft/server/Enchantment;)Z
-MD: net/minecraft/enchantment/EnchantmentDamage/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentWeaponDamage/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/EnchantmentDamage/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentWeaponDamage/canEnchant (Lnet/minecraft/server/ItemStack;)Z
 MD: net/minecraft/enchantment/EnchantmentDamage/getMaxEnchantability (I)I net/minecraft/server/EnchantmentWeaponDamage/b (I)I
 MD: net/minecraft/enchantment/EnchantmentDamage/getMaxLevel ()I net/minecraft/server/EnchantmentWeaponDamage/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentDamage/getMinEnchantability (I)I net/minecraft/server/EnchantmentWeaponDamage/a (I)I
 MD: net/minecraft/enchantment/EnchantmentDamage/getName ()Ljava/lang/String; net/minecraft/server/EnchantmentWeaponDamage/a ()Ljava/lang/String;
-MD: net/minecraft/enchantment/EnchantmentDigging/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentDigging/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/EnchantmentDigging/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentDigging/canEnchant (Lnet/minecraft/server/ItemStack;)Z
 MD: net/minecraft/enchantment/EnchantmentDigging/getMaxEnchantability (I)I net/minecraft/server/EnchantmentDigging/b (I)I
 MD: net/minecraft/enchantment/EnchantmentDigging/getMaxLevel ()I net/minecraft/server/EnchantmentDigging/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentDigging/getMinEnchantability (I)I net/minecraft/server/EnchantmentDigging/a (I)I
-MD: net/minecraft/enchantment/EnchantmentDurability/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentDurability/canEnchant (Lnet/minecraft/server/ItemStack;)Z
-MD: net/minecraft/enchantment/EnchantmentDurability/func_92045_a (Lnet/minecraft/item/ItemStack;ILjava/util/Random;)Z net/minecraft/server/EnchantmentDurability/a (Lnet/minecraft/server/ItemStack;ILjava/util/Random;)Z
+MD: net/minecraft/enchantment/EnchantmentDurability/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentDurability/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/EnchantmentDurability/func_92097_a (Lnet/minecraft/item/ItemStack;ILjava/util/Random;)Z net/minecraft/server/EnchantmentDurability/a (Lnet/minecraft/server/ItemStack;ILjava/util/Random;)Z
 MD: net/minecraft/enchantment/EnchantmentDurability/getMaxEnchantability (I)I net/minecraft/server/EnchantmentDurability/b (I)I
 MD: net/minecraft/enchantment/EnchantmentDurability/getMaxLevel ()I net/minecraft/server/EnchantmentDurability/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentDurability/getMinEnchantability (I)I net/minecraft/server/EnchantmentDurability/a (I)I
@@ -6079,8 +6079,8 @@ MD: net/minecraft/enchantment/EnchantmentHelper/applyEnchantmentModifier (Lnet/m
 MD: net/minecraft/enchantment/EnchantmentHelper/applyEnchantmentModifierArray (Lnet/minecraft/enchantment/IEnchantmentModifier;[Lnet/minecraft/item/ItemStack;)V net/minecraft/server/EnchantmentManager/a (Lnet/minecraft/server/EnchantmentModifier;[Lnet/minecraft/server/ItemStack;)V
 MD: net/minecraft/enchantment/EnchantmentHelper/buildEnchantmentList (Ljava/util/Random;Lnet/minecraft/item/ItemStack;I)Ljava/util/List; net/minecraft/server/EnchantmentManager/b (Ljava/util/Random;Lnet/minecraft/server/ItemStack;I)Ljava/util/List;
 MD: net/minecraft/enchantment/EnchantmentHelper/calcItemStackEnchantability (Ljava/util/Random;IILnet/minecraft/item/ItemStack;)I net/minecraft/server/EnchantmentManager/a (Ljava/util/Random;IILnet/minecraft/server/ItemStack;)I
-MD: net/minecraft/enchantment/EnchantmentHelper/func_92046_i (Lnet/minecraft/entity/EntityLiving;)I net/minecraft/server/EnchantmentManager/getThornsEnchantmentLevel (Lnet/minecraft/server/EntityLiving;)I
-MD: net/minecraft/enchantment/EnchantmentHelper/func_92047_a (Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/item/ItemStack; net/minecraft/server/EnchantmentManager/a (Lnet/minecraft/server/Enchantment;Lnet/minecraft/server/EntityLiving;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/enchantment/EnchantmentHelper/func_92098_i (Lnet/minecraft/entity/EntityLiving;)I net/minecraft/server/EnchantmentManager/getThornsEnchantmentLevel (Lnet/minecraft/server/EntityLiving;)I
+MD: net/minecraft/enchantment/EnchantmentHelper/func_92099_a (Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/item/ItemStack; net/minecraft/server/EnchantmentManager/a (Lnet/minecraft/server/Enchantment;Lnet/minecraft/server/EntityLiving;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/enchantment/EnchantmentHelper/getAquaAffinityModifier (Lnet/minecraft/entity/EntityLiving;)Z net/minecraft/server/EnchantmentManager/hasWaterWorkerEnchantment (Lnet/minecraft/server/EntityLiving;)Z
 MD: net/minecraft/enchantment/EnchantmentHelper/getEfficiencyModifier (Lnet/minecraft/entity/EntityLiving;)I net/minecraft/server/EnchantmentManager/getDigSpeedEnchantmentLevel (Lnet/minecraft/server/EntityLiving;)I
 MD: net/minecraft/enchantment/EnchantmentHelper/getEnchantmentLevel (ILnet/minecraft/item/ItemStack;)I net/minecraft/server/EnchantmentManager/getEnchantmentLevel (ILnet/minecraft/server/ItemStack;)I
@@ -6110,21 +6110,21 @@ MD: net/minecraft/enchantment/EnchantmentOxygen/getMaxLevel ()I net/minecraft/se
 MD: net/minecraft/enchantment/EnchantmentOxygen/getMinEnchantability (I)I net/minecraft/server/EnchantmentOxygen/a (I)I
 MD: net/minecraft/enchantment/EnchantmentProtection/calcModifierDamage (ILnet/minecraft/util/DamageSource;)I net/minecraft/server/EnchantmentProtection/a (ILnet/minecraft/server/DamageSource;)I
 MD: net/minecraft/enchantment/EnchantmentProtection/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z net/minecraft/server/EnchantmentProtection/a (Lnet/minecraft/server/Enchantment;)Z
-MD: net/minecraft/enchantment/EnchantmentProtection/func_92040_a (Lnet/minecraft/entity/Entity;D)D net/minecraft/server/EnchantmentProtection/a (Lnet/minecraft/server/Entity;D)D
-MD: net/minecraft/enchantment/EnchantmentProtection/func_92041_a (Lnet/minecraft/entity/Entity;I)I net/minecraft/server/EnchantmentProtection/a (Lnet/minecraft/server/Entity;I)I
+MD: net/minecraft/enchantment/EnchantmentProtection/func_92092_a (Lnet/minecraft/entity/Entity;D)D net/minecraft/server/EnchantmentProtection/a (Lnet/minecraft/server/Entity;D)D
+MD: net/minecraft/enchantment/EnchantmentProtection/func_92093_a (Lnet/minecraft/entity/Entity;I)I net/minecraft/server/EnchantmentProtection/a (Lnet/minecraft/server/Entity;I)I
 MD: net/minecraft/enchantment/EnchantmentProtection/getMaxEnchantability (I)I net/minecraft/server/EnchantmentProtection/b (I)I
 MD: net/minecraft/enchantment/EnchantmentProtection/getMaxLevel ()I net/minecraft/server/EnchantmentProtection/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentProtection/getMinEnchantability (I)I net/minecraft/server/EnchantmentProtection/a (I)I
 MD: net/minecraft/enchantment/EnchantmentProtection/getName ()Ljava/lang/String; net/minecraft/server/EnchantmentProtection/a ()Ljava/lang/String;
-MD: net/minecraft/enchantment/EnchantmentThorns/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentThorns/canEnchant (Lnet/minecraft/server/ItemStack;)Z
-MD: net/minecraft/enchantment/EnchantmentThorns/func_92042_a (ILjava/util/Random;)Z net/minecraft/server/EnchantmentThorns/a (ILjava/util/Random;)Z
-MD: net/minecraft/enchantment/EnchantmentThorns/func_92043_b (ILjava/util/Random;)I net/minecraft/server/EnchantmentThorns/b (ILjava/util/Random;)I
-MD: net/minecraft/enchantment/EnchantmentThorns/func_92044_a (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/EntityLiving;Ljava/util/Random;)V net/minecraft/server/EnchantmentThorns/a (Lnet/minecraft/server/Entity;Lnet/minecraft/server/EntityLiving;Ljava/util/Random;)V
+MD: net/minecraft/enchantment/EnchantmentThorns/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentThorns/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/EnchantmentThorns/func_92094_a (ILjava/util/Random;)Z net/minecraft/server/EnchantmentThorns/a (ILjava/util/Random;)Z
+MD: net/minecraft/enchantment/EnchantmentThorns/func_92095_b (ILjava/util/Random;)I net/minecraft/server/EnchantmentThorns/b (ILjava/util/Random;)I
+MD: net/minecraft/enchantment/EnchantmentThorns/func_92096_a (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/EntityLiving;Ljava/util/Random;)V net/minecraft/server/EnchantmentThorns/a (Lnet/minecraft/server/Entity;Lnet/minecraft/server/EntityLiving;Ljava/util/Random;)V
 MD: net/minecraft/enchantment/EnchantmentThorns/getMaxEnchantability (I)I net/minecraft/server/EnchantmentThorns/b (I)I
 MD: net/minecraft/enchantment/EnchantmentThorns/getMaxLevel ()I net/minecraft/server/EnchantmentThorns/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentThorns/getMinEnchantability (I)I net/minecraft/server/EnchantmentThorns/a (I)I
 MD: net/minecraft/enchantment/EnchantmentUntouching/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z net/minecraft/server/EnchantmentSilkTouch/a (Lnet/minecraft/server/Enchantment;)Z
-MD: net/minecraft/enchantment/EnchantmentUntouching/func_92037_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentSilkTouch/canEnchant (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/enchantment/EnchantmentUntouching/func_92089_a (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/EnchantmentSilkTouch/canEnchant (Lnet/minecraft/server/ItemStack;)Z
 MD: net/minecraft/enchantment/EnchantmentUntouching/getMaxEnchantability (I)I net/minecraft/server/EnchantmentSilkTouch/b (I)I
 MD: net/minecraft/enchantment/EnchantmentUntouching/getMaxLevel ()I net/minecraft/server/EnchantmentSilkTouch/getMaxLevel ()I
 MD: net/minecraft/enchantment/EnchantmentUntouching/getMinEnchantability (I)I net/minecraft/server/EnchantmentSilkTouch/a (I)I
@@ -6141,7 +6141,7 @@ MD: net/minecraft/entity/DataWatcher/addObject (ILjava/lang/Object;)V net/minecr
 MD: net/minecraft/entity/DataWatcher/addObjectByDataType (II)V net/minecraft/server/DataWatcher/a (II)V
 MD: net/minecraft/entity/DataWatcher/func_75685_c ()Ljava/util/List; net/minecraft/server/DataWatcher/c ()Ljava/util/List;
 MD: net/minecraft/entity/DataWatcher/func_82708_h (I)V net/minecraft/server/DataWatcher/h (I)V
-MD: net/minecraft/entity/DataWatcher/func_92034_d ()Z net/minecraft/server/DataWatcher/d ()Z
+MD: net/minecraft/entity/DataWatcher/func_92085_d ()Z net/minecraft/server/DataWatcher/d ()Z
 MD: net/minecraft/entity/DataWatcher/getWatchableObjectByte (I)B net/minecraft/server/DataWatcher/getByte (I)B
 MD: net/minecraft/entity/DataWatcher/getWatchableObjectInt (I)I net/minecraft/server/DataWatcher/getInt (I)I
 MD: net/minecraft/entity/DataWatcher/getWatchableObjectItemStack (I)Lnet/minecraft/item/ItemStack; net/minecraft/server/DataWatcher/getItemStack (I)Lnet/minecraft/server/ItemStack;
@@ -6696,9 +6696,9 @@ MD: net/minecraft/entity/ai/EntityLookHelper/onUpdateLook ()V net/minecraft/serv
 MD: net/minecraft/entity/ai/EntityLookHelper/setLookPosition (DDDFF)V net/minecraft/server/ControllerLook/a (DDDFF)V
 MD: net/minecraft/entity/ai/EntityLookHelper/setLookPositionWithEntity (Lnet/minecraft/entity/Entity;FF)V net/minecraft/server/ControllerLook/a (Lnet/minecraft/server/Entity;FF)V
 MD: net/minecraft/entity/ai/EntityLookHelper/updateRotation (FFF)F net/minecraft/server/ControllerLook/a (FFF)F
-MD: net/minecraft/entity/ai/EntityMoveHelper/func_75639_a (FFF)F net/minecraft/server/ControllerMove/a (FFF)F
-MD: net/minecraft/entity/ai/EntityMoveHelper/func_75640_a ()Z net/minecraft/server/ControllerMove/a ()Z
 MD: net/minecraft/entity/ai/EntityMoveHelper/getSpeed ()F net/minecraft/server/ControllerMove/b ()F
+MD: net/minecraft/entity/ai/EntityMoveHelper/isUpdating ()Z net/minecraft/server/ControllerMove/a ()Z
+MD: net/minecraft/entity/ai/EntityMoveHelper/limitAngle (FFF)F net/minecraft/server/ControllerMove/a (FFF)F
 MD: net/minecraft/entity/ai/EntityMoveHelper/onUpdateMoveHelper ()V net/minecraft/server/ControllerMove/c ()V
 MD: net/minecraft/entity/ai/EntityMoveHelper/setMoveTo (DDDF)V net/minecraft/server/ControllerMove/a (DDDF)V
 MD: net/minecraft/entity/ai/EntitySenses/canSee (Lnet/minecraft/entity/Entity;)Z net/minecraft/server/EntitySenses/canSee (Lnet/minecraft/server/Entity;)Z
@@ -6834,8 +6834,8 @@ MD: net/minecraft/entity/item/EntityItem/dealFireDamage (I)V net/minecraft/serve
 MD: net/minecraft/entity/item/EntityItem/entityInit ()V net/minecraft/server/EntityItem/a ()V
 MD: net/minecraft/entity/item/EntityItem/func_70288_d ()V net/minecraft/server/EntityItem/c ()V
 MD: net/minecraft/entity/item/EntityItem/func_85054_d ()V net/minecraft/server/EntityItem/g ()V
-MD: net/minecraft/entity/item/EntityItem/func_92013_a (Lnet/minecraft/item/ItemStack;)V net/minecraft/server/EntityItem/setItemStack (Lnet/minecraft/server/ItemStack;)V
-MD: net/minecraft/entity/item/EntityItem/func_92014_d ()Lnet/minecraft/item/ItemStack; net/minecraft/server/EntityItem/getItemStack ()Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/entity/item/EntityItem/func_92058_a (Lnet/minecraft/item/ItemStack;)V net/minecraft/server/EntityItem/setItemStack (Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/entity/item/EntityItem/getEntityItem ()Lnet/minecraft/item/ItemStack; net/minecraft/server/EntityItem/getItemStack ()Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/entity/item/EntityItem/getEntityName ()Ljava/lang/String; net/minecraft/server/EntityItem/getLocalizedName ()Ljava/lang/String;
 MD: net/minecraft/entity/item/EntityItem/handleWaterMovement ()Z net/minecraft/server/EntityItem/I ()Z
 MD: net/minecraft/entity/item/EntityItem/onCollideWithPlayer (Lnet/minecraft/entity/player/EntityPlayer;)V net/minecraft/server/EntityItem/c_ (Lnet/minecraft/server/EntityHuman;)V
@@ -6863,16 +6863,14 @@ MD: net/minecraft/entity/item/EntityMinecart/closeChest ()V net/minecraft/server
 MD: net/minecraft/entity/item/EntityMinecart/decrStackSize (II)Lnet/minecraft/item/ItemStack; net/minecraft/server/EntityMinecart/splitStack (II)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/entity/item/EntityMinecart/entityInit ()V net/minecraft/server/EntityMinecart/a ()V
 MD: net/minecraft/entity/item/EntityMinecart/func_70489_a (DDD)Lnet/minecraft/util/Vec3; net/minecraft/server/EntityMinecart/a (DDD)Lnet/minecraft/server/Vec3D;
-MD: net/minecraft/entity/item/EntityMinecart/func_70493_k ()I net/minecraft/server/EntityMinecart/k ()I
-MD: net/minecraft/entity/item/EntityMinecart/func_70494_i (I)V net/minecraft/server/EntityMinecart/i (I)V
-MD: net/minecraft/entity/item/EntityMinecart/func_70496_j ()I net/minecraft/server/EntityMinecart/j ()I
-MD: net/minecraft/entity/item/EntityMinecart/func_70497_h (I)V net/minecraft/server/EntityMinecart/h (I)V
 MD: net/minecraft/entity/item/EntityMinecart/getBoundingBox ()Lnet/minecraft/util/AxisAlignedBB; net/minecraft/server/EntityMinecart/E ()Lnet/minecraft/server/AxisAlignedBB;
 MD: net/minecraft/entity/item/EntityMinecart/getCollisionBox (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/AxisAlignedBB; net/minecraft/server/EntityMinecart/g (Lnet/minecraft/server/Entity;)Lnet/minecraft/server/AxisAlignedBB;
 MD: net/minecraft/entity/item/EntityMinecart/getDamage ()I net/minecraft/server/EntityMinecart/getDamage ()I
 MD: net/minecraft/entity/item/EntityMinecart/getInvName ()Ljava/lang/String; net/minecraft/server/EntityMinecart/getName ()Ljava/lang/String;
 MD: net/minecraft/entity/item/EntityMinecart/getInventoryStackLimit ()I net/minecraft/server/EntityMinecart/getMaxStackSize ()I
 MD: net/minecraft/entity/item/EntityMinecart/getMountedYOffset ()D net/minecraft/server/EntityMinecart/X ()D
+MD: net/minecraft/entity/item/EntityMinecart/getRollingAmplitude ()I net/minecraft/server/EntityMinecart/j ()I
+MD: net/minecraft/entity/item/EntityMinecart/getRollingDirection ()I net/minecraft/server/EntityMinecart/k ()I
 MD: net/minecraft/entity/item/EntityMinecart/getSizeInventory ()I net/minecraft/server/EntityMinecart/getSize ()I
 MD: net/minecraft/entity/item/EntityMinecart/getStackInSlot (I)Lnet/minecraft/item/ItemStack; net/minecraft/server/EntityMinecart/getItem (I)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/entity/item/EntityMinecart/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack; net/minecraft/server/EntityMinecart/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack;
@@ -6887,6 +6885,8 @@ MD: net/minecraft/entity/item/EntityMinecart/setDamage (I)V net/minecraft/server
 MD: net/minecraft/entity/item/EntityMinecart/setDead ()V net/minecraft/server/EntityMinecart/die ()V
 MD: net/minecraft/entity/item/EntityMinecart/setInventorySlotContents (ILnet/minecraft/item/ItemStack;)V net/minecraft/server/EntityMinecart/setItem (ILnet/minecraft/server/ItemStack;)V
 MD: net/minecraft/entity/item/EntityMinecart/setMinecartPowered (Z)V net/minecraft/server/EntityMinecart/e (Z)V
+MD: net/minecraft/entity/item/EntityMinecart/setRollingAmplitude (I)V net/minecraft/server/EntityMinecart/h (I)V
+MD: net/minecraft/entity/item/EntityMinecart/setRollingDirection (I)V net/minecraft/server/EntityMinecart/i (I)V
 MD: net/minecraft/entity/item/EntityMinecart/travelToDimension (I)V net/minecraft/server/EntityMinecart/b (I)V
 MD: net/minecraft/entity/item/EntityMinecart/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/EntityMinecart/b (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/entity/item/EntityPainting/dropItemStack ()V net/minecraft/server/EntityPainting/h ()V
@@ -6953,8 +6953,6 @@ MD: net/minecraft/entity/monster/EntityEnderman/attackEntityFrom (Lnet/minecraft
 MD: net/minecraft/entity/monster/EntityEnderman/dropFewItems (ZI)V net/minecraft/server/EntityEnderman/dropDeathLoot (ZI)V
 MD: net/minecraft/entity/monster/EntityEnderman/entityInit ()V net/minecraft/server/EntityEnderman/a ()V
 MD: net/minecraft/entity/monster/EntityEnderman/findPlayerToAttack ()Lnet/minecraft/entity/Entity; net/minecraft/server/EntityEnderman/findTarget ()Lnet/minecraft/server/Entity;
-MD: net/minecraft/entity/monster/EntityEnderman/func_70819_e (Z)V net/minecraft/server/EntityEnderman/f (Z)V
-MD: net/minecraft/entity/monster/EntityEnderman/func_70823_r ()Z net/minecraft/server/EntityEnderman/q ()Z
 MD: net/minecraft/entity/monster/EntityEnderman/getAttackStrength (Lnet/minecraft/entity/Entity;)I net/minecraft/server/EntityEnderman/c (Lnet/minecraft/server/Entity;)I
 MD: net/minecraft/entity/monster/EntityEnderman/getCarried ()I net/minecraft/server/EntityEnderman/getCarriedId ()I
 MD: net/minecraft/entity/monster/EntityEnderman/getCarryingData ()I net/minecraft/server/EntityEnderman/getCarriedData ()I
@@ -6963,10 +6961,12 @@ MD: net/minecraft/entity/monster/EntityEnderman/getDropItemId ()I net/minecraft/
 MD: net/minecraft/entity/monster/EntityEnderman/getHurtSound ()Ljava/lang/String; net/minecraft/server/EntityEnderman/aZ ()Ljava/lang/String;
 MD: net/minecraft/entity/monster/EntityEnderman/getLivingSound ()Ljava/lang/String; net/minecraft/server/EntityEnderman/aY ()Ljava/lang/String;
 MD: net/minecraft/entity/monster/EntityEnderman/getMaxHealth ()I net/minecraft/server/EntityEnderman/getMaxHealth ()I
+MD: net/minecraft/entity/monster/EntityEnderman/isScreaming ()Z net/minecraft/server/EntityEnderman/q ()Z
 MD: net/minecraft/entity/monster/EntityEnderman/onLivingUpdate ()V net/minecraft/server/EntityEnderman/c ()V
 MD: net/minecraft/entity/monster/EntityEnderman/readEntityFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/EntityEnderman/a (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/entity/monster/EntityEnderman/setCarried (I)V net/minecraft/server/EntityEnderman/setCarriedId (I)V
 MD: net/minecraft/entity/monster/EntityEnderman/setCarryingData (I)V net/minecraft/server/EntityEnderman/setCarriedData (I)V
+MD: net/minecraft/entity/monster/EntityEnderman/setScreaming (Z)V net/minecraft/server/EntityEnderman/f (Z)V
 MD: net/minecraft/entity/monster/EntityEnderman/shouldAttackPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z net/minecraft/server/EntityEnderman/d (Lnet/minecraft/server/EntityHuman;)Z
 MD: net/minecraft/entity/monster/EntityEnderman/teleportRandomly ()Z net/minecraft/server/EntityEnderman/m ()Z
 MD: net/minecraft/entity/monster/EntityEnderman/teleportTo (DDD)Z net/minecraft/server/EntityEnderman/j (DDD)Z
@@ -7174,7 +7174,6 @@ MD: net/minecraft/entity/monster/EntityZombie/convertToVillager ()V net/minecraf
 MD: net/minecraft/entity/monster/EntityZombie/dropRareDrop (I)V net/minecraft/server/EntityZombie/l (I)V
 MD: net/minecraft/entity/monster/EntityZombie/entityInit ()V net/minecraft/server/EntityZombie/a ()V
 MD: net/minecraft/entity/monster/EntityZombie/func_82164_bB ()V net/minecraft/server/EntityZombie/bE ()V
-MD: net/minecraft/entity/monster/EntityZombie/func_82230_o ()Z net/minecraft/server/EntityZombie/o ()Z
 MD: net/minecraft/entity/monster/EntityZombie/getAttackStrength (Lnet/minecraft/entity/Entity;)I net/minecraft/server/EntityZombie/c (Lnet/minecraft/server/Entity;)I
 MD: net/minecraft/entity/monster/EntityZombie/getConversionTimeBoost ()I net/minecraft/server/EntityZombie/q ()I
 MD: net/minecraft/entity/monster/EntityZombie/getCreatureAttribute ()Lnet/minecraft/entity/EnumCreatureAttribute; net/minecraft/server/EntityZombie/getMonsterType ()Lnet/minecraft/server/EnumMonsterType;
@@ -7189,6 +7188,7 @@ MD: net/minecraft/entity/monster/EntityZombie/initCreature ()V net/minecraft/ser
 MD: net/minecraft/entity/monster/EntityZombie/interact (Lnet/minecraft/entity/player/EntityPlayer;)Z net/minecraft/server/EntityZombie/a (Lnet/minecraft/server/EntityHuman;)Z
 MD: net/minecraft/entity/monster/EntityZombie/isAIEnabled ()Z net/minecraft/server/EntityZombie/be ()Z
 MD: net/minecraft/entity/monster/EntityZombie/isChild ()Z net/minecraft/server/EntityZombie/isBaby ()Z
+MD: net/minecraft/entity/monster/EntityZombie/isConverting ()Z net/minecraft/server/EntityZombie/o ()Z
 MD: net/minecraft/entity/monster/EntityZombie/isVillager ()Z net/minecraft/server/EntityZombie/isVillager ()Z
 MD: net/minecraft/entity/monster/EntityZombie/onKillEntity (Lnet/minecraft/entity/EntityLiving;)V net/minecraft/server/EntityZombie/a (Lnet/minecraft/server/EntityLiving;)V
 MD: net/minecraft/entity/monster/EntityZombie/onLivingUpdate ()V net/minecraft/server/EntityZombie/c ()V
@@ -8027,12 +8027,12 @@ MD: net/minecraft/item/ItemEditableBook/onItemRightClick (Lnet/minecraft/item/It
 MD: net/minecraft/item/ItemEditableBook/validBookTagContents (Lnet/minecraft/nbt/NBTTagCompound;)Z net/minecraft/server/ItemWrittenBook/a (Lnet/minecraft/server/NBTTagCompound;)Z
 MD: net/minecraft/item/ItemEgg/onItemRightClick (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEgg/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/ItemEmptyMap/onItemRightClick (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemMapEmpty/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
-MD: net/minecraft/item/ItemEnchantedBook/func_92055_a (Ljava/util/Random;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEnchantedBook/a (Ljava/util/Random;)Lnet/minecraft/server/ItemStack;
-MD: net/minecraft/item/ItemEnchantedBook/func_92056_g (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/nbt/NBTTagList; net/minecraft/server/ItemEnchantedBook/g (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/NBTTagList;
-MD: net/minecraft/item/ItemEnchantedBook/func_92057_a (Lnet/minecraft/enchantment/EnchantmentData;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEnchantedBook/a (Lnet/minecraft/server/EnchantmentInstance;)Lnet/minecraft/server/ItemStack;
-MD: net/minecraft/item/ItemEnchantedBook/func_92058_a (Ljava/util/Random;III)Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/ItemEnchantedBook/a (Ljava/util/Random;III)Lnet/minecraft/server/StructurePieceTreasure;
-MD: net/minecraft/item/ItemEnchantedBook/func_92059_b (Ljava/util/Random;)Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/ItemEnchantedBook/b (Ljava/util/Random;)Lnet/minecraft/server/StructurePieceTreasure;
-MD: net/minecraft/item/ItemEnchantedBook/func_92060_a (Lnet/minecraft/item/ItemStack;Lnet/minecraft/enchantment/EnchantmentData;)V net/minecraft/server/ItemEnchantedBook/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EnchantmentInstance;)V
+MD: net/minecraft/item/ItemEnchantedBook/func_92109_a (Ljava/util/Random;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEnchantedBook/a (Ljava/util/Random;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/item/ItemEnchantedBook/func_92110_g (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/nbt/NBTTagList; net/minecraft/server/ItemEnchantedBook/g (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/NBTTagList;
+MD: net/minecraft/item/ItemEnchantedBook/func_92111_a (Lnet/minecraft/enchantment/EnchantmentData;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEnchantedBook/a (Lnet/minecraft/server/EnchantmentInstance;)Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/item/ItemEnchantedBook/func_92112_a (Ljava/util/Random;III)Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/ItemEnchantedBook/a (Ljava/util/Random;III)Lnet/minecraft/server/StructurePieceTreasure;
+MD: net/minecraft/item/ItemEnchantedBook/func_92114_b (Ljava/util/Random;)Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/ItemEnchantedBook/b (Ljava/util/Random;)Lnet/minecraft/server/StructurePieceTreasure;
+MD: net/minecraft/item/ItemEnchantedBook/func_92115_a (Lnet/minecraft/item/ItemStack;Lnet/minecraft/enchantment/EnchantmentData;)V net/minecraft/server/ItemEnchantedBook/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EnchantmentInstance;)V
 MD: net/minecraft/item/ItemEnchantedBook/isItemTool (Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/ItemEnchantedBook/d_ (Lnet/minecraft/server/ItemStack;)Z
 MD: net/minecraft/item/ItemEnderEye/onItemRightClick (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemEnderEye/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/ItemEnderEye/onItemUse (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIIFFF)Z net/minecraft/server/ItemEnderEye/interactWith (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;IIIIFFF)Z
@@ -8175,7 +8175,6 @@ MD: net/minecraft/item/ItemStack/updateAnimation (Lnet/minecraft/world/World;Lne
 MD: net/minecraft/item/ItemStack/useItemRightClick (Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemStack/a (Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/ItemStack/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)Lnet/minecraft/nbt/NBTTagCompound; net/minecraft/server/ItemStack/save (Lnet/minecraft/server/NBTTagCompound;)Lnet/minecraft/server/NBTTagCompound;
 MD: net/minecraft/item/ItemSword/canHarvestBlock (Lnet/minecraft/block/Block;)Z net/minecraft/server/ItemSword/canDestroySpecialBlock (Lnet/minecraft/server/Block;)Z
-MD: net/minecraft/item/ItemSword/func_77825_f ()Ljava/lang/String; net/minecraft/server/ItemSword/h ()Ljava/lang/String;
 MD: net/minecraft/item/ItemSword/func_82803_g ()I net/minecraft/server/ItemSword/g ()I
 MD: net/minecraft/item/ItemSword/getDamageVsEntity (Lnet/minecraft/entity/Entity;)I net/minecraft/server/ItemSword/a (Lnet/minecraft/server/Entity;)I
 MD: net/minecraft/item/ItemSword/getIsRepairable (Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z net/minecraft/server/ItemSword/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/ItemStack;)Z
@@ -8183,6 +8182,7 @@ MD: net/minecraft/item/ItemSword/getItemEnchantability ()I net/minecraft/server/
 MD: net/minecraft/item/ItemSword/getItemUseAction (Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/EnumAction; net/minecraft/server/ItemSword/b_ (Lnet/minecraft/server/ItemStack;)Lnet/minecraft/server/EnumAnimation;
 MD: net/minecraft/item/ItemSword/getMaxItemUseDuration (Lnet/minecraft/item/ItemStack;)I net/minecraft/server/ItemSword/c_ (Lnet/minecraft/server/ItemStack;)I
 MD: net/minecraft/item/ItemSword/getStrVsBlock (Lnet/minecraft/item/ItemStack;Lnet/minecraft/block/Block;)F net/minecraft/server/ItemSword/getDestroySpeed (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/Block;)F
+MD: net/minecraft/item/ItemSword/getToolMaterialName ()Ljava/lang/String; net/minecraft/server/ItemSword/h ()Ljava/lang/String;
 MD: net/minecraft/item/ItemSword/hitEntity (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityLiving;Lnet/minecraft/entity/EntityLiving;)Z net/minecraft/server/ItemSword/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EntityLiving;Lnet/minecraft/server/EntityLiving;)Z
 MD: net/minecraft/item/ItemSword/onBlockDestroyed (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;IIIILnet/minecraft/entity/EntityLiving;)Z net/minecraft/server/ItemSword/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;IIIILnet/minecraft/server/EntityLiving;)Z
 MD: net/minecraft/item/ItemSword/onItemRightClick (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemSword/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
@@ -8196,9 +8196,9 @@ MD: net/minecraft/item/ItemTool/onBlockDestroyed (Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/item/ItemWritableBook/getShareTag ()Z net/minecraft/server/ItemBookAndQuill/q ()Z
 MD: net/minecraft/item/ItemWritableBook/onItemRightClick (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ItemBookAndQuill/a (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/ItemWritableBook/validBookTagPages (Lnet/minecraft/nbt/NBTTagCompound;)Z net/minecraft/server/ItemBookAndQuill/a (Lnet/minecraft/server/NBTTagCompound;)Z
+MD: net/minecraft/item/crafting/CraftingManager/addRecipe (Lnet/minecraft/item/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/item/crafting/ShapedRecipes; net/minecraft/server/CraftingManager/registerShapedRecipe (Lnet/minecraft/server/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/server/ShapedRecipes;
 MD: net/minecraft/item/crafting/CraftingManager/addShapelessRecipe (Lnet/minecraft/item/ItemStack;[Ljava/lang/Object;)V net/minecraft/server/CraftingManager/registerShapelessRecipe (Lnet/minecraft/server/ItemStack;[Ljava/lang/Object;)V
 MD: net/minecraft/item/crafting/CraftingManager/findMatchingRecipe (Lnet/minecraft/inventory/InventoryCrafting;Lnet/minecraft/world/World;)Lnet/minecraft/item/ItemStack; net/minecraft/server/CraftingManager/craft (Lnet/minecraft/server/InventoryCrafting;Lnet/minecraft/server/World;)Lnet/minecraft/server/ItemStack;
-MD: net/minecraft/item/crafting/CraftingManager/func_92051_a (Lnet/minecraft/item/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/item/crafting/ShapedRecipes; net/minecraft/server/CraftingManager/registerShapedRecipe (Lnet/minecraft/server/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/server/ShapedRecipes;
 MD: net/minecraft/item/crafting/CraftingManager/getInstance ()Lnet/minecraft/item/crafting/CraftingManager; net/minecraft/server/CraftingManager/getInstance ()Lnet/minecraft/server/CraftingManager;
 MD: net/minecraft/item/crafting/CraftingManager/getRecipeList ()Ljava/util/List; net/minecraft/server/CraftingManager/getRecipes ()Ljava/util/List;
 MD: net/minecraft/item/crafting/FurnaceRecipes/addSmelting (ILnet/minecraft/item/ItemStack;F)V net/minecraft/server/RecipesFurnace/registerRecipe (ILnet/minecraft/server/ItemStack;F)V
@@ -8234,7 +8234,7 @@ MD: net/minecraft/item/crafting/RecipesMapExtending/matches (Lnet/minecraft/inve
 MD: net/minecraft/item/crafting/RecipesTools/addRecipes (Lnet/minecraft/item/crafting/CraftingManager;)V net/minecraft/server/RecipesTools/a (Lnet/minecraft/server/CraftingManager;)V
 MD: net/minecraft/item/crafting/RecipesWeapons/addRecipes (Lnet/minecraft/item/crafting/CraftingManager;)V net/minecraft/server/RecipesWeapons/a (Lnet/minecraft/server/CraftingManager;)V
 MD: net/minecraft/item/crafting/ShapedRecipes/checkMatch (Lnet/minecraft/inventory/InventoryCrafting;IIZ)Z net/minecraft/server/ShapedRecipes/a (Lnet/minecraft/server/InventoryCrafting;IIZ)Z
-MD: net/minecraft/item/crafting/ShapedRecipes/func_92048_c ()Lnet/minecraft/item/crafting/ShapedRecipes; net/minecraft/server/ShapedRecipes/c ()Lnet/minecraft/server/ShapedRecipes;
+MD: net/minecraft/item/crafting/ShapedRecipes/func_92100_c ()Lnet/minecraft/item/crafting/ShapedRecipes; net/minecraft/server/ShapedRecipes/c ()Lnet/minecraft/server/ShapedRecipes;
 MD: net/minecraft/item/crafting/ShapedRecipes/getCraftingResult (Lnet/minecraft/inventory/InventoryCrafting;)Lnet/minecraft/item/ItemStack; net/minecraft/server/ShapedRecipes/a (Lnet/minecraft/server/InventoryCrafting;)Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/crafting/ShapedRecipes/getRecipeOutput ()Lnet/minecraft/item/ItemStack; net/minecraft/server/ShapedRecipes/b ()Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/item/crafting/ShapedRecipes/getRecipeSize ()I net/minecraft/server/ShapedRecipes/a ()I
@@ -9150,7 +9150,7 @@ MD: net/minecraft/profiler/ProfilerResult/func_76328_a (Lnet/minecraft/profiler/
 MD: net/minecraft/server/CallableIsServerModded/call ()Ljava/lang/Object; net/minecraft/server/CrashReportProfilerPosition/call ()Ljava/lang/Object;
 MD: net/minecraft/server/CallableIsServerModded/func_82554_a ()Ljava/lang/String; net/minecraft/server/CrashReportProfilerPosition/a ()Ljava/lang/String;
 MD: net/minecraft/server/CallableServerMemoryStats/call ()Ljava/lang/Object; net/minecraft/server/CrashReportPlayerCount/call ()Ljava/lang/Object;
-MD: net/minecraft/server/CallableServerMemoryStats/func_92022_a ()Ljava/lang/String; net/minecraft/server/CrashReportPlayerCount/a ()Ljava/lang/String;
+MD: net/minecraft/server/CallableServerMemoryStats/func_92074_a ()Ljava/lang/String; net/minecraft/server/CrashReportPlayerCount/a ()Ljava/lang/String;
 MD: net/minecraft/server/CallableServerProfiler/call ()Ljava/lang/Object; net/minecraft/server/CrashReportVec3DPoolSize/call ()Ljava/lang/Object;
 MD: net/minecraft/server/CallableServerProfiler/func_82551_a ()Ljava/lang/String; net/minecraft/server/CrashReportVec3DPoolSize/a ()Ljava/lang/String;
 MD: net/minecraft/server/ConvertingProgressUpdate/displayProgressMessage (Ljava/lang/String;)V net/minecraft/server/ConvertProgressUpdater/a (Ljava/lang/String;)V
@@ -9333,7 +9333,7 @@ MD: net/minecraft/server/gui/GuiLogFormatter/format (Ljava/util/logging/LogRecor
 MD: net/minecraft/server/gui/GuiLogOutputHandler/close ()V net/minecraft/server/GuiLogOutputHandler/close ()V
 MD: net/minecraft/server/gui/GuiLogOutputHandler/flush ()V net/minecraft/server/GuiLogOutputHandler/flush ()V
 MD: net/minecraft/server/gui/GuiLogOutputHandler/publish (Ljava/util/logging/LogRecord;)V net/minecraft/server/GuiLogOutputHandler/publish (Ljava/util/logging/LogRecord;)V
-MD: net/minecraft/server/gui/GuiStatsComponent/func_79015_a ([J)D net/minecraft/server/GuiStatsComponent/a ([J)D
+MD: net/minecraft/server/gui/GuiStatsComponent/calcArrayAverage ([J)D net/minecraft/server/GuiStatsComponent/a ([J)D
 MD: net/minecraft/server/gui/GuiStatsComponent/paint (Ljava/awt/Graphics;)V net/minecraft/server/GuiStatsComponent/paint (Ljava/awt/Graphics;)V
 MD: net/minecraft/server/gui/GuiStatsComponent/update (Lnet/minecraft/server/gui/GuiStatsComponent;)V net/minecraft/server/GuiStatsComponent/a (Lnet/minecraft/server/GuiStatsComponent;)V
 MD: net/minecraft/server/gui/GuiStatsComponent/updateStats ()V net/minecraft/server/GuiStatsComponent/a ()V
@@ -9415,7 +9415,6 @@ MD: net/minecraft/server/management/ServerConfigurationManager/createPlayerForUs
 MD: net/minecraft/server/management/ServerConfigurationManager/findPlayers (Lnet/minecraft/util/ChunkCoordinates;IIIIII)Ljava/util/List; net/minecraft/server/PlayerList/a (Lnet/minecraft/server/ChunkCoordinates;IIIIII)Ljava/util/List;
 MD: net/minecraft/server/management/ServerConfigurationManager/func_72375_a (Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/world/WorldServer;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/WorldServer;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/func_72381_a (Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/world/World;)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/EntityPlayer;Lnet/minecraft/server/World;)V
-MD: net/minecraft/server/management/ServerConfigurationManager/func_92027_k (Ljava/lang/String;)V net/minecraft/server/PlayerList/k (Ljava/lang/String;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/getAllUsernames ()[Ljava/lang/String; net/minecraft/server/PlayerList/d ()[Ljava/lang/String;
 MD: net/minecraft/server/management/ServerConfigurationManager/getAvailablePlayerDat ()[Ljava/lang/String; net/minecraft/server/PlayerList/getSeenPlayers ()[Ljava/lang/String;
 MD: net/minecraft/server/management/ServerConfigurationManager/getBannedIPs ()Lnet/minecraft/server/management/BanList; net/minecraft/server/PlayerList/getIPBans ()Lnet/minecraft/server/BanList;
@@ -9443,6 +9442,7 @@ MD: net/minecraft/server/management/ServerConfigurationManager/removeFromWhiteli
 MD: net/minecraft/server/management/ServerConfigurationManager/removeOp (Ljava/lang/String;)V net/minecraft/server/PlayerList/removeOp (Ljava/lang/String;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/respawnPlayer (Lnet/minecraft/entity/player/EntityPlayerMP;IZ)Lnet/minecraft/entity/player/EntityPlayerMP; net/minecraft/server/PlayerList/moveToWorld (Lnet/minecraft/server/EntityPlayer;IZ)Lnet/minecraft/server/EntityPlayer;
 MD: net/minecraft/server/management/ServerConfigurationManager/saveAllPlayerData ()V net/minecraft/server/PlayerList/savePlayers ()V
+MD: net/minecraft/server/management/ServerConfigurationManager/sendChatMsg (Ljava/lang/String;)V net/minecraft/server/PlayerList/k (Ljava/lang/String;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPacketToAllPlayers (Lnet/minecraft/network/packet/Packet;)V net/minecraft/server/PlayerList/sendAll (Lnet/minecraft/server/Packet;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPacketToAllPlayersInDimension (Lnet/minecraft/network/packet/Packet;I)V net/minecraft/server/PlayerList/a (Lnet/minecraft/server/Packet;I)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPlayerInfoToAllPlayers ()V net/minecraft/server/PlayerList/tick ()V
@@ -9603,8 +9603,8 @@ MD: net/minecraft/tileentity/TileEntityFurnace/smeltItem ()V net/minecraft/serve
 MD: net/minecraft/tileentity/TileEntityFurnace/updateEntity ()V net/minecraft/server/TileEntityFurnace/g ()V
 MD: net/minecraft/tileentity/TileEntityFurnace/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/TileEntityFurnace/b (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/tileentity/TileEntityMobSpawner/anyPlayerInRange ()Z net/minecraft/server/TileEntityMobSpawner/b ()Z
-MD: net/minecraft/tileentity/TileEntityMobSpawner/func_92015_a ()Ljava/lang/String; net/minecraft/server/TileEntityMobSpawner/getMobName ()Ljava/lang/String;
 MD: net/minecraft/tileentity/TileEntityMobSpawner/getDescriptionPacket ()Lnet/minecraft/network/packet/Packet; net/minecraft/server/TileEntityMobSpawner/getUpdatePacket ()Lnet/minecraft/server/Packet;
+MD: net/minecraft/tileentity/TileEntityMobSpawner/getMobID ()Ljava/lang/String; net/minecraft/server/TileEntityMobSpawner/getMobName ()Ljava/lang/String;
 MD: net/minecraft/tileentity/TileEntityMobSpawner/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/TileEntityMobSpawner/a (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/tileentity/TileEntityMobSpawner/receiveClientEvent (II)V net/minecraft/server/TileEntityMobSpawner/b (II)V
 MD: net/minecraft/tileentity/TileEntityMobSpawner/setMobID (Ljava/lang/String;)V net/minecraft/server/TileEntityMobSpawner/a (Ljava/lang/String;)V
@@ -9612,7 +9612,7 @@ MD: net/minecraft/tileentity/TileEntityMobSpawner/updateDelay ()V net/minecraft/
 MD: net/minecraft/tileentity/TileEntityMobSpawner/updateEntity ()V net/minecraft/server/TileEntityMobSpawner/g ()V
 MD: net/minecraft/tileentity/TileEntityMobSpawner/writeNBTTagsTo (Lnet/minecraft/entity/Entity;)V net/minecraft/server/TileEntityMobSpawner/a (Lnet/minecraft/server/Entity;)V
 MD: net/minecraft/tileentity/TileEntityMobSpawner/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/TileEntityMobSpawner/b (Lnet/minecraft/server/NBTTagCompound;)V
-MD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/func_92030_a ()Lnet/minecraft/nbt/NBTTagCompound; net/minecraft/server/TileEntityMobSpawnerData/a ()Lnet/minecraft/server/NBTTagCompound;
+MD: net/minecraft/tileentity/TileEntityMobSpawnerSpawnData/func_92081_a ()Lnet/minecraft/nbt/NBTTagCompound; net/minecraft/server/TileEntityMobSpawnerData/a ()Lnet/minecraft/server/NBTTagCompound;
 MD: net/minecraft/tileentity/TileEntityNote/changePitch ()V net/minecraft/server/TileEntityNote/a ()V
 MD: net/minecraft/tileentity/TileEntityNote/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V net/minecraft/server/TileEntityNote/a (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/tileentity/TileEntityNote/triggerNote (Lnet/minecraft/world/World;III)V net/minecraft/server/TileEntityNote/play (Lnet/minecraft/server/World;III)V
@@ -9693,7 +9693,7 @@ MD: net/minecraft/util/DamageSource/causeIndirectMagicDamage (Lnet/minecraft/ent
 MD: net/minecraft/util/DamageSource/causeMobDamage (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/mobAttack (Lnet/minecraft/server/EntityLiving;)Lnet/minecraft/server/DamageSource;
 MD: net/minecraft/util/DamageSource/causePlayerDamage (Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/playerAttack (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/DamageSource;
 MD: net/minecraft/util/DamageSource/causeThrownDamage (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/projectile (Lnet/minecraft/server/Entity;Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource;
-MD: net/minecraft/util/DamageSource/func_92036_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/a (Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource;
+MD: net/minecraft/util/DamageSource/func_92087_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/a (Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource;
 MD: net/minecraft/util/DamageSource/getDamageType ()Ljava/lang/String; net/minecraft/server/DamageSource/l ()Ljava/lang/String;
 MD: net/minecraft/util/DamageSource/getDeathMessage (Lnet/minecraft/entity/player/EntityPlayer;)Ljava/lang/String; net/minecraft/server/DamageSource/getLocalizedDeathMessage (Lnet/minecraft/server/EntityHuman;)Ljava/lang/String;
 MD: net/minecraft/util/DamageSource/getEntity ()Lnet/minecraft/entity/Entity; net/minecraft/server/DamageSource/getEntity ()Lnet/minecraft/server/Entity;
@@ -9710,7 +9710,7 @@ MD: net/minecraft/util/DamageSource/setDifficultyScaled ()Lnet/minecraft/util/Da
 MD: net/minecraft/util/DamageSource/setFireDamage ()Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/j ()Lnet/minecraft/server/DamageSource;
 MD: net/minecraft/util/DamageSource/setMagicDamage ()Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/p ()Lnet/minecraft/server/DamageSource;
 MD: net/minecraft/util/DamageSource/setProjectile ()Lnet/minecraft/util/DamageSource; net/minecraft/server/DamageSource/b ()Lnet/minecraft/server/DamageSource;
-MD: net/minecraft/util/Direction/func_82372_a (DD)I net/minecraft/server/Direction/a (DD)I
+MD: net/minecraft/util/Direction/getMovementDirection (DD)I net/minecraft/server/Direction/a (DD)I
 MD: net/minecraft/util/EntityDamageSource/getDeathMessage (Lnet/minecraft/entity/player/EntityPlayer;)Ljava/lang/String; net/minecraft/server/EntityDamageSource/getLocalizedDeathMessage (Lnet/minecraft/server/EntityHuman;)Ljava/lang/String;
 MD: net/minecraft/util/EntityDamageSource/getEntity ()Lnet/minecraft/entity/Entity; net/minecraft/server/EntityDamageSource/getEntity ()Lnet/minecraft/server/Entity;
 MD: net/minecraft/util/EntityDamageSource/isDifficultyScaled ()Z net/minecraft/server/EntityDamageSource/n ()Z
@@ -9719,9 +9719,9 @@ MD: net/minecraft/util/EntityDamageSourceIndirect/getEntity ()Lnet/minecraft/ent
 MD: net/minecraft/util/EntityDamageSourceIndirect/getSourceOfDamage ()Lnet/minecraft/entity/Entity; net/minecraft/server/EntityDamageSourceIndirect/f ()Lnet/minecraft/server/Entity;
 MD: net/minecraft/util/EnumArt/valueOf (Ljava/lang/String;)Lnet/minecraft/util/EnumArt; net/minecraft/server/EnumArt/valueOf (Ljava/lang/String;)Lnet/minecraft/server/EnumArt;
 MD: net/minecraft/util/EnumArt/values ()[Lnet/minecraft/util/EnumArt; net/minecraft/server/EnumArt/values ()[Lnet/minecraft/server/EnumArt;
-MD: net/minecraft/util/EnumFacing/func_82599_e ()I net/minecraft/server/EnumFacing/e ()I
-MD: net/minecraft/util/EnumFacing/func_82600_a (I)Lnet/minecraft/util/EnumFacing; net/minecraft/server/EnumFacing/a (I)Lnet/minecraft/server/EnumFacing;
-MD: net/minecraft/util/EnumFacing/func_82601_c ()I net/minecraft/server/EnumFacing/c ()I
+MD: net/minecraft/util/EnumFacing/getFront (I)Lnet/minecraft/util/EnumFacing; net/minecraft/server/EnumFacing/a (I)Lnet/minecraft/server/EnumFacing;
+MD: net/minecraft/util/EnumFacing/getFrontOffsetX ()I net/minecraft/server/EnumFacing/c ()I
+MD: net/minecraft/util/EnumFacing/getFrontOffsetZ ()I net/minecraft/server/EnumFacing/e ()I
 MD: net/minecraft/util/EnumFacing/values ()[Lnet/minecraft/util/EnumFacing; net/minecraft/server/EnumFacing/values ()[Lnet/minecraft/server/EnumFacing;
 MD: net/minecraft/util/EnumMovingObjectType/valueOf (Ljava/lang/String;)Lnet/minecraft/util/EnumMovingObjectType; net/minecraft/server/EnumMovingObjectType/valueOf (Ljava/lang/String;)Lnet/minecraft/server/EnumMovingObjectType;
 MD: net/minecraft/util/EnumMovingObjectType/values ()[Lnet/minecraft/util/EnumMovingObjectType; net/minecraft/server/EnumMovingObjectType/values ()[Lnet/minecraft/server/EnumMovingObjectType;
@@ -9841,7 +9841,7 @@ MD: net/minecraft/util/WeightedRandom/getRandomItem (Ljava/util/Random;[Lnet/min
 MD: net/minecraft/util/WeightedRandom/getRandomItem (Ljava/util/Random;[Lnet/minecraft/util/WeightedRandomItem;I)Lnet/minecraft/util/WeightedRandomItem; net/minecraft/server/WeightedRandom/a (Ljava/util/Random;[Lnet/minecraft/server/WeightedRandomChoice;I)Lnet/minecraft/server/WeightedRandomChoice;
 MD: net/minecraft/util/WeightedRandom/getTotalWeight (Ljava/util/Collection;)I net/minecraft/server/WeightedRandom/a (Ljava/util/Collection;)I
 MD: net/minecraft/util/WeightedRandom/getTotalWeight ([Lnet/minecraft/util/WeightedRandomItem;)I net/minecraft/server/WeightedRandom/a ([Lnet/minecraft/server/WeightedRandomChoice;)I
-MD: net/minecraft/util/WeightedRandomChestContent/func_92029_a ([Lnet/minecraft/util/WeightedRandomChestContent;[Lnet/minecraft/util/WeightedRandomChestContent;)[Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/StructurePieceTreasure/a ([Lnet/minecraft/server/StructurePieceTreasure;[Lnet/minecraft/server/StructurePieceTreasure;)[Lnet/minecraft/server/StructurePieceTreasure;
+MD: net/minecraft/util/WeightedRandomChestContent/func_92080_a ([Lnet/minecraft/util/WeightedRandomChestContent;[Lnet/minecraft/util/WeightedRandomChestContent;)[Lnet/minecraft/util/WeightedRandomChestContent; net/minecraft/server/StructurePieceTreasure/a ([Lnet/minecraft/server/StructurePieceTreasure;[Lnet/minecraft/server/StructurePieceTreasure;)[Lnet/minecraft/server/StructurePieceTreasure;
 MD: net/minecraft/util/WeightedRandomChestContent/generateChestContents (Ljava/util/Random;[Lnet/minecraft/util/WeightedRandomChestContent;Lnet/minecraft/tileentity/TileEntityChest;I)V net/minecraft/server/StructurePieceTreasure/a (Ljava/util/Random;[Lnet/minecraft/server/StructurePieceTreasure;Lnet/minecraft/server/TileEntityChest;I)V
 MD: net/minecraft/util/WeightedRandomChestContent/generateDispenserContents (Ljava/util/Random;[Lnet/minecraft/util/WeightedRandomChestContent;Lnet/minecraft/tileentity/TileEntityDispenser;I)V net/minecraft/server/StructurePieceTreasure/a (Ljava/util/Random;[Lnet/minecraft/server/StructurePieceTreasure;Lnet/minecraft/server/TileEntityDispenser;I)V
 MD: net/minecraft/village/MerchantRecipe/func_82783_a (I)V net/minecraft/server/MerchantRecipe/a (I)V
@@ -10007,6 +10007,7 @@ MD: net/minecraft/world/World/addWeatherEffect (Lnet/minecraft/entity/Entity;)Z 
 MD: net/minecraft/world/World/addWorldAccess (Lnet/minecraft/world/IWorldAccess;)V net/minecraft/server/World/addIWorldAccess (Lnet/minecraft/server/IWorldAccess;)V
 MD: net/minecraft/world/World/addWorldInfoToCrashReport (Lnet/minecraft/crash/CrashReport;)Lnet/minecraft/crash/CrashReportCategory; net/minecraft/server/World/a (Lnet/minecraft/server/CrashReport;)Lnet/minecraft/server/CrashReportSystemDetails;
 MD: net/minecraft/world/World/blockExists (III)Z net/minecraft/server/World/isLoaded (III)Z
+MD: net/minecraft/world/World/blockGetRenderType (III)I net/minecraft/server/World/e (III)I
 MD: net/minecraft/world/World/blockHasTileEntity (III)Z net/minecraft/server/World/isTileEntity (III)Z
 MD: net/minecraft/world/World/calculateInitialSkylight ()V net/minecraft/server/World/x ()V
 MD: net/minecraft/world/World/calculateInitialWeather ()V net/minecraft/server/World/a ()V
@@ -10038,7 +10039,6 @@ MD: net/minecraft/world/World/func_82735_a (Lnet/minecraft/entity/item/EntityMin
 MD: net/minecraft/world/World/func_82739_e (IIIII)V net/minecraft/server/World/e (IIIII)V
 MD: net/minecraft/world/World/func_82740_a (IIIIII)V net/minecraft/server/World/a (IIIIII)V
 MD: net/minecraft/world/World/func_85174_u (III)Z net/minecraft/server/World/u (III)Z
-MD: net/minecraft/world/World/func_85175_e (III)I net/minecraft/server/World/e (III)I
 MD: net/minecraft/world/World/getActualHeight ()I net/minecraft/server/World/P ()I
 MD: net/minecraft/world/World/getAllCollidingBoundingBoxes (Lnet/minecraft/util/AxisAlignedBB;)Ljava/util/List; net/minecraft/server/World/a (Lnet/minecraft/server/AxisAlignedBB;)Ljava/util/List;
 MD: net/minecraft/world/World/getBiomeGenForCoords (II)Lnet/minecraft/world/biome/BiomeGenBase; net/minecraft/server/World/getBiome (II)Lnet/minecraft/server/BiomeBase;
@@ -10133,7 +10133,8 @@ MD: net/minecraft/world/World/rayTraceBlocks_do (Lnet/minecraft/util/Vec3;Lnet/m
 MD: net/minecraft/world/World/rayTraceBlocks_do_do (Lnet/minecraft/util/Vec3;Lnet/minecraft/util/Vec3;ZZ)Lnet/minecraft/util/MovingObjectPosition; net/minecraft/server/World/rayTrace (Lnet/minecraft/server/Vec3D;Lnet/minecraft/server/Vec3D;ZZ)Lnet/minecraft/server/MovingObjectPosition;
 MD: net/minecraft/world/World/releaseEntitySkin (Lnet/minecraft/entity/Entity;)V net/minecraft/server/World/b (Lnet/minecraft/server/Entity;)V
 MD: net/minecraft/world/World/removeBlockTileEntity (III)V net/minecraft/server/World/r (III)V
-MD: net/minecraft/world/World/removeEntity (Lnet/minecraft/entity/Entity;)V net/minecraft/server/World/removeEntity (Lnet/minecraft/server/Entity;)V
+MD: net/minecraft/world/World/removeEntity (Lnet/minecraft/entity/Entity;)V net/minecraft/server/World/kill (Lnet/minecraft/server/Entity;)V
+MD: net/minecraft/world/World/removePlayerEntityDangerously (Lnet/minecraft/entity/Entity;)V net/minecraft/server/World/removeEntity (Lnet/minecraft/server/Entity;)V
 MD: net/minecraft/world/World/scheduleBlockUpdate (IIIII)V net/minecraft/server/World/a (IIIII)V
 MD: net/minecraft/world/World/scheduleBlockUpdateFromLoad (IIIII)V net/minecraft/server/World/b (IIIII)V
 MD: net/minecraft/world/World/selectEntitiesWithinAABB (Ljava/lang/Class;Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/command/IEntitySelector;)Ljava/util/List; net/minecraft/server/World/a (Ljava/lang/Class;Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/IEntitySelector;)Ljava/util/List;
@@ -10147,7 +10148,6 @@ MD: net/minecraft/world/World/setBlockMetadata (IIII)Z net/minecraft/server/Worl
 MD: net/minecraft/world/World/setBlockMetadataWithNotify (IIII)V net/minecraft/server/World/setData (IIII)V
 MD: net/minecraft/world/World/setBlockTileEntity (IIILnet/minecraft/tileentity/TileEntity;)V net/minecraft/server/World/setTileEntity (IIILnet/minecraft/server/TileEntity;)V
 MD: net/minecraft/world/World/setBlockWithNotify (IIII)Z net/minecraft/server/World/setTypeId (IIII)Z
-MD: net/minecraft/world/World/setEntityDead (Lnet/minecraft/entity/Entity;)V net/minecraft/server/World/kill (Lnet/minecraft/server/Entity;)V
 MD: net/minecraft/world/World/setEntityState (Lnet/minecraft/entity/Entity;B)V net/minecraft/server/World/broadcastEntityEffect (Lnet/minecraft/server/Entity;B)V
 MD: net/minecraft/world/World/setItemData (Ljava/lang/String;Lnet/minecraft/world/WorldSavedData;)V net/minecraft/server/World/a (Ljava/lang/String;Lnet/minecraft/server/WorldMapBase;)V
 MD: net/minecraft/world/World/setLightValue (Lnet/minecraft/world/EnumSkyBlock;IIII)V net/minecraft/server/World/b (Lnet/minecraft/server/EnumSkyBlock;IIII)V
@@ -11051,11 +11051,11 @@ MD: net/minecraft/world/storage/ThreadedFileIOBase/processQueue ()V net/minecraf
 MD: net/minecraft/world/storage/ThreadedFileIOBase/queueIO (Lnet/minecraft/world/storage/IThreadedFileIO;)V net/minecraft/server/FileIOThread/a (Lnet/minecraft/server/IAsyncChunkSaver;)V
 MD: net/minecraft/world/storage/ThreadedFileIOBase/run ()V net/minecraft/server/FileIOThread/run ()V
 MD: net/minecraft/world/storage/ThreadedFileIOBase/waitForFinish ()V net/minecraft/server/FileIOThread/a ()V
+MD: net/minecraft/world/storage/WorldInfo/addToCrashReport (Lnet/minecraft/crash/CrashReportCategory;)V net/minecraft/server/WorldData/a (Lnet/minecraft/server/CrashReportSystemDetails;)V
 MD: net/minecraft/world/storage/WorldInfo/areCommandsAllowed ()Z net/minecraft/server/WorldData/allowCommands ()Z
 MD: net/minecraft/world/storage/WorldInfo/cloneNBTCompound (Lnet/minecraft/nbt/NBTTagCompound;)Lnet/minecraft/nbt/NBTTagCompound; net/minecraft/server/WorldData/a (Lnet/minecraft/server/NBTTagCompound;)Lnet/minecraft/server/NBTTagCompound;
 MD: net/minecraft/world/storage/WorldInfo/func_85116_n (Lnet/minecraft/world/storage/WorldInfo;)Z net/minecraft/server/WorldData/n (Lnet/minecraft/server/WorldData;)Z
 MD: net/minecraft/world/storage/WorldInfo/func_85117_p (Lnet/minecraft/world/storage/WorldInfo;)Z net/minecraft/server/WorldData/p (Lnet/minecraft/server/WorldData;)Z
-MD: net/minecraft/world/storage/WorldInfo/func_85118_a (Lnet/minecraft/crash/CrashReportCategory;)V net/minecraft/server/WorldData/a (Lnet/minecraft/server/CrashReportSystemDetails;)V
 MD: net/minecraft/world/storage/WorldInfo/func_85119_k (Lnet/minecraft/world/storage/WorldInfo;)I net/minecraft/server/WorldData/k (Lnet/minecraft/server/WorldData;)I
 MD: net/minecraft/world/storage/WorldInfo/func_85120_o (Lnet/minecraft/world/storage/WorldInfo;)Lnet/minecraft/world/EnumGameType; net/minecraft/server/WorldData/o (Lnet/minecraft/server/WorldData;)Lnet/minecraft/server/EnumGamemode;
 MD: net/minecraft/world/storage/WorldInfo/func_85121_j (Lnet/minecraft/world/storage/WorldInfo;)I net/minecraft/server/WorldData/j (Lnet/minecraft/server/WorldData;)I
@@ -11110,48 +11110,48 @@ MD: org/bouncycastle/asn1/ASN1Encodable/toASN1Primitive ()Lorg/bouncycastle/asn1
 MD: org/bouncycastle/asn1/ASN1Object/equals (Ljava/lang/Object;)Z org/bouncycastle/asn1/ASN1Object/equals (Ljava/lang/Object;)Z
 MD: org/bouncycastle/asn1/ASN1Object/hashCode ()I org/bouncycastle/asn1/ASN1Object/hashCode ()I
 MD: org/bouncycastle/asn1/ASN1Object/toASN1Primitive ()Lorg/bouncycastle/asn1/ASN1Primitive; org/bouncycastle/asn1/ASN1Object/a ()Lorg/bouncycastle/asn1/ASN1Primitive;
-MD: org/bouncycastle/asn1/ASN1ObjectIdentifier/func_71612_a (Ljava/lang/String;)Lorg/bouncycastle/asn1/ASN1ObjectIdentifier; org/bouncycastle/asn1/ASN1ObjectIdentifier/a (Ljava/lang/String;)Lorg/bouncycastle/asn1/ASN1ObjectIdentifier;
+MD: org/bouncycastle/asn1/ASN1ObjectIdentifier/branch (Ljava/lang/String;)Lorg/bouncycastle/asn1/ASN1ObjectIdentifier; org/bouncycastle/asn1/ASN1ObjectIdentifier/a (Ljava/lang/String;)Lorg/bouncycastle/asn1/ASN1ObjectIdentifier;
 MD: org/bouncycastle/asn1/ASN1Primitive/asn1Equals (Lorg/bouncycastle/asn1/ASN1Primitive;)Z org/bouncycastle/asn1/ASN1Primitive/a (Lorg/bouncycastle/asn1/ASN1Primitive;)Z
 MD: org/bouncycastle/asn1/ASN1Primitive/equals (Ljava/lang/Object;)Z org/bouncycastle/asn1/ASN1Primitive/equals (Ljava/lang/Object;)Z
 MD: org/bouncycastle/asn1/ASN1Primitive/hashCode ()I org/bouncycastle/asn1/ASN1Primitive/hashCode ()I
 MD: org/bouncycastle/asn1/ASN1Primitive/toASN1Primitive ()Lorg/bouncycastle/asn1/ASN1Primitive; org/bouncycastle/asn1/ASN1Primitive/a ()Lorg/bouncycastle/asn1/ASN1Primitive;
 MD: org/bouncycastle/asn1/DERObjectIdentifier/asn1Equals (Lorg/bouncycastle/asn1/ASN1Primitive;)Z org/bouncycastle/asn1/DERObjectIdentifier/a (Lorg/bouncycastle/asn1/ASN1Primitive;)Z
-MD: org/bouncycastle/asn1/DERObjectIdentifier/func_71608_a (Ljava/lang/String;)Z org/bouncycastle/asn1/DERObjectIdentifier/a (Ljava/lang/String;)Z
-MD: org/bouncycastle/asn1/DERObjectIdentifier/func_71609_b ()Ljava/lang/String; org/bouncycastle/asn1/DERObjectIdentifier/b ()Ljava/lang/String;
+MD: org/bouncycastle/asn1/DERObjectIdentifier/getId ()Ljava/lang/String; org/bouncycastle/asn1/DERObjectIdentifier/b ()Ljava/lang/String;
 MD: org/bouncycastle/asn1/DERObjectIdentifier/hashCode ()I org/bouncycastle/asn1/DERObjectIdentifier/hashCode ()I
+MD: org/bouncycastle/asn1/DERObjectIdentifier/isValidIdentifier (Ljava/lang/String;)Z org/bouncycastle/asn1/DERObjectIdentifier/a (Ljava/lang/String;)Z
 MD: org/bouncycastle/asn1/DERObjectIdentifier/toString ()Ljava/lang/String; org/bouncycastle/asn1/DERObjectIdentifier/toString ()Ljava/lang/String;
-MD: org/bouncycastle/crypto/BlockCipher/func_71803_c ()V org/bouncycastle/crypto/BlockCipher/c ()V
-MD: org/bouncycastle/crypto/BlockCipher/func_71805_a (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/BlockCipher/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
-MD: org/bouncycastle/crypto/BlockCipher/func_71806_a ([BI[BI)I org/bouncycastle/crypto/BlockCipher/a ([BI[BI)I
 MD: org/bouncycastle/crypto/BlockCipher/getAlgorithmName ()Ljava/lang/String; org/bouncycastle/crypto/BlockCipher/a ()Ljava/lang/String;
 MD: org/bouncycastle/crypto/BlockCipher/getBlockSize ()I org/bouncycastle/crypto/BlockCipher/b ()I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71789_b (I)I org/bouncycastle/crypto/BufferedBlockCipher/b (I)I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71790_a ([BI)I org/bouncycastle/crypto/BufferedBlockCipher/a ([BI)I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71791_a ([BII[BI)I org/bouncycastle/crypto/BufferedBlockCipher/a ([BII[BI)I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71792_a ()I org/bouncycastle/crypto/BufferedBlockCipher/a ()I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71793_a (I)I org/bouncycastle/crypto/BufferedBlockCipher/a (I)I
-MD: org/bouncycastle/crypto/BufferedBlockCipher/func_71794_b ()V org/bouncycastle/crypto/BufferedBlockCipher/b ()V
+MD: org/bouncycastle/crypto/BlockCipher/init (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/BlockCipher/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
+MD: org/bouncycastle/crypto/BlockCipher/processBlock ([BI[BI)I org/bouncycastle/crypto/BlockCipher/a ([BI[BI)I
+MD: org/bouncycastle/crypto/BlockCipher/reset ()V org/bouncycastle/crypto/BlockCipher/c ()V
+MD: org/bouncycastle/crypto/BufferedBlockCipher/doFinal ([BI)I org/bouncycastle/crypto/BufferedBlockCipher/a ([BI)I
+MD: org/bouncycastle/crypto/BufferedBlockCipher/getBlockSize ()I org/bouncycastle/crypto/BufferedBlockCipher/a ()I
+MD: org/bouncycastle/crypto/BufferedBlockCipher/getOutputSize (I)I org/bouncycastle/crypto/BufferedBlockCipher/b (I)I
+MD: org/bouncycastle/crypto/BufferedBlockCipher/getUpdateOutputSize (I)I org/bouncycastle/crypto/BufferedBlockCipher/a (I)I
 MD: org/bouncycastle/crypto/BufferedBlockCipher/init (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/BufferedBlockCipher/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
-MD: org/bouncycastle/crypto/StreamCipher/func_74850_a ([BII[BI)V org/bouncycastle/crypto/StreamCipher/a ([BII[BI)V
+MD: org/bouncycastle/crypto/BufferedBlockCipher/processByte ([BII[BI)I org/bouncycastle/crypto/BufferedBlockCipher/a ([BII[BI)I
+MD: org/bouncycastle/crypto/BufferedBlockCipher/reset ()V org/bouncycastle/crypto/BufferedBlockCipher/b ()V
+MD: org/bouncycastle/crypto/StreamCipher/processBytes ([BII[BI)V org/bouncycastle/crypto/StreamCipher/a ([BII[BI)V
 MD: org/bouncycastle/crypto/StreamCipher/returnByte (B)B org/bouncycastle/crypto/StreamCipher/a (B)B
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71803_c ()V org/bouncycastle/crypto/engines/AESFastEngine/c ()V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71805_a (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/engines/AESFastEngine/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71806_a ([BI[BI)I org/bouncycastle/crypto/engines/AESFastEngine/a ([BI[BI)I
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71815_c (I)I org/bouncycastle/crypto/engines/AESFastEngine/c (I)I
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71816_a ([BI)V org/bouncycastle/crypto/engines/AESFastEngine/a ([BI)V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71817_a (I)I org/bouncycastle/crypto/engines/AESFastEngine/a (I)I
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71818_a ([[I)V org/bouncycastle/crypto/engines/AESFastEngine/a ([[I)V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71819_a (II)I org/bouncycastle/crypto/engines/AESFastEngine/a (II)I
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71820_b (I)I org/bouncycastle/crypto/engines/AESFastEngine/b (I)I
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71821_b ([BI)V org/bouncycastle/crypto/engines/AESFastEngine/b ([BI)V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71822_b ([[I)V org/bouncycastle/crypto/engines/AESFastEngine/b ([[I)V
-MD: org/bouncycastle/crypto/engines/AESFastEngine/func_71823_a ([BZ)[[I org/bouncycastle/crypto/engines/AESFastEngine/a ([BZ)[[I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/FFmulX (I)I org/bouncycastle/crypto/engines/AESFastEngine/a (I)I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/decryptBlock ([[I)V org/bouncycastle/crypto/engines/AESFastEngine/b ([[I)V
+MD: org/bouncycastle/crypto/engines/AESFastEngine/encryptBlock ([[I)V org/bouncycastle/crypto/engines/AESFastEngine/a ([[I)V
+MD: org/bouncycastle/crypto/engines/AESFastEngine/generateWorkingKey ([BZ)[[I org/bouncycastle/crypto/engines/AESFastEngine/a ([BZ)[[I
 MD: org/bouncycastle/crypto/engines/AESFastEngine/getAlgorithmName ()Ljava/lang/String; org/bouncycastle/crypto/engines/AESFastEngine/a ()Ljava/lang/String;
 MD: org/bouncycastle/crypto/engines/AESFastEngine/getBlockSize ()I org/bouncycastle/crypto/engines/AESFastEngine/b ()I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/init (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/engines/AESFastEngine/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
+MD: org/bouncycastle/crypto/engines/AESFastEngine/inv_mcol (I)I org/bouncycastle/crypto/engines/AESFastEngine/b (I)I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/packBlock ([BI)V org/bouncycastle/crypto/engines/AESFastEngine/b ([BI)V
+MD: org/bouncycastle/crypto/engines/AESFastEngine/processBlock ([BI[BI)I org/bouncycastle/crypto/engines/AESFastEngine/a ([BI[BI)I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/reset ()V org/bouncycastle/crypto/engines/AESFastEngine/c ()V
+MD: org/bouncycastle/crypto/engines/AESFastEngine/shift (II)I org/bouncycastle/crypto/engines/AESFastEngine/a (II)I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/subWord (I)I org/bouncycastle/crypto/engines/AESFastEngine/c (I)I
+MD: org/bouncycastle/crypto/engines/AESFastEngine/unpackBlock ([BI)V org/bouncycastle/crypto/engines/AESFastEngine/a ([BI)V
 MD: org/bouncycastle/crypto/io/CipherInputStream/available ()I org/bouncycastle/crypto/io/CipherInputStream/available ()I
 MD: org/bouncycastle/crypto/io/CipherInputStream/close ()V org/bouncycastle/crypto/io/CipherInputStream/close ()V
-MD: org/bouncycastle/crypto/io/CipherInputStream/func_74852_a ()I org/bouncycastle/crypto/io/CipherInputStream/a ()I
 MD: org/bouncycastle/crypto/io/CipherInputStream/markSupported ()Z org/bouncycastle/crypto/io/CipherInputStream/markSupported ()Z
+MD: org/bouncycastle/crypto/io/CipherInputStream/nextChunk ()I org/bouncycastle/crypto/io/CipherInputStream/a ()I
 MD: org/bouncycastle/crypto/io/CipherInputStream/read ()I org/bouncycastle/crypto/io/CipherInputStream/read ()I
 MD: org/bouncycastle/crypto/io/CipherInputStream/read ([B)I org/bouncycastle/crypto/io/CipherInputStream/read ([B)I
 MD: org/bouncycastle/crypto/io/CipherInputStream/read ([BII)I org/bouncycastle/crypto/io/CipherInputStream/read ([BII)I
@@ -11161,13 +11161,13 @@ MD: org/bouncycastle/crypto/io/CipherOutputStream/flush ()V org/bouncycastle/cry
 MD: org/bouncycastle/crypto/io/CipherOutputStream/write (I)V org/bouncycastle/crypto/io/CipherOutputStream/write (I)V
 MD: org/bouncycastle/crypto/io/CipherOutputStream/write ([B)V org/bouncycastle/crypto/io/CipherOutputStream/write ([B)V
 MD: org/bouncycastle/crypto/io/CipherOutputStream/write ([BII)V org/bouncycastle/crypto/io/CipherOutputStream/write ([BII)V
-MD: org/bouncycastle/crypto/modes/CFBBlockCipher/func_71803_c ()V org/bouncycastle/crypto/modes/CFBBlockCipher/c ()V
-MD: org/bouncycastle/crypto/modes/CFBBlockCipher/func_71805_a (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/modes/CFBBlockCipher/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
-MD: org/bouncycastle/crypto/modes/CFBBlockCipher/func_71806_a ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/a ([BI[BI)I
-MD: org/bouncycastle/crypto/modes/CFBBlockCipher/func_71807_b ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/b ([BI[BI)I
-MD: org/bouncycastle/crypto/modes/CFBBlockCipher/func_71808_c ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/c ([BI[BI)I
+MD: org/bouncycastle/crypto/modes/CFBBlockCipher/decryptBlock ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/c ([BI[BI)I
+MD: org/bouncycastle/crypto/modes/CFBBlockCipher/encryptBlock ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/b ([BI[BI)I
 MD: org/bouncycastle/crypto/modes/CFBBlockCipher/getAlgorithmName ()Ljava/lang/String; org/bouncycastle/crypto/modes/CFBBlockCipher/a ()Ljava/lang/String;
 MD: org/bouncycastle/crypto/modes/CFBBlockCipher/getBlockSize ()I org/bouncycastle/crypto/modes/CFBBlockCipher/b ()I
+MD: org/bouncycastle/crypto/modes/CFBBlockCipher/init (ZLorg/bouncycastle/crypto/CipherParameters;)V org/bouncycastle/crypto/modes/CFBBlockCipher/a (ZLorg/bouncycastle/crypto/CipherParameters;)V
+MD: org/bouncycastle/crypto/modes/CFBBlockCipher/processBlock ([BI[BI)I org/bouncycastle/crypto/modes/CFBBlockCipher/a ([BI[BI)I
+MD: org/bouncycastle/crypto/modes/CFBBlockCipher/reset ()V org/bouncycastle/crypto/modes/CFBBlockCipher/c ()V
 MD: org/bouncycastle/crypto/params/KeyParameter/getKey ()[B org/bouncycastle/crypto/params/KeyParameter/a ()[B
 MD: org/bouncycastle/crypto/params/ParametersWithIV/getIV ()[B org/bouncycastle/crypto/params/ParametersWithIV/a ()[B
 MD: org/bouncycastle/crypto/params/ParametersWithIV/getParameters ()Lorg/bouncycastle/crypto/CipherParameters; org/bouncycastle/crypto/params/ParametersWithIV/b ()Lorg/bouncycastle/crypto/CipherParameters;
@@ -11177,9 +11177,9 @@ MD: org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/getA
 MD: org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/hashCode ()I org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/hashCode ()I
 MD: org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/implies (Ljava/security/Permission;)Z org/bouncycastle/jcajce/provider/config/ProviderConfigurationPermission/implies (Ljava/security/Permission;)Z
 MD: org/bouncycastle/jcajce/provider/util/AlgorithmProvider/configure (Lorg/bouncycastle/jcajce/provider/config/ConfigurableProvider;)V org/bouncycastle/jcajce/provider/util/AlgorithmProvider/a (Lorg/bouncycastle/jcajce/provider/config/ConfigurableProvider;)V
-MD: org/bouncycastle/jce/provider/BouncyCastleProvider/func_74818_a ()V org/bouncycastle/jce/provider/BouncyCastleProvider/a ()V
-MD: org/bouncycastle/jce/provider/BouncyCastleProvider/func_74819_a (Ljava/lang/String;[Ljava/lang/String;)V org/bouncycastle/jce/provider/BouncyCastleProvider/a (Ljava/lang/String;[Ljava/lang/String;)V
-MD: org/bouncycastle/jce/provider/BouncyCastleProvider/func_74820_b ()V org/bouncycastle/jce/provider/BouncyCastleProvider/b ()V
-MD: org/bouncycastle/jce/provider/BouncyCastleProvider/func_74821_a (Lorg/bouncycastle/jce/provider/BouncyCastleProvider;)V org/bouncycastle/jce/provider/BouncyCastleProvider/a (Lorg/bouncycastle/jce/provider/BouncyCastleProvider;)V
+MD: org/bouncycastle/jce/provider/BouncyCastleProvider/addMacAlgorithms ()V org/bouncycastle/jce/provider/BouncyCastleProvider/b ()V
+MD: org/bouncycastle/jce/provider/BouncyCastleProvider/doSetup (Lorg/bouncycastle/jce/provider/BouncyCastleProvider;)V org/bouncycastle/jce/provider/BouncyCastleProvider/a (Lorg/bouncycastle/jce/provider/BouncyCastleProvider;)V
+MD: org/bouncycastle/jce/provider/BouncyCastleProvider/loadAlgorithms (Ljava/lang/String;[Ljava/lang/String;)V org/bouncycastle/jce/provider/BouncyCastleProvider/a (Ljava/lang/String;[Ljava/lang/String;)V
+MD: org/bouncycastle/jce/provider/BouncyCastleProvider/setup ()V org/bouncycastle/jce/provider/BouncyCastleProvider/a ()V
 MD: org/bouncycastle/jce/provider/BouncyCastleProviderAction/run ()Ljava/lang/Object; org/bouncycastle/jce/provider/BouncyCastleProvider$1/run ()Ljava/lang/Object;
 MD: org/bouncycastle/util/Strings/toLowerCase (Ljava/lang/String;)Ljava/lang/String; org/bouncycastle/util/Strings/a (Ljava/lang/String;)Ljava/lang/String;
