@@ -1980,6 +1980,7 @@ net/minecraft/server/MinecraftServer isStopped i
 net/minecraft/server/MinecraftServer issueCommand (Ljava/lang/String;Lnet/minecraft/server/ICommandListener;)V a
 net/minecraft/server/MinecraftServer log a
 net/minecraft/server/MinecraftServer motd s
+net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 net/minecraft/server/MinecraftServer networkListenThread c
 net/minecraft/server/MinecraftServer onlineMode n
 net/minecraft/server/MinecraftServer propertyManager d

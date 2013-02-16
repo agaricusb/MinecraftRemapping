@@ -1780,6 +1780,7 @@ net/minecraft/server/MinecraftServer m ()Ljava/lang/String; getWorldName
 net/minecraft/server/MinecraftServer m tracker
 net/minecraft/server/MinecraftServer n ()Ljava/lang/String; getPlugins
 net/minecraft/server/MinecraftServer n onlineMode
+net/minecraft/server/MinecraftServer net/minecraft/server/MinecraftServer
 net/minecraft/server/MinecraftServer o spawnAnimals
 net/minecraft/server/MinecraftServer p ()Z isDebugging
 net/minecraft/server/MinecraftServer p spawnNPCs
