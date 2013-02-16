@@ -2,16 +2,7 @@
 
 import sys
 
-if len(sys.argv) < 2:
-    print "Reverse srg mapping"
-    print "Usage: %s file.srg" % (sys.argv[0],)
-    raise SystemExit
-
-
-filename = sys.argv[1]
-
-f = file(filename)
-for line in f.readlines():
+for line in sys.stdin.readlines():
     line = line.strip()
     tokens = line.split(" ")
     kind = tokens[0]
