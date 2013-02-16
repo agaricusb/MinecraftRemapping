@@ -7,8 +7,9 @@ import subprocess, os
 
 srcRoot = "../CraftBukkit"
 scriptDir = "../Srg2Source/python"  # relative to srcRoot
-outDir = "../jars/upstream-patches/craftbukkit" # relative to srcRoot
-startCommit = "27f73b62998ef7ba6b951a5cc7acbb95a1a17bed" # Updated version to 1.4.7-R1.0 in pom.xml for RB.
+outDir = "../jars/upstream-patches/craftbukkit/" # relative to srcRoot
+startCommit = "6c77179121a5abdf2562db0c5c8818adda906ac8" # Always return a TravelAgent.. last CB commit before Spigot #487
+#startCommit = "27f73b62998ef7ba6b951a5cc7acbb95a1a17bed" # Updated version to 1.4.7-R1.0 in pom.xml for RB.
 #startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # Remove erroneous break.. before update to 1.4.7-R1.0
 #startCommit = "6b4ae3cdc7da8c8a886c0d2e1e57363cfd151f46" # Spigot - Add Custom Timings to various points
 #startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # before spigot - Remove erroneous break statement in scheduler. Fixes BUKKIT-3395
@@ -20,6 +21,7 @@ startCommit = "27f73b62998ef7ba6b951a5cc7acbb95a1a17bed" # Updated version to 1.
 #startCommit = "0104a4078da87d65abbe7f94aa58c5e136dfdab8" # last commit of 1.4.6 before 1.4.7
 #startCommit = "d92dbbef5418f133f521097002c2ba9c9e145b8a"  # first dev build of 1.4.6-R0.4 - initial MCPC+ fork
 cbmcpBranch = "pkgmcp"
+remoteSource = "origin" # 'git remote' name
 masterBranch = "master"
 
 shouldPullLatestChanges = True
@@ -86,13 +88,13 @@ def saveBranch():
 def main():
     if os.path.basename(os.getcwd()) != os.path.basename(srcRoot): os.chdir(srcRoot)
 
+    if shouldPullLatestChanges:
+        # Get all the latest changes 
+        run("git pull "+remoteSource+" "+masterBranch)
+
     if shouldCheckoutMaster:
         clean()
         run("git checkout "+masterBranch)
-
-    if shouldPullLatestChanges:
-        # Get all the latest changes 
-        run("git pull origin "+masterBranch)
 
     if shouldCheckoutMaster:
         run("git checkout "+masterBranch)
