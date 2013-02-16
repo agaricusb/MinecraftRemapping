@@ -165,6 +165,8 @@ def readSrg(filename):
         if len(line) == 0 or line.startswith("#"): continue
         kind, argsString = line.split(": ")
         args = argsString.split(" ")
+        # read srg file format
+        # TODO: also add csrg support, move from chain.py
         if kind == "PK":
             inName, outName = args
             packageMap[inName] = outName

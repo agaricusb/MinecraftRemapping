@@ -3,9 +3,12 @@
 # Given obf<->MCP and obf<->CB mappings, generate MCP<->CB mappings
 
 import sys, os
+import srglib
 
 global verbose
 
+# Load a srg
+# TODO: refactor into srglib.py!
 def process(filename):
     reverse = False
     if filename.startswith("^"):
@@ -15,31 +18,71 @@ def process(filename):
     classes_o2d = {}; classes_d2o = {}
     fields_o2d = {}; fields_d2o = {}
     methods_o2d = {}; methods_d2o = {}
+    csrg_lines = []
     for line in f.readlines():
         line = line.strip()
         if len(line) == 0: continue
-        assert ": " in line, "Invalid line: %s" % (line,)
-        kind, argsString = line.split(": ")
-        args = argsString.split(" ")
-        if kind == "PK":  # package
-            continue 
-        elif kind == "CL": # class
-            obfName, deobName = args
-            classes_o2d[obfName] = deobName
-            classes_d2o[deobName] = obfName
-        elif kind == "FD": # field
-            obfName, deobName = args
-            fields_o2d[obfName] = deobName
-            fields_d2o[deobName] = obfName
-        elif kind == "MD": # method
-            obfName, obfSig, deobName, deobSig = args
+        if ": " in line:
+            # standard srg
+            kind, argsString = line.split(": ")
+            args = argsString.split(" ")
+            if kind == "PK":  # package
+                continue 
+            elif kind == "CL": # class
+                obfName, deobName = args
+                classes_o2d[obfName] = deobName
+                classes_d2o[deobName] = obfName
+            elif kind == "FD": # field
+                obfName, deobName = args
+                fields_o2d[obfName] = deobName
+                fields_d2o[deobName] = obfName
+            elif kind == "MD": # method
+                obfName, obfSig, deobName, deobSig = args
 
-            obfKey = obfName + " " + obfSig
-            deobKey = deobName + " " + deobSig
-            methods_o2d[obfKey] = deobKey
-            methods_d2o[deobKey] = obfKey
+                obfKey = obfName + " " + obfSig
+                deobKey = deobName + " " + deobSig
+                methods_o2d[obfKey] = deobKey
+                methods_d2o[deobKey] = obfKey
+            else:
+                assert "Unknown type " + kind
         else:
-            assert "Unknown type " + kind
+            # compact srg
+            args = line.split(" ")
+            if len(args) == 2: # class
+                obfName, deobName = args
+                if obfName.endswith("/"): continue # package
+                classes_o2d[obfName] = deobName
+                classes_d2o[deobName] = obfName
+            # defer field/method mapping until read complete class map (TODO: refactor)
+            elif len(args) == 3: # field
+                csrg_lines.append(args)
+            elif len(args) == 4: # method
+                csrg_lines.append(args)
+            else:
+                assert "Unknown mapping file format "+line
+
+    if len(csrg_lines) > 0:
+        for args in csrg_lines:
+            if len(args) == 3: # field
+                obfClassName, obfFieldName, deobFieldName = args
+                obfName = obfClassName + "/" + obfFieldName
+                deobName = classes_o2d[obfClassName] + "/" + deobFieldName
+
+                fields_o2d[obfName] = deobName
+                fields_d2o[deobName] = obfName
+            elif len(args) == 4: # method
+                obfClassName, obfMethodName, obfSig, deobMethodName = args
+                obfName = obfClassName + "/" + obfMethodName
+                deobName = classes_o2d[obfClassName] + "/" + deobMethodName
+
+                obfKey = obfName + " " + obfSig
+                deobKey = deobName + " " + srglib.remapSig(obfSig, classes_o2d)
+
+                methods_o2d[obfKey] = deobKey
+                methods_d2o[deobKey] = obfKey
+            else:
+                assert "Unknown mapping file format "+line
+
 
     if not reverse:
         return {"CL": classes_o2d, "FD": fields_o2d, "MD": methods_o2d}
@@ -59,7 +102,7 @@ def loadDescriptiveNamesCSV(fn):
     return d
 
 def chain(mcpdir, cbsrg):
-    if mcpdir.endswith(".srg"):
+    if mcpdir.endswith("srg"):
         # only chain srgs
         mcpsrg = mcpdir
         fields_fn = methods_fn = None
