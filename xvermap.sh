@@ -13,6 +13,6 @@ do
     hits=`wc -l < $xver`
     echo $version = $hits
 
-    #py chain $version/
+    py chain.py $xver $version/obf2cb.srg | py rmdupes-srg.py | sort > $version/cb$ver-to-obf147.srg
 done
 

@@ -18,6 +18,7 @@ def process(filename):
     for line in f.readlines():
         line = line.strip()
         if len(line) == 0: continue
+        if line.startswith("#"): continue
         assert ": " in line, "Invalid line: %s" % (line,)
         kind, argsString = line.split(": ")
         args = argsString.split(" ")
