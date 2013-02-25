@@ -5,7 +5,9 @@ import subprocess, os
 
 srcRoot = "../MinecraftForge"
 outDir = "../jars/upstream-patches/forge" # relative to srcRoot
-startCommit = "0f3bd780e17baf3fcccc8f594337556e2368fe35" # build 518, Merge branch 'master' into TESRculling.. 2013-02-29
+startCommit = "feca047114562c2ec2ec6be42e3ffd7c09a9a94d" # build 528, Update FML to 556..
+#startCommit = "6673844c54b8de0ebe4cba601b6505ec0e3dda3f" # build 524, Fix ServerBrand retriever..
+#startCommit = "0f3bd780e17baf3fcccc8f594337556e2368fe35" # build 518, Merge branch 'master' into TESRculling.. 2013-02-29
 #startCommit = "fb87773c3ab77522a27651dcf20066277bb5e88d" # Added input getters for..
 #startCommit = "f06e0be5e59723808305f4c4aeb89c9108c79230" # We try and log a message.. - last commit of Forge 516
 #startCommit = "f20ea649c6fbf4e49ccb857e6ea9d3333cf6d6a9" # Attempt to fix a possible NPE in the...
@@ -26,7 +28,7 @@ def build():
         print "Rerunning setup..."  # TODO: automatic, if commit changes FML.. or always?
         run("py setup.py") # installs MCP, decompiles
         print "Continue?"
-        raw_input()
+        #raw_input()
 
     run("py release.py")  # patches MCP source
     # TODO: pass --force to mcp cleanup to avoid confirmation prompt
