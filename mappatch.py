@@ -8,7 +8,8 @@ import subprocess, os
 srcRoot = "../CraftBukkit"
 scriptDir = "../Srg2Source/python"  # relative to srcRoot
 outDir = "../jars/upstream-patches/craftbukkit/" # relative to srcRoot
-startCommit = "6c77179121a5abdf2562db0c5c8818adda906ac8" # Always return a TravelAgent.. last CB commit before Spigot #487
+startCommit = "1ba48e78773e3b8b8fca1665a29a863bd2644c7d" # Implement PlayerItemConsumeEvent
+#startCommit = "6c77179121a5abdf2562db0c5c8818adda906ac8" # Always return a TravelAgent.. last CB commit before Spigot #487
 #startCommit = "27f73b62998ef7ba6b951a5cc7acbb95a1a17bed" # Updated version to 1.4.7-R1.0 in pom.xml for RB.
 #startCommit = "eea7fc2067d7d7fc08c72414b662d0a065495264" # Remove erroneous break.. before update to 1.4.7-R1.0
 #startCommit = "6b4ae3cdc7da8c8a886c0d2e1e57363cfd151f46" # Spigot - Add Custom Timings to various points
