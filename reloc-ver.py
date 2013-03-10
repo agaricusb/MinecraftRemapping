@@ -39,19 +39,19 @@ for line in sys.stdin.readlines():
     elif kind == "CL:": # class
         inName, outName = args
         if noverMode: 
-            print kind, inName, addVersion(inName, outVersion)
+            print kind, inName, addVersion(outName, outVersion)
         else:
             print kind, addVersion(inName, inVersion), addVersion(outName, outVersion)
     elif kind == "FD:": # field
         inName, outName = args
         if noverMode:
-            print kind, inName, addVersion(inName, outVersion)
+            print kind, inName, addVersion(outName, outVersion)
         else:
             print kind, addVersion(inName, inVersion), addVersion(outName, outVersion)
     elif kind == "MD:": # method
         inName, inSig, outName, outSig = args
         if noverMode:
-            print kind, inName, inSig, addVersion(inName, outVersion), addVersion(outSig, outVersion)
+            print kind, inName, inSig, addVersion(outName, outVersion), addVersion(outSig, outVersion)
         else:
             print kind, addVersion(inName, inVersion), inSig, addVersion(outName, outVersion), addVersion(outSig, outVersion)
     else:
