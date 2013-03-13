@@ -22,15 +22,6 @@ MD: net/minecraft/server/BlockSapling/TreeGenerator/a (Lnet/minecraft/server/Wor
 MD: net/minecraft/server/EntityBoat/collide (Lnet/minecraft/server/Entity;)V net/minecraft/entity/EntityBoat/applyEntityCollision (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/WorldServer/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/WorldServer/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
 
-# Methods the Bukkit API requires, but are renamed to MCP names
-# Wrapper methods added by prerenamefixes to appease BlockChangeDelegate interface
-MD: net/minecraft/server/World/getTypeId__API_CB (III)I net/minecraft/world/World/getTypeId (III)I
-MD: net/minecraft/server/World/isEmpty__API_CB (III)Z net/minecraft/world/World/isEmpty (III)Z
-MD: net/minecraft/server/World/setRawTypeId__API_CB (IIII)Z net/minecraft/world/World/setRawTypeId (IIII)Z
-MD: net/minecraft/server/World/setRawTypeIdAndData__API_CB (IIIII)Z net/minecraft/world/World/setRawTypeIdAndData (IIIII)Z
-MD: net/minecraft/server/World/setTypeId__API_CB (IIII)Z net/minecraft/world/World/setTypeId (IIII)Z
-MD: net/minecraft/server/World/setTypeIdAndData__API_CB (IIIII)Z net/minecraft/world/World/setTypeIdAndData (IIIII)Z
-
 # Interface implementors in OBC
 # These are simply the interface method mappings, but with classes replaced by OBC's TODO: automatically generated
 
