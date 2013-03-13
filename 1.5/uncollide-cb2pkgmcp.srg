@@ -22,6 +22,15 @@ MD: net/minecraft/server/BlockSapling/TreeGenerator/a (Lnet/minecraft/server/Wor
 MD: net/minecraft/server/EntityBoat/collide (Lnet/minecraft/server/Entity;)V net/minecraft/entity/EntityBoat/applyEntityCollision (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/WorldServer/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/WorldServer/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
 
+# Methods the Bukkit API requires, but are renamed to MCP names
+# Wrapper methods added by prerenamefixes to appease BlockChangeDelegate interface
+MD: net/minecraft/server/WorldServer/getTypeId__API_CB (III)I net/minecraft/world/World/getTypeId (III)I
+MD: net/minecraft/server/WorldServer/isEmpty__API_CB (III)Z net/minecraft/world/World/isEmpty (III)Z
+MD: net/minecraft/server/WorldServer/setTypeId__API_CB (IIII)Z net/minecraft/world/World/setTypeId (IIII)Z
+
+# Compatibility class carried over to 1.5 from 1.4.7 in ProjectAres
+CL: net/minecraft/server/ConsoleLogManager net/minecraft/logging/ConsoleLogManager
+
 # Interface implementors in OBC
 # These are simply the interface method mappings, but with classes replaced by OBC's TODO: automatically generated
 
@@ -37,7 +46,7 @@ MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getOrCreateChunk (II)L
 MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/isChunkLoaded (II)Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/chunkExists (II)Z
 MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/recreateStructures (II)V org/bukkit/craftbukkit/generator/NormalChunkGenerator/recreateStructures (II)V
 MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/unload100OldestChunks ()Z
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/unloadQueuedChunks ()Z
 
 MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/canSave ()Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/canSave ()Z
 MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; org/bukkit/craftbukkit/generator/CustomChunkGenerator/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
@@ -50,7 +59,7 @@ MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getOrCreateChunk (II)L
 MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/isChunkLoaded (II)Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/chunkExists (II)Z
 MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/recreateStructures (II)V org/bukkit/craftbukkit/generator/CustomChunkGenerator/recreateStructures (II)V
 MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/unload100OldestChunks ()Z
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/unloadQueuedChunks ()Z
 
 # ICommandSender(MCP)/ICommandListener(CB) interface implementors
 MD: org/bukkit/craftbukkit/command/ServerCommandListener/a (ILjava/lang/String;)Z org/bukkit/craftbukkit/command/ServerCommandListener/canCommandSenderUseCommand (ILjava/lang/String;)Z
@@ -80,14 +89,16 @@ MD: org/bukkit/craftbukkit/inventory/CraftContainer/getSlot (I)Lnet/minecraft/se
 MD: org/bukkit/craftbukkit/inventory/CraftContainer/setItem (ILnet/minecraft/server/ItemStack;)V org/bukkit/craftbukkit/inventory/CraftContainer/putStackInSlot (ILnet/minecraft/item/ItemStack;)V
 
 # IInventory interface implementor
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/a_ (Lnet/minecraft/server/EntityHuman;)Z org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/isUseableByPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/f ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/closeChest ()V
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getItem (I)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getStackInSlot (I)Lnet/minecraft/item/ItemStack;
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getMaxStackSize ()I org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getInventoryStackLimit ()I
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getName ()Ljava/lang/String; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getInvName ()Ljava/lang/String;
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getSize ()I org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getSizeInventory ()I
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/setItem (ILnet/minecraft/server/ItemStack;)V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/setInventorySlotContents (ILnet/minecraft/item/ItemStack;)V
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitStack (II)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/decrStackSize (II)Lnet/minecraft/item/ItemStack;
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack;
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/startOpen ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/openChest ()V
-MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/update ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/onInventoryChanged ()V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/a (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/inventory/IInventory/isUseableByPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/b (ILnet/minecraft/server/ItemStack;)Z net/minecraft/inventory/IInventory/func_94041_b (ILnet/minecraft/item/ItemStack;)Z
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/c ()Z net/minecraft/inventory/IInventory/func_94042_c ()Z
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/g ()V net/minecraft/inventory/IInventory/closeChest ()V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getItem (I)Lnet/minecraft/server/ItemStack; net/minecraft/inventory/IInventory/getStackInSlot (I)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getMaxStackSize ()I net/minecraft/inventory/IInventory/getInventoryStackLimit ()I
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getName ()Ljava/lang/String; net/minecraft/inventory/IInventory/getInvName ()Ljava/lang/String;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getSize ()I net/minecraft/inventory/IInventory/getSizeInventory ()I
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/setItem (ILnet/minecraft/server/ItemStack;)V net/minecraft/inventory/IInventory/setInventorySlotContents (ILnet/minecraft/item/ItemStack;)V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitStack (II)Lnet/minecraft/server/ItemStack; net/minecraft/inventory/IInventory/decrStackSize (II)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack; net/minecraft/inventory/IInventory/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/startOpen ()V net/minecraft/inventory/IInventory/openChest ()V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/update ()V net/minecraft/inventory/IInventory/onInventoryChanged ()V

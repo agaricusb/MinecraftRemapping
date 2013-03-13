@@ -16,8 +16,8 @@
 import zipfile, os, sys
 
 srcDir = "../CraftBukkit/src/main/java/net/minecraft/server"
-inFile = "../minecraft-server-1.4.7.jar"
-outFile = "../slim-minecraft-server-1.4.7.jar"
+inFile = "minecraft-server-1.5pre.jar"
+outFile = "slim-minecraft-server-1.5pre.jar"
 
 skipFiles = ["net/minecraft/server/" + x.replace(".java", ".class") for x in os.listdir(srcDir)]
 z = zipfile.ZipFile(inFile)

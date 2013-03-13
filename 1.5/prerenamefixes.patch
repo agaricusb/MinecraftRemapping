@@ -1,4 +1,4 @@
-commit 2e704a97caf1e03b28e8015fd6dc8e2ae4d7e858
+commit 6a5f28237a9c9faa5be49280b9a92f8051458aa8
 Author: Agaricus <agaricusb@yahoo.com>
 Date:   Tue Mar 12 22:30:54 2013 -0700
 
@@ -20,7 +20,7 @@ index b9c7dd1..9396827 100644
      private SimpleDateFormat b;
      final LogAgent a;
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 46ab859..5df2271 100644
+index 46ab859..22e96ca 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -61,7 +61,7 @@ public class PlayerConnection extends Connection {
@@ -28,7 +28,7 @@ index 46ab859..5df2271 100644
      private static Random j = new Random();
      private long k;
 -    private volatile int chatThrottle = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, "chatThrottle"); // CraftBukkit - multithreaded field
-+    private volatile int chatThrottle = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, org.bukkit.craftbukkit.util.Versioning.isUsingMappingMCP ? "chatSpamThresholdCount" : (org.bukkit.craftbukkit.util.Versioning.isUsingMappingCB ? "chatThrottle" : "m")); // CraftBukkit - multithreaded field // CBMCP
++    private volatile int chatThrottle = 0; private static final AtomicIntegerFieldUpdater chatSpamField = AtomicIntegerFieldUpdater.newUpdater(PlayerConnection.class, "chatSpamThresholdCount"); // CraftBukkit - multithreaded field // CBMCP - chatThrottle -> chatSpamThresholdCount
      private int x = 0;
      private double y;
      private double z;
@@ -81,50 +81,8 @@ index c24c524..bf810c3 100644
          return provider.getMobsFor(ect, i, i1, i2);
      }
  
-diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index f905d17..ea654ad 100644
---- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-+++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-@@ -26,4 +26,37 @@ public final class Versioning {
- 
-         return result;
-     }
-+
-+    // CBMCP start - fields to mark our symbol map environment
-+    public static final boolean isUsingMappingCB;
-+    public static final boolean isUsingMappingMCP;
-+    public static final boolean isUsingMappingObf;
-+
-+    private static boolean classExists(String s) {
-+        try {
-+            Class.forName(s);
-+            return true;
-+        } catch (Exception ex) {
-+            return false;
-+        }
-+    }
-+
-+    static {
-+        // Detect based on what classes exist at runtime
-+        // TODO: is there a better way to do this??
-+        if (classExists("net.minecraft.server.ItemStack")) {
-+            isUsingMappingCB = true;
-+            isUsingMappingMCP = false;
-+            isUsingMappingObf = false;
-+        } else if (classExists("net.minecraft.item.ItemStack")) {
-+            isUsingMappingCB = false;
-+            isUsingMappingMCP = true;
-+            isUsingMappingObf = false;
-+        } else {
-+            isUsingMappingCB = false;
-+            isUsingMappingMCP = false;
-+            isUsingMappingObf = true;
-+        }
-+    }
-+    // CBMCP end
- }
 diff --git a/src/test/java/org/bukkit/AchievementTest.java b/src/test/java/org/bukkit/AchievementTest.java
-index b8695cc..f3cbd45 100644
+index b8695cc..fd13e8e 100644
 --- a/src/test/java/org/bukkit/AchievementTest.java
 +++ b/src/test/java/org/bukkit/AchievementTest.java
 @@ -23,7 +23,7 @@ public class AchievementTest {
@@ -132,26 +90,25 @@ index b8695cc..f3cbd45 100644
              int id = statistic.e;
  
 -            String name = Util.getInternalState(Statistic.class, statistic, "a");
-+            String name = Util.getInternalState(Statistic.class, statistic, org.bukkit.craftbukkit.util.Versioning.isUsingMappingCB ? "a" : "statName"); // CBMCP
++            String name = Util.getInternalState(Statistic.class, statistic, "statName"); // CBMCP
              String message = String.format("org.bukkit.Achievement is missing id: %d named: '%s'", id - Achievement.STATISTIC_OFFSET, name);
  
              Achievement subject = Achievement.getById(id);
 diff --git a/src/test/java/org/bukkit/PerMaterialTest.java b/src/test/java/org/bukkit/PerMaterialTest.java
-index e660d9e..8ffdd8e 100644
+index e660d9e..6823813 100644
 --- a/src/test/java/org/bukkit/PerMaterialTest.java
 +++ b/src/test/java/org/bukkit/PerMaterialTest.java
-@@ -30,7 +30,8 @@ public class PerMaterialTest extends AbstractTestingBase {
+@@ -30,7 +30,7 @@ public class PerMaterialTest extends AbstractTestingBase {
  
      @BeforeClass
      public static void getFireValues() {
 -        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "creativeTab");
-+        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, org.bukkit.craftbukkit.util.Versioning.isUsingMappingCB ? "creativeTab" : "chanceToEncourageFire"); // CBMCP - buggy mappings
-+        //fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, org.bukkit.craftbukkit.util.Versioning.isUsingMappingCB ? "a" : "chanceToEncourageFire"); // CBMCP
++        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "chanceToEncourageFire"); // CBMCP
      }
  
      @Parameters(name= "{index}: {0}")
 diff --git a/src/test/java/org/bukkit/potion/PotionTest.java b/src/test/java/org/bukkit/potion/PotionTest.java
-index a9df7d1..3944a12 100644
+index a9df7d1..bf3c299 100644
 --- a/src/test/java/org/bukkit/potion/PotionTest.java
 +++ b/src/test/java/org/bukkit/potion/PotionTest.java
 @@ -26,7 +26,7 @@ public class PotionTest extends AbstractTestingBase {
@@ -159,7 +116,7 @@ index a9df7d1..3944a12 100644
      @Test
      public void testEffectCompleteness() throws Throwable {
 -        Map<Integer, ?> effectDurations = Util.getInternalState(net.minecraft.server.PotionBrewer.class, null, "effectDurations");
-+        Map<Integer, ?> effectDurations = Util.getInternalState(net.minecraft.server.PotionBrewer.class, null, org.bukkit.craftbukkit.util.Versioning.isUsingMappingCB ? "effectDurations" : "potionRequirements"); // CBMCP
++        Map<Integer, ?> effectDurations = Util.getInternalState(net.minecraft.server.PotionBrewer.class, null, "potionRequirements"); // CBMCP
  
          Map<PotionType, String> effects = new EnumMap(PotionType.class);
          for (int id : effectDurations.keySet()) {
