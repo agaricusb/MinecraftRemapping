@@ -1,0 +1,102 @@
+# Extra mappings for remapping CraftBukkit to MCP
+
+# This augments the automatically-generated cb2pkgmcp.srg generated from mc-dev, adding
+# mappings specifically needed for CraftBukkit's added or modified code
+
+# New fields added by CB, distinct from deobfuscated methods in MCP with same name; resolve name collision
+FD: net/minecraft/server/PlayerConnection/lastPosX net/minecraft/network/NetServerHandler/lastPosX__ForEvent_CB
+FD: net/minecraft/server/PlayerConnection/lastPosY net/minecraft/network/NetServerHandler/lastPosY__ForEvent_CB
+FD: net/minecraft/server/PlayerConnection/lastPosZ net/minecraft/network/NetServerHandler/lastPosZ__ForEvent_CB
+
+# New method added by CB with same name as deobfuscated method
+MD: net/minecraft/server/ChunkRegionLoader/loadChunk (Lnet/minecraft/server/World;II)[Ljava/lang/Object; net/minecraft/world/chunk/storage/AnvilChunkLoader/loadChunk__Async_CB (Lnet/minecraft/world/World;II)[Ljava/lang/Object;
+
+# Redundant colliding synthetic method (type erasure?) - MCP has a manual patch to comment this out; just rename it
+MD: net/minecraft/server/EntityMushroomCow/b (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityCow; net/minecraft/entity/passive/EntityMooshroom/spawnBabyAnimal__SyntheticUnused_CB (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityCow;
+
+# New inner class added by CB, implemented by world generators
+CL: net/minecraft/server/BlockSapling/TreeGenerator net/minecraft/block/BlockSapling/TreeGenerator
+MD: net/minecraft/server/BlockSapling/TreeGenerator/a (Lnet/minecraft/server/World;Ljava/util/Random;III)Z net/minecraft/world/block/BlockSapling/generate (Lnet/minecraft/world/World;Ljava/util/Random;III)Z
+
+# New methods/classes added by CB overriding renamed methods
+MD: net/minecraft/server/EntityBoat/collide (Lnet/minecraft/server/Entity;)V net/minecraft/entity/EntityBoat/applyEntityCollision (Lnet/minecraft/entity/Entity;)V
+MD: net/minecraft/server/WorldServer/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/WorldServer/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
+
+# Methods the Bukkit API requires, but are renamed to MCP names
+# Wrapper methods added by prerenamefixes to appease BlockChangeDelegate interface
+MD: net/minecraft/server/World/getTypeId__API_CB (III)I net/minecraft/world/World/getTypeId (III)I
+MD: net/minecraft/server/World/isEmpty__API_CB (III)Z net/minecraft/world/World/isEmpty (III)Z
+MD: net/minecraft/server/World/setRawTypeId__API_CB (IIII)Z net/minecraft/world/World/setRawTypeId (IIII)Z
+MD: net/minecraft/server/World/setRawTypeIdAndData__API_CB (IIIII)Z net/minecraft/world/World/setRawTypeIdAndData (IIIII)Z
+MD: net/minecraft/server/World/setTypeId__API_CB (IIII)Z net/minecraft/world/World/setTypeId (IIII)Z
+MD: net/minecraft/server/World/setTypeIdAndData__API_CB (IIIII)Z net/minecraft/world/World/setTypeIdAndData (IIIII)Z
+
+# Interface implementors in OBC
+# These are simply the interface method mappings, but with classes replaced by OBC's TODO: automatically generated
+
+# IChunkProvider interface implementors
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/canSave ()Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/canSave ()Z
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; org/bukkit/craftbukkit/generator/NormalChunkGenerator/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getChunkAt (II)Lnet/minecraft/server/Chunk; org/bukkit/craftbukkit/generator/NormalChunkGenerator/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V org/bukkit/craftbukkit/generator/NormalChunkGenerator/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getLoadedChunks ()I org/bukkit/craftbukkit/generator/NormalChunkGenerator/getLoadedChunkCount ()I
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; org/bukkit/craftbukkit/generator/NormalChunkGenerator/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getName ()Ljava/lang/String; org/bukkit/craftbukkit/generator/NormalChunkGenerator/makeString ()Ljava/lang/String;
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; org/bukkit/craftbukkit/generator/NormalChunkGenerator/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/isChunkLoaded (II)Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/chunkExists (II)Z
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/recreateStructures (II)V org/bukkit/craftbukkit/generator/NormalChunkGenerator/recreateStructures (II)V
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
+MD: org/bukkit/craftbukkit/generator/NormalChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/NormalChunkGenerator/unload100OldestChunks ()Z
+
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/canSave ()Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/canSave ()Z
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; org/bukkit/craftbukkit/generator/CustomChunkGenerator/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getChunkAt (II)Lnet/minecraft/server/Chunk; org/bukkit/craftbukkit/generator/CustomChunkGenerator/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V org/bukkit/craftbukkit/generator/CustomChunkGenerator/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getLoadedChunks ()I org/bukkit/craftbukkit/generator/CustomChunkGenerator/getLoadedChunkCount ()I
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; org/bukkit/craftbukkit/generator/CustomChunkGenerator/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getName ()Ljava/lang/String; org/bukkit/craftbukkit/generator/CustomChunkGenerator/makeString ()Ljava/lang/String;
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; org/bukkit/craftbukkit/generator/CustomChunkGenerator/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/isChunkLoaded (II)Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/chunkExists (II)Z
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/recreateStructures (II)V org/bukkit/craftbukkit/generator/CustomChunkGenerator/recreateStructures (II)V
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
+MD: org/bukkit/craftbukkit/generator/CustomChunkGenerator/unloadChunks ()Z org/bukkit/craftbukkit/generator/CustomChunkGenerator/unload100OldestChunks ()Z
+
+# ICommandSender(MCP)/ICommandListener(CB) interface implementors
+MD: org/bukkit/craftbukkit/command/ServerCommandListener/a (ILjava/lang/String;)Z org/bukkit/craftbukkit/command/ServerCommandListener/canCommandSenderUseCommand (ILjava/lang/String;)Z
+MD: org/bukkit/craftbukkit/command/ServerCommandListener/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; org/bukkit/craftbukkit/command/ServerCommandListener/translateString (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+MD: org/bukkit/craftbukkit/command/ServerCommandListener/b ()Lnet/minecraft/server/ChunkCoordinates; org/bukkit/craftbukkit/command/ServerCommandListener/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates;
+MD: org/bukkit/craftbukkit/command/ServerCommandListener/getName ()Ljava/lang/String; org/bukkit/craftbukkit/command/ServerCommandListener/getCommandSenderName ()Ljava/lang/String;
+MD: org/bukkit/craftbukkit/command/ServerCommandListener/sendMessage (Ljava/lang/String;)V org/bukkit/craftbukkit/command/ServerCommandListener/sendChatToPlayer (Ljava/lang/String;)V
+
+
+# Container interface implementor
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a ()Ljava/util/List; org/bukkit/craftbukkit/inventory/CraftContainer/getInventory ()Ljava/util/List;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (IIZLnet/minecraft/server/EntityHuman;)V org/bukkit/craftbukkit/inventory/CraftContainer/retrySlotClick (IIZLnet/minecraft/entity/player/EntityPlayer;)V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/EntityHuman;)Z org/bukkit/craftbukkit/inventory/CraftContainer/canInteractWith (Lnet/minecraft/entity/player/EntityPlayer;)Z
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/EntityHuman;I)Z org/bukkit/craftbukkit/inventory/CraftContainer/enchantItem (Lnet/minecraft/entity/player/EntityPlayer;I)Z
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/EntityHuman;Z)V org/bukkit/craftbukkit/inventory/CraftContainer/setPlayerIsPresent (Lnet/minecraft/entity/player/EntityPlayer;Z)V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/IInventory;)V org/bukkit/craftbukkit/inventory/CraftContainer/onCraftMatrixChanged (Lnet/minecraft/inventory/IInventory;)V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/IInventory;I)Lnet/minecraft/server/Slot; org/bukkit/craftbukkit/inventory/CraftContainer/getSlotFromInventory (Lnet/minecraft/inventory/IInventory;I)Lnet/minecraft/inventory/Slot;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/ItemStack;IIZ)Z org/bukkit/craftbukkit/inventory/CraftContainer/mergeItemStack (Lnet/minecraft/item/ItemStack;IIZ)Z
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/a (Lnet/minecraft/server/Slot;)Lnet/minecraft/server/Slot; org/bukkit/craftbukkit/inventory/CraftContainer/addSlotToContainer (Lnet/minecraft/inventory/Slot;)Lnet/minecraft/inventory/Slot;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/addSlotListener (Lnet/minecraft/server/ICrafting;)V org/bukkit/craftbukkit/inventory/CraftContainer/addCraftingToCrafters (Lnet/minecraft/inventory/ICrafting;)V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/b ()V org/bukkit/craftbukkit/inventory/CraftContainer/updateCraftingResults ()V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/b (Lnet/minecraft/server/EntityHuman;)V org/bukkit/craftbukkit/inventory/CraftContainer/onCraftGuiClosed (Lnet/minecraft/entity/player/EntityPlayer;)V
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/b (Lnet/minecraft/server/EntityHuman;I)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftContainer/transferStackInSlot (Lnet/minecraft/entity/player/EntityPlayer;I)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/c (Lnet/minecraft/server/EntityHuman;)Z org/bukkit/craftbukkit/inventory/CraftContainer/isPlayerNotUsingContainer (Lnet/minecraft/entity/player/EntityPlayer;)Z
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/clickItem (IIILnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftContainer/slotClick (IIILnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/getSlot (I)Lnet/minecraft/server/Slot; org/bukkit/craftbukkit/inventory/CraftContainer/getSlot (I)Lnet/minecraft/inventory/Slot;
+MD: org/bukkit/craftbukkit/inventory/CraftContainer/setItem (ILnet/minecraft/server/ItemStack;)V org/bukkit/craftbukkit/inventory/CraftContainer/putStackInSlot (ILnet/minecraft/item/ItemStack;)V
+
+# IInventory interface implementor
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/a_ (Lnet/minecraft/server/EntityHuman;)Z org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/isUseableByPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/f ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/closeChest ()V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getItem (I)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getStackInSlot (I)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getMaxStackSize ()I org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getInventoryStackLimit ()I
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getName ()Ljava/lang/String; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getInvName ()Ljava/lang/String;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getSize ()I org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getSizeInventory ()I
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/setItem (ILnet/minecraft/server/ItemStack;)V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/setInventorySlotContents (ILnet/minecraft/item/ItemStack;)V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitStack (II)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/decrStackSize (II)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack; org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack;
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/startOpen ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/openChest ()V
+MD: org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/update ()V org/bukkit/craftbukkit/inventory/CraftInventoryCustom/MinecraftInventory/onInventoryChanged ()V
