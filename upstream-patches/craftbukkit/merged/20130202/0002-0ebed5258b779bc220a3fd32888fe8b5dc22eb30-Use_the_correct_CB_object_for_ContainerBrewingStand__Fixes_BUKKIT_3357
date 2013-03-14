@@ -1,0 +1,28 @@
+From 0ebed5258b779bc220a3fd32888fe8b5dc22eb30 Mon Sep 17 00:00:00 2001
+From: Nate Mortensen <nate.richard.mortensen@gmail.com>
+Date: Fri, 8 Feb 2013 19:22:22 -0700
+Subject: [PATCH] Use the correct CB object for ContainerBrewingStand. Fixes BUKKIT-3357
+
+
+diff --git a/src/minecraft/net/minecraft/inventory/ContainerBrewingStand.java b/src/minecraft/net/minecraft/inventory/ContainerBrewingStand.java
+index ff9fa1f..8525b9c 100644
+--- a/src/minecraft/net/minecraft/inventory/ContainerBrewingStand.java
++++ b/src/minecraft/net/minecraft/inventory/ContainerBrewingStand.java
+@@ -1,7 +1,7 @@
+ package net.minecraft.inventory;
+ 
+ // CraftBukkit start
+-import org.bukkit.craftbukkit.inventory.CraftInventory;
++import org.bukkit.craftbukkit.inventory.CraftInventoryBrewer;
+ import org.bukkit.craftbukkit.inventory.CraftInventoryView;
+ import net.minecraft.entity.player.EntityPlayer;
+ import net.minecraft.entity.player.InventoryPlayer;
+@@ -167,7 +167,7 @@ public class ContainerBrewingStand extends Container
+             return bukkitEntity;
+         }
+ 
+-        CraftInventory inventory = new CraftInventory(this.tileBrewingStand);
++        CraftInventoryBrewer inventory = new CraftInventoryBrewer(this.tileBrewingStand);
+         bukkitEntity = new CraftInventoryView(this.player.player.getBukkitEntity(), inventory, this);
+         return bukkitEntity;
+     }

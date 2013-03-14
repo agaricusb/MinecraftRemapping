@@ -1,0 +1,2047 @@
+From 2b7950fdac4a0fa78a90539082e0d3dd0c8dbe0f Mon Sep 17 00:00:00 2001
+From: EdGruberman <ed@rjump.com>
+Date: Sat, 22 Dec 2012 11:46:24 -0700
+Subject: [PATCH] [Bleeding] Add experimental support for entity portal traveling
+
+
+diff --git a/src/minecraft/net/minecraft/block/BlockEndPortal.java b/src/minecraft/net/minecraft/block/BlockEndPortal.java
+index d6d203b..700bc7c 100644
+--- a/src/minecraft/net/minecraft/block/BlockEndPortal.java
++++ b/src/minecraft/net/minecraft/block/BlockEndPortal.java
+@@ -10,6 +10,8 @@ import net.minecraft.util.AxisAlignedBB;
+ import net.minecraft.world.IBlockAccess;
+ import net.minecraft.world.World;
+ 
++import org.bukkit.event.entity.EntityPortalEnterEvent; // CraftBukkit
++
+ public class BlockEndPortal extends BlockContainer
+ {
+     /**
+@@ -77,6 +79,10 @@ public class BlockEndPortal extends BlockContainer
+     {
+         if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && !par1World.isRemote)
+         {
++            // CraftBukkit start - Entity in portal
++            EntityPortalEnterEvent event = new EntityPortalEnterEvent(par5Entity.getBukkitEntity(), new org.bukkit.Location(par1World.getWorld(), par2, par3, par4));
++            par1World.getServer().getPluginManager().callEvent(event);
++            // CraftBukkit end
+             par5Entity.travelToDimension(1);
+         }
+     }
+diff --git a/src/minecraft/net/minecraft/entity/Entity.java b/src/minecraft/net/minecraft/entity/Entity.java
+index b3b790e..1502f14 100644
+--- a/src/minecraft/net/minecraft/entity/Entity.java
++++ b/src/minecraft/net/minecraft/entity/Entity.java
+@@ -36,7 +36,9 @@ import net.minecraft.world.WorldServer;
+ import java.util.UUID;
+ 
+ import org.bukkit.Bukkit;
++import org.bukkit.Location;
+ import org.bukkit.Server;
++import org.bukkit.TravelAgent;
+ import org.bukkit.block.BlockFace;
+ import org.bukkit.entity.LivingEntity;
+ import org.bukkit.entity.Painting;
+@@ -47,11 +49,13 @@ import org.bukkit.event.vehicle.VehicleBlockCollisionEvent;
+ import org.bukkit.event.vehicle.VehicleEnterEvent;
+ import org.bukkit.event.vehicle.VehicleExitEvent;
+ import org.bukkit.craftbukkit.CraftWorld;
++import org.bukkit.craftbukkit.entity.CraftEntity;
+ import org.bukkit.craftbukkit.entity.CraftPlayer;
+ import org.bukkit.event.entity.EntityCombustEvent;
+ import org.bukkit.event.entity.EntityDamageByBlockEvent;
+ import org.bukkit.event.entity.EntityDamageByEntityEvent;
+ import org.bukkit.event.entity.EntityDamageEvent;
++import org.bukkit.event.entity.EntityPortalEvent;
+ import org.bukkit.plugin.PluginManager;
+ // CraftBukkit end
+ 
+@@ -1976,9 +1980,9 @@ public abstract class Entity
+         this.setPassengerOf(par1Entity);
+     }
+ 
+-    protected org.bukkit.entity.Entity bukkitEntity;
++    protected CraftEntity bukkitEntity;
+ 
+-    public org.bukkit.entity.Entity getBukkitEntity()
++    public CraftEntity getBukkitEntity()
+     {
+         if (this.bukkitEntity == null)
+         {
+@@ -2499,31 +2503,64 @@ public abstract class Entity
+      */
+     public void travelToDimension(int par1)
+     {
+-        if (false && !this.worldObj.isRemote && !this.isDead)   // CraftBukkit - disable entity portal support for now.
++        if (!this.worldObj.isRemote && !this.isDead)
+         {
+             this.worldObj.theProfiler.startSection("changeDimension");
+             MinecraftServer var2 = MinecraftServer.getServer();
+-            int var3 = this.dimension;
+-            WorldServer var4 = var2.worldServerForDimension(var3);
+-            WorldServer var5 = var2.worldServerForDimension(par1);
+-            this.dimension = par1;
++            // CraftBukkit start - move logic into new function "teleportToLocation"
++            // int j = this.dimension;
++            Location enter = this.getBukkitEntity().getLocation();
++            Location exit = var2.getConfigurationManager().calculateTarget(enter, var2.worldServerForDimension(par1));
++            TravelAgent agent = (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s();
++            EntityPortalEvent event = new EntityPortalEvent(this.getBukkitEntity(), enter, exit, agent);
++            event.getEntity().getServer().getPluginManager().callEvent(event);
++
++            if (event.isCancelled() || event.getTo() == null || !this.isEntityAlive())
++            {
++                return;
++            }
++
++            exit = event.useTravelAgent() ? event.getPortalTravelAgent().findOrCreate(exit) : event.getTo();
++            this.teleportTo(exit, true);
++        }
++    }
++
++    public void teleportTo(Location exit, boolean portal)
++    {
++        if (true)
++        {
++            WorldServer worldserver = ((CraftWorld) this.getBukkitEntity().getLocation().getWorld()).getHandle();
++            WorldServer worldserver1 = ((CraftWorld) exit.getWorld()).getHandle();
++            int i = worldserver1.dimension;
++            // CraftBukkit end
++            this.dimension = i;
+             this.worldObj.setEntityDead(this);
+             this.isDead = false;
+             this.worldObj.theProfiler.startSection("reposition");
+-            var2.getConfigurationManager().transferEntityToWorld(this, var3, var4, var5);
++            // CraftBukkit start - ensure chunks are loaded in case TravelAgent is not used which would initially cause chunks to load during find/create
++            // minecraftserver.getPlayerList().a(this, j, worldserver, worldserver1);
++            boolean before = worldserver1.theChunkProviderServer.loadChunkOnProvideRequest;
++            worldserver1.theChunkProviderServer.loadChunkOnProvideRequest = true;
++            worldserver1.getMinecraftServer().getConfigurationManager().repositionEntity(this, exit, portal);
++            worldserver1.theChunkProviderServer.loadChunkOnProvideRequest = before;
++            // CraftBukkit end
+             this.worldObj.theProfiler.endStartSection("reloading");
+-            Entity var6 = EntityList.createEntityByName(EntityList.getEntityString(this), var5);
++            Entity entity = EntityList.createEntityByName(EntityList.getEntityString(this), worldserver1);
+ 
+-            if (var6 != null)
++            if (entity != null)
+             {
+-                var6.copyDataFrom(this, true);
+-                var5.spawnEntityInWorld(var6);
++                entity.copyDataFrom(this, true);
++                worldserver1.spawnEntityInWorld(entity);
++                // CraftBukkit start - forward the CraftEntity to the new entity
++                this.getBukkitEntity().setHandle(entity);
++                entity.bukkitEntity = this.getBukkitEntity();
++                // CraftBukkit end
+             }
+ 
+             this.isDead = true;
+             this.worldObj.theProfiler.endSection();
+-            var4.resetUpdateEntityTick();
+-            var5.resetUpdateEntityTick();
++            worldserver.resetUpdateEntityTick();
++            worldserver1.resetUpdateEntityTick();
+             this.worldObj.theProfiler.endSection();
+         }
+     }
+diff --git a/src/minecraft/net/minecraft/entity/item/EntityMinecart.java b/src/minecraft/net/minecraft/entity/item/EntityMinecart.java
+index 839a04c..fdb2e58 100644
+--- a/src/minecraft/net/minecraft/entity/item/EntityMinecart.java
++++ b/src/minecraft/net/minecraft/entity/item/EntityMinecart.java
+@@ -411,7 +411,7 @@ public class EntityMinecart extends Entity implements IInventory
+ 
+             if (this.inPortal)
+             {
+-                if (var1.getAllowNether())
++                if (true || var1.getAllowNether())   // CraftBukkit - multi-world should still allow teleport even if default vanilla nether disabled
+                 {
+                     if (this.ridingEntity == null && this.field_82153_h++ >= var2)
+                     {
+diff --git a/src/minecraft/net/minecraft/entity/player/EntityPlayer.java b/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
+index 16625a2..94afe3c 100644
+--- a/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
++++ b/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
+@@ -52,8 +52,8 @@ import net.minecraft.world.World;
+ import net.minecraft.world.chunk.IChunkProvider;
+ 
+ // CraftBukkit start
++import org.bukkit.craftbukkit.entity.CraftHumanEntity;
+ import org.bukkit.craftbukkit.entity.CraftItem;
+-import org.bukkit.entity.HumanEntity;
+ import org.bukkit.entity.Player;
+ import org.bukkit.event.entity.EntityCombustByEntityEvent;
+ import org.bukkit.event.player.PlayerBedEnterEvent;
+@@ -103,9 +103,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+     public boolean fauxSleeping;
+     public String spawnWorld = "";
+ 
+-    public HumanEntity getBukkitEntity()
++    @Override
++    public CraftHumanEntity getBukkitEntity()
+     {
+-        return (HumanEntity) super.getBukkitEntity();
++        return (CraftHumanEntity) super.getBukkitEntity();
+     }
+     // CraftBukkit end
+ 
+diff --git a/src/minecraft/net/minecraft/entity/player/EntityPlayerMP.java b/src/minecraft/net/minecraft/entity/player/EntityPlayerMP.java
+index f742bff..f3f23e1 100644
+--- a/src/minecraft/net/minecraft/entity/player/EntityPlayerMP.java
++++ b/src/minecraft/net/minecraft/entity/player/EntityPlayerMP.java
+@@ -82,6 +82,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
+ import org.bukkit.craftbukkit.event.CraftEventFactory;
+ import org.bukkit.craftbukkit.inventory.CraftItemStack;
+ import org.bukkit.event.inventory.InventoryType;
++import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+ // CraftBukkit end
+ 
+ public class EntityPlayerMP extends EntityPlayer implements ICrafting
+@@ -514,20 +515,30 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
+         }
+         else
+         {
+-            this.triggerAchievement((StatBase) AchievementList.theEnd);
+-            /* CraftBukkit start - removed to fix our handling of The End portals
+-            ChunkCoordinates chunkcoordinates = this.server.getWorldServer(i).getDimensionSpawn();
++            if (this.dimension == 1 && par1 == 0)
++            {
++                this.triggerAchievement((StatBase) AchievementList.theEnd);
++                // CraftBukkit start - rely on custom portal management
++                /*
++                ChunkCoordinates chunkcoordinates = this.server.getWorldServer(i).getDimensionSpawn();
+ 
+                 if (chunkcoordinates != null) {
+                     this.netServerHandler.a((double) chunkcoordinates.x, (double) chunkcoordinates.y, (double) chunkcoordinates.z, 0.0F, 0.0F);
+                 }
+ 
+                 i = 1;
+-            } else {
+-                this.a((Statistic) AchievementList.x);
++                */
++                // CraftBukkit end
+             }
+-            // CraftBukkit end */
+-            this.mcServer.getConfigurationManager().transferPlayerToDimension(this, par1);
++            else
++            {
++                this.triggerAchievement((StatBase) AchievementList.portal);
++            }
++
++            // CraftBukkit start
++            TeleportCause cause = (this.dimension == 1 || par1 == 1) ? TeleportCause.END_PORTAL : TeleportCause.NETHER_PORTAL;
++            this.mcServer.getConfigurationManager().changeDimension(this, par1, cause);
++            // CraftBukkit end
+             this.lastExperience = -1;
+             this.lastHealth = -1;
+             this.lastFoodLevel = -1;
+diff --git a/src/minecraft/net/minecraft/network/NetServerHandler.java b/src/minecraft/net/minecraft/network/NetServerHandler.java
+index 38d0b26..a955908 100644
+--- a/src/minecraft/net/minecraft/network/NetServerHandler.java
++++ b/src/minecraft/net/minecraft/network/NetServerHandler.java
+@@ -53,7 +53,6 @@ import net.minecraft.network.packet.Packet255KickDisconnect;
+ import net.minecraft.network.packet.Packet3Chat;
+ import net.minecraft.network.packet.Packet53BlockChange;
+ import net.minecraft.network.packet.Packet6SpawnPosition;
+-import net.minecraft.network.packet.Packet70GameEvent;
+ import net.minecraft.network.packet.Packet7UseEntity;
+ import net.minecraft.network.packet.Packet9Respawn;
+ import net.minecraft.server.MinecraftServer;
+@@ -101,6 +100,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
+ import org.bukkit.event.player.PlayerKickEvent;
+ import org.bukkit.event.player.PlayerMoveEvent;
+ import org.bukkit.event.player.PlayerTeleportEvent;
++import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+ import org.bukkit.event.player.PlayerToggleSneakEvent;
+ import org.bukkit.event.player.PlayerToggleSprintEvent;
+ import org.bukkit.event.inventory.*;
+@@ -1525,28 +1525,7 @@ public class NetServerHandler extends NetHandler
+         {
+             if (this.playerEntity.playerConqueredTheEnd)
+             {
+-                // CraftBukkit start
+-                org.bukkit.craftbukkit.PortalTravelAgent pta = new org.bukkit.craftbukkit.PortalTravelAgent();
+-                Location toLocation;
+-
+-                if (this.playerEntity.getBukkitEntity().getBedSpawnLocation() == null)
+-                {
+-                    CraftWorld cworld = (CraftWorld) this.server.getWorlds().get(0);
+-                    ChunkCoordinates chunkcoordinates = cworld.getHandle().getSpawnPoint();
+-                    toLocation = new Location(cworld, chunkcoordinates.posX + 0.5, chunkcoordinates.posY, chunkcoordinates.posZ + 0.5);
+-                    this.playerEntity.playerNetServerHandler.sendPacketToPlayer(new Packet70GameEvent(0, 0));
+-                }
+-                else
+-                {
+-                    toLocation = this.playerEntity.getBukkitEntity().getBedSpawnLocation();
+-                    toLocation = new Location(toLocation.getWorld(), toLocation.getX() + 0.5, toLocation.getY(), toLocation.getZ() + 0.5);
+-                }
+-
+-                PlayerPortalEvent event = new PlayerPortalEvent(this.playerEntity.getBukkitEntity(), this.playerEntity.getBukkitEntity().getLocation(), toLocation, pta, PlayerPortalEvent.TeleportCause.END_PORTAL);
+-                event.useTravelAgent(false);
+-                Bukkit.getServer().getPluginManager().callEvent(event);
+-                this.playerEntity = this.mcServer.getConfigurationManager().moveToWorld(this.playerEntity, 0, true, event.getTo());
+-                // CraftBukkit end
++                this.mcServer.getConfigurationManager().changeDimension(this.playerEntity, 0, TeleportCause.END_PORTAL); // CraftBukkit - reroute logic through custom portal management
+             }
+             else if (this.playerEntity.getServerForPlayer().getWorldInfo().isHardcoreModeEnabled())
+             {
+diff --git a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+index a214163..b3d8c03 100644
+--- a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+@@ -42,9 +42,11 @@ import net.minecraft.world.storage.IPlayerFileData;
+ 
+ // CraftBukkit start
+ import org.bukkit.Location;
++import org.bukkit.TravelAgent;
+ import org.bukkit.craftbukkit.CraftServer;
+ import org.bukkit.craftbukkit.CraftWorld;
+ import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
++import org.bukkit.craftbukkit.entity.CraftPlayer;
+ import org.bukkit.entity.Player;
+ import org.bukkit.event.player.PlayerChangedWorldEvent;
+ import org.bukkit.event.player.PlayerPortalEvent;
+@@ -53,6 +55,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
+ import org.bukkit.event.player.PlayerLoginEvent;
+ import org.bukkit.event.player.PlayerRespawnEvent;
+ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
++import org.bukkit.util.Vector;
+ import org.bukkit.Bukkit;
+ // CraftBukkit end
+ 
+@@ -543,79 +546,26 @@ public abstract class ServerConfigurationManager
+         return entityplayer1;
+     }
+ 
+-    public void transferPlayerToDimension(EntityPlayerMP par1EntityPlayerMP, int par2)
++    // CraftBukkit start - Replaced the standard handling of portals with a more customised method.
++    public void changeDimension(EntityPlayerMP entityplayer, int i, TeleportCause cause)
+     {
+-        // CraftBukkit start -- Replaced the standard handling of portals with a more customised method.
+-        int dimension = par2;
+-        WorldServer fromWorld = this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension);
+-        WorldServer toWorld = null;
++        WorldServer exitWorld = this.mcServer.worldServerForDimension(i);
++        Location enter = entityplayer.getBukkitEntity().getLocation();
++        Location exit = null;
+ 
+-        if (par1EntityPlayerMP.dimension < 10)
++        if ((cause == TeleportCause.END_PORTAL) && (i == 0))
+         {
+-            for (WorldServer world : this.mcServer.worlds)
+-            {
+-                if (world.dimension == dimension)
+-                {
+-                    toWorld = world;
+-                }
+-            }
++            // THE_END -> NORMAL; use bed if available
++            exit = ((CraftPlayer) entityplayer.getBukkitEntity()).getBedSpawnLocation();
+         }
+ 
+-        Location fromLocation = new Location(fromWorld.getWorld(), par1EntityPlayerMP.posX, par1EntityPlayerMP.posY, par1EntityPlayerMP.posZ, par1EntityPlayerMP.rotationYaw, par1EntityPlayerMP.rotationPitch);
+-        Location toLocation = null;
+-
+-        if (toWorld != null)
++        if (exit == null)
+         {
+-            if (((dimension == -1) || (dimension == 0)) && ((par1EntityPlayerMP.dimension == -1) || (par1EntityPlayerMP.dimension == 0)))
+-            {
+-                double blockRatio = dimension == 0 ? 8 : 0.125;
+-                toLocation = toWorld == null ? null : new Location(toWorld.getWorld(), (par1EntityPlayerMP.posX * blockRatio), par1EntityPlayerMP.posY, (par1EntityPlayerMP.posZ * blockRatio), par1EntityPlayerMP.rotationYaw, par1EntityPlayerMP.rotationPitch);
+-            }
+-            else
+-            {
+-                ChunkCoordinates coords = toWorld.getEntrancePortalLocation();
+-
+-                if (coords != null)
+-                {
+-                    toLocation = new Location(toWorld.getWorld(), coords.posX, coords.posY, coords.posZ, 90, 0);
+-                }
+-            }
+-        }
+-
+-        TeleportCause cause = TeleportCause.UNKNOWN;
+-        int playerEnvironmentId = par1EntityPlayerMP.getBukkitEntity().getWorld().getEnvironment().getId();
+-
+-        switch (dimension)
+-        {
+-            case -1:
+-                cause = TeleportCause.NETHER_PORTAL;
+-                break;
+-
+-            case 0:
+-                if (playerEnvironmentId == -1)
+-                {
+-                    cause = TeleportCause.NETHER_PORTAL;
+-                }
+-                else if (playerEnvironmentId == 1)
+-                {
+-                    cause = TeleportCause.END_PORTAL;
+-                }
+-
+-                break;
+-
+-            case 1:
+-                cause = TeleportCause.END_PORTAL;
+-                break;
+-        }
+-
+-        org.bukkit.craftbukkit.PortalTravelAgent pta = new org.bukkit.craftbukkit.PortalTravelAgent();
+-        PlayerPortalEvent event = new PlayerPortalEvent((Player) par1EntityPlayerMP.getBukkitEntity(), fromLocation, toLocation, pta, cause);
+-
+-        if (par1EntityPlayerMP.dimension == 1)
+-        {
+-            event.useTravelAgent(false);
++            exit = this.calculateTarget(enter, exitWorld);
+         }
+ 
++        TravelAgent agent = (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s();
++        PlayerPortalEvent event = new PlayerPortalEvent(entityplayer.getBukkitEntity(), enter, exit, agent, cause);
+         Bukkit.getServer().getPluginManager().callEvent(event);
+ 
+         if (event.isCancelled() || event.getTo() == null)
+@@ -623,15 +573,20 @@ public abstract class ServerConfigurationManager
+             return;
+         }
+ 
+-        Location finalLocation = event.getTo();
++        exit = event.useTravelAgent() ? event.getPortalTravelAgent().findOrCreate(exit) : event.getTo();
++        exitWorld = ((CraftWorld) exit.getWorld()).getHandle();
++        Vector velocity = entityplayer.getBukkitEntity().getVelocity();
++        boolean before = exitWorld.theChunkProviderServer.loadChunkOnProvideRequest;
++        exitWorld.theChunkProviderServer.loadChunkOnProvideRequest = true;
++        exitWorld.func_85176_s().adjustExit(entityplayer, exit, velocity);
++        exitWorld.theChunkProviderServer.loadChunkOnProvideRequest = before;
++        this.moveToWorld(entityplayer, exitWorld.dimension, true, exit);
+ 
+-        if (event.useTravelAgent())
++        if (entityplayer.motionX != velocity.getX() || entityplayer.motionY != velocity.getY() || entityplayer.motionZ != velocity.getZ())
+         {
+-            finalLocation = event.getPortalTravelAgent().findOrCreate(finalLocation);
++            entityplayer.getBukkitEntity().setVelocity(velocity);
+         }
+ 
+-        toWorld = ((CraftWorld) finalLocation.getWorld()).getHandle();
+-        this.moveToWorld(par1EntityPlayerMP, toWorld.dimension, true, finalLocation);
+         // CraftBukkit end
+     }
+ 
+@@ -640,81 +595,193 @@ public abstract class ServerConfigurationManager
+      */
+     public void transferEntityToWorld(Entity par1Entity, int par2, WorldServer par3WorldServer, WorldServer par4WorldServer)
+     {
+-        double var5 = par1Entity.posX;
+-        double var7 = par1Entity.posZ;
+-        double var9 = 8.0D;
+-        double var11 = par1Entity.posX;
+-        double var13 = par1Entity.posY;
+-        double var15 = par1Entity.posZ;
+-        float var17 = par1Entity.rotationYaw;
+-        par3WorldServer.theProfiler.startSection("moving");
+-
+-        if (par1Entity.dimension == -1)
+-        {
+-            var5 /= var9;
+-            var7 /= var9;
+-            par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, par1Entity.rotationYaw, par1Entity.rotationPitch);
++        // CraftBukkit start - split into modular functions
++        Location exit = this.calculateTarget(par1Entity.getBukkitEntity().getLocation(), par4WorldServer);
++        this.repositionEntity(par1Entity, exit, true);
++    }
+ 
+-            if (par1Entity.isEntityAlive())
+-            {
+-                par3WorldServer.updateEntityWithOptionalForce(par1Entity, false);
++    // copy of original a(Entity, int, WorldServer, WorldServer) method with only location calculation logic
++    public Location calculateTarget(Location enter, World target)
++    {
++        WorldServer worldserver = ((CraftWorld) enter.getWorld()).getHandle();
++        WorldServer worldserver1 = ((CraftWorld) target.getWorld()).getHandle();
++        int i = worldserver.dimension;
++        double y = enter.getY();
++        float yaw = enter.getYaw();
++        float pitch = enter.getPitch();
++        double d0 = enter.getX();
++        double d1 = enter.getZ();
++        double d2 = 8.0D;
++
++        /*
++        double d3 = entity.locX;
++        double d4 = entity.locY;
++        double d5 = entity.locZ;
++        float f = entity.yaw;
++
++        worldserver.methodProfiler.a("moving");
++        */
++        if (worldserver1.dimension == -1)
++        {
++            d0 /= d2;
++            d1 /= d2;
++            /*
++            entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
+             }
++            */
+         }
+-        else if (par1Entity.dimension == 0)
++        else if (worldserver1.dimension == 0)
+         {
+-            var5 *= var9;
+-            var7 *= var9;
+-            par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, par1Entity.rotationYaw, par1Entity.rotationPitch);
+-
+-            if (par1Entity.isEntityAlive())
+-            {
+-                par3WorldServer.updateEntityWithOptionalForce(par1Entity, false);
++            d0 *= d2;
++            d1 *= d2;
++            /*
++            entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
+             }
++            */
+         }
+         else
+         {
+-            ChunkCoordinates var18;
++            ChunkCoordinates chunkcoordinates;
+ 
+-            if (par2 == 1)
++            if (i == 1)
+             {
+-                var18 = par4WorldServer.getSpawnPoint();
++                chunkcoordinates = worldserver1.getSpawnPoint();
+             }
+             else
+             {
+-                var18 = par4WorldServer.getEntrancePortalLocation();
++                chunkcoordinates = worldserver1.getEntrancePortalLocation();
+             }
+ 
+-            var5 = (double)var18.posX;
+-            par1Entity.posY = (double)var18.posY;
+-            var7 = (double)var18.posZ;
+-            par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, 90.0F, 0.0F);
++            d0 = (double) chunkcoordinates.posX;
++            y = (double) chunkcoordinates.posY;
++            d1 = (double) chunkcoordinates.posZ;
++            yaw = 90.0F;
++            pitch = 0.0F;
++            /*
++            entity.setPositionRotation(d0, entity.locY, d1, 90.0F, 0.0F);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
++            }
++            */
++        }
+ 
+-            if (par1Entity.isEntityAlive())
+-            {
+-                par3WorldServer.updateEntityWithOptionalForce(par1Entity, false);
++        // worldserver.methodProfiler.b();
++        if (i != 1)
++        {
++            // worldserver.methodProfiler.a("placing");
++            d0 = (double) MathHelper.clamp_int((int) d0, -29999872, 29999872);
++            d1 = (double) MathHelper.clamp_int((int) d1, -29999872, 29999872);
++            /*
++            if (entity.isAlive()) {
++                worldserver1.addEntity(entity);
++                entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch);
++                worldserver1.entityJoinedWorld(entity, false);
++                worldserver1.s().a(entity, d3, d4, d5, f);
+             }
++
++            worldserver.methodProfiler.b();
++            */
++        }
++
++        // entity.spawnIn(worldserver1);
++        return new Location(target.getWorld(), d0, y, d1, yaw, pitch);
++    }
++
++    // copy of original a(Entity, int, WorldServer, WorldServer) method with only entity repositioning logic
++    public void repositionEntity(Entity entity, Location exit, boolean portal)
++    {
++        int i = entity.dimension;
++        WorldServer worldserver = (WorldServer) entity.worldObj;
++        WorldServer worldserver1 = ((CraftWorld) exit.getWorld()).getHandle();
++        /*
++        double d0 = entity.locX;
++        double d1 = entity.locZ;
++        double d2 = 8.0D;
++        double d3 = entity.locX;
++        double d4 = entity.locY;
++        double d5 = entity.locZ;
++        float f = entity.yaw;
++        */
++        worldserver.theProfiler.startSection("moving");
++        entity.setLocationAndAngles(exit.getX(), exit.getY(), exit.getZ(), exit.getYaw(), exit.getPitch());
++
++        if (entity.isEntityAlive())
++        {
++            worldserver.updateEntityWithOptionalForce(entity, false);
+         }
+ 
+-        par3WorldServer.theProfiler.endSection();
++        /*
++        if (entity.dimension == -1) {
++            d0 /= d2;
++            d1 /= d2;
++            entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
++            }
++        } else if (entity.dimension == 0) {
++            d0 *= d2;
++            d1 *= d2;
++            entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
++            }
++        } else {
++            ChunkCoordinates chunkcoordinates;
++
++            if (i == 1) {
++                chunkcoordinates = worldserver1.getSpawn();
++            } else {
++                chunkcoordinates = worldserver1.getDimensionSpawn();
++            }
++
++            d0 = (double) chunkcoordinates.x;
++            entity.locY = (double) chunkcoordinates.y;
++            d1 = (double) chunkcoordinates.z;
++            entity.setPositionRotation(d0, entity.locY, d1, 90.0F, 0.0F);
++            if (entity.isAlive()) {
++                worldserver.entityJoinedWorld(entity, false);
++            }
++        }
++        */
++        worldserver.theProfiler.endSection();
+ 
+-        if (par2 != 1)
++        if (i != 1)
+         {
+-            par3WorldServer.theProfiler.startSection("placing");
+-            var5 = (double)MathHelper.clamp_int((int)var5, -29999872, 29999872);
+-            var7 = (double)MathHelper.clamp_int((int)var7, -29999872, 29999872);
++            worldserver.theProfiler.startSection("placing");
+ 
+-            if (par1Entity.isEntityAlive())
++            /*
++            d0 = (double) MathHelper.a((int) d0, -29999872, 29999872);
++            d1 = (double) MathHelper.a((int) d1, -29999872, 29999872);
++            */
++            if (entity.isEntityAlive())
+             {
+-                par4WorldServer.spawnEntityInWorld(par1Entity);
+-                par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, par1Entity.rotationYaw, par1Entity.rotationPitch);
+-                par4WorldServer.updateEntityWithOptionalForce(par1Entity, false);
+-                par4WorldServer.func_85176_s().placeInPortal(par1Entity, var11, var13, var15, var17);
++                worldserver1.spawnEntityInWorld(entity);
++                // entity.setPositionRotation(d0, entity.locY, d1, entity.yaw, entity.pitch)
++                worldserver1.updateEntityWithOptionalForce(entity, false);
++
++                // worldserver1.s().a(entity, d3, d4, d5, f);
++                if (portal)
++                {
++                    Vector velocity = entity.getBukkitEntity().getVelocity();
++                    worldserver1.func_85176_s().adjustExit(entity, exit, velocity);
++                    entity.setLocationAndAngles(exit.getX(), exit.getY(), exit.getZ(), exit.getYaw(), exit.getPitch());
++
++                    if (entity.motionX != velocity.getX() || entity.motionY != velocity.getY() || entity.motionZ != velocity.getZ())
++                    {
++                        entity.getBukkitEntity().setVelocity(velocity);
++                    }
++                }
+             }
+ 
+-            par3WorldServer.theProfiler.endSection();
++            worldserver.theProfiler.endSection();
+         }
+ 
+-        par1Entity.setWorld(par4WorldServer);
++        entity.setWorld(worldserver1);
++        // CraftBukkit end
+     }
+ 
+     /**
+diff --git a/src/minecraft/net/minecraft/world/Teleporter.java b/src/minecraft/net/minecraft/world/Teleporter.java
+index 636819e..d0981b6 100644
+--- a/src/minecraft/net/minecraft/world/Teleporter.java
++++ b/src/minecraft/net/minecraft/world/Teleporter.java
+@@ -6,18 +6,15 @@ import java.util.List;
+ import java.util.Random;
+ import net.minecraft.block.Block;
+ import net.minecraft.entity.Entity;
++import net.minecraft.util.ChunkCoordinates;
+ import net.minecraft.util.Direction;
+ import net.minecraft.util.LongHashMap;
+ import net.minecraft.util.MathHelper;
+ 
+ // CraftBukkit start
+-/*
+- * HEAR ME, HE WHOM WISHES TO COMMAND THE UPDATERING
+- *
+- * FOR SOME REASON WE HAVE OUR OWN PORTAL TRAVEL AGENT IN OBC, WE NEED TO UPDATE
+- * THAT WITH ANY NEW UPDATES TO THIS FILE. THIS FILE LEFT HERE AS A REMINDER.
+- *
+- */
++import org.bukkit.Location;
++import org.bukkit.event.entity.EntityPortalExitEvent;
++import org.bukkit.util.Vector;
+ // CraftBukkit end
+ 
+ public class Teleporter
+@@ -50,87 +47,159 @@ public class Teleporter
+         }
+         else
+         {
+-            int var9 = MathHelper.floor_double(par1Entity.posX);
+-            int var10 = MathHelper.floor_double(par1Entity.posY) - 1;
+-            int var11 = MathHelper.floor_double(par1Entity.posZ);
+-            byte var12 = 1;
+-            byte var13 = 0;
++            // CraftBukkit start - modularize end portal creation
++            ChunkCoordinates created = this.createEndPortal(par2, par4, par6);
++            par1Entity.setLocationAndAngles((double) created.posX, (double) created.posY, (double) created.posZ, par1Entity.rotationYaw, 0.0F);
++            par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
++        }
++    }
++
++    // split out from original a(Entity, double, double, double, float) method in order to enable being called from createPortal
++    private ChunkCoordinates createEndPortal(double x, double y, double z)
++    {
++        int i = MathHelper.floor_double(x);
++        int j = MathHelper.floor_double(y) - 1;
++        int k = MathHelper.floor_double(z);
++        // CraftBukkit end
++        byte b0 = 1;
++        byte b1 = 0;
++
++        for (int l = -2; l <= 2; ++l)
++        {
++            for (int i1 = -2; i1 <= 2; ++i1)
++            {
++                for (int j1 = -1; j1 < 3; ++j1)
++                {
++                    int k1 = i + i1 * b0 + l * b1;
++                    int l1 = j + j1;
++                    int i2 = k + i1 * b1 - l * b0;
++                    boolean flag = j1 < 0;
++                    this.field_85192_a.setBlockWithNotify(k1, l1, i2, flag ? Block.obsidian.blockID : 0);
++                }
++            }
++        }
++
++        // CraftBukkit start
++        return new ChunkCoordinates(i, j, k);
++    }
++
++    // use logic based on creation to verify end portal
++    private ChunkCoordinates findEndPortal(ChunkCoordinates portal)
++    {
++        int i = portal.posX;
++        int j = portal.posY - 1;
++        int k = portal.posZ;
++        byte b0 = 1;
++        byte b1 = 0;
+ 
+-            for (int var14 = -2; var14 <= 2; ++var14)
++        for (int l = -2; l <= 2; ++l)
++        {
++            for (int i1 = -2; i1 <= 2; ++i1)
+             {
+-                for (int var15 = -2; var15 <= 2; ++var15)
++                for (int j1 = -1; j1 < 3; ++j1)
+                 {
+-                    for (int var16 = -1; var16 < 3; ++var16)
++                    int k1 = i + i1 * b0 + l * b1;
++                    int l1 = j + j1;
++                    int i2 = k + i1 * b1 - l * b0;
++                    boolean flag = j1 < 0;
++
++                    if (this.field_85192_a.getBlockId(k1, l1, i2) != (flag ? Block.obsidian.blockID : 0))
+                     {
+-                        int var17 = var9 + var15 * var12 + var14 * var13;
+-                        int var18 = var10 + var16;
+-                        int var19 = var11 + var15 * var13 - var14 * var12;
+-                        boolean var20 = var16 < 0;
+-                        this.field_85192_a.setBlockWithNotify(var17, var18, var19, var20 ? Block.obsidian.blockID : 0);
++                        return null;
+                     }
+                 }
+             }
+-
+-            par1Entity.setLocationAndAngles((double)var9, (double)var10, (double)var11, par1Entity.rotationYaw, 0.0F);
+-            par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+         }
++
++        return new ChunkCoordinates(i, j, k);
+     }
++    // CraftBukkit end
+ 
+     /**
+      * Place an entity in a nearby portal which already exists.
+      */
+     public boolean placeInExistingPortal(Entity par1Entity, double par2, double par4, double par6, float par8)
+     {
+-        short var9 = 128;
+-        double var10 = -1.0D;
+-        int var12 = 0;
+-        int var13 = 0;
+-        int var14 = 0;
+-        int var15 = MathHelper.floor_double(par1Entity.posX);
+-        int var16 = MathHelper.floor_double(par1Entity.posZ);
+-        long var17 = ChunkCoordIntPair.chunkXZ2Int(var15, var16);
+-        boolean var19 = true;
+-        double var27;
+-        int var48;
+-
+-        if (this.field_85191_c.containsItem(var17))
++        // CraftBukkit start - modularize portal search process and entity teleportation
++        ChunkCoordinates found = this.findPortal(par1Entity.posX, par1Entity.posY, par1Entity.posZ, 128);
++
++        if (found == null)
+         {
+-            PortalPosition var20 = (PortalPosition)this.field_85191_c.getValueByKey(var17);
+-            var10 = 0.0D;
+-            var12 = var20.posX;
+-            var13 = var20.posY;
+-            var14 = var20.posZ;
+-            var20.field_85087_d = this.field_85192_a.getTotalWorldTime();
+-            var19 = false;
++            return false;
++        }
++
++        Location exit = new Location(this.field_85192_a.getWorld(), found.posX, found.posY, found.posZ, par8, par1Entity.rotationPitch);
++        Vector velocity = par1Entity.getBukkitEntity().getVelocity();
++        this.adjustExit(par1Entity, exit, velocity);
++        par1Entity.setLocationAndAngles(exit.getX(), exit.getY(), exit.getZ(), exit.getYaw(), exit.getPitch());
++
++        if (par1Entity.motionX != velocity.getX() || par1Entity.motionY != velocity.getY() || par1Entity.motionZ != velocity.getZ())
++        {
++            par1Entity.getBukkitEntity().setVelocity(velocity);
++        }
++
++        return true;
++    }
++
++    public ChunkCoordinates findPortal(double x, double y, double z, int short1)
++    {
++        if (this.field_85192_a.getWorld().getEnvironment() == org.bukkit.World.Environment.THE_END)
++        {
++            return this.findEndPortal(this.field_85192_a.provider.getEntrancePortalLocation());
++        }
++
++        // CraftBukkit end
++        double d3 = -1.0D;
++        int i = 0;
++        int j = 0;
++        int k = 0;
++        // CraftBukkit start
++        int l = MathHelper.floor_double(x);
++        int i1 = MathHelper.floor_double(z);
++        // CraftBukkit end
++        long j1 = ChunkCoordIntPair.chunkXZ2Int(l, i1);
++        boolean flag = true;
++        double d4;
++        int k1;
++
++        if (this.field_85191_c.containsItem(j1))
++        {
++            PortalPosition chunkcoordinatesportal = (PortalPosition) this.field_85191_c.getValueByKey(j1);
++            d3 = 0.0D;
++            i = chunkcoordinatesportal.posX;
++            j = chunkcoordinatesportal.posY;
++            k = chunkcoordinatesportal.posZ;
++            chunkcoordinatesportal.field_85087_d = this.field_85192_a.getTotalWorldTime();
++            flag = false;
+         }
+         else
+         {
+-            for (var48 = var15 - var9; var48 <= var15 + var9; ++var48)
++            for (k1 = l - short1; k1 <= l + short1; ++k1)
+             {
+-                double var21 = (double)var48 + 0.5D - par1Entity.posX;
++                double d5 = (double) k1 + 0.5D - x; // CraftBukkit
+ 
+-                for (int var23 = var16 - var9; var23 <= var16 + var9; ++var23)
++                for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1)
+                 {
+-                    double var24 = (double)var23 + 0.5D - par1Entity.posZ;
++                    double d6 = (double) l1 + 0.5D - z; // CraftBukkit
+ 
+-                    for (int var26 = this.field_85192_a.getActualHeight() - 1; var26 >= 0; --var26)
++                    for (int i2 = this.field_85192_a.getActualHeight() - 1; i2 >= 0; --i2)
+                     {
+-                        if (this.field_85192_a.getBlockId(var48, var26, var23) == Block.portal.blockID)
++                        if (this.field_85192_a.getBlockId(k1, i2, l1) == Block.portal.blockID)
+                         {
+-                            while (this.field_85192_a.getBlockId(var48, var26 - 1, var23) == Block.portal.blockID)
++                            while (this.field_85192_a.getBlockId(k1, i2 - 1, l1) == Block.portal.blockID)
+                             {
+-                                --var26;
++                                --i2;
+                             }
+ 
+-                            var27 = (double)var26 + 0.5D - par1Entity.posY;
+-                            double var29 = var21 * var21 + var27 * var27 + var24 * var24;
++                            d4 = (double) i2 + 0.5D - y; // CraftBukkit
++                            double d7 = d5 * d5 + d4 * d4 + d6 * d6;
+ 
+-                            if (var10 < 0.0D || var29 < var10)
++                            if (d3 < 0.0D || d7 < d3)
+                             {
+-                                var10 = var29;
+-                                var12 = var48;
+-                                var13 = var26;
+-                                var14 = var23;
++                                d3 = d7;
++                                i = k1;
++                                j = i2;
++                                k = l1;
+                             }
+                         }
+                     }
+@@ -138,199 +207,267 @@ public class Teleporter
+             }
+         }
+ 
+-        if (var10 >= 0.0D)
++        if (d3 >= 0.0D)
+         {
+-            if (var19)
++            if (flag)
+             {
+-                this.field_85191_c.add(var17, new PortalPosition(this, var12, var13, var14, this.field_85192_a.getTotalWorldTime()));
+-                this.field_85190_d.add(Long.valueOf(var17));
++                this.field_85191_c.add(j1, new PortalPosition(this, i, j, k, this.field_85192_a.getTotalWorldTime()));
++                this.field_85190_d.add(Long.valueOf(j1));
+             }
+ 
+-            double var49 = (double)var12 + 0.5D;
+-            double var25 = (double)var13 + 0.5D;
+-            var27 = (double)var14 + 0.5D;
+-            int var50 = -1;
+-
+-            if (this.field_85192_a.getBlockId(var12 - 1, var13, var14) == Block.portal.blockID)
++            // CraftBukkit start - moved entity teleportation logic into exit
++            return new ChunkCoordinates(i, j, k);
++        }
++        else
++        {
++            return null;
++        }
++    }
++    // entity repositioning logic split out from original b method and combined with repositioning logic for The End from original a method
++    public void adjustExit(Entity entity, Location position, Vector velocity)
++    {
++        Location from = position.clone();
++        Vector before = velocity.clone();
++        int i = position.getBlockX();
++        int j = position.getBlockY();
++        int k = position.getBlockZ();
++        float f = position.getYaw();
++
++        if (this.field_85192_a.getWorld().getEnvironment() == org.bukkit.World.Environment.THE_END)
++        {
++            // entity.setPositionRotation((double) i, (double) j, (double) k, entity.yaw, 0.0F);
++            // entity.motX = entity.motY = entity.motZ = 0.0D;
++            position.setPitch(0.0F);
++            position.setX(0);
++            position.setY(0);
++            position.setZ(0);
++        }
++        else
++        {
++            double d4;
++            int k1;
++            // CraftBukkit end
++            double d8 = (double) i + 0.5D;
++            double d9 = (double) j + 0.5D;
++            d4 = (double) k + 0.5D;
++            int j2 = -1;
++
++            if (this.field_85192_a.getBlockId(i - 1, j, k) == Block.portal.blockID)
+             {
+-                var50 = 2;
++                j2 = 2;
+             }
+ 
+-            if (this.field_85192_a.getBlockId(var12 + 1, var13, var14) == Block.portal.blockID)
++            if (this.field_85192_a.getBlockId(i + 1, j, k) == Block.portal.blockID)
+             {
+-                var50 = 0;
++                j2 = 0;
+             }
+ 
+-            if (this.field_85192_a.getBlockId(var12, var13, var14 - 1) == Block.portal.blockID)
++            if (this.field_85192_a.getBlockId(i, j, k - 1) == Block.portal.blockID)
+             {
+-                var50 = 3;
++                j2 = 3;
+             }
+ 
+-            if (this.field_85192_a.getBlockId(var12, var13, var14 + 1) == Block.portal.blockID)
++            if (this.field_85192_a.getBlockId(i, j, k + 1) == Block.portal.blockID)
+             {
+-                var50 = 1;
++                j2 = 1;
+             }
+ 
+-            int var30 = par1Entity.func_82148_at();
++            int k2 = entity.func_82148_at();
+ 
+-            if (var50 > -1)
++            if (j2 > -1)
+             {
+-                int var31 = Direction.field_71578_g[var50];
+-                int var32 = Direction.offsetX[var50];
+-                int var33 = Direction.offsetZ[var50];
+-                int var34 = Direction.offsetX[var31];
+-                int var35 = Direction.offsetZ[var31];
+-                boolean var36 = !this.field_85192_a.isAirBlock(var12 + var32 + var34, var13, var14 + var33 + var35) || !this.field_85192_a.isAirBlock(var12 + var32 + var34, var13 + 1, var14 + var33 + var35);
+-                boolean var37 = !this.field_85192_a.isAirBlock(var12 + var32, var13, var14 + var33) || !this.field_85192_a.isAirBlock(var12 + var32, var13 + 1, var14 + var33);
+-
+-                if (var36 && var37)
++                int l2 = Direction.field_71578_g[j2];
++                int i3 = Direction.offsetX[j2];
++                int j3 = Direction.offsetZ[j2];
++                int k3 = Direction.offsetX[l2];
++                int l3 = Direction.offsetZ[l2];
++                boolean flag1 = !this.field_85192_a.isAirBlock(i + i3 + k3, j, k + j3 + l3) || !this.field_85192_a.isAirBlock(i + i3 + k3, j + 1, k + j3 + l3);
++                boolean flag2 = !this.field_85192_a.isAirBlock(i + i3, j, k + j3) || !this.field_85192_a.isAirBlock(i + i3, j + 1, k + j3);
++
++                if (flag1 && flag2)
+                 {
+-                    var50 = Direction.footInvisibleFaceRemap[var50];
+-                    var31 = Direction.footInvisibleFaceRemap[var31];
+-                    var32 = Direction.offsetX[var50];
+-                    var33 = Direction.offsetZ[var50];
+-                    var34 = Direction.offsetX[var31];
+-                    var35 = Direction.offsetZ[var31];
+-                    var48 = var12 - var34;
+-                    var49 -= (double)var34;
+-                    int var22 = var14 - var35;
+-                    var27 -= (double)var35;
+-                    var36 = !this.field_85192_a.isAirBlock(var48 + var32 + var34, var13, var22 + var33 + var35) || !this.field_85192_a.isAirBlock(var48 + var32 + var34, var13 + 1, var22 + var33 + var35);
+-                    var37 = !this.field_85192_a.isAirBlock(var48 + var32, var13, var22 + var33) || !this.field_85192_a.isAirBlock(var48 + var32, var13 + 1, var22 + var33);
++                    j2 = Direction.footInvisibleFaceRemap[j2];
++                    l2 = Direction.footInvisibleFaceRemap[l2];
++                    i3 = Direction.offsetX[j2];
++                    j3 = Direction.offsetZ[j2];
++                    k3 = Direction.offsetX[l2];
++                    l3 = Direction.offsetZ[l2];
++                    k1 = i - k3;
++                    d8 -= (double) k3;
++                    int i4 = k - l3;
++                    d4 -= (double) l3;
++                    flag1 = !this.field_85192_a.isAirBlock(k1 + i3 + k3, j, i4 + j3 + l3) || !this.field_85192_a.isAirBlock(k1 + i3 + k3, j + 1, i4 + j3 + l3);
++                    flag2 = !this.field_85192_a.isAirBlock(k1 + i3, j, i4 + j3) || !this.field_85192_a.isAirBlock(k1 + i3, j + 1, i4 + j3);
+                 }
+ 
+-                float var38 = 0.5F;
+-                float var39 = 0.5F;
++                float f1 = 0.5F;
++                float f2 = 0.5F;
+ 
+-                if (!var36 && var37)
++                if (!flag1 && flag2)
+                 {
+-                    var38 = 1.0F;
++                    f1 = 1.0F;
+                 }
+-                else if (var36 && !var37)
++                else if (flag1 && !flag2)
+                 {
+-                    var38 = 0.0F;
++                    f1 = 0.0F;
+                 }
+-                else if (var36 && var37)
++                else if (flag1 && flag2)
+                 {
+-                    var39 = 0.0F;
++                    f2 = 0.0F;
+                 }
+ 
+-                var49 += (double)((float)var34 * var38 + var39 * (float)var32);
+-                var27 += (double)((float)var35 * var38 + var39 * (float)var33);
+-                float var40 = 0.0F;
+-                float var41 = 0.0F;
+-                float var42 = 0.0F;
+-                float var43 = 0.0F;
++                d8 += (double)((float) k3 * f1 + f2 * (float) i3);
++                d4 += (double)((float) l3 * f1 + f2 * (float) j3);
++                float f3 = 0.0F;
++                float f4 = 0.0F;
++                float f5 = 0.0F;
++                float f6 = 0.0F;
+ 
+-                if (var50 == var30)
++                if (j2 == k2)
+                 {
+-                    var40 = 1.0F;
+-                    var41 = 1.0F;
++                    f3 = 1.0F;
++                    f4 = 1.0F;
+                 }
+-                else if (var50 == Direction.footInvisibleFaceRemap[var30])
++                else if (j2 == Direction.footInvisibleFaceRemap[k2])
+                 {
+-                    var40 = -1.0F;
+-                    var41 = -1.0F;
++                    f3 = -1.0F;
++                    f4 = -1.0F;
+                 }
+-                else if (var50 == Direction.enderEyeMetaToDirection[var30])
++                else if (j2 == Direction.enderEyeMetaToDirection[k2])
+                 {
+-                    var42 = 1.0F;
+-                    var43 = -1.0F;
++                    f5 = 1.0F;
++                    f6 = -1.0F;
+                 }
+                 else
+                 {
+-                    var42 = -1.0F;
+-                    var43 = 1.0F;
++                    f5 = -1.0F;
++                    f6 = 1.0F;
+                 }
+ 
+-                double var44 = par1Entity.motionX;
+-                double var46 = par1Entity.motionZ;
+-                par1Entity.motionX = var44 * (double)var40 + var46 * (double)var43;
+-                par1Entity.motionZ = var44 * (double)var42 + var46 * (double)var41;
+-                par1Entity.rotationYaw = par8 - (float)(var30 * 90) + (float)(var50 * 90);
++                // CraftBukkit start
++                double d10 = velocity.getX();
++                double d11 = velocity.getZ();
++                // CraftBukkit end
++                // CraftBukkit start - adjust position and velocity instances instead of entity
++                velocity.setX(d10 * (double) f3 + d11 * (double) f6);
++                velocity.setZ(d10 * (double) f5 + d11 * (double) f4);
++                f = f - (float)(k2 * 90) + (float)(j2 * 90);
+             }
+             else
+             {
+-                par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
++                // entity.motX = entity.motY = entity.motZ = 0.0D;
++                velocity.setX(0);
++                velocity.setY(0);
++                velocity.setZ(0);
+             }
+ 
+-            par1Entity.setLocationAndAngles(var49, var25, var27, par1Entity.rotationYaw, par1Entity.rotationPitch);
+-            return true;
++            // entity.setPositionRotation(d8, d9, d4, entity.yaw, entity.pitch);
++            position.setX(d8);
++            position.setY(d9);
++            position.setZ(d4);
++            position.setYaw(f);
++        }
++
++        EntityPortalExitEvent event = new EntityPortalExitEvent(entity.getBukkitEntity(), from, position, before, velocity);
++        this.field_85192_a.getServer().getPluginManager().callEvent(event);
++        Location to = event.getTo();
++
++        if (event.isCancelled() || to == null || !entity.isEntityAlive())
++        {
++            position = from;
++            velocity = before;
+         }
+         else
+         {
+-            return false;
++            position = to;
++            velocity = event.getAfter();
+         }
++
++        // CraftBukkit end
+     }
+ 
+     public boolean func_85188_a(Entity par1Entity)
+     {
+-        byte var2 = 16;
+-        double var3 = -1.0D;
+-        int var5 = MathHelper.floor_double(par1Entity.posX);
+-        int var6 = MathHelper.floor_double(par1Entity.posY);
+-        int var7 = MathHelper.floor_double(par1Entity.posZ);
+-        int var8 = var5;
+-        int var9 = var6;
+-        int var10 = var7;
+-        int var11 = 0;
+-        int var12 = this.random.nextInt(4);
+-        int var13;
+-        double var14;
+-        double var17;
+-        int var16;
+-        int var19;
+-        int var21;
+-        int var20;
+-        int var23;
+-        int var22;
+-        int var25;
+-        int var24;
+-        int var27;
+-        int var26;
+-        double var31;
+-        double var32;
+-
+-        for (var13 = var5 - var2; var13 <= var5 + var2; ++var13)
++        // CraftBukkit start - allow for portal creation to be based on coordinates instead of entity
++        return this.createPortal(par1Entity.posX, par1Entity.posY, par1Entity.posZ, 16);
++    }
++
++    public boolean createPortal(double x, double y, double z, int b0)
++    {
++        if (this.field_85192_a.getWorld().getEnvironment() == org.bukkit.World.Environment.THE_END)
++        {
++            this.createEndPortal(x, y, z);
++            return true;
++        }
++
++        // CraftBukkit end
++        double d0 = -1.0D;
++        // CraftBukkit start
++        int i = MathHelper.floor_double(x);
++        int j = MathHelper.floor_double(y);
++        int k = MathHelper.floor_double(z);
++        // CraftBukkit end
++        int l = i;
++        int i1 = j;
++        int j1 = k;
++        int k1 = 0;
++        int l1 = this.random.nextInt(4);
++        int i2;
++        double d1;
++        double d2;
++        int j2;
++        int k2;
++        int l2;
++        int i3;
++        int j3;
++        int k3;
++        int l3;
++        int i4;
++        int j4;
++        int k4;
++        double d3;
++        double d4;
++
++        for (i2 = i - b0; i2 <= i + b0; ++i2)
+         {
+-            var14 = (double)var13 + 0.5D - par1Entity.posX;
++            d1 = (double) i2 + 0.5D - x; // CraftBukkit
+ 
+-            for (var16 = var7 - var2; var16 <= var7 + var2; ++var16)
++            for (j2 = k - b0; j2 <= k + b0; ++j2)
+             {
+-                var17 = (double)var16 + 0.5D - par1Entity.posZ;
++                d2 = (double) j2 + 0.5D - z; // CraftBukkit
+                 label274:
+ 
+-                for (var19 = this.field_85192_a.getActualHeight() - 1; var19 >= 0; --var19)
++                for (k2 = this.field_85192_a.getActualHeight() - 1; k2 >= 0; --k2)
+                 {
+-                    if (this.field_85192_a.isAirBlock(var13, var19, var16))
++                    if (this.field_85192_a.isAirBlock(i2, k2, j2))
+                     {
+-                        while (var19 > 0 && this.field_85192_a.isAirBlock(var13, var19 - 1, var16))
++                        while (k2 > 0 && this.field_85192_a.isAirBlock(i2, k2 - 1, j2))
+                         {
+-                            --var19;
++                            --k2;
+                         }
+ 
+-                        for (var20 = var12; var20 < var12 + 4; ++var20)
++                        for (i3 = l1; i3 < l1 + 4; ++i3)
+                         {
+-                            var21 = var20 % 2;
+-                            var22 = 1 - var21;
++                            l2 = i3 % 2;
++                            k3 = 1 - l2;
+ 
+-                            if (var20 % 4 >= 2)
++                            if (i3 % 4 >= 2)
+                             {
+-                                var21 = -var21;
+-                                var22 = -var22;
++                                l2 = -l2;
++                                k3 = -k3;
+                             }
+ 
+-                            for (var23 = 0; var23 < 3; ++var23)
++                            for (j3 = 0; j3 < 3; ++j3)
+                             {
+-                                for (var24 = 0; var24 < 4; ++var24)
++                                for (i4 = 0; i4 < 4; ++i4)
+                                 {
+-                                    for (var25 = -1; var25 < 4; ++var25)
++                                    for (l3 = -1; l3 < 4; ++l3)
+                                     {
+-                                        var26 = var13 + (var24 - 1) * var21 + var23 * var22;
+-                                        var27 = var19 + var25;
+-                                        int var28 = var16 + (var24 - 1) * var22 - var23 * var21;
++                                        k4 = i2 + (i4 - 1) * l2 + j3 * k3;
++                                        j4 = k2 + l3;
++                                        int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
+ 
+-                                        if (var25 < 0 && !this.field_85192_a.getBlockMaterial(var26, var27, var28).isSolid() || var25 >= 0 && !this.field_85192_a.isAirBlock(var26, var27, var28))
++                                        if (l3 < 0 && !this.field_85192_a.getBlockMaterial(k4, j4, l4).isSolid() || l3 >= 0 && !this.field_85192_a.isAirBlock(k4, j4, l4))
+                                         {
+                                             continue label274;
+                                         }
+@@ -338,16 +475,16 @@ public class Teleporter
+                                 }
+                             }
+ 
+-                            var31 = (double) var19 + 0.5D - par1Entity.posY;
+-                            var32 = var14 * var14 + var31 * var31 + var17 * var17;
++                            d3 = (double) k2 + 0.5D - y; // CraftBukkit
++                            d4 = d1 * d1 + d3 * d3 + d2 * d2;
+ 
+-                            if (var3 < 0.0D || var32 < var3)
++                            if (d0 < 0.0D || d4 < d0)
+                             {
+-                                var3 = var32;
+-                                var8 = var13;
+-                                var9 = var19;
+-                                var10 = var16;
+-                                var11 = var20 % 4;
++                                d0 = d4;
++                                l = i2;
++                                i1 = k2;
++                                j1 = j2;
++                                k1 = i3 % 4;
+                             }
+                         }
+                     }
+@@ -355,56 +492,56 @@ public class Teleporter
+             }
+         }
+ 
+-        if (var3 < 0.0D)
++        if (d0 < 0.0D)
+         {
+-            for (var13 = var5 - var2; var13 <= var5 + var2; ++var13)
++            for (i2 = i - b0; i2 <= i + b0; ++i2)
+             {
+-                var14 = (double)var13 + 0.5D - par1Entity.posX;
++                d1 = (double) i2 + 0.5D - x; // CraftBukkit
+ 
+-                for (var16 = var7 - var2; var16 <= var7 + var2; ++var16)
++                for (j2 = k - b0; j2 <= k + b0; ++j2)
+                 {
+-                    var17 = (double)var16 + 0.5D - par1Entity.posZ;
++                    d2 = (double) j2 + 0.5D - z; // CraftBukkit
+                     label222:
+ 
+-                    for (var19 = this.field_85192_a.getActualHeight() - 1; var19 >= 0; --var19)
++                    for (k2 = this.field_85192_a.getActualHeight() - 1; k2 >= 0; --k2)
+                     {
+-                        if (this.field_85192_a.isAirBlock(var13, var19, var16))
++                        if (this.field_85192_a.isAirBlock(i2, k2, j2))
+                         {
+-                            while (var19 > 0 && this.field_85192_a.isAirBlock(var13, var19 - 1, var16))
++                            while (k2 > 0 && this.field_85192_a.isAirBlock(i2, k2 - 1, j2))
+                             {
+-                                --var19;
++                                --k2;
+                             }
+ 
+-                            for (var20 = var12; var20 < var12 + 2; ++var20)
++                            for (i3 = l1; i3 < l1 + 2; ++i3)
+                             {
+-                                var21 = var20 % 2;
+-                                var22 = 1 - var21;
++                                l2 = i3 % 2;
++                                k3 = 1 - l2;
+ 
+-                                for (var23 = 0; var23 < 4; ++var23)
++                                for (j3 = 0; j3 < 4; ++j3)
+                                 {
+-                                    for (var24 = -1; var24 < 4; ++var24)
++                                    for (i4 = -1; i4 < 4; ++i4)
+                                     {
+-                                        var25 = var13 + (var23 - 1) * var21;
+-                                        var26 = var19 + var24;
+-                                        var27 = var16 + (var23 - 1) * var22;
++                                        l3 = i2 + (j3 - 1) * l2;
++                                        k4 = k2 + i4;
++                                        j4 = j2 + (j3 - 1) * k3;
+ 
+-                                        if (var24 < 0 && !this.field_85192_a.getBlockMaterial(var25, var26, var27).isSolid() || var24 >= 0 && !this.field_85192_a.isAirBlock(var25, var26, var27))
++                                        if (i4 < 0 && !this.field_85192_a.getBlockMaterial(l3, k4, j4).isSolid() || i4 >= 0 && !this.field_85192_a.isAirBlock(l3, k4, j4))
+                                         {
+                                             continue label222;
+                                         }
+                                     }
+                                 }
+ 
+-                                var31 = (double) var19 + 0.5D - par1Entity.posY;
+-                                var32 = var14 * var14 + var31 * var31 + var17 * var17;
++                                d3 = (double) k2 + 0.5D - y; // CraftBukkit
++                                d4 = d1 * d1 + d3 * d3 + d2 * d2;
+ 
+-                                if (var3 < 0.0D || var32 < var3)
++                                if (d0 < 0.0D || d4 < d0)
+                                 {
+-                                    var3 = var32;
+-                                    var8 = var13;
+-                                    var9 = var19;
+-                                    var10 = var16;
+-                                    var11 = var20 % 2;
++                                    d0 = d4;
++                                    l = i2;
++                                    i1 = k2;
++                                    j1 = j2;
++                                    k1 = i3 % 2;
+                                 }
+                             }
+                         }
+@@ -413,76 +550,76 @@ public class Teleporter
+             }
+         }
+ 
+-        int var29 = var8;
+-        int var15 = var9;
+-        var16 = var10;
+-        int var30 = var11 % 2;
+-        int var18 = 1 - var30;
++        int i5 = l;
++        int j5 = i1;
++        j2 = j1;
++        int k5 = k1 % 2;
++        int l5 = 1 - k5;
+ 
+-        if (var11 % 4 >= 2)
++        if (k1 % 4 >= 2)
+         {
+-            var30 = -var30;
+-            var18 = -var18;
++            k5 = -k5;
++            l5 = -l5;
+         }
+ 
+-        boolean var33;
++        boolean flag;
+ 
+-        if (var3 < 0.0D)
++        if (d0 < 0.0D)
+         {
+-            if (var9 < 70)
++            if (i1 < 70)
+             {
+-                var9 = 70;
++                i1 = 70;
+             }
+ 
+-            if (var9 > this.field_85192_a.getActualHeight() - 10)
++            if (i1 > this.field_85192_a.getActualHeight() - 10)
+             {
+-                var9 = this.field_85192_a.getActualHeight() - 10;
++                i1 = this.field_85192_a.getActualHeight() - 10;
+             }
+ 
+-            var15 = var9;
++            j5 = i1;
+ 
+-            for (var19 = -1; var19 <= 1; ++var19)
++            for (k2 = -1; k2 <= 1; ++k2)
+             {
+-                for (var20 = 1; var20 < 3; ++var20)
++                for (i3 = 1; i3 < 3; ++i3)
+                 {
+-                    for (var21 = -1; var21 < 3; ++var21)
++                    for (l2 = -1; l2 < 3; ++l2)
+                     {
+-                        var22 = var29 + (var20 - 1) * var30 + var19 * var18;
+-                        var23 = var15 + var21;
+-                        var24 = var16 + (var20 - 1) * var18 - var19 * var30;
+-                        var33 = var21 < 0;
+-                        this.field_85192_a.setBlockWithNotify(var22, var23, var24, var33 ? Block.obsidian.blockID : 0);
++                        k3 = i5 + (i3 - 1) * k5 + k2 * l5;
++                        j3 = j5 + l2;
++                        i4 = j2 + (i3 - 1) * l5 - k2 * k5;
++                        flag = l2 < 0;
++                        this.field_85192_a.setBlockWithNotify(k3, j3, i4, flag ? Block.obsidian.blockID : 0);
+                     }
+                 }
+             }
+         }
+ 
+-        for (var19 = 0; var19 < 4; ++var19)
++        for (k2 = 0; k2 < 4; ++k2)
+         {
+             this.field_85192_a.editingBlocks = true;
+ 
+-            for (var20 = 0; var20 < 4; ++var20)
++            for (i3 = 0; i3 < 4; ++i3)
+             {
+-                for (var21 = -1; var21 < 4; ++var21)
++                for (l2 = -1; l2 < 4; ++l2)
+                 {
+-                    var22 = var29 + (var20 - 1) * var30;
+-                    var23 = var15 + var21;
+-                    var24 = var16 + (var20 - 1) * var18;
+-                    var33 = var20 == 0 || var20 == 3 || var21 == -1 || var21 == 3;
+-                    this.field_85192_a.setBlockWithNotify(var22, var23, var24, var33 ? Block.obsidian.blockID : Block.portal.blockID);
++                    k3 = i5 + (i3 - 1) * k5;
++                    j3 = j5 + l2;
++                    i4 = j2 + (i3 - 1) * l5;
++                    flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
++                    this.field_85192_a.setBlockWithNotify(k3, j3, i4, flag ? Block.obsidian.blockID : Block.portal.blockID);
+                 }
+             }
+ 
+             this.field_85192_a.editingBlocks = false;
+ 
+-            for (var20 = 0; var20 < 4; ++var20)
++            for (i3 = 0; i3 < 4; ++i3)
+             {
+-                for (var21 = -1; var21 < 4; ++var21)
++                for (l2 = -1; l2 < 4; ++l2)
+                 {
+-                    var22 = var29 + (var20 - 1) * var30;
+-                    var23 = var15 + var21;
+-                    var24 = var16 + (var20 - 1) * var18;
+-                    this.field_85192_a.notifyBlocksOfNeighborChange(var22, var23, var24, this.field_85192_a.getBlockId(var22, var23, var24));
++                    k3 = i5 + (i3 - 1) * k5;
++                    j3 = j5 + l2;
++                    i4 = j2 + (i3 - 1) * l5;
++                    this.field_85192_a.notifyBlocksOfNeighborChange(k3, j3, i4, this.field_85192_a.getBlockId(k3, j3, i4));
+                 }
+             }
+         }
+diff --git a/src/minecraft/net/minecraft/world/WorldServer.java b/src/minecraft/net/minecraft/world/WorldServer.java
+index 6f52405..95a498d 100644
+--- a/src/minecraft/net/minecraft/world/WorldServer.java
++++ b/src/minecraft/net/minecraft/world/WorldServer.java
+@@ -130,7 +130,7 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
+             this.pendingTickListEntries = new TreeSet();
+         }
+ 
+-        this.field_85177_Q = new Teleporter(this);
++        this.field_85177_Q = new org.bukkit.craftbukkit.CraftTravelAgent(this); // CraftBukkit
+     }
+ 
+     // CraftBukkit start
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+new file mode 100644
+index 0000000..3ce7cf3
+--- /dev/null
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+@@ -0,0 +1,71 @@
++package org.bukkit.craftbukkit;
++
++
++import org.bukkit.Location;
++import org.bukkit.TravelAgent;
++
++public class CraftTravelAgent extends net.minecraft.world.Teleporter/*was:PortalTravelAgent*/ implements TravelAgent {
++
++    private int searchRadius = 128;
++    private int creationRadius = 16;
++    private boolean canCreatePortal = true;
++
++    public CraftTravelAgent(net.minecraft.world.WorldServer/*was:WorldServer*/ worldserver) {
++        super(worldserver);
++    }
++
++    public Location findOrCreate(Location target) {
++        net.minecraft.world.WorldServer/*was:WorldServer*/ worldServer = ((CraftWorld) target.getWorld()).getHandle();
++        boolean before = worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/;
++        worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/ = true;
++
++        Location found = this.findPortal(target);
++        if (found == null) {
++            if (this.getCanCreatePortal() && this.createPortal(target)) {
++                found = this.findPortal(target);
++            } else {
++                found = target; // fallback to original if unable to find or create
++            }
++        }
++
++        worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/ = before;
++        return found;
++    }
++
++    public Location findPortal(Location location) {
++        net.minecraft.world.Teleporter/*was:PortalTravelAgent*/ pta = ((CraftWorld) location.getWorld()).getHandle().func_85176_s/*was:s*/();
++        net.minecraft.util.ChunkCoordinates/*was:ChunkCoordinates*/ found = pta.findPortal(location.getX(), location.getY(), location.getZ(), this.getSearchRadius());
++        return found != null ? new Location(location.getWorld(), found.posX/*was:x*/, found.posY/*was:y*/, found.posZ/*was:z*/, location.getYaw(), location.getPitch()) : null;
++    }
++
++    public boolean createPortal(Location location) {
++        net.minecraft.world.Teleporter/*was:PortalTravelAgent*/ pta = ((CraftWorld) location.getWorld()).getHandle().func_85176_s/*was:s*/();
++        return pta.createPortal(location.getX(), location.getY(), location.getZ(), this.getCreationRadius());
++    }
++
++    public TravelAgent setSearchRadius(int radius) {
++        this.searchRadius = radius;
++        return this;
++    }
++
++    public int getSearchRadius() {
++        return this.searchRadius;
++    }
++
++    public TravelAgent setCreationRadius(int radius) {
++        this.creationRadius = radius < 2 ? 0 : radius;
++        return this;
++    }
++
++    public int getCreationRadius() {
++        return this.creationRadius;
++    }
++
++    public boolean getCanCreatePortal() {
++        return this.canCreatePortal;
++    }
++
++    public void setCanCreatePortal(boolean create) {
++        this.canCreatePortal = create;
++    }
++}
+diff --git a/src/minecraft/org/bukkit/craftbukkit/PortalTravelAgent.java b/src/minecraft/org/bukkit/craftbukkit/PortalTravelAgent.java
+deleted file mode 100644
+index 72becc6..0000000
+--- a/src/minecraft/org/bukkit/craftbukkit/PortalTravelAgent.java
++++ /dev/null
+@@ -1,431 +0,0 @@
+-package org.bukkit.craftbukkit;
+-
+-import java.util.Random;
+-
+-
+-import org.bukkit.Bukkit;
+-import org.bukkit.Location;
+-import org.bukkit.TravelAgent;
+-import org.bukkit.World.Environment;
+-import org.bukkit.event.world.PortalCreateEvent;
+-
+-public class PortalTravelAgent implements TravelAgent {
+-
+-    private Random random = new Random();
+-
+-    private int searchRadius = 128;
+-    private int creationRadius = 14; // 16 -> 14
+-    private boolean canCreatePortal = true;
+-
+-    public PortalTravelAgent() { }
+-
+-    public Location findOrCreate(Location location) {
+-        net.minecraft.world.WorldServer/*was:WorldServer*/ worldServer = ((CraftWorld) location.getWorld()).getHandle();
+-        boolean wasEnabled = worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/;
+-        if (!wasEnabled) {
+-            worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/ = true;
+-        }
+-        // Attempt to find a Portal.
+-        Location resultLocation = this.findPortal(location);
+-        // If a Portal cannot be found we will attempt to create one.
+-        if (resultLocation == null) {
+-            // Attempt to create a portal, return if it was successful or not.
+-            if (this.canCreatePortal && this.createPortal(location)) {
+-                // Now find that portals location.
+-                resultLocation = this.findPortal(location);
+-            } else {
+-                // Fallback onto the original location.
+-                resultLocation = location;
+-            }
+-        }
+-
+-        if (!wasEnabled) {
+-            worldServer.theChunkProviderServer/*was:chunkProviderServer*/.loadChunkOnProvideRequest/*was:forceChunkLoad*/ = false;
+-        }
+-        // Return our resulting portal location.
+-        return resultLocation;
+-    }
+-
+-    public Location findPortal(Location location) {
+-        /*was:net.minecraft.server.*/net.minecraft.world.World/*was:World*/ world = ((CraftWorld) location.getWorld()).getHandle();
+-
+-        if (location.getWorld().getEnvironment() == Environment.THE_END) {
+-            int i = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockX());
+-            int j = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockY()) - 1;
+-            int k = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockZ());
+-            byte b0 = 1;
+-            byte b1 = 0;
+-
+-            for (int l = -2; l <= 2; ++l) {
+-                for (int i1 = -2; i1 <= 2; ++i1) {
+-                    for (int j1 = -1; j1 < 3; ++j1) {
+-                        int k1 = i + i1 * b0 + l * b1;
+-                        int l1 = j + j1;
+-                        int i2 = k + i1 * b1 - l * b0;
+-                        boolean flag = j1 < 0;
+-
+-                        if (world.getBlockId/*was:getTypeId*/(k1, l1, i2) != (flag ? net.minecraft.block.Block/*was:Block*/.obsidian/*was:OBSIDIAN*/.blockID/*was:id*/ : 0)) {
+-                            return null;
+-                        }
+-                    }
+-                }
+-            }
+-
+-            return location;
+-        }
+-
+-        // short short1 = 128;
+-        double d0 = -1.0D;
+-        int i = 0;
+-        int j = 0;
+-        int k = 0;
+-        int l = location.getBlockX();
+-        int i1 = location.getBlockZ();
+-
+-        double d1;
+-
+-        for (int j1 = l - this.searchRadius; j1 <= l + this.searchRadius; ++j1) {
+-            double d2 = (double) j1 + 0.5D - location.getX();
+-
+-            for (int k1 = i1 - this.searchRadius; k1 <= i1 + this.searchRadius; ++k1) {
+-                double d3 = (double) k1 + 0.5D - location.getZ();
+-
+-                for (int l1 = world.getActualHeight/*was:P*/() - 1; l1 >= 0; --l1) {
+-                    if (world.getBlockId/*was:getTypeId*/(j1, l1, k1) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                        while (world.getBlockId/*was:getTypeId*/(j1, l1 - 1, k1) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                            --l1;
+-                        }
+-
+-                        d1 = (double) l1 + 0.5D - location.getY();
+-                        double d4 = d2 * d2 + d1 * d1 + d3 * d3;
+-
+-                        if (d0 < 0.0D || d4 < d0) {
+-                            d0 = d4;
+-                            i = j1;
+-                            j = l1;
+-                            k = k1;
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-
+-        if (d0 >= 0.0D) {
+-            double d5 = (double) i + 0.5D;
+-            double d6 = (double) j + 0.5D;
+-
+-            d1 = (double) k + 0.5D;
+-            if (world.getBlockId/*was:getTypeId*/(i - 1, j, k) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                d5 -= 0.5D;
+-            }
+-
+-            if (world.getBlockId/*was:getTypeId*/(i + 1, j, k) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                d5 += 0.5D;
+-            }
+-
+-            if (world.getBlockId/*was:getTypeId*/(i, j, k - 1) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                d1 -= 0.5D;
+-            }
+-
+-            if (world.getBlockId/*was:getTypeId*/(i, j, k + 1) == net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/) {
+-                d1 += 0.5D;
+-            }
+-
+-            return new Location(location.getWorld(), d5, d6, d1, location.getYaw(), location.getPitch());
+-        } else {
+-            return null;
+-        }
+-    }
+-
+-    public boolean createPortal(Location location) {
+-        /*was:net.minecraft.server.*/net.minecraft.world.World/*was:World*/ world = ((CraftWorld) location.getWorld()).getHandle();
+-
+-        if (location.getWorld().getEnvironment() == Environment.THE_END) {
+-            int i = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockX());
+-            int j = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockY()) - 1;
+-            int k = net.minecraft.util.MathHelper/*was:MathHelper*/.floor_double/*was:floor*/(location.getBlockZ());
+-            byte b0 = 1;
+-            byte b1 = 0;
+-
+-            for (int l = -2; l <= 2; ++l) {
+-                for (int i1 = -2; i1 <= 2; ++i1) {
+-                    for (int j1 = -1; j1 < 3; ++j1) {
+-                        int k1 = i + i1 * b0 + l * b1;
+-                        int l1 = j + j1;
+-                        int i2 = k + i1 * b1 - l * b0;
+-                        boolean flag = j1 < 0;
+-
+-                        world.setBlockWithNotify/*was:setTypeId*/(k1, l1, i2, flag ? net.minecraft.block.Block/*was:Block*/.obsidian/*was:OBSIDIAN*/.blockID/*was:id*/ : 0);
+-                    }
+-                }
+-            }
+-
+-            return true;
+-        }
+-
+-        // byte b0 = 16;
+-        double d0 = -1.0D;
+-        int i = location.getBlockX();
+-        int j = location.getBlockY();
+-        int k = location.getBlockZ();
+-        int l = i;
+-        int i1 = j;
+-        int j1 = k;
+-        int k1 = 0;
+-        int l1 = this.random.nextInt(4);
+-
+-        int i2;
+-        double d1;
+-        int j2;
+-        double d2;
+-        int k2;
+-        int l2;
+-        int i3;
+-        int j3;
+-        int k3;
+-        int l3;
+-        int i4;
+-        int j4;
+-        int k4;
+-        double d3;
+-        double d4;
+-
+-        for (i2 = i - this.creationRadius; i2 <= i + this.creationRadius; ++i2) {
+-            d1 = (double) i2 + 0.5D - location.getX();
+-
+-            for (j2 = k - this.creationRadius; j2 <= k + this.creationRadius; ++j2) {
+-                d2 = (double) j2 + 0.5D - location.getZ();
+-
+-                label271:
+-                for (l2 = world.getActualHeight/*was:P*/() - 1; l2 >= 0; --l2) {
+-                    if (world.isAirBlock/*was:isEmpty*/(i2, l2, j2)) {
+-                        while (l2 > 0 && world.isAirBlock/*was:isEmpty*/(i2, l2 - 1, j2)) {
+-                            --l2;
+-                        }
+-
+-                        for (k2 = l1; k2 < l1 + 4; ++k2) {
+-                            j3 = k2 % 2;
+-                            i3 = 1 - j3;
+-                            if (k2 % 4 >= 2) {
+-                                j3 = -j3;
+-                                i3 = -i3;
+-                            }
+-
+-                            for (l3 = 0; l3 < 3; ++l3) {
+-                                for (k3 = 0; k3 < 4; ++k3) {
+-                                    for (j4 = -1; j4 < 5; ++j4) {
+-                                        i4 = i2 + (k3 - 1) * j3 + l3 * i3;
+-                                        k4 = l2 + j4;
+-                                        int l4 = j2 + (k3 - 1) * i3 - l3 * j3;
+-
+-                                        if (j4 < 0 && !world.getBlockMaterial/*was:getMaterial*/(i4, k4, l4).isSolid/*was:isBuildable*/() || j4 >= 0 && !world.isAirBlock/*was:isEmpty*/(i4, k4, l4)) {
+-                                            continue label271;
+-                                        }
+-                                    }
+-                                }
+-                            }
+-
+-                            d3 = (double) l2 + 0.5D - location.getY();
+-                            d4 = d1 * d1 + d3 * d3 + d2 * d2;
+-                            if (d0 < 0.0D || d4 < d0) {
+-                                d0 = d4;
+-                                l = i2;
+-                                i1 = l2 + 1;
+-                                j1 = j2;
+-                                k1 = k2 % 4;
+-                            }
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-
+-        if (d0 < 0.0D) {
+-            for (i2 = i - this.creationRadius; i2 <= i + this.creationRadius; ++i2) {
+-                d1 = (double) i2 + 0.5D - location.getX();
+-
+-                for (j2 = k - this.creationRadius; j2 <= k + this.creationRadius; ++j2) {
+-                    d2 = (double) j2 + 0.5D - location.getZ();
+-
+-                    label219:
+-                    for (l2 = world.getActualHeight/*was:P*/() - 1; l2 >= 0; --l2) {
+-                        if (world.isAirBlock/*was:isEmpty*/(i2, l2, j2)) {
+-                            while (l2 > 0 && world.isAirBlock/*was:isEmpty*/(i2, l2 - 1, j2)) {
+-                                --l2;
+-                            }
+-
+-                            for (k2 = l1; k2 < l1 + 2; ++k2) {
+-                                j3 = k2 % 2;
+-                                i3 = 1 - j3;
+-
+-                                for (l3 = 0; l3 < 4; ++l3) {
+-                                    for (k3 = -1; k3 < 5; ++k3) {
+-                                        j4 = i2 + (l3 - 1) * j3;
+-                                        i4 = l2 + k3;
+-                                        k4 = j2 + (l3 - 1) * i3;
+-                                        if (k3 < 0 && !world.getBlockMaterial/*was:getMaterial*/(j4, i4, k4).isSolid/*was:isBuildable*/() || k3 >= 0 && !world.isAirBlock/*was:isEmpty*/(j4, i4, k4)) {
+-                                            continue label219;
+-                                        }
+-                                    }
+-                                }
+-
+-                                d3 = (double) l2 + 0.5D - location.getY();
+-                                d4 = d1 * d1 + d3 * d3 + d2 * d2;
+-                                if (d0 < 0.0D || d4 < d0) {
+-                                    d0 = d4;
+-                                    l = i2;
+-                                    i1 = l2 + 1;
+-                                    j1 = j2;
+-                                    k1 = k2 % 2;
+-                                }
+-                            }
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-
+-        int i5 = l;
+-        int j5 = i1;
+-
+-        j2 = j1;
+-        int k5 = k1 % 2;
+-        int l5 = 1 - k5;
+-
+-        if (k1 % 4 >= 2) {
+-            k5 = -k5;
+-            l5 = -l5;
+-        }
+-
+-        boolean flag;
+-
+-        // CraftBukkit start - portal create event
+-        java.util.ArrayList<org.bukkit.block.Block> blocks = new java.util.ArrayList<org.bukkit.block.Block>();
+-        // Find out what blocks the portal is going to modify, duplicated from below
+-        CraftWorld craftWorld = ((net.minecraft.world.WorldServer/*was:WorldServer*/) world).getWorld();
+-
+-        if (d0 < 0.0D) {
+-            if (i1 < 70) {
+-                i1 = 70;
+-            }
+-
+-            if (i1 > world.getActualHeight/*was:P*/() - 10) {
+-                i1 = world.getActualHeight/*was:P*/() - 10;
+-            }
+-
+-            j5 = i1;
+-
+-            for (l2 = -1; l2 <= 1; ++l2) {
+-                for (k2 = 1; k2 < 3; ++k2) {
+-                    for (j3 = -1; j3 < 3; ++j3) {
+-                        i3 = i5 + (k2 - 1) * k5 + l2 * l5;
+-                        l3 = j5 + j3;
+-                        k3 = j2 + (k2 - 1) * l5 - l2 * k5;
+-                        org.bukkit.block.Block b = craftWorld.getBlockAt(i3, l3, k3);
+-                        if (!blocks.contains(b)) {
+-                            blocks.add(b);
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-
+-        for (l2 = 0; l2 < 4; ++l2) {
+-            for (k2 = 0; k2 < 4; ++k2) {
+-                for (j3 = -1; j3 < 4; ++j3) {
+-                    i3 = i5 + (k2 - 1) * k5;
+-                    l3 = j5 + j3;
+-                    k3 = j2 + (k2 - 1) * l5;
+-                    org.bukkit.block.Block b = craftWorld.getBlockAt(i3, l3, k3);
+-                    if (!blocks.contains(b)) {
+-                        blocks.add(b);
+-                    }
+-                }
+-            }
+-        }
+-
+-        PortalCreateEvent event = new PortalCreateEvent(blocks, (org.bukkit.World) craftWorld, PortalCreateEvent.CreateReason.OBC_DESTINATION);
+-        Bukkit.getServer().getPluginManager().callEvent(event);
+-        if (event.isCancelled()) {
+-            return false;
+-        }
+-        // CraftBukkit end
+-
+-        if (d0 < 0.0D) {
+-            if (i1 < 70) {
+-                i1 = 70;
+-            }
+-
+-            if (i1 > 118) {
+-                i1 = 118;
+-            }
+-
+-            j5 = i1;
+-
+-            for (l2 = -1; l2 <= 1; ++l2) {
+-                for (k2 = 1; k2 < 3; ++k2) {
+-                    for (j3 = -1; j3 < 3; ++j3) {
+-                        i3 = i5 + (k2 - 1) * k5 + l2 * l5;
+-                        l3 = j5 + j3;
+-                        k3 = j2 + (k2 - 1) * l5 - l2 * k5;
+-                        flag = j3 < 0;
+-                        world.setBlockWithNotify/*was:setTypeId*/(i3, l3, k3, flag ? net.minecraft.block.Block/*was:Block*/.obsidian/*was:OBSIDIAN*/.blockID/*was:id*/ : 0);
+-                    }
+-                }
+-            }
+-        }
+-
+-        for (l2 = 0; l2 < 4; ++l2) {
+-            world.editingBlocks/*was:suppressPhysics*/ = true;
+-
+-            for (k2 = 0; k2 < 4; ++k2) {
+-                for (j3 = -1; j3 < 4; ++j3) {
+-                    i3 = i5 + (k2 - 1) * k5;
+-                    l3 = j5 + j3;
+-                    k3 = j2 + (k2 - 1) * l5;
+-                    flag = k2 == 0 || k2 == 3 || j3 == -1 || j3 == 3;
+-                    world.setBlockWithNotify/*was:setTypeId*/(i3, l3, k3, flag ? net.minecraft.block.Block/*was:Block*/.obsidian/*was:OBSIDIAN*/.blockID/*was:id*/ : net.minecraft.block.Block/*was:Block*/.portal/*was:PORTAL*/.blockID/*was:id*/);
+-                }
+-            }
+-
+-            world.editingBlocks/*was:suppressPhysics*/ = false;
+-
+-            for (k2 = 0; k2 < 4; ++k2) {
+-                for (j3 = -1; j3 < 4; ++j3) {
+-                    i3 = i5 + (k2 - 1) * k5;
+-                    l3 = j5 + j3;
+-                    k3 = j2 + (k2 - 1) * l5;
+-                    world.notifyBlocksOfNeighborChange/*was:applyPhysics*/(i3, l3, k3, world.getBlockId/*was:getTypeId*/(i3, l3, k3));
+-                }
+-            }
+-        }
+-
+-        return true;
+-    }
+-
+-    public TravelAgent setSearchRadius(int radius) {
+-        this.searchRadius = radius;
+-        return this;
+-    }
+-
+-    public int getSearchRadius() {
+-        return this.searchRadius;
+-    }
+-
+-    public TravelAgent setCreationRadius(int radius) {
+-        this.creationRadius = radius < 2 ? 0 : radius - 2;
+-        return this;
+-    }
+-
+-    public int getCreationRadius() {
+-        return this.creationRadius;
+-    }
+-
+-    public boolean getCanCreatePortal() {
+-        return this.canCreatePortal;
+-    }
+-
+-    public void setCanCreatePortal(boolean create) {
+-        this.canCreatePortal = create;
+-    }
+-}

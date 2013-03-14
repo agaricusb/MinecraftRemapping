@@ -1,0 +1,37 @@
+From 4a6351a526544f27da4a8f469543dfa1fe73fe14 Mon Sep 17 00:00:00 2001
+From: Mike Primm <mike@primmhome.com>
+Date: Wed, 16 Jan 2013 15:27:22 -0600
+Subject: [PATCH] Alternate, sync-free-but-safe chunk reference cache
+
+
+diff --git a/src/minecraft/net/minecraft/world/World.java b/src/minecraft/net/minecraft/world/World.java
+index 58bfe99..a8ffc58 100644
+--- a/src/minecraft/net/minecraft/world/World.java
++++ b/src/minecraft/net/minecraft/world/World.java
+@@ -491,20 +491,16 @@ public abstract class World implements IBlockAccess
+      */
+     public Chunk getChunkFromChunkCoords(int par1, int par2)
+     {
+-        Chunk result = null;
++        //synchronized (this.chunkLock) {
++        Chunk result = this.lastChunkAccessed; // Exploit fact that read is atomic
+ 
+-        synchronized (this.chunkLock)
++        if (result == null || result.xPosition != par1 || result.zPosition != par2)
+         {
+-            if (this.lastChunkAccessed == null || this.lastXAccessed != par1 || this.lastZAccessed != par2)
+-            {
+-                this.lastChunkAccessed = this.chunkProvider.provideChunk(par1, par2);
+-                this.lastXAccessed = par1;
+-                this.lastZAccessed = par2;
+-            }
+-
+-            result = this.lastChunkAccessed;
++            result = this.chunkProvider.provideChunk(par1, par2);
++            this.lastChunkAccessed = result; // Exploit fact that write is atomic
+         }
+ 
++        //}
+         return result;
+     }
+     // CraftBukkit end

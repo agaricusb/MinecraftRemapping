@@ -1,0 +1,19 @@
+From dcdd7c6c0edbaea2227862dc79f1bc4da29f90dc Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 04:43:20 -0800
+Subject: [PATCH] Fixes comparison for items in creative inventory, closes #411
+
+
+diff --git a/src/minecraft/net/minecraft/client/gui/inventory/GuiContainerCreative.java b/src/minecraft/net/minecraft/client/gui/inventory/GuiContainerCreative.java
+index 4faeb58..0f8fde6 100644
+--- a/src/minecraft/net/minecraft/client/gui/inventory/GuiContainerCreative.java
++++ b/src/minecraft/net/minecraft/client/gui/inventory/GuiContainerCreative.java
+@@ -139,7 +139,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
+                     return;
+                 }
+ 
+-                if (var7 != null && var8 != null && var7.isItemEqual(var8))
++                if (var7 != null && var8 != null && var7.isItemEqual(var8) && ItemStack.areItemStackTagsEqual(var7, var8))
+                 {
+                     if (par3 == 0)
+                     {

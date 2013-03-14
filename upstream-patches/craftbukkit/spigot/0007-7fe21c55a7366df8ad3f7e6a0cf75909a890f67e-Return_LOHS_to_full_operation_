@@ -1,0 +1,24 @@
+From 7fe21c55a7366df8ad3f7e6a0cf75909a890f67e Mon Sep 17 00:00:00 2001
+From: md_5 <md_5@bigpond.com>
+Date: Mon, 7 Jan 2013 09:57:30 +1100
+Subject: [PATCH] Return LOHS to full operation.
+
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/util/LongHashSet.java b/src/minecraft/org/bukkit/craftbukkit/util/LongHashSet.java
+index 3f1617d..a1250d3 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/util/LongHashSet.java
++++ b/src/minecraft/org/bukkit/craftbukkit/util/LongHashSet.java
+@@ -81,11 +81,11 @@ public class LongHashSet {
+     }
+ 
+     public boolean add(int msw, int lsw) {
+-        flat.put(msw, lsw, PRESENT); // Spigot
+         return add(LongHash.toLong(msw, lsw));
+     }
+ 
+-    private boolean add(long value) { // Spigot
++    public boolean add(long value) {
++        flat.put(value, PRESENT); // Spigot
+         int hash = hash(value);
+         int index = (hash & 0x7FFFFFFF) % values.length;
+         int offset = 1;

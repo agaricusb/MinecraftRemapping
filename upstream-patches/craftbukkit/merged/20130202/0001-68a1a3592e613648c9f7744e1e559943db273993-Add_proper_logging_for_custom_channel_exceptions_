@@ -1,0 +1,86 @@
+From 68a1a3592e613648c9f7744e1e559943db273993 Mon Sep 17 00:00:00 2001
+From: Eimref <me@eimref.com>
+Date: Wed, 6 Feb 2013 18:59:07 -0500
+Subject: [PATCH] Add proper logging for custom channel exceptions.
+
+
+diff --git a/src/minecraft/net/minecraft/network/NetServerHandler.java b/src/minecraft/net/minecraft/network/NetServerHandler.java
+index 0b35792..0746b13 100644
+--- a/src/minecraft/net/minecraft/network/NetServerHandler.java
++++ b/src/minecraft/net/minecraft/network/NetServerHandler.java
+@@ -2002,7 +2002,10 @@ public class NetServerHandler extends NetHandler
+             }
+             catch (Exception var12)
+             {
+-                var12.printStackTrace();
++                // CraftBukkit start
++                logger.log(Level.WARNING, this.playerEntity.username + " sent invalid MC|BEdit data", var12);
++                this.kickPlayerFromServer("Invalid book data!");
++                // CraftBukkit end
+             }
+         }
+         else if ("MC|BSign".equals(par1Packet250CustomPayload.channel))
+@@ -2030,7 +2033,8 @@ public class NetServerHandler extends NetHandler
+             catch (Exception var11)
+             {
+                 // CraftBukkit start
+-                // exception1.printStackTrace();
++                logger.log(Level.WARNING, this.playerEntity.username + " sent invalid MC|BSign data", var11);
++                this.kickPlayerFromServer("Invalid book data!");
+                 // CraftBukkit end
+             }
+         }
+@@ -2053,7 +2057,10 @@ public class NetServerHandler extends NetHandler
+                 }
+                 catch (Exception var10)
+                 {
+-                    var10.printStackTrace();
++                    // CraftBukkit start
++                    logger.log(Level.WARNING, this.playerEntity.username + " sent invalid MC|TrSel data", var10);
++                    this.kickPlayerFromServer("Invalid trade data!");
++                    // CraftBukkit end
+                 }
+             }
+             else
+@@ -2086,7 +2093,10 @@ public class NetServerHandler extends NetHandler
+                         }
+                         catch (Exception var9)
+                         {
+-                            var9.printStackTrace();
++                            // CraftBukkit start
++                            logger.log(Level.WARNING, this.playerEntity.username + " sent invalid MC|AdvCdm data", var9);
++                            this.kickPlayerFromServer("Invalid CommandBlock data!");
++                            // CraftBukkit end
+                         }
+                     }
+                     else
+@@ -2117,7 +2127,10 @@ public class NetServerHandler extends NetHandler
+                         }
+                         catch (Exception var8)
+                         {
+-                            var8.printStackTrace();
++                            // CraftBukkit start
++                            logger.log(Level.WARNING, this.playerEntity.username + " sent invalid MC|Beacon data", var8);
++                            this.kickPlayerFromServer("Invalid beacon data!");
++                            // CraftBukkit end
+                         }
+                     }
+                 }
+@@ -2153,7 +2166,7 @@ public class NetServerHandler extends NetHandler
+                     }
+                     catch (UnsupportedEncodingException ex)
+                     {
+-                        Logger.getLogger(NetServerHandler.class.getName()).log(Level.SEVERE, "Could not parse REGISTER payload in plugin message packet", ex);
++                        throw new AssertionError(ex);
+                     }
+                 }
+                 else if (par1Packet250CustomPayload.channel.equals("UNREGISTER"))
+@@ -2169,7 +2182,7 @@ public class NetServerHandler extends NetHandler
+                     }
+                     catch (UnsupportedEncodingException ex)
+                     {
+-                        Logger.getLogger(NetServerHandler.class.getName()).log(Level.SEVERE, "Could not parse UNREGISTER payload in plugin message packet", ex);
++                        throw new AssertionError(ex);
+                     }
+                 }
+                 else

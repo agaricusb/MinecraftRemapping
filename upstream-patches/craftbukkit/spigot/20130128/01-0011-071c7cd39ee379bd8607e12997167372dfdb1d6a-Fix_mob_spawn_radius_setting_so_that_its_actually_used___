@@ -1,0 +1,24 @@
+From 071c7cd39ee379bd8607e12997167372dfdb1d6a Mon Sep 17 00:00:00 2001
+From: Aikar <aikar@aikar.co>
+Date: Fri, 11 Jan 2013 14:54:51 -0500
+Subject: [PATCH] Fix mob-spawn-radius setting so that its actually used...
+
+
+diff --git a/src/minecraft/net/minecraft/world/SpawnerAnimals.java b/src/minecraft/net/minecraft/world/SpawnerAnimals.java
+index a80eb5a..5272bec 100644
+--- a/src/minecraft/net/minecraft/world/SpawnerAnimals.java
++++ b/src/minecraft/net/minecraft/world/SpawnerAnimals.java
+@@ -65,7 +65,12 @@ public final class SpawnerAnimals
+             // Spigot start - limit radius to spawn distance (chunks aren't loaded)
+             if (spawnRadius == 0)
+             {
+-                spawnRadius = (byte) par0WorldServer.getServer().getViewDistance();
++                spawnRadius = (byte) par0WorldServer.getWorld().mobSpawnRange;
++
++                if (spawnRadius > (byte) par0WorldServer.getServer().getViewDistance())
++                {
++                    spawnRadius = (byte) par0WorldServer.getServer().getViewDistance();
++                }
+ 
+                 if (spawnRadius > 8)
+                 {

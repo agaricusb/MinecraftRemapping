@@ -1,0 +1,19 @@
+From 91d2e774d94c3a6f9bc2863c99932d395720d997 Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Tue, 29 Jan 2013 09:36:56 -0600
+Subject: [PATCH] When leaving the end, always target the main world. Fixes BUKKIT-3517
+
+
+diff --git a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+index 00996c4..11c8eb8 100644
+--- a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+@@ -574,7 +574,7 @@ public abstract class ServerConfigurationManager
+                 // THE_END -> NORMAL; use bed if available, otherwise default spawn
+                 exit = ((CraftPlayer) entityplayer.getBukkitEntity()).getBedSpawnLocation();
+ 
+-                if (exit == null)
++                if (exit == null || ((CraftWorld) exit.getWorld()).getHandle().dimension != 0)
+                 {
+                     exit = exitWorld.getWorld().getSpawnLocation();
+                 }

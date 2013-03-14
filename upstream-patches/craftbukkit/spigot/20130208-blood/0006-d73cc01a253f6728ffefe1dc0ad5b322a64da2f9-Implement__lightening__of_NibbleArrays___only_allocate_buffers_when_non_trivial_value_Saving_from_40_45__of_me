@@ -1,0 +1,454 @@
+From d73cc01a253f6728ffefe1dc0ad5b322a64da2f9 Mon Sep 17 00:00:00 2001
+From: Mike Primm <mike@primmhome.com>
+Date: Sun, 23 Dec 2012 14:46:23 -0600
+Subject: [PATCH] Implement 'lightening' of NibbleArrays - only allocate buffers when non-trivial value Saving from 40-45% of memory use by chunk section data.
+
+Finish up NibbleArray lightening work - use for Snapshots, reduce copies
+
+Fix nibble handling with NBT - arrays aren't copied by NBTByteArray
+
+diff --git a/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java b/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
+index 4ffd390..b54f59f 100644
+--- a/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
++++ b/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
+@@ -196,8 +196,11 @@ public class Packet51MapChunk extends Packet
+             if (var4[var8] != null && (!par1 || !var4[var8].isEmpty()) && (par2 & 1 << var8) != 0)
+             {
+                 var10 = var4[var8].getMetadataArray();
+-                System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
+-                var3 += var10.data.length;
++                // Spigot start
++                // System.arraycopy(nibblearray.a, 0, abyte, j, nibblearray.a.length);
++                // j += nibblearray.a.length;
++                var3 = var10.copyToByteArray(var7, var3);
++                // Spigot end
+             }
+         }
+ 
+@@ -206,8 +209,11 @@ public class Packet51MapChunk extends Packet
+             if (var4[var8] != null && (!par1 || !var4[var8].isEmpty()) && (par2 & 1 << var8) != 0)
+             {
+                 var10 = var4[var8].getBlocklightArray();
+-                System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
+-                var3 += var10.data.length;
++                // Spigot start
++                // System.arraycopy(nibblearray.a, 0, abyte, j, nibblearray.a.length);
++                // j += nibblearray.a.length;
++                var3 = var10.copyToByteArray(var7, var3);
++                // Spigot end
+             }
+         }
+ 
+@@ -218,8 +224,11 @@ public class Packet51MapChunk extends Packet
+                 if (var4[var8] != null && (!par1 || !var4[var8].isEmpty()) && (par2 & 1 << var8) != 0)
+                 {
+                     var10 = var4[var8].getSkylightArray();
+-                    System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
+-                    var3 += var10.data.length;
++                    // Spigot start
++                    // System.arraycopy(nibblearray.a, 0, abyte, j, nibblearray.a.length);
++                    // j += nibblearray.a.length;
++                    var3 = var10.copyToByteArray(var7, var3);
++                    // Spigot end
+                 }
+             }
+         }
+@@ -231,8 +240,11 @@ public class Packet51MapChunk extends Packet
+                 if (var4[var8] != null && (!par1 || !var4[var8].isEmpty()) && var4[var8].getBlockMSBArray() != null && (par2 & 1 << var8) != 0)
+                 {
+                     var10 = var4[var8].getBlockMSBArray();
+-                    System.arraycopy(var10.data, 0, var7, var3, var10.data.length);
+-                    var3 += var10.data.length;
++                    // Spigot start
++                    //System.arraycopy(nibblearray.a, 0, abyte, j, nibblearray.a.length);
++                    //j += nibblearray.a.length;
++                    var3 = var10.copyToByteArray(var7, var3);
++                    // Spigot end
+                 }
+             }
+         }
+diff --git a/src/minecraft/net/minecraft/world/chunk/NibbleArray.java b/src/minecraft/net/minecraft/world/chunk/NibbleArray.java
+index 1efed59..95975c7 100644
+--- a/src/minecraft/net/minecraft/world/chunk/NibbleArray.java
++++ b/src/minecraft/net/minecraft/world/chunk/NibbleArray.java
+@@ -1,12 +1,10 @@
+ package net.minecraft.world.chunk;
+ 
++import java.util.Arrays; // Spigot
++
+ public class NibbleArray
+ {
+-    /**
+-     * Byte array of data stored in this holder. Possibly a light map or some chunk data. Data is accessed in 4-bit
+-     * pieces.
+-     */
+-    public final byte[] data;
++    private byte[] data; // Spigot - remove final, make private (anyone directly accessing this is broken already)
+ 
+     /**
+      * Log base 2 of the chunk height (128); applied as a shift on Z coordinate
+@@ -17,10 +15,150 @@ public class NibbleArray
+      * Log base 2 of the chunk height (128) * width (16); applied as a shift on X coordinate
+      */
+     private final int depthBitsPlusFour;
++    // Spigot start
++    private byte trivialValue;
++    private byte trivialByte;
++    private int length;
++    private static final int LEN2K = 2048; // Universal length used right now - optimize around this
++    private static final byte[][] TrivLen2k;
++
++    static
++    {
++        TrivLen2k = new byte[16][];
++
++        for (int i = 0; i < 16; i++)
++        {
++            TrivLen2k[i] = new byte[LEN2K];
++            Arrays.fill(TrivLen2k[i], (byte)(i | (i << 4)));
++        }
++    }
++
++    // Try to convert array to trivial array
++    public void detectAndProcessTrivialArray()
++    {
++        trivialValue = (byte)(data[0] & 0xF);
++        trivialByte = (byte)(trivialValue | (trivialValue << 4));
++
++        for (int i = 0; i < data.length; i++)
++        {
++            if (data[i] != trivialByte)
++            {
++                return;
++            }
++        }
++
++        // All values matches, so array is trivial
++        this.length = data.length;
++        this.data = null;
++    }
++
++    // Force array to non-trivial state
++    public void forceToNonTrivialArray()
++    {
++        if (this.data == null)
++        {
++            this.data = new byte[this.length];
++
++            if (this.trivialByte != 0)
++            {
++                Arrays.fill(this.data, this.trivialByte);
++            }
++        }
++    }
++
++    // Test if array is in trivial state
++    public boolean isTrivialArray()
++    {
++        return (this.data == null);
++    }
++
++    // Get value of all elements (only valid if array is in trivial state)
++    public int getTrivialArrayValue()
++    {
++        return this.trivialValue;
++    }
++
++    // Get logical length of byte array for nibble data (whether trivial or non-trivial)
++    public int getByteLength()
++    {
++        if (this.data == null)
++        {
++            return this.length;
++        }
++        else
++        {
++            return this.data.length;
++        }
++    }
++
++    // Return byte encoding of array (whether trivial or non-trivial) - returns read-only array if trivial (do not modify!)
++    public byte[] getValueArray()
++    {
++        if (this.data != null)
++        {
++            return this.data;
++        }
++        else
++        {
++            byte[] rslt;
++
++            if (this.length == LEN2K)    // All current uses are 2k long, but be safe
++            {
++                rslt = TrivLen2k[this.trivialValue];
++            }
++            else
++            {
++                rslt = new byte[this.length];
++
++                if (this.trivialByte != 0)
++                {
++                    Arrays.fill(rslt, this.trivialByte);
++                }
++            }
++
++            return rslt;
++        }
++    }
++
++    // Copy byte representation of array to given offset in given byte array
++    public int copyToByteArray(byte[] dest, int off)
++    {
++        if (this.data == null)
++        {
++            Arrays.fill(dest, off, off + this.length, this.trivialByte);
++            return off + this.length;
++        }
++        else
++        {
++            System.arraycopy(this.data, 0, dest, off, this.data.length);
++            return off + this.data.length;
++        }
++    }
++
++    // Resize array to given byte length
++    public void resizeArray(int len)
++    {
++        if (this.data == null)
++        {
++            this.length = len;
++        }
++        else if (this.data.length != len)
++        {
++            byte[] newa = new byte[len];
++            System.arraycopy(this.data, 0, newa, 0, ((this.data.length > len) ? len : this.data.length));
++            this.data = newa;
++        }
++    }
++    // Spigot end
+ 
+     public NibbleArray(int par1, int par2)
+     {
+-        this.data = new byte[par1 >> 1];
++        // Spigot start
++        //this.a = new byte[i >> 1];
++        this.data = null; // Start off as trivial value (all same zero value)
++        this.length = par1 >> 1;
++        this.trivialByte = this.trivialValue = 0;
++        // Spigot end
+         this.depthBits = par2;
+         this.depthBitsPlusFour = par2 + 4;
+     }
+@@ -30,6 +168,7 @@ public class NibbleArray
+         this.data = par1ArrayOfByte;
+         this.depthBits = par2;
+         this.depthBitsPlusFour = par2 + 4;
++        detectAndProcessTrivialArray(); // Spigot
+     }
+ 
+     /**
+@@ -37,6 +176,11 @@ public class NibbleArray
+      */
+     public int get(int par1, int par2, int par3)
+     {
++        if (this.data == null)
++        {
++            return this.trivialValue;    // Spigot
++        }
++
+         int var4 = par2 << this.depthBitsPlusFour | par3 << this.depthBits | par1;
+         int var5 = var4 >> 1;
+         int var6 = var4 & 1;
+@@ -48,6 +192,25 @@ public class NibbleArray
+      */
+     public void set(int par1, int par2, int par3, int par4)
+     {
++        // Spigot start
++        if (this.data == null)
++        {
++            if (par4 != this.trivialValue)   // Not same as trivial value, array no longer trivial
++            {
++                this.data = new byte[this.length];
++
++                if (this.trivialByte != 0)
++                {
++                    Arrays.fill(this.data, this.trivialByte);
++                }
++            }
++            else
++            {
++                return;
++            }
++        }
++
++        // Spigot end
+         int var5 = par2 << this.depthBitsPlusFour | par3 << this.depthBits | par1;
+         int var6 = var5 >> 1;
+         int var7 = var5 & 1;
+diff --git a/src/minecraft/net/minecraft/world/chunk/storage/AnvilChunkLoader.java b/src/minecraft/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
+index b17cc68..0e1be2f 100644
+--- a/src/minecraft/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
++++ b/src/minecraft/net/minecraft/world/chunk/storage/AnvilChunkLoader.java
+@@ -314,19 +314,19 @@ public class AnvilChunkLoader implements IThreadedFileIO, IChunkLoader
+ 
+                 if (var10.getBlockMSBArray() != null)
+                 {
+-                    var11.setByteArray("Add", var10.getBlockMSBArray().data);
++                    var11.setByteArray("Add", var10.getBlockMSBArray().getValueArray()); // Spigot
+                 }
+ 
+-                var11.setByteArray("Data", var10.getMetadataArray().data);
+-                var11.setByteArray("BlockLight", var10.getBlocklightArray().data);
++                var11.setByteArray("Data", var10.getMetadataArray().getValueArray()); // Spigot
++                var11.setByteArray("BlockLight", var10.getBlocklightArray().getValueArray()); // Spigot
+ 
+                 if (var6)
+                 {
+-                    var11.setByteArray("SkyLight", var10.getSkylightArray().data);
++                    var11.setByteArray("SkyLight", var10.getSkylightArray().getValueArray()); // Spigot
+                 }
+                 else
+                 {
+-                    var11.setByteArray("SkyLight", new byte[var10.getBlocklightArray().data.length]);
++                    var11.setByteArray("SkyLight", new byte[var10.getBlocklightArray().getValueArray().length]); // Spigot
+                 }
+ 
+                 var5.appendTag(var11);
+diff --git a/src/minecraft/net/minecraft/world/chunk/storage/ExtendedBlockStorage.java b/src/minecraft/net/minecraft/world/chunk/storage/ExtendedBlockStorage.java
+index 94f71ff..52e5414 100644
+--- a/src/minecraft/net/minecraft/world/chunk/storage/ExtendedBlockStorage.java
++++ b/src/minecraft/net/minecraft/world/chunk/storage/ExtendedBlockStorage.java
+@@ -251,7 +251,8 @@ public class ExtendedBlockStorage
+         }
+         else
+         {
+-            byte[] ext = this.blockMSBArray.data;
++            this.blockMSBArray.forceToNonTrivialArray(); // Spigot
++            byte[] ext = this.blockMSBArray.getValueArray();
+ 
+             for (int off = 0, off2 = 0; off < blkIds.length;)
+             {
+@@ -300,6 +301,16 @@ public class ExtendedBlockStorage
+                 off++;
+                 off2++;
+             }
++
++            // Spigot start
++            this.blockMSBArray.detectAndProcessTrivialArray();
++
++            if (this.blockMSBArray.isTrivialArray() && (this.blockMSBArray.getTrivialArrayValue() == 0))
++            {
++                this.blockMSBArray = null;
++            }
++
++            // Spigot end
+         }
+ 
+         this.blockRefCount = cntNonEmpty;
+@@ -396,15 +407,14 @@ public class ExtendedBlockStorage
+         // CraftBukkit start - don't hang on to an empty nibble array
+         boolean empty = true;
+ 
+-        for (int i = 0; i < par1NibbleArray.data.length; i++)
++        // Spigot start
++        if ((!par1NibbleArray.isTrivialArray()) || (par1NibbleArray.getTrivialArrayValue() != 0))
+         {
+-            if (par1NibbleArray.data[i] != 0)
+-            {
+-                empty = false;
+-                break;
+-            }
++            empty = false;
+         }
+ 
++        // Spigot end
++
+         if (empty)
+         {
+             return;
+@@ -441,11 +451,9 @@ public class ExtendedBlockStorage
+     // Spigot start - validate/correct nibble array
+     private static final NibbleArray validateNibbleArray(NibbleArray na)
+     {
+-        if ((na != null) && (na.data.length < 2048))
++        if ((na != null) && (na.getByteLength() < 2048))
+         {
+-            NibbleArray newna = new NibbleArray(4096, 4);
+-            System.arraycopy(na.data, 0, newna.data, 0, na.data.length);
+-            na = newna;
++            na.resizeArray(2048);
+         }
+ 
+         return na;
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftChunk.java b/src/minecraft/org/bukkit/craftbukkit/CraftChunk.java
+index 34625f8..03992c4 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftChunk.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftChunk.java
+@@ -168,7 +168,18 @@ public class CraftChunk implements Chunk {
+                 }
+ 
+                 if (cs[i].getBlockMSBArray/*was:i*/() != null) { /* If we've got extended IDs */
+-                    byte[] extids = cs[i].getBlockMSBArray/*was:i*/().data/*was:a*/;
++                    // Spigot start
++                    if (cs[i].getBlockMSBArray/*was:i*/().isTrivialArray()) {
++                        int tval = cs[i].getBlockMSBArray/*was:i*/().getTrivialArrayValue();
++                        if (tval != 0) {
++                            tval = tval << 8;
++                            for (int j = 0; j < 4096; j++) {
++                                blockids[j << 1] |= tval;
++                            }
++                        }
++                  } else {
++                    byte[] extids = cs[i].getBlockMSBArray/*was:i*/().getValueArray();
++                    // Spigot end
+ 
+                     for (int j = 0; j < 2048; j++) {
+                         short b = (short) (extids[j] & 0xFF);
+@@ -180,21 +191,42 @@ public class CraftChunk implements Chunk {
+                         blockids[j<<1] |= (b & 0x0F) << 8;
+                         blockids[(j<<1)+1] |= (b & 0xF0) << 4;
+                     }
++                    } // Spigot
+                 }
+ 
+                 sectionBlockIDs[i] = blockids;
+ 
+                 /* Get block data nibbles */
+-                sectionBlockData[i] = new byte[2048];
+-                System.arraycopy(cs[i].getMetadataArray/*was:j*/().data/*was:a*/, 0, sectionBlockData[i], 0, 2048); // Should be getData
++                // Spigot start
++                if (cs[i].getMetadataArray/*was:j*/().isTrivialArray() && (cs[i].getMetadataArray/*was:j*/().getTrivialArrayValue() == 0)) {
++                    sectionBlockData[i] = emptyData;
++                } else {
++                    sectionBlockData[i] = new byte[2048];
++                    cs[i].getMetadataArray/*was:j*/().copyToByteArray(sectionBlockData[i], 0);
++                }
+                 if (cs[i].getSkylightArray/*was:l*/() == null) {
+                     sectionSkyLights[i] = emptyData;
++                }
++                else if (cs[i].getSkylightArray/*was:l*/().isTrivialArray()) {
++                    if (cs[i].getSkylightArray/*was:l*/().getTrivialArrayValue() == 0) {
++                        sectionSkyLights[i] = emptyData;
++                    } else if (cs[i].getSkylightArray/*was:l*/().getTrivialArrayValue() == 15) {
++                        sectionSkyLights[i] = emptySkyLight;
++                    } else {
++                        sectionSkyLights[i] = new byte[2048];
++                        cs[i].getSkylightArray/*was:l*/().copyToByteArray(sectionSkyLights[i], 0);
++                    }
+                 } else {
+                     sectionSkyLights[i] = new byte[2048];
+-                    System.arraycopy(cs[i].getSkylightArray/*was:l*/().data/*was:a*/, 0, sectionSkyLights[i], 0, 2048); // Should be getSkyLight
++                    cs[i].getSkylightArray/*was:l*/().copyToByteArray(sectionSkyLights[i], 0);
++                }
++                if (cs[i].getBlocklightArray/*was:k*/().isTrivialArray() && (cs[i].getBlocklightArray/*was:k*/().getTrivialArrayValue() == 0)) {
++                    sectionEmitLights[i] = emptyData;
++                } else {
++                    sectionEmitLights[i] = new byte[2048];
++                    cs[i].getBlocklightArray/*was:k*/().copyToByteArray(sectionEmitLights[i], 0);
+                 }
+-                sectionEmitLights[i] = new byte[2048];
+-                System.arraycopy(cs[i].getBlocklightArray/*was:k*/().data/*was:a*/, 0, sectionEmitLights[i], 0, 2048); // Should be getBlockLight
++                // Spigot end
+             }
+         }
+ 

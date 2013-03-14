@@ -1,0 +1,19 @@
+From f172c526d82dd1e9756d93d18fe1d14d2fb5aaf4 Mon Sep 17 00:00:00 2001
+From: EvilSeph <evilseph@gmail.com>
+Date: Thu, 17 Jan 2013 05:30:48 -0500
+Subject: [PATCH] Updated version to 1.4.7-R0.2-SNAPSHOT for development towards next release.
+
+
+diff --git a/pom.xml b/pom.xml
+index 9930e0b..aa4ac8b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -4,7 +4,7 @@
+   <groupId>org.bukkit</groupId>
+   <artifactId>craftbukkit</artifactId>
+   <packaging>jar</packaging>
+-  <version>1.4.7-R0.1</version>
++  <version>1.4.7-R0.2-SNAPSHOT</version>
+   <name>CraftBukkit</name>
+   <url>http://www.bukkit.org</url>
+ 

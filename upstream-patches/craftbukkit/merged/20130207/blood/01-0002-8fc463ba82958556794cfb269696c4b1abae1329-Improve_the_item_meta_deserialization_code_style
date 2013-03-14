@@ -1,0 +1,333 @@
+From 8fc463ba82958556794cfb269696c4b1abae1329 Mon Sep 17 00:00:00 2001
+From: Wesley Wolfe <weswolf@aol.com>
+Date: Fri, 18 Jan 2013 02:21:38 -0600
+Subject: [PATCH] Improve the item meta deserialization code-style
+
+Fixed the ItemMetaFireworkTest
+
+Add set power unit tests for FireworkMeta
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+index 9b2a2e8..74192a3 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+@@ -256,9 +256,4 @@ class CraftMetaBook extends CraftMetaItem implements BookMeta {
+ 
+         return builder;
+     }
+-
+-    @Override
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.BOOK;
+-    }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
+index 17ea3a1..32c8eb5 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
+@@ -7,7 +7,6 @@ import org.bukkit.FireworkEffect;
+ import org.bukkit.Material;
+ import org.bukkit.configuration.serialization.DelegateDeserialization;
+ import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
+-import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta.Deserializers;
+ import org.bukkit.inventory.meta.FireworkEffectMeta;
+ 
+ import com.google.common.collect.ImmutableMap.Builder;
+@@ -125,9 +124,4 @@ class CraftMetaCharge extends CraftMetaItem implements FireworkEffectMeta {
+ 
+         return builder;
+     }
+-
+-    @Override
+-    Deserializers deserializer() {
+-        return Deserializers.FIREWORK_EFFECT;
+-    }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaEnchantedBook.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaEnchantedBook.java
+index d3ef900..26984e1 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaEnchantedBook.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaEnchantedBook.java
+@@ -7,7 +7,6 @@ import java.util.Map;
+ import org.bukkit.Material;
+ import org.bukkit.configuration.serialization.DelegateDeserialization;
+ import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
+-import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta.Deserializers;
+ import org.bukkit.enchantments.Enchantment;
+ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+ 
+@@ -122,11 +121,6 @@ class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorage
+         return builder;
+     }
+ 
+-    @Override
+-    Deserializers deserializer() {
+-        return Deserializers.ENCHANTED;
+-    }
+-
+     boolean isEnchantedEmpty() {
+         return !hasStoredEnchants();
+     }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
+index 58ac28b..a9d4d3c 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
+@@ -15,7 +15,6 @@ import org.bukkit.configuration.serialization.DelegateDeserialization;
+ import org.bukkit.craftbukkit.inventory.CraftMetaItem.ItemMetaKey.Specific;
+ import org.bukkit.craftbukkit.inventory.CraftMetaItem.ItemMetaKey.Specific.To;
+ import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta;
+-import org.bukkit.craftbukkit.inventory.CraftMetaItem.SerializableMeta.Deserializers;
+ import org.bukkit.inventory.meta.FireworkMeta;
+ 
+ import com.google.common.collect.ImmutableList;
+@@ -313,11 +312,6 @@ class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
+     }
+ 
+     @Override
+-    Deserializers deserializer() {
+-        return Deserializers.FIREWORK;
+-    }
+-
+-    @Override
+     public CraftMetaFirework clone() {
+         CraftMetaFirework meta = (CraftMetaFirework) super.clone();
+ 
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
+index bb8974c..1b671e8 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
+@@ -4,6 +4,8 @@ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Retention;
+ import java.lang.annotation.RetentionPolicy;
+ import java.lang.annotation.Target;
++import java.lang.reflect.Constructor;
++import java.lang.reflect.InvocationTargetException;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.HashMap;
+@@ -82,79 +84,55 @@ class CraftMetaItem implements ItemMeta, Repairable {
+     public static class SerializableMeta implements ConfigurationSerializable {
+         static final String TYPE_FIELD = "meta-type";
+ 
+-        enum Deserializers {
+-            BOOK {
+-                @Override
+-                CraftMetaBook deserialize(Map<String, Object> map) {
+-                    return new CraftMetaBook(map);
++        static final ImmutableMap<Class<? extends CraftMetaItem>, String> classMap;
++        static final ImmutableMap<String, Constructor<? extends CraftMetaItem>> constructorMap;
++
++        static {
++            classMap = ImmutableMap.<Class<? extends CraftMetaItem>, String>builder()
++                    .put(CraftMetaBook.class, "BOOK")
++                    .put(CraftMetaSkull.class, "SKULL")
++                    .put(CraftMetaLeatherArmor.class, "LEATHER_ARMOR")
++                    .put(CraftMetaMap.class, "MAP")
++                    .put(CraftMetaPotion.class, "POTION")
++                    .put(CraftMetaEnchantedBook.class, "ENCHANTED")
++                    .put(CraftMetaFirework.class, "FIREWORK")
++                    .put(CraftMetaCharge.class, "FIREWORK_EFFECT")
++                    .put(CraftMetaItem.class, "UNSPECIFIC")
++                    .build();
++
++            final ImmutableMap.Builder<String, Constructor<? extends CraftMetaItem>> classConstructorBuilder = ImmutableMap.builder();
++            for (Map.Entry<Class<? extends CraftMetaItem>, String> mapping : classMap.entrySet()) {
++                try {
++                    classConstructorBuilder.put(mapping.getValue(), mapping.getKey().getDeclaredConstructor(Map.class));
++                } catch (NoSuchMethodException e) {
++                    throw new AssertionError(e);
+                 }
+-            },
+-            SKULL {
+-                @Override
+-                CraftMetaSkull deserialize(Map<String, Object> map) {
+-                    return new CraftMetaSkull(map);
+-                }
+-            },
+-            LEATHER_ARMOR {
+-                @Override
+-                CraftMetaLeatherArmor deserialize(Map<String, Object> map) {
+-                    return new CraftMetaLeatherArmor(map);
+-                }
+-            },
+-            MAP {
+-                @Override
+-                CraftMetaMap deserialize(Map<String, Object> map) {
+-                    return new CraftMetaMap(map);
+-                }
+-            },
+-            POTION {
+-                @Override
+-                CraftMetaPotion deserialize(Map<String, Object> map) {
+-                    return new CraftMetaPotion(map);
+-                }
+-            },
+-            ENCHANTED {
+-                @Override
+-                CraftMetaEnchantedBook deserialize(Map<String, Object> map) {
+-                    return new CraftMetaEnchantedBook(map);
+-                }
+-            },
+-            FIREWORK {
+-                @Override
+-                CraftMetaFirework deserialize(Map<String, Object> map) {
+-                    return new CraftMetaFirework(map);
+-                }
+-            },
+-            FIREWORK_EFFECT {
+-                @Override
+-                CraftMetaCharge deserialize(Map<String, Object> map) {
+-                    return new CraftMetaCharge(map);
+-                }
+-            },
+-            UNSPECIFIC {
+-                @Override
+-                CraftMetaItem deserialize(Map<String, Object> map) {
+-                    return new CraftMetaItem(map);
+-                }
+-            };
+-
+-            abstract CraftMetaItem deserialize(Map<String, Object> map);
++            }
++            constructorMap = classConstructorBuilder.build();
+         }
+ 
+         private SerializableMeta() {
+         }
+ 
+-        public static ItemMeta deserialize(Map<String, Object> map) {
++        public static ItemMeta deserialize(Map<String, Object> map) throws Throwable {
+             Validate.notNull(map, "Cannot deserialize null map");
+ 
+             String type = getString(map, TYPE_FIELD, false);
+-            Deserializers deserializer = Deserializers.valueOf(type);
++            Constructor<? extends CraftMetaItem> constructor = constructorMap.get(type);
+ 
+-            if (deserializer == null) {
++            if (constructor == null) {
+                 throw new IllegalArgumentException(type + " is not a valid " + TYPE_FIELD);
+             }
+ 
+-            return deserializer.deserialize(map);
++            try {
++                return constructor.newInstance(map);
++            } catch (final InstantiationException e) {
++                throw new AssertionError(e);
++            } catch (final IllegalAccessException e) {
++                throw new AssertionError(e);
++            } catch (final InvocationTargetException e) {
++                throw e.getCause();
++            }
+         }
+ 
+         public Map<String, Object> serialize() {
+@@ -512,7 +490,7 @@ class CraftMetaItem implements ItemMeta, Repairable {
+ 
+     public final Map<String, Object> serialize() {
+         ImmutableMap.Builder<String, Object> map = ImmutableMap.builder();
+-        map.put(SerializableMeta.TYPE_FIELD, deserializer().name());
++        map.put(SerializableMeta.TYPE_FIELD, SerializableMeta.classMap.get(getClass()));
+         serialize(map);
+         return map.build();
+     }
+@@ -549,11 +527,6 @@ class CraftMetaItem implements ItemMeta, Repairable {
+         builder.put(key.BUKKIT, enchants.build());
+     }
+ 
+-    @Overridden
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.UNSPECIFIC;
+-    }
+-
+     static void safelyAdd(Iterable<?> addFrom, Collection<String> addTo, int maxItemLength) {
+         if (addFrom == null) {
+             return;
+@@ -580,6 +553,6 @@ class CraftMetaItem implements ItemMeta, Repairable {
+ 
+     @Override
+     public final String toString() {
+-        return deserializer().toString() + "_META:" + serialize(); // TODO: cry
++        return SerializableMeta.classMap.get(getClass()) + "_META:" + serialize(); // TODO: cry
+     }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaLeatherArmor.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaLeatherArmor.java
+index a640c7b..98d812e 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaLeatherArmor.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaLeatherArmor.java
+@@ -44,6 +44,7 @@ class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
+         setColor(SerializableMeta.getObject(Color.class, map, COLOR.BUKKIT, true));
+     }
+ 
++    @Override
+     void applyToItem(net.minecraft.nbt.NBTTagCompound/*was:NBTTagCompound*/ itemTag) {
+         super.applyToItem(itemTag);
+ 
+@@ -61,6 +62,7 @@ class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
+         return !(hasColor());
+     }
+ 
++    @Override
+     boolean applicableTo(Material type) {
+         switch(type) {
+             case LEATHER_HELMET:
+@@ -102,11 +104,6 @@ class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
+     }
+ 
+     @Override
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.LEATHER_ARMOR;
+-    }
+-
+-    @Override
+     boolean equalsCommon(CraftMetaItem meta) {
+         if (!super.equalsCommon(meta)) {
+             return false;
+@@ -124,6 +121,7 @@ class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmorMeta {
+         return super.notUncommon(meta) && (meta instanceof CraftMetaLeatherArmor || isLeatherArmorEmpty());
+     }
+ 
++    @Override
+     int applyHash() {
+         final int original;
+         int hash = original = super.applyHash();
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
+index ac15c04..595d56a 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
+@@ -131,9 +131,4 @@ class CraftMetaMap extends CraftMetaItem implements MapMeta {
+ 
+         return builder;
+     }
+-
+-    @Override
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.MAP;
+-    }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
+index f455767..aaaea52 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
+@@ -250,9 +250,4 @@ class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
+ 
+         return builder;
+     }
+-
+-    @Override
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.POTION;
+-    }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
+index 649d242..8eb4434 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaSkull.java
+@@ -125,9 +125,4 @@ class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
+         }
+         return builder;
+     }
+-
+-    @Override
+-    SerializableMeta.Deserializers deserializer() {
+-        return SerializableMeta.Deserializers.SKULL;
+-    }
+ }

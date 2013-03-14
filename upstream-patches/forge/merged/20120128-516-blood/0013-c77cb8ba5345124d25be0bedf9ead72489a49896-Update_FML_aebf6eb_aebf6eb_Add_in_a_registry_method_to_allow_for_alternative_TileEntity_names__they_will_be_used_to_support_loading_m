@@ -1,0 +1,675 @@
+From c77cb8ba5345124d25be0bedf9ead72489a49896 Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Tue, 22 Jan 2013 13:53:46 -0500
+Subject: [PATCH] Update FML:aebf6eb
+ aebf6eb Add in a registry method to allow for alternative TileEntity names- they will be used to support loading maps containing the older definiti
+
+
+diff --git a/fml-src-1.4.7-4.7.21.538-master.zip b/fml-src-1.4.7-4.7.21.538-master.zip
+deleted file mode 100644
+index 4067978..0000000
+Binary files a/fml-src-1.4.7-4.7.21.538-master.zip and /dev/null differ
+diff --git a/fml-src-1.4.7-4.7.22.539-master.zip b/fml-src-1.4.7-4.7.22.539-master.zip
+new file mode 100644
+index 0000000..502748d
+Binary files /dev/null and b/fml-src-1.4.7-4.7.22.539-master.zip differ
+diff --git a/src/minecraft/cpw/mods/fml/common/BukkitProxy.java b/src/minecraft/cpw/mods/fml/common/BukkitProxy.java
+index d0dcfb3..19257da 100644
+--- a/src/minecraft/cpw/mods/fml/common/BukkitProxy.java
++++ b/src/minecraft/cpw/mods/fml/common/BukkitProxy.java
+@@ -2,7 +2,7 @@ package cpw.mods.fml.common;
+ 
+ /**
+  * A marker interface for retrieving a proxy to a bukkit plugin.
+- * Fields associated with {@link BukkitPluginRef} annotations should be should probably
++ * Fields associated with {@link BukkitPluginRef} annotations should
+  * declare this type and cast down if the target is available (not null)
+  * @author cpw
+  *
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java b/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
+index 7f7e8ca..76cad1b 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
+@@ -304,9 +304,14 @@ public class FMLCommonHandler
+         }
+     }
+ 
+-    public void handleServerStarting(MinecraftServer server)
++    public boolean handleServerAboutToStart(MinecraftServer server)
+     {
+-        Loader.instance().serverStarting(server);
++        return Loader.instance().serverAboutToStart(server);
++    }
++
++    public boolean handleServerStarting(MinecraftServer server)
++    {
++        return Loader.instance().serverStarting(server);
+     }
+ 
+     public void handleServerStarted()
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLModContainer.java b/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
+index 7ab6449..252aea2 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
+@@ -58,6 +58,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+ import cpw.mods.fml.common.event.FMLFingerprintViolationEvent;
+ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
++import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
+ import cpw.mods.fml.common.event.FMLServerStartedEvent;
+ import cpw.mods.fml.common.event.FMLServerStartingEvent;
+ import cpw.mods.fml.common.event.FMLServerStoppedEvent;
+@@ -90,6 +91,7 @@ public class FMLModContainer implements ModContainer
+         .put(FMLPreInitializationEvent.class, Mod.PreInit.class)
+         .put(FMLInitializationEvent.class, Mod.Init.class)
+         .put(FMLPostInitializationEvent.class, Mod.PostInit.class)
++        .put(FMLServerAboutToStartEvent.class, Mod.ServerAboutToStart.class)
+         .put(FMLServerStartingEvent.class, Mod.ServerStarting.class)
+         .put(FMLServerStartedEvent.class, Mod.ServerStarted.class)
+         .put(FMLServerStoppingEvent.class, Mod.ServerStopping.class)
+diff --git a/src/minecraft/cpw/mods/fml/common/Loader.java b/src/minecraft/cpw/mods/fml/common/Loader.java
+index d66ec02..3ac4564 100644
+--- a/src/minecraft/cpw/mods/fml/common/Loader.java
++++ b/src/minecraft/cpw/mods/fml/common/Loader.java
+@@ -377,7 +377,7 @@ public class Loader
+     }
+ 
+     /**
+-     * @return
++     *
+      */
+     private void initializeLoader()
+     {
+@@ -695,10 +695,19 @@ public class Loader
+         return "Minecraft " + mccversion;
+     }
+ 
+-    public void serverStarting(Object server)
++    public boolean serverStarting(Object server)
+     {
+-        modController.distributeStateMessage(LoaderState.SERVER_STARTING, server);
+-        modController.transition(LoaderState.SERVER_STARTING);
++        try
++        {
++            modController.distributeStateMessage(LoaderState.SERVER_STARTING, server);
++            modController.transition(LoaderState.SERVER_STARTING);
++        }
++        catch (Throwable t)
++        {
++            FMLLog.log(Level.SEVERE, t, "A fatal exception occurred during the server starting event");
++            return false;
++        }
++        return true;
+     }
+ 
+     public void serverStarted()
+@@ -752,4 +761,19 @@ public class Loader
+         modController.transition(LoaderState.SERVER_STOPPED);
+         modController.transition(LoaderState.AVAILABLE);
+     }
++
++    public boolean serverAboutToStart(MinecraftServer server)
++    {
++        try
++        {
++            modController.distributeStateMessage(LoaderState.SERVER_ABOUT_TO_START, server);
++            modController.transition(LoaderState.SERVER_ABOUT_TO_START);
++        }
++        catch (Throwable t)
++        {
++            FMLLog.log(Level.SEVERE, t, "A fatal exception occurred during the server about to start event");
++            return false;
++        }
++        return true;
++    }
+ }
+diff --git a/src/minecraft/cpw/mods/fml/common/LoaderState.java b/src/minecraft/cpw/mods/fml/common/LoaderState.java
+index 0bd7803..4bdb122 100644
+--- a/src/minecraft/cpw/mods/fml/common/LoaderState.java
++++ b/src/minecraft/cpw/mods/fml/common/LoaderState.java
+@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
+ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
++import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
+ import cpw.mods.fml.common.event.FMLServerStartedEvent;
+ import cpw.mods.fml.common.event.FMLServerStartingEvent;
+ import cpw.mods.fml.common.event.FMLServerStoppedEvent;
+@@ -28,6 +29,7 @@ public enum LoaderState
+     INITIALIZATION("Initializing mods", FMLInitializationEvent.class),
+     POSTINITIALIZATION("Post-initializing mods", FMLPostInitializationEvent.class),
+     AVAILABLE("Mod loading complete", FMLLoadCompleteEvent.class),
++    SERVER_ABOUT_TO_START("Server about to start", FMLServerAboutToStartEvent.class),
+     SERVER_STARTING("Server starting", FMLServerStartingEvent.class),
+     SERVER_STARTED("Server started", FMLServerStartedEvent.class),
+     SERVER_STOPPING("Server stopping", FMLServerStoppingEvent.class),
+diff --git a/src/minecraft/cpw/mods/fml/common/Mod.java b/src/minecraft/cpw/mods/fml/common/Mod.java
+index 5aa5cd4..51d7537 100644
+--- a/src/minecraft/cpw/mods/fml/common/Mod.java
++++ b/src/minecraft/cpw/mods/fml/common/Mod.java
+@@ -145,6 +145,14 @@ public @interface Mod
+     @Target(ElementType.METHOD)
+     public @interface PostInit {}
+     /**
++     * Mark the designated method as being called at the "server-about-to-start" phase
++     * @author cpw
++     *
++     */
++    @Retention(RetentionPolicy.RUNTIME)
++    @Target(ElementType.METHOD)
++    public @interface ServerAboutToStart {}
++    /**
+      * Mark the designated method as being called at the "server-starting" phase
+      * @author cpw
+      *
+diff --git a/src/minecraft/cpw/mods/fml/common/event/FMLServerAboutToStartEvent.java b/src/minecraft/cpw/mods/fml/common/event/FMLServerAboutToStartEvent.java
+new file mode 100644
+index 0000000..14574c1
+--- /dev/null
++++ b/src/minecraft/cpw/mods/fml/common/event/FMLServerAboutToStartEvent.java
+@@ -0,0 +1,25 @@
++package cpw.mods.fml.common.event;
++
++import net.minecraft.server.MinecraftServer;
++import cpw.mods.fml.common.LoaderState.ModState;
++
++public class FMLServerAboutToStartEvent extends FMLStateEvent {
++
++    private MinecraftServer server;
++
++    public FMLServerAboutToStartEvent(Object... data)
++    {
++        super(data);
++        this.server = (MinecraftServer) data[0];
++    }
++    @Override
++    public ModState getModState()
++    {
++        return ModState.AVAILABLE;
++    }
++
++    public MinecraftServer getServer()
++    {
++        return server;
++    }
++}
+diff --git a/src/minecraft/cpw/mods/fml/common/network/NetworkMod.java b/src/minecraft/cpw/mods/fml/common/network/NetworkMod.java
+index 3f3bc24..44f5936 100644
+--- a/src/minecraft/cpw/mods/fml/common/network/NetworkMod.java
++++ b/src/minecraft/cpw/mods/fml/common/network/NetworkMod.java
+@@ -35,7 +35,7 @@ public @interface NetworkMod
+     Class<? extends IPacketHandler> packetHandler() default NULL.class;
+ 
+     /**
+-     * A tiny packet handler implementation based on {@link Packet131MapData} for "small"
++     * A tiny packet handler implementation based on {@link net.minecraft.network.packet.Packet131MapData} for "small"
+      * data packet loads.
+      */
+     Class<? extends ITinyPacketHandler> tinyPacketHandler() default NULL.class;
+diff --git a/src/minecraft/cpw/mods/fml/common/network/NetworkModHandler.java b/src/minecraft/cpw/mods/fml/common/network/NetworkModHandler.java
+index 2c5c392..6d71b98 100644
+--- a/src/minecraft/cpw/mods/fml/common/network/NetworkModHandler.java
++++ b/src/minecraft/cpw/mods/fml/common/network/NetworkModHandler.java
+@@ -193,7 +193,7 @@ public class NetworkModHandler
+         }
+     }
+     /**
+-     * @return
++     * @return the default {@link NetworkMod#connectionHandler()} annotation value
+      */
+     private Object getConnectionHandlerDefaultValue()
+     {
+@@ -211,7 +211,7 @@ public class NetworkModHandler
+     }
+ 
+     /**
+-     * @return
++     * @return the default {@link NetworkMod#packetHandler()} annotation value
+      */
+     private Object getPacketHandlerDefaultValue()
+     {
+@@ -228,6 +228,9 @@ public class NetworkModHandler
+         }
+     }
+ 
++    /**
++     * @return the default {@link NetworkMod#tinyPacketHandler()} annotation value
++     */
+     private Object getTinyPacketHandlerDefaultValue()
+     {
+         try {
+@@ -243,7 +246,7 @@ public class NetworkModHandler
+         }
+     }
+     /**
+-     * @return
++     * @return the {@link NetworkMod#clientPacketHandlerSpec()} default annotation value
+      */
+     private Object getClientHandlerSpecDefaultValue()
+     {
+@@ -260,7 +263,7 @@ public class NetworkModHandler
+         }
+     }
+     /**
+-     * @return
++     * @return the default {@link NetworkMod#serverPacketHandlerSpec()} annotation value
+      */
+     private Object getServerHandlerSpecDefaultValue()
+     {
+diff --git a/src/minecraft/cpw/mods/fml/common/network/NetworkRegistry.java b/src/minecraft/cpw/mods/fml/common/network/NetworkRegistry.java
+index d2d7a73..2c2f652 100644
+--- a/src/minecraft/cpw/mods/fml/common/network/NetworkRegistry.java
++++ b/src/minecraft/cpw/mods/fml/common/network/NetworkRegistry.java
+@@ -64,7 +64,7 @@ public class NetworkRegistry
+     }
+     /**
+      * Get the packet 250 channel registration string
+-     * @return
++     * @return the {@link Packet250CustomPayload} channel registration string
+      */
+     byte[] getPacketRegistry(Side side)
+     {
+@@ -81,8 +81,8 @@ public class NetworkRegistry
+     }
+     /**
+      * register a channel to a mod
+-     * @param container
+-     * @param channelName
++     * @param handler the packet handler
++     * @param channelName the channel name to register it with
+      */
+     public void registerChannel(IPacketHandler handler, String channelName)
+     {
+diff --git a/src/minecraft/cpw/mods/fml/common/registry/GameRegistry.java b/src/minecraft/cpw/mods/fml/common/registry/GameRegistry.java
+index 33f57ea..8c11697 100644
+--- a/src/minecraft/cpw/mods/fml/common/registry/GameRegistry.java
++++ b/src/minecraft/cpw/mods/fml/common/registry/GameRegistry.java
+@@ -45,6 +45,7 @@ import cpw.mods.fml.common.IWorldGenerator;
+ import cpw.mods.fml.common.Loader;
+ import cpw.mods.fml.common.LoaderException;
+ import cpw.mods.fml.common.LoaderState;
++import cpw.mods.fml.common.ObfuscationReflectionHelper;
+ import cpw.mods.fml.common.Mod.Block;
+ import cpw.mods.fml.common.ModContainer;
+ 
+@@ -145,7 +146,7 @@ public class GameRegistry
+     /**
+      * Private and not yet working properly
+      *
+-     * @return
++     * @return a block id
+      */
+     private static int findSpareBlockId()
+     {
+@@ -278,6 +279,27 @@ public class GameRegistry
+         TileEntity.addMapping(tileEntityClass, id);
+     }
+ 
++    /**
++     * Register a tile entity, with alternative TileEntity identifiers. Use with caution!
++     * This method allows for you to "rename" the 'id' of the tile entity.
++     *
++     * @param tileEntityClass The tileEntity class to register
++     * @param id The primary ID, this will be the ID that the tileentity saves as
++     * @param alternatives A list of alternative IDs that will also map to this class. These will never save, but they will load
++     */
++    public static void registerTileEntityWithAlternatives(Class<? extends TileEntity> tileEntityClass, String id, String... alternatives)
++    {
++        TileEntity.addMapping(tileEntityClass, id);
++        Map<String,Class> teMappings = ObfuscationReflectionHelper.getPrivateValue(TileEntity.class, null, "nameToClassMap", "a");
++        for (String s: alternatives)
++        {
++            if (!teMappings.containsKey(s))
++            {
++                teMappings.put(s, tileEntityClass);
++            }
++        }
++    }
++
+     public static void addBiome(BiomeGenBase biome)
+     {
+         WorldType.DEFAULT.addNewBiome(biome);
+diff --git a/src/minecraft/cpw/mods/fml/common/registry/TickRegistry.java b/src/minecraft/cpw/mods/fml/common/registry/TickRegistry.java
+index 76714fe..b16f856 100644
+--- a/src/minecraft/cpw/mods/fml/common/registry/TickRegistry.java
++++ b/src/minecraft/cpw/mods/fml/common/registry/TickRegistry.java
+@@ -58,8 +58,8 @@ public class TickRegistry
+     }
+ 
+     /**
+-     * @param side
+-     * @return
++     * @param side the side to get the tick queue for
++     * @return the queue for the effective side
+      */
+     private static PriorityQueue<TickQueueElement> getQueue(Side side)
+     {
+diff --git a/src/minecraft/cpw/mods/fml/common/registry/VillagerRegistry.java b/src/minecraft/cpw/mods/fml/common/registry/VillagerRegistry.java
+index 4ec85eb..881a7cf 100644
+--- a/src/minecraft/cpw/mods/fml/common/registry/VillagerRegistry.java
++++ b/src/minecraft/cpw/mods/fml/common/registry/VillagerRegistry.java
+@@ -37,7 +37,7 @@ public class VillagerRegistry
+     private List<Integer> newVillagerIds = Lists.newArrayList();
+ 
+     /**
+-     * Allow access to the {@link StructureVillagePieces} array controlling new village
++     * Allow access to the {@link net.minecraft.world.gen.structure.StructureVillagePieces} array controlling new village
+      * creation so you can insert your own new village pieces
+      *
+      * @author cpw
+@@ -46,7 +46,7 @@ public class VillagerRegistry
+     public interface IVillageCreationHandler
+     {
+         /**
+-         * Called when {@link MapGenVillage} is creating a new village
++         * Called when {@link net.minecraft.world.gen.structure.MapGenVillage} is creating a new village
+          *
+          * @param random
+          * @param i
+@@ -60,7 +60,7 @@ public class VillagerRegistry
+ 
+ 
+         /**
+-         * Build an instance of the village component {@link StructureVillagePieces}
++         * Build an instance of the village component {@link net.minecraft.world.gen.structure.StructureVillagePieces}
+          * @param villagePiece
+          * @param startPiece
+          * @param pieces
+@@ -150,10 +150,10 @@ public class VillagerRegistry
+         }
+         return defaultSkin;
+     }
+-    
++
+     /**
+      * Returns a list of all added villager types
+-     * 
++     *
+      * @return newVillagerIds
+      */
+     public static Collection<Integer> getRegisteredVillagers()
+diff --git a/src/minecraft/cpw/mods/fml/relauncher/FMLRelauncher.java b/src/minecraft/cpw/mods/fml/relauncher/FMLRelauncher.java
+index a8e7416..ba40533 100644
+--- a/src/minecraft/cpw/mods/fml/relauncher/FMLRelauncher.java
++++ b/src/minecraft/cpw/mods/fml/relauncher/FMLRelauncher.java
+@@ -177,7 +177,7 @@ public class FMLRelauncher
+     }
+ 
+     /**
+-     * @return
++     * @return the location of the client home
+      */
+     private File computeExistingClientHome()
+     {
+diff --git a/src/minecraft/cpw/mods/fml/relauncher/RelaunchLibraryManager.java b/src/minecraft/cpw/mods/fml/relauncher/RelaunchLibraryManager.java
+index 4d83ca6..a5f7d32 100644
+--- a/src/minecraft/cpw/mods/fml/relauncher/RelaunchLibraryManager.java
++++ b/src/minecraft/cpw/mods/fml/relauncher/RelaunchLibraryManager.java
+@@ -401,8 +401,8 @@ public class RelaunchLibraryManager
+     }
+ 
+     /**
+-     * @param mcDir
+-     * @return
++     * @param mcDir the minecraft home directory
++     * @return the lib directory
+      */
+     private static File setupLibDir(File mcDir)
+     {
+@@ -427,8 +427,8 @@ public class RelaunchLibraryManager
+     }
+ 
+     /**
+-     * @param mcDir
+-     * @return
++     * @param mcDir the minecraft home directory
++     * @return the coremod directory
+      */
+     private static File setupCoreModDir(File mcDir)
+     {
+diff --git a/src/minecraft/cpw/mods/fml/server/FMLServerHandler.java b/src/minecraft/cpw/mods/fml/server/FMLServerHandler.java
+index be36fd7..91e2973 100644
+--- a/src/minecraft/cpw/mods/fml/server/FMLServerHandler.java
++++ b/src/minecraft/cpw/mods/fml/server/FMLServerHandler.java
+@@ -42,7 +42,7 @@ import cpw.mods.fml.relauncher.Side;
+  * Handles primary communication from hooked code into the system
+  *
+  * The FML entry point is {@link #beginServerLoading(MinecraftServer)} called from
+- * {@link net.minecraft.shared.DedicatedServer}
++ * {@link net.minecraft.server.dedicated.DedicatedServer}
+  *
+  * Obfuscated code should focus on this class and other members of the "server"
+  * (or "client") code
+diff --git a/src/minecraft/fmlversion.properties b/src/minecraft/fmlversion.properties
+index 0c442ab..75749a8 100644
+--- a/src/minecraft/fmlversion.properties
++++ b/src/minecraft/fmlversion.properties
+@@ -1,10 +1,10 @@
+-#Sun, 20 Jan 2013 16:04:30 -0700
++#Tue, 22 Jan 2013 11:23:10 -0700
+ fmlbuild.major.number=4
+ fmlbuild.minor.number=7
+-fmlbuild.revision.number=18
+-fmlbuild.githash=g5ce4e31
++fmlbuild.revision.number=22
++fmlbuild.githash=gaebf6eb
+ fmlbuild.mcpversion=7.26a
+ fmlbuild.mcversion=1.4.7
+ fmlbuild.branch=master
+ 
+-fmlbuild.build.number=535
++fmlbuild.build.number=539
+diff --git a/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java b/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
+index aae98c6..5bfa8d4 100644
+--- a/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
++++ b/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
+@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
+ import java.io.IOException;
+ import net.minecraft.world.World;
+ import net.minecraft.world.chunk.Chunk;
++import net.minecraftforge.common.MinecraftForge;
+ 
+ public class Packet52MultiBlockChange extends Packet
+ {
+@@ -38,7 +39,7 @@ public class Packet52MultiBlockChange extends Packet
+ 
+         try
+         {
+-            if (par4 >= 64)
++            if (par4 >= MinecraftForge.clumpingThreshold)
+             {
+                 System.out.println("ChunkTilesUpdatePacket compress " + par4);
+ 
+diff --git a/src/minecraft/net/minecraft/server/dedicated/DedicatedServer.java b/src/minecraft/net/minecraft/server/dedicated/DedicatedServer.java
+index ad0b3b9..2397fd3 100644
+--- a/src/minecraft/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/minecraft/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -175,6 +175,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
+         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
+         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
+         this.settings.setProperty("max-build-height", Integer.valueOf(this.getBuildLimit()));
++        if (!FMLCommonHandler.instance().handleServerAboutToStart(this)) { return false; }
+         logger.info("Preparing level \"" + this.getFolderName() + "\"");
+         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
+         long var12 = System.nanoTime() - var4;
+@@ -195,9 +196,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
+             this.theRConThreadMain.startThread();
+         }
+ 
+-        FMLCommonHandler.instance().handleServerStarting(this);
+-
+-        return true;
++        return FMLCommonHandler.instance().handleServerStarting(this);
+     }
+ 
+     public boolean canStructuresSpawn()
+diff --git a/src/minecraft/net/minecraft/server/integrated/IntegratedServer.java b/src/minecraft/net/minecraft/server/integrated/IntegratedServer.java
+index b6a8570..3da2a36 100644
+--- a/src/minecraft/net/minecraft/server/integrated/IntegratedServer.java
++++ b/src/minecraft/net/minecraft/server/integrated/IntegratedServer.java
+@@ -97,10 +97,10 @@ public class IntegratedServer extends MinecraftServer
+         this.setAllowFlight(true);
+         logger.info("Generating keypair");
+         this.setKeyPair(CryptManager.createNewKeyPair());
++        if (!FMLCommonHandler.instance().handleServerAboutToStart(this)) { return false; }
+         this.loadAllWorlds(this.getFolderName(), this.getWorldName(), this.theWorldSettings.getSeed(), this.theWorldSettings.getTerrainType(), this.theWorldSettings.func_82749_j());
+         this.setMOTD(this.getServerOwner() + " - " + this.worldServers[0].getWorldInfo().getWorldName());
+-        FMLCommonHandler.instance().handleServerStarting(this);
+-        return true;
++        return FMLCommonHandler.instance().handleServerStarting(this);
+     }
+ 
+     /**
+diff --git a/src/minecraft/net/minecraft/server/management/PlayerInstance.java b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+index 6ec5aaa..65bd7cc 100644
+--- a/src/minecraft/net/minecraft/server/management/PlayerInstance.java
++++ b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+@@ -1,7 +1,11 @@
+ package net.minecraft.server.management;
+ 
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.List;
++
++import com.google.common.collect.ObjectArrays;
++
+ import net.minecraft.entity.player.EntityPlayerMP;
+ import net.minecraft.network.packet.Packet;
+ import net.minecraft.network.packet.Packet51MapChunk;
+@@ -10,11 +14,14 @@ import net.minecraft.network.packet.Packet53BlockChange;
+ import net.minecraft.tileentity.TileEntity;
+ import net.minecraft.world.ChunkCoordIntPair;
+ 
++import net.minecraftforge.common.ForgeHooks;
+ import net.minecraftforge.common.MinecraftForge;
+ import net.minecraftforge.event.world.ChunkWatchEvent;
+ 
+ public class PlayerInstance
+ {
++    public static int clumpingThreshold;
++
+     public final List playersInChunk;
+ 
+     /** note: this is final */
+@@ -58,7 +65,7 @@ public class PlayerInstance
+             par1EntityPlayerMP.playerNetServerHandler.sendPacketToPlayer(new Packet51MapChunk(PlayerManager.getWorldServer(this.myManager).getChunkFromChunkCoords(this.chunkLocation.chunkXPos, this.chunkLocation.chunkZPos), true, 0));
+             this.playersInChunk.remove(par1EntityPlayerMP);
+             par1EntityPlayerMP.loadedChunks.remove(this.chunkLocation);
+-            
++
+             MinecraftForge.EVENT_BUS.post(new ChunkWatchEvent.UnWatch(chunkLocation, par1EntityPlayerMP));
+ 
+             if (this.playersInChunk.isEmpty())
+@@ -85,20 +92,21 @@ public class PlayerInstance
+ 
+         this.field_73260_f |= 1 << (par2 >> 4);
+ 
+-        if (this.numberOfTilesToUpdate < 64)
+-        {
+-            short var4 = (short)(par1 << 12 | par3 << 8 | par2);
++        short var4 = (short)(par1 << 12 | par3 << 8 | par2);
+ 
+-            for (int var5 = 0; var5 < this.numberOfTilesToUpdate; ++var5)
++        for (int var5 = 0; var5 < this.numberOfTilesToUpdate; ++var5)
++        {
++            if (this.locationOfBlockChange[var5] == var4)
+             {
+-                if (this.locationOfBlockChange[var5] == var4)
+-                {
+-                    return;
+-                }
++                return;
+             }
++        }
+ 
+-            this.locationOfBlockChange[this.numberOfTilesToUpdate++] = var4;
++        if (this.numberOfTilesToUpdate == locationOfBlockChange.length)
++        {
++            this.locationOfBlockChange = Arrays.copyOf(this.locationOfBlockChange, locationOfBlockChange.length << 1);
+         }
++        this.locationOfBlockChange[this.numberOfTilesToUpdate++] = var4;
+     }
+ 
+     public void sendToAllPlayersWatchingChunk(Packet par1Packet)
+@@ -138,43 +146,26 @@ public class PlayerInstance
+             {
+                 int var4;
+ 
+-                if (this.numberOfTilesToUpdate == 64)
++                if (this.numberOfTilesToUpdate >= MinecraftForge.clumpingThreshold)
+                 {
+                     var1 = this.chunkLocation.chunkXPos * 16;
+                     var2 = this.chunkLocation.chunkZPos * 16;
+                     this.sendToAllPlayersWatchingChunk(new Packet51MapChunk(PlayerManager.getWorldServer(this.myManager).getChunkFromChunkCoords(this.chunkLocation.chunkXPos, this.chunkLocation.chunkZPos), false, this.field_73260_f));
+-
+-                    for (var3 = 0; var3 < 16; ++var3)
+-                    {
+-                        if ((this.field_73260_f & 1 << var3) != 0)
+-                        {
+-                            var4 = var3 << 4;
+-                            //BugFix: 16 makes it load an extra chunk, which isn't associated with a player, which makes it not unload unless a player walks near it.
+-                            //ToDo: Find a way to efficiently clean abandoned chunks.
+-                            //List var5 = PlayerManager.getWorldServer(this.myManager).getAllTileEntityInBox(var1, var4, var2, var1 + 16, var4 + 16, var2 + 16);
+-                            List var5 = PlayerManager.getWorldServer(this.myManager).getAllTileEntityInBox(var1, var4, var2, var1 + 15, var4 + 16, var2 + 15);
+-
+-                            for (int var6 = 0; var6 < var5.size(); ++var6)
+-                            {
+-                                this.sendTileToAllPlayersWatchingChunk((TileEntity)var5.get(var6));
+-                            }
+-                        }
+-                    }
+                 }
+                 else
+                 {
+                     this.sendToAllPlayersWatchingChunk(new Packet52MultiBlockChange(this.chunkLocation.chunkXPos, this.chunkLocation.chunkZPos, this.locationOfBlockChange, this.numberOfTilesToUpdate, PlayerManager.getWorldServer(this.myManager)));
++                }
++
++                for (var1 = 0; var1 < this.numberOfTilesToUpdate; ++var1)
++                {
++                    var2 = this.chunkLocation.chunkXPos * 16 + (this.locationOfBlockChange[var1] >> 12 & 15);
++                    var3 = this.locationOfBlockChange[var1] & 255;
++                    var4 = this.chunkLocation.chunkZPos * 16 + (this.locationOfBlockChange[var1] >> 8 & 15);
+ 
+-                    for (var1 = 0; var1 < this.numberOfTilesToUpdate; ++var1)
++                    if (PlayerManager.getWorldServer(this.myManager).blockHasTileEntity(var2, var3, var4))
+                     {
+-                        var2 = this.chunkLocation.chunkXPos * 16 + (this.locationOfBlockChange[var1] >> 12 & 15);
+-                        var3 = this.locationOfBlockChange[var1] & 255;
+-                        var4 = this.chunkLocation.chunkZPos * 16 + (this.locationOfBlockChange[var1] >> 8 & 15);
+-
+-                        if (PlayerManager.getWorldServer(this.myManager).blockHasTileEntity(var2, var3, var4))
+-                        {
+-                            this.sendTileToAllPlayersWatchingChunk(PlayerManager.getWorldServer(this.myManager).getBlockTileEntity(var2, var3, var4));
+-                        }
++                        this.sendTileToAllPlayersWatchingChunk(PlayerManager.getWorldServer(this.myManager).getBlockTileEntity(var2, var3, var4));
+                     }
+                 }
+             }
+diff --git a/src/minecraft/net/minecraft/world/World.java b/src/minecraft/net/minecraft/world/World.java
+index ae5ea54..3250f5c 100644
+--- a/src/minecraft/net/minecraft/world/World.java
++++ b/src/minecraft/net/minecraft/world/World.java
+@@ -2108,9 +2108,9 @@ public abstract class World implements IBlockAccess
+                 {
+                     this.updateEntity(var2);
+                 }
+-                catch (Throwable var7)
++                catch (Throwable var6)
+                 {
+-                    var4 = CrashReport.makeCrashReport(var7, "Ticking entity");
++                    var4 = CrashReport.makeCrashReport(var6, "Ticking entity");
+                     var5 = var4.makeCategory("Entity being ticked");
+ 
+                     if (var2 == null)
+@@ -2152,9 +2152,9 @@ public abstract class World implements IBlockAccess
+                 {
+                     var9.updateEntity();
+                 }
+-                catch (Throwable var6)
++                catch (Throwable var7)
+                 {
+-                    var4 = CrashReport.makeCrashReport(var6, "Ticking tile entity");
++                    var4 = CrashReport.makeCrashReport(var7, "Ticking tile entity");
+                     var5 = var4.makeCategory("Tile entity being ticked");
+ 
+                     if (var9 == null)

@@ -1,0 +1,32 @@
+From 1155235d9234ec2fdd004129f2d61a5ac08f8a7d Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Sat, 12 Jan 2013 16:30:08 -0800
+Subject: [PATCH] Fix check in getItem() to allow lowest item ID #361
+
+
+diff --git a/common/net/minecraftforge/common/Configuration.java b/common/net/minecraftforge/common/Configuration.java
+index fb593e7..70a651d 100644
+--- a/common/net/minecraftforge/common/Configuration.java
++++ b/common/net/minecraftforge/common/Configuration.java
+@@ -194,7 +194,7 @@ public class Configuration
+                 FMLLog.warning("Config \"%s\" Category: \"%s\" Key: \"%s\" Default: %d", fileName, category, key, defaultID);
+             }
+ 
+-            if (Item.itemsList[defaultShift] == null && !configMarkers[defaultShift] && defaultShift > Block.blocksList.length)
++            if (Item.itemsList[defaultShift] == null && !configMarkers[defaultShift] && defaultShift >= Block.blocksList.length)
+             {
+                 prop.value = Integer.toString(defaultID);
+                 configMarkers[defaultShift] = true;
+diff --git a/src/minecraft/net/minecraftforge/common/Configuration.java b/src/minecraft/net/minecraftforge/common/Configuration.java
+index fb593e7..70a651d 100644
+--- a/src/minecraft/net/minecraftforge/common/Configuration.java
++++ b/src/minecraft/net/minecraftforge/common/Configuration.java
+@@ -194,7 +194,7 @@ public class Configuration
+                 FMLLog.warning("Config \"%s\" Category: \"%s\" Key: \"%s\" Default: %d", fileName, category, key, defaultID);
+             }
+ 
+-            if (Item.itemsList[defaultShift] == null && !configMarkers[defaultShift] && defaultShift > Block.blocksList.length)
++            if (Item.itemsList[defaultShift] == null && !configMarkers[defaultShift] && defaultShift >= Block.blocksList.length)
+             {
+                 prop.value = Integer.toString(defaultID);
+                 configMarkers[defaultShift] = true;

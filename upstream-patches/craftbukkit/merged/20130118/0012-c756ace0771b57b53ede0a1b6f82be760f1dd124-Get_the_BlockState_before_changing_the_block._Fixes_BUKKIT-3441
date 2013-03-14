@@ -1,0 +1,27 @@
+From c756ace0771b57b53ede0a1b6f82be760f1dd124 Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Wed, 16 Jan 2013 20:15:40 -0600
+Subject: [PATCH] Get the BlockState before changing the block. Fixes BUKKIT-3441
+
+
+diff --git a/src/minecraft/net/minecraft/item/ItemBlock.java b/src/minecraft/net/minecraft/item/ItemBlock.java
+index d6078db..aada87c 100644
+--- a/src/minecraft/net/minecraft/item/ItemBlock.java
++++ b/src/minecraft/net/minecraft/item/ItemBlock.java
+@@ -109,13 +109,14 @@ public class ItemBlock extends Item
+     // CraftBukkit start - add method to process block placement
+     static boolean processBlockPlace(final World world, final EntityPlayer entityhuman, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data)
+     {
++        org.bukkit.block.BlockState blockstate = org.bukkit.craftbukkit.block.CraftBlockState.getBlockState(world, x, y, z);
+         world.editingBlocks = true;
+         world.setBlockAndMetadataWithNotify(x, y, z, id, data);
+-        org.bukkit.event.block.BlockPlaceEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callBlockPlaceEvent(world, entityhuman, org.bukkit.craftbukkit.block.CraftBlockState.getBlockState(world, x, y, z), x, y, z);
++        org.bukkit.event.block.BlockPlaceEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callBlockPlaceEvent(world, entityhuman, blockstate, x, y, z);
+ 
+         if (event.isCancelled() || !event.canBuild())
+         {
+-            event.getBlockReplacedState().update(true);
++            blockstate.update(true);
+             world.editingBlocks = false;
+             return false;
+         }

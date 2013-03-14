@@ -1,0 +1,114 @@
+From 9065f2e4756abdb694974587443edf9089f201f7 Mon Sep 17 00:00:00 2001
+From: md_5 <md_5@live.com.au>
+Date: Fri, 25 Jan 2013 18:24:54 +1100
+Subject: [PATCH] Better + more flexible itemstack merging
+
+
+diff --git a/src/minecraft/net/minecraft/entity/item/EntityItem.java b/src/minecraft/net/minecraft/entity/item/EntityItem.java
+index a9dec5e..17ba6b4 100644
+--- a/src/minecraft/net/minecraft/entity/item/EntityItem.java
++++ b/src/minecraft/net/minecraft/entity/item/EntityItem.java
+@@ -164,12 +164,13 @@ public class EntityItem extends Entity
+ 
+     private void func_85054_d()
+     {
+-        Iterator var1 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(0.5D, 0.0D, 0.5D)).iterator();
++        double var1 = worldObj.getWorld().itemMergeRadius;
++        Iterator var2 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(var1, var1, var1)).iterator();
+ 
+-        while (var1.hasNext())
++        while (var2.hasNext())
+         {
+-            EntityItem var2 = (EntityItem)var1.next();
+-            this.combineItems(var2);
++            EntityItem entityitem = (EntityItem) var2.next();
++            this.combineItems(entityitem);
+         }
+     }
+ 
+@@ -214,11 +215,11 @@ public class EntityItem extends Entity
+             }
+             else
+             {
+-                var3.stackSize += var2.stackSize;
+-                par1EntityItem.delayBeforeCanPickup = Math.max(par1EntityItem.delayBeforeCanPickup, this.delayBeforeCanPickup);
+-                par1EntityItem.age = Math.min(par1EntityItem.age, this.age);
+-                par1EntityItem.func_92013_a(var3);
+-                this.setDead();
++                var2.stackSize += var3.stackSize;
++                this.delayBeforeCanPickup = Math.max(par1EntityItem.delayBeforeCanPickup, this.delayBeforeCanPickup);
++                this.age = Math.min(par1EntityItem.age, this.age);
++                this.func_92013_a(var2);
++                par1EntityItem.setDead();
+                 return true;
+             }
+         }
+diff --git a/src/minecraft/net/minecraft/world/World.java b/src/minecraft/net/minecraft/world/World.java
+index 4776ef4..35c4cd3 100644
+--- a/src/minecraft/net/minecraft/world/World.java
++++ b/src/minecraft/net/minecraft/world/World.java
+@@ -30,7 +30,6 @@ import net.minecraft.entity.passive.EntityAnimal;
+ import net.minecraft.entity.passive.EntityWaterMob;
+ import net.minecraft.entity.player.EntityPlayer;
+ import net.minecraft.entity.player.EntityPlayerMP;
+-import net.minecraft.item.ItemStack;
+ import net.minecraft.pathfinding.PathEntity;
+ import net.minecraft.pathfinding.PathFinder;
+ import net.minecraft.profiler.Profiler;
+@@ -1474,43 +1473,9 @@ public abstract class World implements IBlockAccess
+         else if (entity instanceof EntityItem)
+         {
+             event = CraftEventFactory.callItemSpawnEvent((EntityItem) entity);
+-            // Spigot start
+-            ItemStack item = ((EntityItem) entity).func_92014_d();
+-            org.bukkit.craftbukkit.inventory.CraftItemStack craft = org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(item);
+-            int maxSize = item.getMaxStackSize();
++        }   // Spigot start
+ 
+-            if (item.stackSize < maxSize)
+-            {
+-                double radius = this.getWorld().itemMergeRadius;
+-
+-                if (radius > 0)
+-                {
+-                    List<Entity> entities = this.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.expand(radius, radius, radius));
+-
+-                    for (Entity e : entities)
+-                    {
+-                        if (e instanceof EntityItem)
+-                        {
+-                            EntityItem loopItem = (EntityItem) e;
+-                            ItemStack loopStack = loopItem.func_92014_d();
+-
+-                            if (!loopItem.isDead && craft.isSimilar(org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(loopStack)))
+-                            {
+-                                int toAdd = Math.min(loopStack.stackSize, maxSize - item.stackSize);
+-                                item.stackSize += toAdd;
+-                                loopStack.stackSize -= toAdd;
+-
+-                                if (loopStack.stackSize <= 0)
+-                                {
+-                                    loopItem.setDead();
+-                                }
+-                            }
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-        else if (entity instanceof EntityXPOrb)
++        if (entity instanceof EntityXPOrb)
+         {
+             EntityXPOrb xp = (EntityXPOrb) entity;
+             double radius = this.getWorld().expMergeRadius;
+@@ -1533,9 +1498,7 @@ public abstract class World implements IBlockAccess
+                     }
+                 }
+             }
+-
+-            // Spigot end
+-        }
++        } // Spigot end
+         else if (entity.getBukkitEntity() instanceof org.bukkit.entity.Projectile)
+         {
+             // Not all projectiles extend EntityProjectile, so check for Bukkit interface instead

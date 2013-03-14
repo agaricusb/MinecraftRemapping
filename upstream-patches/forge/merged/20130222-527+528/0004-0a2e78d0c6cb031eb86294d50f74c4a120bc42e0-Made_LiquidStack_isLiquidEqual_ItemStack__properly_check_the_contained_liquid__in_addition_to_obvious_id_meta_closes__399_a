@@ -1,0 +1,29 @@
+From 0a2e78d0c6cb031eb86294d50f74c4a120bc42e0 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 04:00:46 -0800
+Subject: [PATCH] Made LiquidStack.isLiquidEqual(ItemStack) properly check the contained liquid, in addition to obvious id/meta closes #399 and closes #403
+
+
+diff --git a/src/minecraft/net/minecraftforge/liquids/LiquidStack.java b/src/minecraft/net/minecraftforge/liquids/LiquidStack.java
+index 50d0a76..345dfdf 100644
+--- a/src/minecraft/net/minecraftforge/liquids/LiquidStack.java
++++ b/src/minecraft/net/minecraftforge/liquids/LiquidStack.java
+@@ -75,7 +75,17 @@ public class LiquidStack
+      */
+     public boolean isLiquidEqual(ItemStack other)
+     {
+-        return other != null && itemID == other.itemID && itemMeta == other.getItemDamage();
++        if (other == null)
++        {
++            return false;
++        }
++
++        if (itemID == other.itemID && itemMeta == other.getItemDamage())
++        {
++            return true;
++        }
++        
++        return isLiquidEqual(LiquidContainerRegistry.getLiquidForFilledItem(other));
+     }
+ 
+     /**

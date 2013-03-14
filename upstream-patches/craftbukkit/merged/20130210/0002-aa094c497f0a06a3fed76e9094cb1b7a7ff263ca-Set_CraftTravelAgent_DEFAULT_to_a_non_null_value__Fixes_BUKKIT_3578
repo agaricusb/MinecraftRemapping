@@ -1,0 +1,20 @@
+From aa094c497f0a06a3fed76e9094cb1b7a7ff263ca Mon Sep 17 00:00:00 2001
+From: James Clarke <jamesrtclarke@me.com>
+Date: Tue, 5 Feb 2013 20:34:02 +0000
+Subject: [PATCH] Set CraftTravelAgent.DEFAULT to a non-null value. Fixes BUKKIT-3578
+
+Currently, CraftTravelAgent will call s() on the passed-in WorldServer in order to set DEFAULT. However, s() will always return null at this point, because WorldServer.P will still be null, as it is set after the constructor is called. Instead, we set CraftTravelAgent.DEFAULT to the instance that is being constructed.
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+index 97bc275..3034f05 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+@@ -15,7 +15,7 @@ public class CraftTravelAgent extends net.minecraft.world.Teleporter/*was:Portal
+     public CraftTravelAgent(net.minecraft.world.WorldServer/*was:WorldServer*/ worldserver) {
+         super(worldserver);
+         if (DEFAULT == null && worldserver.dimension == 0) {
+-            DEFAULT = (TravelAgent) worldserver.func_85176_s/*was:s*/();
++            DEFAULT = this;
+         }
+     }
+ 

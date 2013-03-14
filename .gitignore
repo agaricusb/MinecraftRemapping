@@ -5,3 +5,4 @@ vanilla146
 *.jar
 *.swp
 *.pyc
+.DS_Store

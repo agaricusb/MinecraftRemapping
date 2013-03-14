@@ -1,0 +1,21 @@
+From 40392216b3cdcced2678ba0e7ccdb1bf97009029 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Mon, 28 Jan 2013 18:08:38 -0800
+Subject: [PATCH] Change access of upper and lower chest fields of InventoryLargeChest to public. Closes #387
+
+
+diff --git a/src/minecraft/forge_at.cfg b/src/minecraft/forge_at.cfg
+index abccc5a..0ec7c1c 100644
+--- a/resources/forge_at.cfg
++++ b/resources/forge_at.cfg
+@@ -127,4 +127,7 @@ public ayp.b(Llq;)V #MD:WorldClient/func_72847_b #releaseEntitySkin
+ #WorldServer
+ public in.b(Llq;)V #MD:WorldServer/func_72847_b #releaseEntitySkin
+ # ChunkCache
+-public ys.e # FD:ChunkCache/field_72815_e # worldObj
+\ No newline at end of file
++public ys.e # FD:ChunkCache/field_72815_e # worldObj
++# InventoryLargeChest
++public kz.c #FD:InventoryLargeChest/field_70478_c #lowerChest
++public kz.b #FD:InventoryLargeChest/field_70477_b #upperChest
+\ No newline at end of file

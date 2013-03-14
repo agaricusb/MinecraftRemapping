@@ -1,0 +1,33 @@
+From e11feec55f4ef0eee581c28054f8457c3074f47b Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 04:49:33 -0800
+Subject: [PATCH] Fix fortune modifier always passed as 0 to idDropped closes #412
+
+
+diff --git a/src/minecraft/net/minecraft/block/Block.java b/src/minecraft/net/minecraft/block/Block.java
+index a7b5a8d..5607752 100644
+--- a/src/minecraft/net/minecraft/block/Block.java
++++ b/src/minecraft/net/minecraft/block/Block.java
+@@ -1622,11 +1622,11 @@ public class Block
+     {
+         if (blockID == Block.netherrack.blockID && side == UP)
+         {
+-                return true;
++            return true;
+         }
+         if ((world.provider instanceof WorldProviderEnd) && blockID == Block.bedrock.blockID && side == UP)
+         {
+-                return true;
++            return true;
+         }
+         return false;
+     }
+@@ -1707,7 +1707,7 @@ public class Block
+         int count = quantityDropped(metadata, fortune, world.rand);
+         for(int i = 0; i < count; i++)
+         {
+-            int id = idDropped(metadata, world.rand, 0);
++            int id = idDropped(metadata, world.rand, fortune);
+             if (id > 0)
+             {
+                 ret.add(new ItemStack(id, 1, damageDropped(metadata)));

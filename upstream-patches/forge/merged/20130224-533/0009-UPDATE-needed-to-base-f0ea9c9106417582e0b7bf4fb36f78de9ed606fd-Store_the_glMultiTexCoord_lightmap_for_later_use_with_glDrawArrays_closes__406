@@ -1,0 +1,33 @@
+From f0ea9c9106417582e0b7bf4fb36f78de9ed606fd Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Sat, 23 Feb 2013 13:50:12 -0800
+Subject: [PATCH] Store the glMultiTexCoord lightmap for later use with glDrawArrays closes #406
+
+
+diff --git a/src/minecraft/net/minecraft/client/renderer/OpenGlHelper.java b/src/minecraft/net/minecraft/client/renderer/OpenGlHelper.java
+index b320334..e55ab13 100644
+--- a/src/minecraft/net/minecraft/client/renderer/OpenGlHelper.java
++++ b/src/minecraft/net/minecraft/client/renderer/OpenGlHelper.java
+@@ -26,6 +26,10 @@ public class OpenGlHelper
+      */
+     private static boolean useMultitextureARB = false;
+ 
++    /* Stores the last values sent into setLightmapTextureCoords */
++    public static float lastBrightnessX = 0.0f;
++    public static float lastBrightnessY = 0.0f;
++
+     /**
+      * Initializes the texture constants to be used when rendering lightmap values
+      */
+@@ -88,5 +92,11 @@ public class OpenGlHelper
+         {
+             GL13.glMultiTexCoord2f(par0, par1, par2);
+         }
++
++        if (par0 == lightmapTexUnit)
++        {
++            lastBrightnessX = par1;
++            lastBrightnessY = par2;
++        }
+     }
+ }

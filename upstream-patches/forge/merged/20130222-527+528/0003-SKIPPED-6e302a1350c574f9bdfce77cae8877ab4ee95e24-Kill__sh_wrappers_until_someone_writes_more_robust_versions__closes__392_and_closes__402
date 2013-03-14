@@ -1,0 +1,32 @@
+From 6e302a1350c574f9bdfce77cae8877ab4ee95e24 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 03:38:46 -0800
+Subject: [PATCH] Kill .sh wrappers until someone writes more robust versions, closes #392 and closes #402
+
+
+diff --git a/build.sh b/build.sh
+deleted file mode 100755
+index d57ac69..0000000
+--- a/build.sh
++++ /dev/null
+@@ -1,2 +0,0 @@
+-#!/bin/bash
+-python build.py "$@"
+diff --git a/setup.sh b/setup.sh
+deleted file mode 100755
+index 8c02e4c..0000000
+--- a/setup.sh
++++ /dev/null
+@@ -1,2 +0,0 @@
+-#!/bin/bash
+-python setup.py "$@"
+\ No newline at end of file
+diff --git a/update_patches.sh b/update_patches.sh
+deleted file mode 100755
+index 4f579cc..0000000
+--- a/update_patches.sh
++++ /dev/null
+@@ -1,2 +0,0 @@
+-#!/bin/bash
+-python update_patches.py "$@"
+\ No newline at end of file

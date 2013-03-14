@@ -1,0 +1,78 @@
+From deda98a3b2562660ce2e359e099deb5f59fe7f80 Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Sun, 27 Jan 2013 14:46:58 -0600
+Subject: [PATCH] Update Fireballs to account for ExplosionPower. Fixes BUKKIT-3460
+ Adds BUKKIT-3516
+
+
+diff --git a/src/minecraft/net/minecraft/entity/monster/EntityGhast.java b/src/minecraft/net/minecraft/entity/monster/EntityGhast.java
+index 4c83ba6..f74ae2a 100644
+--- a/src/minecraft/net/minecraft/entity/monster/EntityGhast.java
++++ b/src/minecraft/net/minecraft/entity/monster/EntityGhast.java
+@@ -198,7 +198,8 @@ public class EntityGhast extends EntityFlying implements IMob
+                 {
+                     this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1008, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
+                     EntityLargeFireball var17 = new EntityLargeFireball(this.worldObj, this, var11, var13, var15);
+-                    var17.field_92012_e = this.field_92009_j;
++                    // CraftBukkit - set yield when setting explosionpower
++                    var17.yield = var17.field_92012_e = this.field_92009_j;
+                     double var18 = 4.0D;
+                     Vec3 var20 = this.getLook(1.0F);
+                     var17.posX = this.posX + var20.xCoord * var18;
+diff --git a/src/minecraft/net/minecraft/entity/projectile/EntityLargeFireball.java b/src/minecraft/net/minecraft/entity/projectile/EntityLargeFireball.java
+index 804b7a6..21837ae 100644
+--- a/src/minecraft/net/minecraft/entity/projectile/EntityLargeFireball.java
++++ b/src/minecraft/net/minecraft/entity/projectile/EntityLargeFireball.java
+@@ -2,6 +2,7 @@ package net.minecraft.entity.projectile;
+ 
+ import org.bukkit.event.entity.ExplosionPrimeEvent; // CraftBukkit
+ import net.minecraft.entity.EntityLiving;
++import net.minecraft.nbt.NBTTagCompound;
+ import net.minecraft.util.DamageSource;
+ import net.minecraft.util.MovingObjectPosition;
+ import net.minecraft.world.World;
+@@ -46,4 +47,27 @@ public class EntityLargeFireball extends EntityFireball
+             this.setDead();
+         }
+     }
++
++    /**
++     * (abstract) Protected helper method to write subclass entity data to NBT.
++     */
++    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
++    {
++        super.writeEntityToNBT(par1NBTTagCompound);
++        par1NBTTagCompound.setInteger("ExplosionPower", this.field_92012_e);
++    }
++
++    /**
++     * (abstract) Protected helper method to read subclass entity data from NBT.
++     */
++    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
++    {
++        super.readEntityFromNBT(par1NBTTagCompound);
++
++        if (par1NBTTagCompound.hasKey("ExplosionPower"))
++        {
++            // CraftBukkit - set yield when setting explosionpower
++            this.yield = this.field_92012_e = par1NBTTagCompound.getInteger("ExplosionPower");
++        }
++    }
+ }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/entity/CraftLargeFireball.java b/src/minecraft/org/bukkit/craftbukkit/entity/CraftLargeFireball.java
+index 0909f48..cc7a74e 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/entity/CraftLargeFireball.java
++++ b/src/minecraft/org/bukkit/craftbukkit/entity/CraftLargeFireball.java
+@@ -10,6 +10,12 @@ public class CraftLargeFireball extends CraftFireball implements LargeFireball {
+     }
+ 
+     @Override
++    public void setYield(float yield) {
++        super.setYield(yield);
++        getHandle().field_92012_e/*was:e*/ = (int) yield;
++    }
++
++    @Override
+     public net.minecraft.entity.projectile.EntityLargeFireball/*was:EntityLargeFireball*/ getHandle() {
+         return (net.minecraft.entity.projectile.EntityLargeFireball/*was:EntityLargeFireball*/) entity;
+     }

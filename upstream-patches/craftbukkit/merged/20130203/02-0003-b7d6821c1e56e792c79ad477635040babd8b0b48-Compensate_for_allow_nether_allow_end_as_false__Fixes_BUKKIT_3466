@@ -1,0 +1,124 @@
+From b7d6821c1e56e792c79ad477635040babd8b0b48 Mon Sep 17 00:00:00 2001
+From: EdGruberman <ed@rjump.com>
+Date: Tue, 22 Jan 2013 18:36:03 -0700
+Subject: [PATCH] Compensate for allow-nether/allow-end as false; Fixes BUKKIT-3466
+
+When either of those settings are false, the worlds are not loaded and
+therefore will not be targeted for portal exits.  Existing worlds are
+iterated directly to avoid defaulting to the first world if a direct
+dimension match is not found.
+
+Plugins must also specify exit from custom Bukkit worlds to comply with
+original commit: https://github.com/Bukkit/CraftBukkit/commit/2dc2af0
+
+This commit introduces a constant to clarify the dependency on the
+CraftBukkit implementation of custom worlds having a dimension offset.
+
+diff --git a/src/minecraft/net/minecraft/entity/Entity.java b/src/minecraft/net/minecraft/entity/Entity.java
+index 1502f14..6668d06 100644
+--- a/src/minecraft/net/minecraft/entity/Entity.java
++++ b/src/minecraft/net/minecraft/entity/Entity.java
+@@ -2509,9 +2509,23 @@ public abstract class Entity
+             MinecraftServer var2 = MinecraftServer.getServer();
+             // CraftBukkit start - move logic into new function "teleportToLocation"
+             // int j = this.dimension;
++            WorldServer exitWorld = null;
++
++            if (this.dimension < CraftWorld.CUSTOM_DIMENSION_OFFSET)   // plugins must specify exit from custom Bukkit worlds
++            {
++                // only target existing worlds (compensate for allow-nether/allow-end as false)
++                for (WorldServer world : var2.worlds)
++                {
++                    if (world.dimension == par1)
++                    {
++                        exitWorld = world;
++                    }
++                }
++            }
++
+             Location enter = this.getBukkitEntity().getLocation();
+-            Location exit = var2.getConfigurationManager().calculateTarget(enter, var2.worldServerForDimension(par1));
+-            TravelAgent agent = (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s();
++            Location exit = exitWorld != null ? var2.getConfigurationManager().calculateTarget(enter, var2.worldServerForDimension(par1)) : null;
++            TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : null;
+             EntityPortalEvent event = new EntityPortalEvent(this.getBukkitEntity(), enter, exit, agent);
+             event.getEntity().getServer().getPluginManager().callEvent(event);
+ 
+diff --git a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+index b3d8c03..f8eb91e 100644
+--- a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+@@ -549,22 +549,38 @@ public abstract class ServerConfigurationManager
+     // CraftBukkit start - Replaced the standard handling of portals with a more customised method.
+     public void changeDimension(EntityPlayerMP entityplayer, int i, TeleportCause cause)
+     {
+-        WorldServer exitWorld = this.mcServer.worldServerForDimension(i);
+-        Location enter = entityplayer.getBukkitEntity().getLocation();
+-        Location exit = null;
++        WorldServer exitWorld = null;
+ 
+-        if ((cause == TeleportCause.END_PORTAL) && (i == 0))
++        if (entityplayer.dimension < CraftWorld.CUSTOM_DIMENSION_OFFSET)   // plugins must specify exit from custom Bukkit worlds
+         {
+-            // THE_END -> NORMAL; use bed if available
+-            exit = ((CraftPlayer) entityplayer.getBukkitEntity()).getBedSpawnLocation();
++            // only target existing worlds (compensate for allow-nether/allow-end as false)
++            for (WorldServer world : this.mcServer.worlds)
++            {
++                if (world.dimension == i)
++                {
++                    exitWorld = world;
++                }
++            }
+         }
+ 
+-        if (exit == null)
++        Location enter = entityplayer.getBukkitEntity().getLocation();
++        Location exit = null;
++
++        if (exitWorld != null)
+         {
+-            exit = this.calculateTarget(enter, exitWorld);
++            if ((cause == TeleportCause.END_PORTAL) && (i == 0))
++            {
++                // THE_END -> NORMAL; use bed if available
++                exit = ((CraftPlayer) entityplayer.getBukkitEntity()).getBedSpawnLocation();
++            }
++
++            if (exit == null)
++            {
++                exit = this.calculateTarget(enter, exitWorld);
++            }
+         }
+ 
+-        TravelAgent agent = (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s();
++        TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : null;
+         PlayerPortalEvent event = new PlayerPortalEvent(entityplayer.getBukkitEntity(), enter, exit, agent, cause);
+         Bukkit.getServer().getPluginManager().callEvent(event);
+ 
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftServer.java b/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
+index 86576b8..ff39f85 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
+@@ -697,7 +697,7 @@ public final class CraftServer implements Server {
+             converter.convertMapFormat/*was:convert*/(name, new net.minecraft.server.ConvertingProgressUpdate/*was:ConvertProgressUpdater*/(console));
+         }
+ 
+-        int dimension = 10 + console.worlds.size();
++        int dimension = CraftWorld.CUSTOM_DIMENSION_OFFSET + console.worlds.size();
+         boolean used = false;
+         do {
+             for (net.minecraft.world.WorldServer/*was:WorldServer*/ server : console.worlds) {
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftWorld.java b/src/minecraft/org/bukkit/craftbukkit/CraftWorld.java
+index c64b111..445254f 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftWorld.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftWorld.java
+@@ -48,6 +48,8 @@ import org.bukkit.plugin.messaging.StandardMessenger;
+ import org.bukkit.craftbukkit.util.LongHash;
+ 
+ public class CraftWorld implements World {
++    public static final int CUSTOM_DIMENSION_OFFSET = 10;
++
+     private final net.minecraft.world.WorldServer/*was:WorldServer*/ world;
+     private Environment environment;
+     private final CraftServer server = (CraftServer) Bukkit.getServer();

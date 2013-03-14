@@ -1,0 +1,80 @@
+From f20ea649c6fbf4e49ccb857e6ea9d3333cf6d6a9 Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Wed, 23 Jan 2013 23:36:59 -0500
+Subject: [PATCH] Attempt to fix a possible NPE in the face of ChickenBones' hackery. ChickenBones. stop it!
+
+
+diff --git a/common/net/minecraftforge/common/DimensionManager.java b/common/net/minecraftforge/common/DimensionManager.java
+index 918525f..8cf5050 100644
+--- a/common/net/minecraftforge/common/DimensionManager.java
++++ b/common/net/minecraftforge/common/DimensionManager.java
+@@ -240,14 +240,28 @@ public class DimensionManager
+     */
+     public static void unloadWorlds(Hashtable<Integer, long[]> worldTickTimes) {
+         for (int id : unloadQueue) {
++            WorldServer w = worlds.get(id);
+             try {
+-                worlds.get(id).saveAllChunks(true, null);
++                if (w != null)
++                {
++                    w.saveAllChunks(true, null);
++                }
++                else
++                {
++                    FMLLog.warning("Unexpected world unload - world %d is already unloaded", id);
++                }
+             } catch (MinecraftException e) {
+                 e.printStackTrace();
+             }
+-            MinecraftForge.EVENT_BUS.post(new WorldEvent.Unload(worlds.get(id)));
+-            ((WorldServer)worlds.get(id)).flush();
+-            setWorld(id, null);
++            finally
++            {
++                if (w != null)
++                {
++                    MinecraftForge.EVENT_BUS.post(new WorldEvent.Unload(w));
++                    w.flush();
++                    setWorld(id, null);
++                }
++            }
+         }
+         unloadQueue.clear();
+     }
+diff --git a/src/minecraft/net/minecraftforge/common/DimensionManager.java b/src/minecraft/net/minecraftforge/common/DimensionManager.java
+index 918525f..8cf5050 100644
+--- a/src/minecraft/net/minecraftforge/common/DimensionManager.java
++++ b/src/minecraft/net/minecraftforge/common/DimensionManager.java
+@@ -240,14 +240,28 @@ public class DimensionManager
+     */
+     public static void unloadWorlds(Hashtable<Integer, long[]> worldTickTimes) {
+         for (int id : unloadQueue) {
++            WorldServer w = worlds.get(id);
+             try {
+-                worlds.get(id).saveAllChunks(true, null);
++                if (w != null)
++                {
++                    w.saveAllChunks(true, null);
++                }
++                else
++                {
++                    FMLLog.warning("Unexpected world unload - world %d is already unloaded", id);
++                }
+             } catch (MinecraftException e) {
+                 e.printStackTrace();
+             }
+-            MinecraftForge.EVENT_BUS.post(new WorldEvent.Unload(worlds.get(id)));
+-            ((WorldServer)worlds.get(id)).flush();
+-            setWorld(id, null);
++            finally
++            {
++                if (w != null)
++                {
++                    MinecraftForge.EVENT_BUS.post(new WorldEvent.Unload(w));
++                    w.flush();
++                    setWorld(id, null);
++                }
++            }
+         }
+         unloadQueue.clear();
+     }

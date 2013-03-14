@@ -1,0 +1,19 @@
+From f703dbb230c06d12565e14e26c0076c36fe96f62 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Sat, 23 Feb 2013 11:51:16 -0800
+Subject: [PATCH] clarify what the size is measured in for the dormant chunk cache. -.-
+
+
+diff --git a/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java b/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
+index 99146b8..ae45c5a 100644
+--- a/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
++++ b/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
+@@ -936,7 +936,7 @@ public class ForgeChunkManager
+ 
+         Property dormantChunkCacheSizeProperty = config.get("defaults", "dormantChunkCacheSize", 0);
+         dormantChunkCacheSizeProperty.comment = "Unloaded chunks can first be kept in a dormant cache for quicker\n" +
+-                    "loading times. Specify the size of that cache here";
++                    "loading times. Specify the size (in chunks) of that cache here";
+         dormantChunkCacheSize = dormantChunkCacheSizeProperty.getInt(0);
+         FMLLog.info("Configured a dormant chunk cache size of %d", dormantChunkCacheSizeProperty.getInt(0));
+ 

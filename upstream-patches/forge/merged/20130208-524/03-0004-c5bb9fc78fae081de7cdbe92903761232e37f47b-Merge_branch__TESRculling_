@@ -1,0 +1,127 @@
+From c5bb9fc78fae081de7cdbe92903761232e37f47b Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Mon, 4 Feb 2013 11:13:29 -0500
+Subject: [PATCH] Merge branch 'TESRculling'
+
+
+diff --git a/src/minecraft/net/minecraft/entity/Entity.java b/src/minecraft/net/minecraft/entity/Entity.java
+index 4a7ee77..e265bf8 100644
+--- a/src/minecraft/net/minecraft/entity/Entity.java
++++ b/src/minecraft/net/minecraft/entity/Entity.java
+@@ -2529,4 +2529,9 @@ public abstract class Entity
+     {
+         this.entityId = nextEntityID++;
+     }
++
++    public boolean shouldRenderInPass(int pass)
++    {
++        return pass == 0;
++    }
+ }
+diff --git a/src/minecraft/net/minecraft/tileentity/TileEntity.java b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+index 382b07d..4dd5a31 100644
+--- a/src/minecraft/net/minecraft/tileentity/TileEntity.java
++++ b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
+ import net.minecraft.network.INetworkManager;
+ import net.minecraft.network.packet.Packet;
+ import net.minecraft.network.packet.Packet132TileEntityData;
++import net.minecraft.util.AxisAlignedBB;
+ import net.minecraft.world.World;
+ 
+ public class TileEntity
+@@ -299,6 +300,7 @@ public class TileEntity
+         addMapping(TileEntitySkull.class, "Skull");
+     }
+ 
++    // -- BEGIN FORGE PATCHES --
+     /**
+      * Determines if this TileEntity requires update calls.
+      * @return True if you want updateEntity() to be called, false if not
+@@ -311,10 +313,10 @@ public class TileEntity
+     /**
+      * Called when you receive a TileEntityData packet for the location this
+      * TileEntity is currently in. On the client, the NetworkManager will always
+-     * be the remote server. On the server, it will be whomever is responsible for 
++     * be the remote server. On the server, it will be whomever is responsible for
+      * sending the packet.
+-     * 
+-     * @param net The NetworkManager the packet originated from 
++     *
++     * @param net The NetworkManager the packet originated from
+      * @param pkt The data packet
+      */
+     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+@@ -331,12 +333,12 @@ public class TileEntity
+     /**
+      * Called from Chunk.setBlockIDWithMetadata, determines if this tile entity should be re-created when the ID, or Metadata changes.
+      * Use with caution as this will leave straggler TileEntities, or create conflicts with other TileEntities if not used properly.
+-     * 
++     *
+      * @param oldID The old ID of the block
+      * @param newID The new ID of the block (May be the same)
+      * @param oldMeta The old metadata of the block
+      * @param newMeta The new metadata of the block (May be the same)
+-     * @param world Current world 
++     * @param world Current world
+      * @param x X Postion
+      * @param y Y Position
+      * @param z Z Position
+@@ -346,4 +348,30 @@ public class TileEntity
+     {
+         return true;
+     }
++
++    public boolean shouldRenderInPass(int pass)
++    {
++        return pass == 0;
++    }
++    /**
++     * Sometimes default render bounding box: infinite in scope. Used to control rendering on {@link TileEntitySpecialRenderer}.
++     */
++    public static final AxisAlignedBB INFINITE_EXTENT_AABB = AxisAlignedBB.getBoundingBox(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
++
++    /**
++     * Return an {@link AxisAlignedBB} that controls the visible scope of a {@link TileEntitySpecialRenderer} associated with this {@link TileEntity}
++     * Defaults to the collision bounding box {@link Block#getCollisionBoundingBoxFromPool(World, int, int, int)} associated with the block
++     * at this location.
++     *
++     * @return an appropriately size {@link AxisAlignedBB} for the {@link TileEntity}
++     */
++    @SideOnly(Side.CLIENT)
++    public AxisAlignedBB getRenderBoundingBox()
++    {
++        if (getBlockType()!=null)
++        {
++            return getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
++        }
++        return INFINITE_EXTENT_AABB;
++    }
+ }
+diff --git a/src/minecraft/net/minecraftforge/client/ForgeHooksClient.java b/src/minecraft/net/minecraftforge/client/ForgeHooksClient.java
+index 72c4181..053e62c 100644
+--- a/src/minecraft/net/minecraftforge/client/ForgeHooksClient.java
++++ b/src/minecraft/net/minecraftforge/client/ForgeHooksClient.java
+@@ -413,4 +413,9 @@ public class ForgeHooksClient
+             }
+         }
+     }
++
++    public static void setRenderPass(int pass)
++    {
++        renderPass = pass;
++    }
+ }
+diff --git a/src/minecraft/net/minecraftforge/common/ForgeVersion.java b/src/minecraft/net/minecraftforge/common/ForgeVersion.java
+index b9f4b77..c3bc3b7 100644
+--- a/src/minecraft/net/minecraftforge/common/ForgeVersion.java
++++ b/src/minecraft/net/minecraftforge/common/ForgeVersion.java
+@@ -12,7 +12,7 @@ public class ForgeVersion
+     //This number is incremented every minecraft release, never reset
+     public static final int minorVersion    = 6;
+     //This number is incremented every time a interface changes or new major feature is added, and reset every Minecraft version
+-    public static final int revisionVersion = 0;
++    public static final int revisionVersion = 1;
+     //This number is incremented every time Jenkins builds Forge, and never reset. Should always be 0 in the repo code.
+     public static final int buildVersion    = 0;
+ 

@@ -1,0 +1,62 @@
+From 6c77179121a5abdf2562db0c5c8818adda906ac8 Mon Sep 17 00:00:00 2001
+From: EdGruberman <ed@rjump.com>
+Date: Sun, 3 Feb 2013 12:55:51 -0700
+Subject: [PATCH] Always return a TravelAgent; Fixes BUKKIT-3541
+
+Recent changes caused PlayerPortalEvent to suddenly return null
+unexpectedly and could end up in NPEs resulting that did not before.
+This commit addresses that situation by always ensuring a TravelAgent
+instance is returned.
+
+The TravelAgent for world 0 is returned arbitrarily in an effort to
+compensate for plugins that are implementation dependent and expect some
+form of a TravelAgent to be accessible in the event at all times.
+
+diff --git a/src/minecraft/net/minecraft/entity/Entity.java b/src/minecraft/net/minecraft/entity/Entity.java
+index caed56a..bf075d9 100644
+--- a/src/minecraft/net/minecraft/entity/Entity.java
++++ b/src/minecraft/net/minecraft/entity/Entity.java
+@@ -2526,7 +2526,7 @@ public abstract class Entity
+             Location enter = this.getBukkitEntity().getLocation();
+             Location exit = exitWorld != null ? var2.getConfigurationManager().calculateTarget(enter, var2.worldServerForDimension(par1)) : null;
+             boolean useTravelAgent = exitWorld != null && !(this.dimension == 1 && exitWorld.dimension == 1); // don't use agent for custom worlds or return from THE_END
+-            TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : null;
++            TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : org.bukkit.craftbukkit.CraftTravelAgent.DEFAULT;  // return arbitrary TA to compensate for implementation dependent plugins
+             EntityPortalEvent event = new EntityPortalEvent(this.getBukkitEntity(), enter, exit, agent);
+             event.useTravelAgent(useTravelAgent);
+             event.getEntity().getServer().getPluginManager().callEvent(event);
+diff --git a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+index 48ec765..4655244 100644
+--- a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+@@ -587,7 +587,7 @@ public abstract class ServerConfigurationManager
+             }
+         }
+ 
+-        TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : null;
++        TravelAgent agent = exit != null ? (TravelAgent)((CraftWorld) exit.getWorld()).getHandle().func_85176_s() : org.bukkit.craftbukkit.CraftTravelAgent.DEFAULT;  // return arbitrary TA to compensate for implementation dependent plugins
+         PlayerPortalEvent event = new PlayerPortalEvent(entityplayer.getBukkitEntity(), enter, exit, agent, cause);
+         event.useTravelAgent(useTravelAgent);
+         Bukkit.getServer().getPluginManager().callEvent(event);
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+index 3ce7cf3..97bc275 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftTravelAgent.java
+@@ -6,12 +6,17 @@ import org.bukkit.TravelAgent;
+ 
+ public class CraftTravelAgent extends net.minecraft.world.Teleporter/*was:PortalTravelAgent*/ implements TravelAgent {
+ 
++    public static TravelAgent DEFAULT = null;
++
+     private int searchRadius = 128;
+     private int creationRadius = 16;
+     private boolean canCreatePortal = true;
+ 
+     public CraftTravelAgent(net.minecraft.world.WorldServer/*was:WorldServer*/ worldserver) {
+         super(worldserver);
++        if (DEFAULT == null && worldserver.dimension == 0) {
++            DEFAULT = (TravelAgent) worldserver.func_85176_s/*was:s*/();
++        }
+     }
+ 
+     public Location findOrCreate(Location target) {

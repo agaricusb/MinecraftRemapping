@@ -1,0 +1,20 @@
+From 78a3d1a656cfbbf2f40c1f0301b5a8c2e827a945 Mon Sep 17 00:00:00 2001
+From: CovertJaguar <CovertJaguar@gmail.com>
+Date: Fri, 18 Jan 2013 12:06:29 -0800
+Subject: [PATCH] Fixed render passes for EntityItems
+
+Should be < instead of <=
+
+diff --git a/patches/minecraft/net/minecraft/client/renderer/entity/RenderItem.java.patch b/patches/minecraft/net/minecraft/client/renderer/entity/RenderItem.java.patch
+index dd7ba3f..5c8a932 100644
+--- a/patches/minecraft/net/minecraft/client/renderer/entity/RenderItem.java.patch
++++ b/patches/minecraft/net/minecraft/client/renderer/entity/RenderItem.java.patch
+@@ -92,7 +92,7 @@
+ -                    for (var15 = 0; var15 <= 1; ++var15)
+ -                    {
+ +
+-+                    for (var15 = 0; var15 <= var10.getItem().getRenderPasses(var10.getItemDamage()); ++var15)
+++                    for (var15 = 0; var15 < var10.getItem().getRenderPasses(var10.getItemDamage()); ++var15)
+ +                    {
+ +                        this.loadTexture(Item.itemsList[var10.itemID].getTextureFile());
+                          this.random.setSeed(187L);

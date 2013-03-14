@@ -1,0 +1,101 @@
+From d9ff553b6b1df958bff1ec2d4f9b650223c0898e Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Sun, 20 Jan 2013 00:34:55 -0600
+Subject: [PATCH] Call BlockPlaceEvent for skulls the same as other blocks. BUKKIT-3406
+
+When the skull BlockPlaceEvent was added it was made so the event
+would be called after all the data has been set, however this is a
+behavior change that is inconsistent with other BlockPlaceEvents.
+Instead, if people wish to get the block data they should schedule
+a task.
+
+Relates to: BUKKIT-3438
+
+diff --git a/src/minecraft/net/minecraft/item/ItemSkull.java b/src/minecraft/net/minecraft/item/ItemSkull.java
+index 68bfbfd..dc18601 100644
+--- a/src/minecraft/net/minecraft/item/ItemSkull.java
++++ b/src/minecraft/net/minecraft/item/ItemSkull.java
+@@ -1,6 +1,5 @@
+ package net.minecraft.item;
+ 
+-import org.bukkit.craftbukkit.block.CraftBlockState; // CraftBukkit
+ import net.minecraft.block.Block;
+ import net.minecraft.block.BlockSkull;
+ import net.minecraft.creativetab.CreativeTabs;
+@@ -10,7 +9,6 @@ import net.minecraft.tileentity.TileEntitySkull;
+ import net.minecraft.util.MathHelper;
+ import net.minecraft.util.StatCollector;
+ import net.minecraft.world.World;
+-
+ public class ItemSkull extends Item
+ {
+     private static final String[] skullTypes = new String[] {"skeleton", "wither", "zombie", "char", "creeper"};
+@@ -40,8 +38,6 @@ public class ItemSkull extends Item
+         }
+         else
+         {
+-            int var11 = par4, var12 = par5, var13 = par6; // CraftBukkit
+-
+             if (par7 == 1)
+             {
+                 ++par5;
+@@ -77,41 +73,38 @@ public class ItemSkull extends Item
+             }
+             else
+             {
+-                CraftBlockState blockState = CraftBlockState.getBlockState(par3World, par4, par5, par6); // CraftBukkit
+-                par3World.setBlockAndMetadataWithNotify(par4, par5, par6, Block.skull.blockID, par7);
+-                int i1 = 0;
++                // CraftBukkit start - handle in ItemBlock
++                // world.setTypeIdAndData(i, j, k, Block.SKULL.id, l);
++                if (!ItemBlock.processBlockPlace(par3World, par2EntityPlayer, null, par4, par5, par6, Block.skull.blockID, par7))
++                {
++                    return false;
++                }
++
++                par7 = par3World.getBlockMetadata(par4, par5, par6);
++                // CraftBukkit end
++                int var11 = 0;
+ 
+                 if (par7 == 1)
+                 {
+-                    i1 = MathHelper.floor_double((double)(par2EntityPlayer.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
++                    var11 = MathHelper.floor_double((double)(par2EntityPlayer.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
+                 }
+ 
+-                TileEntity tileentity = par3World.getBlockTileEntity(par4, par5, par6);
++                TileEntity var12 = par3World.getBlockTileEntity(par4, par5, par6);
+ 
+-                if (tileentity != null && tileentity instanceof TileEntitySkull)
++                if (var12 != null && var12 instanceof TileEntitySkull)
+                 {
+-                    String s = "";
++                    String var13 = "";
+ 
+                     if (par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("SkullOwner"))
+                     {
+-                        s = par1ItemStack.getTagCompound().getString("SkullOwner");
++                        var13 = par1ItemStack.getTagCompound().getString("SkullOwner");
+                     }
+ 
+-                    ((TileEntitySkull) tileentity).setSkullType(par1ItemStack.getItemDamage(), s);
+-                    ((TileEntitySkull) tileentity).setSkullRotation(i1);
+-                    ((BlockSkull) Block.skull).makeWither(par3World, par4, par5, par6, (TileEntitySkull) tileentity);
++                    ((TileEntitySkull)var12).setSkullType(par1ItemStack.getItemDamage(), var13);
++                    ((TileEntitySkull)var12).setSkullRotation(var11);
++                    ((BlockSkull)Block.skull).makeWither(par3World, par4, par5, par6, (TileEntitySkull)var12);
+                 }
+ 
+-                // CraftBukkit start
+-                org.bukkit.event.block.BlockPlaceEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callBlockPlaceEvent(par3World, par2EntityPlayer, blockState, var11, var12, var13);
+-
+-                if (event.isCancelled() || !event.canBuild())
+-                {
+-                    event.getBlockPlaced().setTypeIdAndData(blockState.getTypeId(), blockState.getRawData(), false);
+-                    return false;
+-                }
+-
+-                // CraftBukkit end
+                 --par1ItemStack.stackSize;
+                 return true;
+             }

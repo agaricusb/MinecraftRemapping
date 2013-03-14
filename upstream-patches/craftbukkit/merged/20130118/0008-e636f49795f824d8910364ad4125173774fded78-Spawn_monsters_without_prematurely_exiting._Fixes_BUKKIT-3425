@@ -1,0 +1,23 @@
+From e636f49795f824d8910364ad4125173774fded78 Mon Sep 17 00:00:00 2001
+From: cexikitin <king@hiberniagaming.net>
+Date: Sun, 13 Jan 2013 14:58:34 -0500
+Subject: [PATCH] Spawn monsters without prematurely exiting. Fixes BUKKIT-3425
+
+By using return 0, we exit the loop prematurely preventing other
+creature types from being spawned if one type is set to 0. By using
+continue we move on to the other types and allow them to spawn
+properly.
+
+diff --git a/src/minecraft/net/minecraft/world/SpawnerAnimals.java b/src/minecraft/net/minecraft/world/SpawnerAnimals.java
+index 0f0ce93..b8ab2b4 100644
+--- a/src/minecraft/net/minecraft/world/SpawnerAnimals.java
++++ b/src/minecraft/net/minecraft/world/SpawnerAnimals.java
+@@ -122,7 +122,7 @@ public final class SpawnerAnimals
+ 
+                 if (limit == 0)
+                 {
+-                    return 0;
++                    continue;
+                 }
+ 
+                 // CraftBukkit end

@@ -1,0 +1,277 @@
+From 2e1ea209521756bd512a2a881e8bc4d5387e8a1a Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Sun, 20 Jan 2013 11:42:08 -0500
+Subject: [PATCH] Update FML: a99c488
+ a99c488 Merge branch 'patch-1' of https://github.com/bspkrs/FML into gh-updates
+ 94282c5 Merge branch 'FMLLogFormatter' of https://github.com/donington/FML into gh-updates
+ aa822e3 Fix logical error in comment text
+ 26a5b31 FMLLogFormatter: dynamic log level name
+
+
+diff --git a/fml-src-1.4.7-4.7.13.533-master.zip b/fml-src-1.4.7-4.7.13.533-master.zip
+deleted file mode 100644
+index 4ec8ced..0000000
+Binary files a/fml-src-1.4.7-4.7.13.533-master.zip and /dev/null differ
+diff --git a/fml-src-1.4.7-4.7.17.534-master.zip b/fml-src-1.4.7-4.7.17.534-master.zip
+new file mode 100644
+index 0000000..489c8b9
+Binary files /dev/null and b/fml-src-1.4.7-4.7.17.534-master.zip differ
+diff --git a/src/minecraft/cpw/mods/fml/common/ModContainer.java b/src/minecraft/cpw/mods/fml/common/ModContainer.java
+index 26b4181..21c6094 100644
+--- a/src/minecraft/cpw/mods/fml/common/ModContainer.java
++++ b/src/minecraft/cpw/mods/fml/common/ModContainer.java
+@@ -81,13 +81,13 @@ public interface ModContainer
+ 
+     /**
+      * A list of modids that should be loaded prior to this one. The special
+-     * value <strong>*</strong> indicates to load <em>before</em> any other mod.
++     * value <strong>*</strong> indicates to load <em>after</em> any other mod.
+      */
+     List<ArtifactVersion> getDependencies();
+ 
+     /**
+      * A list of modids that should be loaded <em>after</em> this one. The
+-     * special value <strong>*</strong> indicates to load <em>after</em> any
++     * special value <strong>*</strong> indicates to load <em>before</em> any
+      * other mod.
+      */
+     List<ArtifactVersion> getDependants();
+diff --git a/src/minecraft/cpw/mods/fml/relauncher/FMLLogFormatter.java b/src/minecraft/cpw/mods/fml/relauncher/FMLLogFormatter.java
+index 7f81db1..7768e73 100644
+--- a/src/minecraft/cpw/mods/fml/relauncher/FMLLogFormatter.java
++++ b/src/minecraft/cpw/mods/fml/relauncher/FMLLogFormatter.java
+@@ -22,33 +22,19 @@ final class FMLLogFormatter extends Formatter
+         msg.append(this.dateFormat.format(Long.valueOf(record.getMillis())));
+         Level lvl = record.getLevel();
+ 
+-        if (lvl == Level.FINEST)
++        String name = lvl.getLocalizedName();
++        if ( name == null )
+         {
+-            msg.append(" [FINEST] ");
++            name = lvl.getName();        	
+         }
+-        else if (lvl == Level.FINER)
+-        {
+-            msg.append(" [FINER] ");
+-        }
+-        else if (lvl == Level.FINE)
+-        {
+-            msg.append(" [FINE] ");
+-        }
+-        else if (lvl == Level.INFO)
+-        {
+-            msg.append(" [INFO] ");
+-        }
+-        else if (lvl == Level.WARNING)
+-        {
+-            msg.append(" [WARNING] ");
+-        }
+-        else if (lvl == Level.SEVERE)
++
++        if ( ( name != null ) && ( name.length() > 0 ) )
+         {
+-            msg.append(" [SEVERE] ");
++            msg.append(" [" + name + "] ");
+         }
+-        else if (lvl == Level.SEVERE)
++        else
+         {
+-            msg.append(" [" + lvl.getLocalizedName() + "] ");
++            msg.append(" ");
+         }
+ 
+         if (record.getLoggerName() != null)
+diff --git a/src/minecraft/fmlversion.properties b/src/minecraft/fmlversion.properties
+index b31d74b..1f4f814 100644
+--- a/src/minecraft/fmlversion.properties
++++ b/src/minecraft/fmlversion.properties
+@@ -1,10 +1,10 @@
+-#Sun, 20 Jan 2013 08:40:18 -0700
++#Sun, 20 Jan 2013 09:38:33 -0700
+ fmlbuild.major.number=4
+ fmlbuild.minor.number=7
+-fmlbuild.revision.number=13
+-fmlbuild.githash=g7ad8529
++fmlbuild.revision.number=17
++fmlbuild.githash=ga99c488
+ fmlbuild.mcpversion=7.26a
+ fmlbuild.mcversion=1.4.7
+ fmlbuild.branch=master
+ 
+-fmlbuild.build.number=533
++fmlbuild.build.number=534
+diff --git a/src/minecraft/net/minecraft/util/HttpUtilRunnable.java b/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
+index f70a39c..35de5c3 100644
+--- a/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
++++ b/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
+@@ -52,101 +52,105 @@ final class HttpUtilRunnable implements Runnable
+ 
+         try
+         {
+-            byte[] var4 = new byte[4096];
+-            URL var5 = new URL(this.sourceURL);
+-            var1 = var5.openConnection();
+-            float var6 = 0.0F;
+-            float var7 = (float)this.field_76177_c.entrySet().size();
+-            Iterator var8 = this.field_76177_c.entrySet().iterator();
+-
+-            while (var8.hasNext())
+-            {
+-                Entry var9 = (Entry)var8.next();
+-                var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+-
+-                if (this.feedbackHook != null)
+-                {
+-                    this.feedbackHook.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+-                }
+-            }
+-
+-            var2 = var1.getInputStream();
+-            var7 = (float)var1.getContentLength();
+-            int var28 = var1.getContentLength();
+-
+-            if (this.feedbackHook != null)
+-            {
+-                this.feedbackHook.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
+-            }
+-
+-            if (this.destinationFile.exists())
++            try
+             {
+-                long var29 = this.destinationFile.length();
+-
+-                if (var29 == (long)var28)
++                byte[] var4 = new byte[4096];
++                URL var5 = new URL(this.sourceURL);
++                var1 = var5.openConnection();
++                float var6 = 0.0F;
++                float var7 = (float)this.field_76177_c.entrySet().size();
++                Iterator var8 = this.field_76177_c.entrySet().iterator();
++
++                while (var8.hasNext())
+                 {
+-                    this.downloadSuccess.onSuccess(this.destinationFile);
++                    Entry var9 = (Entry)var8.next();
++                    var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+ 
+                     if (this.feedbackHook != null)
+                     {
+-                        this.feedbackHook.onNoMoreProgress();
++                        this.feedbackHook.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+                     }
+-
+-                    return;
+                 }
+ 
+-                System.out.println("Deleting " + this.destinationFile + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
+-                this.destinationFile.delete();
+-            }
+-
+-            var3 = new DataOutputStream(new FileOutputStream(this.destinationFile));
++                var2 = var1.getInputStream();
++                var7 = (float)var1.getContentLength();
++                int var28 = var1.getContentLength();
+ 
+-            if (this.field_76173_f > 0 && var7 > (float)this.field_76173_f)
+-            {
+                 if (this.feedbackHook != null)
+                 {
+-                    this.feedbackHook.onNoMoreProgress();
++                    this.feedbackHook.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
+                 }
+ 
+-                throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + this.field_76173_f + ")");
+-            }
++                if (this.destinationFile.exists())
++                {
++                    long var29 = this.destinationFile.length();
+ 
+-            boolean var31 = false;
+-            int var30;
++                    if (var29 == (long)var28)
++                    {
++                        this.downloadSuccess.onSuccess(this.destinationFile);
+ 
+-            while ((var30 = var2.read(var4)) >= 0)
+-            {
+-                var6 += (float)var30;
++                        if (this.feedbackHook != null)
++                        {
++                            this.feedbackHook.onNoMoreProgress();
++                        }
+ 
+-                if (this.feedbackHook != null)
+-                {
+-                    this.feedbackHook.setLoadingProgress((int)(var6 / var7 * 100.0F));
++                        return;
++                    }
++
++                    System.out.println("Deleting " + this.destinationFile + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
++                    this.destinationFile.delete();
+                 }
+ 
+-                if (this.field_76173_f > 0 && var6 > (float)this.field_76173_f)
++                var3 = new DataOutputStream(new FileOutputStream(this.destinationFile));
++
++                if (this.field_76173_f > 0 && var7 > (float)this.field_76173_f)
+                 {
+                     if (this.feedbackHook != null)
+                     {
+                         this.feedbackHook.onNoMoreProgress();
+                     }
+ 
+-                    throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + this.field_76173_f + ")");
++                    throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + this.field_76173_f + ")");
+                 }
+ 
+-                var3.write(var4, 0, var30);
+-            }
++                boolean var31 = false;
++                int var30;
+ 
+-            this.downloadSuccess.onSuccess(this.destinationFile);
++                while ((var30 = var2.read(var4)) >= 0)
++                {
++                    var6 += (float)var30;
+ 
+-            if (this.feedbackHook != null)
++                    if (this.feedbackHook != null)
++                    {
++                        this.feedbackHook.setLoadingProgress((int)(var6 / var7 * 100.0F));
++                    }
++
++                    if (this.field_76173_f > 0 && var6 > (float)this.field_76173_f)
++                    {
++                        if (this.feedbackHook != null)
++                        {
++                            this.feedbackHook.onNoMoreProgress();
++                        }
++
++                        throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + this.field_76173_f + ")");
++                    }
++
++                    var3.write(var4, 0, var30);
++                }
++
++                this.downloadSuccess.onSuccess(this.destinationFile);
++
++                if (this.feedbackHook != null)
++                {
++                    this.feedbackHook.onNoMoreProgress();
++                    return;
++                }
++            }
++            catch (Throwable var26)
+             {
+-                this.feedbackHook.onNoMoreProgress();
++                var26.printStackTrace();
+             }
+         }
+-        catch (Throwable var26)
+-        {
+-            var26.printStackTrace();
+-        }
+         finally
+         {
+             try

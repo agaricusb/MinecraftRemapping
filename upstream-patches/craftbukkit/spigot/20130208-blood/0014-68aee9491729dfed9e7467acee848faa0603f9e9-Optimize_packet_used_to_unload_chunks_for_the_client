@@ -1,0 +1,51 @@
+From 68aee9491729dfed9e7467acee848faa0603f9e9 Mon Sep 17 00:00:00 2001
+From: Ammar Askar <ammar@ammaraskar.com>
+Date: Fri, 18 Jan 2013 16:20:01 +0500
+Subject: [PATCH] Optimize packet used to unload chunks for the client
+
+At the moment telling a client to unload a chunk involves calling the entire chunk from memory, deflating it and then sending it through the pipes even though the client ignores it and based on the bitmap simply unloads the chunk, and to add the cherry on top, this is done on the main server thread.
+
+diff --git a/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java b/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
+index b54f59f..897cff3 100644
+--- a/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
++++ b/src/minecraft/net/minecraft/network/packet/Packet51MapChunk.java
+@@ -44,12 +44,26 @@ public class Packet51MapChunk extends Packet
+ 
+     /** A temporary storage for the compressed chunk data byte array. */
+     private static byte[] temp = new byte[196864];
++    private static final byte[] unloadSequence = new byte[] {0x78, (byte) 0x9C, 0x63, 0x64, 0x1C, (byte) 0xD9, 0x00, 0x00, (byte) 0x81, (byte) 0x80, 0x01, 0x01}; // Spigot
+ 
+     public Packet51MapChunk()
+     {
+         this.isChunkDataPacket = true;
+     }
+ 
++    // Spigot start - add constructor for chunk removals for the client
++    public Packet51MapChunk(int x, int z)
++    {
++        this.xCh = x;
++        this.zCh = z;
++        this.includeInitialize = true;
++        this.yChMin = 0;
++        this.yChMax = 0;
++        this.tempLength = unloadSequence.length;
++        this.chunkData = unloadSequence;
++    }
++    // Spigot end
++
+     public Packet51MapChunk(Chunk par1Chunk, boolean par2, int par3)
+     {
+         this.isChunkDataPacket = true;
+diff --git a/src/minecraft/net/minecraft/server/management/PlayerInstance.java b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+index 48fdc18..865a593 100644
+--- a/src/minecraft/net/minecraft/server/management/PlayerInstance.java
++++ b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+@@ -75,7 +75,7 @@ class PlayerInstance
+     {
+         if (this.playersInChunk.contains(par1EntityPlayerMP))
+         {
+-            par1EntityPlayerMP.playerNetServerHandler.sendPacketToPlayer(new Packet51MapChunk(PlayerManager.getWorldServer(this.myManager).getChunkFromChunkCoords(this.chunkLocation.chunkXPos, this.chunkLocation.chunkZPos), true, 0));
++            par1EntityPlayerMP.playerNetServerHandler.sendPacketToPlayer(new Packet51MapChunk(this.chunkLocation.chunkXPos, this.chunkLocation.chunkZPos)); // Spigot - remove chunk load call just to unload in favour of specialized constructor
+             this.playersInChunk.remove(par1EntityPlayerMP);
+             par1EntityPlayerMP.loadedChunks.remove(this.chunkLocation);
+ 

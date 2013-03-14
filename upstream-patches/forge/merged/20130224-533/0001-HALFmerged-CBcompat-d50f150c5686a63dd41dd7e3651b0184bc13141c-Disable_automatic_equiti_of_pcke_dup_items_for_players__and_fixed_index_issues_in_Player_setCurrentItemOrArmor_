@@ -1,0 +1,37 @@
+From d50f150c5686a63dd41dd7e3651b0184bc13141c Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Sat, 23 Feb 2013 10:42:33 -0800
+Subject: [PATCH] Disable automatic equiti of pcke dup items for players, and fixed index issues in Player.setCurrentItemOrArmor.
+
+
+diff --git a/src/minecraft/net/minecraft/entity/player/EntityPlayer.java b/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
+index 3ce129a..a1b2000 100644
+--- a/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
++++ b/src/minecraft/net/minecraft/entity/player/EntityPlayer.java
+@@ -892,6 +892,10 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+             NBTTagList var3 = par1NBTTagCompound.getTagList("EnderItems");
+             this.theInventoryEnderChest.loadInventoryFromNBT(var3);
+         }
++        
++        //Disable vanilla mob armor/item pickup, players can already pickup items 
++        //and it causes issues with overwriting items, dropping items, etc..
++        this.canPickUpLoot = false;
+     }
+ 
+     /**
+@@ -2274,7 +2278,14 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
+      */
+     public void setCurrentItemOrArmor(int par1, ItemStack par2ItemStack)
+     {
+-        this.inventory.armorInventory[par1] = par2ItemStack;
++        if (par1 == 0)
++        {
++            this.inventory.mainInventory[this.inventory.currentItem] = par2ItemStack;
++        }
++        else
++        {
++            this.inventory.armorInventory[par1 - 1] = par2ItemStack;
++        }
+     }
+ 
+     public ItemStack[] getLastActiveItems()

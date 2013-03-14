@@ -1,0 +1,56 @@
+From 8c66096a1c811f29b8cd60c9ab2f4395e1120c9a Mon Sep 17 00:00:00 2001
+From: Wesley Wolfe <weswolf@aol.com>
+Date: Sat, 5 Jan 2013 16:45:34 -0600
+Subject: [PATCH] Update calls to DyeColor getData and getByData. Addresses BUKKIT-2786
+
+These two methods are now deprecated and replaced by the strictly
+equivalent calls using wool data.
+
+diff --git a/src/minecraft/net/minecraft/item/ItemDye.java b/src/minecraft/net/minecraft/item/ItemDye.java
+index 7bbb32d..cd9c4fe 100644
+--- a/src/minecraft/net/minecraft/item/ItemDye.java
++++ b/src/minecraft/net/minecraft/item/ItemDye.java
+@@ -261,7 +261,7 @@ public class ItemDye extends Item
+                     return false;
+                 }
+ 
+-                var4 = (byte) event.getColor().getData();
++                var4 = (byte) event.getColor().getWoolData();
+                 // CraftBukkit end
+                 var3.setFleeceColor(var4);
+                 --par1ItemStack.stackSize;
+diff --git a/src/minecraft/org/bukkit/craftbukkit/entity/CraftSheep.java b/src/minecraft/org/bukkit/craftbukkit/entity/CraftSheep.java
+index 5b36c9a..7f69536 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/entity/CraftSheep.java
++++ b/src/minecraft/org/bukkit/craftbukkit/entity/CraftSheep.java
+@@ -12,11 +12,11 @@ public class CraftSheep extends CraftAnimals implements Sheep {
+     }
+ 
+     public DyeColor getColor() {
+-        return DyeColor.getByData((byte) getHandle().getFleeceColor/*was:getColor*/());
++        return DyeColor.getByWoolData((byte) getHandle().getFleeceColor/*was:getColor*/());
+     }
+ 
+     public void setColor(DyeColor color) {
+-        getHandle().setFleeceColor/*was:setColor*/(color.getData());
++        getHandle().setFleeceColor/*was:setColor*/(color.getWoolData());
+     }
+ 
+     public boolean isSheared() {
+diff --git a/src/minecraft/org/bukkit/craftbukkit/entity/CraftWolf.java b/src/minecraft/org/bukkit/craftbukkit/entity/CraftWolf.java
+index c034dbe..5a9e10d 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/entity/CraftWolf.java
++++ b/src/minecraft/org/bukkit/craftbukkit/entity/CraftWolf.java
+@@ -29,10 +29,10 @@ public class CraftWolf extends CraftTameableAnimal implements Wolf {
+     }
+ 
+     public DyeColor getCollarColor() {
+-        return DyeColor.getByData((byte) getHandle().getCollarColor/*was:getCollarColor*/());
++        return DyeColor.getByWoolData((byte) getHandle().getCollarColor/*was:getCollarColor*/());
+     }
+ 
+     public void setCollarColor(DyeColor color) {
+-        getHandle().setCollarColor/*was:setCollarColor*/(color.getData());
++        getHandle().setCollarColor/*was:setCollarColor*/(color.getWoolData());
+     }
+ }

@@ -1,0 +1,76 @@
+From 1dc9ef9b08b6d363d83b3d24c76b177b6b558893 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Tue, 29 Jan 2013 03:11:59 -0800
+Subject: [PATCH] Fix initalization issue with the clamping threshold config value.  And remove vanilla console spam related to it.
+
+
+diff --git a/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java b/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
+index 5bfa8d4..c3a352d 100644
+--- a/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
++++ b/src/minecraft/net/minecraft/network/packet/Packet52MultiBlockChange.java
+@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
+ import java.io.IOException;
+ import net.minecraft.world.World;
+ import net.minecraft.world.chunk.Chunk;
++import net.minecraftforge.common.ForgeDummyContainer;
+ import net.minecraftforge.common.MinecraftForge;
+ 
+ public class Packet52MultiBlockChange extends Packet
+@@ -39,10 +40,8 @@ public class Packet52MultiBlockChange extends Packet
+ 
+         try
+         {
+-            if (par4 >= MinecraftForge.clumpingThreshold)
++            if (par4 >= ForgeDummyContainer.clumpingThreshold)
+             {
+-                System.out.println("ChunkTilesUpdatePacket compress " + par4);
+-
+                 if (field_73449_e.length < var6)
+                 {
+                     field_73449_e = new byte[var6];
+diff --git a/src/minecraft/net/minecraft/server/management/PlayerInstance.java b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+index 65bd7cc..2176fa8 100644
+--- a/src/minecraft/net/minecraft/server/management/PlayerInstance.java
++++ b/src/minecraft/net/minecraft/server/management/PlayerInstance.java
+@@ -14,6 +14,7 @@ import net.minecraft.network.packet.Packet53BlockChange;
+ import net.minecraft.tileentity.TileEntity;
+ import net.minecraft.world.ChunkCoordIntPair;
+ 
++import net.minecraftforge.common.ForgeDummyContainer;
+ import net.minecraftforge.common.ForgeHooks;
+ import net.minecraftforge.common.MinecraftForge;
+ import net.minecraftforge.event.world.ChunkWatchEvent;
+@@ -146,7 +147,7 @@ public class PlayerInstance
+             {
+                 int var4;
+ 
+-                if (this.numberOfTilesToUpdate >= MinecraftForge.clumpingThreshold)
++                if (this.numberOfTilesToUpdate >= ForgeDummyContainer.clumpingThreshold)
+                 {
+                     var1 = this.chunkLocation.chunkXPos * 16;
+                     var2 = this.chunkLocation.chunkZPos * 16;
+diff --git a/src/minecraft/net/minecraftforge/common/ForgeDummyContainer.java b/src/minecraft/net/minecraftforge/common/ForgeDummyContainer.java
+index e3db4f8..8a3dffe 100644
+--- a/src/minecraft/net/minecraftforge/common/ForgeDummyContainer.java
++++ b/src/minecraft/net/minecraftforge/common/ForgeDummyContainer.java
+@@ -25,7 +25,7 @@ import static net.minecraftforge.common.ForgeVersion.*;
+ 
+ public class ForgeDummyContainer extends DummyModContainer implements WorldAccessContainer
+ {
+-    public static int clumpingThreshold;
++    public static int clumpingThreshold = 64;
+ 
+     public ForgeDummyContainer()
+     {
+diff --git a/src/minecraft/net/minecraftforge/common/MinecraftForge.java b/src/minecraft/net/minecraftforge/common/MinecraftForge.java
+index 3af29f7..48a6d22 100644
+--- a/src/minecraft/net/minecraftforge/common/MinecraftForge.java
++++ b/src/minecraft/net/minecraftforge/common/MinecraftForge.java
+@@ -35,7 +35,6 @@ public class MinecraftForge
+     public static final EventBus ORE_GEN_BUS = new EventBus();
+     @Deprecated //Vanilla feature now
+     public static boolean SPAWNER_ALLOW_ON_INVERTED = false;
+-    public static final int clumpingThreshold = ForgeDummyContainer.clumpingThreshold;
+ 
+     private static final ForgeInternalHandler INTERNAL_HANDLER = new ForgeInternalHandler();
+ 

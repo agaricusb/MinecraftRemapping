@@ -1,0 +1,27 @@
+From f999ce7e74f576bca61f15ddea465856e75d48ba Mon Sep 17 00:00:00 2001
+From: md_5 <md_5@live.com.au>
+Date: Sun, 3 Feb 2013 09:20:19 +1100
+Subject: [PATCH] Detect, remove and warn about null tile entities.
+
+
+diff --git a/src/minecraft/net/minecraft/world/World.java b/src/minecraft/net/minecraft/world/World.java
+index 35c4cd3..3ec8bc5 100644
+--- a/src/minecraft/net/minecraft/world/World.java
++++ b/src/minecraft/net/minecraft/world/World.java
+@@ -1991,6 +1991,16 @@ public abstract class World implements IBlockAccess
+         while (var14.hasNext())
+         {
+             TileEntity var9 = (TileEntity)var14.next();
++
++            // Spigot start
++            if (var9 == null)
++            {
++                getServer().getLogger().severe("Spigot has detected a null entity and has removed it, preventing a crash");
++                var14.remove();
++                continue;
++            }
++
++            // Spigot end
+             // CraftBukkit start - don't tick entities in chunks queued for unload
+             ChunkProviderServer chunkProviderServer = ((WorldServer) this).theChunkProviderServer;
+ 

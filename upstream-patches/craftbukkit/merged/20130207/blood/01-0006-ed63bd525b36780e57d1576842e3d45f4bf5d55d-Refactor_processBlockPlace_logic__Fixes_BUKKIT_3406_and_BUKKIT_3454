@@ -1,0 +1,95 @@
+From ed63bd525b36780e57d1576842e3d45f4bf5d55d Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Fri, 18 Jan 2013 23:07:28 -0600
+Subject: [PATCH] Refactor processBlockPlace logic. Fixes BUKKIT-3406 and BUKKIT-3454
+
+The previous logic was faulty since it lost the logic of "placing" the
+block. It was also taking into account data that could have been
+changed outside of the processing of this event, which is irrelevant
+to the processing of this event.
+
+diff --git a/src/minecraft/net/minecraft/block/BlockPumpkin.java b/src/minecraft/net/minecraft/block/BlockPumpkin.java
+index a3d4165..d96e679 100644
+--- a/src/minecraft/net/minecraft/block/BlockPumpkin.java
++++ b/src/minecraft/net/minecraft/block/BlockPumpkin.java
+@@ -68,11 +68,6 @@ public class BlockPumpkin extends BlockDirectional
+     {
+         super.onBlockAdded(par1World, par2, par3, par4);
+ 
+-        if (par1World.editingBlocks)
+-        {
+-            return;    // CraftBukkit
+-        }
+-
+         if (par1World.getBlockId(par2, par3 - 1, par4) == Block.blockSnow.blockID && par1World.getBlockId(par2, par3 - 2, par4) == Block.blockSnow.blockID)
+         {
+             if (!par1World.isRemote)
+diff --git a/src/minecraft/net/minecraft/block/BlockRedstoneWire.java b/src/minecraft/net/minecraft/block/BlockRedstoneWire.java
+index 229abc5..3c03f59 100644
+--- a/src/minecraft/net/minecraft/block/BlockRedstoneWire.java
++++ b/src/minecraft/net/minecraft/block/BlockRedstoneWire.java
+@@ -278,11 +278,6 @@ public class BlockRedstoneWire extends Block
+      */
+     public void onBlockAdded(World par1World, int par2, int par3, int par4)
+     {
+-        if (par1World.editingBlocks)
+-        {
+-            return;    // CraftBukkit
+-        }
+-
+         super.onBlockAdded(par1World, par2, par3, par4);
+ 
+         if (!par1World.isRemote)
+diff --git a/src/minecraft/net/minecraft/item/ItemBlock.java b/src/minecraft/net/minecraft/item/ItemBlock.java
+index aada87c..3bd528c 100644
+--- a/src/minecraft/net/minecraft/item/ItemBlock.java
++++ b/src/minecraft/net/minecraft/item/ItemBlock.java
+@@ -111,7 +111,7 @@ public class ItemBlock extends Item
+     {
+         org.bukkit.block.BlockState blockstate = org.bukkit.craftbukkit.block.CraftBlockState.getBlockState(world, x, y, z);
+         world.editingBlocks = true;
+-        world.setBlockAndMetadataWithNotify(x, y, z, id, data);
++        world.setBlockAndMetadata(x, y, z, id, data);
+         org.bukkit.event.block.BlockPlaceEvent event = org.bukkit.craftbukkit.event.CraftEventFactory.callBlockPlaceEvent(world, entityhuman, blockstate, x, y, z);
+ 
+         if (event.isCancelled() || !event.canBuild())
+@@ -122,13 +122,21 @@ public class ItemBlock extends Item
+         }
+ 
+         world.editingBlocks = false;
+-        world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
+-        Block block = Block.blocksList[world.getBlockId(x, y, z)];
++        int newId = world.getBlockId(x, y, z);
++        int newData = world.getBlockMetadata(x, y, z);
++        Block block = Block.blocksList[newId];
++
++        if (block != null)
++        {
++            block.onBlockAdded(world, x, y, z);
++        }
++
++        world.notifyBlockChange(x, y, z, newId);
+ 
+         if (block != null)
+         {
+             block.onBlockPlacedBy(world, x, y, z, entityhuman);
+-            block.onPostBlockPlaced(world, x, y, z, world.getBlockMetadata(x, y, z));
++            block.onPostBlockPlaced(world, x, y, z, newData);
+             world.playSoundEffect((double)((float) x + 0.5F), (double)((float) y + 0.5F), (double)((float) z + 0.5F), block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+         }
+ 
+diff --git a/src/minecraft/net/minecraft/world/chunk/Chunk.java b/src/minecraft/net/minecraft/world/chunk/Chunk.java
+index 3ece36c..7f63f1a 100644
+--- a/src/minecraft/net/minecraft/world/chunk/Chunk.java
++++ b/src/minecraft/net/minecraft/world/chunk/Chunk.java
+@@ -636,8 +636,8 @@ public class Chunk
+                 {
+                     if (!this.worldObj.isRemote)
+                     {
+-                        // CraftBukkit start - Don't extend piston until data is set
+-                        if (!(Block.blocksList[par4] instanceof BlockPistonBase) || var9 != 0)
++                        // CraftBukkit start - Don't extend piston until data is set, don't "place" if we're processing the event
++                        if (!this.worldObj.editingBlocks && (!(Block.blocksList[par4] instanceof BlockPistonBase) || var9 != 0))
+                         {
+                             Block.blocksList[par4].onBlockAdded(this.worldObj, var12, par2, var13);
+                         }

@@ -1,0 +1,19 @@
+From 183b3e63161627df7958830f6995b6e3b6da61e3 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 04:53:56 -0800
+Subject: [PATCH] Fix EventTransformer throwing an NPE when transforming a class that doesn't exist. Closes #413
+
+
+diff --git a/src/minecraft/net/minecraftforge/transformers/EventTransformer.java b/src/minecraft/net/minecraftforge/transformers/EventTransformer.java
+index ebe5008..ae04b08 100644
+--- a/src/minecraft/net/minecraftforge/transformers/EventTransformer.java
++++ b/src/minecraft/net/minecraftforge/transformers/EventTransformer.java
+@@ -22,7 +22,7 @@ public class EventTransformer implements IClassTransformer
+     @Override
+     public byte[] transform(String name, byte[] bytes)
+     {
+-        if (name.equals("net.minecraftforge.event.Event") || name.startsWith("net.minecraft.") || name.indexOf('.') == -1)
++        if (bytes == null || name.equals("net.minecraftforge.event.Event") || name.startsWith("net.minecraft.") || name.indexOf('.') == -1)
+         {
+             return bytes;
+         }

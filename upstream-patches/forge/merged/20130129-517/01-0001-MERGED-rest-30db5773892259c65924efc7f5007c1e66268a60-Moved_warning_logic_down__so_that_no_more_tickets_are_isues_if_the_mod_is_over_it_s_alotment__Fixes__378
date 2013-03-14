@@ -1,0 +1,27 @@
+From 30db5773892259c65924efc7f5007c1e66268a60 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Mon, 28 Jan 2013 16:36:03 -0800
+Subject: [PATCH] Moved warning logic down, so that no more tickets are isues if the mod is over it's alotment. Fixes #378
+
+
+diff --git a/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java b/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
+index 4794f53..99146b8 100644
+--- a/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
++++ b/src/minecraft/net/minecraftforge/common/ForgeChunkManager.java
+@@ -653,10 +653,13 @@ public class ForgeChunkManager
+ 
+         int allowedCount = ticketConstraints.containsKey(modId) ? ticketConstraints.get(modId) : defaultMaxCount;
+ 
+-        if (tickets.get(world).get(modId).size() >= allowedCount && !warnedMods.contains(modId))
++        if (tickets.get(world).get(modId).size() >= allowedCount)
+         {
+-            FMLLog.info("The mod %s has attempted to allocate a chunkloading ticket beyond it's currently allocated maximum : %d", modId, allowedCount);
+-            warnedMods.add(modId);
++            if (!warnedMods.contains(modId))
++            {
++                FMLLog.info("The mod %s has attempted to allocate a chunkloading ticket beyond it's currently allocated maximum : %d", modId, allowedCount);
++                warnedMods.add(modId);
++            }
+             return null;
+         }
+         Ticket ticket = new Ticket(modId, type, world);

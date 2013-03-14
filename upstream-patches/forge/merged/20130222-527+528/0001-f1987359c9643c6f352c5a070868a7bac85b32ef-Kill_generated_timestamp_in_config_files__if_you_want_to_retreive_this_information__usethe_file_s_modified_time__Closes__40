@@ -1,0 +1,20 @@
+From f1987359c9643c6f352c5a070868a7bac85b32ef Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 03:18:36 -0800
+Subject: [PATCH] Kill generated timestamp in config files, if you want to retreive this information, usethe file's modified time. Closes #404
+
+
+diff --git a/src/minecraft/net/minecraftforge/common/Configuration.java b/src/minecraft/net/minecraftforge/common/Configuration.java
+index 2f04a89..b3911a8 100644
+--- a/src/minecraft/net/minecraftforge/common/Configuration.java
++++ b/src/minecraft/net/minecraftforge/common/Configuration.java
+@@ -674,8 +674,7 @@ public class Configuration
+                 FileOutputStream fos = new FileOutputStream(file);
+                 BufferedWriter buffer = new BufferedWriter(new OutputStreamWriter(fos, defaultEncoding));
+ 
+-                buffer.write("# Configuration file" + NEW_LINE);
+-                buffer.write("# Generated on " + DateFormat.getInstance().format(new Date()) + NEW_LINE + NEW_LINE);
++                buffer.write("# Configuration file" + NEW_LINE + NEW_LINE);
+ 
+                 if (children.isEmpty())
+                 {

@@ -1,0 +1,31 @@
+From d291a6ba7cc041a4ab80fe925b513e945ec03455 Mon Sep 17 00:00:00 2001
+From: QuarterAnimal <quarteranimal@gmail.com>
+Date: Wed, 2 Jan 2013 12:36:23 -0500
+Subject: [PATCH] Preserve source block in mushroom spread event. Fixes BUKKIT-3354
+
+
+diff --git a/src/minecraft/net/minecraft/block/BlockMushroom.java b/src/minecraft/net/minecraft/block/BlockMushroom.java
+index 86599ed..9ebc84f 100644
+--- a/src/minecraft/net/minecraft/block/BlockMushroom.java
++++ b/src/minecraft/net/minecraft/block/BlockMushroom.java
+@@ -60,6 +60,11 @@ public class BlockMushroom extends BlockFlower
+             var8 = par2 + par5Random.nextInt(3) - 1;
+             var9 = par3 + par5Random.nextInt(2) - par5Random.nextInt(2);
+             var10 = par4 + par5Random.nextInt(3) - 1;
++            // CraftBukkit start - preserve source block coordinates
++            int sourceX = par2;
++            int sourceY = par3;
++            int sourceZ = par4;
++            // CraftBukkit end
+ 
+             for (int var11 = 0; var11 < 4; ++var11)
+             {
+@@ -81,7 +86,7 @@ public class BlockMushroom extends BlockFlower
+                 org.bukkit.World bworld = par1World.getWorld();
+                 BlockState blockState = bworld.getBlockAt(var8, var9, var10).getState();
+                 blockState.setTypeId(this.blockID);
+-                BlockSpreadEvent event = new BlockSpreadEvent(blockState.getBlock(), bworld.getBlockAt(par2, par3, par4), blockState);
++                BlockSpreadEvent event = new BlockSpreadEvent(blockState.getBlock(), bworld.getBlockAt(sourceX, sourceY, sourceZ), blockState);
+                 par1World.getServer().getPluginManager().callEvent(event);
+ 
+                 if (!event.isCancelled())

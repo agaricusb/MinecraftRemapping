@@ -1,0 +1,36 @@
+From 9a18c2ac2f284c640d0f75c192e3f650fbf70986 Mon Sep 17 00:00:00 2001
+From: James Clarke <jamesrtclarke@me.com>
+Date: Sat, 2 Feb 2013 23:02:08 +0000
+Subject: [PATCH] Use the result of EntityPortalExitEvent. Fixes BUKKIT-3559.
+
+
+diff --git a/src/minecraft/net/minecraft/world/Teleporter.java b/src/minecraft/net/minecraft/world/Teleporter.java
+index 38d6c88..2d48eab 100644
+--- a/src/minecraft/net/minecraft/world/Teleporter.java
++++ b/src/minecraft/net/minecraft/world/Teleporter.java
+@@ -374,13 +374,21 @@ public class Teleporter
+ 
+         if (event.isCancelled() || to == null || !entity.isEntityAlive())
+         {
+-            position = from;
+-            velocity = before;
++            position.setX(from.getX());
++            position.setY(from.getY());
++            position.setZ(from.getZ());
++            position.setYaw(from.getYaw());
++            position.setPitch(from.getPitch());
++            velocity.copy(before);
+         }
+         else
+         {
+-            position = to;
+-            velocity = event.getAfter();
++            position.setX(to.getX());
++            position.setY(to.getY());
++            position.setZ(to.getZ());
++            position.setYaw(to.getYaw());
++            position.setPitch(to.getPitch());
++            velocity.copy(event.getAfter()); // event.getAfter() will never be null, as setAfter() will cause an NPE if null is passed in
+         }
+ 
+         // CraftBukkit end

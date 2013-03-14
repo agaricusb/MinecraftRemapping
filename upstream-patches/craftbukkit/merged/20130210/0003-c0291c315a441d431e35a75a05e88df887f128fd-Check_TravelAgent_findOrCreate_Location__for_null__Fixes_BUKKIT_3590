@@ -1,0 +1,27 @@
+From c0291c315a441d431e35a75a05e88df887f128fd Mon Sep 17 00:00:00 2001
+From: EdGruberman <ed@rjump.com>
+Date: Sat, 9 Feb 2013 22:01:39 -0700
+Subject: [PATCH] Check TravelAgent.findOrCreate(Location) for null; Fixes BUKKIT-3590
+
+If a custom TravelAgent is used and returns null for findOrCreate method
+a NullPointerException will occur.
+Conflicts:
+	src/minecraft/net/minecraft/server/PlayerList.java
+
+diff --git a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+index 815aed8..ae61601 100644
+--- a/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
++++ b/src/minecraft/net/minecraft/server/management/ServerConfigurationManager.java
+@@ -598,6 +598,12 @@ public abstract class ServerConfigurationManager
+         }
+ 
+         exit = event.useTravelAgent() ? event.getPortalTravelAgent().findOrCreate(event.getTo()) : event.getTo();
++
++        if (exit == null)
++        {
++            return;
++        }
++
+         exitWorld = ((CraftWorld) exit.getWorld()).getHandle();
+         Vector velocity = entityplayer.getBukkitEntity().getVelocity();
+         boolean before = exitWorld.theChunkProviderServer.loadChunkOnProvideRequest;

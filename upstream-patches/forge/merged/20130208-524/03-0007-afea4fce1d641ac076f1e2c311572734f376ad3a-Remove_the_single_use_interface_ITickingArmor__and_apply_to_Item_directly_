@@ -1,0 +1,74 @@
+From afea4fce1d641ac076f1e2c311572734f376ad3a Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Mon, 4 Feb 2013 17:53:47 -0500
+Subject: [PATCH] Remove the single use interface ITickingArmor, and apply to Item directly.
+
+
+diff --git a/src/minecraft/net/minecraft/entity/player/InventoryPlayer.java b/src/minecraft/net/minecraft/entity/player/InventoryPlayer.java
+index a110b13..9df9e63 100644
+--- a/src/minecraft/net/minecraft/entity/player/InventoryPlayer.java
++++ b/src/minecraft/net/minecraft/entity/player/InventoryPlayer.java
+@@ -10,7 +10,6 @@ import net.minecraft.item.ItemArmor;
+ import net.minecraft.item.ItemStack;
+ import net.minecraft.nbt.NBTTagCompound;
+ import net.minecraft.nbt.NBTTagList;
+-import net.minecraftforge.common.ITickingArmor;
+ 
+ public class InventoryPlayer implements IInventory
+ {
+@@ -341,9 +340,9 @@ public class InventoryPlayer implements IInventory
+ 
+         for (int i = 0; i < this.armorInventory.length; i++)
+         {
+-            if (this.armorInventory[i] != null && this.armorInventory[i].getItem() instanceof ITickingArmor)
++            if (this.armorInventory[i] != null)
+             {
+-                ((ITickingArmor)this.armorInventory[i].getItem()).onArmorTickUpdate(this.player.worldObj, this.player, this.armorInventory[i]);
++                this.armorInventory[i].getItem().onArmorTickUpdate(this.player.worldObj, this.player, this.armorInventory[i]);
+             }
+         }
+     }
+diff --git a/src/minecraft/net/minecraft/item/Item.java b/src/minecraft/net/minecraft/item/Item.java
+index b74ea8a..a23c0fd 100644
+--- a/src/minecraft/net/minecraft/item/Item.java
++++ b/src/minecraft/net/minecraft/item/Item.java
+@@ -1016,4 +1016,18 @@ public class Item
+     {
+         return false;
+     }
++
++
++    /**
++     * Called to tick armor in the armor slot. Override to do something
++     *
++     * @param world
++     * @param player
++     * @param itemStack
++     */
++    public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack)
++    {
++
++    }
++
+ }
+diff --git a/src/minecraft/net/minecraftforge/common/ITickingArmor.java b/src/minecraft/net/minecraftforge/common/ITickingArmor.java
+deleted file mode 100644
+index 3c240d3..0000000
+--- a/src/minecraft/net/minecraftforge/common/ITickingArmor.java
++++ /dev/null
+@@ -1,15 +0,0 @@
+-package net.minecraftforge.common;
+-
+-import net.minecraft.entity.player.EntityPlayer;
+-import net.minecraft.item.ItemStack;
+-import net.minecraft.world.World;
+-
+-/**
+- * A simple interface to receive ticks from armor items when placed in armor slots.
+- *
+- * @author cpw
+- *
+- */
+-public interface ITickingArmor {
+-    void onArmorTickUpdate(World worldObj, EntityPlayer player, ItemStack itemStack);
+-}

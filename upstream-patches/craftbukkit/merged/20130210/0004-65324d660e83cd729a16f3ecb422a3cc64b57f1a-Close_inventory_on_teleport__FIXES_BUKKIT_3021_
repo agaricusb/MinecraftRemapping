@@ -1,0 +1,30 @@
+From 65324d660e83cd729a16f3ecb422a3cc64b57f1a Mon Sep 17 00:00:00 2001
+From: Andrzej Pomirski <andrzejp@dysleksja.pl>
+Date: Sat, 9 Feb 2013 23:38:53 +0100
+Subject: [PATCH] Close inventory on teleport. FIXES BUKKIT-3021.
+
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/minecraft/org/bukkit/craftbukkit/entity/CraftPlayer.java
+index b85062f..d832049 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/entity/CraftPlayer.java
++++ b/src/minecraft/org/bukkit/craftbukkit/entity/CraftPlayer.java
+@@ -380,14 +380,15 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+         net.minecraft.world.WorldServer/*was:WorldServer*/ fromWorld = ((CraftWorld) from.getWorld()).getHandle();
+         net.minecraft.world.WorldServer/*was:WorldServer*/ toWorld = ((CraftWorld) to.getWorld()).getHandle();
+ 
++        // Close any foreign inventory
++        if (getHandle().openContainer/*was:activeContainer*/ != getHandle().inventoryContainer/*was:defaultContainer*/) {
++            getHandle().closeScreen/*was:closeInventory*/();
++        }
++
+         // Check if the fromWorld and toWorld are the same.
+         if (fromWorld == toWorld) {
+             entity.playerNetServerHandler/*was:playerConnection*/.teleport(to);
+         } else {
+-            // Close any foreign inventory
+-            if (getHandle().openContainer/*was:activeContainer*/ != getHandle().inventoryContainer/*was:defaultContainer*/){
+-                getHandle().closeScreen/*was:closeInventory*/();
+-            }
+             server.getHandle().moveToWorld(entity, toWorld.dimension, true, to, true);
+         }
+         return true;

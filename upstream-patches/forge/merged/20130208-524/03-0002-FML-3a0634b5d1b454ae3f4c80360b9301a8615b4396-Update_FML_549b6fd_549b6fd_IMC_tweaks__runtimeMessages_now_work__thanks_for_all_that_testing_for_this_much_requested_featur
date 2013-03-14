@@ -1,0 +1,1088 @@
+From 3a0634b5d1b454ae3f4c80360b9301a8615b4396 Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Thu, 31 Jan 2013 13:51:56 -0500
+Subject: [PATCH] Update FML:549b6fd
+ 549b6fd IMC tweaks: runtimeMessages now work (thanks for all that testing for this much requested feature!) and IMCEvent will no longer rem
+ 9fafdc1 More logging tweaks. You can probably configure individual mod log files if you wish now
+ f169f7c A log of logging cleanup. FML will now read logging.properties to configure logging channels a couple of times during startup. You
+ 3ac891f Try and handle "death on startup" a bit cleaner
+ 2dc0189 Deprecate the old GUI ticktype. They're dead and have been for some time.
+ dd98784 Tweak a method signature
+ 1c9a510 Add parameters to FML install to enable/disable certian aspects. Applying patches, running transformer/merger, and decompiling serv
+ 1bd6847 Fix up packages.csv ordering for easier diffing
+
+
+diff --git a/common/net/minecraftforge/common/ForgeVersion.java b/common/net/minecraftforge/common/ForgeVersion.java
+index c3bc3b7..b9f4b77 100644
+--- a/common/net/minecraftforge/common/ForgeVersion.java
++++ b/common/net/minecraftforge/common/ForgeVersion.java
+@@ -12,7 +12,7 @@ public class ForgeVersion
+     //This number is incremented every minecraft release, never reset
+     public static final int minorVersion    = 6;
+     //This number is incremented every time a interface changes or new major feature is added, and reset every Minecraft version
+-    public static final int revisionVersion = 1;
++    public static final int revisionVersion = 0;
+     //This number is incremented every time Jenkins builds Forge, and never reset. Should always be 0 in the repo code.
+     public static final int buildVersion    = 0;
+
+diff --git a/src/minecraft/cpw/mods/fml/client/SpriteHelper.java b/src/minecraft/cpw/mods/fml/client/SpriteHelper.java
+index e65439e..0c2a613 100644
+--- a/src/minecraft/cpw/mods/fml/client/SpriteHelper.java
++++ b/src/minecraft/cpw/mods/fml/client/SpriteHelper.java
+@@ -80,7 +80,7 @@ public class SpriteHelper
+             initMCSpriteMaps();
+         }
+         if (spriteInfo.containsKey(file)) {
+-            FMLCommonHandler.instance().getFMLLogger().finer(String.format("Duplicate attempt to register a sprite file %s for overriding -- ignoring",file));
++            FMLLog.log("fml.TextureManager", Level.FINE, "Duplicate attempt to register a sprite file %s for overriding -- ignoring",file);
+             return;
+         }
+         spriteInfo.put(file, toBitSet(spriteMap));
+@@ -98,7 +98,7 @@ public class SpriteHelper
+         if (slots == null)
+         {
+             Exception ex = new Exception(String.format("Invalid getUniqueSpriteIndex call for texture: %s", path));
+-            FMLLog.log(Level.SEVERE, ex, "A critical error has been detected with sprite overrides");
++            FMLLog.log("fml.TextureManager", Level.SEVERE, ex, "A critical error has been detected with sprite overrides");
+             FMLCommonHandler.instance().raiseException(ex,"Invalid request to getUniqueSpriteIndex",true);
+         }
+
+@@ -107,7 +107,7 @@ public class SpriteHelper
+         if (ret == -1)
+         {
+             Exception ex = new Exception(String.format("No more sprite indicies left for: %s", path));
+-            FMLLog.log(Level.SEVERE, ex, "There are no sprite indicies left for %s", path);
++            FMLLog.log("fml.TextureManager", Level.SEVERE, ex, "There are no sprite indicies left for %s", path);
+             FMLCommonHandler.instance().raiseException(ex,"No more sprite indicies left", true);
+         }
+         return ret;
+diff --git a/src/minecraft/cpw/mods/fml/client/TextureFXManager.java b/src/minecraft/cpw/mods/fml/client/TextureFXManager.java
+index 57c9195..7eee9f4 100644
+--- a/src/minecraft/cpw/mods/fml/client/TextureFXManager.java
++++ b/src/minecraft/cpw/mods/fml/client/TextureFXManager.java
+@@ -15,6 +15,7 @@ import java.util.IdentityHashMap;
+ import java.util.List;
+ import java.util.ListIterator;
+ import java.util.Map;
++import java.util.logging.Level;
+
+ import javax.imageio.ImageIO;
+
+@@ -77,7 +78,7 @@ public class TextureFXManager
+         }
+         catch (Exception e)
+         {
+-            FMLLog.warning("Texture FX %s has failed to animate. Likely caused by a texture pack change that they did not respond correctly to", name);
++            FMLLog.log("fml.TextureManager", Level.WARNING, "Texture FX %s has failed to animate. Likely caused by a texture pack change that they did not respond correctly to", name);
+             if (ifx != null)
+             {
+                 ifx.setErrored(true);
+@@ -93,7 +94,7 @@ public class TextureFXManager
+             int target = ((dim.width >> 4) * (dim.height >> 4)) << 2;
+             if (effect.imageData.length != target)
+             {
+-                FMLLog.warning("Detected a texture FX sizing discrepancy in %s (%d, %d)", name, effect.imageData.length, target);
++                FMLLog.log("fml.TextureManager", Level.WARNING, "Detected a texture FX sizing discrepancy in %s (%d, %d)", name, effect.imageData.length, target);
+                 ifx.setErrored(true);
+                 return false;
+             }
+@@ -232,7 +233,7 @@ public class TextureFXManager
+         for (OverrideInfo animationOverride : animationSet) {
+             renderer.registerTextureFX(animationOverride.textureFX);
+             addedTextureFX.add(animationOverride.textureFX);
+-            FMLCommonHandler.instance().getFMLLogger().finer(String.format("Registered texture override %d (%d) on %s (%d)", animationOverride.index, animationOverride.textureFX.iconIndex, animationOverride.textureFX.getClass().getSimpleName(), animationOverride.textureFX.tileImage));
++            FMLLog.log("fml.TextureManager", Level.FINE, "Registered texture override %d (%d) on %s (%d)", animationOverride.index, animationOverride.textureFX.iconIndex, animationOverride.textureFX.getClass().getSimpleName(), animationOverride.textureFX.tileImage);
+         }
+
+         for (String fileToOverride : overrideInfo.keySet()) {
+@@ -243,11 +244,11 @@ public class TextureFXManager
+                     ModTextureStatic mts=new ModTextureStatic(override.index, 1, override.texture, image);
+                     renderer.registerTextureFX(mts);
+                     addedTextureFX.add(mts);
+-                    FMLCommonHandler.instance().getFMLLogger().finer(String.format("Registered texture override %d (%d) on %s (%d)", override.index, mts.iconIndex, override.texture, mts.tileImage));
++                    FMLLog.log("fml.TextureManager", Level.FINE, "Registered texture override %d (%d) on %s (%d)", override.index, mts.iconIndex, override.texture, mts.tileImage);
+                 }
+                 catch (IOException e)
+                 {
+-                    FMLCommonHandler.instance().getFMLLogger().throwing("FMLClientHandler", "registerTextureOverrides", e);
++                    FMLLog.log("fml.TextureManager", Level.WARNING, e, "Exception occurred registering texture override for %s", fileToOverride);
+                 }
+             }
+         }
+@@ -294,7 +295,7 @@ public class TextureFXManager
+         info.override = overridingTexturePath;
+         info.texture = textureToOverride;
+         overrideInfo.put(textureToOverride, info);
+-        FMLLog.fine("Overriding %s @ %d with %s. %d slots remaining",textureToOverride, location, overridingTexturePath, SpriteHelper.freeSlotCount(textureToOverride));
++        FMLLog.log("fml.TextureManager", Level.FINE, "Overriding %s @ %d with %s. %d slots remaining",textureToOverride, location, overridingTexturePath, SpriteHelper.freeSlotCount(textureToOverride));
+     }
+
+     public BufferedImage loadImageFromTexturePack(RenderEngine renderEngine, String path) throws IOException
+diff --git a/src/minecraft/cpw/mods/fml/client/modloader/ModLoaderClientHelper.java b/src/minecraft/cpw/mods/fml/client/modloader/ModLoaderClientHelper.java
+index 52dc590..b27d446 100644
+--- a/src/minecraft/cpw/mods/fml/client/modloader/ModLoaderClientHelper.java
++++ b/src/minecraft/cpw/mods/fml/client/modloader/ModLoaderClientHelper.java
+@@ -57,38 +57,38 @@ public class ModLoaderClientHelper implements IModLoaderSidedHelper
+
+     public static void handleFinishLoadingFor(ModLoaderModContainer mc, Minecraft game)
+     {
+-        FMLLog.finer("Handling post startup activities for ModLoader mod %s", mc.getModId());
++        FMLLog.log(mc.getModId(), Level.FINE, "Handling post startup activities for ModLoader mod %s", mc.getModId());
+         BaseMod mod = (BaseMod) mc.getMod();
+
+         Map<Class<? extends Entity>, Render> renderers = Maps.newHashMap(RenderManager.instance.entityRenderMap);
+
+         try
+         {
+-            FMLLog.finest("Requesting renderers from basemod %s", mc.getModId());
++            FMLLog.log(mc.getModId(), Level.FINEST, "Requesting renderers from basemod %s", mc.getModId());
+             mod.addRenderer(renderers);
+-            FMLLog.finest("Received %d renderers from basemod %s", renderers.size(), mc.getModId());
++            FMLLog.log(mc.getModId(), Level.FINEST, "Received %d renderers from basemod %s", renderers.size(), mc.getModId());
+         }
+         catch (Exception e)
+         {
+-            FMLLog.log(Level.SEVERE, e, "A severe problem was detected with the mod %s during the addRenderer call. Continuing, but expect odd results", mc.getModId());
++            FMLLog.log(mc.getModId(), Level.SEVERE, e, "A severe problem was detected with the mod %s during the addRenderer call. Continuing, but expect odd results", mc.getModId());
+         }
+
+         MapDifference<Class<? extends Entity>, Render> difference = Maps.difference(RenderManager.instance.entityRenderMap, renderers, Equivalences.identity());
+
+         for ( Entry<Class<? extends Entity>, Render> e : difference.entriesOnlyOnLeft().entrySet())
+         {
+-            FMLLog.warning("The mod %s attempted to remove an entity renderer %s from the entity map. This will be ignored.", mc.getModId(), e.getKey().getName());
++            FMLLog.log(mc.getModId(), Level.WARNING, "The mod %s attempted to remove an entity renderer %s from the entity map. This will be ignored.", mc.getModId(), e.getKey().getName());
+         }
+
+         for (Entry<Class<? extends Entity>, Render> e : difference.entriesOnlyOnRight().entrySet())
+         {
+-            FMLLog.finest("Registering ModLoader entity renderer %s as instance of %s", e.getKey().getName(), e.getValue().getClass().getName());
++            FMLLog.log(mc.getModId(), Level.FINEST, "Registering ModLoader entity renderer %s as instance of %s", e.getKey().getName(), e.getValue().getClass().getName());
+             RenderingRegistry.registerEntityRenderingHandler(e.getKey(), e.getValue());
+         }
+
+         for (Entry<Class<? extends Entity>, ValueDifference<Render>> e : difference.entriesDiffering().entrySet())
+         {
+-            FMLLog.finest("Registering ModLoader entity rendering override for %s as instance of %s", e.getKey().getName(), e.getValue().rightValue().getClass().getName());
++            FMLLog.log(mc.getModId(), Level.FINEST, "Registering ModLoader entity rendering override for %s as instance of %s", e.getKey().getName(), e.getValue().rightValue().getClass().getName());
+             RenderingRegistry.registerEntityRenderingHandler(e.getKey(), e.getValue().rightValue());
+         }
+
+@@ -98,7 +98,7 @@ public class ModLoaderClientHelper implements IModLoaderSidedHelper
+         }
+         catch (Exception e)
+         {
+-            FMLLog.log(Level.SEVERE, e, "A severe problem was detected with the mod %s during the registerAnimation call. Continuing, but expect odd results", mc.getModId());
++            FMLLog.log(mc.getModId(), Level.SEVERE, e, "A severe problem was detected with the mod %s during the registerAnimation call. Continuing, but expect odd results", mc.getModId());
+         }
+     }
+
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java b/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
+index 76cad1b..833d59d 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java
+@@ -18,6 +18,7 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.Properties;
+ import java.util.Set;
++import java.util.logging.Level;
+ import java.util.logging.Logger;
+
+ import net.minecraft.crash.CrashReport;
+@@ -92,10 +93,10 @@ public class FMLCommonHandler
+     public void beginLoading(IFMLSidedHandler handler)
+     {
+         sidedDelegate = handler;
+-        FMLLog.info("Attempting early MinecraftForge initialization");
++        FMLLog.log("MinecraftForge", Level.INFO, "Attempting early MinecraftForge initialization");
+         callForgeMethod("initialize");
+         callForgeMethod("registerCrashCallable");
+-        FMLLog.info("Completed early MinecraftForge initialization");
++        FMLLog.log("MinecraftForge", Level.INFO, "Completed early MinecraftForge initialization");
+     }
+
+     public void rescheduleTicks(Side side)
+@@ -189,7 +190,7 @@ public class FMLCommonHandler
+      */
+     public void raiseException(Throwable exception, String message, boolean stopGame)
+     {
+-        FMLCommonHandler.instance().getFMLLogger().throwing("FMLHandler", "raiseException", exception);
++        FMLLog.log(Level.SEVERE, exception, "Something raised an exception. The message was '%s'. 'stopGame' is %b", message, stopGame);
+         if (stopGame)
+         {
+             getSidedDelegate().haltGame(message,exception);
+@@ -451,6 +452,10 @@ public class FMLCommonHandler
+
+     public boolean shouldServerBeKilledQuietly()
+     {
++        if (sidedDelegate == null)
++        {
++            return false;
++        }
+         return sidedDelegate.shouldServerShouldBeKilledQuietly();
+     }
+
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLDummyContainer.java b/src/minecraft/cpw/mods/fml/common/FMLDummyContainer.java
+index 9762ffa..fa2d3a1 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLDummyContainer.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLDummyContainer.java
+@@ -18,6 +18,7 @@ import java.security.cert.Certificate;
+ import java.util.Arrays;
+ import java.util.Map;
+ import java.util.Set;
++import java.util.logging.Level;
+
+ import net.minecraft.nbt.NBTBase;
+ import net.minecraft.nbt.NBTTagCompound;
+@@ -96,12 +97,12 @@ public class FMLDummyContainer extends DummyModContainer implements WorldAccessC
+                 ModContainer container = Loader.instance().getIndexedModList().get(modId);
+                 if (container == null)
+                 {
+-                    FMLLog.severe("This world was saved with mod %s which appears to be missing, things may not work well", modId);
++                    FMLLog.log("fml.ModTracker", Level.SEVERE, "This world was saved with mod %s which appears to be missing, things may not work well", modId);
+                     continue;
+                 }
+                 if (!modVersion.equals(container.getVersion()))
+                 {
+-                    FMLLog.info("This world was saved with mod %s version %s and it is now at version %s, things may not work well", modId, modVersion, container.getVersion());
++                    FMLLog.log("fml.ModTracker", Level.INFO, "This world was saved with mod %s version %s and it is now at version %s, things may not work well", modId, modVersion, container.getVersion());
+                 }
+             }
+         }
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLLog.java b/src/minecraft/cpw/mods/fml/common/FMLLog.java
+index f9e6d67..cf8dba8 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLLog.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLLog.java
+@@ -7,11 +7,21 @@ public class FMLLog
+ {
+     private static cpw.mods.fml.relauncher.FMLRelaunchLog coreLog = cpw.mods.fml.relauncher.FMLRelaunchLog.log;
+
++    public static void log(String logChannel, Level level, String format, Object... data)
++    {
++        coreLog.log(logChannel, level, format, data);
++    }
++
+     public static void log(Level level, String format, Object... data)
+     {
+         coreLog.log(level, format, data);
+     }
+
++    public static void log(String logChannel, Level level, Throwable ex, String format, Object... data)
++    {
++        coreLog.log(logChannel, level, ex, format, data);
++    }
++
+     public static void log(Level level, Throwable ex, String format, Object... data)
+     {
+         coreLog.log(level, ex, format, data);
+@@ -50,4 +60,9 @@ public class FMLLog
+     {
+         return coreLog.getLogger();
+     }
++
++    public static void makeLog(String logChannel)
++    {
++        coreLog.makeLog(logChannel);
++    }
+ }
+diff --git a/src/minecraft/cpw/mods/fml/common/FMLModContainer.java b/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
+index 252aea2..7fe9565 100644
+--- a/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
++++ b/src/minecraft/cpw/mods/fml/common/FMLModContainer.java
+@@ -164,15 +164,15 @@ public class FMLModContainer implements ModContainer
+             modMetadata.requiredMods = requirements;
+             modMetadata.dependencies = dependencies;
+             modMetadata.dependants = dependants;
+-            FMLLog.finest("Parsed dependency info : %s %s %s", requirements, dependencies, dependants);
++            FMLLog.log(getModId(), Level.FINEST, "Parsed dependency info : %s %s %s", requirements, dependencies, dependants);
+         }
+         else
+         {
+-            FMLLog.finest("Using mcmod dependency info : %s %s %s", modMetadata.requiredMods, modMetadata.dependencies, modMetadata.dependants);
++            FMLLog.log(getModId(), Level.FINEST, "Using mcmod dependency info : %s %s %s", modMetadata.requiredMods, modMetadata.dependencies, modMetadata.dependants);
+         }
+         if (Strings.isNullOrEmpty(modMetadata.name))
+         {
+-            FMLLog.info("Mod %s is missing the required element 'name'. Substituting %s", getModId(), getModId());
++            FMLLog.log(getModId(), Level.INFO,"Mod %s is missing the required element 'name'. Substituting %s", getModId(), getModId());
+             modMetadata.name = getModId();
+         }
+         internalVersion = (String) descriptor.get("version");
+@@ -182,18 +182,18 @@ public class FMLModContainer implements ModContainer
+             if (versionProps != null)
+             {
+                 internalVersion = versionProps.getProperty(getModId()+".version");
+-                FMLLog.fine("Found version %s for mod %s in version.properties, using", internalVersion, getModId());
++                FMLLog.log(getModId(), Level.FINE, "Found version %s for mod %s in version.properties, using", internalVersion, getModId());
+             }
+
+         }
+         if (Strings.isNullOrEmpty(internalVersion) && !Strings.isNullOrEmpty(modMetadata.version))
+         {
+-            FMLLog.warning("Mod %s is missing the required element 'version' and a version.properties file could not be found. Falling back to metadata version %s", getModId(), modMetadata.version);
++            FMLLog.log(getModId(), Level.WARNING, "Mod %s is missing the required element 'version' and a version.properties file could not be found. Falling back to metadata version %s", getModId(), modMetadata.version);
+             internalVersion = modMetadata.version;
+         }
+         if (Strings.isNullOrEmpty(internalVersion))
+         {
+-            FMLLog.warning("Mod %s is missing the required element 'version' and no fallback can be found. Substituting '1.0'.", getModId());
++            FMLLog.log(getModId(), Level.WARNING, "Mod %s is missing the required element 'version' and no fallback can be found. Substituting '1.0'.", getModId());
+             modMetadata.version = internalVersion = "1.0";
+         }
+
+@@ -212,7 +212,7 @@ public class FMLModContainer implements ModContainer
+     {
+         try
+         {
+-            FMLLog.fine("Attempting to load the file version.properties from %s to locate a version number for %s", getSource().getName(), getModId());
++            FMLLog.log(getModId(), Level.FINE,"Attempting to load the file version.properties from %s to locate a version number for %s", getSource().getName(), getModId());
+             Properties version = null;
+             if (getSource().isFile())
+             {
+@@ -241,7 +241,7 @@ public class FMLModContainer implements ModContainer
+         catch (Exception e)
+         {
+             Throwables.propagateIfPossible(e);
+-            FMLLog.fine("Failed to find a usable version.properties file");
++            FMLLog.log(getModId(), Level.FINEST, "Failed to find a usable version.properties file");
+             return null;
+         }
+     }
+@@ -293,7 +293,7 @@ public class FMLModContainer implements ModContainer
+     {
+         if (this.enabled)
+         {
+-            FMLLog.fine("Enabling mod %s", getModId());
++            FMLLog.log(getModId(), Level.FINE, "Enabling mod %s", getModId());
+             this.eventBus = bus;
+             this.controller = controller;
+             eventBus.register(this);
+@@ -324,7 +324,7 @@ public class FMLModContainer implements ModContainer
+                     }
+                     else
+                     {
+-                        FMLLog.severe("The mod %s appears to have an invalid method annotation %s. This annotation can only apply to methods with argument types %s -it will not be called", getModId(), a.annotationType().getSimpleName(), Arrays.toString(paramTypes));
++                        FMLLog.log(getModId(), Level.SEVERE,"The mod %s appears to have an invalid method annotation %s. This annotation can only apply to methods with argument types %s -it will not be called", getModId(), a.annotationType().getSimpleName(), Arrays.toString(paramTypes));
+                     }
+                 }
+             }
+@@ -388,7 +388,7 @@ public class FMLModContainer implements ModContainer
+                 catch (Exception e)
+                 {
+                     Throwables.propagateIfPossible(e);
+-                    FMLLog.log(Level.WARNING, e, "Attempting to load @%s in class %s for %s and failing", annotationName, targets.getClassName(), mc.getModId());
++                    FMLLog.log(getModId(), Level.WARNING, e, "Attempting to load @%s in class %s for %s and failing", annotationName, targets.getClassName(), mc.getModId());
+                 }
+             }
+             if (f != null)
+@@ -399,7 +399,7 @@ public class FMLModContainer implements ModContainer
+                     target = modInstance;
+                     if (!modInstance.getClass().equals(clz))
+                     {
+-                        FMLLog.warning("Unable to inject @%s in non-static field %s.%s for %s as it is NOT the primary mod instance", annotationName, targets.getClassName(), targets.getObjectName(), mc.getModId());
++                        FMLLog.log(getModId(), Level.WARNING, "Unable to inject @%s in non-static field %s.%s for %s as it is NOT the primary mod instance", annotationName, targets.getClassName(), targets.getObjectName(), mc.getModId());
+                         continue;
+                     }
+                 }
+@@ -445,7 +445,7 @@ public class FMLModContainer implements ModContainer
+                     {
+                         warnLevel = Level.FINER;
+                     }
+-                    FMLLog.log(warnLevel, "The mod %s is expecting signature %s for source %s, however there is no signature matching that description", getModId(), expectedFingerprint, source.getName());
++                    FMLLog.log(getModId(), warnLevel, "The mod %s is expecting signature %s for source %s, however there is no signature matching that description", getModId(), expectedFingerprint, source.getName());
+                 }
+                 else
+                 {
+diff --git a/src/minecraft/cpw/mods/fml/common/LoadController.java b/src/minecraft/cpw/mods/fml/common/LoadController.java
+index 123e996..c9f1cb9 100644
+--- a/src/minecraft/cpw/mods/fml/common/LoadController.java
++++ b/src/minecraft/cpw/mods/fml/common/LoadController.java
+@@ -5,6 +5,7 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.Map.Entry;
+ import java.util.logging.Level;
++import java.util.logging.Logger;
+
+ import com.google.common.base.Joiner;
+ import com.google.common.collect.ArrayListMultimap;
+@@ -60,14 +61,16 @@ public class LoadController
+             boolean isActive = mod.registerBus(bus, this);
+             if (isActive)
+             {
+-                FMLLog.fine("Activating mod %s", mod.getModId());
++                Level level = Logger.getLogger(mod.getModId()).getLevel();
++                FMLLog.log(mod.getModId(), Level.FINE, "Mod Logging channel %s configured at %s level.", level == null ? "default" : level);
++                FMLLog.log(mod.getModId(), Level.INFO, "Activating mod %s", mod.getModId());
+                 activeModList.add(mod);
+                 modStates.put(mod.getModId(), ModState.UNLOADED);
+                 eventBus.put(mod.getModId(), bus);
+             }
+             else
+             {
+-                FMLLog.warning("Mod %s has been disabled through configuration", mod.getModId());
++                FMLLog.log(mod.getModId(), Level.WARNING, "Mod %s has been disabled through configuration", mod.getModId());
+                 modStates.put(mod.getModId(), ModState.UNLOADED);
+                 modStates.put(mod.getModId(), ModState.DISABLED);
+             }
+@@ -95,19 +98,29 @@ public class LoadController
+             StringBuilder sb = new StringBuilder();
+             printModStates(sb);
+             FMLLog.getLogger().severe(sb.toString());
+-            FMLLog.severe("The following problems were captured during this phase");
+-            for (Entry<String, Throwable> error : errors.entries())
++            if (errors.size()>0)
+             {
+-                FMLLog.log(Level.SEVERE, error.getValue(), "Caught exception from %s", error.getKey());
+-                if (error.getValue() instanceof IFMLHandledException)
++                FMLLog.severe("The following problems were captured during this phase");
++                for (Entry<String, Throwable> error : errors.entries())
+                 {
+-                    toThrow = error.getValue();
+-                }
+-                else if (toThrow == null)
+-                {
+-                    toThrow = error.getValue();
++                    FMLLog.log(Level.SEVERE, error.getValue(), "Caught exception from %s", error.getKey());
++                    if (error.getValue() instanceof IFMLHandledException)
++                    {
++                        toThrow = error.getValue();
++                    }
++                    else if (toThrow == null)
++                    {
++                        toThrow = error.getValue();
++                    }
+                 }
+             }
++            else
++            {
++                FMLLog.severe("The ForgeModLoader state engine has become corrupted. Probably, a state was missed by and invalid modification to a base class" +
++                       "ForgeModLoader depends on. This is a critical error and not recoverable. Investigate any modifications to base classes outside of" +
++                       "ForgeModLoader, especially Optifine, to see if there are fixes available.");
++                throw new RuntimeException("The ForgeModLoader state engine is invalid");
++            }
+             if (toThrow != null && toThrow instanceof RuntimeException)
+             {
+                 throw (RuntimeException)toThrow;
+@@ -136,9 +149,9 @@ public class LoadController
+             activeContainer = mc;
+             String modId = mc.getModId();
+             stateEvent.applyModContainer(activeContainer());
+-            FMLLog.finer("Sending event %s to mod %s", stateEvent.getEventType(), modId);
++            FMLLog.log(modId, Level.FINEST, "Sending event %s to mod %s", stateEvent.getEventType(), modId);
+             eventChannels.get(modId).post(stateEvent);
+-            FMLLog.finer("Sent event %s to mod %s", stateEvent.getEventType(), modId);
++            FMLLog.log(modId, Level.FINEST, "Sent event %s to mod %s", stateEvent.getEventType(), modId);
+             activeContainer = null;
+             if (stateEvent instanceof FMLStateEvent)
+             {
+diff --git a/src/minecraft/cpw/mods/fml/common/Loader.java b/src/minecraft/cpw/mods/fml/common/Loader.java
+index 3ac4564..b469f22 100644
+--- a/src/minecraft/cpw/mods/fml/common/Loader.java
++++ b/src/minecraft/cpw/mods/fml/common/Loader.java
+@@ -27,7 +27,6 @@ import java.util.concurrent.Callable;
+ import java.util.logging.Level;
+
+ import net.minecraft.crash.CallableMinecraftVersion;
+-import net.minecraft.server.MinecraftServer;
+
+ import com.google.common.base.CharMatcher;
+ import com.google.common.base.Function;
+@@ -62,6 +61,7 @@ import cpw.mods.fml.common.toposort.ModSortingException;
+ import cpw.mods.fml.common.toposort.TopologicalSort;
+ import cpw.mods.fml.common.versioning.ArtifactVersion;
+ import cpw.mods.fml.common.versioning.VersionParser;
++import cpw.mods.fml.relauncher.FMLRelaunchLog;
+
+ /**
+  * The loader class performs the actual loading of the mod code from disk.
+@@ -143,6 +143,7 @@ public class Loader
+
+     private static File minecraftDir;
+     private static List<String> injectedContainers;
++    private File loggingProperties;
+
+     public static Loader instance()
+     {
+@@ -187,7 +188,7 @@ public class Loader
+      */
+     private void sortModList()
+     {
+-        FMLLog.fine("Verifying mod requirements are satisfied");
++        FMLLog.finer("Verifying mod requirements are satisfied");
+         try
+         {
+             BiMap<String, ArtifactVersion> modVersions = HashBiMap.create();
+@@ -239,13 +240,13 @@ public class Loader
+                 }
+             }
+
+-            FMLLog.fine("All mod requirements are satisfied");
++            FMLLog.finer("All mod requirements are satisfied");
+
+             ModSorter sorter = new ModSorter(getActiveModList(), namedMods);
+
+             try
+             {
+-                FMLLog.fine("Sorting mods into an ordered list");
++                FMLLog.finer("Sorting mods into an ordered list");
+                 List<ModContainer> sortedMods = sorter.sort();
+                 // Reset active list to the sorted list
+                 modController.getActiveModList().clear();
+@@ -254,7 +255,7 @@ public class Loader
+                 mods.removeAll(sortedMods);
+                 sortedMods.addAll(mods);
+                 mods = sortedMods;
+-                FMLLog.fine("Mod sorting completed successfully");
++                FMLLog.finer("Mod sorting completed successfully");
+             }
+             catch (ModSortingException sortException)
+             {
+@@ -267,17 +268,19 @@ public class Loader
+         }
+         finally
+         {
+-            FMLLog.fine("Mod sorting data:");
++            FMLLog.fine("Mod sorting data");
++            int unprintedMods = mods.size();
+             for (ModContainer mod : getActiveModList())
+             {
+                 if (!mod.isImmutable())
+                 {
+                     FMLLog.fine("\t%s(%s:%s): %s (%s)", mod.getModId(), mod.getName(), mod.getVersion(), mod.getSource().getName(), mod.getSortingRules());
++                    unprintedMods--;
+                 }
+             }
+-            if (mods.size()==0)
++            if (unprintedMods == mods.size())
+             {
+-                FMLLog.fine("No mods found to sort");
++                FMLLog.fine("No user mods found to sort");
+             }
+         }
+
+@@ -336,6 +339,10 @@ public class Loader
+         identifyDuplicates(mods);
+         namedMods = Maps.uniqueIndex(mods, new ModIdFunction());
+         FMLLog.info("Forge Mod Loader has identified %d mod%s to load", mods.size(), mods.size() != 1 ? "s" : "");
++        for (String modId: namedMods.keySet())
++        {
++            FMLLog.makeLog(modId);
++        }
+         return discoverer;
+     }
+
+@@ -436,6 +443,11 @@ public class Loader
+             FMLLog.severe("Attempting to load configuration from %s, which is not a directory", canonicalConfigPath);
+             throw new LoaderException();
+         }
++
++        loggingProperties = new File(canonicalConfigDir, "logging.properties");
++        FMLLog.info("Reading custom logging properties from %s", loggingProperties.getPath());
++        FMLRelaunchLog.loadLogConfiguration(loggingProperties);
++        FMLLog.log(Level.OFF,"Logging level for ForgeModLoader logging is set to %s", FMLRelaunchLog.log.getLogger().getLevel());
+     }
+
+     public List<ModContainer> getModList()
+@@ -457,6 +469,9 @@ public class Loader
+         modController.transition(LoaderState.LOADING);
+         ModDiscoverer disc = identifyMods();
+         disableRequestedMods();
++        FMLLog.fine("Reloading logging properties from %s", loggingProperties.getPath());
++        FMLRelaunchLog.loadLogConfiguration(loggingProperties);
++        FMLLog.fine("Reloaded logging properties");
+         modController.distributeStateMessage(FMLLoadEvent.class);
+         sortModList();
+         mods = ImmutableList.copyOf(mods);
+@@ -477,11 +492,15 @@ public class Loader
+         }
+         modController.transition(LoaderState.CONSTRUCTING);
+         modController.distributeStateMessage(LoaderState.CONSTRUCTING, modClassLoader, disc.getASMTable());
+-        FMLLog.fine("Mod signature data:");
++        FMLLog.fine("Mod signature data");
+         for (ModContainer mod : getActiveModList())
+         {
+             FMLLog.fine("\t%s(%s:%s): %s (%s)", mod.getModId(), mod.getName(), mod.getVersion(), mod.getSource().getName(), CertificateHelper.getFingerprint(mod.getSigningCertificate()));
+         }
++        if (getActiveModList().isEmpty())
++        {
++            FMLLog.fine("No user mod signature data found");
++        }
+         modController.transition(LoaderState.PREINITIALIZATION);
+         modController.distributeStateMessage(LoaderState.PREINITIALIZATION, disc.getASMTable(), canonicalConfigDir);
+         modController.transition(LoaderState.INITIALIZATION);
+@@ -490,22 +509,22 @@ public class Loader
+     private void disableRequestedMods()
+     {
+         String forcedModList = System.getProperty("fml.modStates", "");
+-        FMLLog.fine("Received a system property request \'%s\'",forcedModList);
++        FMLLog.finer("Received a system property request \'%s\'",forcedModList);
+         Map<String, String> sysPropertyStateList = Splitter.on(CharMatcher.anyOf(";:"))
+                 .omitEmptyStrings().trimResults().withKeyValueSeparator("=")
+                 .split(forcedModList);
+-        FMLLog.fine("System property request managing the state of %d mods", sysPropertyStateList.size());
++        FMLLog.finer("System property request managing the state of %d mods", sysPropertyStateList.size());
+         Map<String, String> modStates = Maps.newHashMap();
+
+         File forcedModFile = new File(canonicalConfigDir, "fmlModState.properties");
+         Properties forcedModListProperties = new Properties();
+         if (forcedModFile.exists() && forcedModFile.isFile())
+         {
+-            FMLLog.fine("Found a mod state file %s", forcedModFile.getName());
++            FMLLog.finer("Found a mod state file %s", forcedModFile.getName());
+             try
+             {
+                 forcedModListProperties.load(new FileReader(forcedModFile));
+-                FMLLog.fine("Loaded states for %d mods from file", forcedModListProperties.size());
++                FMLLog.finer("Loaded states for %d mods from file", forcedModListProperties.size());
+             }
+             catch (Exception e)
+             {
+@@ -762,7 +781,7 @@ public class Loader
+         modController.transition(LoaderState.AVAILABLE);
+     }
+
+-    public boolean serverAboutToStart(MinecraftServer server)
++    public boolean serverAboutToStart(Object server)
+     {
+         try
+         {
+diff --git a/src/minecraft/cpw/mods/fml/common/ModClassLoader.java b/src/minecraft/cpw/mods/fml/common/ModClassLoader.java
+index b5d8bf4..2b69592 100644
+--- a/src/minecraft/cpw/mods/fml/common/ModClassLoader.java
++++ b/src/minecraft/cpw/mods/fml/common/ModClassLoader.java
+@@ -70,7 +70,7 @@ public class ModClassLoader extends URLClassLoader
+         }
+         catch (URISyntaxException e)
+         {
+-            FMLLog.log(Level.SEVERE, "Unable to process our input to locate the minecraft code", e);
++            FMLLog.log(Level.SEVERE, e, "Unable to process our input to locate the minecraft code");
+             throw new LoaderException(e);
+         }
+     }
+diff --git a/src/minecraft/cpw/mods/fml/common/TickType.java b/src/minecraft/cpw/mods/fml/common/TickType.java
+index 30a00f8..3e7426c 100644
+--- a/src/minecraft/cpw/mods/fml/common/TickType.java
++++ b/src/minecraft/cpw/mods/fml/common/TickType.java
+@@ -31,17 +31,14 @@ public enum TickType {
+      */
+     RENDER,
+     /**
+-     * client side
+-     * Fired during the render processing phase if a GUI is open
+-     * arg 0 : float "partial render time"
+-     * arg 1 : the open gui or null if no gui is open
++     * Not fired
+      */
++    @Deprecated
+     GUI,
+     /**
+-     * client side
+-     * Fired during the client evaluation loop
+-     * arg 0 : The open gui or null if no gui is open
++     * Not fired
+      */
++    @Deprecated
+     CLIENTGUI,
+     /**
+      * server side
+diff --git a/src/minecraft/cpw/mods/fml/common/discovery/ModDiscoverer.java b/src/minecraft/cpw/mods/fml/common/discovery/ModDiscoverer.java
+index 411eb8a..991d48e 100644
+--- a/src/minecraft/cpw/mods/fml/common/discovery/ModDiscoverer.java
++++ b/src/minecraft/cpw/mods/fml/common/discovery/ModDiscoverer.java
+@@ -44,7 +44,7 @@ public class ModDiscoverer
+                 {
+                     if (knownLibraries.contains(minecraftSources[i].getName()))
+                     {
+-                        FMLLog.fine("Skipping known library file %s", minecraftSources[i].getAbsolutePath());
++                        FMLLog.finer("Skipping known library file %s", minecraftSources[i].getAbsolutePath());
+                     }
+                     else
+                     {
+diff --git a/src/minecraft/cpw/mods/fml/common/event/FMLInterModComms.java b/src/minecraft/cpw/mods/fml/common/event/FMLInterModComms.java
+index a2d7e02..31f9f11 100644
+--- a/src/minecraft/cpw/mods/fml/common/event/FMLInterModComms.java
++++ b/src/minecraft/cpw/mods/fml/common/event/FMLInterModComms.java
+@@ -44,17 +44,23 @@ public class FMLInterModComms {
+      *
+      */
+     public static class IMCEvent extends FMLEvent {
++        private ModContainer activeContainer;
++
+         @Override
+         public void applyModContainer(ModContainer activeContainer)
+         {
+-            currentList = ImmutableList.copyOf(modMessages.removeAll(activeContainer.getModId()));
+-            FMLLog.finest("Attempting to deliver %d IMC messages to mod %s", currentList.size(), activeContainer.getModId());
++            this.activeContainer = activeContainer;
++            FMLLog.finest("Attempting to deliver %d IMC messages to mod %s", modMessages.get(activeContainer.getModId()).size(), activeContainer.getModId());
+         }
+
+         private ImmutableList<IMCMessage> currentList;
+
+         public ImmutableList<IMCMessage> getMessages()
+         {
++            if (currentList == null)
++            {
++                currentList = ImmutableList.copyOf(modMessages.removeAll(activeContainer.getModId()));
++            }
+             return currentList;
+         }
+     }
+@@ -202,7 +208,7 @@ public class FMLInterModComms {
+         ModContainer mc = FMLCommonHandler.instance().findContainerFor(forMod);
+         if (mc != null)
+         {
+-            return ImmutableList.copyOf(modMessages.removeAll(mc));
++            return ImmutableList.copyOf(modMessages.removeAll(mc.getModId()));
+         }
+         else
+         {
+diff --git a/src/minecraft/cpw/mods/fml/common/event/FMLPreInitializationEvent.java b/src/minecraft/cpw/mods/fml/common/event/FMLPreInitializationEvent.java
+index 4bd09b8..a0dbfab 100644
+--- a/src/minecraft/cpw/mods/fml/common/event/FMLPreInitializationEvent.java
++++ b/src/minecraft/cpw/mods/fml/common/event/FMLPreInitializationEvent.java
+@@ -81,6 +81,8 @@ public class FMLPreInitializationEvent extends FMLStateEvent
+
+     /**
+      * Get a logger instance configured to write to the FML Log as a parent, identified by modid. Handy for mod logging!
++     * Configurations can be applied through the <code>config/logging.properties</code> file, specifying logging levels
++     * for your ModID. Use this!
+      *
+      * @return A logger
+      */
+diff --git a/src/minecraft/cpw/mods/fml/common/registry/GameData.java b/src/minecraft/cpw/mods/fml/common/registry/GameData.java
+index 10c41c7..b14b396 100644
+--- a/src/minecraft/cpw/mods/fml/common/registry/GameData.java
++++ b/src/minecraft/cpw/mods/fml/common/registry/GameData.java
+@@ -50,13 +50,13 @@ public class GameData {
+                     ignoredMods = Maps.fromProperties(p);
+                     if (ignoredMods.size()>0)
+                     {
+-                        FMLLog.warning("Using non-empty ignored mods configuration file %s", ignoredMods.keySet());
++                        FMLLog.log("fml.ItemTracker", Level.WARNING, "Using non-empty ignored mods configuration file %s", ignoredMods.keySet());
+                     }
+                 }
+                 catch (Exception e)
+                 {
+                     Throwables.propagateIfPossible(e);
+-                    FMLLog.log(Level.SEVERE, e, "Failed to read ignored ID checker mods properties file");
++                    FMLLog.log("fml.ItemTracker", Level.SEVERE, e, "Failed to read ignored ID checker mods properties file");
+                     ignoredMods = ImmutableMap.<String, String>of();
+                 }
+             }
+@@ -84,12 +84,12 @@ public class GameData {
+         if (idMap.containsKey(item.itemID))
+         {
+             ItemData id = idMap.get(item.itemID);
+-            FMLLog.info("[ItemTracker] The mod %s is overwriting existing item at %d (%s from %s) with %s", mc.getModId(), id.getItemId(), id.getItemType(), id.getModId(), itemType);
++            FMLLog.log("fml.ItemTracker", Level.INFO, "The mod %s is overwriting existing item at %d (%s from %s) with %s", mc.getModId(), id.getItemId(), id.getItemType(), id.getModId(), itemType);
+         }
+         idMap.put(item.itemID, itemData);
+         if (!"Minecraft".equals(mc.getModId()))
+         {
+-            FMLLog.fine("[ItemTracker] Adding item %s(%d) owned by %s", item.getClass().getName(), item.itemID, mc.getModId());
++            FMLLog.log("fml.ItemTracker",Level.FINE, "Adding item %s(%d) owned by %s", item.getClass().getName(), item.itemID, mc.getModId());
+         }
+     }
+
+@@ -119,12 +119,12 @@ public class GameData {
+
+         Map<Integer,ItemData> worldMap = Maps.uniqueIndex(worldSaveItems,idMapFunction);
+         difference = Maps.difference(worldMap, idMap);
+-        FMLLog.fine("The difference set is %s", difference);
++        FMLLog.log("fml.ItemTracker", Level.FINE, "The difference set is %s", difference);
+         if (!difference.entriesDiffering().isEmpty() || !difference.entriesOnlyOnLeft().isEmpty())
+         {
+-            FMLLog.severe("FML has detected item discrepancies");
+-            FMLLog.severe("Missing items : %s", difference.entriesOnlyOnLeft());
+-            FMLLog.severe("Mismatched items : %s", difference.entriesDiffering());
++            FMLLog.log("fml.ItemTracker", Level.SEVERE, "FML has detected item discrepancies");
++            FMLLog.log("fml.ItemTracker", Level.SEVERE, "Missing items : %s", difference.entriesOnlyOnLeft());
++            FMLLog.log("fml.ItemTracker", Level.SEVERE, "Mismatched items : %s", difference.entriesDiffering());
+             boolean foundNonIgnored = false;
+             for (ItemData diff : difference.entriesOnlyOnLeft().values())
+             {
+@@ -142,7 +142,7 @@ public class GameData {
+             }
+             if (!foundNonIgnored)
+             {
+-                FMLLog.severe("FML is ignoring these ID discrepancies because of configuration. YOUR GAME WILL NOW PROBABLY CRASH. HOPEFULLY YOU WON'T HAVE CORRUPTED YOUR WORLD. BLAME %s", ignoredMods.keySet());
++                FMLLog.log("fml.ItemTracker", Level.SEVERE, "FML is ignoring these ID discrepancies because of configuration. YOUR GAME WILL NOW PROBABLY CRASH. HOPEFULLY YOU WON'T HAVE CORRUPTED YOUR WORLD. BLAME %s", ignoredMods.keySet());
+             }
+             isSaveValid = !foundNonIgnored;
+             serverValidationLatch.countDown();
+diff --git a/src/minecraft/cpw/mods/fml/common/registry/LanguageRegistry.java b/src/minecraft/cpw/mods/fml/common/registry/LanguageRegistry.java
+index a91ab8a..5641d39 100644
+--- a/src/minecraft/cpw/mods/fml/common/registry/LanguageRegistry.java
++++ b/src/minecraft/cpw/mods/fml/common/registry/LanguageRegistry.java
+@@ -7,6 +7,7 @@ import java.net.URL;
+ import java.util.HashMap;
+ import java.util.Map;
+ import java.util.Properties;
++import java.util.logging.Level;
+
+ import com.google.common.base.Charsets;
+
+@@ -142,8 +143,7 @@ public class LanguageRegistry
+             addStringLocalization(langPack, lang);
+         }
+         catch (IOException e) {
+-            FMLLog.getLogger().severe("Unable to load localization from file: " + localizationFile);
+-            e.printStackTrace();
++            FMLLog.log(Level.SEVERE, e, "Unable to load localization from file %s", localizationFile);
+         }
+         finally    {
+             try    {
+@@ -152,7 +152,7 @@ public class LanguageRegistry
+                 }
+             }
+             catch (IOException ex) {
+-                ex.printStackTrace();
++                // HUSH
+             }
+         }
+     }
+diff --git a/src/minecraft/cpw/mods/fml/relauncher/FMLRelaunchLog.java b/src/minecraft/cpw/mods/fml/relauncher/FMLRelaunchLog.java
+index 1752982..88d8583 100644
+--- a/src/minecraft/cpw/mods/fml/relauncher/FMLRelaunchLog.java
++++ b/src/minecraft/cpw/mods/fml/relauncher/FMLRelaunchLog.java
+@@ -2,6 +2,8 @@ package cpw.mods.fml.relauncher;
+
+ import java.io.ByteArrayOutputStream;
+ import java.io.File;
++import java.io.FileInputStream;
++import java.io.FileNotFoundException;
+ import java.io.IOException;
+ import java.io.PrintStream;
+ import java.util.concurrent.Executors;
+@@ -112,7 +114,7 @@ public class FMLRelaunchLog
+     }
+     /**
+      * Our special logger for logging issues to. We copy various assets from the
+-     * Minecraft logger to acheive a similar appearance.
++     * Minecraft logger to achieve a similar appearance.
+      */
+     public static FMLRelaunchLog log = new FMLRelaunchLog();
+
+@@ -124,6 +126,10 @@ public class FMLRelaunchLog
+     private static PrintStream errCache;
+     private Logger myLog;
+
++    private static FileHandler fileHandler;
++
++    private static FMLLogFormatter formatter;
++
+     private FMLRelaunchLog()
+     {
+     }
+@@ -142,37 +148,66 @@ public class FMLRelaunchLog
+         stdOut.setParent(log.myLog);
+         Logger stdErr = Logger.getLogger("STDERR");
+         stdErr.setParent(log.myLog);
+-        FMLLogFormatter formatter = new FMLLogFormatter();
+-
+-        // Console handler captures the normal stderr before it gets replaced
++        log.myLog.setLevel(Level.ALL);
+         log.myLog.setUseParentHandlers(false);
+-        log.myLog.addHandler(new ConsoleLogWrapper());
+         consoleLogThread = new Thread(new ConsoleLogThread());
+         consoleLogThread.start();
+-        ConsoleLogThread.wrappedHandler.setLevel(Level.parse(System.getProperty("fml.log.level","INFO")));
+-        ConsoleLogThread.wrappedHandler.setFormatter(formatter);
+-        log.myLog.setLevel(Level.ALL);
++        formatter = new FMLLogFormatter();
+         try
+         {
+             File logPath = new File(minecraftHome, FMLRelauncher.logFileNamePattern);
+-            FileHandler fileHandler = new FileHandler(logPath.getPath(), 0, 3);
+-            fileHandler.setFormatter(formatter);
+-            fileHandler.setLevel(Level.ALL);
+-            log.myLog.addHandler(fileHandler);
++            fileHandler = new FileHandler(logPath.getPath(), 0, 3)
++            {
++                public synchronized void close() throws SecurityException {
++                    // We don't want this handler to reset
++                }
++            };
+         }
+         catch (Exception e)
+         {
+         }
+
++        resetLoggingHandlers();
++
+         // Set system out to a log stream
+         errCache = System.err;
+
+         System.setOut(new PrintStream(new LoggingOutStream(stdOut), true));
+         System.setErr(new PrintStream(new LoggingOutStream(stdErr), true));
+
+-        // Reset global logging to shut up other logging sources (thanks guava!)
+         configured = true;
+     }
++    private static void resetLoggingHandlers()
++    {
++        ConsoleLogThread.wrappedHandler.setLevel(Level.parse(System.getProperty("fml.log.level","INFO")));
++        // Console handler captures the normal stderr before it gets replaced
++        log.myLog.addHandler(new ConsoleLogWrapper());
++        ConsoleLogThread.wrappedHandler.setFormatter(formatter);
++        fileHandler.setLevel(Level.ALL);
++        fileHandler.setFormatter(formatter);
++        log.myLog.addHandler(fileHandler);
++    }
++
++    public static void loadLogConfiguration(File logConfigFile)
++    {
++        if (logConfigFile!=null && logConfigFile.exists() && logConfigFile.canRead())
++        {
++            try
++            {
++                LogManager.getLogManager().readConfiguration(new FileInputStream(logConfigFile));
++                resetLoggingHandlers();
++            }
++            catch (Exception e)
++            {
++                log(Level.SEVERE, e, "Error reading logging configuration file %s", logConfigFile.getName());
++            }
++        }
++    }
++    public static void log(String logChannel, Level level, String format, Object... data)
++    {
++        makeLog(logChannel);
++        Logger.getLogger(logChannel).log(level, String.format(format, data));
++    }
+
+     public static void log(Level level, String format, Object... data)
+     {
+@@ -183,6 +218,12 @@ public class FMLRelaunchLog
+         log.myLog.log(level, String.format(format, data));
+     }
+
++    public static void log(String logChannel, Level level, Throwable ex, String format, Object... data)
++    {
++        makeLog(logChannel);
++        Logger.getLogger(logChannel).log(level, String.format(format, data), ex);
++    }
++
+     public static void log(Level level, Throwable ex, String format, Object... data)
+     {
+         if (!configured)
+@@ -225,4 +266,9 @@ public class FMLRelaunchLog
+     {
+         return myLog;
+     }
++    public static void makeLog(String logChannel)
++    {
++        Logger l = Logger.getLogger(logChannel);
++        l.setParent(log.myLog);
++    }
+ }
+diff --git a/src/minecraft/fmlversion.properties b/src/minecraft/fmlversion.properties
+index 75749a8..802e7d9 100644
+--- a/resources/fmlversion.properties
++++ b/resources/fmlversion.properties
+@@ -1,10 +1,10 @@
+-#Tue, 22 Jan 2013 11:23:10 -0700
++#Thu, 31 Jan 2013 11:44:33 -0700
+ fmlbuild.major.number=4
+ fmlbuild.minor.number=7
+-fmlbuild.revision.number=22
+-fmlbuild.githash=gaebf6eb
++fmlbuild.revision.number=30
++fmlbuild.githash=g549b6fd
+ fmlbuild.mcpversion=7.26a
+ fmlbuild.mcversion=1.4.7
+ fmlbuild.branch=master
+
+-fmlbuild.build.number=539
++fmlbuild.build.number=549
+diff --git a/src/minecraft/net/minecraft/src/FMLRenderAccessLibrary.java b/src/minecraft/net/minecraft/src/FMLRenderAccessLibrary.java
+index 2032e8a..18d7159 100644
+--- a/src/minecraft/net/minecraft/src/FMLRenderAccessLibrary.java
++++ b/src/minecraft/net/minecraft/src/FMLRenderAccessLibrary.java
+@@ -41,12 +41,14 @@ public class FMLRenderAccessLibrary
+ {
+     public static Logger getLogger()
+     {
+-        return FMLLog.getLogger();
++        Logger l = Logger.getLogger("FMLRenderAccessLibrary");
++        l.setParent(FMLLog.getLogger());
++        return l;
+     }
+
+     public static void log(Level level, String message)
+     {
+-        FMLLog.log(level, message);
++        FMLLog.log("FMLRenderAccessLibrary", level, message);
+     }
+
+diff --git a/src/minecraft/net/minecraft/tileentity/TileEntity.java b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+index 4dd5a31..382b07d 100644
+--- a/src/minecraft/net/minecraft/tileentity/TileEntity.java
++++ b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+@@ -14,7 +14,6 @@ import net.minecraft.nbt.NBTTagCompound;
+ import net.minecraft.network.INetworkManager;
+ import net.minecraft.network.packet.Packet;
+ import net.minecraft.network.packet.Packet132TileEntityData;
+-import net.minecraft.util.AxisAlignedBB;
+ import net.minecraft.world.World;
+
+ public class TileEntity
+@@ -300,7 +299,6 @@ public class TileEntity
+         addMapping(TileEntitySkull.class, "Skull");
+     }
+
+-    // -- BEGIN FORGE PATCHES --
+     /**
+      * Determines if this TileEntity requires update calls.
+      * @return True if you want updateEntity() to be called, false if not
+@@ -313,10 +311,10 @@ public class TileEntity
+     /**
+      * Called when you receive a TileEntityData packet for the location this
+      * TileEntity is currently in. On the client, the NetworkManager will always
+-     * be the remote server. On the server, it will be whomever is responsible for
++     * be the remote server. On the server, it will be whomever is responsible for
+      * sending the packet.
+-     *
+-     * @param net The NetworkManager the packet originated from
++     *
++     * @param net The NetworkManager the packet originated from
+      * @param pkt The data packet
+      */
+     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
+@@ -333,12 +331,12 @@ public class TileEntity
+     /**
+      * Called from Chunk.setBlockIDWithMetadata, determines if this tile entity should be re-created when the ID, or Metadata changes.
+      * Use with caution as this will leave straggler TileEntities, or create conflicts with other TileEntities if not used properly.
+-     *
++     *
+      * @param oldID The old ID of the block
+      * @param newID The new ID of the block (May be the same)
+      * @param oldMeta The old metadata of the block
+      * @param newMeta The new metadata of the block (May be the same)
+-     * @param world Current world
++     * @param world Current world
+      * @param x X Postion
+      * @param y Y Position
+      * @param z Z Position
+@@ -348,30 +346,4 @@ public class TileEntity
+     {
+         return true;
+     }
+
+-    /**
+-     * Sometimes default render bounding box: infinite in scope. Used to control rendering on {@link TileEntitySpecialRenderer}.
+-     */
+-    public static final AxisAlignedBB INFINITE_EXTENT_AABB = AxisAlignedBB.getBoundingBox(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+diff --git a/src/minecraft/net/minecraftforge/common/ForgeVersion.java b/src/minecraft/net/minecraftforge/common/ForgeVersion.java
+index c3bc3b7..b9f4b77 100644
+--- a/src/minecraft/net/minecraftforge/common/ForgeVersion.java
++++ b/src/minecraft/net/minecraftforge/common/ForgeVersion.java
+@@ -12,7 +12,7 @@ public class ForgeVersion
+     //This number is incremented every minecraft release, never reset
+     public static final int minorVersion    = 6;
+     //This number is incremented every time a interface changes or new major feature is added, and reset every Minecraft version
+-    public static final int revisionVersion = 1;
++    public static final int revisionVersion = 0;
+     //This number is incremented every time Jenkins builds Forge, and never reset. Should always be 0 in the repo code.
+     public static final int buildVersion    = 0;

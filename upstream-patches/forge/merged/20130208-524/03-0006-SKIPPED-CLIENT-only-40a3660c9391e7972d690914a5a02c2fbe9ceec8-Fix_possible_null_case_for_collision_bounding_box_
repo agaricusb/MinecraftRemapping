@@ -1,0 +1,59 @@
+From 40a3660c9391e7972d690914a5a02c2fbe9ceec8 Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Mon, 4 Feb 2013 13:58:55 -0500
+Subject: [PATCH] Fix possible null case for collision bounding box.
+
+
+diff --git a/src/minecraft/net/minecraft/tileentity/TileEntity.java b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+index a32e658..8e4560d 100644
+--- a/src/minecraft/net/minecraft/tileentity/TileEntity.java
++++ b/src/minecraft/net/minecraft/tileentity/TileEntity.java
+@@ -368,10 +368,15 @@ public class TileEntity
+     @SideOnly(Side.CLIENT)
+     public AxisAlignedBB getRenderBoundingBox()
+     {
++        AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+         if (getBlockType()!=null && getBlockType() != Block.chest)
+         {
+-            return getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
++            AxisAlignedBB cbb = getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
++            if (cbb != null)
++            {
++                bb = cbb;
++            }
+         }
+-        return INFINITE_EXTENT_AABB;
++        return bb;
+     }
+ }
+diff --git a/patches/minecraft/net/minecraft/tileentity/TileEntity.java.patch b/patches/minecraft/net/minecraft/tileentity/TileEntity.java.patch
+index b1fda24..0568a04 100644
+--- a/patches/minecraft/net/minecraft/tileentity/TileEntity.java.patch
++++ b/patches/minecraft/net/minecraft/tileentity/TileEntity.java.patch
+@@ -11,7 +11,7 @@
+  import net.minecraft.world.World;
+  
+  public class TileEntity
+-@@ -296,4 +299,79 @@
++@@ -296,4 +299,84 @@
+          addMapping(TileEntityBeacon.class, "Beacon");
+          addMapping(TileEntitySkull.class, "Skull");
+      }
+@@ -84,10 +84,15 @@
+ +    @SideOnly(Side.CLIENT)
+ +    public AxisAlignedBB getRenderBoundingBox()
+ +    {
+++        AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+ +        if (getBlockType()!=null && getBlockType() != Block.chest)
+ +        {
+-+            return getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
+++            AxisAlignedBB cbb = getBlockType().getCollisionBoundingBoxFromPool(worldObj, xCoord, yCoord, zCoord);
+++            if (cbb != null)
+++            {
+++                bb = cbb;
+++            }
+ +        }
+-+        return INFINITE_EXTENT_AABB;
+++        return bb;
+ +    }
+  }

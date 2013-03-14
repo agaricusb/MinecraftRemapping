@@ -1,0 +1,20 @@
+From f490306f9057379108d5490c2f2508336ac31ad6 Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Wed, 23 Jan 2013 06:24:40 -0600
+Subject: [PATCH] Reload ban files when reloading the server. Adds BUKKIT-3470
+
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/CraftServer.java b/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
+index cc11e7e..86576b8 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/minecraft/org/bukkit/craftbukkit/CraftServer.java
+@@ -547,6 +547,9 @@ public final class CraftServer implements Server {
+         chunkGCPeriod = configuration.getInt("chunk-gc.period-in-ticks");
+         chunkGCLoadThresh = configuration.getInt("chunk-gc.load-threshold");
+ 
++        playerList.getBannedIPs/*was:getIPBans*/().loadBanList/*was:load*/();
++        playerList.getBannedPlayers/*was:getNameBans*/().loadBanList/*was:load*/();
++
+         for (net.minecraft.world.WorldServer/*was:WorldServer*/ world : console.worlds) {
+             world.difficultySetting/*was:difficulty*/ = difficulty;
+             world.setAllowedSpawnTypes/*was:setSpawnFlags*/(monsters, animals);

@@ -1,0 +1,41 @@
+From fbe86287b4ed8d8da408aadbe79dd80d2796722a Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Mon, 28 Jan 2013 17:06:45 -0800
+Subject: [PATCH] Fixup a resource leak warning.
+
+
+diff --git a/src/minecraft/net/minecraftforge/common/Configuration.java b/src/minecraft/net/minecraftforge/common/Configuration.java
+index 70a651d..2f04a89 100644
+--- a/src/minecraft/net/minecraftforge/common/Configuration.java
++++ b/src/minecraft/net/minecraftforge/common/Configuration.java
+@@ -440,6 +440,7 @@ public class Configuration
+         }
+ 
+         BufferedReader buffer = null;
++        UnicodeInputStreamReader input = null;
+         try
+         {
+             if (file.getParentFile() != null)
+@@ -454,7 +455,7 @@ public class Configuration
+ 
+             if (file.canRead())
+             {
+-                UnicodeInputStreamReader input = new UnicodeInputStreamReader(new FileInputStream(file), defaultEncoding);
++                input = new UnicodeInputStreamReader(new FileInputStream(file), defaultEncoding);
+                 defaultEncoding = input.getEncoding();
+                 buffer = new BufferedReader(input);
+ 
+@@ -638,6 +639,13 @@ public class Configuration
+                     buffer.close();
+                 } catch (IOException e){}
+             }
++            if (input != null)
++            {
++                try
++                {
++                    input.close();
++                } catch (IOException e){}
++            }
+         }
+     }
+ 

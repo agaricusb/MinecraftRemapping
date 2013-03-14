@@ -1,0 +1,21 @@
+From 96b2937ea199d36bf6166ad7999f7fc07859aa95 Mon Sep 17 00:00:00 2001
+From: Zloteanu Nikita <teapa011@gmail.com>
+Date: Thu, 3 Jan 2013 02:52:34 +0200
+Subject: [PATCH] Always call PotionSplashEvent. Fixes BUKKIT-3363
+
+This change allows plugins to add recipients to a PotionSplashEvent
+when it would have otherwise had none.
+
+diff --git a/src/minecraft/net/minecraft/entity/projectile/EntityPotion.java b/src/minecraft/net/minecraft/entity/projectile/EntityPotion.java
+index 20631cd..da7c603 100644
+--- a/src/minecraft/net/minecraft/entity/projectile/EntityPotion.java
++++ b/src/minecraft/net/minecraft/entity/projectile/EntityPotion.java
+@@ -104,7 +104,7 @@ public class EntityPotion extends EntityThrowable
+                 AxisAlignedBB var3 = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
+                 List var4 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, var3);
+ 
+-                if (var4 != null && !var4.isEmpty())
++                if (var4 != null)   // CraftBukkit - Run code even if there are no entities around
+                 {
+                     Iterator var5 = var4.iterator();
+                     // CraftBukkit

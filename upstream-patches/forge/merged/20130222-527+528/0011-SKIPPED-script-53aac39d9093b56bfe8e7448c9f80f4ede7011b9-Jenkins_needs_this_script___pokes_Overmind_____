@@ -1,0 +1,15 @@
+From 53aac39d9093b56bfe8e7448c9f80f4ede7011b9 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Fri, 15 Feb 2013 05:11:55 -0800
+Subject: [PATCH] Jenkins needs this script, *pokes Overmind* -.-
+
+
+diff --git a/setup.sh b/setup.sh
+new file mode 100644
+index 0000000..8c02e4c
+--- /dev/null
++++ b/setup.sh
+@@ -0,0 +1,2 @@
++#!/bin/bash
++python setup.py "$@"
+\ No newline at end of file

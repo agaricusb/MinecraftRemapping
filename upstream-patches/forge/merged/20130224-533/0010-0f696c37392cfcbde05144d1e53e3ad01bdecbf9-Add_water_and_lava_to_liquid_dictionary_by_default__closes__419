@@ -1,0 +1,33 @@
+From 0f696c37392cfcbde05144d1e53e3ad01bdecbf9 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Sat, 23 Feb 2013 13:53:05 -0800
+Subject: [PATCH] Add water and lava to liquid dictionary by default, closes #419
+
+
+diff --git a/src/minecraft/net/minecraftforge/liquids/LiquidDictionary.java b/src/minecraft/net/minecraftforge/liquids/LiquidDictionary.java
+index 9cf6835..8e300f0 100644
+--- a/src/minecraft/net/minecraftforge/liquids/LiquidDictionary.java
++++ b/src/minecraft/net/minecraftforge/liquids/LiquidDictionary.java
+@@ -3,10 +3,9 @@ package net.minecraftforge.liquids;
+ import java.util.HashMap;
+ import java.util.Map;
+ 
+-import net.minecraft.item.ItemStack;
++import net.minecraft.block.Block;
+ import net.minecraftforge.common.MinecraftForge;
+ import net.minecraftforge.event.Event;
+-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+ 
+ import com.google.common.collect.ImmutableMap;
+ 
+@@ -87,4 +86,10 @@ public abstract class LiquidDictionary
+             this.Liquid = liquid.copy();
+         }
+     }
++    
++    static
++    {
++        getOrCreateLiquid("Water", new LiquidStack(Block.waterStill, LiquidContainerRegistry.BUCKET_VOLUME));
++        getOrCreateLiquid("Lava", new LiquidStack(Block.lavaStill, LiquidContainerRegistry.BUCKET_VOLUME));
++    }
+ }

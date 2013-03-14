@@ -1,0 +1,41 @@
+From 704f879320a7ff8a0fde0bc823f8a8ca54eaf256 Mon Sep 17 00:00:00 2001
+From: LexManos <LexManos@gmail.com>
+Date: Mon, 28 Jan 2013 17:51:48 -0800
+Subject: [PATCH] Rework canSilkHarvest hook to try and honor vanilla overrides, should close #391
+
+
+diff --git a/src/minecraft/net/minecraft/block/Block.java b/src/minecraft/net/minecraft/block/Block.java
+index 27b57ad..a7b5a8d 100644
+--- a/src/minecraft/net/minecraft/block/Block.java
++++ b/src/minecraft/net/minecraft/block/Block.java
+@@ -1113,12 +1113,13 @@ public class Block
+         }
+     }
+ 
++    private int silk_check_meta = -1; //Dirty hack to stop us from needing to special case the silk check hook.
+     /**
+      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
+      */
+     protected boolean canSilkHarvest()
+     {
+-        return this.renderAsNormalBlock() && !this.isBlockContainer;
++        return this.renderAsNormalBlock() && !this.hasTileEntity(silk_check_meta);
+     }
+ 
+     /**
+@@ -1728,11 +1729,10 @@ public class Block
+      */
+     public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+     {
+-        if (this instanceof BlockGlass || this instanceof BlockEnderChest)
+-        {
+-            return true;
+-        }
+-        return renderAsNormalBlock() && !hasTileEntity(metadata);
++        silk_check_meta = metadata;
++        boolean ret = this.canSilkHarvest();
++        silk_check_meta = 0;
++        return ret;
+     }
+ 
+     /**

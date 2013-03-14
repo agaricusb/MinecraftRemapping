@@ -1,0 +1,461 @@
+From f06e0be5e59723808305f4c4aeb89c9108c79230 Mon Sep 17 00:00:00 2001
+From: Christian <cpw@weeksfamily.ca>
+Date: Sun, 27 Jan 2013 10:43:35 -0500
+Subject: [PATCH] We try and log a message if we detect a world leak: it's probably not infallible, but it should
+ help mod developers- if you see this when testing your mod with, say, mystcraft, you're probably
+ keeping a hold of an invalid handle to the World (either directly, or indirectly via Entity or TileEntity)
+ and you should look to refactor to wrap those handles in WeakReferences
+
+
+diff --git a/common/net/minecraftforge/common/DimensionManager.java b/common/net/minecraftforge/common/DimensionManager.java
+index 8cf5050..2b29e74 100644
+--- a/common/net/minecraftforge/common/DimensionManager.java
++++ b/common/net/minecraftforge/common/DimensionManager.java
+@@ -3,15 +3,23 @@ package net.minecraftforge.common;
+ import java.io.File;
+ import java.util.ArrayList;
+ import java.util.BitSet;
++import java.util.HashSet;
+ import java.util.Hashtable;
++import java.util.List;
++import java.util.ListIterator;
+ import java.util.Map;
+ import java.util.Map.Entry;
++import java.util.Set;
++import java.util.concurrent.ConcurrentMap;
+ import java.util.logging.Level;
+ 
+ import com.google.common.collect.ArrayListMultimap;
+ import com.google.common.collect.ImmutableListMultimap;
+ import com.google.common.collect.ListMultimap;
++import com.google.common.collect.Lists;
++import com.google.common.collect.MapMaker;
+ import com.google.common.collect.Maps;
++import com.google.common.collect.Sets;
+ 
+ import cpw.mods.fml.common.FMLCommonHandler;
+ import cpw.mods.fml.common.FMLLog;
+@@ -40,9 +48,10 @@ public class DimensionManager
+     private static Hashtable<Integer, WorldServer> worlds = new Hashtable<Integer, WorldServer>();
+     private static boolean hasInit = false;
+     private static Hashtable<Integer, Integer> dimensions = new Hashtable<Integer, Integer>();
+-    private static Map<World, ListMultimap<ChunkCoordIntPair, String>> persistentChunkStore = Maps.newHashMap(); //FIXME: Unused?
+     private static ArrayList<Integer> unloadQueue = new ArrayList<Integer>();
+     private static BitSet dimensionMap = new BitSet(Long.SIZE << 4);
++    private static ConcurrentMap<World, World> weakWorldMap = new MapMaker().weakKeys().weakValues().<World,World>makeMap();
++    private static Set<Integer> leakedWorlds = Sets.newHashSet();
+ 
+     public static boolean registerProviderType(int id, Class<? extends WorldProvider> provider, boolean keepLoaded)
+     {
+@@ -115,6 +124,34 @@ public class DimensionManager
+         return getWorld(dim).provider;
+     }
+ 
++    public static Integer[] getIDs(boolean check)
++    {
++        if (check)
++        {
++            List<World> allWorlds = Lists.newArrayList(weakWorldMap.keySet());
++            allWorlds.removeAll(worlds.values());
++            Set<Integer> newLeaks = Sets.newHashSet();
++            for (ListIterator<World> li = allWorlds.listIterator(); li.hasNext(); )
++            {
++                World w = li.next();
++                if (leakedWorlds.contains(System.identityHashCode(w)))
++                {
++                    li.remove();
++                }
++                newLeaks.add(System.identityHashCode(w));
++            }
++            leakedWorlds = newLeaks;
++            if (allWorlds.size() > 0)
++            {
++                FMLLog.severe("Detected leaking worlds in memory. There are %d worlds that appear to be persisting. A mod is likely caching the world incorrectly\n", allWorlds.size() + leakedWorlds.size());
++                for (World w : allWorlds)
++                {
++                    FMLLog.severe("The world %x (%s) has leaked.\n", System.identityHashCode(w), w.getWorldInfo().getWorldName());
++                }
++            }
++        }
++        return getIDs();
++    }
+     public static Integer[] getIDs()
+     {
+         return worlds.keySet().toArray(new Integer[worlds.size()]); //Only loaded dims, since usually used to cycle through loaded worlds
+@@ -124,6 +161,7 @@ public class DimensionManager
+     {
+         if (world != null) {
+             worlds.put(id, world);
++            weakWorldMap.put(world, world);
+             MinecraftServer.getServer().worldTickTimes.put(id, new long[100]);
+             FMLLog.info("Loading dimension %d (%s) (%s)", id, world.getWorldInfo().getWorldName(), world.getMinecraftServer());
+         } else {
+diff --git a/src/minecraft/net/minecraft/server/MinecraftServer.java b/src/minecraft/net/minecraft/server/MinecraftServer.java
+index feec2ed..1bff460 100644
+--- a/src/minecraft/net/minecraft/server/MinecraftServer.java
++++ b/src/minecraft/net/minecraft/server/MinecraftServer.java
+@@ -639,7 +639,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
+         this.theProfiler.startSection("levels");
+         int var1;
+ 
+-        Integer[] ids = DimensionManager.getIDs();
++        Integer[] ids = DimensionManager.getIDs(this.tickCounter % 200 == 0);
+         for (int x = 0; x < ids.length; x++)
+         {
+             int id = ids[x];
+diff --git a/src/minecraft/net/minecraft/util/HttpUtilRunnable.java b/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
+index 35de5c3..f70a39c 100644
+--- a/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
++++ b/src/minecraft/net/minecraft/util/HttpUtilRunnable.java
+@@ -52,105 +52,101 @@ final class HttpUtilRunnable implements Runnable
+ 
+         try
+         {
+-            try
++            byte[] var4 = new byte[4096];
++            URL var5 = new URL(this.sourceURL);
++            var1 = var5.openConnection();
++            float var6 = 0.0F;
++            float var7 = (float)this.field_76177_c.entrySet().size();
++            Iterator var8 = this.field_76177_c.entrySet().iterator();
++
++            while (var8.hasNext())
+             {
+-                byte[] var4 = new byte[4096];
+-                URL var5 = new URL(this.sourceURL);
+-                var1 = var5.openConnection();
+-                float var6 = 0.0F;
+-                float var7 = (float)this.field_76177_c.entrySet().size();
+-                Iterator var8 = this.field_76177_c.entrySet().iterator();
+-
+-                while (var8.hasNext())
+-                {
+-                    Entry var9 = (Entry)var8.next();
+-                    var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+-
+-                    if (this.feedbackHook != null)
+-                    {
+-                        this.feedbackHook.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+-                    }
+-                }
+-
+-                var2 = var1.getInputStream();
+-                var7 = (float)var1.getContentLength();
+-                int var28 = var1.getContentLength();
++                Entry var9 = (Entry)var8.next();
++                var1.setRequestProperty((String)var9.getKey(), (String)var9.getValue());
+ 
+                 if (this.feedbackHook != null)
+                 {
+-                    this.feedbackHook.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
++                    this.feedbackHook.setLoadingProgress((int)(++var6 / var7 * 100.0F));
+                 }
++            }
+ 
+-                if (this.destinationFile.exists())
+-                {
+-                    long var29 = this.destinationFile.length();
+-
+-                    if (var29 == (long)var28)
+-                    {
+-                        this.downloadSuccess.onSuccess(this.destinationFile);
+-
+-                        if (this.feedbackHook != null)
+-                        {
+-                            this.feedbackHook.onNoMoreProgress();
+-                        }
+-
+-                        return;
+-                    }
++            var2 = var1.getInputStream();
++            var7 = (float)var1.getContentLength();
++            int var28 = var1.getContentLength();
+ 
+-                    System.out.println("Deleting " + this.destinationFile + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
+-                    this.destinationFile.delete();
+-                }
++            if (this.feedbackHook != null)
++            {
++                this.feedbackHook.resetProgresAndWorkingMessage(String.format("Downloading file (%.2f MB)...", new Object[] {Float.valueOf(var7 / 1000.0F / 1000.0F)}));
++            }
+ 
+-                var3 = new DataOutputStream(new FileOutputStream(this.destinationFile));
++            if (this.destinationFile.exists())
++            {
++                long var29 = this.destinationFile.length();
+ 
+-                if (this.field_76173_f > 0 && var7 > (float)this.field_76173_f)
++                if (var29 == (long)var28)
+                 {
++                    this.downloadSuccess.onSuccess(this.destinationFile);
++
+                     if (this.feedbackHook != null)
+                     {
+                         this.feedbackHook.onNoMoreProgress();
+                     }
+ 
+-                    throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + this.field_76173_f + ")");
++                    return;
+                 }
+ 
+-                boolean var31 = false;
+-                int var30;
++                System.out.println("Deleting " + this.destinationFile + " as it does not match what we currently have (" + var28 + " vs our " + var29 + ").");
++                this.destinationFile.delete();
++            }
++
++            var3 = new DataOutputStream(new FileOutputStream(this.destinationFile));
+ 
+-                while ((var30 = var2.read(var4)) >= 0)
++            if (this.field_76173_f > 0 && var7 > (float)this.field_76173_f)
++            {
++                if (this.feedbackHook != null)
+                 {
+-                    var6 += (float)var30;
++                    this.feedbackHook.onNoMoreProgress();
++                }
+ 
+-                    if (this.feedbackHook != null)
+-                    {
+-                        this.feedbackHook.setLoadingProgress((int)(var6 / var7 * 100.0F));
+-                    }
++                throw new IOException("Filesize is bigger than maximum allowed (file is " + var6 + ", limit is " + this.field_76173_f + ")");
++            }
+ 
+-                    if (this.field_76173_f > 0 && var6 > (float)this.field_76173_f)
+-                    {
+-                        if (this.feedbackHook != null)
+-                        {
+-                            this.feedbackHook.onNoMoreProgress();
+-                        }
++            boolean var31 = false;
++            int var30;
+ 
+-                        throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + this.field_76173_f + ")");
+-                    }
++            while ((var30 = var2.read(var4)) >= 0)
++            {
++                var6 += (float)var30;
+ 
+-                    var3.write(var4, 0, var30);
++                if (this.feedbackHook != null)
++                {
++                    this.feedbackHook.setLoadingProgress((int)(var6 / var7 * 100.0F));
+                 }
+ 
+-                this.downloadSuccess.onSuccess(this.destinationFile);
+-
+-                if (this.feedbackHook != null)
++                if (this.field_76173_f > 0 && var6 > (float)this.field_76173_f)
+                 {
+-                    this.feedbackHook.onNoMoreProgress();
+-                    return;
++                    if (this.feedbackHook != null)
++                    {
++                        this.feedbackHook.onNoMoreProgress();
++                    }
++
++                    throw new IOException("Filesize was bigger than maximum allowed (got >= " + var6 + ", limit was " + this.field_76173_f + ")");
+                 }
++
++                var3.write(var4, 0, var30);
+             }
+-            catch (Throwable var26)
++
++            this.downloadSuccess.onSuccess(this.destinationFile);
++
++            if (this.feedbackHook != null)
+             {
+-                var26.printStackTrace();
++                this.feedbackHook.onNoMoreProgress();
+             }
+         }
++        catch (Throwable var26)
++        {
++            var26.printStackTrace();
++        }
+         finally
+         {
+             try
+diff --git a/src/minecraft/net/minecraft/util/WeightedRandomChestContent.java b/src/minecraft/net/minecraft/util/WeightedRandomChestContent.java
+index 2d8948d..da0bdbf 100644
+--- a/src/minecraft/net/minecraft/util/WeightedRandomChestContent.java
++++ b/src/minecraft/net/minecraft/util/WeightedRandomChestContent.java
+@@ -3,6 +3,7 @@ package net.minecraft.util;
+ import java.util.Random;
+ 
+ import cpw.mods.fml.common.FMLLog;
++import net.minecraft.inventory.IInventory;
+ import net.minecraft.item.ItemStack;
+ import net.minecraft.tileentity.TileEntityChest;
+ import net.minecraft.tileentity.TileEntityDispenser;
+@@ -45,16 +46,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem
+         for (int var4 = 0; var4 < par3; ++var4)
+         {
+             WeightedRandomChestContent var5 = (WeightedRandomChestContent)WeightedRandom.getRandomItem(par0Random, par1ArrayOfWeightedRandomChestContent);
+-
+-            if (var5 instanceof DungeonHooks.DungeonLoot)
+-            {
+-                DungeonHooks.DungeonLoot loot = (DungeonHooks.DungeonLoot)var5;
+-                par2TileEntityChest.setInventorySlotContents(par0Random.nextInt(par2TileEntityChest.getSizeInventory()), loot.generateStack(par0Random));
+-                FMLLog.warning("Some mod is still using DungeonHooks.DungonLoot, tell them to stop! %s", loot);
+-                continue;
+-            }
+-
+-            ItemStack[] stacks = ChestGenHooks.generateStacks(par0Random, var5.theItemId, var5.theMinimumChanceToGenerateItem, var5.theMaximumChanceToGenerateItem);
++            ItemStack[] stacks = var5.generateChestContent(par0Random, par2TileEntityChest);
+ 
+             for (ItemStack item : stacks)
+             {
+@@ -71,7 +63,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem
+         for (int var4 = 0; var4 < par3; ++var4)
+         {
+             WeightedRandomChestContent var5 = (WeightedRandomChestContent)WeightedRandom.getRandomItem(par0Random, par1ArrayOfWeightedRandomChestContent);
+-            ItemStack[] stacks = ChestGenHooks.generateStacks(par0Random, var5.theItemId, var5.theMinimumChanceToGenerateItem, var5.theMaximumChanceToGenerateItem);
++            ItemStack[] stacks = var5.generateChestContent(par0Random, par2TileEntityDispenser);
+ 
+             for (ItemStack item : stacks)
+             {
+@@ -101,4 +93,18 @@ public class WeightedRandomChestContent extends WeightedRandomItem
+ 
+         return var2;
+     }
++
++    // -- Forge hooks
++    /**
++     * Allow a mod to submit a custom implementation that can delegate item stack generation beyond simple stack lookup
++     *
++     * @param random The current random for generation
++     * @param newInventory The inventory being generated (do not populate it, but you can refer to it)
++     * @return An array of {@link ItemStack} to put into the chest
++     */
++    protected ItemStack[] generateChestContent(Random random, IInventory newInventory)
++    {
++        return ChestGenHooks.generateStacks(random, theItemId, theMinimumChanceToGenerateItem, theMaximumChanceToGenerateItem);
++    }
++
+ }
+diff --git a/src/minecraft/net/minecraft/world/World.java b/src/minecraft/net/minecraft/world/World.java
+index 4ccdc24..d44328a 100644
+--- a/src/minecraft/net/minecraft/world/World.java
++++ b/src/minecraft/net/minecraft/world/World.java
+@@ -2108,9 +2108,9 @@ public abstract class World implements IBlockAccess
+                 {
+                     this.updateEntity(var2);
+                 }
+-                catch (Throwable var8)
++                catch (Throwable var6)
+                 {
+-                    var4 = CrashReport.makeCrashReport(var8, "Ticking entity");
++                    var4 = CrashReport.makeCrashReport(var6, "Ticking entity");
+                     var5 = var4.makeCategory("Entity being ticked");
+ 
+                     if (var2 == null)
+@@ -2152,9 +2152,9 @@ public abstract class World implements IBlockAccess
+                 {
+                     var9.updateEntity();
+                 }
+-                catch (Throwable var6)
++                catch (Throwable var8)
+                 {
+-                    var4 = CrashReport.makeCrashReport(var6, "Ticking tile entity");
++                    var4 = CrashReport.makeCrashReport(var8, "Ticking tile entity");
+                     var5 = var4.makeCategory("Tile entity being ticked");
+ 
+                     if (var9 == null)
+diff --git a/src/minecraft/net/minecraftforge/common/DimensionManager.java b/src/minecraft/net/minecraftforge/common/DimensionManager.java
+index 8cf5050..2b29e74 100644
+--- a/src/minecraft/net/minecraftforge/common/DimensionManager.java
++++ b/src/minecraft/net/minecraftforge/common/DimensionManager.java
+@@ -3,15 +3,23 @@ package net.minecraftforge.common;
+ import java.io.File;
+ import java.util.ArrayList;
+ import java.util.BitSet;
++import java.util.HashSet;
+ import java.util.Hashtable;
++import java.util.List;
++import java.util.ListIterator;
+ import java.util.Map;
+ import java.util.Map.Entry;
++import java.util.Set;
++import java.util.concurrent.ConcurrentMap;
+ import java.util.logging.Level;
+ 
+ import com.google.common.collect.ArrayListMultimap;
+ import com.google.common.collect.ImmutableListMultimap;
+ import com.google.common.collect.ListMultimap;
++import com.google.common.collect.Lists;
++import com.google.common.collect.MapMaker;
+ import com.google.common.collect.Maps;
++import com.google.common.collect.Sets;
+ 
+ import cpw.mods.fml.common.FMLCommonHandler;
+ import cpw.mods.fml.common.FMLLog;
+@@ -40,9 +48,10 @@ public class DimensionManager
+     private static Hashtable<Integer, WorldServer> worlds = new Hashtable<Integer, WorldServer>();
+     private static boolean hasInit = false;
+     private static Hashtable<Integer, Integer> dimensions = new Hashtable<Integer, Integer>();
+-    private static Map<World, ListMultimap<ChunkCoordIntPair, String>> persistentChunkStore = Maps.newHashMap(); //FIXME: Unused?
+     private static ArrayList<Integer> unloadQueue = new ArrayList<Integer>();
+     private static BitSet dimensionMap = new BitSet(Long.SIZE << 4);
++    private static ConcurrentMap<World, World> weakWorldMap = new MapMaker().weakKeys().weakValues().<World,World>makeMap();
++    private static Set<Integer> leakedWorlds = Sets.newHashSet();
+ 
+     public static boolean registerProviderType(int id, Class<? extends WorldProvider> provider, boolean keepLoaded)
+     {
+@@ -115,6 +124,34 @@ public class DimensionManager
+         return getWorld(dim).provider;
+     }
+ 
++    public static Integer[] getIDs(boolean check)
++    {
++        if (check)
++        {
++            List<World> allWorlds = Lists.newArrayList(weakWorldMap.keySet());
++            allWorlds.removeAll(worlds.values());
++            Set<Integer> newLeaks = Sets.newHashSet();
++            for (ListIterator<World> li = allWorlds.listIterator(); li.hasNext(); )
++            {
++                World w = li.next();
++                if (leakedWorlds.contains(System.identityHashCode(w)))
++                {
++                    li.remove();
++                }
++                newLeaks.add(System.identityHashCode(w));
++            }
++            leakedWorlds = newLeaks;
++            if (allWorlds.size() > 0)
++            {
++                FMLLog.severe("Detected leaking worlds in memory. There are %d worlds that appear to be persisting. A mod is likely caching the world incorrectly\n", allWorlds.size() + leakedWorlds.size());
++                for (World w : allWorlds)
++                {
++                    FMLLog.severe("The world %x (%s) has leaked.\n", System.identityHashCode(w), w.getWorldInfo().getWorldName());
++                }
++            }
++        }
++        return getIDs();
++    }
+     public static Integer[] getIDs()
+     {
+         return worlds.keySet().toArray(new Integer[worlds.size()]); //Only loaded dims, since usually used to cycle through loaded worlds
+@@ -124,6 +161,7 @@ public class DimensionManager
+     {
+         if (world != null) {
+             worlds.put(id, world);
++            weakWorldMap.put(world, world);
+             MinecraftServer.getServer().worldTickTimes.put(id, new long[100]);
+             FMLLog.info("Loading dimension %d (%s) (%s)", id, world.getWorldInfo().getWorldName(), world.getMinecraftServer());
+         } else {
+diff --git a/patches/minecraft/net/minecraft/server/MinecraftServer.java.patch b/patches/minecraft/net/minecraft/server/MinecraftServer.java.patch
+index 6a773e5..7d08a6c 100644
+--- a/patches/minecraft/net/minecraft/server/MinecraftServer.java.patch
++++ b/patches/minecraft/net/minecraft/server/MinecraftServer.java.patch
+@@ -117,7 +117,7 @@
+  
+ -        for (var1 = 0; var1 < this.worldServers.length; ++var1)
+ -        {
+-+        Integer[] ids = DimensionManager.getIDs();
+++        Integer[] ids = DimensionManager.getIDs(this.tickCounter % 200 == 0);
+ +        for (int x = 0; x < ids.length; x++)
+ +        {
+ +            int id = ids[x];

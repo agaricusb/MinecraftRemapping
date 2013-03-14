@@ -1,0 +1,22 @@
+From f07dbe2cc0da74cb3f989ac934d3742c3231c270 Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Mon, 28 Jan 2013 17:01:08 -0600
+Subject: [PATCH] Make command blocks only select players on its world. Fixes BUKKIT-3515
+
+
+diff --git a/src/minecraft/net/minecraft/tileentity/TileEntityCommandBlock.java b/src/minecraft/net/minecraft/tileentity/TileEntityCommandBlock.java
+index 0972cc7..b356068 100644
+--- a/src/minecraft/net/minecraft/tileentity/TileEntityCommandBlock.java
++++ b/src/minecraft/net/minecraft/tileentity/TileEntityCommandBlock.java
+@@ -120,6 +120,11 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
+         {
+             for (EntityPlayerMP player : players)
+             {
++                if (player.worldObj != this.worldObj)
++                {
++                    continue;
++                }
++
+                 String[] command = args.clone();
+                 command[pos] = player.getEntityName();
+                 commands.add(command);

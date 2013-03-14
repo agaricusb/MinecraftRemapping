@@ -1,0 +1,89 @@
+From c5ce2aac8439cfa6fecbded51e9bd5f8d85a63ad Mon Sep 17 00:00:00 2001
+From: feildmaster <admin@feildmaster.com>
+Date: Tue, 1 Jan 2013 23:17:38 -0600
+Subject: [PATCH] Move the tile entity with the falling block. Adds BUKKIT-3349
+
+Allows for interesting things to be done with world.spawn()
+
+diff --git a/src/minecraft/net/minecraft/entity/item/EntityFallingSand.java b/src/minecraft/net/minecraft/entity/item/EntityFallingSand.java
+index b775ac1..2caa11e 100644
+--- a/src/minecraft/net/minecraft/entity/item/EntityFallingSand.java
++++ b/src/minecraft/net/minecraft/entity/item/EntityFallingSand.java
+@@ -8,6 +8,7 @@ import net.minecraft.crash.CrashReportCategory;
+ import net.minecraft.entity.Entity;
+ import net.minecraft.item.ItemStack;
+ import net.minecraft.nbt.NBTTagCompound;
++import net.minecraft.tileentity.TileEntity;
+ import net.minecraft.util.DamageSource;
+ import net.minecraft.util.MathHelper;
+ import net.minecraft.world.World;
+@@ -33,6 +34,7 @@ public class EntityFallingSand extends Entity
+ 
+     /** Actual damage dealt to entities hit by falling block */
+     private float fallHurtAmount;
++    private NBTTagCompound tileEntityData; // CraftBukkit
+ 
+     public EntityFallingSand(World par1World)
+     {
+@@ -128,6 +130,19 @@ public class EntityFallingSand extends Entity
+                         return;
+                     }
+ 
++                    // CraftBukkit start - Store the block tile entity with this entity
++                    TileEntity tile = this.worldObj.getBlockTileEntity(var1, var2, var3);
++
++                    if (tile != null)
++                    {
++                        tileEntityData = new NBTTagCompound();
++                        // Save the data
++                        tile.writeToNBT(tileEntityData);
++                        // Remove the existing tile entity
++                        this.worldObj.removeBlockTileEntity(var1, var2, var3);
++                    }
++
++                    // CraftBukkit end
+                     this.worldObj.setBlockWithNotify(var1, var2, var3, 0);
+                 }
+ 
+@@ -151,6 +166,11 @@ public class EntityFallingSand extends Entity
+ 
+                             this.worldObj.setBlockAndMetadataWithNotify(var1, var2, var3, this.blockID, this.metadata);
+ 
++                            if (this.tileEntityData != null)
++                            {
++                                this.worldObj.setBlockTileEntity(var1, var2, var3, TileEntity.createAndLoadEntity(this.tileEntityData));
++                            }
++
+                             // CraftBukkit end
+                             if (Block.blocksList[this.blockID] instanceof BlockSand)
+                             {
+@@ -238,6 +258,14 @@ public class EntityFallingSand extends Entity
+         par1NBTTagCompound.setBoolean("HurtEntities", this.isAnvil);
+         par1NBTTagCompound.setFloat("FallHurtAmount", this.fallHurtAmount);
+         par1NBTTagCompound.setInteger("FallHurtMax", this.fallHurtMax);
++
++        // CraftBukkit start - store the tile data
++        if (this.tileEntityData != null)
++        {
++            par1NBTTagCompound.setTag("Bukkit.tileData", this.tileEntityData.copy());
++        }
++
++        // CraftBukkit end
+     }
+ 
+     /**
+@@ -260,6 +288,14 @@ public class EntityFallingSand extends Entity
+             this.isAnvil = true;
+         }
+ 
++        // CraftBukkit start - load tileData
++        if (par1NBTTagCompound.hasKey("Bukkit.tileData"))
++        {
++            this.tileEntityData = (NBTTagCompound) par1NBTTagCompound.getCompoundTag("Bukkit.tileData").copy();
++        }
++
++        // CraftBukkit end
++
+         if (par1NBTTagCompound.hasKey("DropItem"))
+         {
+             this.shouldDropItem = par1NBTTagCompound.getBoolean("DropItem");

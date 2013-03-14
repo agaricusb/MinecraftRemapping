@@ -1,0 +1,131 @@
+From c056293b38cb9a1296937d91746b175252be044a Mon Sep 17 00:00:00 2001
+From: Wesley Wolfe <weswolf@aol.com>
+Date: Wed, 9 Jan 2013 04:45:01 -0600
+Subject: [PATCH] Various ItemMeta fixes.
+
+Fixes BUKKIT-3408, BUKKIT-3190, BUKKIT-3191, BUKKIT-3407
+
+These changes relate mostly to semantical changes for serialization
+contract, exception of changing the map scaling value from byte to boolean,
+what it should have been in the first place. Appropriate unit tests were
+added for CraftMapMeta, as they were missing.
+
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+index da90599..9b2a2e8 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaBook.java
+@@ -1,7 +1,6 @@
+ package org.bukkit.craftbukkit.inventory;
+ 
+ import java.util.ArrayList;
+-import java.util.Collection;
+ import java.util.List;
+ import java.util.Map;
+ 
+@@ -71,7 +70,7 @@ class CraftMetaBook extends CraftMetaItem implements BookMeta {
+ 
+         setTitle(SerializableMeta.getString(map, BOOK_TITLE.BUKKIT, true));
+ 
+-        Collection<?> pages = SerializableMeta.getObject(Collection.class, map, BOOK_PAGES.BUKKIT, true);
++        Iterable<?> pages = SerializableMeta.getObject(Iterable.class, map, BOOK_PAGES.BUKKIT, true);
+         CraftMetaItem.safelyAdd(pages, this.pages, MAX_PAGE_LENGTH);
+     }
+ 
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
+index 17308b1..17ea3a1 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaCharge.java
+@@ -29,7 +29,7 @@ class CraftMetaCharge extends CraftMetaItem implements FireworkEffectMeta {
+     CraftMetaCharge(Map<String, Object> map) {
+         super(map);
+ 
+-        effect = SerializableMeta.getObject(FireworkEffect.class, map, EXPLOSION.BUKKIT, true);
++        setEffect(SerializableMeta.getObject(FireworkEffect.class, map, EXPLOSION.BUKKIT, true));
+     }
+ 
+     CraftMetaCharge(net.minecraft.nbt.NBTTagCompound/*was:NBTTagCompound*/ tag) {
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
+index d58c303..58ac28b 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaFirework.java
+@@ -170,7 +170,7 @@ class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
+ 
+         Integer power = SerializableMeta.getObject(Integer.class, map, FLIGHT.BUKKIT, true);
+         if (power != null) {
+-            this.power = power;
++            setPower(power);
+         }
+ 
+         Iterable<?> effects = SerializableMeta.getObject(Iterable.class, map, EXPLOSIONS.BUKKIT, true);
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
+index c73cb2f..bb8974c 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaItem.java
+@@ -267,14 +267,16 @@ class CraftMetaItem implements ItemMeta, Repairable {
+     CraftMetaItem(Map<String, Object> map) {
+         setDisplayName(SerializableMeta.getString(map, NAME.BUKKIT, true));
+ 
+-        if (map.containsKey(LORE.BUKKIT)) {
+-            lore = (List<String>) map.get(LORE.BUKKIT);
++        Iterable<?> lore = SerializableMeta.getObject(Iterable.class, map, LORE.BUKKIT, true);
++        if (lore != null) {
++            safelyAdd(lore, this.lore = new ArrayList<String>(), Integer.MAX_VALUE);
+         }
+ 
+         enchantments = buildEnchantments(map, ENCHANTMENTS);
+ 
+-        if (map.containsKey(REPAIR.BUKKIT)) {
+-            repairCost = (Integer) map.get(REPAIR.BUKKIT);
++        Integer repairCost = SerializableMeta.getObject(Integer.class, map, REPAIR.BUKKIT, true);
++        if (repairCost != null) {
++            setRepairCost(repairCost);
+         }
+     }
+ 
+@@ -552,7 +554,7 @@ class CraftMetaItem implements ItemMeta, Repairable {
+         return SerializableMeta.Deserializers.UNSPECIFIC;
+     }
+ 
+-    static void safelyAdd(Collection<?> addFrom, Collection<String> addTo, int maxItemLength) {
++    static void safelyAdd(Iterable<?> addFrom, Collection<String> addTo, int maxItemLength) {
+         if (addFrom == null) {
+             return;
+         }
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
+index 59d50e3..ac15c04 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaMap.java
+@@ -41,8 +41,9 @@ class CraftMetaMap extends CraftMetaItem implements MapMeta {
+     CraftMetaMap(Map<String, Object> map) {
+         super(map);
+ 
+-        if (map.containsKey(MAP_SCALING.BUKKIT)) {
+-            this.scaling = SerializableMeta.getBoolean(map, MAP_SCALING.BUKKIT) ? SCALING_TRUE : SCALING_FALSE;
++        Boolean scaling = SerializableMeta.getObject(Boolean.class, map, MAP_SCALING.BUKKIT, true);
++        if (scaling != null) {
++            setScaling(scaling);
+         }
+     }
+ 
+@@ -125,7 +126,7 @@ class CraftMetaMap extends CraftMetaItem implements MapMeta {
+         super.serialize(builder);
+ 
+         if (hasScaling()) {
+-            builder.put(MAP_SCALING.BUKKIT, scaling);
++            builder.put(MAP_SCALING.BUKKIT, isScaling());
+         }
+ 
+         return builder;
+diff --git a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
+index fee13c9..f455767 100644
+--- a/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
++++ b/src/minecraft/org/bukkit/craftbukkit/inventory/CraftMetaPotion.java
+@@ -62,7 +62,7 @@ class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
+     CraftMetaPotion(Map<String, Object> map) {
+         super(map);
+ 
+-        List<?> rawEffectList = SerializableMeta.getObject(List.class, map, POTION_EFFECTS.BUKKIT, true);
++        Iterable<?> rawEffectList = SerializableMeta.getObject(Iterable.class, map, POTION_EFFECTS.BUKKIT, true);
+         if (rawEffectList == null) {
+             return;
+         }
