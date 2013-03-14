@@ -4,6 +4,7 @@
 # For updating MCPC+ to latest upstream CB
 
 import subprocess, os
+import xml.dom.minidom
 
 srcRoot = "../CraftBukkit"
 scriptDir = "../Srg2Source/python"  # relative to srcRoot
@@ -31,8 +32,9 @@ masterBranch = "master"
 def runRemap():
     print "Starting remap script..."
     pushd = os.getcwd()
+    mcVersion = getVersion("pom.xml")
     os.chdir(scriptDir)
-    run("./remap-craftbukkit.py")
+    run("./remap-craftbukkit.py --version "+mcVersion)
     os.chdir(pushd)
     print "Remap script finished"
 
@@ -48,6 +50,10 @@ def clean():
     # Clean out even non-repository or moved files
     run("rm -rf src")
     run("git reset --hard HEAD")
+
+def getVersion(filename):
+    # Get game version from project object model
+    return str(xml.dom.minidom.parse(filename).getElementsByTagName("minecraft.version")[0].firstChild.data)
 
 def readCommitLog():
     # Get commit IDs and messages after the starting commit, in reverse chronological order
