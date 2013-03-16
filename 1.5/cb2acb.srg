@@ -1,0 +1,516 @@
+CL: net/minecraft/server/BlockButtonAbstract net/minecraft/server/BlockButton
+CL: net/minecraft/server/BlockDiodeAbstract net/minecraft/server/BlockRedstoneLogic
+CL: net/minecraft/server/BlockMinecartTrackAbstract net/minecraft/server/BlockMinecartTrackBase
+CL: net/minecraft/server/BlockPoweredRail net/minecraft/server/BlockRailPowered
+CL: net/minecraft/server/BlockPressurePlateAbstract net/minecraft/server/BlockBasePressurePlate
+CL: net/minecraft/server/BlockPressurePlateBinary net/minecraft/server/BlockPressurePlate
+CL: net/minecraft/server/BlockRedstone net/minecraft/server/BlockPoweredOre
+CL: net/minecraft/server/BlockRedstoneComparator net/minecraft/server/BlockComparator
+CL: net/minecraft/server/BlockRepeater net/minecraft/server/BlockDiode
+CL: net/minecraft/server/BlockStoneButton net/minecraft/server/BlockButtonStone
+CL: net/minecraft/server/BlockWoodButton net/minecraft/server/BlockButtonWood
+CL: net/minecraft/server/CommandScoreboard net/minecraft/server/ServerCommandScoreboard
+CL: net/minecraft/server/CommandTestFor net/minecraft/server/ServerCommandTestFor
+CL: net/minecraft/server/ConsoleLogManager net/minecraft/server/LogAgent
+CL: net/minecraft/server/CrashReportConnectionPacketClass net/minecraft/server/CallablePacketClass
+CL: net/minecraft/server/CrashReportConnectionPacketID net/minecraft/server/CallablePacketID
+CL: net/minecraft/server/CrashReportEntityName net/minecraft/server/CallableEntityName
+CL: net/minecraft/server/CrashReportEntityTrackerUpdateInterval net/minecraft/server/CallableEntityTracker
+CL: net/minecraft/server/CrashReportItemName net/minecraft/server/CallableItemName
+CL: net/minecraft/server/CrashReportTileEntityData net/minecraft/server/CallableTileEntityData
+CL: net/minecraft/server/CrashReportTileEntityType net/minecraft/server/CallableTileEntityID
+CL: net/minecraft/server/DispenseBehaviorArmor net/minecraft/server/BehaviorDispenseArmor
+CL: net/minecraft/server/DispenseBehaviorBonemeal net/minecraft/server/DispenseBehaviorDye
+CL: net/minecraft/server/DispenseBehaviorExpBottle net/minecraft/server/DispenseBehaviorExperience
+CL: net/minecraft/server/DispenseBehaviorFlintAndSteel net/minecraft/server/DispenseBehaviorFire
+CL: net/minecraft/server/DispenseBehaviorMonsterEgg net/minecraft/server/DispenseBehaviorMobEgg
+CL: net/minecraft/server/DispenseBehaviorSnowBall net/minecraft/server/DispenseBehaviorSnowball
+CL: net/minecraft/server/DispenserRegistry net/minecraft/server/DispenseBehaviors
+CL: net/minecraft/server/EmptyClass3 net/minecraft/server/LogAgentINNER1
+CL: net/minecraft/server/EntityMinecartAbstract net/minecraft/server/EntityMinecart
+CL: net/minecraft/server/EntityMinecartRideable net/minecraft/server/EntityMinecartEmpty
+CL: net/minecraft/server/EntitySelectorContainer net/minecraft/server/EntitySelectorInventory
+CL: net/minecraft/server/EntitySelectorEquipable net/minecraft/server/EntitySelectorArmoredMob
+CL: net/minecraft/server/EntitySelectorLiving net/minecraft/server/EntitySelectorAlive
+CL: net/minecraft/server/EntitySelectorViewable net/minecraft/server/EntityAIAvoidEntitySelector
+CL: net/minecraft/server/EnumChatFormat net/minecraft/server/EnumChatFormatting
+CL: net/minecraft/server/IConsoleLogManager net/minecraft/server/ILogAgent
+CL: net/minecraft/server/IContainer net/minecraft/server/IBlockContainer
+CL: net/minecraft/server/IHopper net/minecraft/server/Hopper
+CL: net/minecraft/server/IIcon net/minecraft/server/Icon
+CL: net/minecraft/server/IObjective net/minecraft/server/ScoreObjectiveCriteria
+CL: net/minecraft/server/IPlayerFileData net/minecraft/server/PlayerFileData
+CL: net/minecraft/server/IWorldInventory net/minecraft/server/ISidedInventory
+CL: net/minecraft/server/ItemBlockWithAuxData net/minecraft/server/ItemBlockWithMetadata
+CL: net/minecraft/server/MobSpawner net/minecraft/server/TileEntityMobSpawnerLogic
+CL: net/minecraft/server/MobSpawnerAbstract net/minecraft/server/MobSpawnerBaseLogic
+CL: net/minecraft/server/MobSpawnerMinecart net/minecraft/server/EntityMinecartMobSpawnerLogic
+CL: net/minecraft/server/Packet206SetScoreboardObjective net/minecraft/server/Packet206SetObjective
+CL: net/minecraft/server/Packet207SetScoreboardScore net/minecraft/server/Packet207SetScore
+CL: net/minecraft/server/Packet208SetScoreboardDisplayObjective net/minecraft/server/Packet208SetDisplayObjective
+CL: net/minecraft/server/Packet209SetScoreboardTeam net/minecraft/server/Packet209SetPlayerTeam
+CL: net/minecraft/server/ScoreboardBaseObjective net/minecraft/server/ScoreDummyCriteria
+CL: net/minecraft/server/ScoreboardComparator net/minecraft/server/ScoreComparator
+CL: net/minecraft/server/ScoreboardHealthObjective net/minecraft/server/ScoreHealthCriteria
+CL: net/minecraft/server/ScoreboardObjective net/minecraft/server/ScoreObjective
+CL: net/minecraft/server/ScoreboardScore net/minecraft/server/Score
+CL: net/minecraft/server/ScoreboardServer net/minecraft/server/ServerScoreboard
+CL: net/minecraft/server/ScoreboardTeam net/minecraft/server/ScorePlayerTeam
+CL: net/minecraft/server/TileEntityLightDetector net/minecraft/server/TileEntityDaylightDetector
+CL: net/minecraft/server/TileEntityMobSpawnerData net/minecraft/server/WeightedRandomMinecart
+FD: net/minecraft/server/Block/ACTIVATOR_RAIL net/minecraft/server/Block/ACTIVATOR_RAILS
+FD: net/minecraft/server/Block/GOLD_PLATE net/minecraft/server/Block/WEIGHTEDPLATE_LIGHT
+FD: net/minecraft/server/Block/IRON_PLATE net/minecraft/server/Block/WEIGHTEDPLATE_HEAVY
+FD: net/minecraft/server/Block/QUARTZ_BLOCK net/minecraft/server/Block/QUARTZ
+FD: net/minecraft/server/Block/QUARTZ_ORE net/minecraft/server/Block/NETHER_QUARTZ
+FD: net/minecraft/server/Block/REDSTONE_COMPARATOR_OFF net/minecraft/server/Block/COMPARATOR_INACTIVE
+FD: net/minecraft/server/Block/REDSTONE_COMPARATOR_ON net/minecraft/server/Block/COMPARATOR_ACTIVE
+FD: net/minecraft/server/BlockAnvil/a net/minecraft/server/BlockAnvil/creativeTab
+FD: net/minecraft/server/BlockAnvil/b net/minecraft/server/BlockAnvil/name
+FD: net/minecraft/server/BlockBed/a net/minecraft/server/BlockBed/creativeTab
+FD: net/minecraft/server/BlockBrewingStand/a net/minecraft/server/BlockBrewingStand/creativeTab
+FD: net/minecraft/server/BlockButtonAbstract/a net/minecraft/server/BlockButton/creativeTab
+FD: net/minecraft/server/BlockChest/a net/minecraft/server/BlockChest/creativeTab
+FD: net/minecraft/server/BlockChest/b net/minecraft/server/BlockChest/name
+FD: net/minecraft/server/BlockCobbleWall/a net/minecraft/server/BlockCobbleWall/creativeTab
+FD: net/minecraft/server/BlockCocoa/a net/minecraft/server/BlockCocoa/creativeTab
+FD: net/minecraft/server/BlockDaylightDetector/a net/minecraft/server/BlockDaylightDetector/creativeTab
+FD: net/minecraft/server/BlockDiodeAbstract/a net/minecraft/server/BlockRedstoneLogic/creativeTab
+FD: net/minecraft/server/BlockDispenser/a net/minecraft/server/BlockDispenser/creativeTab
+FD: net/minecraft/server/BlockDispenser/b net/minecraft/server/BlockDispenser/name
+FD: net/minecraft/server/BlockDoor/a net/minecraft/server/BlockDoor/creativeTab
+FD: net/minecraft/server/BlockDoor/b net/minecraft/server/BlockDoor/name
+FD: net/minecraft/server/BlockEnderPortal/a net/minecraft/server/BlockEnderPortal/creativeTab
+FD: net/minecraft/server/BlockFence/a net/minecraft/server/BlockFence/creativeTab
+FD: net/minecraft/server/BlockFire/a net/minecraft/server/BlockFire/creativeTab
+FD: net/minecraft/server/BlockFire/b net/minecraft/server/BlockFire/name
+FD: net/minecraft/server/BlockFlowing/a net/minecraft/server/BlockFlowing/creativeTab
+FD: net/minecraft/server/BlockFlowing/b net/minecraft/server/BlockFlowing/name
+FD: net/minecraft/server/BlockFurnace/a net/minecraft/server/BlockFurnace/creativeTab
+FD: net/minecraft/server/BlockFurnace/b net/minecraft/server/BlockFurnace/name
+FD: net/minecraft/server/BlockHalfTransparant/a net/minecraft/server/BlockHalfTransparant/creativeTab
+FD: net/minecraft/server/BlockHalfTransparant/b net/minecraft/server/BlockHalfTransparant/name
+FD: net/minecraft/server/BlockHopper/a net/minecraft/server/BlockHopper/creativeTab
+FD: net/minecraft/server/BlockHugeMushroom/a net/minecraft/server/BlockHugeMushroom/creativeTab
+FD: net/minecraft/server/BlockHugeMushroom/b net/minecraft/server/BlockHugeMushroom/name
+FD: net/minecraft/server/BlockLeaves/a net/minecraft/server/BlockLeaves/creativeTab
+FD: net/minecraft/server/BlockLeaves/b net/minecraft/server/BlockLeaves/name
+FD: net/minecraft/server/BlockLog/a net/minecraft/server/BlockLog/creativeTab
+FD: net/minecraft/server/BlockLog/b net/minecraft/server/BlockLog/name
+FD: net/minecraft/server/BlockLongGrass/a net/minecraft/server/BlockLongGrass/creativeTab
+FD: net/minecraft/server/BlockMinecartTrackAbstract/a net/minecraft/server/BlockMinecartTrackBase/creativeTab
+FD: net/minecraft/server/BlockMonsterEggs/a net/minecraft/server/BlockMonsterEggs/creativeTab
+FD: net/minecraft/server/BlockMushroom/a net/minecraft/server/BlockMushroom/creativeTab
+FD: net/minecraft/server/BlockNetherWart/a net/minecraft/server/BlockNetherWart/creativeTab
+FD: net/minecraft/server/BlockPiston/a net/minecraft/server/BlockPiston/creativeTab
+FD: net/minecraft/server/BlockPistonExtension/a net/minecraft/server/BlockPistonExtension/creativeTab
+FD: net/minecraft/server/BlockPressurePlateAbstract/a net/minecraft/server/BlockBasePressurePlate/creativeTab
+FD: net/minecraft/server/BlockPressurePlateBinary/a net/minecraft/server/BlockPressurePlate/creativeTab
+FD: net/minecraft/server/BlockPressurePlateWeighted/a net/minecraft/server/BlockPressurePlateWeighted/creativeTab
+FD: net/minecraft/server/BlockPumpkin/a net/minecraft/server/BlockPumpkin/creativeTab
+FD: net/minecraft/server/BlockQuartz/a net/minecraft/server/BlockQuartz/creativeTab
+FD: net/minecraft/server/BlockQuartz/b net/minecraft/server/BlockQuartz/name
+FD: net/minecraft/server/BlockRedstoneLamp/a net/minecraft/server/BlockRedstoneLamp/creativeTab
+FD: net/minecraft/server/BlockRedstoneOre/a net/minecraft/server/BlockRedstoneOre/creativeTab
+FD: net/minecraft/server/BlockRedstoneTorch/b net/minecraft/server/BlockRedstoneTorch/name
+FD: net/minecraft/server/BlockRedstoneWire/a net/minecraft/server/BlockRedstoneWire/creativeTab
+FD: net/minecraft/server/BlockRedstoneWire/b net/minecraft/server/BlockRedstoneWire/name
+FD: net/minecraft/server/BlockRepeater/b net/minecraft/server/BlockDiode/name
+FD: net/minecraft/server/BlockSandStone/a net/minecraft/server/BlockSandStone/creativeTab
+FD: net/minecraft/server/BlockSandStone/b net/minecraft/server/BlockSandStone/name
+FD: net/minecraft/server/BlockSapling/a net/minecraft/server/BlockSapling/creativeTab
+FD: net/minecraft/server/BlockSapling/b net/minecraft/server/BlockSapling/name
+FD: net/minecraft/server/BlockSign/a net/minecraft/server/BlockSign/creativeTab
+FD: net/minecraft/server/BlockSign/b net/minecraft/server/BlockSign/name
+FD: net/minecraft/server/BlockSmoothBrick/a net/minecraft/server/BlockSmoothBrick/creativeTab
+FD: net/minecraft/server/BlockSmoothBrick/b net/minecraft/server/BlockSmoothBrick/name
+FD: net/minecraft/server/BlockStairs/a net/minecraft/server/BlockStairs/creativeTab
+FD: net/minecraft/server/BlockStairs/b net/minecraft/server/BlockStairs/name
+FD: net/minecraft/server/BlockStep/b net/minecraft/server/BlockStep/name
+FD: net/minecraft/server/BlockStepAbstract/a net/minecraft/server/BlockStepAbstract/creativeTab
+FD: net/minecraft/server/BlockThinFence/a net/minecraft/server/BlockThinFence/creativeTab
+FD: net/minecraft/server/BlockThinFence/b net/minecraft/server/BlockThinFence/name
+FD: net/minecraft/server/BlockWood/a net/minecraft/server/BlockWood/creativeTab
+FD: net/minecraft/server/BlockWood/b net/minecraft/server/BlockWood/name
+FD: net/minecraft/server/BlockWoodStep/b net/minecraft/server/BlockWoodStep/name
+FD: net/minecraft/server/DamageSource/w net/minecraft/server/DamageSource/EXPLOSION
+FD: net/minecraft/server/DedicatedPlayerList/e net/minecraft/server/DedicatedPlayerList/server
+FD: net/minecraft/server/DedicatedServer/l net/minecraft/server/DedicatedServer/ilogagent
+FD: net/minecraft/server/DedicatedServer/n net/minecraft/server/DedicatedServer/universe
+FD: net/minecraft/server/DedicatedServer/q net/minecraft/server/DedicatedServer/serverIp
+FD: net/minecraft/server/DemoPlayerInteractManager/c net/minecraft/server/DemoPlayerInteractManager/gamemode
+FD: net/minecraft/server/DemoPlayerInteractManager/e net/minecraft/server/DemoPlayerInteractManager/lastDigTick
+FD: net/minecraft/server/DemoWorldServer/J net/minecraft/server/DemoWorldServer/tracker
+FD: net/minecraft/server/DemoWorldServer/a net/minecraft/server/DemoWorldServer/server
+FD: net/minecraft/server/Enchantment/THORNS net/minecraft/server/Enchantment/k
+FD: net/minecraft/server/EnchantmentProtection/a net/minecraft/server/EnchantmentProtection/weight
+FD: net/minecraft/server/EnchantmentWeaponDamage/a net/minecraft/server/EnchantmentWeaponDamage/weight
+FD: net/minecraft/server/Entity/uniqueID net/minecraft/server/Entity/i
+FD: net/minecraft/server/EntityAgeable/d net/minecraft/server/EntityAgeable/pathEntity
+FD: net/minecraft/server/EntityAgeable/e net/minecraft/server/EntityAgeable/lastDamager
+FD: net/minecraft/server/EntityAnimal/e net/minecraft/server/EntityAnimal/lastDamager
+FD: net/minecraft/server/EntityArrow/d net/minecraft/server/EntityArrow/fireTicks
+FD: net/minecraft/server/EntityArrow/e net/minecraft/server/EntityArrow/justCreated
+FD: net/minecraft/server/EntityArrow/h net/minecraft/server/EntityArrow/invulnerable
+FD: net/minecraft/server/EntityBlaze/d net/minecraft/server/EntityBlaze/pathEntity
+FD: net/minecraft/server/EntityBlaze/e net/minecraft/server/EntityBlaze/lastDamager
+FD: net/minecraft/server/EntityBoat/b net/minecraft/server/EntityBoat/entityCount
+FD: net/minecraft/server/EntityBoat/d net/minecraft/server/EntityBoat/fireTicks
+FD: net/minecraft/server/EntityBoat/e net/minecraft/server/EntityBoat/justCreated
+FD: net/minecraft/server/EntityBoat/h net/minecraft/server/EntityBoat/invulnerable
+FD: net/minecraft/server/EntityChicken/d net/minecraft/server/EntityChicken/love
+FD: net/minecraft/server/EntityChicken/e net/minecraft/server/EntityChicken/lastDamager
+FD: net/minecraft/server/EntityChicken/h net/minecraft/server/EntityChicken/updateEffects
+FD: net/minecraft/server/EntityChicken/j net/minecraft/server/EntityChicken/lookController
+FD: net/minecraft/server/EntityComplexPart/b net/minecraft/server/EntityComplexPart/entityCount
+FD: net/minecraft/server/EntityCreature/b net/minecraft/server/EntityCreature/entityCount
+FD: net/minecraft/server/EntityCreeper/d net/minecraft/server/EntityCreeper/pathEntity
+FD: net/minecraft/server/EntityEnderCrystal/b net/minecraft/server/EntityEnderCrystal/entityCount
+FD: net/minecraft/server/EntityEnderDragon/b net/minecraft/server/EntityEnderDragon/entityCount
+FD: net/minecraft/server/EntityEnderDragon/bK net/minecraft/server/EntityEnderDragon/moveController
+FD: net/minecraft/server/EntityEnderDragon/bL net/minecraft/server/EntityEnderDragon/jumpController
+FD: net/minecraft/server/EntityEnderDragon/bM net/minecraft/server/EntityEnderDragon/senses
+FD: net/minecraft/server/EntityEnderDragon/bN net/minecraft/server/EntityEnderDragon/navigation
+FD: net/minecraft/server/EntityEnderDragon/bO net/minecraft/server/EntityEnderDragon/goalTarget
+FD: net/minecraft/server/EntityEnderDragon/bT net/minecraft/server/EntityEnderDragon/equipment
+FD: net/minecraft/server/EntityEnderDragon/d net/minecraft/server/EntityEnderDragon/fireTicks
+FD: net/minecraft/server/EntityEnderDragon/e net/minecraft/server/EntityEnderDragon/lastDamager
+FD: net/minecraft/server/EntityEnderDragon/h net/minecraft/server/EntityEnderDragon/updateEffects
+FD: net/minecraft/server/EntityEnderDragon/j net/minecraft/server/EntityEnderDragon/lookController
+FD: net/minecraft/server/EntityEnderSignal/b net/minecraft/server/EntityEnderSignal/entityCount
+FD: net/minecraft/server/EntityEnderSignal/d net/minecraft/server/EntityEnderSignal/fireTicks
+FD: net/minecraft/server/EntityEnderSignal/e net/minecraft/server/EntityEnderSignal/justCreated
+FD: net/minecraft/server/EntityEnderman/d net/minecraft/server/EntityEnderman/pathEntity
+FD: net/minecraft/server/EntityEnderman/e net/minecraft/server/EntityEnderman/lastDamager
+FD: net/minecraft/server/EntityExperienceOrb/b net/minecraft/server/EntityExperienceOrb/entityCount
+FD: net/minecraft/server/EntityExperienceOrb/d net/minecraft/server/EntityExperienceOrb/fireTicks
+FD: net/minecraft/server/EntityFallingBlock/tileEntityData net/minecraft/server/EntityFallingBlock/justCreated
+FD: net/minecraft/server/EntityFireball/e net/minecraft/server/EntityFireball/justCreated
+FD: net/minecraft/server/EntityFireball/h net/minecraft/server/EntityFireball/invulnerable
+FD: net/minecraft/server/EntityFireworks/expectedLifespan net/minecraft/server/EntityFireworks/entityCount
+FD: net/minecraft/server/EntityFireworks/ticksFlown net/minecraft/server/EntityFireworks/a
+FD: net/minecraft/server/EntityFishingHook/d net/minecraft/server/EntityFishingHook/fireTicks
+FD: net/minecraft/server/EntityFishingHook/e net/minecraft/server/EntityFishingHook/justCreated
+FD: net/minecraft/server/EntityFishingHook/h net/minecraft/server/EntityFishingHook/invulnerable
+FD: net/minecraft/server/EntityGhast/b net/minecraft/server/EntityGhast/entityCount
+FD: net/minecraft/server/EntityGhast/d net/minecraft/server/EntityGhast/fireTicks
+FD: net/minecraft/server/EntityGhast/e net/minecraft/server/EntityGhast/lastDamager
+FD: net/minecraft/server/EntityGhast/explosionPower net/minecraft/server/EntityGhast/lookController
+FD: net/minecraft/server/EntityHanging/e net/minecraft/server/EntityHanging/justCreated
+FD: net/minecraft/server/EntityHuman/bO net/minecraft/server/EntityHuman/goalTarget
+FD: net/minecraft/server/EntityHuman/bT net/minecraft/server/EntityHuman/equipment
+FD: net/minecraft/server/EntityHuman/d net/minecraft/server/EntityHuman/fireTicks
+FD: net/minecraft/server/EntityHuman/e net/minecraft/server/EntityHuman/lastDamager
+FD: net/minecraft/server/EntityHuman/h net/minecraft/server/EntityHuman/updateEffects
+FD: net/minecraft/server/EntityIronGolem/d net/minecraft/server/EntityIronGolem/pathEntity
+FD: net/minecraft/server/EntityIronGolem/e net/minecraft/server/EntityIronGolem/lastDamager
+FD: net/minecraft/server/EntityItem/d net/minecraft/server/EntityItem/fireTicks
+FD: net/minecraft/server/EntityItemFrame/e net/minecraft/server/EntityItemFrame/justCreated
+FD: net/minecraft/server/EntityLargeFireball/e net/minecraft/server/EntityLargeFireball/justCreated
+FD: net/minecraft/server/EntityLiving/b net/minecraft/server/EntityLiving/entityCount
+FD: net/minecraft/server/EntityLiving/d net/minecraft/server/EntityLiving/fireTicks
+FD: net/minecraft/server/EntityMinecartAbstract/b net/minecraft/server/EntityMinecart/entityCount
+FD: net/minecraft/server/EntityMinecartAbstract/e net/minecraft/server/EntityMinecart/justCreated
+FD: net/minecraft/server/EntityMinecartAbstract/h net/minecraft/server/EntityMinecart/invulnerable
+FD: net/minecraft/server/EntityMinecartContainer/b net/minecraft/server/EntityMinecartContainer/entityCount
+FD: net/minecraft/server/EntityMinecartContainer/items net/minecraft/server/EntityMinecartContainer/a
+FD: net/minecraft/server/EntityMinecartFurnace/b net/minecraft/server/EntityMinecartFurnace/entityCount
+FD: net/minecraft/server/EntityMinecartHopper/b net/minecraft/server/EntityMinecartHopper/entityCount
+FD: net/minecraft/server/EntityMinecartTNT/fuse net/minecraft/server/EntityMinecartTNT/a
+FD: net/minecraft/server/EntityOcelot/e net/minecraft/server/EntityOcelot/lastDamager
+FD: net/minecraft/server/EntityPig/d net/minecraft/server/EntityPig/love
+FD: net/minecraft/server/EntityPlayer/d net/minecraft/server/EntityPlayer/fireTicks
+FD: net/minecraft/server/EntityPlayer/e net/minecraft/server/EntityPlayer/lastDamager
+FD: net/minecraft/server/EntityPlayer/h net/minecraft/server/EntityPlayer/updateEffects
+FD: net/minecraft/server/EntityPotion/c net/minecraft/server/EntityPotion/blockX
+FD: net/minecraft/server/EntitySheep/d net/minecraft/server/EntitySheep/love
+FD: net/minecraft/server/EntitySheep/e net/minecraft/server/EntitySheep/lastDamager
+FD: net/minecraft/server/EntitySilverfish/d net/minecraft/server/EntitySilverfish/pathEntity
+FD: net/minecraft/server/EntitySkeleton/d net/minecraft/server/EntitySkeleton/pathEntity
+FD: net/minecraft/server/EntitySkeleton/e net/minecraft/server/EntitySkeleton/lastDamager
+FD: net/minecraft/server/EntitySlime/b net/minecraft/server/EntitySlime/entityCount
+FD: net/minecraft/server/EntitySlime/d net/minecraft/server/EntitySlime/fireTicks
+FD: net/minecraft/server/EntitySlime/e net/minecraft/server/EntitySlime/lastDamager
+FD: net/minecraft/server/EntitySquid/bK net/minecraft/server/EntitySquid/moveController
+FD: net/minecraft/server/EntitySquid/bL net/minecraft/server/EntitySquid/jumpController
+FD: net/minecraft/server/EntitySquid/bM net/minecraft/server/EntitySquid/senses
+FD: net/minecraft/server/EntitySquid/bN net/minecraft/server/EntitySquid/navigation
+FD: net/minecraft/server/EntitySquid/bO net/minecraft/server/EntitySquid/goalTarget
+FD: net/minecraft/server/EntitySquid/d net/minecraft/server/EntitySquid/pathEntity
+FD: net/minecraft/server/EntitySquid/e net/minecraft/server/EntitySquid/lastDamager
+FD: net/minecraft/server/EntitySquid/h net/minecraft/server/EntitySquid/updateEffects
+FD: net/minecraft/server/EntitySquid/j net/minecraft/server/EntitySquid/lookController
+FD: net/minecraft/server/EntityTNTPrimed/source net/minecraft/server/EntityTNTPrimed/entityCount
+FD: net/minecraft/server/EntityTameableAnimal/d net/minecraft/server/EntityTameableAnimal/love
+FD: net/minecraft/server/EntityVillager/bK net/minecraft/server/EntityVillager/moveController
+FD: net/minecraft/server/EntityVillager/bL net/minecraft/server/EntityVillager/jumpController
+FD: net/minecraft/server/EntityVillager/bM net/minecraft/server/EntityVillager/senses
+FD: net/minecraft/server/EntityVillager/bN net/minecraft/server/EntityVillager/navigation
+FD: net/minecraft/server/EntityVillager/bO net/minecraft/server/EntityVillager/goalTarget
+FD: net/minecraft/server/EntityVillager/h net/minecraft/server/EntityVillager/updateEffects
+FD: net/minecraft/server/EntityVillager/j net/minecraft/server/EntityVillager/lookController
+FD: net/minecraft/server/EntityWitch/d net/minecraft/server/EntityWitch/pathEntity
+FD: net/minecraft/server/EntityWitch/e net/minecraft/server/EntityWitch/lastDamager
+FD: net/minecraft/server/EntityWither/bK net/minecraft/server/EntityWither/moveController
+FD: net/minecraft/server/EntityWither/d net/minecraft/server/EntityWither/pathEntity
+FD: net/minecraft/server/EntityWither/e net/minecraft/server/EntityWither/lastDamager
+FD: net/minecraft/server/EntityWither/h net/minecraft/server/EntityWither/updateEffects
+FD: net/minecraft/server/EntityWither/j net/minecraft/server/EntityWither/lookController
+FD: net/minecraft/server/EntityWolf/e net/minecraft/server/EntityWolf/lastDamager
+FD: net/minecraft/server/EntityWolf/h net/minecraft/server/EntityWolf/updateEffects
+FD: net/minecraft/server/EntityWolf/j net/minecraft/server/EntityWolf/lookController
+FD: net/minecraft/server/EntityZombie/d net/minecraft/server/EntityZombie/pathEntity
+FD: net/minecraft/server/EnumAnimation/BLOCK net/minecraft/server/EnumAnimation/d
+FD: net/minecraft/server/EnumAnimation/BOW net/minecraft/server/EnumAnimation/e
+FD: net/minecraft/server/EnumAnimation/DRINK net/minecraft/server/EnumAnimation/c
+FD: net/minecraft/server/EnumAnimation/EAT net/minecraft/server/EnumAnimation/b
+FD: net/minecraft/server/EnumAnimation/NONE net/minecraft/server/EnumAnimation/a
+FD: net/minecraft/server/EnumChatFormat/AQUA net/minecraft/server/EnumChatFormatting/l
+FD: net/minecraft/server/EnumChatFormat/BLACK net/minecraft/server/EnumChatFormatting/a
+FD: net/minecraft/server/EnumChatFormat/BLUE net/minecraft/server/EnumChatFormatting/j
+FD: net/minecraft/server/EnumChatFormat/BOLD net/minecraft/server/EnumChatFormatting/r
+FD: net/minecraft/server/EnumChatFormat/DARK_AQUA net/minecraft/server/EnumChatFormatting/d
+FD: net/minecraft/server/EnumChatFormat/DARK_BLUE net/minecraft/server/EnumChatFormatting/b
+FD: net/minecraft/server/EnumChatFormat/DARK_GRAY net/minecraft/server/EnumChatFormatting/i
+FD: net/minecraft/server/EnumChatFormat/DARK_GREEN net/minecraft/server/EnumChatFormatting/c
+FD: net/minecraft/server/EnumChatFormat/DARK_PURPLE net/minecraft/server/EnumChatFormatting/f
+FD: net/minecraft/server/EnumChatFormat/DARK_RED net/minecraft/server/EnumChatFormatting/e
+FD: net/minecraft/server/EnumChatFormat/GOLD net/minecraft/server/EnumChatFormatting/g
+FD: net/minecraft/server/EnumChatFormat/GRAY net/minecraft/server/EnumChatFormatting/h
+FD: net/minecraft/server/EnumChatFormat/GREEN net/minecraft/server/EnumChatFormatting/k
+FD: net/minecraft/server/EnumChatFormat/ITALIC net/minecraft/server/EnumChatFormatting/u
+FD: net/minecraft/server/EnumChatFormat/LIGHT_PURPLE net/minecraft/server/EnumChatFormatting/n
+FD: net/minecraft/server/EnumChatFormat/RANDOM net/minecraft/server/EnumChatFormatting/q
+FD: net/minecraft/server/EnumChatFormat/RED net/minecraft/server/EnumChatFormatting/m
+FD: net/minecraft/server/EnumChatFormat/RESET net/minecraft/server/EnumChatFormatting/v
+FD: net/minecraft/server/EnumChatFormat/STRIKETHROUGH net/minecraft/server/EnumChatFormatting/s
+FD: net/minecraft/server/EnumChatFormat/UNDERLINE net/minecraft/server/EnumChatFormatting/t
+FD: net/minecraft/server/EnumChatFormat/WHITE net/minecraft/server/EnumChatFormatting/p
+FD: net/minecraft/server/EnumChatFormat/YELLOW net/minecraft/server/EnumChatFormatting/o
+FD: net/minecraft/server/EnumFacing/DOWN net/minecraft/server/EnumFacing/a
+FD: net/minecraft/server/EnumFacing/EAST net/minecraft/server/EnumFacing/e
+FD: net/minecraft/server/EnumFacing/NORTH net/minecraft/server/EnumFacing/c
+FD: net/minecraft/server/EnumFacing/SOUTH net/minecraft/server/EnumFacing/d
+FD: net/minecraft/server/EnumFacing/UP net/minecraft/server/EnumFacing/b
+FD: net/minecraft/server/EnumFacing/WEST net/minecraft/server/EnumFacing/f
+FD: net/minecraft/server/Item/QUARTZ net/minecraft/server/Item/NETHER_QUARTZ
+FD: net/minecraft/server/Item/REDSTONE_COMPARATOR net/minecraft/server/Item/COMPARATOR_INACTIVE
+FD: net/minecraft/server/ItemArmor/b net/minecraft/server/ItemArmor/durability
+FD: net/minecraft/server/ItemArmor/c net/minecraft/server/ItemArmor/craftingResult
+FD: net/minecraft/server/ItemArmor/cu net/minecraft/server/ItemArmor/name
+FD: net/minecraft/server/ItemAxe/c net/minecraft/server/ItemAxe/craftingResult
+FD: net/minecraft/server/ItemBlockWithAuxData/a net/minecraft/server/ItemBlockWithMetadata/id
+FD: net/minecraft/server/ItemDye/b net/minecraft/server/ItemDye/durability
+FD: net/minecraft/server/ItemDye/c net/minecraft/server/ItemDye/craftingResult
+FD: net/minecraft/server/ItemFood/b net/minecraft/server/ItemFood/durability
+FD: net/minecraft/server/ItemFood/c net/minecraft/server/ItemFood/craftingResult
+FD: net/minecraft/server/ItemFood/cu net/minecraft/server/ItemFood/name
+FD: net/minecraft/server/ItemMinecart/b net/minecraft/server/ItemMinecart/durability
+FD: net/minecraft/server/ItemMultiTexture/a net/minecraft/server/ItemMultiTexture/id
+FD: net/minecraft/server/ItemMultiTexture/b net/minecraft/server/ItemMultiTexture/durability
+FD: net/minecraft/server/ItemPickaxe/c net/minecraft/server/ItemPickaxe/craftingResult
+FD: net/minecraft/server/ItemPotion/b net/minecraft/server/ItemPotion/durability
+FD: net/minecraft/server/ItemRecord/b net/minecraft/server/ItemRecord/durability
+FD: net/minecraft/server/ItemSeedFood/b net/minecraft/server/ItemSeedFood/durability
+FD: net/minecraft/server/ItemSeedFood/c net/minecraft/server/ItemSeedFood/craftingResult
+FD: net/minecraft/server/ItemSeeds/b net/minecraft/server/ItemSeeds/durability
+FD: net/minecraft/server/ItemSkull/b net/minecraft/server/ItemSkull/durability
+FD: net/minecraft/server/ItemSpade/c net/minecraft/server/ItemSpade/craftingResult
+FD: net/minecraft/server/ItemStep/a net/minecraft/server/ItemStep/id
+FD: net/minecraft/server/ItemStep/b net/minecraft/server/ItemStep/durability
+FD: net/minecraft/server/ItemStep/c net/minecraft/server/ItemStep/craftingResult
+FD: net/minecraft/server/ItemSword/b net/minecraft/server/ItemSword/durability
+FD: net/minecraft/server/ItemTool/b net/minecraft/server/ItemTool/durability
+FD: net/minecraft/server/ItemTool/c net/minecraft/server/ItemTool/craftingResult
+FD: net/minecraft/server/ItemWithAuxData/a net/minecraft/server/ItemWithAuxData/id
+FD: net/minecraft/server/ItemWithAuxData/b net/minecraft/server/ItemWithAuxData/durability
+FD: net/minecraft/server/MobSpawnerAbstract/maxNearbyEntities net/minecraft/server/MobSpawnerBaseLogic/k
+FD: net/minecraft/server/MobSpawnerAbstract/maxSpawnDelay net/minecraft/server/MobSpawnerBaseLogic/h
+FD: net/minecraft/server/MobSpawnerAbstract/minSpawnDelay net/minecraft/server/MobSpawnerBaseLogic/g
+FD: net/minecraft/server/MobSpawnerAbstract/mobName net/minecraft/server/MobSpawnerBaseLogic/a
+FD: net/minecraft/server/MobSpawnerAbstract/mobs net/minecraft/server/MobSpawnerBaseLogic/e
+FD: net/minecraft/server/MobSpawnerAbstract/requiredPlayerRange net/minecraft/server/MobSpawnerBaseLogic/l
+FD: net/minecraft/server/MobSpawnerAbstract/spawnCount net/minecraft/server/MobSpawnerBaseLogic/i
+FD: net/minecraft/server/MobSpawnerAbstract/spawnData net/minecraft/server/MobSpawnerBaseLogic/f
+FD: net/minecraft/server/MobSpawnerAbstract/spawnDelay net/minecraft/server/MobSpawnerBaseLogic/b
+FD: net/minecraft/server/MobSpawnerAbstract/spawnRange net/minecraft/server/MobSpawnerBaseLogic/m
+FD: net/minecraft/server/PropertyManager/loggingAgent net/minecraft/server/PropertyManager/b
+FD: net/minecraft/server/SecondaryWorldData/a net/minecraft/server/SecondaryWorldData/seed
+FD: net/minecraft/server/SlotAnvilResult/a net/minecraft/server/SlotAnvilResult/index
+FD: net/minecraft/server/SlotArmor/a net/minecraft/server/SlotArmor/index
+FD: net/minecraft/server/SlotBeacon/a net/minecraft/server/SlotBeacon/index
+FD: net/minecraft/server/SlotBrewing/a net/minecraft/server/SlotBrewing/index
+FD: net/minecraft/server/SlotEnchant/a net/minecraft/server/SlotEnchant/index
+FD: net/minecraft/server/SlotFurnaceResult/a net/minecraft/server/SlotFurnaceResult/index
+FD: net/minecraft/server/SlotMerchantResult/a net/minecraft/server/SlotMerchantResult/index
+FD: net/minecraft/server/SlotPotionBottle/a net/minecraft/server/SlotPotionBottle/index
+FD: net/minecraft/server/SlotResult/a net/minecraft/server/SlotResult/index
+FD: net/minecraft/server/World/logAgent net/minecraft/server/World/L
+FD: net/minecraft/server/World/scoreboard net/minecraft/server/World/D
+MD: net/minecraft/server/Block/canPlace (Lnet/minecraft/server/World;IIIILnet/minecraft/server/ItemStack;)Z net/minecraft/server/Block/postPlace (Lnet/minecraft/server/World;IIIILnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/Block/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/Block/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/Block/wasExploded (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V net/minecraft/server/Block/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V
+MD: net/minecraft/server/BlockAnvil/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockAnvil/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockBeacon/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockBeacon/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockBrewingStand/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockBrewingStand/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockButtonAbstract/net.minecraft.server.BlockButtonAbstract (IZ)V net/minecraft/server/BlockButton/net.minecraft.server.BlockButton (IZ)V
+MD: net/minecraft/server/BlockChest/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockChest/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockCocoa/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockCocoa/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockCommand/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockCommand/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockDiodeAbstract/net.minecraft.server.BlockDiodeAbstract (IZ)V net/minecraft/server/BlockRedstoneLogic/net.minecraft.server.BlockRedstoneLogic (IZ)V
+MD: net/minecraft/server/BlockDiodeAbstract/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockRedstoneLogic/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockDispenser/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockDispenser/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockEnchantmentTable/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockEnchantmentTable/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockEnderChest/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockEnderChest/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockEnderPortalFrame/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockEnderPortalFrame/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockFenceGate/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockFenceGate/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockFurnace/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockFurnace/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockHopper/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockHopper/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockLever/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockLever/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockMinecartTrackAbstract/net.minecraft.server.BlockMinecartTrackAbstract (IZ)V net/minecraft/server/BlockMinecartTrackBase/net.minecraft.server.BlockMinecartTrackBase (IZ)V
+MD: net/minecraft/server/BlockPiston/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockPiston/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockPoweredRail/net.minecraft.server.BlockPoweredRail (I)V net/minecraft/server/BlockRailPowered/net.minecraft.server.BlockRailPowered (I)V
+MD: net/minecraft/server/BlockPressurePlateAbstract/net.minecraft.server.BlockPressurePlateAbstract (ILjava/lang/String;Lnet/minecraft/server/Material;)V net/minecraft/server/BlockBasePressurePlate/net.minecraft.server.BlockBasePressurePlate (ILjava/lang/String;Lnet/minecraft/server/Material;)V
+MD: net/minecraft/server/BlockPressurePlateBinary/net.minecraft.server.BlockPressurePlateBinary (ILjava/lang/String;Lnet/minecraft/server/Material;Lnet/minecraft/server/EnumMobType;)V net/minecraft/server/BlockPressurePlate/net.minecraft.server.BlockPressurePlate (ILjava/lang/String;Lnet/minecraft/server/Material;Lnet/minecraft/server/EnumMobType;)V
+MD: net/minecraft/server/BlockPumpkin/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockPumpkin/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockRedstone/net.minecraft.server.BlockRedstone (I)V net/minecraft/server/BlockPoweredOre/net.minecraft.server.BlockPoweredOre (I)V
+MD: net/minecraft/server/BlockRedstoneComparator/net.minecraft.server.BlockRedstoneComparator (IZ)V net/minecraft/server/BlockComparator/net.minecraft.server.BlockComparator (IZ)V
+MD: net/minecraft/server/BlockRepeater/net.minecraft.server.BlockRepeater (IZ)V net/minecraft/server/BlockDiode/net.minecraft.server.BlockDiode (IZ)V
+MD: net/minecraft/server/BlockSapling/d (Lnet/minecraft/server/World;IIILjava/util/Random;)V net/minecraft/server/BlockSapling/grow (Lnet/minecraft/server/World;IIILjava/util/Random;)V
+MD: net/minecraft/server/BlockSapling/grow (Lnet/minecraft/server/World;IIILjava/util/Random;)V net/minecraft/server/BlockSapling/c (Lnet/minecraft/server/World;IIILjava/util/Random;)V
+MD: net/minecraft/server/BlockSkull/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockSkull/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockStairs/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/BlockStairs/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/BlockStairs/wasExploded (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V net/minecraft/server/BlockStairs/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V
+MD: net/minecraft/server/BlockStoneButton/net.minecraft.server.BlockStoneButton (I)V net/minecraft/server/BlockButtonStone/net.minecraft.server.BlockButtonStone (I)V
+MD: net/minecraft/server/BlockTNT/wasExploded (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V net/minecraft/server/BlockTNT/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/Explosion;)V
+MD: net/minecraft/server/BlockWoodButton/net.minecraft.server.BlockWoodButton (I)V net/minecraft/server/BlockButtonWood/net.minecraft.server.BlockButtonWood (I)V
+MD: net/minecraft/server/ChunkCache/getBlockPower (IIII)I net/minecraft/server/ChunkCache/j (IIII)I
+MD: net/minecraft/server/CommandScoreboard/net.minecraft.server.CommandScoreboard ()V net/minecraft/server/ServerCommandScoreboard/net.minecraft.server.ServerCommandScoreboard ()V
+MD: net/minecraft/server/CommandTestFor/net.minecraft.server.CommandTestFor ()V net/minecraft/server/ServerCommandTestFor/net.minecraft.server.ServerCommandTestFor ()V
+MD: net/minecraft/server/ConsoleLogManager/getLogger ()Ljava/util/logging/Logger; net/minecraft/server/LogAgent/a ()Ljava/util/logging/Logger;
+MD: net/minecraft/server/ConsoleLogManager/info (Ljava/lang/String;)V net/minecraft/server/LogAgent/a (Ljava/lang/String;)V
+MD: net/minecraft/server/ConsoleLogManager/net.minecraft.server.ConsoleLogManager (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V net/minecraft/server/LogAgent/net.minecraft.server.LogAgent (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+MD: net/minecraft/server/ConsoleLogManager/severe (Ljava/lang/String;)V net/minecraft/server/LogAgent/c (Ljava/lang/String;)V
+MD: net/minecraft/server/ConsoleLogManager/severe (Ljava/lang/String;Ljava/lang/Throwable;)V net/minecraft/server/LogAgent/c (Ljava/lang/String;Ljava/lang/Throwable;)V
+MD: net/minecraft/server/ConsoleLogManager/warning (Ljava/lang/String;)V net/minecraft/server/LogAgent/b (Ljava/lang/String;)V
+MD: net/minecraft/server/ConsoleLogManager/warning (Ljava/lang/String;Ljava/lang/Throwable;)V net/minecraft/server/LogAgent/b (Ljava/lang/String;Ljava/lang/Throwable;)V
+MD: net/minecraft/server/ConsoleLogManager/warning (Ljava/lang/String;[Ljava/lang/Object;)V net/minecraft/server/LogAgent/b (Ljava/lang/String;[Ljava/lang/Object;)V
+MD: net/minecraft/server/CraftingManager/registerShapedRecipe (Lnet/minecraft/server/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/server/ShapedRecipes; net/minecraft/server/CraftingManager/a (Lnet/minecraft/server/ItemStack;[Ljava/lang/Object;)Lnet/minecraft/server/ShapedRecipes;
+MD: net/minecraft/server/CrashReportConnectionPacketClass/net.minecraft.server.CrashReportConnectionPacketClass (Lnet/minecraft/server/PlayerConnection;Lnet/minecraft/server/Packet;)V net/minecraft/server/CallablePacketClass/net.minecraft.server.CallablePacketClass (Lnet/minecraft/server/PlayerConnection;Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/CrashReportConnectionPacketID/net.minecraft.server.CrashReportConnectionPacketID (Lnet/minecraft/server/PlayerConnection;Lnet/minecraft/server/Packet;)V net/minecraft/server/CallablePacketID/net.minecraft.server.CallablePacketID (Lnet/minecraft/server/PlayerConnection;Lnet/minecraft/server/Packet;)V
+MD: net/minecraft/server/CrashReportEntityName/net.minecraft.server.CrashReportEntityName (Lnet/minecraft/server/Entity;)V net/minecraft/server/CallableEntityName/net.minecraft.server.CallableEntityName (Lnet/minecraft/server/Entity;)V
+MD: net/minecraft/server/CrashReportEntityTrackerUpdateInterval/net.minecraft.server.CrashReportEntityTrackerUpdateInterval (Lnet/minecraft/server/EntityTracker;I)V net/minecraft/server/CallableEntityTracker/net.minecraft.server.CallableEntityTracker (Lnet/minecraft/server/EntityTracker;I)V
+MD: net/minecraft/server/CrashReportItemName/net.minecraft.server.CrashReportItemName (Lnet/minecraft/server/PlayerInventory;Lnet/minecraft/server/ItemStack;)V net/minecraft/server/CallableItemName/net.minecraft.server.CallableItemName (Lnet/minecraft/server/PlayerInventory;Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/CrashReportTileEntityData/net.minecraft.server.CrashReportTileEntityData (Lnet/minecraft/server/TileEntity;)V net/minecraft/server/CallableTileEntityData/net.minecraft.server.CallableTileEntityData (Lnet/minecraft/server/TileEntity;)V
+MD: net/minecraft/server/CrashReportTileEntityType/net.minecraft.server.CrashReportTileEntityType (Lnet/minecraft/server/TileEntity;)V net/minecraft/server/CallableTileEntityID/net.minecraft.server.CallableTileEntityID (Lnet/minecraft/server/TileEntity;)V
+MD: net/minecraft/server/DamageSource/explosion (Lnet/minecraft/server/Explosion;)Lnet/minecraft/server/DamageSource; net/minecraft/server/DamageSource/a (Lnet/minecraft/server/Explosion;)Lnet/minecraft/server/DamageSource;
+MD: net/minecraft/server/DamageSource/getLocalizedDeathMessage (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String; net/minecraft/server/DamageSource/b (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String;
+MD: net/minecraft/server/DedicatedServer/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/server/DedicatedServer/al ()Lnet/minecraft/server/ILogAgent;
+MD: net/minecraft/server/DispenseBehaviorArmor/net.minecraft.server.DispenseBehaviorArmor ()V net/minecraft/server/BehaviorDispenseArmor/net.minecraft.server.BehaviorDispenseArmor ()V
+MD: net/minecraft/server/DispenseBehaviorBonemeal/net.minecraft.server.DispenseBehaviorBonemeal ()V net/minecraft/server/DispenseBehaviorDye/net.minecraft.server.DispenseBehaviorDye ()V
+MD: net/minecraft/server/DispenseBehaviorExpBottle/net.minecraft.server.DispenseBehaviorExpBottle ()V net/minecraft/server/DispenseBehaviorExperience/net.minecraft.server.DispenseBehaviorExperience ()V
+MD: net/minecraft/server/DispenseBehaviorFlintAndSteel/net.minecraft.server.DispenseBehaviorFlintAndSteel ()V net/minecraft/server/DispenseBehaviorFire/net.minecraft.server.DispenseBehaviorFire ()V
+MD: net/minecraft/server/DispenseBehaviorMonsterEgg/net.minecraft.server.DispenseBehaviorMonsterEgg ()V net/minecraft/server/DispenseBehaviorMobEgg/net.minecraft.server.DispenseBehaviorMobEgg ()V
+MD: net/minecraft/server/DispenseBehaviorSnowBall/net.minecraft.server.DispenseBehaviorSnowBall ()V net/minecraft/server/DispenseBehaviorSnowball/net.minecraft.server.DispenseBehaviorSnowball ()V
+MD: net/minecraft/server/Enchantment/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/Enchantment/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentDigging/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/EnchantmentDigging/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentDurability/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/EnchantmentDurability/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentManager/getThornsEnchantmentLevel (Lnet/minecraft/server/EntityLiving;)I net/minecraft/server/EnchantmentManager/i (Lnet/minecraft/server/EntityLiving;)I
+MD: net/minecraft/server/EnchantmentSilkTouch/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/EnchantmentSilkTouch/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentThorns/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/EnchantmentThorns/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentWeaponDamage/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/EnchantmentWeaponDamage/a (Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/Entity/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/server/Entity/ax ()Ljava/lang/String;
+MD: net/minecraft/server/EntityDamageSource/getLocalizedDeathMessage (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String; net/minecraft/server/EntityDamageSource/b (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String;
+MD: net/minecraft/server/EntityDamageSourceIndirect/getLocalizedDeathMessage (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String; net/minecraft/server/EntityDamageSourceIndirect/b (Lnet/minecraft/server/EntityLiving;)Ljava/lang/String;
+MD: net/minecraft/server/EntityHuman/getCustomNameVisible ()Z net/minecraft/server/EntityHuman/bQ ()Z
+MD: net/minecraft/server/EntityHuman/getScoreboard ()Lnet/minecraft/server/Scoreboard; net/minecraft/server/EntityHuman/cp ()Lnet/minecraft/server/Scoreboard;
+MD: net/minecraft/server/EntityHuman/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/server/EntityHuman/ax ()Ljava/lang/String;
+MD: net/minecraft/server/EntityHuman/getScoreboardTeam ()Lnet/minecraft/server/ScoreboardTeam; net/minecraft/server/EntityHuman/cq ()Lnet/minecraft/server/ScorePlayerTeam;
+MD: net/minecraft/server/EntityHuman/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/server/EntityHuman/a (Lnet/minecraft/server/TileEntityHopper;)V
+MD: net/minecraft/server/EntityHuman/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/server/EntityHuman/a (Lnet/minecraft/server/EntityMinecartHopper;)V
+MD: net/minecraft/server/EntityHuman/openTrade (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V net/minecraft/server/EntityHuman/a (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V
+MD: net/minecraft/server/EntityHuman/startEnchanting (IIILjava/lang/String;)V net/minecraft/server/EntityHuman/a (IIILjava/lang/String;)V
+MD: net/minecraft/server/EntityLiving/getCustomName ()Ljava/lang/String; net/minecraft/server/EntityLiving/bO ()Ljava/lang/String;
+MD: net/minecraft/server/EntityLiving/getCustomNameVisible ()Z net/minecraft/server/EntityLiving/bQ ()Z
+MD: net/minecraft/server/EntityLiving/hasCustomName ()Z net/minecraft/server/EntityLiving/bP ()Z
+MD: net/minecraft/server/EntityLiving/setCustomName (Ljava/lang/String;)V net/minecraft/server/EntityLiving/c (Ljava/lang/String;)V
+MD: net/minecraft/server/EntityLiving/setCustomNameVisible (Z)V net/minecraft/server/EntityLiving/g (Z)V
+MD: net/minecraft/server/EntityMinecartAbstract/getType ()I net/minecraft/server/EntityMinecart/l ()I
+MD: net/minecraft/server/EntityMinecartAbstract/net.minecraft.server.EntityMinecartAbstract (Lnet/minecraft/server/World;)V net/minecraft/server/EntityMinecart/net.minecraft.server.EntityMinecart (Lnet/minecraft/server/World;)V
+MD: net/minecraft/server/EntityMinecartAbstract/net.minecraft.server.EntityMinecartAbstract (Lnet/minecraft/server/World;DDD)V net/minecraft/server/EntityMinecart/net.minecraft.server.EntityMinecart (Lnet/minecraft/server/World;DDD)V
+MD: net/minecraft/server/EntityMinecartChest/getType ()I net/minecraft/server/EntityMinecartChest/l ()I
+MD: net/minecraft/server/EntityMinecartFurnace/getType ()I net/minecraft/server/EntityMinecartFurnace/l ()I
+MD: net/minecraft/server/EntityMinecartHopper/getType ()I net/minecraft/server/EntityMinecartHopper/l ()I
+MD: net/minecraft/server/EntityMinecartHopper/getWorld ()Lnet/minecraft/server/World; net/minecraft/server/EntityMinecartHopper/az ()Lnet/minecraft/server/World;
+MD: net/minecraft/server/EntityMinecartMobSpawner/getType ()I net/minecraft/server/EntityMinecartMobSpawner/l ()I
+MD: net/minecraft/server/EntityMinecartRideable/getType ()I net/minecraft/server/EntityMinecartEmpty/l ()I
+MD: net/minecraft/server/EntityMinecartRideable/net.minecraft.server.EntityMinecartRideable (Lnet/minecraft/server/World;)V net/minecraft/server/EntityMinecartEmpty/net.minecraft.server.EntityMinecartEmpty (Lnet/minecraft/server/World;)V
+MD: net/minecraft/server/EntityMinecartRideable/net.minecraft.server.EntityMinecartRideable (Lnet/minecraft/server/World;DDD)V net/minecraft/server/EntityMinecartEmpty/net.minecraft.server.EntityMinecartEmpty (Lnet/minecraft/server/World;DDD)V
+MD: net/minecraft/server/EntityMinecartTNT/getType ()I net/minecraft/server/EntityMinecartTNT/l ()I
+MD: net/minecraft/server/EntityPlayer/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/server/EntityPlayer/a (Lnet/minecraft/server/TileEntityHopper;)V
+MD: net/minecraft/server/EntityPlayer/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/server/EntityPlayer/a (Lnet/minecraft/server/EntityMinecartHopper;)V
+MD: net/minecraft/server/EntityPlayer/openTrade (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V net/minecraft/server/EntityPlayer/a (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V
+MD: net/minecraft/server/EntityPlayer/startEnchanting (IIILjava/lang/String;)V net/minecraft/server/EntityPlayer/a (IIILjava/lang/String;)V
+MD: net/minecraft/server/EntitySelectorContainer/net.minecraft.server.EntitySelectorContainer ()V net/minecraft/server/EntitySelectorInventory/net.minecraft.server.EntitySelectorInventory ()V
+MD: net/minecraft/server/EntitySelectorEquipable/net.minecraft.server.EntitySelectorEquipable (Lnet/minecraft/server/ItemStack;)V net/minecraft/server/EntitySelectorArmoredMob/net.minecraft.server.EntitySelectorArmoredMob (Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/EntitySelectorLiving/net.minecraft.server.EntitySelectorLiving ()V net/minecraft/server/EntitySelectorAlive/net.minecraft.server.EntitySelectorAlive ()V
+MD: net/minecraft/server/EntitySelectorViewable/net.minecraft.server.EntitySelectorViewable (Lnet/minecraft/server/PathfinderGoalAvoidPlayer;)V net/minecraft/server/EntityAIAvoidEntitySelector/net.minecraft.server.EntityAIAvoidEntitySelector (Lnet/minecraft/server/PathfinderGoalAvoidPlayer;)V
+MD: net/minecraft/server/EntityTNTPrimed/getSource ()Lnet/minecraft/server/EntityLiving; net/minecraft/server/EntityTNTPrimed/c ()Lnet/minecraft/server/EntityLiving;
+MD: net/minecraft/server/EnumChatFormat/net.minecraft.server.EnumChatFormat (Ljava/lang/String;IC)V net/minecraft/server/EnumChatFormatting/net.minecraft.server.EnumChatFormatting (Ljava/lang/String;IC)V
+MD: net/minecraft/server/EnumChatFormat/net.minecraft.server.EnumChatFormat (Ljava/lang/String;ICZ)V net/minecraft/server/EnumChatFormatting/net.minecraft.server.EnumChatFormatting (Ljava/lang/String;ICZ)V
+MD: net/minecraft/server/IBlockAccess/getBlockPower (IIII)I net/minecraft/server/IBlockAccess/j (IIII)I
+MD: net/minecraft/server/IConsoleLogManager/getLogger ()Ljava/util/logging/Logger; net/minecraft/server/ILogAgent/a ()Ljava/util/logging/Logger;
+MD: net/minecraft/server/IConsoleLogManager/info (Ljava/lang/String;)V net/minecraft/server/ILogAgent/a (Ljava/lang/String;)V
+MD: net/minecraft/server/IConsoleLogManager/severe (Ljava/lang/String;)V net/minecraft/server/ILogAgent/c (Ljava/lang/String;)V
+MD: net/minecraft/server/IConsoleLogManager/severe (Ljava/lang/String;Ljava/lang/Throwable;)V net/minecraft/server/ILogAgent/c (Ljava/lang/String;Ljava/lang/Throwable;)V
+MD: net/minecraft/server/IConsoleLogManager/warning (Ljava/lang/String;)V net/minecraft/server/ILogAgent/b (Ljava/lang/String;)V
+MD: net/minecraft/server/IConsoleLogManager/warning (Ljava/lang/String;Ljava/lang/Throwable;)V net/minecraft/server/ILogAgent/b (Ljava/lang/String;Ljava/lang/Throwable;)V
+MD: net/minecraft/server/IConsoleLogManager/warning (Ljava/lang/String;[Ljava/lang/Object;)V net/minecraft/server/ILogAgent/b (Ljava/lang/String;[Ljava/lang/Object;)V
+MD: net/minecraft/server/IHopper/getWorld ()Lnet/minecraft/server/World; net/minecraft/server/Hopper/az ()Lnet/minecraft/server/World;
+MD: net/minecraft/server/IMojangStatistics/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/server/IMojangStatistics/al ()Lnet/minecraft/server/ILogAgent;
+MD: net/minecraft/server/IPlayerFileData/load (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/NBTTagCompound; net/minecraft/server/PlayerFileData/b (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/NBTTagCompound;
+MD: net/minecraft/server/ItemBlockWithAuxData/net.minecraft.server.ItemBlockWithAuxData (ILnet/minecraft/server/Block;)V net/minecraft/server/ItemBlockWithMetadata/net.minecraft.server.ItemBlockWithMetadata (ILnet/minecraft/server/Block;)V
+MD: net/minecraft/server/ItemStack/getName ()Ljava/lang/String; net/minecraft/server/ItemStack/s ()Ljava/lang/String;
+MD: net/minecraft/server/ItemStack/hasName ()Z net/minecraft/server/ItemStack/t ()Z
+MD: net/minecraft/server/ItemStack/isDamaged (ILjava/util/Random;)Z net/minecraft/server/ItemStack/a (ILjava/util/Random;)Z
+MD: net/minecraft/server/MinecraftServer/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/server/MinecraftServer/al ()Lnet/minecraft/server/ILogAgent;
+MD: net/minecraft/server/MobSpawner/net.minecraft.server.MobSpawner (Lnet/minecraft/server/TileEntityMobSpawner;)V net/minecraft/server/TileEntityMobSpawnerLogic/net.minecraft.server.TileEntityMobSpawnerLogic (Lnet/minecraft/server/TileEntityMobSpawner;)V
+MD: net/minecraft/server/MobSpawnerAbstract/getMobName ()Ljava/lang/String; net/minecraft/server/MobSpawnerBaseLogic/e ()Ljava/lang/String;
+MD: net/minecraft/server/MobSpawnerAbstract/net.minecraft.server.MobSpawnerAbstract ()V net/minecraft/server/MobSpawnerBaseLogic/net.minecraft.server.MobSpawnerBaseLogic ()V
+MD: net/minecraft/server/MobSpawnerMinecart/net.minecraft.server.MobSpawnerMinecart (Lnet/minecraft/server/EntityMinecartMobSpawner;)V net/minecraft/server/EntityMinecartMobSpawnerLogic/net.minecraft.server.EntityMinecartMobSpawnerLogic (Lnet/minecraft/server/EntityMinecartMobSpawner;)V
+MD: net/minecraft/server/Packet206SetScoreboardObjective/net.minecraft.server.Packet206SetScoreboardObjective ()V net/minecraft/server/Packet206SetObjective/net.minecraft.server.Packet206SetObjective ()V
+MD: net/minecraft/server/Packet206SetScoreboardObjective/net.minecraft.server.Packet206SetScoreboardObjective (Lnet/minecraft/server/ScoreboardObjective;I)V net/minecraft/server/Packet206SetObjective/net.minecraft.server.Packet206SetObjective (Lnet/minecraft/server/ScoreObjective;I)V
+MD: net/minecraft/server/Packet207SetScoreboardScore/net.minecraft.server.Packet207SetScoreboardScore ()V net/minecraft/server/Packet207SetScore/net.minecraft.server.Packet207SetScore ()V
+MD: net/minecraft/server/Packet207SetScoreboardScore/net.minecraft.server.Packet207SetScoreboardScore (Ljava/lang/String;)V net/minecraft/server/Packet207SetScore/net.minecraft.server.Packet207SetScore (Ljava/lang/String;)V
+MD: net/minecraft/server/Packet207SetScoreboardScore/net.minecraft.server.Packet207SetScoreboardScore (Lnet/minecraft/server/ScoreboardScore;I)V net/minecraft/server/Packet207SetScore/net.minecraft.server.Packet207SetScore (Lnet/minecraft/server/Score;I)V
+MD: net/minecraft/server/Packet208SetScoreboardDisplayObjective/net.minecraft.server.Packet208SetScoreboardDisplayObjective ()V net/minecraft/server/Packet208SetDisplayObjective/net.minecraft.server.Packet208SetDisplayObjective ()V
+MD: net/minecraft/server/Packet208SetScoreboardDisplayObjective/net.minecraft.server.Packet208SetScoreboardDisplayObjective (ILnet/minecraft/server/ScoreboardObjective;)V net/minecraft/server/Packet208SetDisplayObjective/net.minecraft.server.Packet208SetDisplayObjective (ILnet/minecraft/server/ScoreObjective;)V
+MD: net/minecraft/server/Packet209SetScoreboardTeam/net.minecraft.server.Packet209SetScoreboardTeam ()V net/minecraft/server/Packet209SetPlayerTeam/net.minecraft.server.Packet209SetPlayerTeam ()V
+MD: net/minecraft/server/Packet209SetScoreboardTeam/net.minecraft.server.Packet209SetScoreboardTeam (Lnet/minecraft/server/ScoreboardTeam;I)V net/minecraft/server/Packet209SetPlayerTeam/net.minecraft.server.Packet209SetPlayerTeam (Lnet/minecraft/server/ScorePlayerTeam;I)V
+MD: net/minecraft/server/Packet209SetScoreboardTeam/net.minecraft.server.Packet209SetScoreboardTeam (Lnet/minecraft/server/ScoreboardTeam;Ljava/util/Collection;I)V net/minecraft/server/Packet209SetPlayerTeam/net.minecraft.server.Packet209SetPlayerTeam (Lnet/minecraft/server/ScorePlayerTeam;Ljava/util/Collection;I)V
+MD: net/minecraft/server/ScoreboardBaseObjective/net.minecraft.server.ScoreboardBaseObjective (Ljava/lang/String;)V net/minecraft/server/ScoreDummyCriteria/net.minecraft.server.ScoreDummyCriteria (Ljava/lang/String;)V
+MD: net/minecraft/server/ScoreboardComparator/net.minecraft.server.ScoreboardComparator ()V net/minecraft/server/ScoreComparator/net.minecraft.server.ScoreComparator ()V
+MD: net/minecraft/server/ScoreboardHealthObjective/net.minecraft.server.ScoreboardHealthObjective (Ljava/lang/String;)V net/minecraft/server/ScoreHealthCriteria/net.minecraft.server.ScoreHealthCriteria (Ljava/lang/String;)V
+MD: net/minecraft/server/ScoreboardObjective/net.minecraft.server.ScoreboardObjective (Lnet/minecraft/server/Scoreboard;Ljava/lang/String;Lnet/minecraft/server/IObjective;)V net/minecraft/server/ScoreObjective/net.minecraft.server.ScoreObjective (Lnet/minecraft/server/Scoreboard;Ljava/lang/String;Lnet/minecraft/server/ScoreObjectiveCriteria;)V
+MD: net/minecraft/server/ScoreboardScore/net.minecraft.server.ScoreboardScore (Lnet/minecraft/server/Scoreboard;Lnet/minecraft/server/ScoreboardObjective;Ljava/lang/String;)V net/minecraft/server/Score/net.minecraft.server.Score (Lnet/minecraft/server/Scoreboard;Lnet/minecraft/server/ScoreObjective;Ljava/lang/String;)V
+MD: net/minecraft/server/ScoreboardServer/net.minecraft.server.ScoreboardServer (Lnet/minecraft/server/MinecraftServer;)V net/minecraft/server/ServerScoreboard/net.minecraft.server.ServerScoreboard (Lnet/minecraft/server/MinecraftServer;)V
+MD: net/minecraft/server/ScoreboardTeam/net.minecraft.server.ScoreboardTeam (Lnet/minecraft/server/Scoreboard;Ljava/lang/String;)V net/minecraft/server/ScorePlayerTeam/net.minecraft.server.ScorePlayerTeam (Lnet/minecraft/server/Scoreboard;Ljava/lang/String;)V
+MD: net/minecraft/server/TileEntity/getWorld ()Lnet/minecraft/server/World; net/minecraft/server/TileEntity/az ()Lnet/minecraft/server/World;
+MD: net/minecraft/server/TileEntityLightDetector/net.minecraft.server.TileEntityLightDetector ()V net/minecraft/server/TileEntityDaylightDetector/net.minecraft.server.TileEntityDaylightDetector ()V
+MD: net/minecraft/server/TileEntityMobSpawnerData/net.minecraft.server.TileEntityMobSpawnerData (Lnet/minecraft/server/MobSpawnerAbstract;Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/server/WeightedRandomMinecart/net.minecraft.server.WeightedRandomMinecart (Lnet/minecraft/server/MobSpawnerBaseLogic;Lnet/minecraft/server/NBTTagCompound;)V
+MD: net/minecraft/server/TileEntityMobSpawnerData/net.minecraft.server.TileEntityMobSpawnerData (Lnet/minecraft/server/MobSpawnerAbstract;Lnet/minecraft/server/NBTTagCompound;Ljava/lang/String;)V net/minecraft/server/WeightedRandomMinecart/net.minecraft.server.WeightedRandomMinecart (Lnet/minecraft/server/MobSpawnerBaseLogic;Lnet/minecraft/server/NBTTagCompound;Ljava/lang/String;)V
+MD: net/minecraft/server/TileEntityRecordPlayer/getRecord ()Lnet/minecraft/server/ItemStack; net/minecraft/server/TileEntityRecordPlayer/a ()Lnet/minecraft/server/ItemStack;
+MD: net/minecraft/server/TileEntityRecordPlayer/setRecord (Lnet/minecraft/server/ItemStack;)V net/minecraft/server/TileEntityRecordPlayer/a (Lnet/minecraft/server/ItemStack;)V
+MD: net/minecraft/server/World/getBlockFacePower (IIII)I net/minecraft/server/World/l (IIII)I
+MD: net/minecraft/server/World/getBlockPower (III)I net/minecraft/server/World/B (III)I
+MD: net/minecraft/server/World/getBlockPower (IIII)I net/minecraft/server/World/j (IIII)I
+MD: net/minecraft/server/World/getEntities (Lnet/minecraft/server/Entity;Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/IEntitySelector;)Ljava/util/List; net/minecraft/server/World/a (Lnet/minecraft/server/Entity;Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/IEntitySelector;)Ljava/util/List;
+MD: net/minecraft/server/World/getHighestNeighborSignal (III)I net/minecraft/server/World/D (III)I
+MD: net/minecraft/server/World/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/server/World/W ()Lnet/minecraft/server/ILogAgent;
+MD: net/minecraft/server/World/getScoreboard ()Lnet/minecraft/server/Scoreboard; net/minecraft/server/World/V ()Lnet/minecraft/server/Scoreboard;
+MD: net/minecraft/server/World/isBlockFacePowered (IIII)Z net/minecraft/server/World/k (IIII)Z
+MD: net/minecraft/server/World/mayPlace (IIIIZILnet/minecraft/server/Entity;Lnet/minecraft/server/ItemStack;)Z net/minecraft/server/World/a (IIIIZILnet/minecraft/server/Entity;Lnet/minecraft/server/ItemStack;)Z
+MD: net/minecraft/server/World/setAir (III)Z net/minecraft/server/World/remove (III)Z
+MD: net/minecraft/server/World/setAir (IIIZ)Z net/minecraft/server/World/a (IIIZ)Z
+MD: net/minecraft/server/World/setTypeIdUpdate (IIII)Z net/minecraft/server/World/setTypeId (IIII)Z
+MD: net/minecraft/server/WorldNBTStorage/load (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/NBTTagCompound; net/minecraft/server/WorldNBTStorage/b (Lnet/minecraft/server/EntityHuman;)Lnet/minecraft/server/NBTTagCompound;
