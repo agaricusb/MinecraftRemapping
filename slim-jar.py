@@ -10,14 +10,14 @@
 #  to:
 #      <artifactId>slim-minecraft-server</artifactId>
 # 2. run:
-# mvn install:install-file -Dfile=../slim-minecraft-server-1.4.7.jar -DgroupId=org.bukkit -DartifactId=slim-minecraft-server -Dversion=1.4.7 -Dpackaging=jar
+# mvn install:install-file -Dfile=slim-minecraft-server-1.5.jar -DgroupId=org.bukkit -DartifactId=slim-minecraft-server -Dversion=1.5 -Dpackaging=jar
 # Project should build as normal
 
 import zipfile, os, sys
 
 srcDir = "../CraftBukkit/src/main/java/net/minecraft/server"
-inFile = "minecraft-server-1.5pre.jar"
-outFile = "slim-minecraft-server-1.5pre.jar"
+inFile = "minecraft-server-1.5.jar"
+outFile = "slim-minecraft-server-1.5.jar"
 
 skipFiles = ["net/minecraft/server/" + x.replace(".java", ".class") for x in os.listdir(srcDir)]
 z = zipfile.ZipFile(inFile)

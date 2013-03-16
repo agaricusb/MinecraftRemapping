@@ -1,16 +1,36 @@
-commit 6a5f28237a9c9faa5be49280b9a92f8051458aa8
+commit 727a8e79d81d27e1f8acb36c5218d227a9d4b310
 Author: Agaricus <agaricusb@yahoo.com>
-Date:   Tue Mar 12 22:30:54 2013 -0700
+Date:   Fri Mar 15 22:04:26 2013 -0700
 
     Pre-rename fixes to accomodate MCP remapping
     
     There should be no functional changes with these fixes.
 
+diff --git a/src/main/java/net/minecraft/server/Block.java b/src/main/java/net/minecraft/server/Block.java
+index 4392cb2..6b6bf9e 100644
+--- a/src/main/java/net/minecraft/server/Block.java
++++ b/src/main/java/net/minecraft/server/Block.java
+@@ -768,4 +768,15 @@ public class Block {
+         return 0;
+     }
+     // CraftBukkit end
++
++    // CBMCP start - public accessors for CB code added in PlayerInteractManager(ItemInWorldManager) that wants
++    // to call these methods, to cope with repackaging restricting protected access
++    public static boolean canSilkHarvest__Public_CB(Block block) {
++        return block.r_();
++    }
++
++    public static void dropXpOnBlockBreak__Public_CB(Block block, World world, int i, int j, int k, int l) {
++        block.j(world, i, j, k, l);
++    }
++    // CBMCP end
+ }
 diff --git a/src/main/java/net/minecraft/server/ConsoleLogFormatter.java b/src/main/java/net/minecraft/server/ConsoleLogFormatter.java
-index b9c7dd1..9396827 100644
+index 60d26d5..ff85f41 100644
 --- a/src/main/java/net/minecraft/server/ConsoleLogFormatter.java
 +++ b/src/main/java/net/minecraft/server/ConsoleLogFormatter.java
-@@ -8,7 +8,7 @@ import java.util.logging.LogRecord;
+@@ -9,7 +9,7 @@ import java.util.logging.LogRecord;
  
  import java.util.regex.Pattern; // CraftBukkit
  
@@ -18,9 +38,9 @@ index b9c7dd1..9396827 100644
 +public class ConsoleLogFormatter extends Formatter { // CBMCP - package-private -> public to cope with repackaging
  
      private SimpleDateFormat b;
-     final LogAgent a;
+ 
 diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
-index 46ab859..22e96ca 100644
+index aeca924..bebecb4 100644
 --- a/src/main/java/net/minecraft/server/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/PlayerConnection.java
 @@ -61,7 +61,7 @@ public class PlayerConnection extends Connection {
@@ -32,26 +52,70 @@ index 46ab859..22e96ca 100644
      private int x = 0;
      private double y;
      private double z;
+diff --git a/src/main/java/net/minecraft/server/PlayerInteractManager.java b/src/main/java/net/minecraft/server/PlayerInteractManager.java
+index 92e68be..f30b650 100644
+--- a/src/main/java/net/minecraft/server/PlayerInteractManager.java
++++ b/src/main/java/net/minecraft/server/PlayerInteractManager.java
+@@ -271,7 +271,7 @@ public class PlayerInteractManager {
+ 
+             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && this.player.a(nmsBlock)) {
+                 // Copied from Block.a(world, entityhuman, int, int, int, int)
+-                if (!(nmsBlock.r_() && EnchantmentManager.hasSilkTouchEnchantment(this.player))) {
++                if (!(Block.canSilkHarvest__Public_CB(nmsBlock) && EnchantmentManager.hasSilkTouchEnchantment(this.player))) { // CBMCP - use public wrapper
+                     int data = block.getData();
+                     int bonusLevel = EnchantmentManager.getBonusBlockLootEnchantmentLevel(this.player);
+ 
+@@ -331,7 +331,7 @@ public class PlayerInteractManager {
+ 
+             // CraftBukkit start - drop event experience
+             if (flag && event != null) {
+-                Block.byId[l].j(this.world, i, j, k, event.getExpToDrop());
++                Block.dropXpOnBlockBreak__Public_CB(Block.byId[l], this.world, i, j, k, event.getExpToDrop()); // CBMCP - use public wrapper
+             }
+             // CraftBukkit end
+ 
+diff --git a/src/main/java/net/minecraft/server/Vec3D.java b/src/main/java/net/minecraft/server/Vec3D.java
+index a668e18..d047e80 100644
+--- a/src/main/java/net/minecraft/server/Vec3D.java
++++ b/src/main/java/net/minecraft/server/Vec3D.java
+@@ -32,7 +32,7 @@ public class Vec3D {
+         this.b = vec3dpool;
+     }
+ 
+-    protected Vec3D b(double d0, double d1, double d2) {
++    public Vec3D b(double d0, double d1, double d2) { // CBMCP - protected -> public, for repackaging
+         this.c = d0;
+         this.d = d1;
+         this.e = d2;
+diff --git a/src/main/java/net/minecraft/server/WorldNBTStorage.java b/src/main/java/net/minecraft/server/WorldNBTStorage.java
+index e0ae71a..281669b 100644
+--- a/src/main/java/net/minecraft/server/WorldNBTStorage.java
++++ b/src/main/java/net/minecraft/server/WorldNBTStorage.java
+@@ -194,7 +194,7 @@ public class WorldNBTStorage implements IDataManager, IPlayerFileData {
+         if (nbttagcompound != null) {
+             // CraftBukkit start
+             if (entityhuman instanceof EntityPlayer) {
+-                CraftPlayer player = (CraftPlayer) entityhuman.bukkitEntity;
++                CraftPlayer player = (CraftPlayer) entityhuman.getBukkitEntity(); // CBMCP - replace .bukkitEntity (protected) with .getBukkitEntity() (public)
+                 player.setFirstPlayed(new File(playerDir, entityhuman.name + ".dat").lastModified());
+             }
+             // CraftBukkit end
 diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java/net/minecraft/server/WorldServer.java
-index 33852b3..5b24664 100644
+index d99b6a3..2cdf856 100644
 --- a/src/main/java/net/minecraft/server/WorldServer.java
 +++ b/src/main/java/net/minecraft/server/WorldServer.java
-@@ -935,4 +935,18 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
-         return this.setTypeIdAndData(i, j, k, l, i1, 3);
+@@ -934,4 +934,14 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
+         return this.setTypeIdAndData(x, y, z, typeId, data, 3);
      }
      // CraftBukkit end
 +
-+    // CBMCP start - a few more for BlockChangeDelegate
-+    public boolean setTypeId__API_CB(int x, int y, int z, int typeId) {
-+        return this.setTypeId(x, y, z, typeId);
++    // CBMCP start - more compatibility for BlockChangeDelegate, post-rename
++    public int getTypeId__API_CB(int i, int j, int k) {
++        return this.getTypeId(i, j, k);
 +    }
 +
-+    public boolean isEmpty__API_CB(int x, int y, int z) {
-+        return this.isEmpty(x, y, z);
-+    }
-+
-+    public int getTypeId__API_CB(int x, int y, int z) {
-+        return this.getTypeId(x, y, z);
++    public boolean isEmpty__API_CB(int i, int j, int k) {
++        return this.isEmpty(i, j, k);
 +    }
 +    // CBMCP end
  }
@@ -95,15 +159,15 @@ index b8695cc..fd13e8e 100644
  
              Achievement subject = Achievement.getById(id);
 diff --git a/src/test/java/org/bukkit/PerMaterialTest.java b/src/test/java/org/bukkit/PerMaterialTest.java
-index e660d9e..6823813 100644
+index f55920b..000e165 100644
 --- a/src/test/java/org/bukkit/PerMaterialTest.java
 +++ b/src/test/java/org/bukkit/PerMaterialTest.java
 @@ -30,7 +30,7 @@ public class PerMaterialTest extends AbstractTestingBase {
  
      @BeforeClass
      public static void getFireValues() {
--        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "creativeTab");
-+        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "chanceToEncourageFire"); // CBMCP
+-        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "a");
++        fireValues = Util.getInternalState(BlockFire.class, Block.FIRE, "chance");
      }
  
      @Parameters(name= "{index}: {0}")
