@@ -13,11 +13,10 @@ if os.path.exists(outDir):
     shutil.rmtree(outDir)
 shutil.copytree(vanillaSrc, outDir)
 
-# TODO
-#print "Applying CraftBukkit patches"
-#sys.path.append(os.path.join(fmlDir, "install"))
-#import fml
-#print fml.apply_patches
+print "Applying CraftBukkit patches"
+sys.path.append(os.path.join(fmlDir))
+import fml
+fml.apply_patches(mcpDir, cbPatches, os.path.join(outDir, "net"))  # .../
 
 sys.path.append(mcpDir)
 import runtime.commands
