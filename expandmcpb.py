@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# "Expand" MCPBukkit source on top of MCP source, applying patches, renaming to csv, etc.
+#
+# https://github.com/MinecraftForge/MCPBukkit
+
 import shutil, difflib, os, sys
 
 outDir = "/tmp/out"
@@ -7,13 +11,15 @@ fmlDir = "../Srg2Source/python/fml"
 mcpDir = os.path.join(fmlDir, "mcp")
 vanillaSrc = os.path.join(mcpDir, "src/minecraft_server") # decompiled server with srgnames
 cbPatches = "../MCPBukkit/patches"
+obc = "../MCPBukkit/src"
 
 print "Copying vanilla source"
 if os.path.exists(outDir):
     shutil.rmtree(outDir)
 shutil.copytree(vanillaSrc, outDir)
+shutil.copytree(os.path.join(obc, "org"), os.path.join(outDir, "org"))
 
-print "Applying CraftBukkit patches"
+print "Applying CraftBukkit NMS patches"
 sys.path.append(os.path.join(fmlDir))
 import fml
 fml.apply_patches(mcpDir, cbPatches, os.path.join(outDir, "net"))  # .../
