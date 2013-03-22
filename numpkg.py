@@ -7,9 +7,11 @@ import sys, re
 import srglib
 
 def repackage(s, packageMap):
-    for name, new in packageMap.iteritems():
-        s = s.replace("net/minecraft/src/"+name, new+"/"+name)  # inefficient, yeah
-    return s
+    def getNewName(match):
+        className = match.group(1)
+        return packageMap[className] + "/" + className
+
+    return re.sub(r"net\/minecraft\/src/(\w+)", getNewName, s)
 
 def main():
     packageMap = srglib.readClassPackageMap("../MinecraftForge/fml/conf")
