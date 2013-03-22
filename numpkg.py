@@ -9,12 +9,16 @@ import srglib
 def repackage(s, packageMap):
     def getNewName(match):
         className = match.group(1)
-        return packageMap[className] + "/" + className
+        if not packageMap.has_key(className):
+            # from a time before packaging..
+            return "net/minecraft/src/"+className
+        else:
+            return packageMap[className] + "/" + className
 
     return re.sub(r"net\/minecraft\/src/(\w+)", getNewName, s)
 
 def main():
-    packageMap = srglib.readClassPackageMap("../MinecraftForge/fml/conf")
+    packageMap = srglib.readCSVMap("allpackages.csv")
 
     for line in sys.stdin.readlines():
         line = line.strip()
