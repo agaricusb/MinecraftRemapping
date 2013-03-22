@@ -14,11 +14,24 @@ AnvilSaveHandler,net/minecraft/world/chunk/storage
 AxisAlignedBB,net/minecraft/util
 BanEntry,net/minecraft/server/management
 BanList,net/minecraft/server/management
+BehaviorArrowDispense,net/minecraft/dispenser
+BehaviorBucketEmptyDispense,net/minecraft/dispenser
+BehaviorBucketFullDispense,net/minecraft/dispenser
 BehaviorDefaultDispenseItem,net/minecraft/dispenser
 BehaviorDispenseArmor,net/minecraft/item
+BehaviorDispenseBoat,net/minecraft/dispenser
+BehaviorDispenseFireball,net/minecraft/dispenser
+BehaviorDispenseFirework,net/minecraft/dispenser
 BehaviorDispenseItemProvider,net/minecraft/dispenser
+BehaviorDispenseMinecart,net/minecraft/dispenser
 BehaviorDispenseMinecart,net/minecraft/item
+BehaviorEggDispense,net/minecraft/dispenser
+BehaviorExpBottleDispense,net/minecraft/dispenser
+BehaviorMobEggDispense,net/minecraft/dispenser
+BehaviorPotionDispense,net/minecraft/dispenser
+BehaviorPotionDispenseLogic,net/minecraft/dispenser
 BehaviorProjectileDispense,net/minecraft/dispenser
+BehaviorSnowballDispense,net/minecraft/dispenser
 BiomeCache,net/minecraft/world/biome
 BiomeCacheBlock,net/minecraft/world/biome
 BiomeDecorator,net/minecraft/world/biome
@@ -188,6 +201,7 @@ CallableJVMFlags,net/minecraft/crash
 CallableJavaInfo,net/minecraft/crash
 CallableJavaInfo2,net/minecraft/crash
 CallableLWJGLVersion,net/minecraft/client
+CallableLastTickedParticle,net/minecraft/client/particle
 CallableLevelDimension,net/minecraft/world/storage
 CallableLevelGamemode,net/minecraft/world/storage
 CallableLevelGenerator,net/minecraft/world/storage
@@ -253,6 +267,7 @@ ClippingHelperImpl,net/minecraft/client/renderer/culling
 CodecMus,net/minecraft/client/audio
 ColorizerFoliage,net/minecraft/world
 ColorizerGrass,net/minecraft/world
+ColorizerWater,net/minecraft/world
 CombatEntry,net/minecraft/util
 CombatTracker,net/minecraft/util
 CommandBase,net/minecraft/command
@@ -351,6 +366,8 @@ ComponentVillageTorch,net/minecraft/world/gen/structure
 ComponentVillageWell,net/minecraft/world/gen/structure
 ComponentVillageWoodHut,net/minecraft/world/gen/structure
 CompressedStreamTools,net/minecraft/nbt
+ConsoleLogFormatter,net/minecraft/server/dedicated
+ConsoleLogManager,net/minecraft/server/dedicated
 Container,net/minecraft/inventory
 ContainerBeacon,net/minecraft/inventory
 ContainerBrewingStand,net/minecraft/inventory
@@ -684,6 +701,7 @@ GuiButtonLink,net/minecraft/client/gui
 GuiButtonMerchant,net/minecraft/client/gui
 GuiButtonNextPage,net/minecraft/client/gui
 GuiChat,net/minecraft/client/gui
+GuiChatConfirmLink,net/minecraft/client/gui
 GuiChest,net/minecraft/client/gui/inventory
 GuiCommandBlock,net/minecraft/client/gui
 GuiConfirmOpenLink,net/minecraft/client/gui
@@ -1062,6 +1080,7 @@ Packet207SetScore,net/minecraft/network/packet
 Packet208SetDisplayObjective,net/minecraft/network/packet
 Packet209SetPlayerTeam,net/minecraft/network/packet
 Packet20NamedEntitySpawn,net/minecraft/network/packet
+Packet21PickupSpawn,net/minecraft/network/packet
 Packet22Collect,net/minecraft/network/packet
 Packet23VehicleSpawn,net/minecraft/network/packet
 Packet24MobSpawn,net/minecraft/network/packet
@@ -1143,6 +1162,7 @@ RConThreadMain,net/minecraft/network/rcon
 RConThreadQuery,net/minecraft/network/rcon
 RConThreadQueryAuth,net/minecraft/network/rcon
 RConUtils,net/minecraft/network/rcon
+RailLogic,net/minecraft/block
 RandomPositionGenerator,net/minecraft/entity/ai
 RecipeFireworks,net/minecraft/item/crafting
 RecipeSorter,net/minecraft/item/crafting
@@ -1342,6 +1362,11 @@ Tessellator,net/minecraft/client/renderer
 Texture,net/minecraft/client/renderer/texture
 TextureClock,net/minecraft/client/renderer/texture
 TextureCompass,net/minecraft/client/renderer/texture
+TextureCompassFX,net/minecraft/client/renderer/texturefx
+TextureFX,net/minecraft/client/renderer/texturefx
+TextureFlamesFX,net/minecraft/client/renderer/texturefx
+TextureLavaFX,net/minecraft/client/renderer/texturefx
+TextureLavaFlowFX,net/minecraft/client/renderer/texturefx
 TextureManager,net/minecraft/client/renderer/texture
 TextureMap,net/minecraft/client/renderer/texture
 TextureOffset,net/minecraft/client/model
@@ -1351,7 +1376,11 @@ TexturePackDownloadSuccess,net/minecraft/client/texturepacks
 TexturePackFolder,net/minecraft/client/texturepacks
 TexturePackImplementation,net/minecraft/client/texturepacks
 TexturePackList,net/minecraft/client/texturepacks
+TexturePortalFX,net/minecraft/client/renderer/texturefx
 TextureStitched,net/minecraft/client/renderer/texture
+TextureWatchFX,net/minecraft/client/renderer/texturefx
+TextureWaterFX,net/minecraft/client/renderer/texturefx
+TextureWaterFlowFX,net/minecraft/client/renderer/texturefx
 TexturedQuad,net/minecraft/client/model
 ThreadClientSleep,net/minecraft/client
 ThreadConnectToOnlineServer,net/minecraft/client/gui
@@ -1393,6 +1422,7 @@ TileEntityHopper,net/minecraft/tileentity
 TileEntityMobSpawner,net/minecraft/tileentity
 TileEntityMobSpawnerLogic,net/minecraft/tileentity
 TileEntityMobSpawnerRenderer,net/minecraft/client/renderer/tileentity
+TileEntityMobSpawnerSpawnData,net/minecraft/tileentity
 TileEntityNote,net/minecraft/tileentity
 TileEntityPiston,net/minecraft/tileentity
 TileEntityRecordPlayer,net/minecraft/tileentity
