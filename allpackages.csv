@@ -1,3 +1,4 @@
+class,package
 AABBLocalPool,net/minecraft/util
 AABBPool,net/minecraft/util
 Achievement,net/minecraft/stats
@@ -1500,4 +1501,3 @@ WorldServerMulti,net/minecraft/world
 WorldSettings,net/minecraft/world
 WorldType,net/minecraft/world
 WrongUsageException,net/minecraft/command
-class,package
