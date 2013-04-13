@@ -120,6 +120,9 @@ def readDescriptiveParameterNames(mcpConfDir):
 def readDescriptiveMethodNames(mcpConfDir):
     return readCSVMap(os.path.join(mcpConfDir, "methods.csv"))
 
+def readDescriptiveFieldNames(mcpConfDir):
+    return readCSVMap(os.path.join(mcpConfDir, "fields.csv"))
+
 # Class name to package, from FML/MCP's repackaging
 def readClassPackageMap(mcpConfDir):
     return readCSVMap(os.path.join(mcpConfDir, "packages.csv"))
