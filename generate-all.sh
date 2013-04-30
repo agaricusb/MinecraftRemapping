@@ -1,23 +1,25 @@
 #!/bin/sh -x
 
 # original obfuscated jar from Mojang
-# http://assets.minecraft.net/1_4_7/minecraft_server.jar
-VANILLA=minecraft_server151.jar
-VANILLA_DIR=vanilla151
+# >=1.5.2: http://s3.amazonaws.com/Minecraft.Download/versions/1.5.2/minecraft_server.1.5.2.jar
+# 1.5.1-1.2: http://assets.minecraft.net/1_5_1/minecraft_server.jar
+# <1.2: use mcnostalgia
+VANILLA=minecraft_server152.jar
+VANILLA_DIR=vanilla152
 
 # internally renamed jar from Bukkit
-# http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/1.4.5/minecraft-server-1.4.5.jar
-MCDEV=minecraft-server-1.5.1.jar
-MCDEV_DIR=mcdev151
+# http://repo.bukkit.org/content/repositories/releases/org/bukkit/minecraft-server/1.5.2/minecraft-server-1.5.2.jar
+MCDEV=minecraft-server-1.5.2.jar
+MCDEV_DIR=mcdev152
 
 # MCP deobfuscation mappings from Ocean Labs
-MCPCONF=../mcp744pre2-clean/conf/
+MCPCONF=../mcp751pre-clean/conf/
 
 # Repackaged FML/MCP
 PKGMCPCONF=../FML/mcp/conf/
 
 # Location to store generated mappings (must already exist)
-OUT_DIR=1.5.1/
+OUT_DIR=1.5.2/
 
 set -e
 
