@@ -1,7 +1,6 @@
-mc-dev145
-mc-dev146
-vanilla145
-vanilla146
+mc-dev*
+mcdev*
+vanilla*
 *.jar
 *.swp
 *.pyc
