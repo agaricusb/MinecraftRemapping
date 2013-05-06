@@ -9,7 +9,7 @@ import sys, os, re
 
 import srglib
 
-mcpConfDir = "../MinecraftForge/mcp/conf/"
+mcpConfDir = "../FML/mcp/conf/"
 targetDir = "../15mcpc-plus/src"
 
 methodNames = srglib.readDescriptiveMethodNames(mcpConfDir)
