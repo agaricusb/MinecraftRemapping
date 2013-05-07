@@ -1451,7 +1451,7 @@ FD: net/minecraft/server/BlockAnvil/d net/minecraft/block/BlockAnvil/anvilIconNa
 FD: net/minecraft/server/BlockBed/a net/minecraft/block/BlockBed/footBlockToHeadBlockMap
 FD: net/minecraft/server/BlockBrewingStand/a net/minecraft/block/BlockBrewingStand/rand
 FD: net/minecraft/server/BlockButtonAbstract/a net/minecraft/block/BlockButton/sensible
-FD: net/minecraft/server/BlockChest/a net/minecraft/block/BlockChest/field_94443_a
+FD: net/minecraft/server/BlockChest/a net/minecraft/block/BlockChest/isTrapped
 FD: net/minecraft/server/BlockChest/b net/minecraft/block/BlockChest/random
 FD: net/minecraft/server/BlockCobbleWall/a net/minecraft/block/BlockWall/types
 FD: net/minecraft/server/BlockCocoa/a net/minecraft/block/BlockCocoa/cocoaIcons
@@ -2002,7 +2002,7 @@ FD: net/minecraft/server/Entity/K net/minecraft/entity/Entity/isInWeb
 FD: net/minecraft/server/Entity/L net/minecraft/entity/Entity/field_70135_K
 FD: net/minecraft/server/Entity/Q net/minecraft/entity/Entity/prevDistanceWalkedModified
 FD: net/minecraft/server/Entity/R net/minecraft/entity/Entity/distanceWalkedModified
-FD: net/minecraft/server/Entity/S net/minecraft/entity/Entity/field_82151_R
+FD: net/minecraft/server/Entity/S net/minecraft/entity/Entity/distanceWalkedOnStepModified
 FD: net/minecraft/server/Entity/U net/minecraft/entity/Entity/lastTickPosX
 FD: net/minecraft/server/Entity/V net/minecraft/entity/Entity/lastTickPosY
 FD: net/minecraft/server/Entity/W net/minecraft/entity/Entity/lastTickPosZ
@@ -2148,6 +2148,7 @@ FD: net/minecraft/server/EntityEnderSignal/f net/minecraft/entity/item/EntityEnd
 FD: net/minecraft/server/EntityEnderman/d net/minecraft/entity/monster/EntityEnderman/carriableBlocks
 FD: net/minecraft/server/EntityEnderman/e net/minecraft/entity/monster/EntityEnderman/teleportDelay
 FD: net/minecraft/server/EntityEnderman/f net/minecraft/entity/monster/EntityEnderman/field_70826_g
+FD: net/minecraft/server/EntityEnderman/g net/minecraft/entity/monster/EntityEnderman/field_104003_g
 FD: net/minecraft/server/EntityExperienceOrb/a net/minecraft/entity/item/EntityXPOrb/xpColor
 FD: net/minecraft/server/EntityExperienceOrb/b net/minecraft/entity/item/EntityXPOrb/xpOrbAge
 FD: net/minecraft/server/EntityExperienceOrb/c net/minecraft/entity/item/EntityXPOrb/field_70532_c
@@ -2298,7 +2299,7 @@ FD: net/minecraft/server/EntityLiving/bP net/minecraft/entity/EntityLiving/sense
 FD: net/minecraft/server/EntityLiving/bQ net/minecraft/entity/EntityLiving/AIMoveSpeed
 FD: net/minecraft/server/EntityLiving/bR net/minecraft/entity/EntityLiving/homePosition
 FD: net/minecraft/server/EntityLiving/bS net/minecraft/entity/EntityLiving/maximumHomeDistance
-FD: net/minecraft/server/EntityLiving/bU net/minecraft/entity/EntityLiving/field_82180_bT
+FD: net/minecraft/server/EntityLiving/bU net/minecraft/entity/EntityLiving/previousEquipment
 FD: net/minecraft/server/EntityLiving/bX net/minecraft/entity/EntityLiving/jumpTicks
 FD: net/minecraft/server/EntityLiving/bY net/minecraft/entity/EntityLiving/currentTarget
 FD: net/minecraft/server/EntityLiving/bb net/minecraft/entity/EntityLiving/prevCameraPitch
@@ -2421,17 +2422,17 @@ FD: net/minecraft/server/EntitySlime/c net/minecraft/entity/monster/EntitySlime/
 FD: net/minecraft/server/EntitySlime/d net/minecraft/entity/monster/EntitySlime/field_70812_c
 FD: net/minecraft/server/EntitySlime/e net/minecraft/entity/monster/EntitySlime/spawnChances
 FD: net/minecraft/server/EntitySlime/jumpDelay net/minecraft/entity/monster/EntitySlime/slimeJumpDelay
-FD: net/minecraft/server/EntitySquid/bK net/minecraft/entity/passive/EntitySquid/lastTentacleAngle
+FD: net/minecraft/server/EntitySquid/bK net/minecraft/entity/passive/EntitySquid/prevTentacleAngle
 FD: net/minecraft/server/EntitySquid/bL net/minecraft/entity/passive/EntitySquid/randomMotionSpeed
 FD: net/minecraft/server/EntitySquid/bM net/minecraft/entity/passive/EntitySquid/field_70864_bA
 FD: net/minecraft/server/EntitySquid/bN net/minecraft/entity/passive/EntitySquid/field_70871_bB
 FD: net/minecraft/server/EntitySquid/bO net/minecraft/entity/passive/EntitySquid/randomMotionVecX
 FD: net/minecraft/server/EntitySquid/bP net/minecraft/entity/passive/EntitySquid/randomMotionVecY
 FD: net/minecraft/server/EntitySquid/bQ net/minecraft/entity/passive/EntitySquid/randomMotionVecZ
-FD: net/minecraft/server/EntitySquid/d net/minecraft/entity/passive/EntitySquid/field_70861_d
-FD: net/minecraft/server/EntitySquid/e net/minecraft/entity/passive/EntitySquid/field_70862_e
-FD: net/minecraft/server/EntitySquid/f net/minecraft/entity/passive/EntitySquid/field_70859_f
-FD: net/minecraft/server/EntitySquid/g net/minecraft/entity/passive/EntitySquid/field_70860_g
+FD: net/minecraft/server/EntitySquid/d net/minecraft/entity/passive/EntitySquid/squidPitch
+FD: net/minecraft/server/EntitySquid/e net/minecraft/entity/passive/EntitySquid/prevSquidPitch
+FD: net/minecraft/server/EntitySquid/f net/minecraft/entity/passive/EntitySquid/squidYaw
+FD: net/minecraft/server/EntitySquid/g net/minecraft/entity/passive/EntitySquid/prevSquidYaw
 FD: net/minecraft/server/EntitySquid/h net/minecraft/entity/passive/EntitySquid/field_70867_h
 FD: net/minecraft/server/EntitySquid/i net/minecraft/entity/passive/EntitySquid/field_70868_i
 FD: net/minecraft/server/EntitySquid/j net/minecraft/entity/passive/EntitySquid/tentacleAngle
@@ -2842,8 +2843,8 @@ FD: net/minecraft/server/Item/MELON net/minecraft/item/Item/melon
 FD: net/minecraft/server/Item/MELON_SEEDS net/minecraft/item/Item/melonSeeds
 FD: net/minecraft/server/Item/MILK_BUCKET net/minecraft/item/Item/bucketMilk
 FD: net/minecraft/server/Item/MINECART net/minecraft/item/Item/minecartEmpty
-FD: net/minecraft/server/Item/MINECART_HOPPER net/minecraft/item/Item/hopperMinecart
-FD: net/minecraft/server/Item/MINECART_TNT net/minecraft/item/Item/tntMinecart
+FD: net/minecraft/server/Item/MINECART_HOPPER net/minecraft/item/Item/minecartHopper
+FD: net/minecraft/server/Item/MINECART_TNT net/minecraft/item/Item/minecartTnt
 FD: net/minecraft/server/Item/MONSTER_EGG net/minecraft/item/Item/monsterPlacer
 FD: net/minecraft/server/Item/MUSHROOM_SOUP net/minecraft/item/Item/bowlSoup
 FD: net/minecraft/server/Item/NETHER_BRICK net/minecraft/item/Item/netherrackBrick
@@ -3095,6 +3096,7 @@ FD: net/minecraft/server/MinecraftServer/P net/minecraft/server/MinecraftServer/
 FD: net/minecraft/server/MinecraftServer/Q net/minecraft/server/MinecraftServer/timeOfLastWarning
 FD: net/minecraft/server/MinecraftServer/R net/minecraft/server/MinecraftServer/userMessage
 FD: net/minecraft/server/MinecraftServer/S net/minecraft/server/MinecraftServer/startProfiling
+FD: net/minecraft/server/MinecraftServer/T net/minecraft/server/MinecraftServer/field_104057_T
 FD: net/minecraft/server/MinecraftServer/allowFlight net/minecraft/server/MinecraftServer/allowFlight
 FD: net/minecraft/server/MinecraftServer/c net/minecraft/server/MinecraftServer/currentTask
 FD: net/minecraft/server/MinecraftServer/convertable net/minecraft/server/MinecraftServer/anvilConverterForAnvilFile
@@ -4051,7 +4053,7 @@ FD: net/minecraft/server/Scoreboard/objectivesByCriteria net/minecraft/scoreboar
 FD: net/minecraft/server/Scoreboard/objectivesByName net/minecraft/scoreboard/Scoreboard/scoreObjectives
 FD: net/minecraft/server/Scoreboard/playerScores net/minecraft/scoreboard/Scoreboard/field_96544_c
 FD: net/minecraft/server/Scoreboard/teamsByName net/minecraft/scoreboard/Scoreboard/field_96542_e
-FD: net/minecraft/server/Scoreboard/teamsByPlayer net/minecraft/scoreboard/Scoreboard/field_96540_f
+FD: net/minecraft/server/Scoreboard/teamsByPlayer net/minecraft/scoreboard/Scoreboard/teamMemberships
 FD: net/minecraft/server/ScoreboardBaseCriteria/g net/minecraft/scoreboard/ScoreDummyCriteria/field_96644_g
 FD: net/minecraft/server/ScoreboardObjective/a net/minecraft/scoreboard/ScoreObjective/theScoreboard
 FD: net/minecraft/server/ScoreboardObjective/b net/minecraft/scoreboard/ScoreObjective/name
@@ -4067,9 +4069,9 @@ FD: net/minecraft/server/ScoreboardScore/score net/minecraft/scoreboard/Score/fi
 FD: net/minecraft/server/ScoreboardServer/a net/minecraft/scoreboard/ServerScoreboard/field_96555_a
 FD: net/minecraft/server/ScoreboardServer/b net/minecraft/scoreboard/ServerScoreboard/field_96553_b
 FD: net/minecraft/server/ScoreboardServer/c net/minecraft/scoreboard/ServerScoreboard/field_96554_c
-FD: net/minecraft/server/ScoreboardTeam/a net/minecraft/scoreboard/ScorePlayerTeam/field_96677_a
+FD: net/minecraft/server/ScoreboardTeam/a net/minecraft/scoreboard/ScorePlayerTeam/theScoreboard
 FD: net/minecraft/server/ScoreboardTeam/b net/minecraft/scoreboard/ScorePlayerTeam/field_96675_b
-FD: net/minecraft/server/ScoreboardTeam/c net/minecraft/scoreboard/ScorePlayerTeam/field_96676_c
+FD: net/minecraft/server/ScoreboardTeam/c net/minecraft/scoreboard/ScorePlayerTeam/membershipSet
 FD: net/minecraft/server/ScoreboardTeam/d net/minecraft/scoreboard/ScorePlayerTeam/field_96673_d
 FD: net/minecraft/server/ScoreboardTeam/e net/minecraft/scoreboard/ScorePlayerTeam/field_96674_e
 FD: net/minecraft/server/ScoreboardTeam/f net/minecraft/scoreboard/ScorePlayerTeam/field_96671_f
@@ -4234,11 +4236,11 @@ FD: net/minecraft/server/TileEntityChest/items net/minecraft/tileentity/TileEnti
 FD: net/minecraft/server/TileEntityChest/r net/minecraft/tileentity/TileEntityChest/field_94046_i
 FD: net/minecraft/server/TileEntityChest/s net/minecraft/tileentity/TileEntityChest/field_94045_s
 FD: net/minecraft/server/TileEntityChest/ticks net/minecraft/tileentity/TileEntityChest/ticksSinceSync
-FD: net/minecraft/server/TileEntityCommand/a net/minecraft/tileentity/TileEntityCommandBlock/field_96106_a
+FD: net/minecraft/server/TileEntityCommand/a net/minecraft/tileentity/TileEntityCommandBlock/succesCount
 FD: net/minecraft/server/TileEntityCommand/b net/minecraft/tileentity/TileEntityCommandBlock/command
-FD: net/minecraft/server/TileEntityCommand/c net/minecraft/tileentity/TileEntityCommandBlock/field_96105_c
+FD: net/minecraft/server/TileEntityCommand/c net/minecraft/tileentity/TileEntityCommandBlock/commandSenderName
 FD: net/minecraft/server/TileEntityComparator/a net/minecraft/tileentity/TileEntityComparator/field_96101_a
-FD: net/minecraft/server/TileEntityDispenser/a net/minecraft/tileentity/TileEntityDispenser/field_94050_c
+FD: net/minecraft/server/TileEntityDispenser/a net/minecraft/tileentity/TileEntityDispenser/customName
 FD: net/minecraft/server/TileEntityDispenser/c net/minecraft/tileentity/TileEntityDispenser/dispenserRandom
 FD: net/minecraft/server/TileEntityDispenser/items net/minecraft/tileentity/TileEntityDispenser/dispenserContents
 FD: net/minecraft/server/TileEntityEnchantTable/a net/minecraft/tileentity/TileEntityEnchantmentTable/tickCount
@@ -5243,7 +5245,7 @@ MD: net/minecraft/server/BlockDaylightDetector/b (Lnet/minecraft/server/IBlockAc
 MD: net/minecraft/server/BlockDaylightDetector/b (Lnet/minecraft/server/World;)Lnet/minecraft/server/TileEntity; net/minecraft/block/BlockDaylightDetector/createNewTileEntity (Lnet/minecraft/world/World;)Lnet/minecraft/tileentity/TileEntity;
 MD: net/minecraft/server/BlockDaylightDetector/c ()Z net/minecraft/block/BlockDaylightDetector/isOpaqueCube ()Z
 MD: net/minecraft/server/BlockDaylightDetector/doPhysics (Lnet/minecraft/server/World;IIII)V net/minecraft/block/BlockDaylightDetector/onNeighborBlockChange (Lnet/minecraft/world/World;IIII)V
-MD: net/minecraft/server/BlockDaylightDetector/i_ (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockDaylightDetector/func_94444_j_ (Lnet/minecraft/world/World;III)V
+MD: net/minecraft/server/BlockDaylightDetector/i_ (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockDaylightDetector/updateLightLevel (Lnet/minecraft/world/World;III)V
 MD: net/minecraft/server/BlockDaylightDetector/isPowerSource ()Z net/minecraft/block/BlockDaylightDetector/canProvidePower ()Z
 MD: net/minecraft/server/BlockDaylightDetector/onPlace (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockDaylightDetector/onBlockAdded (Lnet/minecraft/world/World;III)V
 MD: net/minecraft/server/BlockDaylightDetector/updateShape (Lnet/minecraft/server/IBlockAccess;III)V net/minecraft/block/BlockDaylightDetector/setBlockBoundsBasedOnState (Lnet/minecraft/world/IBlockAccess;III)V
@@ -5475,12 +5477,12 @@ MD: net/minecraft/server/BlockHopper/b_ (Lnet/minecraft/server/World;IIII)I net/
 MD: net/minecraft/server/BlockHopper/c ()Z net/minecraft/block/BlockHopper/isOpaqueCube ()Z
 MD: net/minecraft/server/BlockHopper/c (I)I net/minecraft/block/BlockHopper/getDirectionFromMetadata (I)I
 MD: net/minecraft/server/BlockHopper/d ()I net/minecraft/block/BlockHopper/getRenderType ()I
-MD: net/minecraft/server/BlockHopper/d (I)Z net/minecraft/block/BlockHopper/func_94452_d (I)Z
+MD: net/minecraft/server/BlockHopper/d (I)Z net/minecraft/block/BlockHopper/getIsBlockNotPoweredFromMetadata (I)Z
 MD: net/minecraft/server/BlockHopper/d (Lnet/minecraft/server/IBlockAccess;III)Lnet/minecraft/server/TileEntityHopper; net/minecraft/block/BlockHopper/getHopperTile (Lnet/minecraft/world/IBlockAccess;III)Lnet/minecraft/tileentity/TileEntityHopper;
 MD: net/minecraft/server/BlockHopper/doPhysics (Lnet/minecraft/server/World;IIII)V net/minecraft/block/BlockHopper/onNeighborBlockChange (Lnet/minecraft/world/World;IIII)V
 MD: net/minecraft/server/BlockHopper/getPlacedData (Lnet/minecraft/server/World;IIIIFFFI)I net/minecraft/block/BlockHopper/onBlockPlaced (Lnet/minecraft/world/World;IIIIFFFI)I
 MD: net/minecraft/server/BlockHopper/interact (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityHuman;IFFF)Z net/minecraft/block/BlockHopper/onBlockActivated (Lnet/minecraft/world/World;IIILnet/minecraft/entity/player/EntityPlayer;IFFF)Z
-MD: net/minecraft/server/BlockHopper/k (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockHopper/func_96471_k (Lnet/minecraft/world/World;III)V
+MD: net/minecraft/server/BlockHopper/k (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockHopper/updateMetadata (Lnet/minecraft/world/World;III)V
 MD: net/minecraft/server/BlockHopper/onPlace (Lnet/minecraft/server/World;III)V net/minecraft/block/BlockHopper/onBlockAdded (Lnet/minecraft/world/World;III)V
 MD: net/minecraft/server/BlockHopper/postPlace (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityLiving;Lnet/minecraft/server/ItemStack;)V net/minecraft/block/BlockHopper/onBlockPlacedBy (Lnet/minecraft/world/World;IIILnet/minecraft/entity/EntityLiving;Lnet/minecraft/item/ItemStack;)V
 MD: net/minecraft/server/BlockHopper/q_ ()Z net/minecraft/block/BlockHopper/hasComparatorInputOverride ()Z
@@ -5822,7 +5824,7 @@ MD: net/minecraft/server/BlockSapling/a (Lnet/minecraft/server/World;IIILjava/ut
 MD: net/minecraft/server/BlockSapling/d (Lnet/minecraft/server/World;IIII)Z net/minecraft/block/BlockSapling/isSameSapling (Lnet/minecraft/world/World;IIII)Z
 MD: net/minecraft/server/BlockSapling/d (Lnet/minecraft/server/World;IIILjava/util/Random;)V net/minecraft/block/BlockSapling/growTree (Lnet/minecraft/world/World;IIILjava/util/Random;)V
 MD: net/minecraft/server/BlockSapling/getDropData (I)I net/minecraft/block/BlockSapling/damageDropped (I)I
-MD: net/minecraft/server/BlockSapling/grow (Lnet/minecraft/server/World;IIILjava/util/Random;)V net/minecraft/block/BlockSapling/func_96477_c (Lnet/minecraft/world/World;IIILjava/util/Random;)V
+MD: net/minecraft/server/BlockSapling/grow (Lnet/minecraft/server/World;IIILjava/util/Random;)V net/minecraft/block/BlockSapling/markOrGrowMarked (Lnet/minecraft/world/World;IIILjava/util/Random;)V
 MD: net/minecraft/server/BlockSign/b ()Z net/minecraft/block/BlockSign/renderAsNormalBlock ()Z
 MD: net/minecraft/server/BlockSign/b (Lnet/minecraft/server/IBlockAccess;III)Z net/minecraft/block/BlockSign/getBlocksMovement (Lnet/minecraft/world/IBlockAccess;III)Z
 MD: net/minecraft/server/BlockSign/b (Lnet/minecraft/server/World;)Lnet/minecraft/server/TileEntity; net/minecraft/block/BlockSign/createNewTileEntity (Lnet/minecraft/world/World;)Lnet/minecraft/tileentity/TileEntity;
@@ -5857,7 +5859,7 @@ MD: net/minecraft/server/BlockSnow/b ()Z net/minecraft/block/BlockSnow/renderAsN
 MD: net/minecraft/server/BlockSnow/b (Lnet/minecraft/server/World;III)Lnet/minecraft/server/AxisAlignedBB; net/minecraft/block/BlockSnow/getCollisionBoundingBoxFromPool (Lnet/minecraft/world/World;III)Lnet/minecraft/util/AxisAlignedBB;
 MD: net/minecraft/server/BlockSnow/c ()Z net/minecraft/block/BlockSnow/isOpaqueCube ()Z
 MD: net/minecraft/server/BlockSnow/canPlace (Lnet/minecraft/server/World;III)Z net/minecraft/block/BlockSnow/canPlaceBlockAt (Lnet/minecraft/world/World;III)Z
-MD: net/minecraft/server/BlockSnow/d (I)V net/minecraft/block/BlockSnow/func_96478_d (I)V
+MD: net/minecraft/server/BlockSnow/d (I)V net/minecraft/block/BlockSnow/setBlockBoundsForSnowDepth (I)V
 MD: net/minecraft/server/BlockSnow/doPhysics (Lnet/minecraft/server/World;IIII)V net/minecraft/block/BlockSnow/onNeighborBlockChange (Lnet/minecraft/world/World;IIII)V
 MD: net/minecraft/server/BlockSnow/g ()V net/minecraft/block/BlockSnow/setBlockBoundsForItemRender ()V
 MD: net/minecraft/server/BlockSnow/getDropType (ILjava/util/Random;I)I net/minecraft/block/BlockSnow/idDropped (ILjava/util/Random;I)I
@@ -6099,6 +6101,7 @@ MD: net/minecraft/server/ChunkCache/getData (III)I net/minecraft/world/ChunkCach
 MD: net/minecraft/server/ChunkCache/getMaterial (III)Lnet/minecraft/server/Material; net/minecraft/world/ChunkCache/getBlockMaterial (III)Lnet/minecraft/block/material/Material;
 MD: net/minecraft/server/ChunkCache/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/ChunkCache/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
 MD: net/minecraft/server/ChunkCache/getTypeId (III)I net/minecraft/world/ChunkCache/getBlockId (III)I
+MD: net/minecraft/server/ChunkCache/getVec3DPool ()Lnet/minecraft/server/Vec3DPool; net/minecraft/world/ChunkCache/getWorldVec3Pool ()Lnet/minecraft/util/Vec3Pool;
 MD: net/minecraft/server/ChunkCache/u (III)Z net/minecraft/world/ChunkCache/isBlockNormalCube (III)Z
 MD: net/minecraft/server/ChunkCoordIntPair/a ()I net/minecraft/world/ChunkCoordIntPair/getCenterXPos ()I
 MD: net/minecraft/server/ChunkCoordIntPair/a (I)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/ChunkCoordIntPair/getChunkPosition (I)Lnet/minecraft/world/ChunkPosition;
@@ -6117,44 +6120,60 @@ MD: net/minecraft/server/ChunkCoordinates/hashCode ()I net/minecraft/util/ChunkC
 MD: net/minecraft/server/ChunkFilenameFilter/accept (Ljava/io/File;Ljava/lang/String;)Z net/minecraft/world/chunk/storage/AnvilSaveConverterFileFilter/accept (Ljava/io/File;Ljava/lang/String;)Z
 MD: net/minecraft/server/ChunkPosition/equals (Ljava/lang/Object;)Z net/minecraft/world/ChunkPosition/equals (Ljava/lang/Object;)Z
 MD: net/minecraft/server/ChunkPosition/hashCode ()I net/minecraft/world/ChunkPosition/hashCode ()I
+MD: net/minecraft/server/ChunkProviderFlat/b ()V net/minecraft/world/gen/ChunkProviderFlat/func_104112_b ()V
+MD: net/minecraft/server/ChunkProviderFlat/canSave ()Z net/minecraft/world/gen/ChunkProviderFlat/canSave ()Z
 MD: net/minecraft/server/ChunkProviderFlat/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/gen/ChunkProviderFlat/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/ChunkProviderFlat/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderFlat/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderFlat/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/gen/ChunkProviderFlat/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/ChunkProviderFlat/getLoadedChunks ()I net/minecraft/world/gen/ChunkProviderFlat/getLoadedChunkCount ()I
 MD: net/minecraft/server/ChunkProviderFlat/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/gen/ChunkProviderFlat/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/ChunkProviderFlat/getName ()Ljava/lang/String; net/minecraft/world/gen/ChunkProviderFlat/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/ChunkProviderFlat/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderFlat/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderFlat/isChunkLoaded (II)Z net/minecraft/world/gen/ChunkProviderFlat/chunkExists (II)Z
 MD: net/minecraft/server/ChunkProviderFlat/recreateStructures (II)V net/minecraft/world/gen/ChunkProviderFlat/recreateStructures (II)V
 MD: net/minecraft/server/ChunkProviderFlat/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/gen/ChunkProviderFlat/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/ChunkProviderFlat/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderFlat/canSave ()Z
+MD: net/minecraft/server/ChunkProviderFlat/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderFlat/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ChunkProviderGenerate/a (II[B)V net/minecraft/world/gen/ChunkProviderGenerate/generateTerrain (II[B)V
 MD: net/minecraft/server/ChunkProviderGenerate/a (II[B[Lnet/minecraft/server/BiomeBase;)V net/minecraft/world/gen/ChunkProviderGenerate/replaceBlocksForBiome (II[B[Lnet/minecraft/world/biome/BiomeGenBase;)V
 MD: net/minecraft/server/ChunkProviderGenerate/a ([DIIIIII)[D net/minecraft/world/gen/ChunkProviderGenerate/initializeNoiseField ([DIIIIII)[D
+MD: net/minecraft/server/ChunkProviderGenerate/b ()V net/minecraft/world/gen/ChunkProviderGenerate/func_104112_b ()V
+MD: net/minecraft/server/ChunkProviderGenerate/canSave ()Z net/minecraft/world/gen/ChunkProviderGenerate/canSave ()Z
 MD: net/minecraft/server/ChunkProviderGenerate/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/gen/ChunkProviderGenerate/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/ChunkProviderGenerate/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderGenerate/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderGenerate/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/gen/ChunkProviderGenerate/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/ChunkProviderGenerate/getLoadedChunks ()I net/minecraft/world/gen/ChunkProviderGenerate/getLoadedChunkCount ()I
 MD: net/minecraft/server/ChunkProviderGenerate/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/gen/ChunkProviderGenerate/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/ChunkProviderGenerate/getName ()Ljava/lang/String; net/minecraft/world/gen/ChunkProviderGenerate/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/ChunkProviderGenerate/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderGenerate/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderGenerate/isChunkLoaded (II)Z net/minecraft/world/gen/ChunkProviderGenerate/chunkExists (II)Z
 MD: net/minecraft/server/ChunkProviderGenerate/recreateStructures (II)V net/minecraft/world/gen/ChunkProviderGenerate/recreateStructures (II)V
 MD: net/minecraft/server/ChunkProviderGenerate/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/gen/ChunkProviderGenerate/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/ChunkProviderGenerate/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderGenerate/canSave ()Z
+MD: net/minecraft/server/ChunkProviderGenerate/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderGenerate/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ChunkProviderHell/a (II[B)V net/minecraft/world/gen/ChunkProviderHell/generateNetherTerrain (II[B)V
 MD: net/minecraft/server/ChunkProviderHell/a ([DIIIIII)[D net/minecraft/world/gen/ChunkProviderHell/initializeNoiseField ([DIIIIII)[D
+MD: net/minecraft/server/ChunkProviderHell/b ()V net/minecraft/world/gen/ChunkProviderHell/func_104112_b ()V
 MD: net/minecraft/server/ChunkProviderHell/b (II[B)V net/minecraft/world/gen/ChunkProviderHell/replaceBlocksForBiome (II[B)V
+MD: net/minecraft/server/ChunkProviderHell/canSave ()Z net/minecraft/world/gen/ChunkProviderHell/canSave ()Z
 MD: net/minecraft/server/ChunkProviderHell/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/gen/ChunkProviderHell/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/ChunkProviderHell/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderHell/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderHell/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/gen/ChunkProviderHell/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/ChunkProviderHell/getLoadedChunks ()I net/minecraft/world/gen/ChunkProviderHell/getLoadedChunkCount ()I
 MD: net/minecraft/server/ChunkProviderHell/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/gen/ChunkProviderHell/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/ChunkProviderHell/getName ()Ljava/lang/String; net/minecraft/world/gen/ChunkProviderHell/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/ChunkProviderHell/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderHell/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderHell/isChunkLoaded (II)Z net/minecraft/world/gen/ChunkProviderHell/chunkExists (II)Z
 MD: net/minecraft/server/ChunkProviderHell/recreateStructures (II)V net/minecraft/world/gen/ChunkProviderHell/recreateStructures (II)V
 MD: net/minecraft/server/ChunkProviderHell/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/gen/ChunkProviderHell/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/ChunkProviderHell/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderHell/canSave ()Z
+MD: net/minecraft/server/ChunkProviderHell/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderHell/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ChunkProviderServer/a ()V net/minecraft/world/gen/ChunkProviderServer/unloadAllChunks ()V
+MD: net/minecraft/server/ChunkProviderServer/b ()V net/minecraft/world/gen/ChunkProviderServer/func_104112_b ()V
+MD: net/minecraft/server/ChunkProviderServer/canSave ()Z net/minecraft/world/gen/ChunkProviderServer/canSave ()Z
 MD: net/minecraft/server/ChunkProviderServer/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/gen/ChunkProviderServer/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/ChunkProviderServer/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderServer/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderServer/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/gen/ChunkProviderServer/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/ChunkProviderServer/getLoadedChunks ()I net/minecraft/world/gen/ChunkProviderServer/getLoadedChunkCount ()I
 MD: net/minecraft/server/ChunkProviderServer/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/gen/ChunkProviderServer/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/ChunkProviderServer/getName ()Ljava/lang/String; net/minecraft/world/gen/ChunkProviderServer/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/ChunkProviderServer/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderServer/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderServer/isChunkLoaded (II)Z net/minecraft/world/gen/ChunkProviderServer/chunkExists (II)Z
 MD: net/minecraft/server/ChunkProviderServer/loadChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderServer/safeLoadChunk (II)Lnet/minecraft/world/chunk/Chunk;
@@ -6163,22 +6182,26 @@ MD: net/minecraft/server/ChunkProviderServer/recreateStructures (II)V net/minecr
 MD: net/minecraft/server/ChunkProviderServer/saveChunk (Lnet/minecraft/server/Chunk;)V net/minecraft/world/gen/ChunkProviderServer/safeSaveChunk (Lnet/minecraft/world/chunk/Chunk;)V
 MD: net/minecraft/server/ChunkProviderServer/saveChunkNOP (Lnet/minecraft/server/Chunk;)V net/minecraft/world/gen/ChunkProviderServer/safeSaveExtraChunkData (Lnet/minecraft/world/chunk/Chunk;)V
 MD: net/minecraft/server/ChunkProviderServer/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/gen/ChunkProviderServer/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/ChunkProviderServer/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderServer/canSave ()Z
+MD: net/minecraft/server/ChunkProviderServer/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderServer/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ChunkProviderTheEnd/a (II[B[Lnet/minecraft/server/BiomeBase;)V net/minecraft/world/gen/ChunkProviderEnd/generateTerrain (II[B[Lnet/minecraft/world/biome/BiomeGenBase;)V
 MD: net/minecraft/server/ChunkProviderTheEnd/a ([DIIIIII)[D net/minecraft/world/gen/ChunkProviderEnd/initializeNoiseField ([DIIIIII)[D
+MD: net/minecraft/server/ChunkProviderTheEnd/b ()V net/minecraft/world/gen/ChunkProviderEnd/func_104112_b ()V
 MD: net/minecraft/server/ChunkProviderTheEnd/b (II[B[Lnet/minecraft/server/BiomeBase;)V net/minecraft/world/gen/ChunkProviderEnd/replaceBlocksForBiome (II[B[Lnet/minecraft/world/biome/BiomeGenBase;)V
+MD: net/minecraft/server/ChunkProviderTheEnd/canSave ()Z net/minecraft/world/gen/ChunkProviderEnd/canSave ()Z
 MD: net/minecraft/server/ChunkProviderTheEnd/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/gen/ChunkProviderEnd/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/ChunkProviderTheEnd/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderEnd/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderTheEnd/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/gen/ChunkProviderEnd/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/ChunkProviderTheEnd/getLoadedChunks ()I net/minecraft/world/gen/ChunkProviderEnd/getLoadedChunkCount ()I
 MD: net/minecraft/server/ChunkProviderTheEnd/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/gen/ChunkProviderEnd/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/ChunkProviderTheEnd/getName ()Ljava/lang/String; net/minecraft/world/gen/ChunkProviderEnd/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/ChunkProviderTheEnd/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/gen/ChunkProviderEnd/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkProviderTheEnd/isChunkLoaded (II)Z net/minecraft/world/gen/ChunkProviderEnd/chunkExists (II)Z
 MD: net/minecraft/server/ChunkProviderTheEnd/recreateStructures (II)V net/minecraft/world/gen/ChunkProviderEnd/recreateStructures (II)V
 MD: net/minecraft/server/ChunkProviderTheEnd/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/gen/ChunkProviderEnd/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/ChunkProviderTheEnd/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderEnd/canSave ()Z
+MD: net/minecraft/server/ChunkProviderTheEnd/unloadChunks ()Z net/minecraft/world/gen/ChunkProviderEnd/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ChunkRegionLoader/a ()V net/minecraft/world/chunk/storage/AnvilChunkLoader/chunkTick ()V
 MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/Chunk;Lnet/minecraft/server/World;Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/world/chunk/storage/AnvilChunkLoader/writeChunkToNBT (Lnet/minecraft/world/chunk/Chunk;Lnet/minecraft/world/World;Lnet/minecraft/nbt/NBTTagCompound;)V
-MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/ChunkCoordIntPair;Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/world/chunk/storage/AnvilChunkLoader/func_75824_a (Lnet/minecraft/world/ChunkCoordIntPair;Lnet/minecraft/nbt/NBTTagCompound;)V
+MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/ChunkCoordIntPair;Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/world/chunk/storage/AnvilChunkLoader/addChunkToPending (Lnet/minecraft/world/ChunkCoordIntPair;Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/PendingChunkToSave;)V net/minecraft/world/chunk/storage/AnvilChunkLoader/writeChunkNBTTags (Lnet/minecraft/world/chunk/storage/AnvilChunkLoaderPending;)V
 MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/World;II)Lnet/minecraft/server/Chunk; net/minecraft/world/chunk/storage/AnvilChunkLoader/loadChunk (Lnet/minecraft/world/World;II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/ChunkRegionLoader/a (Lnet/minecraft/server/World;IILnet/minecraft/server/NBTTagCompound;)Lnet/minecraft/server/Chunk; net/minecraft/world/chunk/storage/AnvilChunkLoader/checkedReadChunkFromNBT (Lnet/minecraft/world/World;IILnet/minecraft/nbt/NBTTagCompound;)Lnet/minecraft/world/chunk/Chunk;
@@ -6243,7 +6266,7 @@ MD: net/minecraft/server/CommandAbstract/a ([Ljava/lang/String;Ljava/lang/Iterab
 MD: net/minecraft/server/CommandAbstract/a ([Ljava/lang/String;[Ljava/lang/String;)Ljava/util/List; net/minecraft/command/CommandBase/getListOfStringsMatchingLastWord ([Ljava/lang/String;[Ljava/lang/String;)Ljava/util/List;
 MD: net/minecraft/server/CommandAbstract/b ()Ljava/util/List; net/minecraft/command/CommandBase/getCommandAliases ()Ljava/util/List;
 MD: net/minecraft/server/CommandAbstract/b (Lnet/minecraft/server/ICommandListener;)Z net/minecraft/command/CommandBase/canCommandSenderUseCommand (Lnet/minecraft/command/ICommandSender;)Z
-MD: net/minecraft/server/CommandAbstract/b (Lnet/minecraft/server/ICommandListener;Ljava/lang/String;)D net/minecraft/command/CommandBase/func_82363_b (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)D
+MD: net/minecraft/server/CommandAbstract/b (Lnet/minecraft/server/ICommandListener;Ljava/lang/String;)D net/minecraft/command/CommandBase/parseDouble (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)D
 MD: net/minecraft/server/CommandAbstract/c (Lnet/minecraft/server/ICommandListener;)Lnet/minecraft/server/EntityPlayer; net/minecraft/command/CommandBase/getCommandSenderAsPlayer (Lnet/minecraft/command/ICommandSender;)Lnet/minecraft/entity/player/EntityPlayerMP;
 MD: net/minecraft/server/CommandAbstract/c (Lnet/minecraft/server/ICommandListener;Ljava/lang/String;)Lnet/minecraft/server/EntityPlayer; net/minecraft/command/CommandBase/func_82359_c (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Lnet/minecraft/entity/player/EntityPlayerMP;
 MD: net/minecraft/server/CommandAbstract/compareTo (Ljava/lang/Object;)I net/minecraft/command/CommandBase/compareTo (Ljava/lang/Object;)I
@@ -6300,7 +6323,7 @@ MD: net/minecraft/server/CommandEffect/a (Lnet/minecraft/server/ICommandListener
 MD: net/minecraft/server/CommandEffect/a ([Ljava/lang/String;I)Z net/minecraft/command/CommandEffect/isUsernameIndex ([Ljava/lang/String;I)Z
 MD: net/minecraft/server/CommandEffect/b (Lnet/minecraft/server/ICommandListener;[Ljava/lang/String;)V net/minecraft/command/CommandEffect/processCommand (Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V
 MD: net/minecraft/server/CommandEffect/c ()Ljava/lang/String; net/minecraft/command/CommandEffect/getCommandName ()Ljava/lang/String;
-MD: net/minecraft/server/CommandEffect/d ()[Ljava/lang/String; net/minecraft/command/CommandEffect/func_98152_d ()[Ljava/lang/String;
+MD: net/minecraft/server/CommandEffect/d ()[Ljava/lang/String; net/minecraft/command/CommandEffect/getAllUsernames ()[Ljava/lang/String;
 MD: net/minecraft/server/CommandEnchant/a ()I net/minecraft/command/CommandEnchant/getRequiredPermissionLevel ()I
 MD: net/minecraft/server/CommandEnchant/a (Lnet/minecraft/server/ICommandListener;)Ljava/lang/String; net/minecraft/command/CommandEnchant/getCommandUsage (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 MD: net/minecraft/server/CommandEnchant/a (Lnet/minecraft/server/ICommandListener;[Ljava/lang/String;)Ljava/util/List; net/minecraft/command/CommandEnchant/addTabCompletionOptions (Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)Ljava/util/List;
@@ -6583,7 +6606,7 @@ MD: net/minecraft/server/Container/b ()V net/minecraft/inventory/Container/detec
 MD: net/minecraft/server/Container/b (I)I net/minecraft/inventory/Container/func_94529_b (I)I
 MD: net/minecraft/server/Container/b (Lnet/minecraft/server/EntityHuman;)V net/minecraft/inventory/Container/onCraftGuiClosed (Lnet/minecraft/entity/player/EntityPlayer;)V
 MD: net/minecraft/server/Container/b (Lnet/minecraft/server/EntityHuman;I)Lnet/minecraft/server/ItemStack; net/minecraft/inventory/Container/transferStackInSlot (Lnet/minecraft/entity/player/EntityPlayer;I)Lnet/minecraft/item/ItemStack;
-MD: net/minecraft/server/Container/b (Lnet/minecraft/server/IInventory;)I net/minecraft/inventory/Container/func_94526_b (Lnet/minecraft/inventory/IInventory;)I
+MD: net/minecraft/server/Container/b (Lnet/minecraft/server/IInventory;)I net/minecraft/inventory/Container/calcRedstoneFromInventory (Lnet/minecraft/inventory/IInventory;)I
 MD: net/minecraft/server/Container/b (Lnet/minecraft/server/Slot;)Z net/minecraft/inventory/Container/func_94531_b (Lnet/minecraft/inventory/Slot;)Z
 MD: net/minecraft/server/Container/c (I)I net/minecraft/inventory/Container/func_94532_c (I)I
 MD: net/minecraft/server/Container/c (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/inventory/Container/isPlayerNotUsingContainer (Lnet/minecraft/entity/player/EntityPlayer;)Z
@@ -6804,7 +6827,7 @@ MD: net/minecraft/server/CreativeModeTab/a (Ljava/lang/String;)Lnet/minecraft/se
 MD: net/minecraft/server/CreativeModeTab/h ()Lnet/minecraft/server/CreativeModeTab; net/minecraft/creativetab/CreativeTabs/setNoTitle ()Lnet/minecraft/creativetab/CreativeTabs;
 MD: net/minecraft/server/CreativeModeTab/j ()Lnet/minecraft/server/CreativeModeTab; net/minecraft/creativetab/CreativeTabs/setNoScrollbar ()Lnet/minecraft/creativetab/CreativeTabs;
 MD: net/minecraft/server/DamageSource/a ()Z net/minecraft/util/DamageSource/isProjectile ()Z
-MD: net/minecraft/server/DamageSource/a (Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource; net/minecraft/util/DamageSource/func_92087_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;
+MD: net/minecraft/server/DamageSource/a (Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource; net/minecraft/util/DamageSource/causeThornsDamage (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;
 MD: net/minecraft/server/DamageSource/arrow (Lnet/minecraft/server/EntityArrow;Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource; net/minecraft/util/DamageSource/causeArrowDamage (Lnet/minecraft/entity/projectile/EntityArrow;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;
 MD: net/minecraft/server/DamageSource/b ()Lnet/minecraft/server/DamageSource; net/minecraft/util/DamageSource/setProjectile ()Lnet/minecraft/util/DamageSource;
 MD: net/minecraft/server/DamageSource/b (Lnet/minecraft/server/Entity;Lnet/minecraft/server/Entity;)Lnet/minecraft/server/DamageSource; net/minecraft/util/DamageSource/causeIndirectMagicDamage (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;
@@ -6873,6 +6896,9 @@ MD: net/minecraft/server/DedicatedServer/a (Lnet/minecraft/server/MojangStatisti
 MD: net/minecraft/server/DedicatedServer/a (Lnet/minecraft/server/World;IIILnet/minecraft/server/EntityHuman;)Z net/minecraft/server/dedicated/DedicatedServer/func_96290_a (Lnet/minecraft/world/World;IIILnet/minecraft/entity/player/EntityPlayer;)Z
 MD: net/minecraft/server/DedicatedServer/ae ()Lnet/minecraft/server/ServerConnection; net/minecraft/server/dedicated/DedicatedServer/getNetworkThread ()Lnet/minecraft/network/NetworkListenThread;
 MD: net/minecraft/server/DedicatedServer/ag ()Z net/minecraft/server/dedicated/DedicatedServer/getGuiEnabled ()Z
+MD: net/minecraft/server/DedicatedServer/an ()V net/minecraft/server/dedicated/DedicatedServer/executePendingCommands ()V
+MD: net/minecraft/server/DedicatedServer/ao ()Lnet/minecraft/server/DedicatedPlayerList; net/minecraft/server/dedicated/DedicatedServer/getDedicatedPlayerList ()Lnet/minecraft/server/dedicated/DedicatedPlayerList;
+MD: net/minecraft/server/DedicatedServer/ap ()V net/minecraft/server/dedicated/DedicatedServer/enableGui ()V
 MD: net/minecraft/server/DedicatedServer/b (Lnet/minecraft/server/CrashReport;)Lnet/minecraft/server/CrashReport; net/minecraft/server/dedicated/DedicatedServer/addServerInfoToCrashReport (Lnet/minecraft/crash/CrashReport;)Lnet/minecraft/crash/CrashReport;
 MD: net/minecraft/server/DedicatedServer/b_ ()Ljava/lang/String; net/minecraft/server/dedicated/DedicatedServer/getSettingsFilename ()Ljava/lang/String;
 MD: net/minecraft/server/DedicatedServer/getAllowNether ()Z net/minecraft/server/dedicated/DedicatedServer/getAllowNether ()Z
@@ -6986,7 +7012,7 @@ MD: net/minecraft/server/Enchantment/a (Lnet/minecraft/server/Enchantment;)Z net
 MD: net/minecraft/server/Enchantment/b (I)I net/minecraft/enchantment/Enchantment/getMaxEnchantability (I)I
 MD: net/minecraft/server/Enchantment/b (Ljava/lang/String;)Lnet/minecraft/server/Enchantment; net/minecraft/enchantment/Enchantment/setName (Ljava/lang/String;)Lnet/minecraft/enchantment/Enchantment;
 MD: net/minecraft/server/Enchantment/c (I)Ljava/lang/String; net/minecraft/enchantment/Enchantment/getTranslatedName (I)Ljava/lang/String;
-MD: net/minecraft/server/Enchantment/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/Enchantment/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/Enchantment/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/Enchantment/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/Enchantment/getMaxLevel ()I net/minecraft/enchantment/Enchantment/getMaxLevel ()I
 MD: net/minecraft/server/Enchantment/getRandomWeight ()I net/minecraft/enchantment/Enchantment/getWeight ()I
 MD: net/minecraft/server/Enchantment/getStartLevel ()I net/minecraft/enchantment/Enchantment/getMinLevel ()I
@@ -6998,12 +7024,12 @@ MD: net/minecraft/server/EnchantmentArrowKnockback/b (I)I net/minecraft/enchantm
 MD: net/minecraft/server/EnchantmentArrowKnockback/getMaxLevel ()I net/minecraft/enchantment/EnchantmentArrowKnockback/getMaxLevel ()I
 MD: net/minecraft/server/EnchantmentDigging/a (I)I net/minecraft/enchantment/EnchantmentDigging/getMinEnchantability (I)I
 MD: net/minecraft/server/EnchantmentDigging/b (I)I net/minecraft/enchantment/EnchantmentDigging/getMaxEnchantability (I)I
-MD: net/minecraft/server/EnchantmentDigging/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDigging/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentDigging/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDigging/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EnchantmentDigging/getMaxLevel ()I net/minecraft/enchantment/EnchantmentDigging/getMaxLevel ()I
 MD: net/minecraft/server/EnchantmentDurability/a (I)I net/minecraft/enchantment/EnchantmentDurability/getMinEnchantability (I)I
-MD: net/minecraft/server/EnchantmentDurability/a (Lnet/minecraft/server/ItemStack;ILjava/util/Random;)Z net/minecraft/enchantment/EnchantmentDurability/func_92097_a (Lnet/minecraft/item/ItemStack;ILjava/util/Random;)Z
+MD: net/minecraft/server/EnchantmentDurability/a (Lnet/minecraft/server/ItemStack;ILjava/util/Random;)Z net/minecraft/enchantment/EnchantmentDurability/negateDamage (Lnet/minecraft/item/ItemStack;ILjava/util/Random;)Z
 MD: net/minecraft/server/EnchantmentDurability/b (I)I net/minecraft/enchantment/EnchantmentDurability/getMaxEnchantability (I)I
-MD: net/minecraft/server/EnchantmentDurability/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDurability/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentDurability/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDurability/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EnchantmentDurability/getMaxLevel ()I net/minecraft/enchantment/EnchantmentDurability/getMaxLevel ()I
 MD: net/minecraft/server/EnchantmentFire/a (I)I net/minecraft/enchantment/EnchantmentFireAspect/getMinEnchantability (I)I
 MD: net/minecraft/server/EnchantmentFire/b (I)I net/minecraft/enchantment/EnchantmentFireAspect/getMaxEnchantability (I)I
@@ -7060,7 +7086,7 @@ MD: net/minecraft/server/EnchantmentProtection/getMaxLevel ()I net/minecraft/enc
 MD: net/minecraft/server/EnchantmentSilkTouch/a (I)I net/minecraft/enchantment/EnchantmentUntouching/getMinEnchantability (I)I
 MD: net/minecraft/server/EnchantmentSilkTouch/a (Lnet/minecraft/server/Enchantment;)Z net/minecraft/enchantment/EnchantmentUntouching/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z
 MD: net/minecraft/server/EnchantmentSilkTouch/b (I)I net/minecraft/enchantment/EnchantmentUntouching/getMaxEnchantability (I)I
-MD: net/minecraft/server/EnchantmentSilkTouch/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentUntouching/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentSilkTouch/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentUntouching/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EnchantmentSilkTouch/getMaxLevel ()I net/minecraft/enchantment/EnchantmentUntouching/getMaxLevel ()I
 MD: net/minecraft/server/EnchantmentSlotType/canEnchant (Lnet/minecraft/server/Item;)Z net/minecraft/enchantment/EnumEnchantmentType/canEnchantItem (Lnet/minecraft/item/Item;)Z
 MD: net/minecraft/server/EnchantmentSlotType/valueOf (Ljava/lang/String;)Lnet/minecraft/server/EnchantmentSlotType; net/minecraft/enchantment/EnumEnchantmentType/valueOf (Ljava/lang/String;)Lnet/minecraft/enchantment/EnumEnchantmentType;
@@ -7070,7 +7096,7 @@ MD: net/minecraft/server/EnchantmentThorns/a (ILjava/util/Random;)Z net/minecraf
 MD: net/minecraft/server/EnchantmentThorns/a (Lnet/minecraft/server/Entity;Lnet/minecraft/server/EntityLiving;Ljava/util/Random;)V net/minecraft/enchantment/EnchantmentThorns/func_92096_a (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/EntityLiving;Ljava/util/Random;)V
 MD: net/minecraft/server/EnchantmentThorns/b (I)I net/minecraft/enchantment/EnchantmentThorns/getMaxEnchantability (I)I
 MD: net/minecraft/server/EnchantmentThorns/b (ILjava/util/Random;)I net/minecraft/enchantment/EnchantmentThorns/func_92095_b (ILjava/util/Random;)I
-MD: net/minecraft/server/EnchantmentThorns/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentThorns/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentThorns/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentThorns/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EnchantmentThorns/getMaxLevel ()I net/minecraft/enchantment/EnchantmentThorns/getMaxLevel ()I
 MD: net/minecraft/server/EnchantmentWaterWorker/a (I)I net/minecraft/enchantment/EnchantmentWaterWorker/getMinEnchantability (I)I
 MD: net/minecraft/server/EnchantmentWaterWorker/b (I)I net/minecraft/enchantment/EnchantmentWaterWorker/getMaxEnchantability (I)I
@@ -7080,7 +7106,7 @@ MD: net/minecraft/server/EnchantmentWeaponDamage/a (I)I net/minecraft/enchantmen
 MD: net/minecraft/server/EnchantmentWeaponDamage/a (ILnet/minecraft/server/EntityLiving;)I net/minecraft/enchantment/EnchantmentDamage/calcModifierLiving (ILnet/minecraft/entity/EntityLiving;)I
 MD: net/minecraft/server/EnchantmentWeaponDamage/a (Lnet/minecraft/server/Enchantment;)Z net/minecraft/enchantment/EnchantmentDamage/canApplyTogether (Lnet/minecraft/enchantment/Enchantment;)Z
 MD: net/minecraft/server/EnchantmentWeaponDamage/b (I)I net/minecraft/enchantment/EnchantmentDamage/getMaxEnchantability (I)I
-MD: net/minecraft/server/EnchantmentWeaponDamage/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDamage/func_92089_a (Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/EnchantmentWeaponDamage/canEnchant (Lnet/minecraft/server/ItemStack;)Z net/minecraft/enchantment/EnchantmentDamage/canApply (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EnchantmentWeaponDamage/getMaxLevel ()I net/minecraft/enchantment/EnchantmentDamage/getMaxLevel ()I
 MD: net/minecraft/server/Entity/B ()V net/minecraft/entity/Entity/kill ()V
 MD: net/minecraft/server/Entity/C ()V net/minecraft/entity/Entity/doBlockCollisions ()V
@@ -7138,7 +7164,7 @@ MD: net/minecraft/server/Entity/c (DDD)Z net/minecraft/entity/Entity/isOffsetPos
 MD: net/minecraft/server/Entity/c (F)F net/minecraft/entity/Entity/getBrightness (F)F
 MD: net/minecraft/server/Entity/c (I)V net/minecraft/entity/Entity/travelToDimension (I)V
 MD: net/minecraft/server/Entity/c (Lnet/minecraft/server/Entity;I)V net/minecraft/entity/Entity/addToPlayerScore (Lnet/minecraft/entity/Entity;I)V
-MD: net/minecraft/server/Entity/c (Lnet/minecraft/server/NBTTagCompound;)Z net/minecraft/entity/Entity/func_98035_c (Lnet/minecraft/nbt/NBTTagCompound;)Z
+MD: net/minecraft/server/Entity/c (Lnet/minecraft/server/NBTTagCompound;)Z net/minecraft/entity/Entity/addNotRiddenEntityID (Lnet/minecraft/nbt/NBTTagCompound;)Z
 MD: net/minecraft/server/Entity/collide (Lnet/minecraft/server/Entity;)V net/minecraft/entity/Entity/applyEntityCollision (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/Entity/d (Lnet/minecraft/server/Entity;)F net/minecraft/entity/Entity/getDistanceToEntity (Lnet/minecraft/entity/Entity;)F
 MD: net/minecraft/server/Entity/d (Lnet/minecraft/server/NBTTagCompound;)Z net/minecraft/entity/Entity/addEntityID (Lnet/minecraft/nbt/NBTTagCompound;)Z
@@ -7162,7 +7188,7 @@ MD: net/minecraft/server/Entity/getEquipment ()[Lnet/minecraft/server/ItemStack;
 MD: net/minecraft/server/Entity/getHeadHeight ()F net/minecraft/entity/Entity/getEyeHeight ()F
 MD: net/minecraft/server/Entity/getHeadRotation ()F net/minecraft/entity/Entity/getRotationYawHead ()F
 MD: net/minecraft/server/Entity/getLocalizedName ()Ljava/lang/String; net/minecraft/entity/Entity/getEntityName ()Ljava/lang/String;
-MD: net/minecraft/server/Entity/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/entity/Entity/func_96090_ax ()Ljava/lang/String;
+MD: net/minecraft/server/Entity/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/entity/Entity/getTranslatedEntityName ()Ljava/lang/String;
 MD: net/minecraft/server/Entity/h (Lnet/minecraft/server/Entity;)V net/minecraft/entity/Entity/unmountEntity (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/Entity/hashCode ()I net/minecraft/entity/Entity/hashCode ()I
 MD: net/minecraft/server/Entity/i (DDD)Z net/minecraft/entity/Entity/pushOutOfBlocks (DDD)Z
@@ -7171,7 +7197,7 @@ MD: net/minecraft/server/Entity/inBlock ()Z net/minecraft/entity/Entity/isEntity
 MD: net/minecraft/server/Entity/isAlive ()Z net/minecraft/entity/Entity/isEntityAlive ()Z
 MD: net/minecraft/server/Entity/isBurning ()Z net/minecraft/entity/Entity/isBurning ()Z
 MD: net/minecraft/server/Entity/isFireproof ()Z net/minecraft/entity/Entity/isImmuneToFire ()Z
-MD: net/minecraft/server/Entity/isInvisible ()Z net/minecraft/entity/Entity/getHasActivePotion ()Z
+MD: net/minecraft/server/Entity/isInvisible ()Z net/minecraft/entity/Entity/isInvisible ()Z
 MD: net/minecraft/server/Entity/isInvulnerable ()Z net/minecraft/entity/Entity/isEntityInvulnerable ()Z
 MD: net/minecraft/server/Entity/isSneaking ()Z net/minecraft/entity/Entity/isSneaking ()Z
 MD: net/minecraft/server/Entity/isSprinting ()Z net/minecraft/entity/Entity/isSprinting ()Z
@@ -7183,7 +7209,7 @@ MD: net/minecraft/server/Entity/mount (Lnet/minecraft/server/Entity;)V net/minec
 MD: net/minecraft/server/Entity/move (DDD)V net/minecraft/entity/Entity/moveEntity (DDD)V
 MD: net/minecraft/server/Entity/setAirTicks (I)V net/minecraft/entity/Entity/setAir (I)V
 MD: net/minecraft/server/Entity/setEquipment (ILnet/minecraft/server/ItemStack;)V net/minecraft/entity/Entity/setCurrentItemOrArmor (ILnet/minecraft/item/ItemStack;)V
-MD: net/minecraft/server/Entity/setInvisible (Z)V net/minecraft/entity/Entity/setHasActivePotion (Z)V
+MD: net/minecraft/server/Entity/setInvisible (Z)V net/minecraft/entity/Entity/setInvisible (Z)V
 MD: net/minecraft/server/Entity/setLocation (DDDFF)V net/minecraft/entity/Entity/setPositionAndRotation (DDDFF)V
 MD: net/minecraft/server/Entity/setOnFire (I)V net/minecraft/entity/Entity/setFire (I)V
 MD: net/minecraft/server/Entity/setPosition (DDD)V net/minecraft/entity/Entity/setPosition (DDD)V
@@ -7553,6 +7579,9 @@ MD: net/minecraft/server/EntityHuman/b (Lnet/minecraft/server/NBTTagCompound;)V 
 MD: net/minecraft/server/EntityHuman/bG ()Lnet/minecraft/server/ItemStack; net/minecraft/entity/player/EntityPlayer/getHeldItem ()Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/EntityHuman/bH ()V net/minecraft/entity/player/EntityPlayer/addRandomArmor ()V
 MD: net/minecraft/server/EntityHuman/bI ()V net/minecraft/entity/player/EntityPlayer/func_82162_bC ()V
+MD: net/minecraft/server/EntityHuman/bT ()Z net/minecraft/entity/player/EntityPlayer/canPickUpLoot ()Z
+MD: net/minecraft/server/EntityHuman/bX ()Z net/minecraft/entity/player/EntityPlayer/isUsingItem ()Z
+MD: net/minecraft/server/EntityHuman/bZ ()V net/minecraft/entity/player/EntityPlayer/stopUsingItem ()V
 MD: net/minecraft/server/EntityHuman/bj ()Z net/minecraft/entity/player/EntityPlayer/isMovementBlocked ()Z
 MD: net/minecraft/server/EntityHuman/bl ()V net/minecraft/entity/player/EntityPlayer/jump ()V
 MD: net/minecraft/server/EntityHuman/bq ()V net/minecraft/entity/player/EntityPlayer/updateEntityActionState ()V
@@ -7560,10 +7589,14 @@ MD: net/minecraft/server/EntityHuman/c ()V net/minecraft/entity/player/EntityPla
 MD: net/minecraft/server/EntityHuman/c (Lnet/minecraft/server/Entity;)V net/minecraft/entity/player/EntityPlayer/onEnchantmentCritical (Lnet/minecraft/entity/Entity;)V
 MD: net/minecraft/server/EntityHuman/c (Lnet/minecraft/server/Entity;I)V net/minecraft/entity/player/EntityPlayer/addToPlayerScore (Lnet/minecraft/entity/Entity;I)V
 MD: net/minecraft/server/EntityHuman/c (Lnet/minecraft/server/ItemStack;I)V net/minecraft/entity/player/EntityPlayer/updateItemUse (Lnet/minecraft/item/ItemStack;I)V
-MD: net/minecraft/server/EntityHuman/cg ()Z net/minecraft/entity/player/EntityPlayer/isPlayerFullyAsleep ()Z
+MD: net/minecraft/server/EntityHuman/ca ()V net/minecraft/entity/player/EntityPlayer/clearItemInUse ()V
+MD: net/minecraft/server/EntityHuman/cc ()F net/minecraft/entity/player/EntityPlayer/func_82243_bO ()F
+MD: net/minecraft/server/EntityHuman/cd ()Lnet/minecraft/server/ItemStack; net/minecraft/entity/player/EntityPlayer/getCurrentEquippedItem ()Lnet/minecraft/item/ItemStack;
+MD: net/minecraft/server/EntityHuman/ce ()V net/minecraft/entity/player/EntityPlayer/destroyCurrentEquippedItem ()V
+MD: net/minecraft/server/EntityHuman/cg ()Z net/minecraft/entity/player/EntityPlayer/func_71066_bF ()Z
 MD: net/minecraft/server/EntityHuman/checkMovement (DDD)V net/minecraft/entity/player/EntityPlayer/addMovementStat (DDD)V
 MD: net/minecraft/server/EntityHuman/closeInventory ()V net/minecraft/entity/player/EntityPlayer/closeScreen ()V
-MD: net/minecraft/server/EntityHuman/co ()Z net/minecraft/entity/player/EntityPlayer/getHideCape ()Z
+MD: net/minecraft/server/EntityHuman/co ()Z net/minecraft/entity/player/EntityPlayer/shouldHeal ()Z
 MD: net/minecraft/server/EntityHuman/copyTo (Lnet/minecraft/server/EntityHuman;Z)V net/minecraft/entity/player/EntityPlayer/clonePlayer (Lnet/minecraft/entity/player/EntityPlayer;Z)V
 MD: net/minecraft/server/EntityHuman/d (Lnet/minecraft/server/DamageSource;I)V net/minecraft/entity/player/EntityPlayer/damageEntity (Lnet/minecraft/util/DamageSource;I)V
 MD: net/minecraft/server/EntityHuman/d (Lnet/minecraft/server/ItemStack;)V net/minecraft/entity/player/EntityPlayer/displayGUIBook (Lnet/minecraft/item/ItemStack;)V
@@ -7575,22 +7608,31 @@ MD: net/minecraft/server/EntityHuman/e (FF)V net/minecraft/entity/player/EntityP
 MD: net/minecraft/server/EntityHuman/e (III)Z net/minecraft/entity/player/EntityPlayer/canCurrentToolHarvestBlock (III)Z
 MD: net/minecraft/server/EntityHuman/e_ ()V net/minecraft/entity/player/EntityPlayer/resetHeight ()V
 MD: net/minecraft/server/EntityHuman/f_ ()Z net/minecraft/entity/player/EntityPlayer/canTriggerWalking ()Z
+MD: net/minecraft/server/EntityHuman/getBed ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/entity/player/EntityPlayer/getBedLocation ()Lnet/minecraft/util/ChunkCoordinates;
 MD: net/minecraft/server/EntityHuman/getBed (Lnet/minecraft/server/World;Lnet/minecraft/server/ChunkCoordinates;Z)Lnet/minecraft/server/ChunkCoordinates; net/minecraft/entity/player/EntityPlayer/verifyRespawnCoordinates (Lnet/minecraft/world/World;Lnet/minecraft/util/ChunkCoordinates;Z)Lnet/minecraft/util/ChunkCoordinates;
-MD: net/minecraft/server/EntityHuman/getCustomNameVisible ()Z net/minecraft/entity/player/EntityPlayer/func_94059_bO ()Z
+MD: net/minecraft/server/EntityHuman/getCustomNameVisible ()Z net/minecraft/entity/player/EntityPlayer/func_94062_bN ()Z
+MD: net/minecraft/server/EntityHuman/getEnderChest ()Lnet/minecraft/server/InventoryEnderChest; net/minecraft/entity/player/EntityPlayer/getInventoryEnderChest ()Lnet/minecraft/inventory/InventoryEnderChest;
 MD: net/minecraft/server/EntityHuman/getEquipment ()[Lnet/minecraft/server/ItemStack; net/minecraft/entity/player/EntityPlayer/getLastActiveItems ()[Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/EntityHuman/getEquipment (I)Lnet/minecraft/server/ItemStack; net/minecraft/entity/player/EntityPlayer/getCurrentItemOrArmor (I)Lnet/minecraft/item/ItemStack;
+MD: net/minecraft/server/EntityHuman/getExpToLevel ()I net/minecraft/entity/player/EntityPlayer/xpBarCap ()I
 MD: net/minecraft/server/EntityHuman/getExpValue (Lnet/minecraft/server/EntityHuman;)I net/minecraft/entity/player/EntityPlayer/getExperiencePoints (Lnet/minecraft/entity/player/EntityPlayer;)I
+MD: net/minecraft/server/EntityHuman/getFoodData ()Lnet/minecraft/server/FoodMetaData; net/minecraft/entity/player/EntityPlayer/getFoodStats ()Lnet/minecraft/util/FoodStats;
 MD: net/minecraft/server/EntityHuman/getHeadHeight ()F net/minecraft/entity/player/EntityPlayer/getEyeHeight ()F
 MD: net/minecraft/server/EntityHuman/getLocale ()Lnet/minecraft/server/LocaleLanguage; net/minecraft/entity/player/EntityPlayer/getTranslator ()Lnet/minecraft/util/StringTranslate;
 MD: net/minecraft/server/EntityHuman/getLocalizedName ()Ljava/lang/String; net/minecraft/entity/player/EntityPlayer/getEntityName ()Ljava/lang/String;
 MD: net/minecraft/server/EntityHuman/getMaxHealth ()I net/minecraft/entity/player/EntityPlayer/getMaxHealth ()I
 MD: net/minecraft/server/EntityHuman/getName ()Ljava/lang/String; net/minecraft/entity/player/EntityPlayer/getCommandSenderName ()Ljava/lang/String;
-MD: net/minecraft/server/EntityHuman/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/entity/player/EntityPlayer/func_96090_ax ()Ljava/lang/String;
+MD: net/minecraft/server/EntityHuman/getScore ()I net/minecraft/entity/player/EntityPlayer/getScore ()I
+MD: net/minecraft/server/EntityHuman/getScoreboard ()Lnet/minecraft/server/Scoreboard; net/minecraft/entity/player/EntityPlayer/getWorldScoreboard ()Lnet/minecraft/scoreboard/Scoreboard;
+MD: net/minecraft/server/EntityHuman/getScoreboardDisplayName ()Ljava/lang/String; net/minecraft/entity/player/EntityPlayer/getTranslatedEntityName ()Ljava/lang/String;
+MD: net/minecraft/server/EntityHuman/getScoreboardTeam ()Lnet/minecraft/server/ScoreboardTeam; net/minecraft/entity/player/EntityPlayer/getTeam ()Lnet/minecraft/scoreboard/ScorePlayerTeam;
 MD: net/minecraft/server/EntityHuman/giveExp (I)V net/minecraft/entity/player/EntityPlayer/addExperience (I)V
 MD: net/minecraft/server/EntityHuman/i ()Z net/minecraft/entity/player/EntityPlayer/isInBed ()Z
 MD: net/minecraft/server/EntityHuman/i (Z)Z net/minecraft/entity/player/EntityPlayer/canEat (Z)Z
 MD: net/minecraft/server/EntityHuman/inBlock ()Z net/minecraft/entity/player/EntityPlayer/isEntityInsideOpaqueBlock ()Z
 MD: net/minecraft/server/EntityHuman/isBlocking ()Z net/minecraft/entity/player/EntityPlayer/isBlocking ()Z
+MD: net/minecraft/server/EntityHuman/isDeeplySleeping ()Z net/minecraft/entity/player/EntityPlayer/isPlayerFullyAsleep ()Z
+MD: net/minecraft/server/EntityHuman/isRespawnForced ()Z net/minecraft/entity/player/EntityPlayer/isSpawnForced ()Z
 MD: net/minecraft/server/EntityHuman/isSleeping ()Z net/minecraft/entity/player/EntityPlayer/isPlayerSleeping ()Z
 MD: net/minecraft/server/EntityHuman/j (F)V net/minecraft/entity/player/EntityPlayer/addExhaustion (F)V
 MD: net/minecraft/server/EntityHuman/k (DDD)V net/minecraft/entity/player/EntityPlayer/addMountedMovementStat (DDD)V
@@ -7606,8 +7648,8 @@ MD: net/minecraft/server/EntityHuman/openBrewingStand (Lnet/minecraft/server/Til
 MD: net/minecraft/server/EntityHuman/openContainer (Lnet/minecraft/server/IInventory;)V net/minecraft/entity/player/EntityPlayer/displayGUIChest (Lnet/minecraft/inventory/IInventory;)V
 MD: net/minecraft/server/EntityHuman/openDispenser (Lnet/minecraft/server/TileEntityDispenser;)V net/minecraft/entity/player/EntityPlayer/displayGUIDispenser (Lnet/minecraft/tileentity/TileEntityDispenser;)V
 MD: net/minecraft/server/EntityHuman/openFurnace (Lnet/minecraft/server/TileEntityFurnace;)V net/minecraft/entity/player/EntityPlayer/displayGUIFurnace (Lnet/minecraft/tileentity/TileEntityFurnace;)V
-MD: net/minecraft/server/EntityHuman/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/entity/player/EntityPlayer/func_94064_a (Lnet/minecraft/tileentity/TileEntityHopper;)V
-MD: net/minecraft/server/EntityHuman/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/entity/player/EntityPlayer/func_96125_a (Lnet/minecraft/entity/item/EntityMinecartHopper;)V
+MD: net/minecraft/server/EntityHuman/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/entity/player/EntityPlayer/displayGUIHopper (Lnet/minecraft/tileentity/TileEntityHopper;)V
+MD: net/minecraft/server/EntityHuman/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/entity/player/EntityPlayer/displayGUIHopperMinecart (Lnet/minecraft/entity/item/EntityMinecartHopper;)V
 MD: net/minecraft/server/EntityHuman/openTrade (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V net/minecraft/entity/player/EntityPlayer/displayGUIMerchant (Lnet/minecraft/entity/IMerchant;Ljava/lang/String;)V
 MD: net/minecraft/server/EntityHuman/p (Lnet/minecraft/server/Entity;)Z net/minecraft/entity/player/EntityPlayer/interactWith (Lnet/minecraft/entity/Entity;)Z
 MD: net/minecraft/server/EntityHuman/q (I)Lnet/minecraft/server/ItemStack; net/minecraft/entity/player/EntityPlayer/getCurrentArmor (I)Lnet/minecraft/item/ItemStack;
@@ -7732,6 +7774,8 @@ MD: net/minecraft/server/EntityLiving/bK ()V net/minecraft/entity/EntityLiving/s
 MD: net/minecraft/server/EntityLiving/bL ()Z net/minecraft/entity/EntityLiving/canBeSteered ()Z
 MD: net/minecraft/server/EntityLiving/bM ()I net/minecraft/entity/EntityLiving/getArrowCountInEntity ()I
 MD: net/minecraft/server/EntityLiving/bN ()Lnet/minecraft/server/EntityLiving; net/minecraft/entity/EntityLiving/func_94060_bK ()Lnet/minecraft/entity/EntityLiving;
+MD: net/minecraft/server/EntityLiving/bT ()Z net/minecraft/entity/EntityLiving/canPickUpLoot ()Z
+MD: net/minecraft/server/EntityLiving/bU ()Z net/minecraft/entity/EntityLiving/func_104002_bU ()Z
 MD: net/minecraft/server/EntityLiving/ba ()F net/minecraft/entity/EntityLiving/getSoundVolume ()F
 MD: net/minecraft/server/EntityLiving/bb ()Ljava/lang/String; net/minecraft/entity/EntityLiving/getLivingSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityLiving/bc ()Ljava/lang/String; net/minecraft/entity/EntityLiving/getHurtSound ()Ljava/lang/String;
@@ -7770,7 +7814,8 @@ MD: net/minecraft/server/EntityLiving/g_ ()Z net/minecraft/entity/EntityLiving/i
 MD: net/minecraft/server/EntityLiving/getControllerJump ()Lnet/minecraft/server/ControllerJump; net/minecraft/entity/EntityLiving/getJumpHelper ()Lnet/minecraft/entity/ai/EntityJumpHelper;
 MD: net/minecraft/server/EntityLiving/getControllerLook ()Lnet/minecraft/server/ControllerLook; net/minecraft/entity/EntityLiving/getLookHelper ()Lnet/minecraft/entity/ai/EntityLookHelper;
 MD: net/minecraft/server/EntityLiving/getControllerMove ()Lnet/minecraft/server/ControllerMove; net/minecraft/entity/EntityLiving/getMoveHelper ()Lnet/minecraft/entity/ai/EntityMoveHelper;
-MD: net/minecraft/server/EntityLiving/getCustomNameVisible ()Z net/minecraft/entity/EntityLiving/func_94059_bO ()Z
+MD: net/minecraft/server/EntityLiving/getCustomName ()Ljava/lang/String; net/minecraft/entity/EntityLiving/func_94057_bL ()Ljava/lang/String;
+MD: net/minecraft/server/EntityLiving/getCustomNameVisible ()Z net/minecraft/entity/EntityLiving/func_94062_bN ()Z
 MD: net/minecraft/server/EntityLiving/getEffect (Lnet/minecraft/server/MobEffectList;)Lnet/minecraft/server/MobEffect; net/minecraft/entity/EntityLiving/getActivePotionEffect (Lnet/minecraft/potion/Potion;)Lnet/minecraft/potion/PotionEffect;
 MD: net/minecraft/server/EntityLiving/getEffects ()Ljava/util/Collection; net/minecraft/entity/EntityLiving/getActivePotionEffects ()Ljava/util/Collection;
 MD: net/minecraft/server/EntityLiving/getEntitySenses ()Lnet/minecraft/server/EntitySenses; net/minecraft/entity/EntityLiving/getEntitySenses ()Lnet/minecraft/entity/ai/EntitySenses;
@@ -7789,7 +7834,7 @@ MD: net/minecraft/server/EntityLiving/getNavigation ()Lnet/minecraft/server/Navi
 MD: net/minecraft/server/EntityLiving/h ()I net/minecraft/entity/EntityLiving/getArmSwingAnimationEnd ()I
 MD: net/minecraft/server/EntityLiving/h (I)I net/minecraft/entity/EntityLiving/decreaseAirSupply (I)I
 MD: net/minecraft/server/EntityLiving/h (Z)V net/minecraft/entity/EntityLiving/setCanPickUpLoot (Z)V
-MD: net/minecraft/server/EntityLiving/hasCustomName ()Z net/minecraft/entity/EntityLiving/func_94062_bN ()Z
+MD: net/minecraft/server/EntityLiving/hasCustomName ()Z net/minecraft/entity/EntityLiving/func_94056_bM ()Z
 MD: net/minecraft/server/EntityLiving/hasEffect (I)Z net/minecraft/entity/EntityLiving/isPotionActive (I)Z
 MD: net/minecraft/server/EntityLiving/hasEffect (Lnet/minecraft/server/MobEffectList;)Z net/minecraft/entity/EntityLiving/isPotionActive (Lnet/minecraft/potion/Potion;)Z
 MD: net/minecraft/server/EntityLiving/heal (I)V net/minecraft/entity/EntityLiving/heal (I)V
@@ -7945,7 +7990,7 @@ MD: net/minecraft/server/EntityMinecartTNT/a (Lnet/minecraft/server/DamageSource
 MD: net/minecraft/server/EntityMinecartTNT/a (Lnet/minecraft/server/Explosion;Lnet/minecraft/server/World;IIIIF)Z net/minecraft/entity/item/EntityMinecartTNT/func_96091_a (Lnet/minecraft/world/Explosion;Lnet/minecraft/world/World;IIIIF)Z
 MD: net/minecraft/server/EntityMinecartTNT/a (Lnet/minecraft/server/Explosion;Lnet/minecraft/server/World;IIILnet/minecraft/server/Block;)F net/minecraft/entity/item/EntityMinecartTNT/func_82146_a (Lnet/minecraft/world/Explosion;Lnet/minecraft/world/World;IIILnet/minecraft/block/Block;)F
 MD: net/minecraft/server/EntityMinecartTNT/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/item/EntityMinecartTNT/readEntityFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
-MD: net/minecraft/server/EntityMinecartTNT/ay ()Z net/minecraft/entity/item/EntityMinecartTNT/func_96096_ay ()Z
+MD: net/minecraft/server/EntityMinecartTNT/ay ()Z net/minecraft/entity/item/EntityMinecartTNT/isIgnited ()Z
 MD: net/minecraft/server/EntityMinecartTNT/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/item/EntityMinecartTNT/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/EntityMinecartTNT/c (D)V net/minecraft/entity/item/EntityMinecartTNT/explodeCart (D)V
 MD: net/minecraft/server/EntityMinecartTNT/d ()V net/minecraft/entity/item/EntityMinecartTNT/ignite ()V
@@ -8078,6 +8123,7 @@ MD: net/minecraft/server/EntityPlayer/l_ ()V net/minecraft/entity/player/EntityP
 MD: net/minecraft/server/EntityPlayer/levelDown (I)V net/minecraft/entity/player/EntityPlayerMP/addExperienceLevel (I)V
 MD: net/minecraft/server/EntityPlayer/m ()V net/minecraft/entity/player/EntityPlayerMP/onItemUseFinish ()V
 MD: net/minecraft/server/EntityPlayer/mount (Lnet/minecraft/server/Entity;)V net/minecraft/entity/player/EntityPlayerMP/mountEntity (Lnet/minecraft/entity/Entity;)V
+MD: net/minecraft/server/EntityPlayer/nextContainerCounter ()V net/minecraft/entity/player/EntityPlayerMP/incrementWindowID ()V
 MD: net/minecraft/server/EntityPlayer/o ()Lnet/minecraft/server/WorldServer; net/minecraft/entity/player/EntityPlayerMP/getServerForPlayer ()Lnet/minecraft/world/WorldServer;
 MD: net/minecraft/server/EntityPlayer/openAnvil (III)V net/minecraft/entity/player/EntityPlayerMP/displayGUIAnvil (III)V
 MD: net/minecraft/server/EntityPlayer/openBeacon (Lnet/minecraft/server/TileEntityBeacon;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIBeacon (Lnet/minecraft/tileentity/TileEntityBeacon;)V
@@ -8085,8 +8131,8 @@ MD: net/minecraft/server/EntityPlayer/openBrewingStand (Lnet/minecraft/server/Ti
 MD: net/minecraft/server/EntityPlayer/openContainer (Lnet/minecraft/server/IInventory;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIChest (Lnet/minecraft/inventory/IInventory;)V
 MD: net/minecraft/server/EntityPlayer/openDispenser (Lnet/minecraft/server/TileEntityDispenser;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIDispenser (Lnet/minecraft/tileentity/TileEntityDispenser;)V
 MD: net/minecraft/server/EntityPlayer/openFurnace (Lnet/minecraft/server/TileEntityFurnace;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIFurnace (Lnet/minecraft/tileentity/TileEntityFurnace;)V
-MD: net/minecraft/server/EntityPlayer/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/entity/player/EntityPlayerMP/func_94064_a (Lnet/minecraft/tileentity/TileEntityHopper;)V
-MD: net/minecraft/server/EntityPlayer/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/entity/player/EntityPlayerMP/func_96125_a (Lnet/minecraft/entity/item/EntityMinecartHopper;)V
+MD: net/minecraft/server/EntityPlayer/openHopper (Lnet/minecraft/server/TileEntityHopper;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIHopper (Lnet/minecraft/tileentity/TileEntityHopper;)V
+MD: net/minecraft/server/EntityPlayer/openMinecartHopper (Lnet/minecraft/server/EntityMinecartHopper;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIHopperMinecart (Lnet/minecraft/entity/item/EntityMinecartHopper;)V
 MD: net/minecraft/server/EntityPlayer/openTrade (Lnet/minecraft/server/IMerchant;Ljava/lang/String;)V net/minecraft/entity/player/EntityPlayerMP/displayGUIMerchant (Lnet/minecraft/entity/IMerchant;Ljava/lang/String;)V
 MD: net/minecraft/server/EntityPlayer/p ()Ljava/lang/String; net/minecraft/entity/player/EntityPlayerMP/getPlayerIP ()Ljava/lang/String;
 MD: net/minecraft/server/EntityPlayer/receive (Lnet/minecraft/server/Entity;I)V net/minecraft/entity/player/EntityPlayerMP/onItemPickup (Lnet/minecraft/entity/Entity;I)V
@@ -8263,7 +8309,7 @@ MD: net/minecraft/server/EntityTNTPrimed/a (Lnet/minecraft/server/NBTTagCompound
 MD: net/minecraft/server/EntityTNTPrimed/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/item/EntityTNTPrimed/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/EntityTNTPrimed/explode ()V net/minecraft/entity/item/EntityTNTPrimed/explode ()V
 MD: net/minecraft/server/EntityTNTPrimed/f_ ()Z net/minecraft/entity/item/EntityTNTPrimed/canTriggerWalking ()Z
-MD: net/minecraft/server/EntityTNTPrimed/getSource ()Lnet/minecraft/server/EntityLiving; net/minecraft/entity/item/EntityTNTPrimed/func_94083_c ()Lnet/minecraft/entity/EntityLiving;
+MD: net/minecraft/server/EntityTNTPrimed/getSource ()Lnet/minecraft/server/EntityLiving; net/minecraft/entity/item/EntityTNTPrimed/getTntPlacedBy ()Lnet/minecraft/entity/EntityLiving;
 MD: net/minecraft/server/EntityTNTPrimed/l_ ()V net/minecraft/entity/item/EntityTNTPrimed/onUpdate ()V
 MD: net/minecraft/server/EntityTameableAnimal/a ()V net/minecraft/entity/passive/EntityTameable/entityInit ()V
 MD: net/minecraft/server/EntityTameableAnimal/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/passive/EntityTameable/readEntityFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
@@ -8375,7 +8421,7 @@ MD: net/minecraft/server/EntityWither/a (Lnet/minecraft/server/NBTTagCompound;)V
 MD: net/minecraft/server/EntityWither/aZ ()I net/minecraft/entity/boss/EntityWither/getTotalArmorValue ()I
 MD: net/minecraft/server/EntityWither/addEffect (Lnet/minecraft/server/MobEffect;)V net/minecraft/entity/boss/EntityWither/addPotionEffect (Lnet/minecraft/potion/PotionEffect;)V
 MD: net/minecraft/server/EntityWither/al ()V net/minecraft/entity/boss/EntityWither/setInWeb ()V
-MD: net/minecraft/server/EntityWither/b ()I net/minecraft/entity/boss/EntityWither/getDragonHealth ()I
+MD: net/minecraft/server/EntityWither/b ()I net/minecraft/entity/boss/EntityWither/getBossHealth ()I
 MD: net/minecraft/server/EntityWither/b (FFF)F net/minecraft/entity/boss/EntityWither/func_82204_b (FFF)F
 MD: net/minecraft/server/EntityWither/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/boss/EntityWither/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/EntityWither/bb ()Ljava/lang/String; net/minecraft/entity/boss/EntityWither/getLivingSound ()Ljava/lang/String;
@@ -8414,6 +8460,7 @@ MD: net/minecraft/server/EntityWolf/a (Lnet/minecraft/server/NBTTagCompound;)V n
 MD: net/minecraft/server/EntityWolf/a_ (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/entity/passive/EntityWolf/interact (Lnet/minecraft/entity/player/EntityPlayer;)Z
 MD: net/minecraft/server/EntityWolf/b (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityWolf; net/minecraft/entity/passive/EntityWolf/spawnBabyAnimal (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/passive/EntityWolf;
 MD: net/minecraft/server/EntityWolf/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/entity/passive/EntityWolf/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
+MD: net/minecraft/server/EntityWolf/bY ()Z net/minecraft/entity/passive/EntityWolf/func_70922_bv ()Z
 MD: net/minecraft/server/EntityWolf/ba ()F net/minecraft/entity/passive/EntityWolf/getSoundVolume ()F
 MD: net/minecraft/server/EntityWolf/bb ()Ljava/lang/String; net/minecraft/entity/passive/EntityWolf/getLivingSound ()Ljava/lang/String;
 MD: net/minecraft/server/EntityWolf/bc ()Ljava/lang/String; net/minecraft/entity/passive/EntityWolf/getHurtSound ()Ljava/lang/String;
@@ -8426,10 +8473,11 @@ MD: net/minecraft/server/EntityWolf/c ()V net/minecraft/entity/passive/EntityWol
 MD: net/minecraft/server/EntityWolf/c (Lnet/minecraft/server/ItemStack;)Z net/minecraft/entity/passive/EntityWolf/isBreedingItem (Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/EntityWolf/createChild (Lnet/minecraft/server/EntityAgeable;)Lnet/minecraft/server/EntityAgeable; net/minecraft/entity/passive/EntityWolf/createChild (Lnet/minecraft/entity/EntityAgeable;)Lnet/minecraft/entity/EntityAgeable;
 MD: net/minecraft/server/EntityWolf/damageEntity (Lnet/minecraft/server/DamageSource;I)Z net/minecraft/entity/passive/EntityWolf/attackEntityFrom (Lnet/minecraft/util/DamageSource;I)Z
+MD: net/minecraft/server/EntityWolf/getCollarColor ()I net/minecraft/entity/passive/EntityWolf/getCollarColor ()I
 MD: net/minecraft/server/EntityWolf/getHeadHeight ()F net/minecraft/entity/passive/EntityWolf/getEyeHeight ()F
 MD: net/minecraft/server/EntityWolf/getLootId ()I net/minecraft/entity/passive/EntityWolf/getDropItemId ()I
 MD: net/minecraft/server/EntityWolf/getMaxHealth ()I net/minecraft/entity/passive/EntityWolf/getMaxHealth ()I
-MD: net/minecraft/server/EntityWolf/isAngry ()Z net/minecraft/entity/passive/EntityWolf/func_70922_bv ()Z
+MD: net/minecraft/server/EntityWolf/isAngry ()Z net/minecraft/entity/passive/EntityWolf/isAngry ()Z
 MD: net/minecraft/server/EntityWolf/isTypeNotPersistent ()Z net/minecraft/entity/passive/EntityWolf/canDespawn ()Z
 MD: net/minecraft/server/EntityWolf/l_ ()V net/minecraft/entity/passive/EntityWolf/onUpdate ()V
 MD: net/minecraft/server/EntityWolf/m (Lnet/minecraft/server/Entity;)Z net/minecraft/entity/passive/EntityWolf/attackEntityAsMob (Lnet/minecraft/entity/Entity;)Z
@@ -8573,7 +8621,7 @@ MD: net/minecraft/server/GenLayerSmooth/a (IIII)[I net/minecraft/world/gen/layer
 MD: net/minecraft/server/GenLayerSwampRivers/a (IIII)[I net/minecraft/world/gen/layer/GenLayerSwampRivers/getInts (IIII)[I
 MD: net/minecraft/server/GenLayerZoom/a (II)I net/minecraft/world/gen/layer/GenLayerZoom/choose (II)I
 MD: net/minecraft/server/GenLayerZoom/a (IIII)[I net/minecraft/world/gen/layer/GenLayerZoom/getInts (IIII)[I
-MD: net/minecraft/server/GenLayerZoom/a (JLnet/minecraft/server/GenLayer;I)Lnet/minecraft/server/GenLayer; net/minecraft/world/gen/layer/GenLayerZoom/func_75915_a (JLnet/minecraft/world/gen/layer/GenLayer;I)Lnet/minecraft/world/gen/layer/GenLayer;
+MD: net/minecraft/server/GenLayerZoom/a (JLnet/minecraft/server/GenLayer;I)Lnet/minecraft/server/GenLayer; net/minecraft/world/gen/layer/GenLayerZoom/magnify (JLnet/minecraft/world/gen/layer/GenLayer;I)Lnet/minecraft/world/gen/layer/GenLayer;
 MD: net/minecraft/server/GenLayerZoom/b (IIII)I net/minecraft/world/gen/layer/GenLayerZoom/modeOrRandom (IIII)I
 MD: net/minecraft/server/GenLayerZoomFuzzy/a (II)I net/minecraft/world/gen/layer/GenLayerFuzzyZoom/choose (II)I
 MD: net/minecraft/server/GenLayerZoomFuzzy/a (IIII)[I net/minecraft/world/gen/layer/GenLayerFuzzyZoom/getInts (IIII)[I
@@ -8597,21 +8645,26 @@ MD: net/minecraft/server/IBlockAccess/getData (III)I net/minecraft/world/IBlockA
 MD: net/minecraft/server/IBlockAccess/getMaterial (III)Lnet/minecraft/server/Material; net/minecraft/world/IBlockAccess/getBlockMaterial (III)Lnet/minecraft/block/material/Material;
 MD: net/minecraft/server/IBlockAccess/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/IBlockAccess/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
 MD: net/minecraft/server/IBlockAccess/getTypeId (III)I net/minecraft/world/IBlockAccess/getBlockId (III)I
+MD: net/minecraft/server/IBlockAccess/getVec3DPool ()Lnet/minecraft/server/Vec3DPool; net/minecraft/world/IBlockAccess/getWorldVec3Pool ()Lnet/minecraft/util/Vec3Pool;
 MD: net/minecraft/server/IBlockAccess/u (III)Z net/minecraft/world/IBlockAccess/isBlockNormalCube (III)Z
 MD: net/minecraft/server/IChunkLoader/a ()V net/minecraft/world/chunk/storage/IChunkLoader/chunkTick ()V
 MD: net/minecraft/server/IChunkLoader/a (Lnet/minecraft/server/World;II)Lnet/minecraft/server/Chunk; net/minecraft/world/chunk/storage/IChunkLoader/loadChunk (Lnet/minecraft/world/World;II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/IChunkLoader/a (Lnet/minecraft/server/World;Lnet/minecraft/server/Chunk;)V net/minecraft/world/chunk/storage/IChunkLoader/saveChunk (Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/Chunk;)V
 MD: net/minecraft/server/IChunkLoader/b ()V net/minecraft/world/chunk/storage/IChunkLoader/saveExtraData ()V
 MD: net/minecraft/server/IChunkLoader/b (Lnet/minecraft/server/World;Lnet/minecraft/server/Chunk;)V net/minecraft/world/chunk/storage/IChunkLoader/saveExtraChunkData (Lnet/minecraft/world/World;Lnet/minecraft/world/chunk/Chunk;)V
+MD: net/minecraft/server/IChunkProvider/b ()V net/minecraft/world/chunk/IChunkProvider/func_104112_b ()V
+MD: net/minecraft/server/IChunkProvider/canSave ()Z net/minecraft/world/chunk/IChunkProvider/canSave ()Z
 MD: net/minecraft/server/IChunkProvider/findNearestMapFeature (Lnet/minecraft/server/World;Ljava/lang/String;III)Lnet/minecraft/server/ChunkPosition; net/minecraft/world/chunk/IChunkProvider/findClosestStructure (Lnet/minecraft/world/World;Ljava/lang/String;III)Lnet/minecraft/world/ChunkPosition;
 MD: net/minecraft/server/IChunkProvider/getChunkAt (II)Lnet/minecraft/server/Chunk; net/minecraft/world/chunk/IChunkProvider/loadChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/IChunkProvider/getChunkAt (Lnet/minecraft/server/IChunkProvider;II)V net/minecraft/world/chunk/IChunkProvider/populate (Lnet/minecraft/world/chunk/IChunkProvider;II)V
+MD: net/minecraft/server/IChunkProvider/getLoadedChunks ()I net/minecraft/world/chunk/IChunkProvider/getLoadedChunkCount ()I
 MD: net/minecraft/server/IChunkProvider/getMobsFor (Lnet/minecraft/server/EnumCreatureType;III)Ljava/util/List; net/minecraft/world/chunk/IChunkProvider/getPossibleCreatures (Lnet/minecraft/entity/EnumCreatureType;III)Ljava/util/List;
+MD: net/minecraft/server/IChunkProvider/getName ()Ljava/lang/String; net/minecraft/world/chunk/IChunkProvider/makeString ()Ljava/lang/String;
 MD: net/minecraft/server/IChunkProvider/getOrCreateChunk (II)Lnet/minecraft/server/Chunk; net/minecraft/world/chunk/IChunkProvider/provideChunk (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/IChunkProvider/isChunkLoaded (II)Z net/minecraft/world/chunk/IChunkProvider/chunkExists (II)Z
 MD: net/minecraft/server/IChunkProvider/recreateStructures (II)V net/minecraft/world/chunk/IChunkProvider/recreateStructures (II)V
 MD: net/minecraft/server/IChunkProvider/saveChunks (ZLnet/minecraft/server/IProgressUpdate;)Z net/minecraft/world/chunk/IChunkProvider/saveChunks (ZLnet/minecraft/util/IProgressUpdate;)Z
-MD: net/minecraft/server/IChunkProvider/unloadChunks ()Z net/minecraft/world/chunk/IChunkProvider/canSave ()Z
+MD: net/minecraft/server/IChunkProvider/unloadChunks ()Z net/minecraft/world/chunk/IChunkProvider/unloadQueuedChunks ()Z
 MD: net/minecraft/server/ICommand/a (Lnet/minecraft/server/ICommandListener;)Ljava/lang/String; net/minecraft/command/ICommand/getCommandUsage (Lnet/minecraft/command/ICommandSender;)Ljava/lang/String;
 MD: net/minecraft/server/ICommand/a (Lnet/minecraft/server/ICommandListener;[Ljava/lang/String;)Ljava/util/List; net/minecraft/command/ICommand/addTabCompletionOptions (Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)Ljava/util/List;
 MD: net/minecraft/server/ICommand/a ([Ljava/lang/String;I)Z net/minecraft/command/ICommand/isUsernameIndex ([Ljava/lang/String;I)Z
@@ -8749,9 +8802,9 @@ MD: net/minecraft/server/IWorldAccess/a (Lnet/minecraft/server/EntityHuman;Ljava
 MD: net/minecraft/server/IWorldAccess/b (III)V net/minecraft/world/IWorldAccess/markBlockForRenderUpdate (III)V
 MD: net/minecraft/server/IWorldAccess/b (IIIII)V net/minecraft/world/IWorldAccess/destroyBlockPartially (IIIII)V
 MD: net/minecraft/server/IWorldAccess/b (Lnet/minecraft/server/Entity;)V net/minecraft/world/IWorldAccess/onEntityDestroy (Lnet/minecraft/entity/Entity;)V
-MD: net/minecraft/server/IWorldInventory/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/inventory/ISidedInventory/func_102007_a (ILnet/minecraft/item/ItemStack;I)Z
-MD: net/minecraft/server/IWorldInventory/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/inventory/ISidedInventory/func_102008_b (ILnet/minecraft/item/ItemStack;I)Z
-MD: net/minecraft/server/IWorldInventory/getSlotsForFace (I)[I net/minecraft/inventory/ISidedInventory/getSizeInventorySide (I)[I
+MD: net/minecraft/server/IWorldInventory/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/inventory/ISidedInventory/canInsertItem (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/IWorldInventory/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/inventory/ISidedInventory/canExtractItem (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/IWorldInventory/getSlotsForFace (I)[I net/minecraft/inventory/ISidedInventory/getAccessibleSlotsFromSide (I)[I
 MD: net/minecraft/server/InsensitiveStringMap/clear ()V net/minecraft/server/management/LowerStringMap/clear ()V
 MD: net/minecraft/server/InsensitiveStringMap/containsKey (Ljava/lang/Object;)Z net/minecraft/server/management/LowerStringMap/containsKey (Ljava/lang/Object;)Z
 MD: net/minecraft/server/InsensitiveStringMap/containsValue (Ljava/lang/Object;)Z net/minecraft/server/management/LowerStringMap/containsValue (Ljava/lang/Object;)Z
@@ -8982,7 +9035,7 @@ MD: net/minecraft/server/ItemGlassBottle/a (Lnet/minecraft/server/ItemStack;Lnet
 MD: net/minecraft/server/ItemGoldenApple/c (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/World;Lnet/minecraft/server/EntityHuman;)V net/minecraft/item/ItemAppleGold/onFoodEaten (Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;)V
 MD: net/minecraft/server/ItemHanging/a (Lnet/minecraft/server/World;IIII)Lnet/minecraft/server/EntityHanging; net/minecraft/item/ItemHangingEntity/createHangingEntity (Lnet/minecraft/world/World;IIII)Lnet/minecraft/entity/EntityHanging;
 MD: net/minecraft/server/ItemHanging/interactWith (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;IIIIFFF)Z net/minecraft/item/ItemHangingEntity/onItemUse (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIIFFF)Z
-MD: net/minecraft/server/ItemHoe/g ()Ljava/lang/String; net/minecraft/item/ItemHoe/func_77842_f ()Ljava/lang/String;
+MD: net/minecraft/server/ItemHoe/g ()Ljava/lang/String; net/minecraft/item/ItemHoe/getMaterialName ()Ljava/lang/String;
 MD: net/minecraft/server/ItemHoe/interactWith (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/EntityHuman;Lnet/minecraft/server/World;IIIIFFF)Z net/minecraft/item/ItemHoe/onItemUse (Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;IIIIFFF)Z
 MD: net/minecraft/server/ItemLeaves/d (Lnet/minecraft/server/ItemStack;)Ljava/lang/String; net/minecraft/item/ItemLeaves/getUnlocalizedName (Lnet/minecraft/item/ItemStack;)Ljava/lang/String;
 MD: net/minecraft/server/ItemLeaves/filterData (I)I net/minecraft/item/ItemLeaves/getMetadata (I)I
@@ -9066,7 +9119,7 @@ MD: net/minecraft/server/ItemStack/hasEnchantments ()Z net/minecraft/item/ItemSt
 MD: net/minecraft/server/ItemStack/hasName ()Z net/minecraft/item/ItemStack/hasDisplayName ()Z
 MD: net/minecraft/server/ItemStack/hasTag ()Z net/minecraft/item/ItemStack/hasTagCompound ()Z
 MD: net/minecraft/server/ItemStack/i ()Z net/minecraft/item/ItemStack/isItemDamaged ()Z
-MD: net/minecraft/server/ItemStack/isDamaged (ILjava/util/Random;)Z net/minecraft/item/ItemStack/func_96631_a (ILjava/util/Random;)Z
+MD: net/minecraft/server/ItemStack/isDamaged (ILjava/util/Random;)Z net/minecraft/item/ItemStack/attemptDamageItem (ILjava/util/Random;)Z
 MD: net/minecraft/server/ItemStack/isStackable ()Z net/minecraft/item/ItemStack/isStackable ()Z
 MD: net/minecraft/server/ItemStack/j ()I net/minecraft/item/ItemStack/getItemDamageForDisplay ()I
 MD: net/minecraft/server/ItemStack/l ()I net/minecraft/item/ItemStack/getMaxDamage ()I
@@ -9131,7 +9184,7 @@ MD: net/minecraft/server/LocaleLanguage/a (Ljava/lang/String;Z)V net/minecraft/u
 MD: net/minecraft/server/LocaleLanguage/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; net/minecraft/util/StringTranslate/translateKeyFormat (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 MD: net/minecraft/server/LocaleLanguage/a (Ljava/util/Properties;Ljava/lang/String;)V net/minecraft/util/StringTranslate/loadLanguage (Ljava/util/Properties;Ljava/lang/String;)V
 MD: net/minecraft/server/LocaleLanguage/b ()Ljava/util/TreeMap; net/minecraft/util/StringTranslate/getLanguageList ()Ljava/util/TreeMap;
-MD: net/minecraft/server/LocaleLanguage/b (Ljava/lang/String;)Z net/minecraft/util/StringTranslate/func_94520_b (Ljava/lang/String;)Z
+MD: net/minecraft/server/LocaleLanguage/b (Ljava/lang/String;)Z net/minecraft/util/StringTranslate/containsTranslateKey (Ljava/lang/String;)Z
 MD: net/minecraft/server/LocaleLanguage/c (Ljava/lang/String;)Ljava/lang/String; net/minecraft/util/StringTranslate/translateNamedKey (Ljava/lang/String;)Ljava/lang/String;
 MD: net/minecraft/server/LocaleLanguage/e ()V net/minecraft/util/StringTranslate/loadLanguageList ()V
 MD: net/minecraft/server/LongHashMap/a (I)I net/minecraft/util/LongHashMap/hash (I)I
@@ -9285,6 +9338,7 @@ MD: net/minecraft/server/MinecraftServer/ae ()Lnet/minecraft/server/ServerConnec
 MD: net/minecraft/server/MinecraftServer/ag ()Z net/minecraft/server/MinecraftServer/getGuiEnabled ()Z
 MD: net/minecraft/server/MinecraftServer/ah ()I net/minecraft/server/MinecraftServer/getTickCounter ()I
 MD: net/minecraft/server/MinecraftServer/ai ()V net/minecraft/server/MinecraftServer/enableProfiling ()V
+MD: net/minecraft/server/MinecraftServer/an ()V net/minecraft/server/MinecraftServer/registerDispenseBehaviors ()V
 MD: net/minecraft/server/MinecraftServer/b ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/server/MinecraftServer/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates;
 MD: net/minecraft/server/MinecraftServer/b (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/convertMapIfNeeded (Ljava/lang/String;)V
 MD: net/minecraft/server/MinecraftServer/b (Lnet/minecraft/server/CrashReport;)Lnet/minecraft/server/CrashReport; net/minecraft/server/MinecraftServer/addServerInfoToCrashReport (Lnet/minecraft/crash/CrashReport;)Lnet/minecraft/crash/CrashReport;
@@ -9303,6 +9357,7 @@ MD: net/minecraft/server/MinecraftServer/getCommandHandler ()Lnet/minecraft/serv
 MD: net/minecraft/server/MinecraftServer/getConvertable ()Lnet/minecraft/server/Convertable; net/minecraft/server/MinecraftServer/getActiveAnvilConverter ()Lnet/minecraft/world/storage/ISaveFormat;
 MD: net/minecraft/server/MinecraftServer/getDifficulty ()I net/minecraft/server/MinecraftServer/getDifficulty ()I
 MD: net/minecraft/server/MinecraftServer/getEnableCommandBlock ()Z net/minecraft/server/MinecraftServer/isCommandBlockEnabled ()Z
+MD: net/minecraft/server/MinecraftServer/getForceGamemode ()Z net/minecraft/server/MinecraftServer/func_104056_am ()Z
 MD: net/minecraft/server/MinecraftServer/getGamemode ()Lnet/minecraft/server/EnumGamemode; net/minecraft/server/MinecraftServer/getGameType ()Lnet/minecraft/world/EnumGameType;
 MD: net/minecraft/server/MinecraftServer/getGenerateStructures ()Z net/minecraft/server/MinecraftServer/canStructuresSpawn ()Z
 MD: net/minecraft/server/MinecraftServer/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/server/MinecraftServer/getLogAgent ()Lnet/minecraft/logging/ILogAgent;
@@ -9346,6 +9401,7 @@ MD: net/minecraft/server/MinecraftServer/safeShutdown ()V net/minecraft/server/M
 MD: net/minecraft/server/MinecraftServer/saveChunks (Z)V net/minecraft/server/MinecraftServer/saveAllWorlds (Z)V
 MD: net/minecraft/server/MinecraftServer/sendMessage (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/sendChatToPlayer (Ljava/lang/String;)V
 MD: net/minecraft/server/MinecraftServer/setAllowFlight (Z)V net/minecraft/server/MinecraftServer/setAllowFlight (Z)V
+MD: net/minecraft/server/MinecraftServer/setForceGamemode (Z)V net/minecraft/server/MinecraftServer/func_104055_i (Z)V
 MD: net/minecraft/server/MinecraftServer/setMotd (Ljava/lang/String;)V net/minecraft/server/MinecraftServer/setMOTD (Ljava/lang/String;)V
 MD: net/minecraft/server/MinecraftServer/setOnlineMode (Z)V net/minecraft/server/MinecraftServer/setOnlineMode (Z)V
 MD: net/minecraft/server/MinecraftServer/setPort (I)V net/minecraft/server/MinecraftServer/setServerPort (I)V
@@ -9373,7 +9429,7 @@ MD: net/minecraft/server/MobEffect/getEffectId ()I net/minecraft/potion/PotionEf
 MD: net/minecraft/server/MobEffect/h ()I net/minecraft/potion/PotionEffect/deincrementDuration ()I
 MD: net/minecraft/server/MobEffect/hashCode ()I net/minecraft/potion/PotionEffect/hashCode ()I
 MD: net/minecraft/server/MobEffect/isAmbient ()Z net/minecraft/potion/PotionEffect/getIsAmbient ()Z
-MD: net/minecraft/server/MobEffect/isSplash ()Z net/minecraft/potion/PotionEffect/func_102028_d ()Z
+MD: net/minecraft/server/MobEffect/isSplash ()Z net/minecraft/potion/PotionEffect/isSplashPotionEffect ()Z
 MD: net/minecraft/server/MobEffect/setSplash (Z)V net/minecraft/potion/PotionEffect/setSplashPotion (Z)V
 MD: net/minecraft/server/MobEffect/tick (Lnet/minecraft/server/EntityLiving;)Z net/minecraft/potion/PotionEffect/onUpdate (Lnet/minecraft/entity/EntityLiving;)Z
 MD: net/minecraft/server/MobEffect/toString ()Ljava/lang/String; net/minecraft/potion/PotionEffect/toString ()Ljava/lang/String;
@@ -10622,7 +10678,7 @@ MD: net/minecraft/server/Scoreboard/getObjectives ()Ljava/util/Collection; net/m
 MD: net/minecraft/server/Scoreboard/getObjectivesForCriteria (Lnet/minecraft/server/IScoreboardCriteria;)Ljava/util/Collection; net/minecraft/scoreboard/Scoreboard/func_96520_a (Lnet/minecraft/scoreboard/ScoreObjectiveCriteria;)Ljava/util/Collection;
 MD: net/minecraft/server/Scoreboard/getPlayerObjectives (Ljava/lang/String;)Ljava/util/Map; net/minecraft/scoreboard/Scoreboard/func_96510_d (Ljava/lang/String;)Ljava/util/Map;
 MD: net/minecraft/server/Scoreboard/getPlayerScoreForObjective (Ljava/lang/String;Lnet/minecraft/server/ScoreboardObjective;)Lnet/minecraft/server/ScoreboardScore; net/minecraft/scoreboard/Scoreboard/func_96529_a (Ljava/lang/String;Lnet/minecraft/scoreboard/ScoreObjective;)Lnet/minecraft/scoreboard/Score;
-MD: net/minecraft/server/Scoreboard/getPlayerTeam (Ljava/lang/String;)Lnet/minecraft/server/ScoreboardTeam; net/minecraft/scoreboard/Scoreboard/func_96509_i (Ljava/lang/String;)Lnet/minecraft/scoreboard/ScorePlayerTeam;
+MD: net/minecraft/server/Scoreboard/getPlayerTeam (Ljava/lang/String;)Lnet/minecraft/server/ScoreboardTeam; net/minecraft/scoreboard/Scoreboard/getPlayersTeam (Ljava/lang/String;)Lnet/minecraft/scoreboard/ScorePlayerTeam;
 MD: net/minecraft/server/Scoreboard/getPlayers ()Ljava/util/Collection; net/minecraft/scoreboard/Scoreboard/getObjectiveNames ()Ljava/util/Collection;
 MD: net/minecraft/server/Scoreboard/getScores ()Ljava/util/Collection; net/minecraft/scoreboard/Scoreboard/func_96528_e ()Ljava/util/Collection;
 MD: net/minecraft/server/Scoreboard/getScoresForObjective (Lnet/minecraft/server/ScoreboardObjective;)Ljava/util/Collection; net/minecraft/scoreboard/Scoreboard/func_96534_i (Lnet/minecraft/scoreboard/ScoreObjective;)Ljava/util/Collection;
@@ -10641,7 +10697,7 @@ MD: net/minecraft/server/Scoreboard/handleTeamChanged (Lnet/minecraft/server/Sco
 MD: net/minecraft/server/Scoreboard/handleTeamRemoved (Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/Scoreboard/func_96513_c (Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/Scoreboard/registerObjective (Ljava/lang/String;Lnet/minecraft/server/IScoreboardCriteria;)Lnet/minecraft/server/ScoreboardObjective; net/minecraft/scoreboard/Scoreboard/func_96535_a (Ljava/lang/String;Lnet/minecraft/scoreboard/ScoreObjectiveCriteria;)Lnet/minecraft/scoreboard/ScoreObjective;
 MD: net/minecraft/server/Scoreboard/removePlayerFromTeam (Ljava/lang/String;)Z net/minecraft/scoreboard/Scoreboard/func_96524_g (Ljava/lang/String;)Z
-MD: net/minecraft/server/Scoreboard/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/Scoreboard/func_96512_b (Ljava/lang/String;Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
+MD: net/minecraft/server/Scoreboard/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/Scoreboard/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/Scoreboard/removeTeam (Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/Scoreboard/func_96511_d (Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/Scoreboard/resetPlayerScores (Ljava/lang/String;)V net/minecraft/scoreboard/Scoreboard/func_96515_c (Ljava/lang/String;)V
 MD: net/minecraft/server/Scoreboard/setDisplaySlot (ILnet/minecraft/server/ScoreboardObjective;)V net/minecraft/scoreboard/Scoreboard/func_96530_a (ILnet/minecraft/scoreboard/ScoreObjective;)V
@@ -10694,14 +10750,14 @@ MD: net/minecraft/server/ScoreboardServer/handleScoreChanged (Lnet/minecraft/ser
 MD: net/minecraft/server/ScoreboardServer/handleTeamAdded (Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/ServerScoreboard/func_96523_a (Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/ScoreboardServer/handleTeamChanged (Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/ServerScoreboard/func_96538_b (Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/ScoreboardServer/handleTeamRemoved (Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/ServerScoreboard/func_96513_c (Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
-MD: net/minecraft/server/ScoreboardServer/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/ServerScoreboard/func_96512_b (Ljava/lang/String;Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
+MD: net/minecraft/server/ScoreboardServer/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/server/ScoreboardTeam;)V net/minecraft/scoreboard/ServerScoreboard/removePlayerFromTeam (Ljava/lang/String;Lnet/minecraft/scoreboard/ScorePlayerTeam;)V
 MD: net/minecraft/server/ScoreboardServer/setDisplaySlot (ILnet/minecraft/server/ScoreboardObjective;)V net/minecraft/scoreboard/ServerScoreboard/func_96530_a (ILnet/minecraft/scoreboard/ScoreObjective;)V
 MD: net/minecraft/server/ScoreboardTeam/allowFriendlyFire ()Z net/minecraft/scoreboard/ScorePlayerTeam/func_96665_g ()Z
 MD: net/minecraft/server/ScoreboardTeam/canSeeFriendlyInvisibles ()Z net/minecraft/scoreboard/ScorePlayerTeam/func_98297_h ()Z
 MD: net/minecraft/server/ScoreboardTeam/getDisplayName ()Ljava/lang/String; net/minecraft/scoreboard/ScorePlayerTeam/func_96669_c ()Ljava/lang/String;
 MD: net/minecraft/server/ScoreboardTeam/getName ()Ljava/lang/String; net/minecraft/scoreboard/ScorePlayerTeam/func_96661_b ()Ljava/lang/String;
 MD: net/minecraft/server/ScoreboardTeam/getPlayerDisplayName (Lnet/minecraft/server/ScoreboardTeam;Ljava/lang/String;)Ljava/lang/String; net/minecraft/scoreboard/ScorePlayerTeam/func_96667_a (Lnet/minecraft/scoreboard/ScorePlayerTeam;Ljava/lang/String;)Ljava/lang/String;
-MD: net/minecraft/server/ScoreboardTeam/getPlayerNameSet ()Ljava/util/Collection; net/minecraft/scoreboard/ScorePlayerTeam/func_96670_d ()Ljava/util/Collection;
+MD: net/minecraft/server/ScoreboardTeam/getPlayerNameSet ()Ljava/util/Collection; net/minecraft/scoreboard/ScorePlayerTeam/getMembershipCollection ()Ljava/util/Collection;
 MD: net/minecraft/server/ScoreboardTeam/getPrefix ()Ljava/lang/String; net/minecraft/scoreboard/ScorePlayerTeam/func_96668_e ()Ljava/lang/String;
 MD: net/minecraft/server/ScoreboardTeam/getSuffix ()Ljava/lang/String; net/minecraft/scoreboard/ScorePlayerTeam/func_96663_f ()Ljava/lang/String;
 MD: net/minecraft/server/ScoreboardTeam/packOptionData ()I net/minecraft/scoreboard/ScorePlayerTeam/func_98299_i ()I
@@ -10972,14 +11028,14 @@ MD: net/minecraft/server/TileEntityBrewingStand/b (ILnet/minecraft/server/ItemSt
 MD: net/minecraft/server/TileEntityBrewingStand/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityBrewingStand/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/TileEntityBrewingStand/c ()Z net/minecraft/tileentity/TileEntityBrewingStand/isInvNameLocalized ()Z
 MD: net/minecraft/server/TileEntityBrewingStand/c (ILnet/minecraft/server/ItemStack;)I net/minecraft/tileentity/TileEntityBrewingStand/getPotionResult (ILnet/minecraft/item/ItemStack;)I
-MD: net/minecraft/server/TileEntityBrewingStand/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityBrewingStand/func_102007_a (ILnet/minecraft/item/ItemStack;I)Z
-MD: net/minecraft/server/TileEntityBrewingStand/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityBrewingStand/func_102008_b (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/TileEntityBrewingStand/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityBrewingStand/canInsertItem (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/TileEntityBrewingStand/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityBrewingStand/canExtractItem (ILnet/minecraft/item/ItemStack;I)Z
 MD: net/minecraft/server/TileEntityBrewingStand/g ()V net/minecraft/tileentity/TileEntityBrewingStand/closeChest ()V
 MD: net/minecraft/server/TileEntityBrewingStand/getItem (I)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityBrewingStand/getStackInSlot (I)Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/TileEntityBrewingStand/getMaxStackSize ()I net/minecraft/tileentity/TileEntityBrewingStand/getInventoryStackLimit ()I
 MD: net/minecraft/server/TileEntityBrewingStand/getName ()Ljava/lang/String; net/minecraft/tileentity/TileEntityBrewingStand/getInvName ()Ljava/lang/String;
 MD: net/minecraft/server/TileEntityBrewingStand/getSize ()I net/minecraft/tileentity/TileEntityBrewingStand/getSizeInventory ()I
-MD: net/minecraft/server/TileEntityBrewingStand/getSlotsForFace (I)[I net/minecraft/tileentity/TileEntityBrewingStand/getSizeInventorySide (I)[I
+MD: net/minecraft/server/TileEntityBrewingStand/getSlotsForFace (I)[I net/minecraft/tileentity/TileEntityBrewingStand/getAccessibleSlotsFromSide (I)[I
 MD: net/minecraft/server/TileEntityBrewingStand/h ()V net/minecraft/tileentity/TileEntityBrewingStand/updateEntity ()V
 MD: net/minecraft/server/TileEntityBrewingStand/j ()I net/minecraft/tileentity/TileEntityBrewingStand/getFilledSlots ()I
 MD: net/minecraft/server/TileEntityBrewingStand/l ()Z net/minecraft/tileentity/TileEntityBrewingStand/canBrew ()Z
@@ -11020,7 +11076,7 @@ MD: net/minecraft/server/TileEntityCommand/a (Lnet/minecraft/server/World;)I net
 MD: net/minecraft/server/TileEntityCommand/b ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/tileentity/TileEntityCommandBlock/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates;
 MD: net/minecraft/server/TileEntityCommand/b (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityCommandBlock/setCommand (Ljava/lang/String;)V
 MD: net/minecraft/server/TileEntityCommand/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityCommandBlock/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
-MD: net/minecraft/server/TileEntityCommand/c (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityCommandBlock/func_96104_c (Ljava/lang/String;)V
+MD: net/minecraft/server/TileEntityCommand/c (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityCommandBlock/setCommandSenderName (Ljava/lang/String;)V
 MD: net/minecraft/server/TileEntityCommand/d ()I net/minecraft/tileentity/TileEntityCommandBlock/func_96103_d ()I
 MD: net/minecraft/server/TileEntityCommand/getName ()Ljava/lang/String; net/minecraft/tileentity/TileEntityCommandBlock/getCommandSenderName ()Ljava/lang/String;
 MD: net/minecraft/server/TileEntityCommand/getUpdatePacket ()Lnet/minecraft/server/Packet; net/minecraft/tileentity/TileEntityCommandBlock/getDescriptionPacket ()Lnet/minecraft/network/packet/Packet;
@@ -11029,7 +11085,7 @@ MD: net/minecraft/server/TileEntityComparator/a ()I net/minecraft/tileentity/Til
 MD: net/minecraft/server/TileEntityComparator/a (I)V net/minecraft/tileentity/TileEntityComparator/func_96099_a (I)V
 MD: net/minecraft/server/TileEntityComparator/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityComparator/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/TileEntityComparator/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityComparator/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
-MD: net/minecraft/server/TileEntityDispenser/a (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityDispenser/func_94049_a (Ljava/lang/String;)V
+MD: net/minecraft/server/TileEntityDispenser/a (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityDispenser/setCustomName (Ljava/lang/String;)V
 MD: net/minecraft/server/TileEntityDispenser/a (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/tileentity/TileEntityDispenser/isUseableByPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z
 MD: net/minecraft/server/TileEntityDispenser/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityDispenser/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/TileEntityDispenser/addItem (Lnet/minecraft/server/ItemStack;)I net/minecraft/tileentity/TileEntityDispenser/addItem (Lnet/minecraft/item/ItemStack;)I
@@ -11067,15 +11123,15 @@ MD: net/minecraft/server/TileEntityFurnace/b (Lnet/minecraft/server/NBTTagCompou
 MD: net/minecraft/server/TileEntityFurnace/burn ()V net/minecraft/tileentity/TileEntityFurnace/smeltItem ()V
 MD: net/minecraft/server/TileEntityFurnace/c ()Z net/minecraft/tileentity/TileEntityFurnace/isInvNameLocalized ()Z
 MD: net/minecraft/server/TileEntityFurnace/canBurn ()Z net/minecraft/tileentity/TileEntityFurnace/canSmelt ()Z
-MD: net/minecraft/server/TileEntityFurnace/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityFurnace/func_102007_a (ILnet/minecraft/item/ItemStack;I)Z
-MD: net/minecraft/server/TileEntityFurnace/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityFurnace/func_102008_b (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/TileEntityFurnace/canPlaceItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityFurnace/canInsertItem (ILnet/minecraft/item/ItemStack;I)Z
+MD: net/minecraft/server/TileEntityFurnace/canTakeItemThroughFace (ILnet/minecraft/server/ItemStack;I)Z net/minecraft/tileentity/TileEntityFurnace/canExtractItem (ILnet/minecraft/item/ItemStack;I)Z
 MD: net/minecraft/server/TileEntityFurnace/fuelTime (Lnet/minecraft/server/ItemStack;)I net/minecraft/tileentity/TileEntityFurnace/getItemBurnTime (Lnet/minecraft/item/ItemStack;)I
 MD: net/minecraft/server/TileEntityFurnace/g ()V net/minecraft/tileentity/TileEntityFurnace/closeChest ()V
 MD: net/minecraft/server/TileEntityFurnace/getItem (I)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityFurnace/getStackInSlot (I)Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/TileEntityFurnace/getMaxStackSize ()I net/minecraft/tileentity/TileEntityFurnace/getInventoryStackLimit ()I
 MD: net/minecraft/server/TileEntityFurnace/getName ()Ljava/lang/String; net/minecraft/tileentity/TileEntityFurnace/getInvName ()Ljava/lang/String;
 MD: net/minecraft/server/TileEntityFurnace/getSize ()I net/minecraft/tileentity/TileEntityFurnace/getSizeInventory ()I
-MD: net/minecraft/server/TileEntityFurnace/getSlotsForFace (I)[I net/minecraft/tileentity/TileEntityFurnace/getSizeInventorySide (I)[I
+MD: net/minecraft/server/TileEntityFurnace/getSlotsForFace (I)[I net/minecraft/tileentity/TileEntityFurnace/getAccessibleSlotsFromSide (I)[I
 MD: net/minecraft/server/TileEntityFurnace/h ()V net/minecraft/tileentity/TileEntityFurnace/updateEntity ()V
 MD: net/minecraft/server/TileEntityFurnace/isBurning ()Z net/minecraft/tileentity/TileEntityFurnace/isBurning ()Z
 MD: net/minecraft/server/TileEntityFurnace/isFuel (Lnet/minecraft/server/ItemStack;)Z net/minecraft/tileentity/TileEntityFurnace/isItemFuel (Lnet/minecraft/item/ItemStack;)Z
@@ -11083,7 +11139,7 @@ MD: net/minecraft/server/TileEntityFurnace/setItem (ILnet/minecraft/server/ItemS
 MD: net/minecraft/server/TileEntityFurnace/splitStack (II)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityFurnace/decrStackSize (II)Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/TileEntityFurnace/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityFurnace/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/TileEntityFurnace/startOpen ()V net/minecraft/tileentity/TileEntityFurnace/openChest ()V
-MD: net/minecraft/server/TileEntityHopper/a (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityHopper/func_96115_a (Ljava/lang/String;)V
+MD: net/minecraft/server/TileEntityHopper/a (Ljava/lang/String;)V net/minecraft/tileentity/TileEntityHopper/setInventoryName (Ljava/lang/String;)V
 MD: net/minecraft/server/TileEntityHopper/a (Lnet/minecraft/server/EntityHuman;)Z net/minecraft/tileentity/TileEntityHopper/isUseableByPlayer (Lnet/minecraft/entity/player/EntityPlayer;)Z
 MD: net/minecraft/server/TileEntityHopper/a (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityHopper/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/TileEntityHopper/aA ()D net/minecraft/tileentity/TileEntityHopper/getXPos ()D
@@ -11094,10 +11150,10 @@ MD: net/minecraft/server/TileEntityHopper/addItem (Lnet/minecraft/server/IInvent
 MD: net/minecraft/server/TileEntityHopper/b (ILnet/minecraft/server/ItemStack;)Z net/minecraft/tileentity/TileEntityHopper/isStackValidForSlot (ILnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/TileEntityHopper/b (Lnet/minecraft/server/NBTTagCompound;)V net/minecraft/tileentity/TileEntityHopper/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V
 MD: net/minecraft/server/TileEntityHopper/c ()Z net/minecraft/tileentity/TileEntityHopper/isInvNameLocalized ()Z
-MD: net/minecraft/server/TileEntityHopper/c (I)V net/minecraft/tileentity/TileEntityHopper/func_98046_c (I)V
-MD: net/minecraft/server/TileEntityHopper/canMergeItems (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/ItemStack;)Z net/minecraft/tileentity/TileEntityHopper/func_94114_a (Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z
+MD: net/minecraft/server/TileEntityHopper/c (I)V net/minecraft/tileentity/TileEntityHopper/setTransferCooldown (I)V
+MD: net/minecraft/server/TileEntityHopper/canMergeItems (Lnet/minecraft/server/ItemStack;Lnet/minecraft/server/ItemStack;)Z net/minecraft/tileentity/TileEntityHopper/areItemStacksEqualItem (Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/TileEntityHopper/canPlaceItemInInventory (Lnet/minecraft/server/IInventory;Lnet/minecraft/server/ItemStack;II)Z net/minecraft/tileentity/TileEntityHopper/func_102015_a (Lnet/minecraft/inventory/IInventory;Lnet/minecraft/item/ItemStack;II)Z
-MD: net/minecraft/server/TileEntityHopper/canTakeItemFromInventory (Lnet/minecraft/server/IInventory;Lnet/minecraft/server/ItemStack;II)Z net/minecraft/tileentity/TileEntityHopper/func_102013_b (Lnet/minecraft/inventory/IInventory;Lnet/minecraft/item/ItemStack;II)Z
+MD: net/minecraft/server/TileEntityHopper/canTakeItemFromInventory (Lnet/minecraft/server/IInventory;Lnet/minecraft/server/ItemStack;II)Z net/minecraft/tileentity/TileEntityHopper/canExtractItemFromInventory (Lnet/minecraft/inventory/IInventory;Lnet/minecraft/item/ItemStack;II)Z
 MD: net/minecraft/server/TileEntityHopper/g ()V net/minecraft/tileentity/TileEntityHopper/closeChest ()V
 MD: net/minecraft/server/TileEntityHopper/getEntityItemAt (Lnet/minecraft/server/World;DDD)Lnet/minecraft/server/EntityItem; net/minecraft/tileentity/TileEntityHopper/func_96119_a (Lnet/minecraft/world/World;DDD)Lnet/minecraft/entity/item/EntityItem;
 MD: net/minecraft/server/TileEntityHopper/getInventoryAt (Lnet/minecraft/server/World;DDD)Lnet/minecraft/server/IInventory; net/minecraft/tileentity/TileEntityHopper/getInventoryAtLocation (Lnet/minecraft/world/World;DDD)Lnet/minecraft/inventory/IInventory;
@@ -11105,10 +11161,10 @@ MD: net/minecraft/server/TileEntityHopper/getItem (I)Lnet/minecraft/server/ItemS
 MD: net/minecraft/server/TileEntityHopper/getMaxStackSize ()I net/minecraft/tileentity/TileEntityHopper/getInventoryStackLimit ()I
 MD: net/minecraft/server/TileEntityHopper/getName ()Ljava/lang/String; net/minecraft/tileentity/TileEntityHopper/getInvName ()Ljava/lang/String;
 MD: net/minecraft/server/TileEntityHopper/getSize ()I net/minecraft/tileentity/TileEntityHopper/getSizeInventory ()I
-MD: net/minecraft/server/TileEntityHopper/getSourceInventory (Lnet/minecraft/server/IHopper;)Lnet/minecraft/server/IInventory; net/minecraft/tileentity/TileEntityHopper/func_96118_b (Lnet/minecraft/tileentity/Hopper;)Lnet/minecraft/inventory/IInventory;
+MD: net/minecraft/server/TileEntityHopper/getSourceInventory (Lnet/minecraft/server/IHopper;)Lnet/minecraft/server/IInventory; net/minecraft/tileentity/TileEntityHopper/getInventoryAboveHopper (Lnet/minecraft/tileentity/Hopper;)Lnet/minecraft/inventory/IInventory;
 MD: net/minecraft/server/TileEntityHopper/h ()V net/minecraft/tileentity/TileEntityHopper/updateEntity ()V
 MD: net/minecraft/server/TileEntityHopper/j ()Z net/minecraft/tileentity/TileEntityHopper/func_98045_j ()Z
-MD: net/minecraft/server/TileEntityHopper/l ()Z net/minecraft/tileentity/TileEntityHopper/func_98047_l ()Z
+MD: net/minecraft/server/TileEntityHopper/l ()Z net/minecraft/tileentity/TileEntityHopper/isCoolingDown ()Z
 MD: net/minecraft/server/TileEntityHopper/setItem (ILnet/minecraft/server/ItemStack;)V net/minecraft/tileentity/TileEntityHopper/setInventorySlotContents (ILnet/minecraft/item/ItemStack;)V
 MD: net/minecraft/server/TileEntityHopper/splitStack (II)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityHopper/decrStackSize (II)Lnet/minecraft/item/ItemStack;
 MD: net/minecraft/server/TileEntityHopper/splitWithoutUpdate (I)Lnet/minecraft/server/ItemStack; net/minecraft/tileentity/TileEntityHopper/getStackInSlotOnClosing (I)Lnet/minecraft/item/ItemStack;
@@ -11252,19 +11308,25 @@ MD: net/minecraft/server/WeightedRandom/a (Ljava/util/Random;Ljava/util/Collecti
 MD: net/minecraft/server/WeightedRandom/a (Ljava/util/Random;[Lnet/minecraft/server/WeightedRandomChoice;)Lnet/minecraft/server/WeightedRandomChoice; net/minecraft/util/WeightedRandom/getRandomItem (Ljava/util/Random;[Lnet/minecraft/util/WeightedRandomItem;)Lnet/minecraft/util/WeightedRandomItem;
 MD: net/minecraft/server/WeightedRandom/a (Ljava/util/Random;[Lnet/minecraft/server/WeightedRandomChoice;I)Lnet/minecraft/server/WeightedRandomChoice; net/minecraft/util/WeightedRandom/getRandomItem (Ljava/util/Random;[Lnet/minecraft/util/WeightedRandomItem;I)Lnet/minecraft/util/WeightedRandomItem;
 MD: net/minecraft/server/WeightedRandom/a ([Lnet/minecraft/server/WeightedRandomChoice;)I net/minecraft/util/WeightedRandom/getTotalWeight ([Lnet/minecraft/util/WeightedRandomItem;)I
-MD: net/minecraft/server/World/A ()V net/minecraft/world/World/setActivePlayerChunksAndCheckLight ()V
+MD: net/minecraft/server/World/A ()V net/minecraft/world/World/toggleRain ()V
 MD: net/minecraft/server/World/A (III)V net/minecraft/world/World/updateAllLightTypes (III)V
+MD: net/minecraft/server/World/B ()V net/minecraft/world/World/setActivePlayerChunksAndCheckLight ()V
+MD: net/minecraft/server/World/F ()V net/minecraft/world/World/checkSessionLock ()V
 MD: net/minecraft/server/World/F (III)Z net/minecraft/world/World/canLightningStrikeAt (III)Z
 MD: net/minecraft/server/World/G (III)Z net/minecraft/world/World/isBlockHighHumidity (III)Z
 MD: net/minecraft/server/World/H (III)Ljava/util/Random; net/minecraft/world/World/setRandomSeed (III)Ljava/util/Random;
-MD: net/minecraft/server/World/O ()Z net/minecraft/world/World/isRaining ()Z
+MD: net/minecraft/server/World/K ()Lnet/minecraft/server/IChunkProvider; net/minecraft/world/World/getChunkProvider ()Lnet/minecraft/world/chunk/IChunkProvider;
+MD: net/minecraft/server/World/O ()Z net/minecraft/world/World/isThundering ()Z
+MD: net/minecraft/server/World/P ()Z net/minecraft/world/World/isRaining ()Z
+MD: net/minecraft/server/World/R ()I net/minecraft/world/World/getActualHeight ()I
+MD: net/minecraft/server/World/V ()Ljava/util/Calendar; net/minecraft/world/World/getCurrentDate ()Ljava/util/Calendar;
 MD: net/minecraft/server/World/a ()V net/minecraft/world/World/calculateInitialWeather ()V
 MD: net/minecraft/server/World/a (DDDLjava/lang/String;FFZ)V net/minecraft/world/World/playSound (DDDLjava/lang/String;FFZ)V
 MD: net/minecraft/server/World/a (F)I net/minecraft/world/World/calculateSkylightSubtracted (F)I
 MD: net/minecraft/server/World/a (IIII)Z net/minecraft/world/World/isBlockTickScheduled (IIII)Z
 MD: net/minecraft/server/World/a (IIIII)V net/minecraft/world/World/scheduleBlockUpdate (IIIII)V
 MD: net/minecraft/server/World/a (IIIIII)V net/minecraft/world/World/func_82740_a (IIIIII)V
-MD: net/minecraft/server/World/a (IIILnet/minecraft/server/EnumSkyBlock;)I net/minecraft/world/World/func_98179_a (IIILnet/minecraft/world/EnumSkyBlock;)I
+MD: net/minecraft/server/World/a (IIILnet/minecraft/server/EnumSkyBlock;)I net/minecraft/world/World/computeLightValue (IIILnet/minecraft/world/EnumSkyBlock;)I
 MD: net/minecraft/server/World/a (IILnet/minecraft/server/Chunk;)V net/minecraft/world/World/moodSoundAndLightCheck (IILnet/minecraft/world/chunk/Chunk;)V
 MD: net/minecraft/server/World/a (Ljava/lang/Class;)I net/minecraft/world/World/countEntities (Ljava/lang/Class;)I
 MD: net/minecraft/server/World/a (Ljava/lang/Class;Ljava/lang/String;)Lnet/minecraft/server/WorldMapBase; net/minecraft/world/World/loadItemData (Ljava/lang/Class;Ljava/lang/String;)Lnet/minecraft/world/WorldSavedData;
@@ -11280,7 +11342,7 @@ MD: net/minecraft/server/World/a (Lnet/minecraft/server/AxisAlignedBB;)Ljava/uti
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/Entity;)Z net/minecraft/world/World/checkNoEntityCollision (Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/entity/Entity;)Z
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/Material;)Z net/minecraft/world/World/isMaterialInBB (Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/block/material/Material;)Z
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/Material;Lnet/minecraft/server/Entity;)Z net/minecraft/world/World/handleMaterialAcceleration (Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/block/material/Material;Lnet/minecraft/entity/Entity;)Z
-MD: net/minecraft/server/World/a (Lnet/minecraft/server/Block;I)Z net/minecraft/world/World/func_102026_a (Lnet/minecraft/block/Block;I)Z
+MD: net/minecraft/server/World/a (Lnet/minecraft/server/Block;I)Z net/minecraft/world/World/isBlockTopFacingSurfaceSolid (Lnet/minecraft/block/Block;I)Z
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/Chunk;Z)Ljava/util/List; net/minecraft/world/World/getPendingBlockUpdates (Lnet/minecraft/world/chunk/Chunk;Z)Ljava/util/List;
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/CrashReport;)Lnet/minecraft/server/CrashReportSystemDetails; net/minecraft/world/World/addWorldInfoToCrashReport (Lnet/minecraft/crash/CrashReport;)Lnet/minecraft/crash/CrashReportCategory;
 MD: net/minecraft/server/World/a (Lnet/minecraft/server/Entity;)V net/minecraft/world/World/obtainEntitySkin (Lnet/minecraft/entity/Entity;)V
@@ -11349,18 +11411,27 @@ MD: net/minecraft/server/World/getChunkAt (II)Lnet/minecraft/server/Chunk; net/m
 MD: net/minecraft/server/World/getChunkAtWorldCoords (II)Lnet/minecraft/server/Chunk; net/minecraft/world/World/getChunkFromBlockCoords (II)Lnet/minecraft/world/chunk/Chunk;
 MD: net/minecraft/server/World/getCubes (Lnet/minecraft/server/Entity;Lnet/minecraft/server/AxisAlignedBB;)Ljava/util/List; net/minecraft/world/World/getCollidingBoundingBoxes (Lnet/minecraft/entity/Entity;Lnet/minecraft/util/AxisAlignedBB;)Ljava/util/List;
 MD: net/minecraft/server/World/getData (III)I net/minecraft/world/World/getBlockMetadata (III)I
+MD: net/minecraft/server/World/getDataManager ()Lnet/minecraft/server/IDataManager; net/minecraft/world/World/getSaveHandler ()Lnet/minecraft/world/storage/ISaveHandler;
+MD: net/minecraft/server/World/getDayTime ()J net/minecraft/world/World/getWorldTime ()J
 MD: net/minecraft/server/World/getEntities (Lnet/minecraft/server/Entity;Lnet/minecraft/server/AxisAlignedBB;)Ljava/util/List; net/minecraft/world/World/getEntitiesWithinAABBExcludingEntity (Lnet/minecraft/entity/Entity;Lnet/minecraft/util/AxisAlignedBB;)Ljava/util/List;
 MD: net/minecraft/server/World/getEntities (Lnet/minecraft/server/Entity;Lnet/minecraft/server/AxisAlignedBB;Lnet/minecraft/server/IEntitySelector;)Ljava/util/List; net/minecraft/world/World/getEntitiesWithinAABBExcludingEntity (Lnet/minecraft/entity/Entity;Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/command/IEntitySelector;)Ljava/util/List;
 MD: net/minecraft/server/World/getEntity (I)Lnet/minecraft/server/Entity; net/minecraft/world/World/getEntityByID (I)Lnet/minecraft/entity/Entity;
-MD: net/minecraft/server/World/getHeight ()I net/minecraft/world/World/getActualHeight ()I
+MD: net/minecraft/server/World/getGameRules ()Lnet/minecraft/server/GameRules; net/minecraft/world/World/getGameRules ()Lnet/minecraft/world/GameRules;
+MD: net/minecraft/server/World/getHeight ()I net/minecraft/world/World/getHeight ()I
 MD: net/minecraft/server/World/getHighestBlockYAt (II)I net/minecraft/world/World/getHeightValue (II)I
 MD: net/minecraft/server/World/getHighestNeighborSignal (III)I net/minecraft/world/World/getStrongestIndirectPower (III)I
 MD: net/minecraft/server/World/getLightLevel (III)I net/minecraft/world/World/getBlockLightValue (III)I
+MD: net/minecraft/server/World/getLogger ()Lnet/minecraft/server/IConsoleLogManager; net/minecraft/world/World/getWorldLogAgent ()Lnet/minecraft/logging/ILogAgent;
 MD: net/minecraft/server/World/getMaterial (III)Lnet/minecraft/server/Material; net/minecraft/world/World/getBlockMaterial (III)Lnet/minecraft/block/material/Material;
-MD: net/minecraft/server/World/getSeed ()J net/minecraft/world/World/getTotalWorldTime ()J
+MD: net/minecraft/server/World/getScoreboard ()Lnet/minecraft/server/Scoreboard; net/minecraft/world/World/getScoreboard ()Lnet/minecraft/scoreboard/Scoreboard;
+MD: net/minecraft/server/World/getSeed ()J net/minecraft/world/World/getSeed ()J
+MD: net/minecraft/server/World/getSpawn ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/world/World/getSpawnPoint ()Lnet/minecraft/util/ChunkCoordinates;
 MD: net/minecraft/server/World/getTileEntity (III)Lnet/minecraft/server/TileEntity; net/minecraft/world/World/getBlockTileEntity (III)Lnet/minecraft/tileentity/TileEntity;
-MD: net/minecraft/server/World/getTime ()J net/minecraft/world/World/getWorldTime ()J
+MD: net/minecraft/server/World/getTime ()J net/minecraft/world/World/getTotalWorldTime ()J
 MD: net/minecraft/server/World/getTypeId (III)I net/minecraft/world/World/getBlockId (III)I
+MD: net/minecraft/server/World/getVec3DPool ()Lnet/minecraft/server/Vec3DPool; net/minecraft/world/World/getWorldVec3Pool ()Lnet/minecraft/util/Vec3Pool;
+MD: net/minecraft/server/World/getWorldChunkManager ()Lnet/minecraft/server/WorldChunkManager; net/minecraft/world/World/getWorldChunkManager ()Lnet/minecraft/world/biome/WorldChunkManager;
+MD: net/minecraft/server/World/getWorldData ()Lnet/minecraft/server/WorldData; net/minecraft/world/World/getWorldInfo ()Lnet/minecraft/world/storage/WorldInfo;
 MD: net/minecraft/server/World/h (F)F net/minecraft/world/World/getWeightedThunderStrength (F)F
 MD: net/minecraft/server/World/h (II)I net/minecraft/world/World/getPrecipitationHeight (II)I
 MD: net/minecraft/server/World/i (F)F net/minecraft/world/World/getRainStrength (F)F
@@ -11380,6 +11451,7 @@ MD: net/minecraft/server/World/makeSound (DDDLjava/lang/String;FF)V net/minecraf
 MD: net/minecraft/server/World/makeSound (Lnet/minecraft/server/Entity;Ljava/lang/String;FF)V net/minecraft/world/World/playSoundAtEntity (Lnet/minecraft/entity/Entity;Ljava/lang/String;FF)V
 MD: net/minecraft/server/World/mayPlace (IIIIZILnet/minecraft/server/Entity;Lnet/minecraft/server/ItemStack;)Z net/minecraft/world/World/canPlaceEntityOnSide (IIIIZILnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)Z
 MD: net/minecraft/server/World/notify (III)V net/minecraft/world/World/markBlockForUpdate (III)V
+MD: net/minecraft/server/World/o ()V net/minecraft/world/World/updateWeather ()V
 MD: net/minecraft/server/World/p (III)V net/minecraft/world/World/markBlockForRenderUpdate (III)V
 MD: net/minecraft/server/World/playNote (IIIIII)V net/minecraft/world/World/addBlockEvent (IIIIII)V
 MD: net/minecraft/server/World/playerJoinedWorld (Lnet/minecraft/server/Entity;)V net/minecraft/world/World/updateEntity (Lnet/minecraft/entity/Entity;)V
@@ -11402,11 +11474,13 @@ MD: net/minecraft/server/World/tickEntities ()V net/minecraft/world/World/update
 MD: net/minecraft/server/World/triggerEffect (IIIII)V net/minecraft/world/World/playAuxSFX (IIIII)V
 MD: net/minecraft/server/World/u (III)Z net/minecraft/world/World/isBlockNormalCube (III)Z
 MD: net/minecraft/server/World/update (IIII)V net/minecraft/world/World/notifyBlockChange (IIII)V
+MD: net/minecraft/server/World/v ()Z net/minecraft/world/World/isDaytime ()Z
 MD: net/minecraft/server/World/v (III)Z net/minecraft/world/World/func_85174_u (III)Z
+MD: net/minecraft/server/World/w ()I net/minecraft/world/World/getMoonPhase ()I
 MD: net/minecraft/server/World/w (III)Z net/minecraft/world/World/doesBlockHaveSolidTopSurface (III)Z
 MD: net/minecraft/server/World/x (III)Z net/minecraft/world/World/isBlockFreezable (III)Z
 MD: net/minecraft/server/World/y (III)Z net/minecraft/world/World/isBlockFreezableNaturally (III)Z
-MD: net/minecraft/server/World/z ()V net/minecraft/world/World/toggleRain ()V
+MD: net/minecraft/server/World/z ()V net/minecraft/world/World/calculateInitialSkylight ()V
 MD: net/minecraft/server/World/z (III)Z net/minecraft/world/World/canSnowAt (III)Z
 MD: net/minecraft/server/WorldChunkManager/a ()Ljava/util/List; net/minecraft/world/biome/WorldChunkManager/getBiomesToSpawnIn ()Ljava/util/List;
 MD: net/minecraft/server/WorldChunkManager/a (IIILjava/util/List;)Z net/minecraft/world/biome/WorldChunkManager/areBiomesViable (IIILjava/util/List;)Z
@@ -11848,7 +11922,8 @@ MD: net/minecraft/server/WorldProviderTheEnd/getChunkProvider ()Lnet/minecraft/s
 MD: net/minecraft/server/WorldProviderTheEnd/getName ()Ljava/lang/String; net/minecraft/world/WorldProviderEnd/getDimensionName ()Ljava/lang/String;
 MD: net/minecraft/server/WorldProviderTheEnd/getSeaLevel ()I net/minecraft/world/WorldProviderEnd/getAverageGroundLevel ()I
 MD: net/minecraft/server/WorldProviderTheEnd/h ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/world/WorldProviderEnd/getEntrancePortalLocation ()Lnet/minecraft/util/ChunkCoordinates;
-MD: net/minecraft/server/WorldServer/Y ()V net/minecraft/world/WorldServer/sendAndApplyBlockEvents ()V
+MD: net/minecraft/server/WorldServer/Y ()V net/minecraft/world/WorldServer/resetRainAndThunder ()V
+MD: net/minecraft/server/WorldServer/Z ()V net/minecraft/world/WorldServer/sendAndApplyBlockEvents ()V
 MD: net/minecraft/server/WorldServer/a ()V net/minecraft/world/WorldServer/saveLevel ()V
 MD: net/minecraft/server/WorldServer/a (IIII)Z net/minecraft/world/WorldServer/isBlockTickScheduled (IIII)Z
 MD: net/minecraft/server/WorldServer/a (IIIII)V net/minecraft/world/WorldServer/scheduleBlockUpdate (IIIII)V
@@ -11870,18 +11945,23 @@ MD: net/minecraft/server/WorldServer/doTick ()V net/minecraft/world/WorldServer/
 MD: net/minecraft/server/WorldServer/entityJoinedWorld (Lnet/minecraft/server/Entity;Z)V net/minecraft/world/WorldServer/updateEntityWithOptionalForce (Lnet/minecraft/entity/Entity;Z)V
 MD: net/minecraft/server/WorldServer/everyoneDeeplySleeping ()Z net/minecraft/world/WorldServer/areAllPlayersAsleep ()Z
 MD: net/minecraft/server/WorldServer/everyoneSleeping ()V net/minecraft/world/WorldServer/updateAllPlayersSleepingFlag ()V
-MD: net/minecraft/server/WorldServer/flushSave ()V net/minecraft/world/WorldServer/flush ()V
+MD: net/minecraft/server/WorldServer/flushSave ()V net/minecraft/world/WorldServer/func_104140_m ()V
 MD: net/minecraft/server/WorldServer/g ()V net/minecraft/world/WorldServer/tickBlocksAndAmbiance ()V
 MD: net/minecraft/server/WorldServer/getDimensionSpawn ()Lnet/minecraft/server/ChunkCoordinates; net/minecraft/world/WorldServer/getEntrancePortalLocation ()Lnet/minecraft/util/ChunkCoordinates;
 MD: net/minecraft/server/WorldServer/getEntity (I)Lnet/minecraft/server/Entity; net/minecraft/world/WorldServer/getEntityByID (I)Lnet/minecraft/entity/Entity;
+MD: net/minecraft/server/WorldServer/getMinecraftServer ()Lnet/minecraft/server/MinecraftServer; net/minecraft/world/WorldServer/getMinecraftServer ()Lnet/minecraft/server/MinecraftServer;
+MD: net/minecraft/server/WorldServer/getPlayerChunkMap ()Lnet/minecraft/server/PlayerChunkMap; net/minecraft/world/WorldServer/getPlayerManager ()Lnet/minecraft/server/management/PlayerManager;
 MD: net/minecraft/server/WorldServer/getTileEntities (IIIIII)Ljava/util/List; net/minecraft/world/WorldServer/getAllTileEntityInBox (IIIIII)Ljava/util/List;
+MD: net/minecraft/server/WorldServer/getTracker ()Lnet/minecraft/server/EntityTracker; net/minecraft/world/WorldServer/getEntityTracker ()Lnet/minecraft/entity/EntityTracker;
 MD: net/minecraft/server/WorldServer/i ()V net/minecraft/world/WorldServer/resetUpdateEntityTick ()V
 MD: net/minecraft/server/WorldServer/j ()Lnet/minecraft/server/IChunkProvider; net/minecraft/world/WorldServer/createChunkProvider ()Lnet/minecraft/world/chunk/IChunkProvider;
 MD: net/minecraft/server/WorldServer/k ()V net/minecraft/world/WorldServer/createBonusChest ()V
+MD: net/minecraft/server/WorldServer/o ()V net/minecraft/world/WorldServer/updateWeather ()V
 MD: net/minecraft/server/WorldServer/playNote (IIIIII)V net/minecraft/world/WorldServer/addBlockEvent (IIIIII)V
 MD: net/minecraft/server/WorldServer/save (ZLnet/minecraft/server/IProgressUpdate;)V net/minecraft/world/WorldServer/saveAllChunks (ZLnet/minecraft/util/IProgressUpdate;)V
-MD: net/minecraft/server/WorldServer/saveLevel ()V net/minecraft/world/WorldServer/updateWeather ()V
+MD: net/minecraft/server/WorldServer/saveLevel ()V net/minecraft/world/WorldServer/flush ()V
 MD: net/minecraft/server/WorldServer/strikeLightning (Lnet/minecraft/server/Entity;)Z net/minecraft/world/WorldServer/addWeatherEffect (Lnet/minecraft/entity/Entity;)Z
+MD: net/minecraft/server/WorldServer/t ()Lnet/minecraft/server/PortalTravelAgent; net/minecraft/world/WorldServer/getDefaultTeleporter ()Lnet/minecraft/world/Teleporter;
 MD: net/minecraft/server/WorldServer/tickEntities ()V net/minecraft/world/WorldServer/updateEntities ()V
 MD: net/minecraft/server/WorldServer/vehicleEnteredWorld (Lnet/minecraft/server/Entity;Z)V net/minecraft/world/WorldServer/uncheckedUpdateEntity (Lnet/minecraft/entity/Entity;Z)V
 MD: net/minecraft/server/WorldSettings/a ()Lnet/minecraft/server/WorldSettings; net/minecraft/world/WorldSettings/enableBonusChest ()Lnet/minecraft/world/WorldSettings;

@@ -26,14 +26,14 @@ set -e
 # obfuscated -> CB
 
 # Class mappings (CL:)
-python zip-class-diff.py $VANILLA $MCDEV | sort > $OUT_DIR/classes.srg
+#python zip-class-diff.py $VANILLA $MCDEV | sort > $OUT_DIR/classes.srg
 
 # Method and field (MD: and FD:)
-rm -rf $VANILLA_DIR/
-rm -rf $MCDEV_DIR/
-unzip $VANILLA -d $VANILLA_DIR/
-unzip $MCDEV -d $MCDEV_DIR/
-python -u jpdiff.py $OUT_DIR/classes.srg $VANILLA_DIR $MCDEV_DIR | tee $OUT_DIR/obf2cb.srg
+#rm -rf $VANILLA_DIR/
+#rm -rf $MCDEV_DIR/
+#unzip $VANILLA -d $VANILLA_DIR/
+#unzip $MCDEV -d $MCDEV_DIR/
+#python -u jpdiff.py $OUT_DIR/classes.srg $VANILLA_DIR $MCDEV_DIR | tee $OUT_DIR/obf2cb.srg
 
 # CB -> MCP
 python chain.py $MCPCONF $OUT_DIR/obf2cb.srg | sort > $OUT_DIR/cb2mcp.srg
