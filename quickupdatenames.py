@@ -10,7 +10,7 @@ import sys, os, re
 import srglib
 
 mcpConfDir = "../FML/mcp/conf/"
-targetDir = "../15mcpc-plus/src"
+targetDir = "/tmp/un"
 
 methodNames = srglib.readDescriptiveMethodNames(mcpConfDir)
 fieldNames = srglib.readDescriptiveFieldNames(mcpConfDir)
@@ -23,7 +23,7 @@ FIELD_PATTERN = re.compile(r"(field_\d+_\w+)")
 for root, dirs, files in os.walk(targetDir):
     for fn in files:
         path = os.path.join(root, fn)
-        if not path.endswith(".java"): continue
+        #if not path.endswith(".java"): continue
 
         print path
         data = file(path).read()
