@@ -1,6 +1,0 @@
-From 437c575bc9b97cfc226128608e910ccf0f9a33b0 Mon Sep 17 00:00:00 2001
-From: Wesley Wolfe <weswolf@aol.com>
-Date: Sat, 2 Mar 2013 16:33:35 -0600
-Subject: [PATCH] Fix compilation error with exception names
-
-
