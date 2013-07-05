@@ -164,7 +164,6 @@ CL: net/minecraft/client/entity/AbstractClientPlayer bej
 CL: net/minecraft/client/entity/EntityClientPlayerMP bcx
 CL: net/minecraft/client/entity/EntityOtherPlayerMP ben
 CL: net/minecraft/client/entity/EntityPlayerSP bem
-CL: net/minecraft/client/entity/render/RenderMinecartMobSpawner bgs
 CL: net/minecraft/client/gui/ChatClickData avc
 CL: net/minecraft/client/gui/ChatLine atj
 CL: net/minecraft/client/gui/FontRenderer auz
@@ -467,6 +466,7 @@ CL: net/minecraft/client/renderer/entity/RenderLiving bgt
 CL: net/minecraft/client/renderer/entity/RenderMagmaCube bgn
 CL: net/minecraft/client/renderer/entity/RenderManager bga
 CL: net/minecraft/client/renderer/entity/RenderMinecart bgr
+CL: net/minecraft/client/renderer/entity/RenderMinecartMobSpawner bgs
 CL: net/minecraft/client/renderer/entity/RenderMooshroom bgu
 CL: net/minecraft/client/renderer/entity/RenderOcelot bgv
 CL: net/minecraft/client/renderer/entity/RenderPainting bgw
@@ -762,8 +762,8 @@ CL: net/minecraft/entity/ai/EntityAILookIdle qi
 CL: net/minecraft/entity/ai/EntityAIMate ph
 CL: net/minecraft/entity/ai/EntityAIMoveIndoors py
 CL: net/minecraft/entity/ai/EntityAIMoveThroughVillage pz
+CL: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction qa
 CL: net/minecraft/entity/ai/EntityAIMoveTowardsTarget qb
-CL: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction qa
 CL: net/minecraft/entity/ai/EntityAINearestAttackableTarget qv
 CL: net/minecraft/entity/ai/EntityAINearestAttackableTargetSelector qw
 CL: net/minecraft/entity/ai/EntityAINearestAttackableTargetSorter qx
@@ -2493,17 +2493,17 @@ FD: net/minecraft/client/gui/GuiScreenLongRunningTask/field_98118_d ayh/d
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_102019_y ayq/z
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_104044_y ayq/A
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_130039_a ayq/a
-FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_140042_t ayq/t
-FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_140043_q ayq/q
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96185_d ayq/e
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96186_b ayq/c
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96187_c ayq/d
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96188_a ayq/b
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96189_n ayq/p
+FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96190_o ayq/q
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96192_v ayq/x
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96193_u ayq/w
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96194_t ayq/v
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96195_s ayq/u
+FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96196_r ayq/t
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96197_q ayq/s
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96198_p ayq/r
 FD: net/minecraft/client/gui/GuiScreenOnlineServers/field_96199_x ayq/y
@@ -2589,9 +2589,9 @@ FD: net/minecraft/client/gui/GuiSlot/field_77243_s avx/s
 FD: net/minecraft/client/gui/GuiSlot/field_77244_r avx/r
 FD: net/minecraft/client/gui/GuiSlot/field_77245_q avx/q
 FD: net/minecraft/client/gui/GuiSlot/field_77246_p avx/p
-FD: net/minecraft/client/gui/GuiSlotLanguage/field_135050_b avj/b
-FD: net/minecraft/client/gui/GuiSlotLanguage/field_77251_g avj/h
+FD: net/minecraft/client/gui/GuiSlotLanguage/field_77251_g avj/b
 FD: net/minecraft/client/gui/GuiSlotLanguage/field_77252_a avj/a
+FD: net/minecraft/client/gui/GuiSlotLanguage/field_77253_h avj/h
 FD: net/minecraft/client/gui/GuiSlotOnlineServerList/field_96294_a ays/a
 FD: net/minecraft/client/gui/GuiSlotServer/field_77250_a avf/a
 FD: net/minecraft/client/gui/GuiSmallButton/field_73754_j awc/o
@@ -3806,7 +3806,6 @@ FD: net/minecraft/client/renderer/texture/StitchSlot/field_94189_e bhx/e
 FD: net/minecraft/client/renderer/texture/StitchSlot/field_94190_b bhx/b
 FD: net/minecraft/client/renderer/texture/StitchSlot/field_94191_c bhx/c
 FD: net/minecraft/client/renderer/texture/StitchSlot/field_94192_a bhx/a
-FD: net/minecraft/client/renderer/texture/Stitcher/field_110938_h bhv/h
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94313_f bhv/f
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94314_g bhv/g
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94315_d bhv/d
@@ -3814,6 +3813,7 @@ FD: net/minecraft/client/renderer/texture/Stitcher/field_94316_e bhv/e
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94317_b bhv/b
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94318_c bhv/c
 FD: net/minecraft/client/renderer/texture/Stitcher/field_94319_a bhv/a
+FD: net/minecraft/client/renderer/texture/Stitcher/field_94323_h bhv/h
 FD: net/minecraft/client/renderer/texture/TextureAtlasSprite/field_110973_g bia/g
 FD: net/minecraft/client/renderer/texture/TextureAtlasSprite/field_110974_d bia/d
 FD: net/minecraft/client/renderer/texture/TextureAtlasSprite/field_110975_c bia/c
@@ -4589,6 +4589,11 @@ FD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/entityPathNavigate pz/c
 FD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/isNocturnal pz/e
 FD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/movementSpeed pz/b
 FD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/theEntity pz/a
+FD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/movePosX qa/b
+FD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/movePosY qa/c
+FD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/movePosZ qa/d
+FD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/movementSpeed qa/e
+FD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/theEntity qa/a
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/field_75425_f qb/f
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/field_75426_g qb/g
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/movePosX qb/c
@@ -4596,11 +4601,6 @@ FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/movePosY qb/d
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/movePosZ qb/e
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/targetEntity qb/b
 FD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/theEntity qb/a
-FD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/movePosX qa/b
-FD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/movePosY qa/c
-FD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/movePosZ qa/d
-FD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/movementSpeed qa/e
-FD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/theEntity qa/a
 FD: net/minecraft/entity/ai/EntityAINearestAttackableTarget/field_82643_g qv/f
 FD: net/minecraft/entity/ai/EntityAINearestAttackableTarget/targetChance qv/b
 FD: net/minecraft/entity/ai/EntityAINearestAttackableTarget/targetClass qv/a
@@ -9174,7 +9174,6 @@ MD: net/minecraft/client/entity/EntityClientPlayerMP/sendPlayerAbilities ()V bcx
 MD: net/minecraft/client/entity/EntityClientPlayerMP/swingItem ()V bcx/aR ()V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/attackEntityFrom (Lnet/minecraft/util/DamageSource;F)Z ben/a (Lmy;F)Z
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/canCommandSenderUseCommand (ILjava/lang/String;)Z ben/a (ILjava/lang/String;)Z
-MD: net/minecraft/client/entity/EntityOtherPlayerMP/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V ben/a (Lcu;)V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/func_70053_R ()F ben/Q ()F
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/func_70056_a (DDDFFI)V ben/a (DDDFFI)V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/getEyeHeight ()F ben/f ()F
@@ -9182,6 +9181,7 @@ MD: net/minecraft/client/entity/EntityOtherPlayerMP/getPlayerCoordinates ()Lnet/
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/onLivingUpdate ()V ben/c ()V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/onUpdate ()V ben/l_ ()V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/resetHeight ()V ben/d_ ()V
+MD: net/minecraft/client/entity/EntityOtherPlayerMP/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V ben/a (Lcu;)V
 MD: net/minecraft/client/entity/EntityOtherPlayerMP/setCurrentItemOrArmor (ILnet/minecraft/item/ItemStack;)V ben/c (ILxz;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/addChatMessage (Ljava/lang/String;)V bem/a (Ljava/lang/String;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/addStat (Lnet/minecraft/stats/StatBase;I)V bem/a (Lkr;I)V
@@ -9200,7 +9200,6 @@ MD: net/minecraft/client/entity/EntityPlayerSP/displayGUIHopper (Lnet/minecraft/
 MD: net/minecraft/client/entity/EntityPlayerSP/displayGUIHopperMinecart (Lnet/minecraft/entity/item/EntityMinecartHopper;)V bem/a (Lsu;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/displayGUIMerchant (Lnet/minecraft/entity/IMerchant;Ljava/lang/String;)V bem/a (Labf;Ljava/lang/String;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/displayGUIWorkbench (III)V bem/b (III)V
-MD: net/minecraft/client/entity/EntityPlayerSP/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V bem/a (Lcu;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/func_110298_a (Lnet/minecraft/entity/passive/EntityHorse;Lnet/minecraft/inventory/IInventory;)V bem/a (Lrp;Lml;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/func_110317_t ()Z bem/t ()Z
 MD: net/minecraft/client/entity/EntityPlayerSP/func_110318_g ()V bem/h ()V
@@ -9219,10 +9218,9 @@ MD: net/minecraft/client/entity/EntityPlayerSP/onItemPickup (Lnet/minecraft/enti
 MD: net/minecraft/client/entity/EntityPlayerSP/onLivingUpdate ()V bem/c ()V
 MD: net/minecraft/client/entity/EntityPlayerSP/playSound (Ljava/lang/String;FF)V bem/a (Ljava/lang/String;FF)V
 MD: net/minecraft/client/entity/EntityPlayerSP/pushOutOfBlocks (DDD)Z bem/i (DDD)Z
+MD: net/minecraft/client/entity/EntityPlayerSP/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V bem/a (Lcu;)V
 MD: net/minecraft/client/entity/EntityPlayerSP/setSprinting (Z)V bem/c (Z)V
 MD: net/minecraft/client/entity/EntityPlayerSP/updateEntityActionState ()V bem/bh ()V
-MD: net/minecraft/client/entity/render/RenderMinecartMobSpawner/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bgs/a (Lsq;FLaqs;I)V
-MD: net/minecraft/client/entity/render/RenderMinecartMobSpawner/func_98192_a (Lnet/minecraft/entity/ai/EntityMinecartMobSpawner;FLnet/minecraft/block/Block;I)V bgs/a (Lsw;FLaqs;I)V
 MD: net/minecraft/client/gui/ChatClickData/func_78307_h ()Ljava/lang/String; avc/h ()Ljava/lang/String;
 MD: net/minecraft/client/gui/ChatClickData/func_78308_g ()Ljava/net/URI; avc/g ()Ljava/net/URI;
 MD: net/minecraft/client/gui/ChatClickData/func_78309_f ()Ljava/lang/String; avc/f ()Ljava/lang/String;
@@ -9323,11 +9321,11 @@ MD: net/minecraft/client/gui/GuiCreateFlatWorld/func_82272_i ()Z auq/i ()Z
 MD: net/minecraft/client/gui/GuiCreateFlatWorld/func_82273_a (Ljava/lang/String;)V auq/a (Ljava/lang/String;)V
 MD: net/minecraft/client/gui/GuiCreateFlatWorld/func_82274_h ()Lnet/minecraft/client/renderer/entity/RenderItem; auq/h ()Lbgl;
 MD: net/minecraft/client/gui/GuiCreateFlatWorld/func_82275_e ()Ljava/lang/String; auq/z_ ()Ljava/lang/String;
-MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_130003_c ()V aur/b ()V
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77213_a (IZ)V aur/a (IZ)V
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V aur/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77217_a ()I aur/a ()I
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77218_a (I)Z aur/a (I)Z
+MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77221_c ()V aur/b ()V
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_77225_g ()I aur/c ()I
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_82450_b (IIII)V aur/b (IIII)V
 MD: net/minecraft/client/gui/GuiCreateFlatWorldListSlot/func_82451_d (II)V aur/e (II)V
@@ -9377,11 +9375,11 @@ MD: net/minecraft/client/gui/GuiFlatPresets/func_82296_g ()V avq/g ()V
 MD: net/minecraft/client/gui/GuiFlatPresets/func_82297_a (Ljava/lang/String;ILnet/minecraft/world/biome/BiomeGenBase;[Lnet/minecraft/world/gen/FlatLayerInfo;)V avq/a (Ljava/lang/String;ILacl;[Lafy;)V
 MD: net/minecraft/client/gui/GuiFlatPresets/func_82298_b (Lnet/minecraft/client/gui/GuiFlatPresets;)Lnet/minecraft/client/gui/GuiTextField; avq/b (Lavq;)Lauw;
 MD: net/minecraft/client/gui/GuiFlatPresets/func_82299_h ()Lnet/minecraft/client/renderer/entity/RenderItem; avq/h ()Lbgl;
-MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_130003_c ()V avs/b ()V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_77213_a (IZ)V avs/a (IZ)V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V avs/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_77217_a ()I avs/a ()I
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_77218_a (I)Z avs/a (I)Z
+MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_77221_c ()V avs/b ()V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_82455_b (IIII)V avs/b (IIII)V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_82456_d (II)V avs/e (II)V
 MD: net/minecraft/client/gui/GuiFlatPresetsListSlot/func_82457_a (III)V avs/a (III)V
@@ -9411,11 +9409,11 @@ MD: net/minecraft/client/gui/GuiIngameMenu/func_73866_w_ ()V avp/A_ ()V
 MD: net/minecraft/client/gui/GuiIngameMenu/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V avp/a (Lauk;)V
 MD: net/minecraft/client/gui/GuiIngameMenu/func_73876_c ()V avp/c ()V
 MD: net/minecraft/client/gui/GuiLanguage/func_135011_a (Lnet/minecraft/client/gui/GuiLanguage;)Lnet/minecraft/client/resources/LanguageManager; avi/a (Lavi;)Lbjs;
-MD: net/minecraft/client/gui/GuiLanguage/func_135012_b (Lnet/minecraft/client/gui/GuiLanguage;)Lnet/minecraft/client/settings/GameSettings; avi/b (Lavi;)Lauc;
-MD: net/minecraft/client/gui/GuiLanguage/func_135013_c (Lnet/minecraft/client/gui/GuiLanguage;)Lnet/minecraft/client/gui/GuiSmallButton; avi/c (Lavi;)Lawc;
 MD: net/minecraft/client/gui/GuiLanguage/func_73863_a (IIF)V avi/a (IIF)V
 MD: net/minecraft/client/gui/GuiLanguage/func_73866_w_ ()V avi/A_ ()V
 MD: net/minecraft/client/gui/GuiLanguage/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V avi/a (Lauk;)V
+MD: net/minecraft/client/gui/GuiLanguage/func_74042_b (Lnet/minecraft/client/gui/GuiLanguage;)Lnet/minecraft/client/gui/GuiSmallButton; avi/c (Lavi;)Lawc;
+MD: net/minecraft/client/gui/GuiLanguage/func_74043_a (Lnet/minecraft/client/gui/GuiLanguage;)Lnet/minecraft/client/settings/GameSettings; avi/b (Lavi;)Lauc;
 MD: net/minecraft/client/gui/GuiMainMenu/func_110348_a (Lnet/minecraft/client/gui/GuiMainMenu;)Lnet/minecraft/client/Minecraft; bli/a (Lbli;)Latn;
 MD: net/minecraft/client/gui/GuiMainMenu/func_110349_a (Z)Z bli/a (Z)Z
 MD: net/minecraft/client/gui/GuiMainMenu/func_130018_c (Lnet/minecraft/client/gui/GuiMainMenu;)Lnet/minecraft/client/Minecraft; bli/c (Lbli;)Latn;
@@ -9752,15 +9750,13 @@ MD: net/minecraft/client/gui/GuiSlider/func_73736_c (Lnet/minecraft/client/Minec
 MD: net/minecraft/client/gui/GuiSlider/func_73738_a (Z)I awb/a (Z)I
 MD: net/minecraft/client/gui/GuiSlider/func_73739_b (Lnet/minecraft/client/Minecraft;II)V awb/b (Latn;II)V
 MD: net/minecraft/client/gui/GuiSlider/func_73740_a (II)V awb/a (II)V
-MD: net/minecraft/client/gui/GuiSlot/func_110509_d (II)V avx/d (II)V
-MD: net/minecraft/client/gui/GuiSlot/func_130003_c ()V avx/b ()V
-MD: net/minecraft/client/gui/GuiSlot/func_130004_b ()I avx/d ()I
 MD: net/minecraft/client/gui/GuiSlot/func_77206_b (IIII)V avx/b (IIII)V
 MD: net/minecraft/client/gui/GuiSlot/func_77207_a (IIII)V avx/a (IIII)V
 MD: net/minecraft/client/gui/GuiSlot/func_77208_b (I)V avx/b (I)V
 MD: net/minecraft/client/gui/GuiSlot/func_77209_d ()I avx/e ()I
 MD: net/minecraft/client/gui/GuiSlot/func_77210_c (II)I avx/c (II)I
 MD: net/minecraft/client/gui/GuiSlot/func_77211_a (IIF)V avx/a (IIF)V
+MD: net/minecraft/client/gui/GuiSlot/func_77212_b ()I avx/d ()I
 MD: net/minecraft/client/gui/GuiSlot/func_77213_a (IZ)V avx/a (IZ)V
 MD: net/minecraft/client/gui/GuiSlot/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V avx/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlot/func_77215_b (II)V avx/b (II)V
@@ -9768,17 +9764,19 @@ MD: net/minecraft/client/gui/GuiSlot/func_77216_a (Z)V avx/a (Z)V
 MD: net/minecraft/client/gui/GuiSlot/func_77217_a ()I avx/a ()I
 MD: net/minecraft/client/gui/GuiSlot/func_77218_a (I)Z avx/a (I)Z
 MD: net/minecraft/client/gui/GuiSlot/func_77219_a (Lnet/minecraft/client/gui/GuiButton;)V avx/a (Lauk;)V
+MD: net/minecraft/client/gui/GuiSlot/func_77220_a (II)V avx/d (II)V
+MD: net/minecraft/client/gui/GuiSlot/func_77221_c ()V avx/b ()V
 MD: net/minecraft/client/gui/GuiSlot/func_77222_a (IILnet/minecraft/client/renderer/Tessellator;)V avx/a (IILbff;)V
 MD: net/minecraft/client/gui/GuiSlot/func_77223_a (ZI)V avx/a (ZI)V
 MD: net/minecraft/client/gui/GuiSlot/func_77224_a (II)V avx/a (II)V
 MD: net/minecraft/client/gui/GuiSlot/func_77225_g ()I avx/c ()I
 MD: net/minecraft/client/gui/GuiSlot/func_77226_h ()V avx/h ()V
-MD: net/minecraft/client/gui/GuiSlotLanguage/func_130003_c ()V avj/b ()V
-MD: net/minecraft/client/gui/GuiSlotLanguage/func_130004_b ()I avj/d ()I
+MD: net/minecraft/client/gui/GuiSlotLanguage/func_77212_b ()I avj/d ()I
 MD: net/minecraft/client/gui/GuiSlotLanguage/func_77213_a (IZ)V avj/a (IZ)V
 MD: net/minecraft/client/gui/GuiSlotLanguage/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V avj/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlotLanguage/func_77217_a ()I avj/a ()I
 MD: net/minecraft/client/gui/GuiSlotLanguage/func_77218_a (I)Z avj/a (I)Z
+MD: net/minecraft/client/gui/GuiSlotLanguage/func_77221_c ()V avj/b ()V
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_104086_b (I)Z ays/b (I)Z
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_77212_b ()I ays/b ()I
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_77213_a (IZ)V ays/a (IZ)V
@@ -9788,12 +9786,12 @@ MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_77218_a (I)Z ays/a (I)
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_77221_c ()V ays/c ()V
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_96292_b (IIIILnet/minecraft/client/renderer/Tessellator;)V ays/b (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlotOnlineServerList/func_96293_a (IIILnet/minecraft/client/mco/McoServer;)V ays/a (IIILbab;)V
-MD: net/minecraft/client/gui/GuiSlotServer/func_130003_c ()V avf/b ()V
-MD: net/minecraft/client/gui/GuiSlotServer/func_130004_b ()I avf/d ()I
+MD: net/minecraft/client/gui/GuiSlotServer/func_77212_b ()I avf/d ()I
 MD: net/minecraft/client/gui/GuiSlotServer/func_77213_a (IZ)V avf/a (IZ)V
 MD: net/minecraft/client/gui/GuiSlotServer/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V avf/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlotServer/func_77217_a ()I avf/a ()I
 MD: net/minecraft/client/gui/GuiSlotServer/func_77218_a (I)Z avf/a (I)Z
+MD: net/minecraft/client/gui/GuiSlotServer/func_77221_c ()V avf/b ()V
 MD: net/minecraft/client/gui/GuiSlotServer/func_77247_d (IIIILnet/minecraft/client/renderer/Tessellator;)V avf/d (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlotServer/func_77248_b (IIIILnet/minecraft/client/renderer/Tessellator;)V avf/b (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSlotServer/func_77249_c (IIIILnet/minecraft/client/renderer/Tessellator;)V avf/c (IIIILbff;)V
@@ -9803,11 +9801,11 @@ MD: net/minecraft/client/gui/GuiSnooper/func_73866_w_ ()V awd/A_ ()V
 MD: net/minecraft/client/gui/GuiSnooper/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V awd/a (Lauk;)V
 MD: net/minecraft/client/gui/GuiSnooper/func_74094_b (Lnet/minecraft/client/gui/GuiSnooper;)Ljava/util/List; awd/b (Lawd;)Ljava/util/List;
 MD: net/minecraft/client/gui/GuiSnooper/func_74095_a (Lnet/minecraft/client/gui/GuiSnooper;)Ljava/util/List; awd/a (Lawd;)Ljava/util/List;
-MD: net/minecraft/client/gui/GuiSnooperList/func_130003_c ()V awe/b ()V
 MD: net/minecraft/client/gui/GuiSnooperList/func_77213_a (IZ)V awe/a (IZ)V
 MD: net/minecraft/client/gui/GuiSnooperList/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V awe/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiSnooperList/func_77217_a ()I awe/a ()I
 MD: net/minecraft/client/gui/GuiSnooperList/func_77218_a (I)Z awe/a (I)Z
+MD: net/minecraft/client/gui/GuiSnooperList/func_77221_c ()V awe/b ()V
 MD: net/minecraft/client/gui/GuiSnooperList/func_77225_g ()I awe/c ()I
 MD: net/minecraft/client/gui/GuiTextField/func_73777_b (I)V auw/b (I)V
 MD: net/minecraft/client/gui/GuiTextField/func_73778_q ()Z auw/q ()Z
@@ -9853,12 +9851,12 @@ MD: net/minecraft/client/gui/GuiWinGame/func_73869_a (CI)V azi/a (CI)V
 MD: net/minecraft/client/gui/GuiWinGame/func_73876_c ()V azi/c ()V
 MD: net/minecraft/client/gui/GuiWinGame/func_73985_g ()V azi/g ()V
 MD: net/minecraft/client/gui/GuiWinGame/func_73986_b (IIF)V azi/b (IIF)V
-MD: net/minecraft/client/gui/GuiWorldSlot/func_130003_c ()V avz/b ()V
-MD: net/minecraft/client/gui/GuiWorldSlot/func_130004_b ()I avz/d ()I
+MD: net/minecraft/client/gui/GuiWorldSlot/func_77212_b ()I avz/d ()I
 MD: net/minecraft/client/gui/GuiWorldSlot/func_77213_a (IZ)V avz/a (IZ)V
 MD: net/minecraft/client/gui/GuiWorldSlot/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V avz/a (IIIILbff;)V
 MD: net/minecraft/client/gui/GuiWorldSlot/func_77217_a ()I avz/a ()I
 MD: net/minecraft/client/gui/GuiWorldSlot/func_77218_a (I)Z avz/a (I)Z
+MD: net/minecraft/client/gui/GuiWorldSlot/func_77221_c ()V avz/b ()V
 MD: net/minecraft/client/gui/GuiYesNo/func_73863_a (IIF)V auo/a (IIF)V
 MD: net/minecraft/client/gui/GuiYesNo/func_73866_w_ ()V auo/A_ ()V
 MD: net/minecraft/client/gui/GuiYesNo/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V auo/a (Lauk;)V
@@ -9867,7 +9865,7 @@ MD: net/minecraft/client/gui/LoadingScreenRenderer/func_73721_b (Ljava/lang/Stri
 MD: net/minecraft/client/gui/LoadingScreenRenderer/func_73722_d (Ljava/lang/String;)V auf/d (Ljava/lang/String;)V
 MD: net/minecraft/client/gui/LoadingScreenRenderer/resetProgresAndWorkingMessage (Ljava/lang/String;)V auf/c (Ljava/lang/String;)V
 MD: net/minecraft/client/gui/LoadingScreenRenderer/setLoadingProgress (I)V auf/a (I)V
-MD: net/minecraft/client/gui/MapItemRenderer/func_111275_a (Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/world/storage/MapData;)V avm/a (Lua;Lbib;Lalb;)V
+MD: net/minecraft/client/gui/MapItemRenderer/func_78319_a (Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/world/storage/MapData;)V avm/a (Lua;Lbib;Lalb;)V
 MD: net/minecraft/client/gui/RunnableTitleScreen/run ()V blj/run ()V
 MD: net/minecraft/client/gui/ScaledResolution/func_78324_d ()D avw/d ()D
 MD: net/minecraft/client/gui/ScaledResolution/func_78325_e ()I avw/e ()I
@@ -9925,11 +9923,11 @@ MD: net/minecraft/client/gui/achievement/GuiAchievements/func_73875_a (Lnet/mine
 MD: net/minecraft/client/gui/achievement/GuiAchievements/func_73876_c ()V awh/c ()V
 MD: net/minecraft/client/gui/achievement/GuiAchievements/func_74109_g ()V awh/g ()V
 MD: net/minecraft/client/gui/achievement/GuiAchievements/func_74110_b (IIF)V awh/b (IIF)V
-MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_130003_c ()V awo/b ()V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77213_a (IZ)V awo/a (IZ)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77215_b (II)V awo/b (II)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77217_a ()I awo/a ()I
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77218_a (I)Z awo/a (I)Z
+MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77221_c ()V awo/b ()V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77222_a (IILnet/minecraft/client/renderer/Tessellator;)V awo/a (IILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77224_a (II)V awo/a (II)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77257_d (I)Lnet/minecraft/stats/StatCrafting; awo/d (I)Lkp;
@@ -9940,12 +9938,12 @@ MD: net/minecraft/client/gui/achievement/GuiSlotStats/func_77261_e (I)V awo/e (I
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsBlock/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V awj/a (IIIILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsBlock/func_77222_a (IILnet/minecraft/client/renderer/Tessellator;)V awj/a (IILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsBlock/func_77258_c (I)Ljava/lang/String; awj/c (I)Ljava/lang/String;
-MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_130003_c ()V awl/b ()V
-MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_130004_b ()I awl/d ()I
+MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77212_b ()I awl/d ()I
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77213_a (IZ)V awl/a (IZ)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V awl/a (IIIILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77217_a ()I awl/a ()I
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77218_a (I)Z awl/a (I)Z
+MD: net/minecraft/client/gui/achievement/GuiSlotStatsGeneral/func_77221_c ()V awl/b ()V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsItem/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V awm/a (IIIILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsItem/func_77222_a (IILnet/minecraft/client/renderer/Tessellator;)V awm/a (IILbff;)V
 MD: net/minecraft/client/gui/achievement/GuiSlotStatsItem/func_77258_c (I)Ljava/lang/String; awm/c (I)Ljava/lang/String;
@@ -10255,19 +10253,19 @@ MD: net/minecraft/client/mco/McoServer/func_98164_a (Ljava/util/List;)Ljava/util
 MD: net/minecraft/client/mco/McoServer/func_98165_c (Ljava/lang/String;)Lnet/minecraft/client/mco/McoServer; bab/c (Ljava/lang/String;)Lbab;
 MD: net/minecraft/client/mco/McoServer/hashCode ()I bab/hashCode ()I
 MD: net/minecraft/client/mco/McoServerAddress/func_98162_a (Ljava/lang/String;)Lnet/minecraft/client/mco/McoServerAddress; bac/a (Ljava/lang/String;)Lbac;
+MD: net/minecraft/client/mco/McoServerList/func_100014_a (Lnet/minecraft/client/mco/McoServerList;)Lnet/minecraft/util/Session; aza/b (Laza;)Lauj;
 MD: net/minecraft/client/mco/McoServerList/func_130122_a (Lnet/minecraft/client/mco/McoServerList;I)V aza/a (Laza;I)V
 MD: net/minecraft/client/mco/McoServerList/func_130123_a (I)V aza/a (I)V
 MD: net/minecraft/client/mco/McoServerList/func_130124_d ()I aza/d ()I
-MD: net/minecraft/client/mco/McoServerList/func_130125_a (Lnet/minecraft/client/mco/McoServerList;)Z aza/a (Laza;)Z
-MD: net/minecraft/client/mco/McoServerList/func_130126_a (Lnet/minecraft/client/mco/McoServerList;Ljava/util/List;)V aza/a (Laza;Ljava/util/List;)V
 MD: net/minecraft/client/mco/McoServerList/func_130127_a ()Z aza/a ()Z
-MD: net/minecraft/client/mco/McoServerList/func_130128_b (Lnet/minecraft/client/mco/McoServerList;)Lnet/minecraft/util/Session; aza/b (Laza;)Lauj;
 MD: net/minecraft/client/mco/McoServerList/func_130129_a (Lnet/minecraft/util/Session;)V aza/a (Lauj;)V
 MD: net/minecraft/client/mco/McoServerList/func_140056_e ()I aza/e ()I
 MD: net/minecraft/client/mco/McoServerList/func_140057_b (Lnet/minecraft/client/mco/McoServerList;I)I aza/b (Laza;I)I
 MD: net/minecraft/client/mco/McoServerList/func_140058_a (Lnet/minecraft/client/mco/McoServer;)V aza/a (Lbab;)V
 MD: net/minecraft/client/mco/McoServerList/func_96426_a (Ljava/util/List;)V aza/a (Ljava/util/List;)V
+MD: net/minecraft/client/mco/McoServerList/func_98247_a (Lnet/minecraft/client/mco/McoServerList;Ljava/util/List;)V aza/a (Laza;Ljava/util/List;)V
 MD: net/minecraft/client/mco/McoServerList/func_98248_d ()V aza/f ()V
+MD: net/minecraft/client/mco/McoServerList/func_98249_b (Lnet/minecraft/client/mco/McoServerList;)Z aza/a (Laza;)Z
 MD: net/minecraft/client/mco/McoServerList/func_98250_b ()V aza/b ()V
 MD: net/minecraft/client/mco/McoServerList/func_98252_c ()Ljava/util/List; aza/c ()Ljava/util/List;
 MD: net/minecraft/client/mco/McoServerListUpdateTask/func_140062_a ()V azc/a ()V
@@ -10988,10 +10986,10 @@ MD: net/minecraft/client/renderer/entity/RenderBat/func_110775_a (Lnet/minecraft
 MD: net/minecraft/client/renderer/entity/RenderBat/func_110834_a (Lnet/minecraft/entity/passive/EntityBat;)Lnet/minecraft/client/resources/ResourceLocation; bfp/a (Lrl;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderBat/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bfp/a (Lnk;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bfp/a (Lod;DDDFF)V
+MD: net/minecraft/client/renderer/entity/RenderBat/func_77031_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bfp/a (Loc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_77039_a (Lnet/minecraft/entity/EntityLivingBase;DDD)V bfp/a (Loc;DDD)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bfp/a (Loc;F)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_77043_a (Lnet/minecraft/entity/EntityLivingBase;FFF)V bfp/a (Loc;FFF)V
-MD: net/minecraft/client/renderer/entity/RenderBat/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bfp/a (Loc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82442_a (Lnet/minecraft/entity/passive/EntityBat;F)V bfp/a (Lrl;F)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82443_a (Lnet/minecraft/entity/passive/EntityBat;DDDFF)V bfp/a (Lrl;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82444_a (Lnet/minecraft/entity/passive/EntityBat;FFF)V bfp/a (Lrl;FFF)V
@@ -11113,16 +11111,16 @@ MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77048_a (Lnet/mine
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77049_a (Lnet/minecraft/entity/monster/EntityIronGolem;DDDFF)V bhi/a (Lsa;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhi/a (Loc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgl/a (Lnk;)Lbjd;
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110793_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V bgl/a (Lauz;Lbib;Lxz;IILjava/lang/String;)V
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110794_c (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/c (Lauz;Lbib;Lxz;II)V
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110795_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/a (Lauz;Lbib;Lxz;II)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_110796_a (Lnet/minecraft/entity/item/EntityItem;)Lnet/minecraft/client/resources/ResourceLocation; bgl/a (Lsp;)Lbjd;
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110797_b (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/b (Lauz;Lbib;Lxz;II)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgl/a (Lnk;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77014_a (Lnet/minecraft/entity/item/EntityItem;DDDFF)V bgl/a (Lsp;DDDFF)V
+MD: net/minecraft/client/renderer/entity/RenderItem/func_77015_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/a (Lauz;Lbib;Lxz;II)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77017_a (Lnet/minecraft/client/renderer/Tessellator;IIIII)V bgl/a (Lbff;IIIII)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77018_a (IIIII)V bgl/a (IIIII)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77020_a (Lnet/minecraft/entity/item/EntityItem;Lnet/minecraft/util/Icon;IFFFF)V bgl/a (Lsp;Lmp;IFFFF)V
+MD: net/minecraft/client/renderer/entity/RenderItem/func_77021_b (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/c (Lauz;Lbib;Lxz;II)V
+MD: net/minecraft/client/renderer/entity/RenderItem/func_82406_b (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgl/b (Lauz;Lbib;Lxz;II)V
+MD: net/minecraft/client/renderer/entity/RenderItem/func_94148_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V bgl/a (Lauz;Lbib;Lxz;IILjava/lang/String;)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_94149_a (IILnet/minecraft/util/Icon;II)V bgl/a (IILmp;II)V
 MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgo/a (Lnk;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110799_a (Lnet/minecraft/entity/EntityLeashKnot;DDDFF)V bgo/a (Lob;DDDFF)V
@@ -11158,6 +11156,8 @@ MD: net/minecraft/client/renderer/entity/RenderMinecart/func_110803_a (Lnet/mine
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgr/a (Lnk;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_77012_a (Lnet/minecraft/entity/item/EntityMinecart;DDDFF)V bgr/a (Lsq;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bgr/a (Lsq;FLaqs;I)V
+MD: net/minecraft/client/renderer/entity/RenderMinecartMobSpawner/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bgs/a (Lsq;FLaqs;I)V
+MD: net/minecraft/client/renderer/entity/RenderMinecartMobSpawner/func_98192_a (Lnet/minecraft/entity/ai/EntityMinecartMobSpawner;FLnet/minecraft/block/Block;I)V bgs/a (Lsw;FLaqs;I)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgu/a (Lnk;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110879_a (Lnet/minecraft/entity/passive/EntityMooshroom;)Lnet/minecraft/client/resources/ResourceLocation; bgu/a (Lrt;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgu/a (Lnk;DDDFF)V
@@ -11186,24 +11186,24 @@ MD: net/minecraft/client/renderer/entity/RenderPig/func_77032_a (Lnet/minecraft/
 MD: net/minecraft/client/renderer/entity/RenderPig/func_77099_a (Lnet/minecraft/entity/passive/EntityPig;IF)I bgx/a (Lrv;IF)I
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgy/a (Lnk;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110817_a (Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/client/resources/ResourceLocation; bgy/a (Lbej;)Lbjd;
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110818_a (Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I bgy/a (Lbej;IF)I
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110819_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V bgy/a (Lbej;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110820_a (Lnet/minecraft/client/entity/AbstractClientPlayer;F)V bgy/a (Lbej;F)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110821_b (Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V bgy/b (Lbej;IF)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130009_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgy/a (Loc;F)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130013_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V bgy/a (Lbej;DDDLjava/lang/String;FD)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130198_a (Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V bgy/a (Lbej;FFF)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130199_b (Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V bgy/a (Lbej;DDD)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgy/a (Lnk;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77100_a (Lnet/minecraft/entity/EntityLivingBase;F)V bgy/c (Loc;F)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgy/a (Loc;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77102_a (Lnet/minecraft/entity/EntityLivingBase;FFF)V bgy/a (Loc;FFF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bgy/c (Loc;F)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77031_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgy/a (Loc;DDDFF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bgy/a (Loc;IF)I
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77039_a (Lnet/minecraft/entity/EntityLivingBase;DDD)V bgy/a (Loc;DDD)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgy/a (Loc;F)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77043_a (Lnet/minecraft/entity/EntityLivingBase;FFF)V bgy/a (Loc;FFF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77100_a (Lnet/minecraft/client/entity/AbstractClientPlayer;F)V bgy/a (Lbej;F)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77101_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V bgy/a (Lbej;DDDFF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77102_a (Lnet/minecraft/client/entity/AbstractClientPlayer;FFF)V bgy/a (Lbej;FFF)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77104_b (Lnet/minecraft/client/entity/AbstractClientPlayer;F)V bgy/b (Lbej;F)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77105_b (Lnet/minecraft/entity/EntityLivingBase;DDD)V bgy/a (Loc;DDD)V
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77107_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bgy/a (Loc;IF)I
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82439_b (Lnet/minecraft/entity/EntityLivingBase;IF)V bgy/c (Loc;IF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77105_b (Lnet/minecraft/client/entity/AbstractClientPlayer;DDD)V bgy/a (Lbej;DDD)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_77107_a (Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I bgy/a (Lbej;IF)I
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82408_c (Lnet/minecraft/entity/EntityLivingBase;IF)V bgy/c (Loc;IF)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82439_b (Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V bgy/b (Lbej;IF)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82441_a (Lnet/minecraft/entity/player/EntityPlayer;)V bgy/a (Lua;)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_96449_a (Lnet/minecraft/entity/EntityLivingBase;DDDLjava/lang/String;FD)V bgy/a (Loc;DDDLjava/lang/String;FD)V
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_96450_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V bgy/a (Lbej;DDDLjava/lang/String;FD)V
 MD: net/minecraft/client/renderer/entity/RenderSheep/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgz/a (Lnk;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderSheep/func_110883_a (Lnet/minecraft/entity/passive/EntitySheep;)Lnet/minecraft/client/resources/ResourceLocation; bgz/a (Lrw;)Lbjd;
 MD: net/minecraft/client/renderer/entity/RenderSheep/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bgz/a (Loc;IF)I
@@ -11322,11 +11322,12 @@ MD: net/minecraft/client/renderer/entity/RenderZombie/func_82428_a (Lnet/minecra
 MD: net/minecraft/client/renderer/entity/RenderZombie/func_82429_a (Lnet/minecraft/entity/monster/EntityZombie;IF)I bho/a (Ltt;IF)I
 MD: net/minecraft/client/renderer/entity/RenderZombie/func_82430_a (Lnet/minecraft/entity/monster/EntityZombie;FFF)V bho/a (Ltt;FFF)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_110813_b (Lnet/minecraft/entity/EntityLivingBase;)Z bgq/b (Loc;)Z
-MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_130008_a (Lnet/minecraft/entity/EntityLivingBase;DDD)V bgq/b (Loc;DDD)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgq/a (Lnk;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bgq/c (Loc;F)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77030_a (Lnet/minecraft/entity/EntityLivingBase;FF)I bgq/a (Loc;FF)I
+MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77031_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgq/a (Loc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bgq/a (Loc;IF)I
+MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77033_b (Lnet/minecraft/entity/EntityLivingBase;DDD)V bgq/b (Loc;DDD)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77034_a (FFF)F bgq/a (FFF)F
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77035_b (Lnet/minecraft/entity/EntityLivingBase;IF)I bgq/b (Loc;IF)I
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77036_a (Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V bgq/a (Loc;FFFFFF)V
@@ -11338,8 +11339,7 @@ MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77041_b (Lnet
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77042_a (Lnet/minecraft/client/model/ModelBase;)V bgq/a (Lbbf;)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77043_a (Lnet/minecraft/entity/EntityLivingBase;FFF)V bgq/a (Loc;FFF)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77044_a (Lnet/minecraft/entity/EntityLivingBase;F)F bgq/b (Loc;F)F
-MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgq/a (Loc;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_82439_b (Lnet/minecraft/entity/EntityLivingBase;IF)V bgq/c (Loc;IF)V
+MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_82408_c (Lnet/minecraft/entity/EntityLivingBase;IF)V bgq/c (Loc;IF)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_85093_e (Lnet/minecraft/entity/EntityLivingBase;F)V bgq/e (Loc;F)V
 MD: net/minecraft/client/renderer/entity/RendererLivingEntity/func_96449_a (Lnet/minecraft/entity/EntityLivingBase;DDDLjava/lang/String;FD)V bgq/a (Loc;DDDLjava/lang/String;FD)V
 MD: net/minecraft/client/renderer/texture/AbstractTexture/func_110552_b ()I bhp/b ()I
@@ -11544,12 +11544,12 @@ MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelect/func_738
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelect/func_73876_c ()V bjo/c ()V
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelect/func_73879_b (III)V bjo/b (III)V
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_110510_a (Lnet/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList;)Lnet/minecraft/client/resources/ResourcePackRepository; bjp/a (Lbjp;)Lbji;
-MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_130003_c ()V bjp/b ()V
-MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_130004_b ()I bjp/d ()I
+MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77212_b ()I bjp/d ()I
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77213_a (IZ)V bjp/a (IZ)V
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77214_a (IIIILnet/minecraft/client/renderer/Tessellator;)V bjp/a (IIIILbff;)V
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77217_a ()I bjp/a ()I
 MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77218_a (I)Z bjp/a (I)Z
+MD: net/minecraft/client/resources/GuiScreenTemporaryResourcePackSelectSelectionList/func_77221_c ()V bjp/b ()V
 MD: net/minecraft/client/resources/I18n/func_135051_a (Lnet/minecraft/client/resources/Locale;)V bjq/a (Lbjt;)V
 MD: net/minecraft/client/resources/I18n/func_135052_a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; bjq/a (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 MD: net/minecraft/client/resources/I18n/func_135053_a (Ljava/lang/String;)Ljava/lang/String; bjq/a (Ljava/lang/String;)Ljava/lang/String;
@@ -11981,10 +11981,10 @@ MD: net/minecraft/command/ICommandManager/getCommands ()Ljava/util/Map; ac/a ()L
 MD: net/minecraft/command/ICommandManager/getPossibleCommands (Lnet/minecraft/command/ICommandSender;)Ljava/util/List; ac/a (Lad;)Ljava/util/List;
 MD: net/minecraft/command/ICommandManager/getPossibleCommands (Lnet/minecraft/command/ICommandSender;Ljava/lang/String;)Ljava/util/List; ac/b (Lad;Ljava/lang/String;)Ljava/util/List;
 MD: net/minecraft/command/ICommandSender/canCommandSenderUseCommand (ILjava/lang/String;)Z ad/a (ILjava/lang/String;)Z
-MD: net/minecraft/command/ICommandSender/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V ad/a (Lcu;)V
 MD: net/minecraft/command/ICommandSender/func_130014_f_ ()Lnet/minecraft/world/World; ad/f_ ()Labr;
 MD: net/minecraft/command/ICommandSender/getCommandSenderName ()Ljava/lang/String; ad/c_ ()Ljava/lang/String;
 MD: net/minecraft/command/ICommandSender/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates; ad/b ()Lt;
+MD: net/minecraft/command/ICommandSender/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V ad/a (Lcu;)V
 MD: net/minecraft/command/IEntitySelector/isEntityApplicable (Lnet/minecraft/entity/Entity;)Z nt/a (Lnk;)Z
 MD: net/minecraft/command/PlayerSelector/func_96560_a (Ljava/util/Map;)Ljava/util/Map; ae/a (Ljava/util/Map;)Ljava/util/Map;
 MD: net/minecraft/command/PlayerSelector/getArgumentMap (Ljava/lang/String;)Ljava/util/Map; ae/h (Ljava/lang/String;)Ljava/util/Map;
@@ -12834,13 +12834,13 @@ MD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/func_75414_f ()V pz/f ()V
 MD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/resetTask ()V pz/d ()V
 MD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/shouldExecute ()Z pz/a ()Z
 MD: net/minecraft/entity/ai/EntityAIMoveThroughVillage/startExecuting ()V pz/c ()V
+MD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/continueExecuting ()Z qa/b ()Z
+MD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/shouldExecute ()Z qa/a ()Z
+MD: net/minecraft/entity/ai/EntityAIMoveTowardsRestriction/startExecuting ()V qa/c ()V
 MD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/continueExecuting ()Z qb/b ()Z
 MD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/resetTask ()V qb/d ()V
 MD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/shouldExecute ()Z qb/a ()Z
 MD: net/minecraft/entity/ai/EntityAIMoveTowardsTarget/startExecuting ()V qb/c ()V
-MD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/continueExecuting ()Z qa/b ()Z
-MD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/shouldExecute ()Z qa/a ()Z
-MD: net/minecraft/entity/ai/EntityAIMoveTwardsRestriction/startExecuting ()V qa/c ()V
 MD: net/minecraft/entity/ai/EntityAINearestAttackableTarget/shouldExecute ()Z qv/a ()Z
 MD: net/minecraft/entity/ai/EntityAINearestAttackableTarget/startExecuting ()V qv/c ()V
 MD: net/minecraft/entity/ai/EntityAINearestAttackableTargetSelector/isEntityApplicable (Lnet/minecraft/entity/Entity;)Z qw/a (Lnk;)Z
@@ -13094,9 +13094,9 @@ MD: net/minecraft/entity/boss/EntityWither/setInWeb ()V sj/ak ()V
 MD: net/minecraft/entity/boss/EntityWither/updateAITasks ()V sj/be ()V
 MD: net/minecraft/entity/boss/EntityWither/writeEntityToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V sj/b (Lbx;)V
 MD: net/minecraft/entity/boss/EntityWitherAttackFilter/isEntityApplicable (Lnet/minecraft/entity/Entity;)Z sk/a (Lnk;)Z
-MD: net/minecraft/entity/boss/IBossDisplayData/func_110183_aJ ()F sd/aJ ()F
+MD: net/minecraft/entity/boss/IBossDisplayData/func_110138_aP ()F sd/aP ()F
+MD: net/minecraft/entity/boss/IBossDisplayData/func_110143_aJ ()F sd/aJ ()F
 MD: net/minecraft/entity/boss/IBossDisplayData/getEntityName ()Ljava/lang/String; sd/al ()Ljava/lang/String;
-MD: net/minecraft/entity/boss/IBossDisplayData/getMaxHealth ()F sd/aP ()F
 MD: net/minecraft/entity/effect/EntityLightningBolt/entityInit ()V sm/a ()V
 MD: net/minecraft/entity/effect/EntityLightningBolt/func_70102_a (Lnet/minecraft/util/Vec3;)Z sm/a (Lasv;)Z
 MD: net/minecraft/entity/effect/EntityLightningBolt/onUpdate ()V sm/l_ ()V
@@ -14164,7 +14164,6 @@ MD: net/minecraft/entity/player/EntityPlayerMP/displayGUIHopper (Lnet/minecraft/
 MD: net/minecraft/entity/player/EntityPlayerMP/displayGUIHopperMinecart (Lnet/minecraft/entity/item/EntityMinecartHopper;)V js/a (Lsu;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/displayGUIMerchant (Lnet/minecraft/entity/IMerchant;Ljava/lang/String;)V js/a (Labf;Ljava/lang/String;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/displayGUIWorkbench (III)V js/b (III)V
-MD: net/minecraft/entity/player/EntityPlayerMP/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V js/a (Lcu;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/func_110298_a (Lnet/minecraft/entity/passive/EntityHorse;Lnet/minecraft/inventory/IInventory;)V js/a (Lrp;Lml;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/func_110430_a (FFZZ)V js/a (FFZZ)V
 MD: net/minecraft/entity/player/EntityPlayerMP/func_96122_a (Lnet/minecraft/entity/player/EntityPlayer;)Z js/a (Lua;)Z
@@ -14189,6 +14188,7 @@ MD: net/minecraft/entity/player/EntityPlayerMP/onUpdateEntity ()V js/h ()V
 MD: net/minecraft/entity/player/EntityPlayerMP/readEntityFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V js/a (Lbx;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/requestTexturePackLoad (Ljava/lang/String;I)V js/a (Ljava/lang/String;I)V
 MD: net/minecraft/entity/player/EntityPlayerMP/resetHeight ()V js/d_ ()V
+MD: net/minecraft/entity/player/EntityPlayerMP/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V js/a (Lcu;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/sendContainerAndContentsToPlayer (Lnet/minecraft/inventory/Container;Ljava/util/List;)V js/a (Lut;Ljava/util/List;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/sendContainerToPlayer (Lnet/minecraft/inventory/Container;)V js/a (Lut;)V
 MD: net/minecraft/entity/player/EntityPlayerMP/sendPlayerAbilities ()V js/o ()V
@@ -14418,9 +14418,9 @@ MD: net/minecraft/inventory/ContainerPlayer/onCraftMatrixChanged (Lnet/minecraft
 MD: net/minecraft/inventory/ContainerPlayer/transferStackInSlot (Lnet/minecraft/entity/player/EntityPlayer;I)Lnet/minecraft/item/ItemStack; vq/b (Lua;I)Lxz;
 MD: net/minecraft/inventory/ContainerRepair/addCraftingToCrafters (Lnet/minecraft/inventory/ICrafting;)V uv/a (Lvd;)V
 MD: net/minecraft/inventory/ContainerRepair/canInteractWith (Lnet/minecraft/entity/player/EntityPlayer;)Z uv/a (Lua;)Z
-MD: net/minecraft/inventory/ContainerRepair/func_135072_b (Lnet/minecraft/inventory/ContainerRepair;)I uv/b (Luv;)I
-MD: net/minecraft/inventory/ContainerRepair/func_135073_a (Lnet/minecraft/inventory/ContainerRepair;)Lnet/minecraft/inventory/IInventory; uv/a (Luv;)Lml;
 MD: net/minecraft/inventory/ContainerRepair/func_75137_b (II)V uv/b (II)V
+MD: net/minecraft/inventory/ContainerRepair/getRepairInputInventory (Lnet/minecraft/inventory/ContainerRepair;)Lnet/minecraft/inventory/IInventory; uv/a (Luv;)Lml;
+MD: net/minecraft/inventory/ContainerRepair/getStackSizeUsedInRepair (Lnet/minecraft/inventory/ContainerRepair;)I uv/b (Luv;)I
 MD: net/minecraft/inventory/ContainerRepair/onCraftGuiClosed (Lnet/minecraft/entity/player/EntityPlayer;)V uv/b (Lua;)V
 MD: net/minecraft/inventory/ContainerRepair/onCraftMatrixChanged (Lnet/minecraft/inventory/IInventory;)V uv/a (Lml;)V
 MD: net/minecraft/inventory/ContainerRepair/transferStackInSlot (Lnet/minecraft/entity/player/EntityPlayer;I)Lnet/minecraft/item/ItemStack; uv/b (Lua;I)Lxz;
@@ -15869,12 +15869,12 @@ MD: net/minecraft/network/rcon/IServer/logWarning (Ljava/lang/String;)V hl/f (Lj
 MD: net/minecraft/network/rcon/IServer/saveProperties ()V hl/a ()V
 MD: net/minecraft/network/rcon/IServer/setProperty (Ljava/lang/String;Ljava/lang/Object;)V hl/a (Ljava/lang/String;Ljava/lang/Object;)V
 MD: net/minecraft/network/rcon/RConConsoleSource/canCommandSenderUseCommand (ILjava/lang/String;)Z ke/a (ILjava/lang/String;)Z
-MD: net/minecraft/network/rcon/RConConsoleSource/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V ke/a (Lcu;)V
 MD: net/minecraft/network/rcon/RConConsoleSource/func_130014_f_ ()Lnet/minecraft/world/World; ke/f_ ()Labr;
 MD: net/minecraft/network/rcon/RConConsoleSource/getChatBuffer ()Ljava/lang/String; ke/e ()Ljava/lang/String;
 MD: net/minecraft/network/rcon/RConConsoleSource/getCommandSenderName ()Ljava/lang/String; ke/c_ ()Ljava/lang/String;
 MD: net/minecraft/network/rcon/RConConsoleSource/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates; ke/b ()Lt;
 MD: net/minecraft/network/rcon/RConConsoleSource/resetLog ()V ke/d ()V
+MD: net/minecraft/network/rcon/RConConsoleSource/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V ke/a (Lcu;)V
 MD: net/minecraft/network/rcon/RConOutputStream/reset ()V kc/b ()V
 MD: net/minecraft/network/rcon/RConOutputStream/toByteArray ()[B kc/a ()[B
 MD: net/minecraft/network/rcon/RConOutputStream/writeByteArray ([B)V kc/a ([B)V
@@ -16228,7 +16228,6 @@ MD: net/minecraft/server/MinecraftServer/executeCommand (Ljava/lang/String;)Ljav
 MD: net/minecraft/server/MinecraftServer/finalTick (Lnet/minecraft/crash/CrashReport;)V net/minecraft/server/MinecraftServer/a (Lb;)V
 MD: net/minecraft/server/MinecraftServer/func_104055_i (Z)V net/minecraft/server/MinecraftServer/i (Z)V
 MD: net/minecraft/server/MinecraftServer/func_104056_am ()Z net/minecraft/server/MinecraftServer/ao ()Z
-MD: net/minecraft/server/MinecraftServer/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V net/minecraft/server/MinecraftServer/a (Lcu;)V
 MD: net/minecraft/server/MinecraftServer/func_110454_ao ()Ljava/net/Proxy; net/minecraft/server/MinecraftServer/ap ()Ljava/net/Proxy;
 MD: net/minecraft/server/MinecraftServer/func_110455_j ()I net/minecraft/server/MinecraftServer/k ()I
 MD: net/minecraft/server/MinecraftServer/func_130014_f_ ()Lnet/minecraft/world/World; net/minecraft/server/MinecraftServer/f_ ()Labr;
@@ -16300,6 +16299,7 @@ MD: net/minecraft/server/MinecraftServer/outputPercentRemaining (Ljava/lang/Stri
 MD: net/minecraft/server/MinecraftServer/registerDispenseBehaviors ()V net/minecraft/server/MinecraftServer/ar ()V
 MD: net/minecraft/server/MinecraftServer/run ()V net/minecraft/server/MinecraftServer/run ()V
 MD: net/minecraft/server/MinecraftServer/saveAllWorlds (Z)V net/minecraft/server/MinecraftServer/a (Z)V
+MD: net/minecraft/server/MinecraftServer/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V net/minecraft/server/MinecraftServer/a (Lcu;)V
 MD: net/minecraft/server/MinecraftServer/setAllowFlight (Z)V net/minecraft/server/MinecraftServer/h (Z)V
 MD: net/minecraft/server/MinecraftServer/setAllowPvp (Z)V net/minecraft/server/MinecraftServer/g (Z)V
 MD: net/minecraft/server/MinecraftServer/setBuildLimit (I)V net/minecraft/server/MinecraftServer/d (I)V
@@ -16526,7 +16526,6 @@ MD: net/minecraft/server/management/ServerConfigurationManager/areCommandsAllowe
 MD: net/minecraft/server/management/ServerConfigurationManager/createPlayerForUser (Ljava/lang/String;)Lnet/minecraft/entity/player/EntityPlayerMP; hk/a (Ljava/lang/String;)Ljs;
 MD: net/minecraft/server/management/ServerConfigurationManager/findPlayers (Lnet/minecraft/util/ChunkCoordinates;IIIIIILjava/util/Map;Ljava/lang/String;Ljava/lang/String;Lnet/minecraft/world/World;)Ljava/util/List; hk/a (Lt;IIIIIILjava/util/Map;Ljava/lang/String;Ljava/lang/String;Labr;)Ljava/util/List;
 MD: net/minecraft/server/management/ServerConfigurationManager/func_110459_a (Lnet/minecraft/util/ChatMessageComponent;Z)V hk/a (Lcu;Z)V
-MD: net/minecraft/server/management/ServerConfigurationManager/func_110460_a (Lnet/minecraft/util/ChatMessageComponent;)V hk/a (Lcu;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/func_72357_a (Lnet/minecraft/world/EnumGameType;)V hk/a (Labz;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/func_72375_a (Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/world/WorldServer;)V hk/a (Ljs;Ljp;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/func_72381_a (Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/entity/player/EntityPlayerMP;Lnet/minecraft/world/World;)V hk/a (Ljs;Ljs;Labr;)V
@@ -16560,6 +16559,7 @@ MD: net/minecraft/server/management/ServerConfigurationManager/removeFromWhiteli
 MD: net/minecraft/server/management/ServerConfigurationManager/removeOp (Ljava/lang/String;)V hk/c (Ljava/lang/String;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/respawnPlayer (Lnet/minecraft/entity/player/EntityPlayerMP;IZ)Lnet/minecraft/entity/player/EntityPlayerMP; hk/a (Ljs;IZ)Ljs;
 MD: net/minecraft/server/management/ServerConfigurationManager/saveAllPlayerData ()V hk/g ()V
+MD: net/minecraft/server/management/ServerConfigurationManager/sendChatMsg (Lnet/minecraft/util/ChatMessageComponent;)V hk/a (Lcu;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPacketToAllPlayers (Lnet/minecraft/network/packet/Packet;)V hk/a (Lex;)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPacketToAllPlayersInDimension (Lnet/minecraft/network/packet/Packet;I)V hk/a (Lex;I)V
 MD: net/minecraft/server/management/ServerConfigurationManager/sendPlayerInfoToAllPlayers ()V hk/b ()V
@@ -16770,7 +16770,6 @@ MD: net/minecraft/tileentity/TileEntityChest/updateEntity ()V arr/h ()V
 MD: net/minecraft/tileentity/TileEntityChest/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V arr/b (Lbx;)V
 MD: net/minecraft/tileentity/TileEntityCommandBlock/canCommandSenderUseCommand (ILjava/lang/String;)Z ars/a (ILjava/lang/String;)Z
 MD: net/minecraft/tileentity/TileEntityCommandBlock/executeCommandOnPowered (Lnet/minecraft/world/World;)I ars/a (Labr;)I
-MD: net/minecraft/tileentity/TileEntityCommandBlock/func_110122_a (Lnet/minecraft/util/ChatMessageComponent;)V ars/a (Lcu;)V
 MD: net/minecraft/tileentity/TileEntityCommandBlock/func_130014_f_ ()Lnet/minecraft/world/World; ars/f_ ()Labr;
 MD: net/minecraft/tileentity/TileEntityCommandBlock/func_82353_c ()Ljava/lang/String; ars/d ()Ljava/lang/String;
 MD: net/minecraft/tileentity/TileEntityCommandBlock/func_96102_a (I)V ars/a (I)V
@@ -16779,6 +16778,7 @@ MD: net/minecraft/tileentity/TileEntityCommandBlock/getCommandSenderName ()Ljava
 MD: net/minecraft/tileentity/TileEntityCommandBlock/getDescriptionPacket ()Lnet/minecraft/network/packet/Packet; ars/m ()Lex;
 MD: net/minecraft/tileentity/TileEntityCommandBlock/getPlayerCoordinates ()Lnet/minecraft/util/ChunkCoordinates; ars/b ()Lt;
 MD: net/minecraft/tileentity/TileEntityCommandBlock/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V ars/a (Lbx;)V
+MD: net/minecraft/tileentity/TileEntityCommandBlock/sendChatToPlayer (Lnet/minecraft/util/ChatMessageComponent;)V ars/a (Lcu;)V
 MD: net/minecraft/tileentity/TileEntityCommandBlock/setCommand (Ljava/lang/String;)V ars/a (Ljava/lang/String;)V
 MD: net/minecraft/tileentity/TileEntityCommandBlock/setCommandSenderName (Ljava/lang/String;)V ars/b (Ljava/lang/String;)V
 MD: net/minecraft/tileentity/TileEntityCommandBlock/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V ars/b (Lbx;)V
@@ -16909,8 +16909,8 @@ MD: net/minecraft/tileentity/TileEntityPiston/readFromNBT (Lnet/minecraft/nbt/NB
 MD: net/minecraft/tileentity/TileEntityPiston/updateEntity ()V asp/h ()V
 MD: net/minecraft/tileentity/TileEntityPiston/updatePushedObjects (FF)V asp/a (FF)V
 MD: net/minecraft/tileentity/TileEntityPiston/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V asp/b (Lbx;)V
-MD: net/minecraft/tileentity/TileEntityRecordPlayer/func_110135_a (Lnet/minecraft/item/ItemStack;)V aoq/a (Lxz;)V
-MD: net/minecraft/tileentity/TileEntityRecordPlayer/func_110136_a ()Lnet/minecraft/item/ItemStack; aoq/a ()Lxz;
+MD: net/minecraft/tileentity/TileEntityRecordPlayer/func_96097_a ()Lnet/minecraft/item/ItemStack; aoq/a ()Lxz;
+MD: net/minecraft/tileentity/TileEntityRecordPlayer/func_96098_a (Lnet/minecraft/item/ItemStack;)V aoq/a (Lxz;)V
 MD: net/minecraft/tileentity/TileEntityRecordPlayer/readFromNBT (Lnet/minecraft/nbt/NBTTagCompound;)V aoq/a (Lbx;)V
 MD: net/minecraft/tileentity/TileEntityRecordPlayer/writeToNBT (Lnet/minecraft/nbt/NBTTagCompound;)V aoq/b (Lbx;)V
 MD: net/minecraft/tileentity/TileEntitySign/func_70408_a (Z)V asf/a (Z)V
@@ -16998,10 +16998,10 @@ MD: net/minecraft/util/CombatEntry/func_94560_a ()Lnet/minecraft/util/DamageSour
 MD: net/minecraft/util/CombatEntry/func_94561_i ()F mw/i ()F
 MD: net/minecraft/util/CombatEntry/func_94562_g ()Ljava/lang/String; mw/g ()Ljava/lang/String;
 MD: net/minecraft/util/CombatEntry/func_94563_c ()F mw/c ()F
-MD: net/minecraft/util/CombatTracker/func_111182_b ()Lnet/minecraft/util/ChatMessageComponent; mx/b ()Lcu;
 MD: net/minecraft/util/CombatTracker/func_94542_g ()V mx/g ()V
 MD: net/minecraft/util/CombatTracker/func_94544_f ()Lnet/minecraft/util/CombatEntry; mx/f ()Lmw;
 MD: net/minecraft/util/CombatTracker/func_94545_a ()V mx/a ()V
+MD: net/minecraft/util/CombatTracker/func_94546_b ()Lnet/minecraft/util/ChatMessageComponent; mx/b ()Lcu;
 MD: net/minecraft/util/CombatTracker/func_94547_a (Lnet/minecraft/util/DamageSource;FF)V mx/a (Lmy;FF)V
 MD: net/minecraft/util/CombatTracker/func_94548_b (Lnet/minecraft/util/CombatEntry;)Ljava/lang/String; mx/a (Lmw;)Ljava/lang/String;
 MD: net/minecraft/util/CombatTracker/func_94549_h ()V mx/h ()V
@@ -17027,8 +17027,8 @@ MD: net/minecraft/util/DamageSource/causeMobDamage (Lnet/minecraft/entity/Entity
 MD: net/minecraft/util/DamageSource/causePlayerDamage (Lnet/minecraft/entity/player/EntityPlayer;)Lnet/minecraft/util/DamageSource; my/a (Lua;)Lmy;
 MD: net/minecraft/util/DamageSource/causeThornsDamage (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource; my/a (Lnk;)Lmy;
 MD: net/minecraft/util/DamageSource/causeThrownDamage (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource; my/a (Lnk;Lnk;)Lmy;
-MD: net/minecraft/util/DamageSource/func_111181_b (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; my/b (Loc;)Lcu;
 MD: net/minecraft/util/DamageSource/getDamageType ()Ljava/lang/String; my/n ()Ljava/lang/String;
+MD: net/minecraft/util/DamageSource/getDeathMessage (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; my/b (Loc;)Lcu;
 MD: net/minecraft/util/DamageSource/getEntity ()Lnet/minecraft/entity/Entity; my/i ()Lnk;
 MD: net/minecraft/util/DamageSource/getHungerDamage ()F my/f ()F
 MD: net/minecraft/util/DamageSource/getSourceOfDamage ()Lnet/minecraft/entity/Entity; my/h ()Lnk;
@@ -17049,10 +17049,10 @@ MD: net/minecraft/util/DamageSource/setProjectile ()Lnet/minecraft/util/DamageSo
 MD: net/minecraft/util/Direction/getMovementDirection (DD)I r/a (DD)I
 MD: net/minecraft/util/EnchantmentNameParts/func_78057_a ()Ljava/lang/String; axh/a ()Ljava/lang/String;
 MD: net/minecraft/util/EnchantmentNameParts/func_78058_a (J)V axh/a (J)V
-MD: net/minecraft/util/EntityDamageSource/func_111181_b (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; mz/b (Loc;)Lcu;
+MD: net/minecraft/util/EntityDamageSource/getDeathMessage (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; mz/b (Loc;)Lcu;
 MD: net/minecraft/util/EntityDamageSource/getEntity ()Lnet/minecraft/entity/Entity; mz/i ()Lnk;
 MD: net/minecraft/util/EntityDamageSource/isDifficultyScaled ()Z mz/p ()Z
-MD: net/minecraft/util/EntityDamageSourceIndirect/func_111181_b (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; na/b (Loc;)Lcu;
+MD: net/minecraft/util/EntityDamageSourceIndirect/getDeathMessage (Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/util/ChatMessageComponent; na/b (Loc;)Lcu;
 MD: net/minecraft/util/EntityDamageSourceIndirect/getEntity ()Lnet/minecraft/entity/Entity; na/i ()Lnk;
 MD: net/minecraft/util/EntityDamageSourceIndirect/getSourceOfDamage ()Lnet/minecraft/entity/Entity; na/h ()Lnk;
 MD: net/minecraft/util/EnumArt/valueOf (Ljava/lang/String;)Lnet/minecraft/util/EnumArt; oj/valueOf (Ljava/lang/String;)Loj;
@@ -17463,7 +17463,7 @@ MD: net/minecraft/world/World/findClosestStructure (Ljava/lang/String;III)Lnet/m
 MD: net/minecraft/world/World/findNearestEntityWithinAABB (Ljava/lang/Class;Lnet/minecraft/util/AxisAlignedBB;Lnet/minecraft/entity/Entity;)Lnet/minecraft/entity/Entity; abr/a (Ljava/lang/Class;Lasq;Lnk;)Lnk;
 MD: net/minecraft/world/World/func_110746_b (DDD)F abr/b (DDD)F
 MD: net/minecraft/world/World/func_110750_I (III)F abr/I (III)F
-MD: net/minecraft/world/World/func_130001_d ()I abr/w ()I
+MD: net/minecraft/world/World/func_130001_d ()F abr/x ()F
 MD: net/minecraft/world/World/func_72802_i (IIII)I abr/h (IIII)I
 MD: net/minecraft/world/World/func_72806_N ()Z abr/T ()Z
 MD: net/minecraft/world/World/func_72808_j (IIII)F abr/i (IIII)F
@@ -17526,7 +17526,7 @@ MD: net/minecraft/world/World/getHeightValue (II)I abr/f (II)I
 MD: net/minecraft/world/World/getIndirectPowerLevelTo (IIII)I abr/l (IIII)I
 MD: net/minecraft/world/World/getIndirectPowerOutput (IIII)Z abr/k (IIII)Z
 MD: net/minecraft/world/World/getLightBrightness (III)F abr/q (III)F
-MD: net/minecraft/world/World/getMoonPhase ()F abr/x ()F
+MD: net/minecraft/world/World/getMoonPhase ()I abr/w ()I
 MD: net/minecraft/world/World/getPathEntityToEntity (Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;FZZZZ)Lnet/minecraft/pathfinding/PathEntity; abr/a (Lnk;Lnk;FZZZZ)Laky;
 MD: net/minecraft/world/World/getPendingBlockUpdates (Lnet/minecraft/world/chunk/Chunk;Z)Ljava/util/List; abr/a (Ladm;Z)Ljava/util/List;
 MD: net/minecraft/world/World/getPlayerEntityByName (Ljava/lang/String;)Lnet/minecraft/entity/player/EntityPlayer; abr/a (Ljava/lang/String;)Lua;
