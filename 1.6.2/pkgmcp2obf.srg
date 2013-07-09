@@ -538,7 +538,6 @@ CL: net/minecraft/client/resources/LanguageManager bka
 CL: net/minecraft/client/resources/Locale bkb
 CL: net/minecraft/client/resources/ReloadableResourceManager bjj
 CL: net/minecraft/client/resources/Resource bjk
-CL: net/minecraft/client/resources/ResourceLocation bjl
 CL: net/minecraft/client/resources/ResourceManager bjm
 CL: net/minecraft/client/resources/ResourceManagerReloadListener bjn
 CL: net/minecraft/client/resources/ResourcePack bjo
@@ -1300,6 +1299,7 @@ CL: net/minecraft/util/MovementInput bes
 CL: net/minecraft/util/MovementInputFromOptions bet
 CL: net/minecraft/util/MovingObjectPosition asx
 CL: net/minecraft/util/ReportedException u
+CL: net/minecraft/util/ResourceLocation bjl
 CL: net/minecraft/util/ScreenShotHelper aum
 CL: net/minecraft/util/Session aup
 CL: net/minecraft/util/StatCollector bt
@@ -3940,8 +3940,6 @@ FD: net/minecraft/client/resources/Locale/field_135029_d bkb/d
 FD: net/minecraft/client/resources/Locale/field_135030_b bkb/b
 FD: net/minecraft/client/resources/Locale/field_135031_c bkb/c
 FD: net/minecraft/client/resources/Locale/field_135032_a bkb/a
-FD: net/minecraft/client/resources/ResourceLocation/field_110625_b bjl/b
-FD: net/minecraft/client/resources/ResourceLocation/field_110626_a bjl/a
 FD: net/minecraft/client/resources/ResourcePackRepository/field_110617_f bjq/f
 FD: net/minecraft/client/resources/ResourcePackRepository/field_110618_d bjq/d
 FD: net/minecraft/client/resources/ResourcePackRepository/field_110619_e bjq/e
@@ -6795,6 +6793,8 @@ FD: net/minecraft/util/MovingObjectPosition/hitVec asx/f
 FD: net/minecraft/util/MovingObjectPosition/sideHit asx/e
 FD: net/minecraft/util/MovingObjectPosition/typeOfHit asx/a
 FD: net/minecraft/util/ReportedException/theReportedExceptionCrashReport u/a
+FD: net/minecraft/util/ResourceLocation/field_110625_b bjl/b
+FD: net/minecraft/util/ResourceLocation/field_110626_a bjl/a
 FD: net/minecraft/util/ScreenShotHelper/field_74293_b aum/b
 FD: net/minecraft/util/ScreenShotHelper/field_74294_c aum/c
 FD: net/minecraft/util/ScreenShotHelper/field_74295_a aum/a
@@ -9169,19 +9169,19 @@ MD: net/minecraft/client/audio/SoundPoolEntry/func_110458_a ()Ljava/lang/String;
 MD: net/minecraft/client/audio/SoundPoolProtocolHandler/openConnection (Ljava/net/URL;)Ljava/net/URLConnection; blo/openConnection (Ljava/net/URL;)Ljava/net/URLConnection;
 MD: net/minecraft/client/audio/SoundPoolURLConnection/connect ()V blp/connect ()V
 MD: net/minecraft/client/audio/SoundPoolURLConnection/getInputStream ()Ljava/io/InputStream; blp/getInputStream ()Ljava/io/InputStream;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110299_g (Ljava/lang/String;)Lnet/minecraft/client/resources/ResourceLocation; ber/g (Ljava/lang/String;)Lbjl;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110299_g (Ljava/lang/String;)Lnet/minecraft/util/ResourceLocation; ber/g (Ljava/lang/String;)Lbjl;
 MD: net/minecraft/client/entity/AbstractClientPlayer/func_110300_d (Ljava/lang/String;)Ljava/lang/String; ber/d (Ljava/lang/String;)Ljava/lang/String;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110301_a (Lnet/minecraft/client/resources/ResourceLocation;Ljava/lang/String;Lnet/minecraft/client/resources/ResourceLocation;Lnet/minecraft/client/renderer/IImageBuffer;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/a (Lbjl;Ljava/lang/String;Lbjl;Lbff;)Lbhz;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110301_a (Lnet/minecraft/util/ResourceLocation;Ljava/lang/String;Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/IImageBuffer;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/a (Lbjl;Ljava/lang/String;Lbjl;Lbff;)Lbhz;
 MD: net/minecraft/client/entity/AbstractClientPlayer/func_110302_j ()V ber/l ()V
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110303_q ()Lnet/minecraft/client/resources/ResourceLocation; ber/s ()Lbjl;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110304_a (Lnet/minecraft/client/resources/ResourceLocation;Ljava/lang/String;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/a (Lbjl;Ljava/lang/String;)Lbhz;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110305_h (Ljava/lang/String;)Lnet/minecraft/client/resources/ResourceLocation; ber/h (Ljava/lang/String;)Lbjl;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110306_p ()Lnet/minecraft/client/resources/ResourceLocation; ber/r ()Lbjl;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110307_b (Lnet/minecraft/client/resources/ResourceLocation;Ljava/lang/String;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/b (Lbjl;Ljava/lang/String;)Lbhz;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110303_q ()Lnet/minecraft/util/ResourceLocation; ber/s ()Lbjl;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110304_a (Lnet/minecraft/util/ResourceLocation;Ljava/lang/String;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/a (Lbjl;Ljava/lang/String;)Lbhz;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110305_h (Ljava/lang/String;)Lnet/minecraft/util/ResourceLocation; ber/h (Ljava/lang/String;)Lbjl;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110306_p ()Lnet/minecraft/util/ResourceLocation; ber/r ()Lbjl;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110307_b (Lnet/minecraft/util/ResourceLocation;Ljava/lang/String;)Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/b (Lbjl;Ljava/lang/String;)Lbhz;
 MD: net/minecraft/client/entity/AbstractClientPlayer/func_110308_e (Ljava/lang/String;)Ljava/lang/String; ber/e (Ljava/lang/String;)Ljava/lang/String;
 MD: net/minecraft/client/entity/AbstractClientPlayer/func_110309_l ()Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/p ()Lbhz;
 MD: net/minecraft/client/entity/AbstractClientPlayer/func_110310_o ()Lnet/minecraft/client/renderer/ThreadDownloadImageData; ber/q ()Lbhz;
-MD: net/minecraft/client/entity/AbstractClientPlayer/func_110311_f (Ljava/lang/String;)Lnet/minecraft/client/resources/ResourceLocation; ber/f (Ljava/lang/String;)Lbjl;
+MD: net/minecraft/client/entity/AbstractClientPlayer/func_110311_f (Ljava/lang/String;)Lnet/minecraft/util/ResourceLocation; ber/f (Ljava/lang/String;)Lbjl;
 MD: net/minecraft/client/entity/EntityClientPlayerMP/addStat (Lnet/minecraft/stats/StatBase;I)V bdf/a (Lkt;I)V
 MD: net/minecraft/client/entity/EntityClientPlayerMP/attackEntityFrom (Lnet/minecraft/util/DamageSource;F)Z bdf/a (Lna;F)Z
 MD: net/minecraft/client/entity/EntityClientPlayerMP/closeScreen ()V bdf/i ()V
@@ -9258,7 +9258,7 @@ MD: net/minecraft/client/gui/ChatLine/func_74538_a ()Ljava/lang/String; ato/a ()
 MD: net/minecraft/client/gui/ChatLine/func_74539_c ()I ato/c ()I
 MD: net/minecraft/client/gui/ChatLine/func_74540_b ()I ato/b ()I
 MD: net/minecraft/client/gui/FontRenderer/func_110549_a (Lnet/minecraft/client/resources/ResourceManager;)V avf/a (Lbjm;)V
-MD: net/minecraft/client/gui/FontRenderer/func_111271_a (I)Lnet/minecraft/client/resources/ResourceLocation; avf/a (I)Lbjl;
+MD: net/minecraft/client/gui/FontRenderer/func_111271_a (I)Lnet/minecraft/util/ResourceLocation; avf/a (I)Lbjl;
 MD: net/minecraft/client/gui/FontRenderer/func_111272_d ()V avf/c ()V
 MD: net/minecraft/client/gui/FontRenderer/func_78255_a (Ljava/lang/String;Z)V avf/a (Ljava/lang/String;Z)V
 MD: net/minecraft/client/gui/FontRenderer/func_78256_a (Ljava/lang/String;)I avf/a (Ljava/lang/String;)I
@@ -9469,7 +9469,7 @@ MD: net/minecraft/client/gui/GuiMemoryErrorScreen/func_73863_a (IIF)V avu/a (IIF
 MD: net/minecraft/client/gui/GuiMemoryErrorScreen/func_73866_w_ ()V avu/A_ ()V
 MD: net/minecraft/client/gui/GuiMemoryErrorScreen/func_73869_a (CI)V avu/a (CI)V
 MD: net/minecraft/client/gui/GuiMemoryErrorScreen/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V avu/a (Lauq;)V
-MD: net/minecraft/client/gui/GuiMerchant/func_110417_h ()Lnet/minecraft/client/resources/ResourceLocation; axt/h ()Lbjl;
+MD: net/minecraft/client/gui/GuiMerchant/func_110417_h ()Lnet/minecraft/util/ResourceLocation; axt/h ()Lbjl;
 MD: net/minecraft/client/gui/GuiMerchant/func_73863_a (IIF)V axt/a (IIF)V
 MD: net/minecraft/client/gui/GuiMerchant/func_73866_w_ ()V axt/A_ ()V
 MD: net/minecraft/client/gui/GuiMerchant/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V axt/a (Lauq;)V
@@ -9574,7 +9574,7 @@ MD: net/minecraft/client/gui/GuiScreenAddServer/func_73869_a (CI)V avd/a (CI)V
 MD: net/minecraft/client/gui/GuiScreenAddServer/func_73874_b ()V avd/b ()V
 MD: net/minecraft/client/gui/GuiScreenAddServer/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V avd/a (Lauq;)V
 MD: net/minecraft/client/gui/GuiScreenAddServer/func_73876_c ()V avd/c ()V
-MD: net/minecraft/client/gui/GuiScreenBook/func_110404_g ()Lnet/minecraft/client/resources/ResourceLocation; axc/g ()Lbjl;
+MD: net/minecraft/client/gui/GuiScreenBook/func_110404_g ()Lnet/minecraft/util/ResourceLocation; axc/g ()Lbjl;
 MD: net/minecraft/client/gui/GuiScreenBook/func_73863_a (IIF)V axc/a (IIF)V
 MD: net/minecraft/client/gui/GuiScreenBook/func_73866_w_ ()V axc/A_ ()V
 MD: net/minecraft/client/gui/GuiScreenBook/func_73869_a (CI)V axc/a (CI)V
@@ -10013,7 +10013,7 @@ MD: net/minecraft/client/gui/inventory/ContainerCreative/transferStackInSlot (Ln
 MD: net/minecraft/client/gui/inventory/CreativeCrafting/sendContainerAndContentsToPlayer (Lnet/minecraft/inventory/Container;Ljava/util/List;)V axi/a (Lux;Ljava/util/List;)V
 MD: net/minecraft/client/gui/inventory/CreativeCrafting/sendProgressBarUpdate (Lnet/minecraft/inventory/Container;II)V axi/a (Lux;II)V
 MD: net/minecraft/client/gui/inventory/CreativeCrafting/sendSlotContents (Lnet/minecraft/inventory/Container;ILnet/minecraft/item/ItemStack;)V axi/a (Lux;ILyd;)V
-MD: net/minecraft/client/gui/inventory/GuiBeacon/func_110427_g ()Lnet/minecraft/client/resources/ResourceLocation; awx/g ()Lbjl;
+MD: net/minecraft/client/gui/inventory/GuiBeacon/func_110427_g ()Lnet/minecraft/util/ResourceLocation; awx/g ()Lbjl;
 MD: net/minecraft/client/gui/inventory/GuiBeacon/func_73866_w_ ()V awx/A_ ()V
 MD: net/minecraft/client/gui/inventory/GuiBeacon/func_73875_a (Lnet/minecraft/client/gui/GuiButton;)V awx/a (Lauq;)V
 MD: net/minecraft/client/gui/inventory/GuiBeacon/func_73876_c ()V awx/c ()V
@@ -10996,8 +10996,8 @@ MD: net/minecraft/client/renderer/culling/Frustrum/func_78547_a (DDD)V bfs/a (DD
 MD: net/minecraft/client/renderer/culling/Frustrum/func_78548_b (DDDDDD)Z bfs/b (DDDDDD)Z
 MD: net/minecraft/client/renderer/culling/ICamera/func_78546_a (Lnet/minecraft/util/AxisAlignedBB;)Z bfq/a (Lasu;)Z
 MD: net/minecraft/client/renderer/culling/ICamera/func_78547_a (DDD)V bfq/a (DDD)V
-MD: net/minecraft/client/renderer/entity/Render/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgj/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/Render/func_110776_a (Lnet/minecraft/client/resources/ResourceLocation;)V bgj/a (Lbjl;)V
+MD: net/minecraft/client/renderer/entity/Render/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgj/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/Render/func_110776_a (Lnet/minecraft/util/ResourceLocation;)V bgj/a (Lbjl;)V
 MD: net/minecraft/client/renderer/entity/Render/func_110777_b (Lnet/minecraft/entity/Entity;)V bgj/b (Lnm;)V
 MD: net/minecraft/client/renderer/entity/Render/func_76975_c (Lnet/minecraft/entity/Entity;DDDFF)V bgj/c (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/Render/func_76976_a (Lnet/minecraft/client/renderer/entity/RenderManager;)V bgj/a (Lbgi;)V
@@ -11010,12 +11010,12 @@ MD: net/minecraft/client/renderer/entity/Render/func_76982_b ()Lnet/minecraft/wo
 MD: net/minecraft/client/renderer/entity/Render/func_76983_a ()Lnet/minecraft/client/gui/FontRenderer; bgj/a ()Lavf;
 MD: net/minecraft/client/renderer/entity/Render/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgj/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/Render/func_94143_a (Lnet/minecraft/client/renderer/texture/IconRegister;)V bgj/a (Lms;)V
-MD: net/minecraft/client/renderer/entity/RenderArrow/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bfw/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderArrow/func_110779_a (Lnet/minecraft/entity/projectile/EntityArrow;)Lnet/minecraft/client/resources/ResourceLocation; bfw/a (Lug;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderArrow/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bfw/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderArrow/func_110779_a (Lnet/minecraft/entity/projectile/EntityArrow;)Lnet/minecraft/util/ResourceLocation; bfw/a (Lug;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderArrow/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bfw/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderArrow/func_76999_a (Lnet/minecraft/entity/projectile/EntityArrow;DDDFF)V bfw/a (Lug;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderBat/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bfx/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBat/func_110834_a (Lnet/minecraft/entity/passive/EntityBat;)Lnet/minecraft/client/resources/ResourceLocation; bfx/a (Lrn;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBat/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bfx/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBat/func_110834_a (Lnet/minecraft/entity/passive/EntityBat;)Lnet/minecraft/util/ResourceLocation; bfx/a (Lrn;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderBat/func_130000_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bfx/a (Loe;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bfx/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bfx/a (Lof;DDDFF)V
@@ -11026,10 +11026,10 @@ MD: net/minecraft/client/renderer/entity/RenderBat/func_82442_a (Lnet/minecraft/
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82443_a (Lnet/minecraft/entity/passive/EntityBat;DDDFF)V bfx/a (Lrn;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82444_a (Lnet/minecraft/entity/passive/EntityBat;FFF)V bfx/a (Lrn;FFF)V
 MD: net/minecraft/client/renderer/entity/RenderBat/func_82445_a (Lnet/minecraft/entity/passive/EntityBat;DDD)V bfx/a (Lrn;DDD)V
-MD: net/minecraft/client/renderer/entity/RenderBiped/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgr/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBiped/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/client/resources/ResourceLocation; bgr/a (Lof;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBiped/func_110857_a (Lnet/minecraft/item/ItemArmor;I)Lnet/minecraft/client/resources/ResourceLocation; bgr/a (Lwg;I)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBiped/func_110858_a (Lnet/minecraft/item/ItemArmor;ILjava/lang/String;)Lnet/minecraft/client/resources/ResourceLocation; bgr/a (Lwg;ILjava/lang/String;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBiped/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgr/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBiped/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/util/ResourceLocation; bgr/a (Lof;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBiped/func_110857_a (Lnet/minecraft/item/ItemArmor;I)Lnet/minecraft/util/ResourceLocation; bgr/a (Lwg;I)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBiped/func_110858_a (Lnet/minecraft/item/ItemArmor;ILjava/lang/String;)Lnet/minecraft/util/ResourceLocation; bgr/a (Lwg;ILjava/lang/String;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_130005_c (Lnet/minecraft/entity/EntityLiving;F)V bgr/a (Lof;F)V
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_130006_a (Lnet/minecraft/entity/EntityLiving;IF)I bgr/a (Lof;IF)I
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_130013_c (Lnet/minecraft/entity/EntityLiving;IF)V bgr/b (Lof;IF)V
@@ -11042,33 +11042,33 @@ MD: net/minecraft/client/renderer/entity/RenderBiped/func_82420_a (Lnet/minecraf
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_82421_b ()V bgr/b ()V
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_82422_c ()V bgr/c ()V
 MD: net/minecraft/client/renderer/entity/RenderBiped/func_82439_b (Lnet/minecraft/entity/EntityLivingBase;IF)V bgr/c (Loe;IF)V
-MD: net/minecraft/client/renderer/entity/RenderBlaze/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bfy/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBlaze/func_110836_a (Lnet/minecraft/entity/monster/EntityBlaze;)Lnet/minecraft/client/resources/ResourceLocation; bfy/a (Ltc;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBlaze/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bfy/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBlaze/func_110836_a (Lnet/minecraft/entity/monster/EntityBlaze;)Lnet/minecraft/util/ResourceLocation; bfy/a (Ltc;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderBlaze/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bfy/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBlaze/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bfy/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBlaze/func_77067_a (Lnet/minecraft/entity/monster/EntityBlaze;DDDFF)V bfy/a (Ltc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBlaze/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bfy/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderBoat/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bfz/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderBoat/func_110781_a (Lnet/minecraft/entity/item/EntityBoat;)Lnet/minecraft/client/resources/ResourceLocation; bfz/a (Lsp;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBoat/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bfz/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderBoat/func_110781_a (Lnet/minecraft/entity/item/EntityBoat;)Lnet/minecraft/util/ResourceLocation; bfz/a (Lsp;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderBoat/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bfz/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderBoat/func_76997_a (Lnet/minecraft/entity/item/EntityBoat;DDDFF)V bfz/a (Lsp;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bga/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110889_a (Lnet/minecraft/entity/monster/EntitySpider;)Lnet/minecraft/client/resources/ResourceLocation; bga/a (Lts;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110892_a (Lnet/minecraft/entity/monster/EntityCaveSpider;)Lnet/minecraft/client/resources/ResourceLocation; bga/a (Ltd;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bga/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110889_a (Lnet/minecraft/entity/monster/EntitySpider;)Lnet/minecraft/util/ResourceLocation; bga/a (Lts;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_110892_a (Lnet/minecraft/entity/monster/EntityCaveSpider;)Lnet/minecraft/util/ResourceLocation; bga/a (Ltd;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bga/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderCaveSpider/func_77096_a (Lnet/minecraft/entity/monster/EntityCaveSpider;F)V bga/a (Ltd;F)V
-MD: net/minecraft/client/renderer/entity/RenderChicken/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgb/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderChicken/func_110919_a (Lnet/minecraft/entity/passive/EntityChicken;)Lnet/minecraft/client/resources/ResourceLocation; bgb/a (Lrp;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderChicken/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgb/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderChicken/func_110919_a (Lnet/minecraft/entity/passive/EntityChicken;)Lnet/minecraft/util/ResourceLocation; bgb/a (Lrp;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgb/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bgb/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_77044_a (Lnet/minecraft/entity/EntityLivingBase;F)F bgb/b (Loe;F)F
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_77065_a (Lnet/minecraft/entity/passive/EntityChicken;DDDFF)V bgb/a (Lrp;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_77066_a (Lnet/minecraft/entity/passive/EntityChicken;F)F bgb/a (Lrp;F)F
 MD: net/minecraft/client/renderer/entity/RenderChicken/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgb/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderCow/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgc/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderCow/func_110832_a (Lnet/minecraft/entity/passive/EntityCow;)Lnet/minecraft/client/resources/ResourceLocation; bgc/a (Lrq;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderCreeper/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgd/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderCreeper/func_110829_a (Lnet/minecraft/entity/monster/EntityCreeper;)Lnet/minecraft/client/resources/ResourceLocation; bgd/a (Lte;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCow/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgc/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCow/func_110832_a (Lnet/minecraft/entity/passive/EntityCow;)Lnet/minecraft/util/ResourceLocation; bgc/a (Lrq;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCreeper/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgd/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderCreeper/func_110829_a (Lnet/minecraft/entity/monster/EntityCreeper;)Lnet/minecraft/util/ResourceLocation; bgd/a (Lte;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77030_a (Lnet/minecraft/entity/EntityLivingBase;FF)I bgd/a (Loe;FF)I
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bgd/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77035_b (Lnet/minecraft/entity/EntityLivingBase;IF)I bgd/b (Loe;IF)I
@@ -11077,8 +11077,8 @@ MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77060_a (Lnet/minecr
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77061_b (Lnet/minecraft/entity/monster/EntityCreeper;IF)I bgd/b (Lte;IF)I
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77062_a (Lnet/minecraft/entity/monster/EntityCreeper;IF)I bgd/a (Lte;IF)I
 MD: net/minecraft/client/renderer/entity/RenderCreeper/func_77063_a (Lnet/minecraft/entity/monster/EntityCreeper;FF)I bgd/a (Lte;FF)I
-MD: net/minecraft/client/renderer/entity/RenderDragon/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgg/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderDragon/func_110841_a (Lnet/minecraft/entity/boss/EntityDragon;)Lnet/minecraft/client/resources/ResourceLocation; bgg/a (Lsj;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderDragon/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgg/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderDragon/func_110841_a (Lnet/minecraft/entity/boss/EntityDragon;)Lnet/minecraft/util/ResourceLocation; bgg/a (Lsj;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderDragon/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgg/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderDragon/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bgg/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderDragon/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bgg/a (Lof;DDDFF)V
@@ -11093,8 +11093,8 @@ MD: net/minecraft/client/renderer/entity/RenderDragon/func_77083_a (Lnet/minecra
 MD: net/minecraft/client/renderer/entity/RenderDragon/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgg/a (Loe;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderEnchantmentTable/func_76894_a (Lnet/minecraft/tileentity/TileEntity;DDDF)V bit/a (Lasm;DDDF)V
 MD: net/minecraft/client/renderer/entity/RenderEnchantmentTable/func_76901_a (Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDF)V bit/a (Lasb;DDDF)V
-MD: net/minecraft/client/renderer/entity/RenderEnderman/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgh/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderEnderman/func_110838_a (Lnet/minecraft/entity/monster/EntityEnderman;)Lnet/minecraft/client/resources/ResourceLocation; bgh/a (Ltf;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderEnderman/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgh/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderEnderman/func_110838_a (Lnet/minecraft/entity/monster/EntityEnderman;)Lnet/minecraft/util/ResourceLocation; bgh/a (Ltf;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgh/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bgh/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bgh/a (Lof;DDDFF)V
@@ -11103,37 +11103,37 @@ MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77074_a (Lnet/minec
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77075_a (Lnet/minecraft/entity/monster/EntityEnderman;DDDFF)V bgh/a (Ltf;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77076_a (Lnet/minecraft/entity/monster/EntityEnderman;F)V bgh/a (Ltf;F)V
 MD: net/minecraft/client/renderer/entity/RenderEnderman/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bgh/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderEntity/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bge/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderEntity/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bge/a (Lnm;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderEntity/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bge/a (Lnm;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgl/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_110783_a (Lnet/minecraft/entity/item/EntityFallingSand;)Lnet/minecraft/client/resources/ResourceLocation; bgl/a (Lsq;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgl/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_110783_a (Lnet/minecraft/entity/item/EntityFallingSand;)Lnet/minecraft/util/ResourceLocation; bgl/a (Lsq;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgl/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderFallingSand/func_77003_a (Lnet/minecraft/entity/item/EntityFallingSand;DDDFF)V bgl/a (Lsq;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderFireball/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgm/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderFireball/func_110790_a (Lnet/minecraft/entity/projectile/EntityFireball;)Lnet/minecraft/client/resources/ResourceLocation; bgm/a (Lui;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFireball/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgm/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFireball/func_110790_a (Lnet/minecraft/entity/projectile/EntityFireball;)Lnet/minecraft/util/ResourceLocation; bgm/a (Lui;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderFireball/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgm/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderFireball/func_77001_a (Lnet/minecraft/entity/projectile/EntityFireball;DDDFF)V bgm/a (Lui;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderFish/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgn/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderFish/func_110791_a (Lnet/minecraft/entity/projectile/EntityFishHook;)Lnet/minecraft/client/resources/ResourceLocation; bgn/a (Luk;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFish/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgn/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderFish/func_110791_a (Lnet/minecraft/entity/projectile/EntityFishHook;)Lnet/minecraft/util/ResourceLocation; bgn/a (Luk;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderFish/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgn/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderFish/func_77000_a (Lnet/minecraft/entity/projectile/EntityFishHook;DDDFF)V bgn/a (Luk;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderGhast/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgo/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderGhast/func_110867_a (Lnet/minecraft/entity/monster/EntityGhast;)Lnet/minecraft/client/resources/ResourceLocation; bgo/a (Lti;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderGhast/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgo/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderGhast/func_110867_a (Lnet/minecraft/entity/monster/EntityGhast;)Lnet/minecraft/util/ResourceLocation; bgo/a (Lti;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderGhast/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgo/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderGhast/func_77069_a (Lnet/minecraft/entity/monster/EntityGhast;F)V bgo/a (Lti;F)V
-MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgp/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_110870_a (Lnet/minecraft/entity/monster/EntityGiantZombie;)Lnet/minecraft/client/resources/ResourceLocation; bgp/a (Ltj;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgp/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_110870_a (Lnet/minecraft/entity/monster/EntityGiantZombie;)Lnet/minecraft/util/ResourceLocation; bgp/a (Ltj;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgp/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderGiantZombie/func_77072_a (Lnet/minecraft/entity/monster/EntityGiantZombie;F)V bgp/a (Ltj;F)V
-MD: net/minecraft/client/renderer/entity/RenderHorse/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgq/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderHorse/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgq/a (Lnm;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderHorse/func_110846_a (Lnet/minecraft/entity/passive/EntityHorse;FFFFFF)V bgq/a (Lrr;FFFFFF)V
 MD: net/minecraft/client/renderer/entity/RenderHorse/func_110847_a (Lnet/minecraft/entity/passive/EntityHorse;F)V bgq/a (Lrr;F)V
-MD: net/minecraft/client/renderer/entity/RenderHorse/func_110848_b (Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/client/resources/ResourceLocation; bgq/b (Lrr;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderHorse/func_110849_a (Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/client/resources/ResourceLocation; bgq/a (Lrr;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderHorse/func_110848_b (Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/util/ResourceLocation; bgq/b (Lrr;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderHorse/func_110849_a (Lnet/minecraft/entity/passive/EntityHorse;)Lnet/minecraft/util/ResourceLocation; bgq/a (Lrr;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderHorse/func_77036_a (Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V bgq/a (Loe;FFFFFF)V
 MD: net/minecraft/client/renderer/entity/RenderHorse/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgq/a (Loe;F)V
-MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhq/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_110898_a (Lnet/minecraft/entity/monster/EntityIronGolem;)Lnet/minecraft/client/resources/ResourceLocation; bhq/a (Lsc;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhq/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_110898_a (Lnet/minecraft/entity/monster/EntityIronGolem;)Lnet/minecraft/util/ResourceLocation; bhq/a (Lsc;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhq/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bhq/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhq/a (Lof;DDDFF)V
@@ -11142,8 +11142,8 @@ MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77047_a (Lnet/mine
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77048_a (Lnet/minecraft/entity/monster/EntityIronGolem;FFF)V bhq/a (Lsc;FFF)V
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77049_a (Lnet/minecraft/entity/monster/EntityIronGolem;DDDFF)V bhq/a (Lsc;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderIronGolem/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhq/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgt/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderItem/func_110796_a (Lnet/minecraft/entity/item/EntityItem;)Lnet/minecraft/client/resources/ResourceLocation; bgt/a (Lsr;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderItem/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgt/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderItem/func_110796_a (Lnet/minecraft/entity/item/EntityItem;)Lnet/minecraft/util/ResourceLocation; bgt/a (Lsr;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderItem/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgt/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77014_a (Lnet/minecraft/entity/item/EntityItem;DDDFF)V bgt/a (Lsr;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_77015_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgt/a (Lavf;Lbij;Lyd;II)V
@@ -11154,12 +11154,12 @@ MD: net/minecraft/client/renderer/entity/RenderItem/func_77021_b (Lnet/minecraft
 MD: net/minecraft/client/renderer/entity/RenderItem/func_82406_b (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V bgt/b (Lavf;Lbij;Lyd;II)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_94148_a (Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V bgt/a (Lavf;Lbij;Lyd;IILjava/lang/String;)V
 MD: net/minecraft/client/renderer/entity/RenderItem/func_94149_a (IILnet/minecraft/util/Icon;II)V bgt/a (IILmr;II)V
-MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgw/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgw/a (Lnm;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110799_a (Lnet/minecraft/entity/EntityLeashKnot;DDDFF)V bgw/a (Lod;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110800_a (Lnet/minecraft/entity/EntityLeashKnot;)Lnet/minecraft/client/resources/ResourceLocation; bgw/a (Lod;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_110800_a (Lnet/minecraft/entity/EntityLeashKnot;)Lnet/minecraft/util/ResourceLocation; bgw/a (Lod;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderLeashKnot/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgw/a (Lnm;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgx/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_110805_a (Lnet/minecraft/entity/effect/EntityLightningBolt;)Lnet/minecraft/client/resources/ResourceLocation; bgx/a (Lso;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgx/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_110805_a (Lnet/minecraft/entity/effect/EntityLightningBolt;)Lnet/minecraft/util/ResourceLocation; bgx/a (Lso;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgx/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderLightningBolt/func_77028_a (Lnet/minecraft/entity/effect/EntityLightningBolt;DDDFF)V bgx/a (Lso;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderLiving/func_110813_b (Lnet/minecraft/entity/EntityLivingBase;)Z bhb/b (Loe;)Z
@@ -11169,8 +11169,8 @@ MD: net/minecraft/client/renderer/entity/RenderLiving/func_130007_b (Lnet/minecr
 MD: net/minecraft/client/renderer/entity/RenderLiving/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhb/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderLiving/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhb/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderLiving/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhb/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgv/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_110872_a (Lnet/minecraft/entity/monster/EntityMagmaCube;)Lnet/minecraft/client/resources/ResourceLocation; bgv/a (Ltk;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgv/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_110872_a (Lnet/minecraft/entity/monster/EntityMagmaCube;)Lnet/minecraft/util/ResourceLocation; bgv/a (Ltk;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bgv/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderMagmaCube/func_77118_a (Lnet/minecraft/entity/monster/EntityMagmaCube;F)V bgv/a (Ltk;F)V
 MD: net/minecraft/client/renderer/entity/RenderManager/func_78713_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/renderer/entity/Render; bgi/a (Lnm;)Lbgj;
@@ -11183,41 +11183,41 @@ MD: net/minecraft/client/renderer/entity/RenderManager/func_78719_a (Lnet/minecr
 MD: net/minecraft/client/renderer/entity/RenderManager/func_78720_a (Lnet/minecraft/entity/Entity;F)V bgi/a (Lnm;F)V
 MD: net/minecraft/client/renderer/entity/RenderManager/func_85094_b (Lnet/minecraft/entity/Entity;DDDFF)V bgi/b (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderManager/func_94178_a (Lnet/minecraft/client/renderer/texture/IconRegister;)V bgi/a (Lms;)V
-MD: net/minecraft/client/renderer/entity/RenderMinecart/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgz/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderMinecart/func_110803_a (Lnet/minecraft/entity/item/EntityMinecart;)Lnet/minecraft/client/resources/ResourceLocation; bgz/a (Lss;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMinecart/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgz/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMinecart/func_110803_a (Lnet/minecraft/entity/item/EntityMinecart;)Lnet/minecraft/util/ResourceLocation; bgz/a (Lss;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgz/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_77012_a (Lnet/minecraft/entity/item/EntityMinecart;DDDFF)V bgz/a (Lss;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMinecart/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bgz/a (Lss;FLaqw;I)V
 MD: net/minecraft/client/renderer/entity/RenderMinecartMobSpawner/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bha/a (Lss;FLaqw;I)V
 MD: net/minecraft/client/renderer/entity/RenderMinecartMobSpawner/func_98192_a (Lnet/minecraft/entity/ai/EntityMinecartMobSpawner;FLnet/minecraft/block/Block;I)V bha/a (Lsy;FLaqw;I)V
-MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhc/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110879_a (Lnet/minecraft/entity/passive/EntityMooshroom;)Lnet/minecraft/client/resources/ResourceLocation; bhc/a (Lrv;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhc/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_110879_a (Lnet/minecraft/entity/passive/EntityMooshroom;)Lnet/minecraft/util/ResourceLocation; bhc/a (Lrv;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhc/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bhc/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhc/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhc/a (Loe;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_77114_a (Lnet/minecraft/entity/passive/EntityMooshroom;DDDFF)V bhc/a (Lrv;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderMooshroom/func_77115_a (Lnet/minecraft/entity/passive/EntityMooshroom;F)V bhc/a (Lrv;F)V
-MD: net/minecraft/client/renderer/entity/RenderOcelot/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhd/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderOcelot/func_110874_a (Lnet/minecraft/entity/passive/EntityOcelot;)Lnet/minecraft/client/resources/ResourceLocation; bhd/a (Lrw;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderOcelot/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhd/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderOcelot/func_110874_a (Lnet/minecraft/entity/passive/EntityOcelot;)Lnet/minecraft/util/ResourceLocation; bhd/a (Lrw;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhd/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhd/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bhd/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhd/a (Loe;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_77116_a (Lnet/minecraft/entity/passive/EntityOcelot;F)V bhd/a (Lrw;F)V
 MD: net/minecraft/client/renderer/entity/RenderOcelot/func_77117_a (Lnet/minecraft/entity/passive/EntityOcelot;DDDFF)V bhd/a (Lrw;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderPainting/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhe/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderPainting/func_110806_a (Lnet/minecraft/entity/item/EntityPainting;)Lnet/minecraft/client/resources/ResourceLocation; bhe/a (Lok;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPainting/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhe/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPainting/func_110806_a (Lnet/minecraft/entity/item/EntityPainting;)Lnet/minecraft/util/ResourceLocation; bhe/a (Lok;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderPainting/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhe/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderPainting/func_77008_a (Lnet/minecraft/entity/item/EntityPainting;FF)V bhe/a (Lok;FF)V
 MD: net/minecraft/client/renderer/entity/RenderPainting/func_77009_a (Lnet/minecraft/entity/item/EntityPainting;DDDFF)V bhe/a (Lok;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderPainting/func_77010_a (Lnet/minecraft/entity/item/EntityPainting;IIII)V bhe/a (Lok;IIII)V
-MD: net/minecraft/client/renderer/entity/RenderPig/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhf/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderPig/func_110886_a (Lnet/minecraft/entity/passive/EntityPig;)Lnet/minecraft/client/resources/ResourceLocation; bhf/a (Lrx;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPig/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhf/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPig/func_110886_a (Lnet/minecraft/entity/passive/EntityPig;)Lnet/minecraft/util/ResourceLocation; bhf/a (Lrx;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderPig/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhf/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderPig/func_77099_a (Lnet/minecraft/entity/passive/EntityPig;IF)I bhf/a (Lrx;IF)I
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhg/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110817_a (Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/client/resources/ResourceLocation; bhg/a (Lber;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhg/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderPlayer/func_110817_a (Lnet/minecraft/client/entity/AbstractClientPlayer;)Lnet/minecraft/util/ResourceLocation; bhg/a (Lber;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130000_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhg/a (Loe;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130009_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDFF)V bhg/a (Lber;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_130220_b (Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V bhg/b (Lber;IF)V
@@ -11236,12 +11236,12 @@ MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82408_c (Lnet/minecra
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_82441_a (Lnet/minecraft/entity/player/EntityPlayer;)V bhg/a (Lue;)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_96449_a (Lnet/minecraft/entity/EntityLivingBase;DDDLjava/lang/String;FD)V bhg/a (Loe;DDDLjava/lang/String;FD)V
 MD: net/minecraft/client/renderer/entity/RenderPlayer/func_96450_a (Lnet/minecraft/client/entity/AbstractClientPlayer;DDDLjava/lang/String;FD)V bhg/a (Lber;DDDLjava/lang/String;FD)V
-MD: net/minecraft/client/renderer/entity/RenderSheep/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhh/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSheep/func_110883_a (Lnet/minecraft/entity/passive/EntitySheep;)Lnet/minecraft/client/resources/ResourceLocation; bhh/a (Lry;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSheep/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhh/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSheep/func_110883_a (Lnet/minecraft/entity/passive/EntitySheep;)Lnet/minecraft/util/ResourceLocation; bhh/a (Lry;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSheep/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhh/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderSheep/func_77113_a (Lnet/minecraft/entity/passive/EntitySheep;IF)I bhh/a (Lry;IF)I
-MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhi/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_110881_b (Lnet/minecraft/entity/monster/EntitySilverfish;)Lnet/minecraft/client/resources/ResourceLocation; bhi/b (Ltp;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhi/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_110881_b (Lnet/minecraft/entity/monster/EntitySilverfish;)Lnet/minecraft/util/ResourceLocation; bhi/b (Ltp;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhi/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhi/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhi/a (Loe;IF)I
@@ -11250,33 +11250,33 @@ MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77087_a (Lnet/min
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77088_a (Lnet/minecraft/entity/monster/EntitySilverfish;DDDFF)V bhi/a (Ltp;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77089_a (Lnet/minecraft/entity/monster/EntitySilverfish;)F bhi/a (Ltp;)F
 MD: net/minecraft/client/renderer/entity/RenderSilverfish/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhi/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhj/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/client/resources/ResourceLocation; bhj/a (Lof;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110860_a (Lnet/minecraft/entity/monster/EntitySkeleton;)Lnet/minecraft/client/resources/ResourceLocation; bhj/a (Ltq;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhj/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/util/ResourceLocation; bhj/a (Lof;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_110860_a (Lnet/minecraft/entity/monster/EntitySkeleton;)Lnet/minecraft/util/ResourceLocation; bhj/a (Ltq;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bhj/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_82422_c ()V bhj/c ()V
 MD: net/minecraft/client/renderer/entity/RenderSkeleton/func_82438_a (Lnet/minecraft/entity/monster/EntitySkeleton;F)V bhj/a (Ltq;F)V
-MD: net/minecraft/client/renderer/entity/RenderSlime/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhk/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSlime/func_110896_a (Lnet/minecraft/entity/monster/EntitySlime;)Lnet/minecraft/client/resources/ResourceLocation; bhk/a (Ltr;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSlime/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhk/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSlime/func_110896_a (Lnet/minecraft/entity/monster/EntitySlime;)Lnet/minecraft/util/ResourceLocation; bhk/a (Ltr;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSlime/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhk/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderSlime/func_77041_b (Lnet/minecraft/entity/EntityLivingBase;F)V bhk/a (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderSlime/func_77090_a (Lnet/minecraft/entity/monster/EntitySlime;IF)I bhk/a (Ltr;IF)I
 MD: net/minecraft/client/renderer/entity/RenderSlime/func_77091_a (Lnet/minecraft/entity/monster/EntitySlime;F)V bhk/a (Ltr;F)V
-MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhl/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_110894_a (Lnet/minecraft/entity/monster/EntitySnowman;)Lnet/minecraft/client/resources/ResourceLocation; bhl/a (Lsa;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhl/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_110894_a (Lnet/minecraft/entity/monster/EntitySnowman;)Lnet/minecraft/util/ResourceLocation; bhl/a (Lsa;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bhl/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderSnowMan/func_77093_a (Lnet/minecraft/entity/monster/EntitySnowman;F)V bhl/a (Lsa;F)V
-MD: net/minecraft/client/renderer/entity/RenderSnowball/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgu/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSnowball/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgu/a (Lnm;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSnowball/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgu/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSnowball/func_77026_a (Lnet/minecraft/client/renderer/Tessellator;Lnet/minecraft/util/Icon;)V bgu/a (Lbfn;Lmr;)V
-MD: net/minecraft/client/renderer/entity/RenderSpider/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhm/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSpider/func_110889_a (Lnet/minecraft/entity/monster/EntitySpider;)Lnet/minecraft/client/resources/ResourceLocation; bhm/a (Lts;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSpider/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhm/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSpider/func_110889_a (Lnet/minecraft/entity/monster/EntitySpider;)Lnet/minecraft/util/ResourceLocation; bhm/a (Lts;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSpider/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhm/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderSpider/func_77037_a (Lnet/minecraft/entity/EntityLivingBase;)F bhm/a (Loe;)F
 MD: net/minecraft/client/renderer/entity/RenderSpider/func_77095_a (Lnet/minecraft/entity/monster/EntitySpider;)F bhm/b (Lts;)F
 MD: net/minecraft/client/renderer/entity/RenderSpider/func_77097_a (Lnet/minecraft/entity/monster/EntitySpider;IF)I bhm/a (Lts;IF)I
-MD: net/minecraft/client/renderer/entity/RenderSquid/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhn/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderSquid/func_110900_a (Lnet/minecraft/entity/passive/EntitySquid;)Lnet/minecraft/client/resources/ResourceLocation; bhn/a (Lsb;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSquid/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhn/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderSquid/func_110900_a (Lnet/minecraft/entity/passive/EntitySquid;)Lnet/minecraft/util/ResourceLocation; bhn/a (Lsb;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhn/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhn/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_77043_a (Lnet/minecraft/entity/EntityLivingBase;FFF)V bhn/a (Loe;FFF)V
@@ -11285,14 +11285,14 @@ MD: net/minecraft/client/renderer/entity/RenderSquid/func_77101_a (Lnet/minecraf
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_77121_a (Lnet/minecraft/entity/passive/EntitySquid;F)F bhn/a (Lsb;F)F
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_77122_a (Lnet/minecraft/entity/passive/EntitySquid;FFF)V bhn/a (Lsb;FFF)V
 MD: net/minecraft/client/renderer/entity/RenderSquid/func_77123_a (Lnet/minecraft/entity/passive/EntitySquid;DDDFF)V bhn/a (Lsb;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhp/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_110808_a (Lnet/minecraft/entity/item/EntityTNTPrimed;)Lnet/minecraft/client/resources/ResourceLocation; bhp/a (Ltb;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhp/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_110808_a (Lnet/minecraft/entity/item/EntityTNTPrimed;)Lnet/minecraft/util/ResourceLocation; bhp/a (Ltb;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhp/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderTNTPrimed/func_76992_a (Lnet/minecraft/entity/item/EntityTNTPrimed;DDDFF)V bhp/a (Ltb;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderTntMinecart/func_94144_a (Lnet/minecraft/entity/item/EntityMinecart;FLnet/minecraft/block/Block;I)V bho/a (Lss;FLaqw;I)V
 MD: net/minecraft/client/renderer/entity/RenderTntMinecart/func_94146_a (Lnet/minecraft/entity/item/EntityMinecartTNT;FLnet/minecraft/block/Block;I)V bho/a (Lta;FLaqw;I)V
-MD: net/minecraft/client/renderer/entity/RenderVillager/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhr/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderVillager/func_110902_a (Lnet/minecraft/entity/passive/EntityVillager;)Lnet/minecraft/client/resources/ResourceLocation; bhr/a (Lua;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderVillager/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhr/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderVillager/func_110902_a (Lnet/minecraft/entity/passive/EntityVillager;)Lnet/minecraft/util/ResourceLocation; bhr/a (Lua;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhr/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bhr/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhr/a (Lof;DDDFF)V
@@ -11303,8 +11303,8 @@ MD: net/minecraft/client/renderer/entity/RenderVillager/func_77052_b (Lnet/minec
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_77053_a (Lnet/minecraft/entity/passive/EntityVillager;IF)I bhr/a (Lua;IF)I
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_77054_a (Lnet/minecraft/entity/passive/EntityVillager;DDDFF)V bhr/a (Lua;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderVillager/func_77101_a (Lnet/minecraft/entity/EntityLivingBase;DDDFF)V bhr/a (Loe;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderWitch/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhs/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderWitch/func_110909_a (Lnet/minecraft/entity/monster/EntityWitch;)Lnet/minecraft/client/resources/ResourceLocation; bhs/a (Ltu;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWitch/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhs/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWitch/func_110909_a (Lnet/minecraft/entity/monster/EntityWitch;)Lnet/minecraft/util/ResourceLocation; bhs/a (Ltu;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhs/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_77029_c (Lnet/minecraft/entity/EntityLivingBase;F)V bhs/c (Loe;F)V
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bhs/a (Lof;DDDFF)V
@@ -11314,8 +11314,8 @@ MD: net/minecraft/client/renderer/entity/RenderWitch/func_82409_b (Lnet/minecraf
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_82410_b ()V bhs/b ()V
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_82411_a (Lnet/minecraft/entity/monster/EntityWitch;F)V bhs/a (Ltu;F)V
 MD: net/minecraft/client/renderer/entity/RenderWitch/func_82412_a (Lnet/minecraft/entity/monster/EntityWitch;DDDFF)V bhs/a (Ltu;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderWither/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bht/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderWither/func_110911_a (Lnet/minecraft/entity/boss/EntityWither;)Lnet/minecraft/client/resources/ResourceLocation; bht/a (Lsl;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWither/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bht/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWither/func_110911_a (Lnet/minecraft/entity/boss/EntityWither;)Lnet/minecraft/util/ResourceLocation; bht/a (Lsl;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderWither/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bht/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderWither/func_77031_a (Lnet/minecraft/entity/EntityLiving;DDDFF)V bht/a (Lof;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderWither/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bht/a (Loe;IF)I
@@ -11326,19 +11326,19 @@ MD: net/minecraft/client/renderer/entity/RenderWither/func_82415_a (Lnet/minecra
 MD: net/minecraft/client/renderer/entity/RenderWither/func_82416_b (Lnet/minecraft/entity/boss/EntityWither;IF)I bht/b (Lsl;IF)I
 MD: net/minecraft/client/renderer/entity/RenderWither/func_82417_a (Lnet/minecraft/entity/boss/EntityWither;IF)I bht/a (Lsl;IF)I
 MD: net/minecraft/client/renderer/entity/RenderWither/func_82418_a (Lnet/minecraft/entity/boss/EntityWither;DDDFF)V bht/a (Lsl;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderWolf/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhv/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderWolf/func_110914_a (Lnet/minecraft/entity/passive/EntityWolf;)Lnet/minecraft/client/resources/ResourceLocation; bhv/a (Lse;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWolf/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhv/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderWolf/func_110914_a (Lnet/minecraft/entity/passive/EntityWolf;)Lnet/minecraft/util/ResourceLocation; bhv/a (Lse;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderWolf/func_77032_a (Lnet/minecraft/entity/EntityLivingBase;IF)I bhv/a (Loe;IF)I
 MD: net/minecraft/client/renderer/entity/RenderWolf/func_77044_a (Lnet/minecraft/entity/EntityLivingBase;F)F bhv/b (Loe;F)F
 MD: net/minecraft/client/renderer/entity/RenderWolf/func_77057_a (Lnet/minecraft/entity/passive/EntityWolf;F)F bhv/a (Lse;F)F
 MD: net/minecraft/client/renderer/entity/RenderWolf/func_82447_a (Lnet/minecraft/entity/passive/EntityWolf;IF)I bhv/a (Lse;IF)I
-MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgk/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_110784_a (Lnet/minecraft/entity/item/EntityXPOrb;)Lnet/minecraft/client/resources/ResourceLocation; bgk/a (Lnz;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgk/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_110784_a (Lnet/minecraft/entity/item/EntityXPOrb;)Lnet/minecraft/util/ResourceLocation; bgk/a (Lnz;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgk/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/entity/RenderXPOrb/func_77005_a (Lnet/minecraft/entity/item/EntityXPOrb;DDDFF)V bgk/a (Lnz;DDDFF)V
-MD: net/minecraft/client/renderer/entity/RenderZombie/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhw/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderZombie/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/client/resources/ResourceLocation; bhw/a (Lof;)Lbjl;
-MD: net/minecraft/client/renderer/entity/RenderZombie/func_110863_a (Lnet/minecraft/entity/monster/EntityZombie;)Lnet/minecraft/client/resources/ResourceLocation; bhw/a (Ltv;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderZombie/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhw/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderZombie/func_110856_a (Lnet/minecraft/entity/EntityLiving;)Lnet/minecraft/util/ResourceLocation; bhw/a (Lof;)Lbjl;
+MD: net/minecraft/client/renderer/entity/RenderZombie/func_110863_a (Lnet/minecraft/entity/monster/EntityZombie;)Lnet/minecraft/util/ResourceLocation; bhw/a (Ltv;)Lbjl;
 MD: net/minecraft/client/renderer/entity/RenderZombie/func_130005_c (Lnet/minecraft/entity/EntityLiving;F)V bhw/a (Lof;F)V
 MD: net/minecraft/client/renderer/entity/RenderZombie/func_130006_a (Lnet/minecraft/entity/EntityLiving;IF)I bhw/a (Lof;IF)I
 MD: net/minecraft/client/renderer/entity/RenderZombie/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhw/a (Lnm;DDDFF)V
@@ -11436,13 +11436,13 @@ MD: net/minecraft/client/renderer/texture/TextureCompass/func_94219_l ()V biq/j 
 MD: net/minecraft/client/renderer/texture/TextureCompass/func_94241_a (Lnet/minecraft/world/World;DDDZZ)V biq/a (Labv;DDDZZ)V
 MD: net/minecraft/client/renderer/texture/TextureManager/func_110549_a (Lnet/minecraft/client/resources/ResourceManager;)V bij/a (Lbjm;)V
 MD: net/minecraft/client/renderer/texture/TextureManager/func_110550_d ()V bij/d ()V
-MD: net/minecraft/client/renderer/texture/TextureManager/func_110577_a (Lnet/minecraft/client/resources/ResourceLocation;)V bij/a (Lbjl;)V
-MD: net/minecraft/client/renderer/texture/TextureManager/func_110578_a (Ljava/lang/String;Lnet/minecraft/client/renderer/texture/DynamicTexture;)Lnet/minecraft/client/resources/ResourceLocation; bij/a (Ljava/lang/String;Lbhy;)Lbjl;
-MD: net/minecraft/client/renderer/texture/TextureManager/func_110579_a (Lnet/minecraft/client/resources/ResourceLocation;Lnet/minecraft/client/renderer/texture/TextureObject;)Z bij/a (Lbjl;Lbil;)Z
-MD: net/minecraft/client/renderer/texture/TextureManager/func_110580_a (Lnet/minecraft/client/resources/ResourceLocation;Lnet/minecraft/client/renderer/texture/TickableTextureObject;)Z bij/a (Lbjl;Lbio;)Z
-MD: net/minecraft/client/renderer/texture/TextureManager/func_110581_b (Lnet/minecraft/client/resources/ResourceLocation;)Lnet/minecraft/client/renderer/texture/TextureObject; bij/b (Lbjl;)Lbil;
-MD: net/minecraft/client/renderer/texture/TextureManager/func_130087_a (I)Lnet/minecraft/client/resources/ResourceLocation; bij/a (I)Lbjl;
-MD: net/minecraft/client/renderer/texture/TextureManager/func_130088_a (Lnet/minecraft/client/resources/ResourceLocation;Lnet/minecraft/client/renderer/texture/TextureMap;)Z bij/a (Lbjl;Lbih;)Z
+MD: net/minecraft/client/renderer/texture/TextureManager/func_110577_a (Lnet/minecraft/util/ResourceLocation;)V bij/a (Lbjl;)V
+MD: net/minecraft/client/renderer/texture/TextureManager/func_110578_a (Ljava/lang/String;Lnet/minecraft/client/renderer/texture/DynamicTexture;)Lnet/minecraft/util/ResourceLocation; bij/a (Ljava/lang/String;Lbhy;)Lbjl;
+MD: net/minecraft/client/renderer/texture/TextureManager/func_110579_a (Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/TextureObject;)Z bij/a (Lbjl;Lbil;)Z
+MD: net/minecraft/client/renderer/texture/TextureManager/func_110580_a (Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/TickableTextureObject;)Z bij/a (Lbjl;Lbio;)Z
+MD: net/minecraft/client/renderer/texture/TextureManager/func_110581_b (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/texture/TextureObject; bij/b (Lbjl;)Lbil;
+MD: net/minecraft/client/renderer/texture/TextureManager/func_130087_a (I)Lnet/minecraft/util/ResourceLocation; bij/a (I)Lbjl;
+MD: net/minecraft/client/renderer/texture/TextureManager/func_130088_a (Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/TextureMap;)Z bij/a (Lbjl;Lbih;)Z
 MD: net/minecraft/client/renderer/texture/TextureManagerINNER1/call ()Ljava/lang/Object; bik/call ()Ljava/lang/Object;
 MD: net/minecraft/client/renderer/texture/TextureManagerINNER1/func_135060_a ()Ljava/lang/String; bik/a ()Ljava/lang/String;
 MD: net/minecraft/client/renderer/texture/TextureMap/func_110550_d ()V bih/d ()V
@@ -11457,7 +11457,7 @@ MD: net/minecraft/client/renderer/texture/TextureMap/func_94248_c ()V bih/c ()V
 MD: net/minecraft/client/renderer/texture/TextureObject/func_110551_a (Lnet/minecraft/client/resources/ResourceManager;)V bil/a (Lbjm;)V
 MD: net/minecraft/client/renderer/texture/TextureObject/func_110552_b ()I bil/b ()I
 MD: net/minecraft/client/renderer/texture/TextureUtil/func_110985_a ([I)[I bim/a ([I)[I
-MD: net/minecraft/client/renderer/texture/TextureUtil/func_110986_a (Lnet/minecraft/client/resources/ResourceManager;Lnet/minecraft/client/resources/ResourceLocation;)[I bim/a (Lbjm;Lbjl;)[I
+MD: net/minecraft/client/renderer/texture/TextureUtil/func_110986_a (Lnet/minecraft/client/resources/ResourceManager;Lnet/minecraft/util/ResourceLocation;)[I bim/a (Lbjm;Lbjl;)[I
 MD: net/minecraft/client/renderer/texture/TextureUtil/func_110987_a (ILjava/awt/image/BufferedImage;)I bim/a (ILjava/awt/image/BufferedImage;)I
 MD: net/minecraft/client/renderer/texture/TextureUtil/func_110988_a (I[III)V bim/a (I[III)V
 MD: net/minecraft/client/renderer/texture/TextureUtil/func_110989_a (ILjava/awt/image/BufferedImage;ZZ)I bim/a (ILjava/awt/image/BufferedImage;ZZ)I
@@ -11475,19 +11475,19 @@ MD: net/minecraft/client/renderer/texture/Tickable/func_110550_d ()V bin/d ()V
 MD: net/minecraft/client/renderer/tileentity/RenderEndPortal/func_76894_a (Lnet/minecraft/tileentity/TileEntity;DDDF)V biz/a (Lasm;DDDF)V
 MD: net/minecraft/client/renderer/tileentity/RenderEndPortal/func_76906_a (Lnet/minecraft/tileentity/TileEntityEndPortal;DDDF)V biz/a (Lasl;DDDF)V
 MD: net/minecraft/client/renderer/tileentity/RenderEndPortal/func_76907_a (FFFF)Ljava/nio/FloatBuffer; biz/a (FFFF)Ljava/nio/FloatBuffer;
-MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgf/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_110786_a (Lnet/minecraft/entity/item/EntityEnderCrystal;)Lnet/minecraft/client/resources/ResourceLocation; bgf/a (Lsi;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgf/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_110786_a (Lnet/minecraft/entity/item/EntityEnderCrystal;)Lnet/minecraft/util/ResourceLocation; bgf/a (Lsi;)Lbjl;
 MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgf/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/tileentity/RenderEnderCrystal/func_76994_a (Lnet/minecraft/entity/item/EntityEnderCrystal;DDDFF)V bgf/a (Lsi;DDDFF)V
-MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bgs/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_110788_a (Lnet/minecraft/entity/item/EntityItemFrame;)Lnet/minecraft/client/resources/ResourceLocation; bgs/a (Loc;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bgs/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_110788_a (Lnet/minecraft/entity/item/EntityItemFrame;)Lnet/minecraft/util/ResourceLocation; bgs/a (Loc;)Lbjl;
 MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bgs/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_82402_b (Lnet/minecraft/entity/item/EntityItemFrame;)V bgs/c (Loc;)V
 MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_82403_a (Lnet/minecraft/entity/item/EntityItemFrame;)V bgs/b (Loc;)V
 MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_82404_a (Lnet/minecraft/entity/item/EntityItemFrame;DDDFF)V bgs/a (Loc;DDDFF)V
 MD: net/minecraft/client/renderer/tileentity/RenderItemFrame/func_94143_a (Lnet/minecraft/client/renderer/texture/IconRegister;)V bgs/a (Lms;)V
-MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/resources/ResourceLocation; bhu/a (Lnm;)Lbjl;
-MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_110809_a (Lnet/minecraft/entity/projectile/EntityWitherSkull;)Lnet/minecraft/client/resources/ResourceLocation; bhu/a (Luu;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; bhu/a (Lnm;)Lbjl;
+MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_110809_a (Lnet/minecraft/entity/projectile/EntityWitherSkull;)Lnet/minecraft/util/ResourceLocation; bhu/a (Luu;)Lbjl;
 MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_76986_a (Lnet/minecraft/entity/Entity;DDDFF)V bhu/a (Lnm;DDDFF)V
 MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_82399_a (Lnet/minecraft/entity/projectile/EntityWitherSkull;DDDFF)V bhu/a (Luu;DDDFF)V
 MD: net/minecraft/client/renderer/tileentity/RenderWitherSkull/func_82400_a (FFF)F bhu/a (FFF)F
@@ -11517,16 +11517,16 @@ MD: net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer/func_76893_
 MD: net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer/func_76894_a (Lnet/minecraft/tileentity/TileEntity;DDDF)V biy/a (Lasm;DDDF)V
 MD: net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer/func_82393_a (FFFIFILjava/lang/String;)V biy/a (FFFIFILjava/lang/String;)V
 MD: net/minecraft/client/renderer/tileentity/TileEntitySkullRenderer/func_82394_a (Lnet/minecraft/tileentity/TileEntitySkull;DDDF)V biy/a (Lask;DDDF)V
-MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_110628_a (Lnet/minecraft/client/resources/ResourceLocation;)V bjb/a (Lbjl;)V
+MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_110628_a (Lnet/minecraft/util/ResourceLocation;)V bjb/a (Lbjl;)V
 MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_76893_a (Lnet/minecraft/client/renderer/tileentity/TileEntityRenderer;)V bjb/a (Lbja;)V
 MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_76894_a (Lnet/minecraft/tileentity/TileEntity;DDDF)V bjb/a (Lasm;DDDF)V
 MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_76895_b ()Lnet/minecraft/client/gui/FontRenderer; bjb/b ()Lavf;
 MD: net/minecraft/client/renderer/tileentity/TileEntitySpecialRenderer/func_76896_a (Lnet/minecraft/world/World;)V bjb/a (Labv;)V
 MD: net/minecraft/client/resources/AbstractResourcePack/func_110586_a ()Ljava/awt/image/BufferedImage; bjc/a ()Ljava/awt/image/BufferedImage;
-MD: net/minecraft/client/resources/AbstractResourcePack/func_110589_b (Lnet/minecraft/client/resources/ResourceLocation;)Z bjc/b (Lbjl;)Z
-MD: net/minecraft/client/resources/AbstractResourcePack/func_110590_a (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/io/InputStream; bjc/a (Lbjl;)Ljava/io/InputStream;
+MD: net/minecraft/client/resources/AbstractResourcePack/func_110589_b (Lnet/minecraft/util/ResourceLocation;)Z bjc/b (Lbjl;)Z
+MD: net/minecraft/client/resources/AbstractResourcePack/func_110590_a (Lnet/minecraft/util/ResourceLocation;)Ljava/io/InputStream; bjc/a (Lbjl;)Ljava/io/InputStream;
 MD: net/minecraft/client/resources/AbstractResourcePack/func_110591_a (Ljava/lang/String;)Ljava/io/InputStream; bjc/a (Ljava/lang/String;)Ljava/io/InputStream;
-MD: net/minecraft/client/resources/AbstractResourcePack/func_110592_c (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/lang/String; bjc/c (Lbjl;)Ljava/lang/String;
+MD: net/minecraft/client/resources/AbstractResourcePack/func_110592_c (Lnet/minecraft/util/ResourceLocation;)Ljava/lang/String; bjc/c (Lbjl;)Ljava/lang/String;
 MD: net/minecraft/client/resources/AbstractResourcePack/func_110593_b (Ljava/lang/String;)Z bjc/b (Ljava/lang/String;)Z
 MD: net/minecraft/client/resources/AbstractResourcePack/func_110594_c (Ljava/lang/String;)V bjc/c (Ljava/lang/String;)V
 MD: net/minecraft/client/resources/AbstractResourcePack/func_110595_a (Ljava/io/File;Ljava/io/File;)Ljava/lang/String; bjc/a (Ljava/io/File;Ljava/io/File;)Ljava/lang/String;
@@ -11535,18 +11535,18 @@ MD: net/minecraft/client/resources/AbstractResourcePack/func_130077_b ()Ljava/la
 MD: net/minecraft/client/resources/AbstractResourcePack/func_135058_a (Lnet/minecraft/client/resources/data/MetadataSerializer;Ljava/lang/String;)Lnet/minecraft/client/resources/data/MetadataSection; bjc/a (Lbkf;Ljava/lang/String;)Lbkd;
 MD: net/minecraft/client/resources/DefaultResourcePack/func_110586_a ()Ljava/awt/image/BufferedImage; bjd/a ()Ljava/awt/image/BufferedImage;
 MD: net/minecraft/client/resources/DefaultResourcePack/func_110587_b ()Ljava/util/Set; bjd/c ()Ljava/util/Set;
-MD: net/minecraft/client/resources/DefaultResourcePack/func_110589_b (Lnet/minecraft/client/resources/ResourceLocation;)Z bjd/b (Lbjl;)Z
-MD: net/minecraft/client/resources/DefaultResourcePack/func_110590_a (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/io/InputStream; bjd/a (Lbjl;)Ljava/io/InputStream;
+MD: net/minecraft/client/resources/DefaultResourcePack/func_110589_b (Lnet/minecraft/util/ResourceLocation;)Z bjd/b (Lbjl;)Z
+MD: net/minecraft/client/resources/DefaultResourcePack/func_110590_a (Lnet/minecraft/util/ResourceLocation;)Ljava/io/InputStream; bjd/a (Lbjl;)Ljava/io/InputStream;
 MD: net/minecraft/client/resources/DefaultResourcePack/func_110603_a (Ljava/io/File;)V bjd/a (Ljava/io/File;)V
 MD: net/minecraft/client/resources/DefaultResourcePack/func_110604_a (Ljava/lang/String;Ljava/io/File;)V bjd/a (Ljava/lang/String;Ljava/io/File;)V
-MD: net/minecraft/client/resources/DefaultResourcePack/func_110605_c (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/io/InputStream; bjd/c (Lbjl;)Ljava/io/InputStream;
+MD: net/minecraft/client/resources/DefaultResourcePack/func_110605_c (Lnet/minecraft/util/ResourceLocation;)Ljava/io/InputStream; bjd/c (Lbjl;)Ljava/io/InputStream;
 MD: net/minecraft/client/resources/DefaultResourcePack/func_130077_b ()Ljava/lang/String; bjd/b ()Ljava/lang/String;
 MD: net/minecraft/client/resources/DefaultResourcePack/func_135058_a (Lnet/minecraft/client/resources/data/MetadataSerializer;Ljava/lang/String;)Lnet/minecraft/client/resources/data/MetadataSection; bjd/a (Lbkf;Ljava/lang/String;)Lbkd;
-MD: net/minecraft/client/resources/FallbackResourceManager/func_110536_a (Lnet/minecraft/client/resources/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bje/a (Lbjl;)Lbjk;
-MD: net/minecraft/client/resources/FallbackResourceManager/func_110537_b (Lnet/minecraft/client/resources/ResourceLocation;)Lnet/minecraft/client/resources/ResourceLocation; bje/c (Lbjl;)Lbjl;
+MD: net/minecraft/client/resources/FallbackResourceManager/func_110536_a (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bje/a (Lbjl;)Lbjk;
+MD: net/minecraft/client/resources/FallbackResourceManager/func_110537_b (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/util/ResourceLocation; bje/c (Lbjl;)Lbjl;
 MD: net/minecraft/client/resources/FallbackResourceManager/func_110538_a (Lnet/minecraft/client/resources/ResourcePack;)V bje/a (Lbjo;)V
 MD: net/minecraft/client/resources/FallbackResourceManager/func_135055_a ()Ljava/util/Set; bje/a ()Ljava/util/Set;
-MD: net/minecraft/client/resources/FallbackResourceManager/func_135056_b (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/util/List; bje/b (Lbjl;)Ljava/util/List;
+MD: net/minecraft/client/resources/FallbackResourceManager/func_135056_b (Lnet/minecraft/util/ResourceLocation;)Ljava/util/List; bje/b (Lbjl;)Ljava/util/List;
 MD: net/minecraft/client/resources/FileResourcePack/close ()V bjf/close ()V
 MD: net/minecraft/client/resources/FileResourcePack/finalize ()V bjf/finalize ()V
 MD: net/minecraft/client/resources/FileResourcePack/func_110587_b ()Ljava/util/Set; bjf/c ()Ljava/util/Set;
@@ -11612,19 +11612,14 @@ MD: net/minecraft/client/resources/ReloadableResourceManager/func_110542_a (Lnet
 MD: net/minecraft/client/resources/Resource/func_110526_a (Ljava/lang/String;)Lnet/minecraft/client/resources/data/MetadataSection; bjk/a (Ljava/lang/String;)Lbkd;
 MD: net/minecraft/client/resources/Resource/func_110527_b ()Ljava/io/InputStream; bjk/b ()Ljava/io/InputStream;
 MD: net/minecraft/client/resources/Resource/func_110528_c ()Z bjk/c ()Z
-MD: net/minecraft/client/resources/ResourceLocation/equals (Ljava/lang/Object;)Z bjl/equals (Ljava/lang/Object;)Z
-MD: net/minecraft/client/resources/ResourceLocation/func_110623_a ()Ljava/lang/String; bjl/a ()Ljava/lang/String;
-MD: net/minecraft/client/resources/ResourceLocation/func_110624_b ()Ljava/lang/String; bjl/b ()Ljava/lang/String;
-MD: net/minecraft/client/resources/ResourceLocation/hashCode ()I bjl/hashCode ()I
-MD: net/minecraft/client/resources/ResourceLocation/toString ()Ljava/lang/String; bjl/toString ()Ljava/lang/String;
-MD: net/minecraft/client/resources/ResourceManager/func_110536_a (Lnet/minecraft/client/resources/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bjm/a (Lbjl;)Lbjk;
+MD: net/minecraft/client/resources/ResourceManager/func_110536_a (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bjm/a (Lbjl;)Lbjk;
 MD: net/minecraft/client/resources/ResourceManager/func_135055_a ()Ljava/util/Set; bjm/a ()Ljava/util/Set;
-MD: net/minecraft/client/resources/ResourceManager/func_135056_b (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/util/List; bjm/b (Lbjl;)Ljava/util/List;
+MD: net/minecraft/client/resources/ResourceManager/func_135056_b (Lnet/minecraft/util/ResourceLocation;)Ljava/util/List; bjm/b (Lbjl;)Ljava/util/List;
 MD: net/minecraft/client/resources/ResourceManagerReloadListener/func_110549_a (Lnet/minecraft/client/resources/ResourceManager;)V bjn/a (Lbjm;)V
 MD: net/minecraft/client/resources/ResourcePack/func_110586_a ()Ljava/awt/image/BufferedImage; bjo/a ()Ljava/awt/image/BufferedImage;
 MD: net/minecraft/client/resources/ResourcePack/func_110587_b ()Ljava/util/Set; bjo/c ()Ljava/util/Set;
-MD: net/minecraft/client/resources/ResourcePack/func_110589_b (Lnet/minecraft/client/resources/ResourceLocation;)Z bjo/b (Lbjl;)Z
-MD: net/minecraft/client/resources/ResourcePack/func_110590_a (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/io/InputStream; bjo/a (Lbjl;)Ljava/io/InputStream;
+MD: net/minecraft/client/resources/ResourcePack/func_110589_b (Lnet/minecraft/util/ResourceLocation;)Z bjo/b (Lbjl;)Z
+MD: net/minecraft/client/resources/ResourcePack/func_110590_a (Lnet/minecraft/util/ResourceLocation;)Ljava/io/InputStream; bjo/a (Lbjl;)Ljava/io/InputStream;
 MD: net/minecraft/client/resources/ResourcePack/func_130077_b ()Ljava/lang/String; bjo/b ()Ljava/lang/String;
 MD: net/minecraft/client/resources/ResourcePack/func_135058_a (Lnet/minecraft/client/resources/data/MetadataSerializer;Ljava/lang/String;)Lnet/minecraft/client/resources/data/MetadataSection; bjo/a (Lbkf;Ljava/lang/String;)Lbkd;
 MD: net/minecraft/client/resources/ResourcePackRepository/func_110609_b ()Ljava/util/List; bjq/b ()Ljava/util/List;
@@ -11645,14 +11640,14 @@ MD: net/minecraft/client/resources/ResourcePackRepositoryEntry/func_110519_e ()L
 MD: net/minecraft/client/resources/ResourcePackRepositoryEntry/hashCode ()I bjs/hashCode ()I
 MD: net/minecraft/client/resources/ResourcePackRepositoryEntry/toString ()Ljava/lang/String; bjs/toString ()Ljava/lang/String;
 MD: net/minecraft/client/resources/ResourcePackRepositoryFilter/accept (Ljava/io/File;)Z bjr/accept (Ljava/io/File;)Z
-MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110536_a (Lnet/minecraft/client/resources/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bjt/a (Lbjl;)Lbjk;
+MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110536_a (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/resources/Resource; bjt/a (Lbjl;)Lbjk;
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110541_a (Ljava/util/List;)V bjt/a (Ljava/util/List;)V
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110542_a (Lnet/minecraft/client/resources/ResourceManagerReloadListener;)V bjt/a (Lbjn;)V
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110543_a ()V bjt/b ()V
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110544_b ()V bjt/c ()V
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_110545_a (Lnet/minecraft/client/resources/ResourcePack;)V bjt/a (Lbjo;)V
 MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_135055_a ()Ljava/util/Set; bjt/a ()Ljava/util/Set;
-MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_135056_b (Lnet/minecraft/client/resources/ResourceLocation;)Ljava/util/List; bjt/b (Lbjl;)Ljava/util/List;
+MD: net/minecraft/client/resources/SimpleReloadableResourceManager/func_135056_b (Lnet/minecraft/util/ResourceLocation;)Ljava/util/List; bjt/b (Lbjl;)Ljava/util/List;
 MD: net/minecraft/client/resources/SimpleReloadableResourceManagerINNER1/apply (Ljava/lang/Object;)Ljava/lang/Object; bju/apply (Ljava/lang/Object;)Ljava/lang/Object;
 MD: net/minecraft/client/resources/SimpleReloadableResourceManagerINNER1/func_130075_a (Lnet/minecraft/client/resources/ResourcePack;)Ljava/lang/String; bju/a (Lbjo;)Ljava/lang/String;
 MD: net/minecraft/client/resources/SimpleResource/equals (Ljava/lang/Object;)Z bjv/equals (Ljava/lang/Object;)Z
@@ -17232,6 +17227,11 @@ MD: net/minecraft/util/MovementInputFromOptions/func_78898_a ()V bet/a ()V
 MD: net/minecraft/util/ReportedException/getCause ()Ljava/lang/Throwable; u/getCause ()Ljava/lang/Throwable;
 MD: net/minecraft/util/ReportedException/getCrashReport ()Lnet/minecraft/crash/CrashReport; u/a ()Lb;
 MD: net/minecraft/util/ReportedException/getMessage ()Ljava/lang/String; u/getMessage ()Ljava/lang/String;
+MD: net/minecraft/util/ResourceLocation/equals (Ljava/lang/Object;)Z bjl/equals (Ljava/lang/Object;)Z
+MD: net/minecraft/util/ResourceLocation/func_110623_a ()Ljava/lang/String; bjl/a ()Ljava/lang/String;
+MD: net/minecraft/util/ResourceLocation/func_110624_b ()Ljava/lang/String; bjl/b ()Ljava/lang/String;
+MD: net/minecraft/util/ResourceLocation/hashCode ()I bjl/hashCode ()I
+MD: net/minecraft/util/ResourceLocation/toString ()Ljava/lang/String; bjl/toString ()Ljava/lang/String;
 MD: net/minecraft/util/ScreenShotHelper/func_74289_a ([III)V aum/a ([III)V
 MD: net/minecraft/util/ScreenShotHelper/func_74290_a (Ljava/io/File;)Ljava/io/File; aum/a (Ljava/io/File;)Ljava/io/File;
 MD: net/minecraft/util/ScreenShotHelper/func_74291_a (Ljava/io/File;II)Ljava/lang/String; aum/a (Ljava/io/File;II)Ljava/lang/String;
