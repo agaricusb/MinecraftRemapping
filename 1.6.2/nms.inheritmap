@@ -291,10 +291,8 @@ net/minecraft/entity/ai/EntityAIWatchClosest2 net/minecraft/entity/ai/EntityAIWa
 net/minecraft/entity/ai/EntityMinecartMobSpawner net/minecraft/entity/item/EntityMinecart
 net/minecraft/entity/ai/EntityMinecartMobSpawnerLogic net/minecraft/tileentity/MobSpawnerBaseLogic
 net/minecraft/entity/ai/attributes/BaseAttribute net/minecraft/entity/ai/attributes/Attribute
-net/minecraft/entity/ai/attributes/ClientsideAttributeMap net/minecraft/entity/ai/attributes/BaseAttributeMap
 net/minecraft/entity/ai/attributes/ModifiableAttributeInstance net/minecraft/entity/ai/attributes/AttributeInstance
 net/minecraft/entity/ai/attributes/RangedAttribute net/minecraft/entity/ai/attributes/BaseAttribute
-net/minecraft/entity/ai/attributes/ReadonlyAttributeInstance net/minecraft/entity/ai/attributes/AttributeInstance
 net/minecraft/entity/ai/attributes/ServersideAttributeMap net/minecraft/entity/ai/attributes/BaseAttributeMap
 net/minecraft/entity/boss/EntityDragon net/minecraft/entity/IEntityMultiPart net/minecraft/entity/monster/IMob net/minecraft/entity/EntityLiving
 net/minecraft/entity/boss/EntityDragonPart net/minecraft/entity/Entity
